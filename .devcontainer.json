@@ -1,0 +1,3 @@
+"mounts": [
+    "source=vscode-loan-application-bot-volume,target=/usr/src/app/.vscode-server/extensions,type=volume",
+]

@@ -1,0 +1,5 @@
+Hi!
+
+Please verify your email address {{ client_app_url }}/loan-application-bot/{{ email.verification_code }}
+
+Thanks!
