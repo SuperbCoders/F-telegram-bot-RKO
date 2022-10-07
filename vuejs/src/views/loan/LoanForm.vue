@@ -15,15 +15,122 @@
     </v-row>
   </v-container>
   <v-container v-else class="fill-height application-form" fluid>
+    <attach-button text="Прикрепить файл" />
+    <section class="auth_section w-100">
+      <div class="logo_block d-flex">
+                <img src="@/assets/images/logo.png">
+              </div>
+              <div class="auth_title text-left mt-15">
+                <h2>Вход в личный кабинет</h2>
+                <div class="d-flex">
+                  <a style="text-decoration:none" class="mr-1 text-none darken-3" href="">
+                    Или создайте личный кабинет
+                  </a>
+                  <p>Если нет личного кабинета</p>
+                </div>
+              </div>
+              <div class="auth_form mt-10 d-flex align-center" style="height:50px">
+                <v-text-field
+                      v-model="formData['oldName']"
+                      label="Номер телефона "
+                      id="oldName"
+                      class="align-center"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  <!-- <v-bth
+                  elevation="2">
+                    fwwfaf
+                  </v-bth> -->
+                  <v-btn
+                    elevation="2"
+                    class="ml-5 h-100 align-center"
+                    style="height:100%"
+                >
+                Отправить
+                </v-btn>
+              </div>
+              <div class="auth_form_code d-flex mt-5">
+                <v-text-field
+                      v-model="formData['oldName']"
+                      label="Получить код"
+                      id="oldName"
+                      class="align-center"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  <p class="text-left w-50 pl-5">Повторно получить код можно через сек</p>
+              </div>
+              <v-checkbox
+                    class="mt-n5"
+                    :ripple="false"
+                    v-model="hasOldName"
+                    label="Запомнить"
+                  ></v-checkbox>
+              <v-btn
+                  elevation="2"
+                  block
+                  class="w-100"
+                >
+                Отправить
+              </v-btn>
+    </section>
     <v-row align="center" justify="center">
       <v-col cols="12">
         <v-stepper v-model="currentFormStep" alt-labels class="elevation-0">
           <v-stepper-items align="center" justify="center">
-            <v-stepper-content step="1">
+            <!-- <v-stepper-content step="1">
+              <div class="logo_block d-flex">
+                <img src="@/assets/images/logo.png">
+              </div>
+              <div class="auth_title d-flex mt-15">
+                <h2>Вход в личный кабинет</h2>
+              </div>
+              <div class="auth_form mt-10 d-flex align-center" style="height:50px">
+                <v-text-field
+                      v-model="formData['oldName']"
+                      label="Номер телефона "
+                      id="oldName"
+                      class="align-center"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  <v-btn
+                    elevation="2"
+                    class="ml-5 h-100 align-center"
+                    style="height:100%"
+                >
+                Отправить
+                </v-btn>
+              </div>
+              <div class="auth_form_code d-flex mt-5">
+                <v-text-field
+                      v-model="formData['oldName']"
+                      label="Получить код"
+                      id="oldName"
+                      class="align-center"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  <p class="text-left w-50 pl-5">Повторно получить код можно через сек</p>
+              </div>
+              <v-checkbox
+                    class="mt-n5"
+                    :ripple="false"
+                    v-model="hasOldName"
+                    label="Запомнить"
+                  ></v-checkbox>
               <v-row>
                 <v-col cols="12">
                   <p class="title blue-grey--text">
-                    Сумма кредита:
                     <span class="primary--text"
                       >{{
                         getFormattedCurrency(formData["loanAmount"])
@@ -96,7 +203,7 @@
                   </p>
                 </v-col>
               </v-row>
-            </v-stepper-content>
+            </v-stepper-content> -->
             <v-stepper-content step="2">
               <v-row>
                 <v-col cols="12">
@@ -478,318 +585,315 @@
 <script>
 import axios from "axios";
 import { DateTime } from 'luxon';
+import AttachButton from "../../components/button/attachButton.vue";
 
 export default {
-  name: 'LoanForm',
-
-  data: () => ({
-    isApplicationSuccessfullySubmitted: false,
-    isWaitingForResponse: false,
-    currentFormStep: 1,
-    formSteps: [
-      {
-        stepName: "1",
-        stepNumber: 1,
-        stepFields: [
-          "loanAmount",
-          "loanTerm",
-        ]
-      },
-      {
-        stepName: "2",
-        stepNumber: 2,
-        stepFields: [
-          "city",
-        ]
-      },
-      {
-        stepName: "3",
-        stepNumber: 3,
-        stepFields: [
-          "name",
-          "phoneNumber",
-          "email",
-        ]
-      },
-      {
-        stepName: "4",
-        stepNumber: 4,
-        stepFields: [
-          "passportSeries",
-          "passportNumber",
-          "passportCode",
-          "passportIssueDate",
-          "passportIssuedBy",
-          "passportPlaceOfBirth",
-          "passportDateOfBirth",
-        ]
-      },
-      {
-        stepName: "5",
-        stepNumber: 5,
-        stepFields: [
-          "passportPhotoOne",
-          "passportPhotoTwo",
-        ]
-      },
-      {
-        stepName: "6",
-        stepNumber: 6,
-        stepFields: [
-          "registrationAddress",
-          "currentAddress",
-          "currentApartmentsNumber",
-        ]
-      },
-      {
-        stepName: "7",
-        stepNumber: 7,
-        stepFields: [
-          "monthlyIncome",
-        ]
-      },
-    ],
-    hasOldName: false,
-    agreementCheckboxOne: false,
-    agreementCheckboxTwo: false,
-    agreementCheckboxThree: false,
-    agreementCheckboxFour: false,
-    agreementCheckboxFive: false,
-    availableCities: [
-      "Москва",
-      "Санкт-Петербург",
-      "Альметьевск",
-      "Азнакаево",
-      "Анапа",
-      "Арзамас",
-      "Бавлы",
-      "Балашиха",
-      "Бугры",
-      "Бугульма",
-      "Горно-Алтайск",
-      "Данков",
-      "Джалиль",
-      "Екатеринбург",
-      "Елабуга",
-      "Елец",
-      "Заинск",
-      "Ижевск",
-      "Йошкар-Ола",
-      "Казань",
-      "Калининград",
-      "Карабаш",
-      "Кемерово",
-      "Краснодар",
-      "Лениногорск",
-      "Липецк",
-      "Мытищи",
-      "Набережные Челны",
-      "Нижнекамск",
-      "Нижний Новгород",
-      "Новосибирск",
-      "Нурлат",
-      "Одинцово",
-      "Пермь",
-      "Ростов-на-Дону",
-      "Самара",
-      "Саратов",
-      "Саров",
-      "Сочи",
-      "Тольятти",
-      "Тула",
-      "Химки",
-      "Чебоксары",
-      "Челябинск",
-      "Чистополь",
-    ],
-    passportPhotoOne: null,
-    passportPhotoTwo: null,
-    interestRate: 0.05,
-    formErrors: {},
-    hasErrors: false,
-    formData: {},
-    isRegistrationAddressSameAsCurrent: false,
-    loanTermTickLabels: [
-      '2 года',
-      '3 года',
-      '4 года',
-      '5 лет',
-      '6 лет',
-      '7 лет',
-    ],
-    smallLoanTermTickLabels: [
-      '2 года',
-      '',
-      '4 года',
-      '',
-      '6 лет',
-      '',
-    ],
-    passportIssueDateMenu: false,
-    passportBirthDateMenu: false,
-    shouldDisplaySuccessMessage: false,
-  }),
-
-  mounted: function () {
-    window.Telegram.WebApp.ready()
-    window.Telegram.WebApp.expand()
-  },
-
-  computed: {
-    currentDate: function () {
-      return DateTime.now().setZone("Europe/Moscow").toISODate()
+    name: "LoanForm",
+    data: () => ({
+        isApplicationSuccessfullySubmitted: false,
+        isWaitingForResponse: false,
+        currentFormStep: 1,
+        formSteps: [
+            {
+                stepName: "1",
+                stepNumber: 1,
+                stepFields: [
+                    "loanAmount",
+                    "loanTerm",
+                ]
+            },
+            {
+                stepName: "2",
+                stepNumber: 2,
+                stepFields: [
+                    "city",
+                ]
+            },
+            {
+                stepName: "3",
+                stepNumber: 3,
+                stepFields: [
+                    "name",
+                    "phoneNumber",
+                    "email",
+                ]
+            },
+            {
+                stepName: "4",
+                stepNumber: 4,
+                stepFields: [
+                    "passportSeries",
+                    "passportNumber",
+                    "passportCode",
+                    "passportIssueDate",
+                    "passportIssuedBy",
+                    "passportPlaceOfBirth",
+                    "passportDateOfBirth",
+                ]
+            },
+            {
+                stepName: "5",
+                stepNumber: 5,
+                stepFields: [
+                    "passportPhotoOne",
+                    "passportPhotoTwo",
+                ]
+            },
+            {
+                stepName: "6",
+                stepNumber: 6,
+                stepFields: [
+                    "registrationAddress",
+                    "currentAddress",
+                    "currentApartmentsNumber",
+                ]
+            },
+            {
+                stepName: "7",
+                stepNumber: 7,
+                stepFields: [
+                    "monthlyIncome",
+                ]
+            },
+        ],
+        hasOldName: false,
+        agreementCheckboxOne: false,
+        agreementCheckboxTwo: false,
+        agreementCheckboxThree: false,
+        agreementCheckboxFour: false,
+        agreementCheckboxFive: false,
+        availableCities: [
+            "Москва",
+            "Санкт-Петербург",
+            "Альметьевск",
+            "Азнакаево",
+            "Анапа",
+            "Арзамас",
+            "Бавлы",
+            "Балашиха",
+            "Бугры",
+            "Бугульма",
+            "Горно-Алтайск",
+            "Данков",
+            "Джалиль",
+            "Екатеринбург",
+            "Елабуга",
+            "Елец",
+            "Заинск",
+            "Ижевск",
+            "Йошкар-Ола",
+            "Казань",
+            "Калининград",
+            "Карабаш",
+            "Кемерово",
+            "Краснодар",
+            "Лениногорск",
+            "Липецк",
+            "Мытищи",
+            "Набережные Челны",
+            "Нижнекамск",
+            "Нижний Новгород",
+            "Новосибирск",
+            "Нурлат",
+            "Одинцово",
+            "Пермь",
+            "Ростов-на-Дону",
+            "Самара",
+            "Саратов",
+            "Саров",
+            "Сочи",
+            "Тольятти",
+            "Тула",
+            "Химки",
+            "Чебоксары",
+            "Челябинск",
+            "Чистополь",
+        ],
+        passportPhotoOne: null,
+        passportPhotoTwo: null,
+        interestRate: 0.05,
+        formErrors: {},
+        hasErrors: false,
+        formData: {},
+        isRegistrationAddressSameAsCurrent: false,
+        loanTermTickLabels: [
+            "2 года",
+            "3 года",
+            "4 года",
+            "5 лет",
+            "6 лет",
+            "7 лет",
+        ],
+        smallLoanTermTickLabels: [
+            "2 года",
+            "",
+            "4 года",
+            "",
+            "6 лет",
+            "",
+        ],
+        passportIssueDateMenu: false,
+        passportBirthDateMenu: false,
+        shouldDisplaySuccessMessage: false,
+    }),
+    mounted: function () {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
     },
-    formProgress: function () {
-      return (this.currentFormStep / this.formSteps.length) * 100
-    },
-    monthlyPayment: function () {
-      let r = this.interestRate / 12
-      let n = this.formData["loanTerm"] * 12 || 24
-      let P = this.formData["loanAmount"] || 1000000
-      let result = P * (r * (1 + r) ** n) / ((1 + r) ** n - 1)
-      return parseFloat(result).toFixed(2)
-    },
-    interestAmount: function () {
-      let loanTerm = this.formData["loanTerm"] * 12 || 24
-      let loanAmount = this.formData["loanAmount"] || 1000000
-      let result = (this.monthlyPayment * loanTerm) - loanAmount
-      return parseFloat(result).toFixed(2)
-    },
-    totalLoanAmount: function () {
-      let loanAmount = this.formData["loanAmount"] || 1000000
-      let result = parseFloat(loanAmount) + parseFloat(this.interestAmount)
-      return result.toFixed(2)
-    },
-    allowedToContinueFromStepTwo: function () {
-      let requiredFields = [
-        this.formData["name"],
-        this.formData["city"],
-        this.formData["email"],
-        this.formData["phoneNumber"],
-      ]
-      return requiredFields.every(Boolean)
-    },
-    allowedToSubmitApplication: function () {
-      let requiredFields = [
-        this.agreementCheckboxOne,
-        this.agreementCheckboxTwo,
-        this.agreementCheckboxThree,
-        this.agreementCheckboxFour,
-        this.agreementCheckboxFive,
-      ]
-      return requiredFields.every(Boolean)
-    },
-    shouldAddOldPassportData: function () {
-      if (this.formData["passportIssueDate"]) {
-        let passportIssueDate = DateTime.fromISO(this.formData["passportIssueDate"])
-        let currentDate = DateTime.now().setZone("Europe/Moscow")
-        let timeSincePassportWasIssued = currentDate.diff(passportIssueDate, ["months"])
-        if (timeSincePassportWasIssued.months < 24) {
-          return true
+    computed: {
+        currentDate: function () {
+            return DateTime.now().setZone("Europe/Moscow").toISODate();
+        },
+        formProgress: function () {
+            return (this.currentFormStep / this.formSteps.length) * 100;
+        },
+        monthlyPayment: function () {
+            let r = this.interestRate / 12;
+            let n = this.formData["loanTerm"] * 12 || 24;
+            let P = this.formData["loanAmount"] || 1000000;
+            let result = P * (r * (1 + r) ** n) / ((1 + r) ** n - 1);
+            return parseFloat(result).toFixed(2);
+        },
+        interestAmount: function () {
+            let loanTerm = this.formData["loanTerm"] * 12 || 24;
+            let loanAmount = this.formData["loanAmount"] || 1000000;
+            let result = (this.monthlyPayment * loanTerm) - loanAmount;
+            return parseFloat(result).toFixed(2);
+        },
+        totalLoanAmount: function () {
+            let loanAmount = this.formData["loanAmount"] || 1000000;
+            let result = parseFloat(loanAmount) + parseFloat(this.interestAmount);
+            return result.toFixed(2);
+        },
+        allowedToContinueFromStepTwo: function () {
+            let requiredFields = [
+                this.formData["name"],
+                this.formData["city"],
+                this.formData["email"],
+                this.formData["phoneNumber"],
+            ];
+            return requiredFields.every(Boolean);
+        },
+        allowedToSubmitApplication: function () {
+            let requiredFields = [
+                this.agreementCheckboxOne,
+                this.agreementCheckboxTwo,
+                this.agreementCheckboxThree,
+                this.agreementCheckboxFour,
+                this.agreementCheckboxFive,
+            ];
+            return requiredFields.every(Boolean);
+        },
+        shouldAddOldPassportData: function () {
+            if (this.formData["passportIssueDate"]) {
+                let passportIssueDate = DateTime.fromISO(this.formData["passportIssueDate"]);
+                let currentDate = DateTime.now().setZone("Europe/Moscow");
+                let timeSincePassportWasIssued = currentDate.diff(passportIssueDate, ["months"]);
+                if (timeSincePassportWasIssued.months < 24) {
+                    return true;
+                }
+            }
+            return false;
+        },
+        isOnFirstFormStep: function () {
+            return this.currentFormStep === 1;
+        },
+        isOnLastFormStep: function () {
+            return this.currentFormStep === this.formSteps.length;
         }
-      }
-      return false
     },
-    isOnFirstFormStep: function () {
-      return this.currentFormStep === 1
+    methods: {
+        nextStep(n) {
+            if (n === this.steps) {
+                this.e1 = 1;
+            }
+            else {
+                this.e1 = n + 1;
+            }
+        },
+        getFormattedCurrency: function (number) {
+            if (number) {
+                return parseFloat(number).toLocaleString("ru-RU");
+            }
+        },
+        getFormattedYearNoun: function (number) {
+            const ORDER = [2, 0, 1, 1, 1, 2];
+            const DECLENSIONS = ["год", "года", "лет"];
+            let declension = ((number % 100 > 4 && number % 100 < 20) ?
+                2 :
+                ORDER[(number % 10 < 5) ? number % 10 : 5]);
+            return DECLENSIONS[declension];
+        },
+        getFormData: function () {
+            let formData = new FormData();
+            Object.keys(this.formData).forEach(key => formData.append(key, this.formData[key]));
+            if (this.passportPhotoOne) {
+                formData.append("passportPhotoOne", this.passportPhotoOne);
+            }
+            if (this.passportPhotoTwo) {
+                formData.append("passportPhotoTwo", this.passportPhotoTwo);
+            }
+            if (window.Telegram &&
+                window.Telegram.WebApp &&
+                window.Telegram.WebApp.initDataUnsafe &&
+                window.Telegram.WebApp.initDataUnsafe.user &&
+                window.Telegram.WebApp.initDataUnsafe.user.id) {
+                const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+                formData.append("telegramChatId", userId);
+            }
+            return formData;
+        },
+        goToNextStep: function () {
+            if (!this.isOnLastFormStep) {
+                this.currentFormStep += 1;
+                window.scrollTo(0, 0);
+            }
+        },
+        goToPreviousStep: function () {
+            if (!this.isOnFirstFormStep) {
+                this.currentFormStep -= 1;
+                window.scrollTo(0, 0);
+            }
+        },
+        goToFirstFormError: function () {
+            for (const fieldName of Object.keys(this.formErrors)) {
+                for (let step of this.formSteps) {
+                    if (step.stepFields.includes(fieldName)) {
+                        this.currentFormStep = step.stepNumber;
+                        return;
+                    }
+                }
+            }
+        },
+        submitLoanApplication: function () {
+            this.formErrors = {};
+            this.hasErrors = false;
+            this.isWaitingForResponse = true;
+            const formData = this.getFormData();
+            axios
+                .post(`${process.env.VUE_APP_API_ROOT_URL}loan-application/create/`, formData)
+                .then(() => {
+                this.isWaitingForResponse = false;
+                this.formData = {};
+                this.isApplicationSuccessfullySubmitted = true;
+                window.Telegram.WebApp.close();
+            })
+                .catch(error => {
+                this.formErrors = error.response.data;
+                this.hasErrors = true;
+                this.isWaitingForResponse = false;
+                this.goToFirstFormError();
+            });
+        },
     },
-    isOnLastFormStep: function () {
-      return this.currentFormStep === this.formSteps.length
-    }
-  },
-
-  methods: {
-    nextStep(n) {
-      if (n === this.steps) {
-        this.e1 = 1
-      } else {
-        this.e1 = n + 1
-      }
-    },
-    getFormattedCurrency: function (number) {
-      if (number) {
-        return parseFloat(number).toLocaleString("ru-RU")
-      }
-    },
-    getFormattedYearNoun: function (number) {
-      const ORDER = [2, 0, 1, 1, 1, 2]
-      const DECLENSIONS = ['год', 'года', 'лет']
-      let declension = (
-        (number % 100 > 4 && number % 100 < 20) ?
-          2 :
-          ORDER[(number % 10 < 5) ? number % 10 : 5]
-      )
-      return DECLENSIONS[declension]
-    },
-    getFormData: function () {
-      let formData = new FormData()
-      Object.keys(this.formData).forEach(key => formData.append(key, this.formData[key]))
-      if (this.passportPhotoOne) {
-        formData.append("passportPhotoOne", this.passportPhotoOne)
-      }
-      if (this.passportPhotoTwo) {
-        formData.append("passportPhotoTwo", this.passportPhotoTwo)
-      }
-      if (window.Telegram &&
-        window.Telegram.WebApp &&
-        window.Telegram.WebApp.initDataUnsafe &&
-        window.Telegram.WebApp.initDataUnsafe.user &&
-        window.Telegram.WebApp.initDataUnsafe.user.id) {
-        const userId = window.Telegram.WebApp.initDataUnsafe.user.id
-        formData.append("telegramChatId", userId)
-      }
-      return formData
-    },
-    goToNextStep: function () {
-      if (!this.isOnLastFormStep) {
-        this.currentFormStep += 1
-        window.scrollTo(0, 0)
-      }
-    },
-    goToPreviousStep: function () {
-      if (!this.isOnFirstFormStep) {
-        this.currentFormStep -= 1
-        window.scrollTo(0, 0)
-      }
-    },
-    goToFirstFormError: function () {
-      for (const fieldName of Object.keys(this.formErrors)) {
-        for (let step of this.formSteps) {
-          if (step.stepFields.includes(fieldName)) {
-            this.currentFormStep = step.stepNumber
-            return
-          }
-        }
-      }
-    },
-    submitLoanApplication: function () {
-      this.formErrors = {}
-      this.hasErrors = false
-      this.isWaitingForResponse = true
-      const formData = this.getFormData()
-      axios
-        .post(
-          `${process.env.VUE_APP_API_ROOT_URL}loan-application/create/`,
-          formData,
-        )
-        .then(() => {
-          this.isWaitingForResponse = false
-          this.formData = {}
-          this.isApplicationSuccessfullySubmitted = true
-          window.Telegram.WebApp.close()
-        })
-        .catch(error => {
-          this.formErrors = error.response.data
-          this.hasErrors = true
-          this.isWaitingForResponse = false
-          this.goToFirstFormError()
-        });
-    },
-  },
+    components: { AttachButton }
 };
 </script>
 
 <style lang="scss" >
+.autn_form {
+  height: 50px !important;
+}
 .application-form {
   .v-slider__track-container {
     height: 5px !important;
