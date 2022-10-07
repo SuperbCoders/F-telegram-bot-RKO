@@ -50,7 +50,7 @@ services:
       context: ../../
       dockerfile: ./Docker/dev/python/Dockerfile
       target: telegram
-    command: tail -F anything
+    command: python telegram-bot/bot.py
     volumes:
       - ../../django:/usr/src/app/
     env_file:
