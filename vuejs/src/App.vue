@@ -31,4 +31,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@font-face {
+  font-family: 'Montserrat';
+  src: url('./assets/font/Montserrat-VariableFont_wght.ttf')
+}
+  html, body, #base {
+    font-family: Montserrat;
+  }
+</style>
