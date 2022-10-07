@@ -83,6 +83,7 @@
               <v-row>
                 <v-col cols="12">
                   <h1 class="display-1 text-left mb-10 ">Адрес</h1>
+                  <defalt-input v-model="formData['oldName']" />
                   <div class="form_block mt-5">
                     <p class="text-left">Адрес</p>
                     <v-text-field
@@ -96,6 +97,7 @@
                       :required="true"
                   ></v-text-field>
                   </div>
+                  <default-input />
                   <div class="form_block mt-5">
                     <p class="text-left">Тип</p>
                   <v-combobox
@@ -654,7 +656,7 @@
 import axios from "axios";
 import { DateTime } from 'luxon';
 import AttachButton from "../../components/button/attachButton.vue";
-
+import defaltInput from "../../components/input/defaltInput.vue";
 export default {
     name: "LoanForm",
     data: () => ({
@@ -954,7 +956,7 @@ export default {
             });
         },
     },
-    components: { AttachButton }
+    components: { AttachButton, defaltInput }
 };
 </script>
 
