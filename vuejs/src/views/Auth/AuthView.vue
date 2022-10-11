@@ -53,7 +53,6 @@
         </div>
       </template>
     </v-checkbox>
-      <!-- <p>ewafglih;weaghega;hge;esouhsego;ehpsghe</p> -->
         </div>
     </div>
   </div>

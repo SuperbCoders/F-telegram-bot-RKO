@@ -1,21 +1,18 @@
 <template>
-  <div class="address_form">
-    <h1 class="display-1 text-left mb-10">Адрес</h1>
-    <!-- <defalt-input v-model="formData['oldName']" /> -->
+  <div class="structure_form">
+    <h2 class="text-left mb-10">Структура органов управления</h2>
     <div class="form_block mt-5">
-      <p class="text-left">Адрес</p>
-      <v-text-field
-        id="oldName"
-        placeholder="ООО Ромашка"
-        class="align-center border-none"
-        name="oldName"
+      <p class="text-left">Выберите из списка</p>
+      <v-combobox
+        filled
         outlined
-        :required="true"
-      ></v-text-field>
+        placeholder="Выберите из списка"
+        :items="availableCities"
+      ></v-combobox>
     </div>
     <default-input />
     <div class="form_block mt-5">
-      <p class="text-left">Тип</p>
+      <p class="text-left">Руководитель</p>
       <v-combobox
         filled
         outlined
@@ -24,18 +21,20 @@
       ></v-combobox>
     </div>
     <div class="form_block mt-5">
-      <p class="text-left">Основания</p>
+      <p class="text-left">ИНН</p>
       <v-text-field
+        v-model="formData['oldName']"
         id="oldName"
-        placeholder="ООО Ромашка"
+        placeholder="Введите ИНН или название компании"
         class="align-center border-none"
         name="oldName"
         outlined
+        :error-messages="formErrors['oldName']"
         :required="true"
       ></v-text-field>
     </div>
     <div class="form_group">
-      <p class="text-left mb-5">Основания</p>
+      <p class="text-left mb-5">Наличие наблюдательного совета</p>
       <v-btn-toggle
         active-class
         color="pink darken-1"
@@ -45,25 +44,27 @@
         <v-btn class="d-flex align-center">
           <p class="pl-5 pr-5 mb-0">Да</p>
         </v-btn>
-
         <v-btn>
           <p class="pl-5 pr-5 mb-0">Нет</p>
         </v-btn>
       </v-btn-toggle>
     </div>
     <div class="form_block mt-5">
-      <p class="text-left">Адрес</p>
+      <p class="text-left">Наименования наблюдательного совета</p>
       <v-text-field
+        v-model="formData['oldName']"
         id="oldName"
+        append-icon="mdi-map-marker"
         placeholder="Адрес"
         class="align-center border-none"
         name="oldName"
         outlined
+        :error-messages="formErrors['oldName']"
         :required="true"
       ></v-text-field>
     </div>
     <div class="form_group">
-      <p class="text-left mb-5">Основания</p>
+      <p class="text-left mb-5">Наличие коллегиального исполнительног органа</p>
       <v-btn-toggle
         active-class
         color="pink darken-1"
@@ -73,33 +74,41 @@
         <v-btn class="d-flex align-center">
           <p class="pl-5 pr-5 mb-0">Да</p>
         </v-btn>
-
         <v-btn>
           <p class="pl-5 pr-5 mb-0">Нет</p>
         </v-btn>
       </v-btn-toggle>
     </div>
     <div class="form_block mt-5">
-      <p class="text-left">Адрес</p>
+      <p class="text-left">Наименование коллегиального исполнительног органа</p>
       <v-text-field
+        v-model="formData['oldName']"
         id="oldName"
-        placeholder="Адрес"
+        placeholder="Наименование"
         class="align-center border-none"
         name="oldName"
         outlined
+        :error-messages="formErrors['oldName']"
+        :required="true"
+      ></v-text-field>
+    </div>
+    <div class="form_block mt-5">
+      <p class="text-left">Члены коллегиального исполнительного органа</p>
+      <v-text-field
+        v-model="formData['oldName']"
+        id="oldName"
+        placeholder="Укажите ФИЗ"
+        class="align-center border-none"
+        name="oldName"
+        outlined
+        :error-messages="formErrors['oldName']"
         :required="true"
       ></v-text-field>
     </div>
   </div>
 </template>
-
 <script>
-export default {
-    data () {
-        return {
-        }
-    }
-};
+export default {};
 </script>
 
 <style>

@@ -14,67 +14,8 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-container v-else class="fill-height application-form" fluid>
+  <v-container v-else class="fill-height p-0 application-form" fluid>
     <attach-button class="d-none" text="Прикрепить файл" />
-    <!-- <section class="auth_section w-100">
-      <div class="logo_block d-flex">
-                <img src="@/assets/images/logo.png">
-              </div>
-              <div class="auth_title text-left mt-15">
-                <h2>Вход в личный кабинет</h2>
-                <div class="d-flex">
-                  <a style="text-decoration:none" class="mr-1 text-none darken-3" href="">
-                    Или создайте личный кабинет
-                  </a>
-                  <p>Если нет личного кабинета</p>
-                </div>
-              </div>
-              <div class="auth_form mt-10 d-flex align-center" style="height:50px">
-                <v-text-field
-                      v-model="formData['oldName']"
-                      label="Номер телефона "
-                      id="oldName"
-                      class="align-center"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['oldName']"
-                      :required="true"
-                    ></v-text-field>
-                  <v-btn
-                    elevation="2"
-                    class="ml-5 h-100 align-center"
-                    style="height:100%"
-                >
-                Отправить
-                </v-btn>
-              </div>
-              <div class="auth_form_code d-flex mt-5">
-                <v-text-field
-                      v-model="formData['oldName']"
-                      label="Получить код"
-                      id="oldName"
-                      class="align-center"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['oldName']"
-                      :required="true"
-                    ></v-text-field>
-                  <p class="text-left w-50 pl-5">Повторно получить код можно через сек</p>
-              </div>
-              <v-checkbox
-                    class="mt-n5"
-                    :ripple="false"
-                    v-model="hasOldName"
-                    label="Запомнить"
-                  ></v-checkbox>
-              <v-btn
-                  elevation="2"
-                  block
-                  class="w-100"
-                >
-                Отправить
-              </v-btn>
-    </section> -->
     <v-row align="center" justify="center">
       <v-col cols="12">
         <v-stepper v-model="currentFormStep" alt-labels class="elevation-0">
@@ -82,7 +23,7 @@
             <v-stepper-content step="1">
               <v-row>
                 <v-col cols="12">
-                  <h1 class="display-1 text-left mb-10 ">Адрес</h1>
+                  <h1 class="display-1 text-left mb-10">Адрес</h1>
                   <defalt-input v-model="formData['oldName']" />
                   <div class="form_block mt-5">
                     <p class="text-left">Адрес</p>
@@ -95,17 +36,17 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
                   </div>
                   <default-input />
                   <div class="form_block mt-5">
                     <p class="text-left">Тип</p>
-                  <v-combobox
-                    filled
-                    outlined
-                    placeholder="Тип"
-                    :items="availableCities"
-                  ></v-combobox>
+                    <v-combobox
+                      filled
+                      outlined
+                      placeholder="Тип"
+                      :items="availableCities"
+                    ></v-combobox>
                   </div>
                   <div class="form_block mt-5">
                     <p class="text-left">Основания</p>
@@ -118,52 +59,24 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
-                  </div>
-                  <div class="form_group">
-                    <p class="text-left mb-5 ">Основания</p>
-                    <v-btn-toggle
-                      active-class
-                      color="pink darken-1"
-                      class="d-flex align-start" v-model="toggle_exclusive">
-                    <v-btn
-                      class="d-flex align-center">
-                      <p class="pl-5 pr-5 mb-0 ">Да</p>
-                    </v-btn>
-
-                    <v-btn>
-                      <p class="pl-5 pr-5 mb-0">Нет</p>
-                    </v-btn>
-                  </v-btn-toggle>
-                  </div>
-                  <div class="form_block mt-5">
-                    <p class="text-left">Адрес</p>
-                    <v-text-field
-                      v-model="formData['oldName']"
-                      id="oldName"
-                      placeholder="Адрес"
-                      class="align-center border-none"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['oldName']"
-                      :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
                   </div>
                   <div class="form_group">
                     <p class="text-left mb-5">Основания</p>
                     <v-btn-toggle
                       active-class
                       color="pink darken-1"
-                      class="d-flex align-start" v-model="toggle_exclusive">
-                    <v-btn
-                      class="d-flex align-center">
-                      <p class="pl-5 pr-5 mb-0">Да</p>
-                    </v-btn>
+                      class="d-flex align-start"
+                      v-model="toggle_exclusive"
+                    >
+                      <v-btn class="d-flex align-center">
+                        <p class="pl-5 pr-5 mb-0">Да</p>
+                      </v-btn>
 
-                    <v-btn>
-                      <p class="pl-5 pr-5 mb-0">Нет</p>
-                    </v-btn>
-                  </v-btn-toggle>
+                      <v-btn>
+                        <p class="pl-5 pr-5 mb-0">Нет</p>
+                      </v-btn>
+                    </v-btn-toggle>
                   </div>
                   <div class="form_block mt-5">
                     <p class="text-left">Адрес</p>
@@ -176,7 +89,37 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
+                  </div>
+                  <div class="form_group">
+                    <p class="text-left mb-5">Основания</p>
+                    <v-btn-toggle
+                      active-class
+                      color="pink darken-1"
+                      class="d-flex align-start"
+                      v-model="toggle_exclusive"
+                    >
+                      <v-btn class="d-flex align-center">
+                        <p class="pl-5 pr-5 mb-0">Да</p>
+                      </v-btn>
+
+                      <v-btn>
+                        <p class="pl-5 pr-5 mb-0">Нет</p>
+                      </v-btn>
+                    </v-btn-toggle>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Адрес</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Адрес"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
                   </div>
                   <!-- <v-btn-toggle
                   color="pink darken-1"
@@ -276,27 +219,26 @@
             </v-stepper-content>
             <v-stepper-content step="2">
               <v-row>
-                  <v-col cols="12">
-                  <h2 class="text-left mb-10 ">Структура органов управления</h2>
-
+                <v-col cols="12">
+                  <h2 class="text-left mb-10">Структура органов управления</h2>
                   <div class="form_block mt-5">
                     <p class="text-left">Выберите из списка</p>
                     <v-combobox
-                    filled
-                    outlined
-                    placeholder="Выберите из списка"
-                    :items="availableCities"
-                  ></v-combobox>
+                      filled
+                      outlined
+                      placeholder="Выберите из списка"
+                      :items="availableCities"
+                    ></v-combobox>
                   </div>
                   <default-input />
                   <div class="form_block mt-5">
                     <p class="text-left">Руководитель</p>
-                  <v-combobox
-                    filled
-                    outlined
-                    placeholder="Тип"
-                    :items="availableCities"
-                  ></v-combobox>
+                    <v-combobox
+                      filled
+                      outlined
+                      placeholder="Тип"
+                      :items="availableCities"
+                    ></v-combobox>
                   </div>
                   <div class="form_block mt-5">
                     <p class="text-left">ИНН</p>
@@ -309,23 +251,24 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
                   </div>
                   <div class="form_group">
-                    <p class="text-left mb-5 ">Наличие наблюдательного совета</p>
+                    <p class="text-left mb-5">Наличие наблюдательного совета</p>
                     <v-btn-toggle
                       active-class
                       color="pink darken-1"
-                      class="d-flex align-start" v-model="toggle_exclusive">
-                    <v-btn
-                      class="d-flex align-center">
-                      <p class="pl-5 pr-5 mb-0 ">Да</p>
-                    </v-btn>
+                      class="d-flex align-start"
+                      v-model="toggle_exclusive"
+                    >
+                      <v-btn class="d-flex align-center">
+                        <p class="pl-5 pr-5 mb-0">Да</p>
+                      </v-btn>
 
-                    <v-btn>
-                      <p class="pl-5 pr-5 mb-0">Нет</p>
-                    </v-btn>
-                  </v-btn-toggle>
+                      <v-btn>
+                        <p class="pl-5 pr-5 mb-0">Нет</p>
+                      </v-btn>
+                    </v-btn-toggle>
                   </div>
                   <div class="form_block mt-5">
                     <p class="text-left">Наименования наблюдательного совета</p>
@@ -339,26 +282,31 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
                   </div>
                   <div class="form_group">
-                    <p class="text-left mb-5 ">Наличие коллегиального исполнительног органа</p>
+                    <p class="text-left mb-5">
+                      Наличие коллегиального исполнительног органа
+                    </p>
                     <v-btn-toggle
                       active-class
                       color="pink darken-1"
-                      class="d-flex align-start" v-model="toggle_exclusive">
-                    <v-btn
-                      class="d-flex align-center">
-                      <p class="pl-5 pr-5 mb-0">Да</p>
-                    </v-btn>
+                      class="d-flex align-start"
+                      v-model="toggle_exclusive"
+                    >
+                      <v-btn class="d-flex align-center">
+                        <p class="pl-5 pr-5 mb-0">Да</p>
+                      </v-btn>
 
-                    <v-btn>
-                      <p class="pl-5 pr-5 mb-0">Нет</p>
-                    </v-btn>
-                  </v-btn-toggle>
+                      <v-btn>
+                        <p class="pl-5 pr-5 mb-0">Нет</p>
+                      </v-btn>
+                    </v-btn-toggle>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">Наименование коллегиального исполнительног органа</p>
+                    <p class="text-left">
+                      Наименование коллегиального исполнительног органа
+                    </p>
                     <v-text-field
                       v-model="formData['oldName']"
                       id="oldName"
@@ -368,10 +316,12 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">Члены коллегиального исполнительного органа</p>
+                    <p class="text-left">
+                      Члены коллегиального исполнительного органа
+                    </p>
                     <v-text-field
                       v-model="formData['oldName']"
                       id="oldName"
@@ -381,7 +331,7 @@
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
-                  ></v-text-field>
+                    ></v-text-field>
                   </div>
                   <!-- <v-btn-toggle
                   color="pink darken-1"
@@ -483,34 +433,35 @@
             <v-stepper-content step="3">
               <v-row>
                 <v-col cols="12">
-                  <v-text-field
-                    v-model="formData['name']"
-                    label="ФИО"
-                    id="name"
-                    name="name"
-                    outlined
-                    :error-messages="formErrors['name']"
-                    :required="true"
-                  ></v-text-field>
-                  <v-checkbox
-                    class="mt-n5"
-                    :ripple="false"
-                    v-model="hasOldName"
-                    label="Меняли ли вы ФИО?"
-                  ></v-checkbox>
-                  <v-scroll-y-transition hide-on-leave>
+                  <h2 class="text-left mb-10">Сведенья о персонале</h2>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Численность персонала</p>
                     <v-text-field
-                      v-if="hasOldName"
                       v-model="formData['oldName']"
-                      label="Данные о предыдущих ФИО"
                       id="oldName"
+                      placeholder="Наименование"
+                      class="align-center border-none"
                       name="oldName"
                       outlined
                       :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
-                  </v-scroll-y-transition>
-                  <v-text-field
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Численность персонала</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Наименование"
+                      class="align-center border-none"
+                      name="oldName"
+                      append-icon="mdi-currency-rub"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  </div>
+                  <!-- <v-text-field
                     v-model="formData['phoneNumber']"
                     label="Мобильный телефон"
                     id="phoneNumber"
@@ -529,7 +480,7 @@
                     outlined
                     :error-messages="formErrors['email']"
                     :required="true"
-                  ></v-text-field>
+                  ></v-text-field> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -537,26 +488,81 @@
             <v-stepper-content step="4">
               <v-row>
                 <v-col cols="12">
-                  <p class="subtitle grey--text">Текущие данные паспорта</p>
-                  <v-text-field
-                    v-model="formData['passportSeries']"
-                    label="Серия"
-                    id="passportSeries"
-                    name="passportSeries"
-                    outlined
-                    :error-messages="formErrors['passportSeries']"
-                    :required="true"
-                  ></v-text-field>
-                  <v-text-field
-                    v-model="formData['passportNumber']"
-                    label="Номер"
-                    id="passportNumber"
-                    name="passportNumber"
-                    outlined
-                    :error-messages="formErrors['passportNumber']"
-                    :required="true"
-                  ></v-text-field>
-                  <v-text-field
+                  <h2 class="text-left mb-10">
+                    Группа взаимосвязанных компаний
+                  </h2>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Название компании</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Наименование"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Численность о персонале</p>
+                    <v-menu
+                      v-model="passportIssueDateMenu"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="formData['passportIssueDate']"
+                          label="Дата выдачи"
+                          id="passportIssueDate"
+                          name="passportIssueDate"
+                          outlined
+                          append-icon="mdi-calendar-blank"
+                          :error-messages="formErrors['passportIssueDate']"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="formData['passportIssueDate']"
+                        @input="passportIssueDateMenu = false"
+                      ></v-date-picker>
+                    </v-menu>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Численность о персонале</p>
+                    <v-menu
+                      v-model="passportIssueDateMenu"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="formData['passportIssueDate']"
+                          label="Дата выдачи"
+                          id="passportIssueDate"
+                          name="passportIssueDate"
+                          append-icon="mdi-calendar-blank"
+                          outlined
+                          :error-messages="formErrors['passportIssueDate']"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="formData['passportIssueDate']"
+                        @input="passportIssueDateMenu = false"
+                      ></v-date-picker>
+                    </v-menu>
+                  </div>
+                  <!-- <v-text-field
                     v-model="formData['passportCode']"
                     label="Код подразделения"
                     id="passportCode"
@@ -674,7 +680,7 @@
                       v-model="formData['passportDateOfBirth']"
                       @input="passportBirthDateMenu = false"
                     ></v-date-picker>
-                  </v-menu>
+                  </v-menu> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -682,7 +688,10 @@
             <v-stepper-content step="5">
               <v-row>
                 <v-col cols="12">
-                  <p class="subtitle grey--text">Фото страниц паспорта</p>
+                  <h2 class="text-left mb-10">Документы</h2>
+                  <p class="subtitle text-left">
+                    Сведения о лицензии на право осуществления деятельности
+                  </p>
                   <v-file-input
                     v-model="passportPhotoOne"
                     :error-messages="formErrors['passportPhotoOne']"
@@ -704,48 +713,81 @@
             <v-stepper-content step="6">
               <v-row>
                 <v-col cols="12">
-                  <v-text-field
-                    v-model="formData['registrationAddress']"
-                    label="Адрес регистрации"
-                    id="registrationAddress"
-                    name="registrationAddress"
-                    outlined
-                    :error-messages="formErrors['registrationAddress']"
-                    :required="true"
-                  ></v-text-field>
-                  <v-checkbox
-                    class="mt-n2"
-                    :ripple="false"
-                    v-model="isRegistrationAddressSameAsCurrent"
-                    label="Адрес регистрации совпадает с адресом проживания"
-                  ></v-checkbox>
-                  <v-checkbox
-                    class="mt-n2"
-                    :ripple="false"
-                    v-model="formData['hasNoCurrentAddress']"
-                    label="Адрес регистрации отсутствует"
-                  ></v-checkbox>
-                  <v-scroll-y-transition hide-on-leave>
-                    <v-text-field
-                      v-if="!isRegistrationAddressSameAsCurrent"
-                      v-model="formData['currentAddress']"
-                      label="Адрес проживания"
-                      id="currentAddress"
-                      name="currentAddress"
-                      outlined
-                      :error-messages="formErrors['currentAddress']"
-                      :required="true"
-                    ></v-text-field>
-                  </v-scroll-y-transition>
-                  <v-text-field
-                    v-model="formData['currentApartmentsNumber']"
-                    label="Номер квартиры"
-                    id="currentApartmentsNumber"
-                    name="currentApartmentsNumber"
-                    outlined
-                    :error-messages="formErrors['currentApartmentsNumber']"
-                    :required="true"
-                  ></v-text-field>
+                  <h2 class="text-left mb-10">
+                    Тарифы на расчетно-кассовое обслуживание
+                  </h2>
+                  <v-card elevation="2" class="mb-3">
+                    <div class="card_content p-10 text-left m-11">
+                      <h1 class="text-left mb-3">Простой</h1>
+                      <p class="text-left mb-3">
+                        Для начинающих предприниматель
+                      </p>
+                      <ul class="mb-3">
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                      </ul>
+                      <h2 class="text-left mb-3">490 руб/мес</h2>
+                      <v-btn elevation="2" large>Выбрать</v-btn>
+                    </div>
+                  </v-card>
+                  <v-card elevation="2" class="mb-5">
+                    <div class="card_content p-10 text-left m-11 ,b-">
+                      <h1 class="text-left mb-3">Простой</h1>
+                      <p class="text-left mb-3">
+                        Для начинающих предприниматель
+                      </p>
+                      <ul class="mb-3">
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                      </ul>
+                      <h2 class="text-left mb-3">490 руб/мес</h2>
+                      <v-btn elevation="2" large>Выбрать</v-btn>
+                    </div>
+                  </v-card>
+                  <v-card elevation="2" class="mb-3">
+                    <div class="card_content p-10 text-left m-11 mb-5">
+                      <h1 class="text-left mb-3">Простой</h1>
+                      <p class="text-left mb-3">
+                        Для начинающих предприниматель
+                      </p>
+                      <ul class="mb-3">
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                        <li class="text-left mb-3">
+                          До 400 000 ₽ себе на счет для ИП бесплатно
+                        </li>
+                      </ul>
+                      <h2 class="text-left mb-3">490 руб/мес</h2>
+                      <v-btn elevation="2" large>Выбрать</v-btn>
+                    </div>
+                  </v-card>
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -847,309 +889,299 @@
 
 <script>
 import axios from "axios";
-import { DateTime } from 'luxon';
+import { DateTime } from "luxon";
 import AttachButton from "../../components/button/attachButton.vue";
 import defaltInput from "../../components/input/defaltInput.vue";
 export default {
-    name: "LoanForm",
-    data: () => ({
-        isApplicationSuccessfullySubmitted: false,
-        isWaitingForResponse: false,
-        currentFormStep: 1,
-        formSteps: [
-            {
-                stepName: "1",
-                stepNumber: 1,
-                stepFields: [
-                    "loanAmount",
-                    "loanTerm",
-                ]
-            },
-            {
-                stepName: "2",
-                stepNumber: 2,
-                stepFields: [
-                    "city",
-                ]
-            },
-            {
-                stepName: "3",
-                stepNumber: 3,
-                stepFields: [
-                    "name",
-                    "phoneNumber",
-                    "email",
-                ]
-            },
-            {
-                stepName: "4",
-                stepNumber: 4,
-                stepFields: [
-                    "passportSeries",
-                    "passportNumber",
-                    "passportCode",
-                    "passportIssueDate",
-                    "passportIssuedBy",
-                    "passportPlaceOfBirth",
-                    "passportDateOfBirth",
-                ]
-            },
-            {
-                stepName: "5",
-                stepNumber: 5,
-                stepFields: [
-                    "passportPhotoOne",
-                    "passportPhotoTwo",
-                ]
-            },
-            {
-                stepName: "6",
-                stepNumber: 6,
-                stepFields: [
-                    "registrationAddress",
-                    "currentAddress",
-                    "currentApartmentsNumber",
-                ]
-            },
-            {
-                stepName: "7",
-                stepNumber: 7,
-                stepFields: [
-                    "monthlyIncome",
-                ]
-            },
+  name: "LoanForm",
+  data: () => ({
+    isApplicationSuccessfullySubmitted: false,
+    isWaitingForResponse: false,
+    currentFormStep: 1,
+    formSteps: [
+      {
+        stepName: "1",
+        stepNumber: 1,
+        stepFields: ["loanAmount", "loanTerm"],
+      },
+      {
+        stepName: "2",
+        stepNumber: 2,
+        stepFields: ["city"],
+      },
+      {
+        stepName: "3",
+        stepNumber: 3,
+        stepFields: ["name", "phoneNumber", "email"],
+      },
+      {
+        stepName: "4",
+        stepNumber: 4,
+        stepFields: [
+          "passportSeries",
+          "passportNumber",
+          "passportCode",
+          "passportIssueDate",
+          "passportIssuedBy",
+          "passportPlaceOfBirth",
+          "passportDateOfBirth",
         ],
-        hasOldName: false,
-        agreementCheckboxOne: false,
-        agreementCheckboxTwo: false,
-        agreementCheckboxThree: false,
-        agreementCheckboxFour: false,
-        agreementCheckboxFive: false,
-        availableCities: [
-            "Москва",
-            "Санкт-Петербург",
-            "Альметьевск",
-            "Азнакаево",
-            "Анапа",
-            "Арзамас",
-            "Бавлы",
-            "Балашиха",
-            "Бугры",
-            "Бугульма",
-            "Горно-Алтайск",
-            "Данков",
-            "Джалиль",
-            "Екатеринбург",
-            "Елабуга",
-            "Елец",
-            "Заинск",
-            "Ижевск",
-            "Йошкар-Ола",
-            "Казань",
-            "Калининград",
-            "Карабаш",
-            "Кемерово",
-            "Краснодар",
-            "Лениногорск",
-            "Липецк",
-            "Мытищи",
-            "Набережные Челны",
-            "Нижнекамск",
-            "Нижний Новгород",
-            "Новосибирск",
-            "Нурлат",
-            "Одинцово",
-            "Пермь",
-            "Ростов-на-Дону",
-            "Самара",
-            "Саратов",
-            "Саров",
-            "Сочи",
-            "Тольятти",
-            "Тула",
-            "Химки",
-            "Чебоксары",
-            "Челябинск",
-            "Чистополь",
+      },
+      {
+        stepName: "5",
+        stepNumber: 5,
+        stepFields: ["passportPhotoOne", "passportPhotoTwo"],
+      },
+      {
+        stepName: "6",
+        stepNumber: 6,
+        stepFields: [
+          "registrationAddress",
+          "currentAddress",
+          "currentApartmentsNumber",
         ],
-        passportPhotoOne: null,
-        passportPhotoTwo: null,
-        interestRate: 0.05,
-        formErrors: {},
-        hasErrors: false,
-        formData: {},
-        isRegistrationAddressSameAsCurrent: false,
-        loanTermTickLabels: [
-            "2 года",
-            "3 года",
-            "4 года",
-            "5 лет",
-            "6 лет",
-            "7 лет",
-        ],
-        smallLoanTermTickLabels: [
-            "2 года",
-            "",
-            "4 года",
-            "",
-            "6 лет",
-            "",
-        ],
-        passportIssueDateMenu: false,
-        passportBirthDateMenu: false,
-        shouldDisplaySuccessMessage: false,
-    }),
-    mounted: function () {
-        window.Telegram.WebApp.ready();
-        window.Telegram.WebApp.expand();
+      },
+      {
+        stepName: "7",
+        stepNumber: 7,
+        stepFields: ["monthlyIncome"],
+      },
+    ],
+    hasOldName: false,
+    agreementCheckboxOne: false,
+    agreementCheckboxTwo: false,
+    agreementCheckboxThree: false,
+    agreementCheckboxFour: false,
+    agreementCheckboxFive: false,
+    availableCities: [
+      "Москва",
+      "Санкт-Петербург",
+      "Альметьевск",
+      "Азнакаево",
+      "Анапа",
+      "Арзамас",
+      "Бавлы",
+      "Балашиха",
+      "Бугры",
+      "Бугульма",
+      "Горно-Алтайск",
+      "Данков",
+      "Джалиль",
+      "Екатеринбург",
+      "Елабуга",
+      "Елец",
+      "Заинск",
+      "Ижевск",
+      "Йошкар-Ола",
+      "Казань",
+      "Калининград",
+      "Карабаш",
+      "Кемерово",
+      "Краснодар",
+      "Лениногорск",
+      "Липецк",
+      "Мытищи",
+      "Набережные Челны",
+      "Нижнекамск",
+      "Нижний Новгород",
+      "Новосибирск",
+      "Нурлат",
+      "Одинцово",
+      "Пермь",
+      "Ростов-на-Дону",
+      "Самара",
+      "Саратов",
+      "Саров",
+      "Сочи",
+      "Тольятти",
+      "Тула",
+      "Химки",
+      "Чебоксары",
+      "Челябинск",
+      "Чистополь",
+    ],
+    passportPhotoOne: null,
+    passportPhotoTwo: null,
+    interestRate: 0.05,
+    formErrors: {},
+    hasErrors: false,
+    formData: {},
+    isRegistrationAddressSameAsCurrent: false,
+    loanTermTickLabels: [
+      "2 года",
+      "3 года",
+      "4 года",
+      "5 лет",
+      "6 лет",
+      "7 лет",
+    ],
+    smallLoanTermTickLabels: ["2 года", "", "4 года", "", "6 лет", ""],
+    passportIssueDateMenu: false,
+    passportBirthDateMenu: false,
+    shouldDisplaySuccessMessage: false,
+  }),
+  mounted: function () {
+    window.Telegram.WebApp.ready();
+    window.Telegram.WebApp.expand();
+  },
+  computed: {
+    currentDate: function () {
+      return DateTime.now().setZone("Europe/Moscow").toISODate();
     },
-    computed: {
-        currentDate: function () {
-            return DateTime.now().setZone("Europe/Moscow").toISODate();
-        },
-        formProgress: function () {
-            return (this.currentFormStep / this.formSteps.length) * 100;
-        },
-        monthlyPayment: function () {
-            let r = this.interestRate / 12;
-            let n = this.formData["loanTerm"] * 12 || 24;
-            let P = this.formData["loanAmount"] || 1000000;
-            let result = P * (r * (1 + r) ** n) / ((1 + r) ** n - 1);
-            return parseFloat(result).toFixed(2);
-        },
-        interestAmount: function () {
-            let loanTerm = this.formData["loanTerm"] * 12 || 24;
-            let loanAmount = this.formData["loanAmount"] || 1000000;
-            let result = (this.monthlyPayment * loanTerm) - loanAmount;
-            return parseFloat(result).toFixed(2);
-        },
-        totalLoanAmount: function () {
-            let loanAmount = this.formData["loanAmount"] || 1000000;
-            let result = parseFloat(loanAmount) + parseFloat(this.interestAmount);
-            return result.toFixed(2);
-        },
-        allowedToContinueFromStepTwo: function () {
-            let requiredFields = [
-                this.formData["name"],
-                this.formData["city"],
-                this.formData["email"],
-                this.formData["phoneNumber"],
-            ];
-            return requiredFields.every(Boolean);
-        },
-        allowedToSubmitApplication: function () {
-            let requiredFields = [
-                this.agreementCheckboxOne,
-                this.agreementCheckboxTwo,
-                this.agreementCheckboxThree,
-                this.agreementCheckboxFour,
-                this.agreementCheckboxFive,
-            ];
-            return requiredFields.every(Boolean);
-        },
-        shouldAddOldPassportData: function () {
-            if (this.formData["passportIssueDate"]) {
-                let passportIssueDate = DateTime.fromISO(this.formData["passportIssueDate"]);
-                let currentDate = DateTime.now().setZone("Europe/Moscow");
-                let timeSincePassportWasIssued = currentDate.diff(passportIssueDate, ["months"]);
-                if (timeSincePassportWasIssued.months < 24) {
-                    return true;
-                }
-            }
-            return false;
-        },
-        isOnFirstFormStep: function () {
-            return this.currentFormStep === 1;
-        },
-        isOnLastFormStep: function () {
-            return this.currentFormStep === this.formSteps.length;
+    formProgress: function () {
+      return (this.currentFormStep / this.formSteps.length) * 100;
+    },
+    monthlyPayment: function () {
+      let r = this.interestRate / 12;
+      let n = this.formData["loanTerm"] * 12 || 24;
+      let P = this.formData["loanAmount"] || 1000000;
+      let result = (P * (r * (1 + r) ** n)) / ((1 + r) ** n - 1);
+      return parseFloat(result).toFixed(2);
+    },
+    interestAmount: function () {
+      let loanTerm = this.formData["loanTerm"] * 12 || 24;
+      let loanAmount = this.formData["loanAmount"] || 1000000;
+      let result = this.monthlyPayment * loanTerm - loanAmount;
+      return parseFloat(result).toFixed(2);
+    },
+    totalLoanAmount: function () {
+      let loanAmount = this.formData["loanAmount"] || 1000000;
+      let result = parseFloat(loanAmount) + parseFloat(this.interestAmount);
+      return result.toFixed(2);
+    },
+    allowedToContinueFromStepTwo: function () {
+      let requiredFields = [
+        this.formData["name"],
+        this.formData["city"],
+        this.formData["email"],
+        this.formData["phoneNumber"],
+      ];
+      return requiredFields.every(Boolean);
+    },
+    allowedToSubmitApplication: function () {
+      let requiredFields = [
+        this.agreementCheckboxOne,
+        this.agreementCheckboxTwo,
+        this.agreementCheckboxThree,
+        this.agreementCheckboxFour,
+        this.agreementCheckboxFive,
+      ];
+      return requiredFields.every(Boolean);
+    },
+    shouldAddOldPassportData: function () {
+      if (this.formData["passportIssueDate"]) {
+        let passportIssueDate = DateTime.fromISO(
+          this.formData["passportIssueDate"]
+        );
+        let currentDate = DateTime.now().setZone("Europe/Moscow");
+        let timeSincePassportWasIssued = currentDate.diff(passportIssueDate, [
+          "months",
+        ]);
+        if (timeSincePassportWasIssued.months < 24) {
+          return true;
         }
+      }
+      return false;
     },
-    methods: {
-        nextStep(n) {
-            if (n === this.steps) {
-                this.e1 = 1;
-            }
-            else {
-                this.e1 = n + 1;
-            }
-        },
-        getFormattedCurrency: function (number) {
-            if (number) {
-                return parseFloat(number).toLocaleString("ru-RU");
-            }
-        },
-        getFormattedYearNoun: function (number) {
-            const ORDER = [2, 0, 1, 1, 1, 2];
-            const DECLENSIONS = ["год", "года", "лет"];
-            let declension = ((number % 100 > 4 && number % 100 < 20) ?
-                2 :
-                ORDER[(number % 10 < 5) ? number % 10 : 5]);
-            return DECLENSIONS[declension];
-        },
-        getFormData: function () {
-            let formData = new FormData();
-            Object.keys(this.formData).forEach(key => formData.append(key, this.formData[key]));
-            if (this.passportPhotoOne) {
-                formData.append("passportPhotoOne", this.passportPhotoOne);
-            }
-            if (this.passportPhotoTwo) {
-                formData.append("passportPhotoTwo", this.passportPhotoTwo);
-            }
-            if (window.Telegram &&
-                window.Telegram.WebApp &&
-                window.Telegram.WebApp.initDataUnsafe &&
-                window.Telegram.WebApp.initDataUnsafe.user &&
-                window.Telegram.WebApp.initDataUnsafe.user.id) {
-                const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-                formData.append("telegramChatId", userId);
-            }
-            return formData;
-        },
-        goToNextStep: function () {
-            if (!this.isOnLastFormStep) {
-                this.currentFormStep += 1;
-                window.scrollTo(0, 0);
-            }
-        },
-        goToPreviousStep: function () {
-            if (!this.isOnFirstFormStep) {
-                this.currentFormStep -= 1;
-                window.scrollTo(0, 0);
-            }
-        },
-        goToFirstFormError: function () {
-            for (const fieldName of Object.keys(this.formErrors)) {
-                for (let step of this.formSteps) {
-                    if (step.stepFields.includes(fieldName)) {
-                        this.currentFormStep = step.stepNumber;
-                        return;
-                    }
-                }
-            }
-        },
-        submitLoanApplication: function () {
-            this.formErrors = {};
-            this.hasErrors = false;
-            this.isWaitingForResponse = true;
-            const formData = this.getFormData();
-            axios
-                .post(`${process.env.VUE_APP_API_ROOT_URL}loan-application/create/`, formData)
-                .then(() => {
-                this.isWaitingForResponse = false;
-                this.formData = {};
-                this.isApplicationSuccessfullySubmitted = true;
-                window.Telegram.WebApp.close();
-            })
-                .catch(error => {
-                this.formErrors = error.response.data;
-                this.hasErrors = true;
-                this.isWaitingForResponse = false;
-                this.goToFirstFormError();
-            });
-        },
+    isOnFirstFormStep: function () {
+      return this.currentFormStep === 1;
     },
-    components: { AttachButton, defaltInput }
+    isOnLastFormStep: function () {
+      return this.currentFormStep === this.formSteps.length;
+    },
+  },
+  methods: {
+    nextStep(n) {
+      if (n === this.steps) {
+        this.e1 = 1;
+      } else {
+        this.e1 = n + 1;
+      }
+    },
+    getFormattedCurrency: function (number) {
+      if (number) {
+        return parseFloat(number).toLocaleString("ru-RU");
+      }
+    },
+    getFormattedYearNoun: function (number) {
+      const ORDER = [2, 0, 1, 1, 1, 2];
+      const DECLENSIONS = ["год", "года", "лет"];
+      let declension =
+        number % 100 > 4 && number % 100 < 20
+          ? 2
+          : ORDER[number % 10 < 5 ? number % 10 : 5];
+      return DECLENSIONS[declension];
+    },
+    getFormData: function () {
+      let formData = new FormData();
+      Object.keys(this.formData).forEach((key) =>
+        formData.append(key, this.formData[key])
+      );
+      if (this.passportPhotoOne) {
+        formData.append("passportPhotoOne", this.passportPhotoOne);
+      }
+      if (this.passportPhotoTwo) {
+        formData.append("passportPhotoTwo", this.passportPhotoTwo);
+      }
+      if (
+        window.Telegram &&
+        window.Telegram.WebApp &&
+        window.Telegram.WebApp.initDataUnsafe &&
+        window.Telegram.WebApp.initDataUnsafe.user &&
+        window.Telegram.WebApp.initDataUnsafe.user.id
+      ) {
+        const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+        formData.append("telegramChatId", userId);
+      }
+      return formData;
+    },
+    goToNextStep: function () {
+      if (!this.isOnLastFormStep) {
+        this.currentFormStep += 1;
+        window.scrollTo(0, 0);
+      }
+    },
+    goToPreviousStep: function () {
+      if (!this.isOnFirstFormStep) {
+        this.currentFormStep -= 1;
+        window.scrollTo(0, 0);
+      }
+    },
+    goToFirstFormError: function () {
+      for (const fieldName of Object.keys(this.formErrors)) {
+        for (let step of this.formSteps) {
+          if (step.stepFields.includes(fieldName)) {
+            this.currentFormStep = step.stepNumber;
+            return;
+          }
+        }
+      }
+    },
+    submitLoanApplication: function () {
+      this.formErrors = {};
+      this.hasErrors = false;
+      this.isWaitingForResponse = true;
+      const formData = this.getFormData();
+      axios
+        .post(
+          `${process.env.VUE_APP_API_ROOT_URL}loan-application/create/`,
+          formData
+        )
+        .then(() => {
+          this.isWaitingForResponse = false;
+          this.formData = {};
+          this.isApplicationSuccessfullySubmitted = true;
+          window.Telegram.WebApp.close();
+        })
+        .catch((error) => {
+          this.formErrors = error.response.data;
+          this.hasErrors = true;
+          this.isWaitingForResponse = false;
+          this.goToFirstFormError();
+        });
+    },
+  },
+  components: { AttachButton, defaltInput },
 };
 </script>
 
@@ -1167,5 +1199,8 @@ export default {
   .v-slider__tick {
     background-color: #10c8d2;
   }
+}
+.card_content {
+  padding: 20px;
 }
 </style>
