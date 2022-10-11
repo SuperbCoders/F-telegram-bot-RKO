@@ -15,8 +15,8 @@
     </v-row>
   </v-container>
   <v-container v-else class="fill-height application-form" fluid>
-    <attach-button text="Прикрепить файл" />
-    <section class="auth_section w-100">
+    <attach-button class="d-none" text="Прикрепить файл" />
+    <!-- <section class="auth_section w-100">
       <div class="logo_block d-flex">
                 <img src="@/assets/images/logo.png">
               </div>
@@ -40,10 +40,6 @@
                       :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
-                  <!-- <v-bth
-                  elevation="2">
-                    fwwfaf
-                  </v-bth> -->
                   <v-btn
                     elevation="2"
                     class="ml-5 h-100 align-center"
@@ -78,59 +74,133 @@
                 >
                 Отправить
               </v-btn>
-    </section>
+    </section> -->
     <v-row align="center" justify="center">
       <v-col cols="12">
         <v-stepper v-model="currentFormStep" alt-labels class="elevation-0">
           <v-stepper-items align="center" justify="center">
-            <!-- <v-stepper-content step="1">
-              <div class="logo_block d-flex">
-                <img src="@/assets/images/logo.png">
-              </div>
-              <div class="auth_title d-flex mt-15">
-                <h2>Вход в личный кабинет</h2>
-              </div>
-              <div class="auth_form mt-10 d-flex align-center" style="height:50px">
-                <v-text-field
-                      v-model="formData['oldName']"
-                      label="Номер телефона "
-                      id="oldName"
-                      class="align-center"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['oldName']"
-                      :required="true"
-                    ></v-text-field>
-                  <v-btn
-                    elevation="2"
-                    class="ml-5 h-100 align-center"
-                    style="height:100%"
-                >
-                Отправить
-                </v-btn>
-              </div>
-              <div class="auth_form_code d-flex mt-5">
-                <v-text-field
-                      v-model="formData['oldName']"
-                      label="Получить код"
-                      id="oldName"
-                      class="align-center"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['oldName']"
-                      :required="true"
-                    ></v-text-field>
-                  <p class="text-left w-50 pl-5">Повторно получить код можно через сек</p>
-              </div>
-              <v-checkbox
-                    class="mt-n5"
-                    :ripple="false"
-                    v-model="hasOldName"
-                    label="Запомнить"
-                  ></v-checkbox>
+            <v-stepper-content step="1">
               <v-row>
                 <v-col cols="12">
-                  <p class="title blue-grey--text">
+                  <h1 class="display-1 text-left mb-10 ">Адрес</h1>
+                  <defalt-input v-model="formData['oldName']" />
+                  <div class="form_block mt-5">
+                    <p class="text-left">Адрес</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="ООО Ромашка"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <default-input />
+                  <div class="form_block mt-5">
+                    <p class="text-left">Тип</p>
+                  <v-combobox
+                    filled
+                    outlined
+                    placeholder="Тип"
+                    :items="availableCities"
+                  ></v-combobox>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Основания</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="ООО Ромашка"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <div class="form_group">
+                    <p class="text-left mb-5 ">Основания</p>
+                    <v-btn-toggle
+                      active-class
+                      color="pink darken-1"
+                      class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 mb-0 ">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 mb-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Адрес</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Адрес"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <div class="form_group">
+                    <p class="text-left mb-5">Основания</p>
+                    <v-btn-toggle
+                      active-class
+                      color="pink darken-1"
+                      class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 mb-0">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 mb-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Адрес</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Адрес"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <!-- <v-btn-toggle
+                  color="pink darken-1"
+                  class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 m-0">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 m-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle> -->
+                  <!-- <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="ООО Ромашка"
+                      class="align-center mt-10"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field> -->
+                  <!-- <p class="title blue-grey--text">
                     <span class="primary--text"
                       >{{
                         getFormattedCurrency(formData["loanAmount"])
@@ -200,19 +270,212 @@
                   <p class="grey--text">
                     Процентная ставка:
                     <span class="black--text">{{ interestRate * 100 }}%</span>
-                  </p>
+                  </p> -->
                 </v-col>
               </v-row>
-            </v-stepper-content> -->
+            </v-stepper-content>
             <v-stepper-content step="2">
               <v-row>
-                <v-col cols="12">
-                  <v-select
-                    v-model="formData['city']"
-                    :items="availableCities"
+                  <v-col cols="12">
+                  <h2 class="text-left mb-10 ">Структура органов управления</h2>
+
+                  <div class="form_block mt-5">
+                    <p class="text-left">Выберите из списка</p>
+                    <v-combobox
+                    filled
                     outlined
-                    label="Город"
-                  ></v-select>
+                    placeholder="Выберите из списка"
+                    :items="availableCities"
+                  ></v-combobox>
+                  </div>
+                  <default-input />
+                  <div class="form_block mt-5">
+                    <p class="text-left">Руководитель</p>
+                  <v-combobox
+                    filled
+                    outlined
+                    placeholder="Тип"
+                    :items="availableCities"
+                  ></v-combobox>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">ИНН</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Введите ИНН или название компании"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <div class="form_group">
+                    <p class="text-left mb-5 ">Наличие наблюдательного совета</p>
+                    <v-btn-toggle
+                      active-class
+                      color="pink darken-1"
+                      class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 mb-0 ">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 mb-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Наименования наблюдательного совета</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      append-icon="mdi-map-marker"
+                      placeholder="Адрес"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <div class="form_group">
+                    <p class="text-left mb-5 ">Наличие коллегиального исполнительног органа</p>
+                    <v-btn-toggle
+                      active-class
+                      color="pink darken-1"
+                      class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 mb-0">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 mb-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Наименование коллегиального исполнительног органа</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Наименование"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Члены коллегиального исполнительного органа</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Укажите ФИЗ"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field>
+                  </div>
+                  <!-- <v-btn-toggle
+                  color="pink darken-1"
+                  class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 m-0">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 m-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle> -->
+                  <!-- <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="ООО Ромашка"
+                      class="align-center mt-10"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field> -->
+                  <!-- <p class="title blue-grey--text">
+                    <span class="primary--text"
+                      >{{
+                        getFormattedCurrency(formData["loanAmount"])
+                      }}
+                      &#8381;</span
+                    >
+                  </p>
+                  <v-slider
+                    v-model="formData['loanAmount']"
+                    :max="5000000"
+                    :min="1000000"
+                    step="500000"
+                    track-color="light-grey"
+                    tick-size="5"
+                    ticks="always"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <p class="title blue-grey--text">
+                    Срок:
+                    <span class="primary--text">
+                      {{ formData["loanTerm"] }}
+                      {{ getFormattedYearNoun(formData["loanTerm"]) }}
+                    </span>
+                  </p>
+                  <v-slider
+                    class="d-none d-sm-block"
+                    v-model="formData['loanTerm']"
+                    :tick-labels="loanTermTickLabels"
+                    :max="7"
+                    :min="2"
+                    step="1"
+                    ticks
+                    track-color="light-grey"
+                    tick-size="5"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <v-slider
+                    class="d-sm-none"
+                    v-model="formData['loanTerm']"
+                    :tick-labels="smallLoanTermTickLabels"
+                    :max="7"
+                    :min="2"
+                    step="1"
+                    ticks
+                    track-color="light-grey"
+                    tick-size="5"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <p class="mt-5 title grey--text">Ежемесячный платеж</p>
+                  <v-scroll-y-transition hide-on-leave>
+                    <p :key="monthlyPayment" class="display-1 primary--text">
+                      {{ getFormattedCurrency(monthlyPayment) }} &#8381;
+                    </p>
+                  </v-scroll-y-transition>
+                  <p class="grey--text">
+                    Сумма переплаты:
+                    <span class="black--text"
+                      >{{ getFormattedCurrency(interestAmount) }} &#8381;</span
+                    >
+                  </p>
+                  <p class="grey--text">
+                    Сумма кредита:
+                    <span class="black--text"
+                      >{{ getFormattedCurrency(totalLoanAmount) }} &#8381;</span
+                    >
+                  </p>
+                  <p class="grey--text">
+                    Процентная ставка:
+                    <span class="black--text">{{ interestRate * 100 }}%</span>
+                  </p> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -586,7 +849,7 @@
 import axios from "axios";
 import { DateTime } from 'luxon';
 import AttachButton from "../../components/button/attachButton.vue";
-
+import defaltInput from "../../components/input/defaltInput.vue";
 export default {
     name: "LoanForm",
     data: () => ({
@@ -886,7 +1149,7 @@ export default {
             });
         },
     },
-    components: { AttachButton }
+    components: { AttachButton, defaltInput }
 };
 </script>
 
