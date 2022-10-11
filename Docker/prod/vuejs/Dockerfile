@@ -16,6 +16,8 @@ COPY ./vuejs/package*.json ./vuejs/yarn.lock ./
 
 RUN yarn install --frozen-lockfile --check-files
 
+RUN chmod -R 777 /usr/src/app
+
 COPY --chown=node:node ./vuejs/ /usr/src/app/
 
 CMD yarn build --dest build-output && \
