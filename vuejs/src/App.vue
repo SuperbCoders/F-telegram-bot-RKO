@@ -28,15 +28,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 @font-face {
   font-family: "Montserrat";
-  src: url("./assets/font/Montserrat-VariableFont_wght.ttf");
+  src: url("./assets/font/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: 'Geometria';
+  src: url('./assets/font/Geometria/geometria_light.otf');
 }
 html,
 body,
 #base {
-  font-family: Montserrat;
-  padding: 20px;
+  font-family: Geometria;
+}
+fieldset{
+  border: 1px solid #D6D8DA !important;
+  border-radius: 8px;
 }
 </style>
