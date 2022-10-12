@@ -4,6 +4,7 @@
     :clipped="$vuetify.breakpoint.lgAndUp"
     app
   >
+    <p>Сань, верни сотку</p>
     <v-list nav>
       <template v-for="(item, index) in items">
         <v-list-item

@@ -46,7 +46,7 @@ async def chat(update, context):
 
 
 async def loan(update, context):
-    WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
+    WEB_APP_URL = "https://localhost:8080/"
     button = InlineKeyboardButton(
         text="Подать заявку",
         web_app=WebAppInfo(url=WEB_APP_URL)
@@ -65,7 +65,7 @@ async def loan(update, context):
 
 def get_user_applications(chat_id):
     api_url = (
-        "https://api.loan-application-bot.baraba.sh/" +
+        "http://localhost:8000/" +
         f"loan-application/{chat_id}/"
     )
     user_applications = []

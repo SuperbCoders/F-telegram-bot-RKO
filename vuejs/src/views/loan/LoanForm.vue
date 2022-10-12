@@ -769,7 +769,7 @@ export default {
       const formData = this.getFormData()
       axios
         .post(
-          `${process.env.VUE_APP_API_ROOT_URL}loan-application/create/`,
+          `http://localhost:8000/loan-application/create/`,
           formData,
         )
         .then(() => {

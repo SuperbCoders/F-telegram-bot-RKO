@@ -5,6 +5,7 @@
     color="primary"
     dark
   >
+    фцвфцвфцвфцвфцвцф
     <v-toolbar-title style="width: 300px" class="toolbar-title ml-0 pl-4">{{
       title
     }}</v-toolbar-title>
