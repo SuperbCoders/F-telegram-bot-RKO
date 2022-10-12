@@ -7,28 +7,36 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
 
-  components: {
-  },
+  components: {},
 
-  data: () => ({
-  }),
+  data: () => ({}),
 
-  mounted: function () {
-  },
+  mounted: function () {},
 
-  watch: {
-  },
+  watch: {},
 
   computed: {
+    layout() {
+      return this.$route.meta.layout || 'default-layout'
+    },
   },
 
-  methods: {
-  },
+  methods: {},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/font/Montserrat-VariableFont_wght.ttf");
+}
+html,
+body,
+#base {
+  font-family: Montserrat;
+  padding: 20px;
+}
+</style>
