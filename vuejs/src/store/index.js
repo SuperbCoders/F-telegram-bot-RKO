@@ -9,6 +9,7 @@ export default new Vuex.Store({
     authToken: localStorage.getItem("authToken") || null,
     user: null,
     data: null,
+    formData: {}
   },
   getters: {
   },
