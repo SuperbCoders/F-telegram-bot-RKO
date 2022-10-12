@@ -1,13 +1,12 @@
 <template>
   <div class="address_form">
-    <h1 class="display-1 text-left mb-10">Адрес</h1>
-    <!-- <defalt-input v-model="formData['oldName']" /> -->
+    <h2 class="text-left mb-10 font-weight-bold">Адрес</h2>
     <div class="form_block mt-5">
       <p class="text-left">Адрес</p>
       <v-text-field
         id="oldName"
         placeholder="ООО Ромашка"
-        class="align-center border-none"
+        class="align-center border-none address_form_input"
         name="oldName"
         outlined
         :required="true"
@@ -19,6 +18,7 @@
       <v-combobox
         filled
         outlined
+        class="default_select"
         placeholder="Тип"
         :items="availableCities"
       ></v-combobox>
@@ -102,5 +102,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.default_select {
+
+}
 </style>
