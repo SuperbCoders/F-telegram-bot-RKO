@@ -27,9 +27,10 @@
             placeholder="Наименование"
             class="align-center border-none"
             name="oldName"
+            type="number"
             v-model="itemForm.inn"
             outlined
-            :rules="requiredRules"
+            :rules="innRules"
             :required="true"
           ></v-text-field>
         </div>
@@ -99,6 +100,11 @@ export default {
         ogrn: null,
       },
       valid: true,
+      innRules: [
+      (v) => !!v || "Это поле обязательно",
+      (v) => (v && v.length >= 10)  || "ИНН не может содержать меньше 10 симоволов",
+      (v) => (v && v.length <= 12 ) || "ИНН не может содержать больше 12 симоволов",
+      ],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };
   },
