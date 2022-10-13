@@ -1,8 +1,6 @@
 <template>
   <v-app id="base">
-    <v-main>
       <router-view></router-view>
-    </v-main>
   </v-app>
 </template>
 
@@ -41,7 +39,8 @@ export default {
 html,
 body,
 #base {
-  margin: 10px;
+  padding: 10px;
+  min-height: 0;
   font-family: Geometria;
 }
 fieldset{
