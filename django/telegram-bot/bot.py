@@ -1,23 +1,42 @@
 import os
 
 import requests
+import string
 
-from telegram.ext import (ApplicationBuilder, CommandHandler)
+from telegram.ext import (
+    ApplicationBuilder,
+    CommandHandler,
+    TypeHandler
+)
+
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     WebAppInfo,
+    KeyboardButton,
+    ReplyKeyboardMarkup,
+    Update,
 )
 from telegram.constants import ParseMode
 
+def is_chat_id_confirmed(chat_id):
+    api_url = (
+        os.getenv("DJANGO_APP_API_ROOT_URL") +
+        f"user/{chat_id}/"
+    )
+    try:
+        response = requests.get(api_url, timeout=10, verify=False)
+        if response.status_code == 200:
+            return True
+    except Exception as error:
+        return False
 
 async def start(update, context):
     text = (
-        "Официальный бот Банка 'Ренессанс' для частных лиц, малого бизнеса " +
-        "и компаний." +
+        "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
         "\n\n" +
         "/start начать работу с ботом\n" +
-        "/loan подать заявку на кредит\n" +
+        "/apply подать заявку на РКО\n" +
         "/status узнать статус заявок\n" +
         "/chat связаться с поддержкой банка"
     )
@@ -28,39 +47,108 @@ async def start(update, context):
 
 
 async def chat(update, context):
-    CHAT_URL = "https://rencredit.ru/"
-    button = InlineKeyboardButton(
-        text="Чат с сотрудником банка",
-        url=CHAT_URL,
-    )
-    # keyboard = InlineKeyboardMarkup.from_button(button)
     text = (
-        "Связаться с поддержкой банка можно нажав на кнопку и " +
-        "перейдя на сайт банка."
+        "Контакт-центр Банка “Ренессанс Кредит”\n" +
+        "8-800-200-0-981(круглосуточно, бесплатно по России)"
     )
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=text,
-        reply_markup=button,
     )
 
 
-async def loan(update, context):
-    WEB_APP_URL = "https://localhost:8080/"
-    button = InlineKeyboardButton(
-        text="Подать заявку",
-        web_app=WebAppInfo(url=WEB_APP_URL)
+async def apply(update, context):
+    if not is_chat_id_confirmed(update.effective_chat.id):
+        keyboard = KeyboardButton(
+            text="Подтвердить",
+            request_contact=True,
+        )
+        reply_markup = ReplyKeyboardMarkup(
+            [[keyboard]],
+            one_time_keyboard=True,
+        )
+        text = (
+                "Пройдите авторизацию. Для этого необходимо разрешить использование вашего номера телефона."
+        )
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text,
+            reply_markup=reply_markup,
+        )
+    else:
+        WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
+        button = InlineKeyboardButton(
+            text="Создать заявку",
+            web_app=WebAppInfo(url=WEB_APP_URL)
+        )
+        keyboard = InlineKeyboardMarkup.from_button(button)
+        text = (
+                "Номер успешно подтверждён!\n" +
+                "Перейдите на форму создания заявки"
+        )
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text,
+            reply_markup=keyboard,
+        )
+    
+    # text = (
+    #     "Оформите заявку чтобы получить потребительский кредит " +
+    #     "наличными на выгодных условиях с низкой ставкой."
+    # )
+    # await context.bot.send_message(
+    #     chat_id=update.effective_chat.id,
+    #     text=text,
+    #     reply_markup=keyboard,
+    # )
+
+def save_user_chat_id(chat_id, phone_number):
+    api_url = (
+        os.getenv("DJANGO_APP_API_ROOT_URL") +
+        f"user/{chat_id}/"
     )
-    # keyboard = InlineKeyboardMarkup.from_button(button)
-    text = (
-        "Оформите заявку чтобы получить потребительский кредит " +
-        "наличными на выгодных условиях с низкой ставкой."
-    )
-    await context.bot.send_message(
-        chat_id=update.effective_chat.id,
-        text=text,
-        reply_markup=button,
-    )
+    try:
+        stripped_phone_number = "".join(
+            char for char in phone_number if char in string.digits
+        )
+        formatted_phone_number = f"+{stripped_phone_number}"
+        response = requests.post(
+            api_url,
+            {"phone_number": formatted_phone_number},
+            timeout=10,
+        )
+        if not response.status_code == 200:
+            raise Exception()
+    except Exception:
+        raise Exception()
+
+async def handle_phone_number(update, context):
+    if update.message.contact:
+        try:
+            save_user_chat_id(
+                update.effective_chat.id,
+                update.message.contact.phone_number,
+            )
+            WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
+            button = InlineKeyboardButton(
+                text="Создать заявку",
+                web_app=WebAppInfo(url=WEB_APP_URL)
+            )
+            keyboard = InlineKeyboardMarkup.from_button(button)
+            text = (
+                    "Номер успешно подтверждён!\n" +
+                    "Перейдите на форму создания заявки"
+            )
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text=text,
+                reply_markup=keyboard,
+            )
+        except Exception:
+            await context.bot.send_message(
+                chat_id=update.effective_chat.id,
+                text="Не удалось подтвердить номер.",
+            )
 
 
 def get_user_applications(chat_id):
@@ -104,13 +192,15 @@ def run_bot():
     application = ApplicationBuilder().token(api_token).build()
 
     start_handler = CommandHandler('start', start)
-    loan_handler = CommandHandler('loan', loan)
+    apply_handler = CommandHandler('apply', apply)
     status_handler = CommandHandler('status', status)
     chat_handler = CommandHandler('chat', chat)
+    phone_number_handler = TypeHandler(Update, handle_phone_number)
     application.add_handler(start_handler)
-    application.add_handler(loan_handler)
+    application.add_handler(apply_handler)
     application.add_handler(status_handler)
     application.add_handler(chat_handler)
+    application.add_handler(phone_number_handler)
 
     application.run_polling()
 

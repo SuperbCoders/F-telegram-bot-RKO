@@ -1,3 +1,6 @@
+import random
+import string
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -11,8 +14,22 @@ MAX_PHONE_LENGTH = 12
 MAX_ADDRESS_LENGTH = 120
 MAX_JSON_STRING_LENGTH = 300
 
-class User(AbstractUser):
-    pass
+def generate_dhl_track_id():
+    characters = string.ascii_uppercase + string.digits
+    random_dhl_track_id = ''.join(
+        random.choice(characters) for _ in range(15)
+    )
+    return random_dhl_track_id
+
+def generate_application_id():
+    characters = ''.join(
+        random.choice(string.ascii_uppercase) for _ in range(2)
+    )
+    digits = ''.join(
+        random.choice(string.digits) for _ in range(6)
+    )
+    return f"{characters}-{digits}"
+
 
 class TypeToChoose(models.Model):
     type_name = models.CharField(max_length=MAX_CITY_NAME_STRING)
@@ -214,3 +231,18 @@ class LoanApplication(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class User(AbstractUser):
+    phone_number = models.CharField(
+        max_length=140,
+        blank=True,
+        null=True,
+        unique=True,
+    )
+    telegram_chat_id = models.CharField(
+        max_length=140,
+        blank=True,
+        null=True,
+        unique=True,
+    )

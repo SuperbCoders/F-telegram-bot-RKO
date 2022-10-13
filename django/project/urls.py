@@ -20,8 +20,9 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from apps.main.views import (
-    LoanRequestCreateAPIView,
-    # LoanApplicationListAPIView,
+    LoanApplicationCreateAPIView,
+    UserAPIView,
+    LoanApplicationListAPIView,
 )
 
 
@@ -36,6 +37,10 @@ urlpatterns = [
     path(
         "loan-application/<int:telegram_chat_id>/",
         LoanRequestCreateAPIView.as_view()
+    ),
+    path(
+        "user/<int:telegram_chat_id>/",
+        UserAPIView.as_view(),
     ),
     path('adminpage/', admin.site.urls),
 ]
