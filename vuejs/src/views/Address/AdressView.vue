@@ -43,14 +43,14 @@
         <p class="text-left mb-5 form_group_label form_block_title">
           Фактический и юридический адреса совпадают?
         </p>
-        <RadioGroup name="ActualAndLegalAddress" />
+        <RadioGroup @isStatus="isActualAdressShow" name="ActualAndLegalAddress" />
       </div>
-      <div class="form_block mt-5">
+      <div v-if="!addressActualShow" class="form_block mt-5">
         <p class="text-left form_block_title">Адрес</p>
         <v-text-field
           id="oldName"
           placeholder="Адрес"
-          class="align-center form_block_input border-none"
+          class="align-center border-none"
           name="oldName"
           outlined
           :rules="requiredRules"
@@ -58,12 +58,12 @@
         ></v-text-field>
       </div>
       <div class="form_group">
-        <p class="text-left mb-5 form_group_label form_block_title">
+        <p class="text-left mb-5 mt-10 form_group_label form_block_title">
           Фактический и почтовый адрес совпадают?
         </p>
-        <RadioGroup name="Actualandpostaladdress" />
+        <RadioGroup @isStatus="isActualEmailShow" name="Actualandpostaladdress" />
       </div>
-      <div class="form_block mt-5">
+      <div v-if="!emailActualShow" class="form_block mt-5">
         <p class="text-left form_block_title">Адрес</p>
         <v-text-field
           id="oldName"
@@ -96,6 +96,8 @@ export default {
     return {
       valid: false,
       requiredRules: [(v) => !!v || "Это поле обязательно"],
+      addressActualShow: false,
+      emailActualShow: false
     };
   },
   methods: {
@@ -106,6 +108,12 @@ export default {
         this.$router.push("/sctructure");
       }
     },
+    isActualAdressShow (e) {
+      this.addressActualShow = e
+    },
+    isActualEmailShow (e) {
+      this.emailActualShow = e
+    }
   },
   components: { RadioGroup },
 };
