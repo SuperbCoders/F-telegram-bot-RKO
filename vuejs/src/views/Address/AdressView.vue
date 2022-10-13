@@ -1,37 +1,59 @@
 <template>
-  <div class="address_form">
+  <div class="structure_group_section">
+    <h2 class="text-left structure_group_title mb-10">Адрес</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <h2 class="text-left mb-5 font-weight-bold">Адрес</h2>
-      <div class="form_block mt-2">
-        <p class="text-left form_block_title">Адрес</p>
+      <div class="form_block mb-5">
+        <v-checkbox
+          v-model="ex4"
+          label="Юридический"
+          value="red"
+          hide-details
+        ></v-checkbox>
+        <v-checkbox
+          v-model="ex4"
+          label="Фактический"
+          value="Фактический"
+          hide-details
+        ></v-checkbox>
+        <v-checkbox
+          v-model="ex4"
+          label="Почтовый"
+          value="Почтовый"
+          hide-details
+        ></v-checkbox>
+      </div>
+      <div
+        v-for="(itemForm, index) in groupList"
+        :key="index"
+        class="form_input_block"
+      >
+        <div class="form_block">
+          <p class="text-left form_block_title">Адрес</p>
+          <v-text-field
+            id="oldName"
+            placeholder="Напишите адрес"
+            class="align-center border-none"
+            v-model="itemForm.name"
+            name="oldName"
+            outlined
+            :rules="requiredRules"
+            :required="true"
+          ></v-text-field>
+        </div>
+        <div class="form_block">
+          <p class="text-left form_block_title">Основание</p>
+          <v-combobox
+            filled
+            outlined
+            :rules="requiredRules"
+            placeholder="Выберите основание"
+          ></v-combobox>
+        </div>
+        <!-- <div class="form_block">
+        <p class="text-left form_block_title">ИНН</p>
         <v-text-field
           id="oldName"
-          placeholder="ООО Ромашка"
-          class="align-center border-none address_form_input"
-          name="oldName"
-          :rules="requiredRules"
-          outlined
-          :required="true"
-        ></v-text-field>
-      </div>
-      <default-input />
-      <div class="form_block">
-        <p class="text-left form_block_title">Тип</p>
-        <v-combobox
-          filled
-          outlined
-          :rules="requiredRules"
-          :required="true"
-          class="default_select"
-          placeholder="Тип"
-          :items="availableCities"
-        ></v-combobox>
-      </div>
-      <div class="form_block">
-        <p class="text-left form_block_title">Основания</p>
-        <v-text-field
-          id="oldName"
-          placeholder="ООО Ромашка"
+          placeholder="Введите ИНН или название компании"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -39,65 +61,75 @@
           :required="true"
         ></v-text-field>
       </div>
-      <div class="form_group">
-        <p class="text-left mb-5 form_group_label form_block_title">
-          Фактический и юридический адреса совпадают?
-        </p>
-        <RadioGroup @isStatus="isActualAdressShow" name="ActualAndLegalAddress" />
+        <div class="form_block">
+          <p class="text-left form_block_title">ОГРН</p>
+          <v-text-field
+            id="oldName"
+            placeholder="Наименование"
+            class="align-center border-none"
+            name="oldName"
+            v-model="itemForm.ogrn"
+            outlined
+            :rules="requiredRules"
+            :required="true"
+          ></v-text-field>
+        </div> -->
       </div>
-      <div v-if="!addressActualShow" class="form_block mt-5">
-        <p class="text-left form_block_title">Адрес</p>
-        <v-text-field
-          id="oldName"
-          placeholder="Адрес"
-          class="align-center border-none"
-          name="oldName"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
+      <div class="form_block d-flex align-center justify-center">
+        <a
+          @click="deleteGroupList"
+          class="form_block_delete_link text-decoration-none"
+          href="#"
+        >
+          <v-icon>mdi-trash-can-outline</v-icon>
+          Удалить
+        </a>
+        <v-btn
+          class="text-center d-flex align-center justify-center ml-10 add_form"
+          @click="addGroupList()"
+        >
+          <span class="pr-3">Добавить</span>
+          <v-icon>mdi-plus-circle-outline</v-icon>
+        </v-btn>
       </div>
-      <div class="form_group">
-        <p class="text-left mb-5 mt-10 form_group_label form_block_title">
-          Фактический и почтовый адрес совпадают?
-        </p>
-        <RadioGroup @isStatus="isActualEmailShow" name="Actualandpostaladdress" />
-      </div>
-      <div v-if="!emailActualShow" class="form_block mt-5">
-        <p class="text-left form_block_title">Адрес</p>
-        <v-text-field
-          id="oldName"
-          placeholder="Адрес"
-          class="align-center border-none"
-          name="oldName"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
-      </div>
+      <v-btn
+        block
+        large
+        :disabled="!valid"
+        class="mt-10 auth_form_bth"
+        color="primary"
+        @click="validate"
+        >Продолжить</v-btn
+      >
     </v-form>
-    <v-btn
-      block
-      large
-      :disabled="!valid"
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить</v-btn
-    >
   </div>
 </template>
 
 <script>
-import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
-
 export default {
   data() {
     return {
-      valid: false,
+      groupList: [
+        {
+          name: null,
+          inn: null,
+          ogrn: null,
+        },
+      ],
+      defaultGroupItem: {
+        name: null,
+        inn: null,
+        ogrn: null,
+      },
+      valid: true,
+      innRules: [
+        (v) => !!v || "Это поле обязательно",
+        (v) =>
+          (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
+        (v) =>
+          (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
+      ],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
-      addressActualShow: false,
-      emailActualShow: false
     };
   },
   methods: {
@@ -105,71 +137,40 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.$router.push("/sctructure");
+        this.$router.push("/credit-page");
       }
     },
-    isActualAdressShow (e) {
-      this.addressActualShow = e
+    addGroupList() {
+      this.groupList.push(this.defaultGroupItem);
     },
-    isActualEmailShow (e) {
-      this.emailActualShow = e
-    }
+    deleteGroupList() {
+      if (this.groupList.length > 1) {
+        this.groupList.pop();
+      }
+    },
   },
-  components: { RadioGroup },
 };
 </script>
 
-<style scoped>
-.default_select {
-  background: none !important;
-}
-.form_radio_btn {
-  display: flex;
-  font-family: Roboto;
-}
+<style>
 .auth_form_bth {
-  color: white;
-  border-radius: 10px;
-  text-transform: capitalize;
   font-size: 14px;
-}
-.form_radio_btn input {
-  display: none;
-}
-.auth_form_bth {
-  border-radius: 10px;
-  text-transform: capitalize;
-  font-size: 14px;
-}
-.form_group {
-  font-family: face;
-}
-.form_block_input .form_block {
-  font-family: Roboto;
   border-radius: 8px;
-  background: none;
 }
-
-.form_block_title {
-  font-size: 12px;
+.form_block {
+}
+.add_form {
+  padding: 25px 15px !important;
+  border-radius: 8px;
   font-family: Roboto;
-  color: #8e909b;
+  font-weight: 500;
+  box-shadow: none;
+  color: #5b656d !important;
+  text-transform: capitalize;
 }
-
-.form_block_radio {
-  border-radius: 10px;
-  font-family: face;
-}
-
-.form_group_label {
-  width: 80%;
-  color: #323e48;
+.form_block_delete_link {
   font-size: 14px;
   font-weight: 500;
-}
-
-.form_block_label {
-  font-family: face;
-  font-size: 12px;
+  color: #8e909b !important;
 }
 </style>
