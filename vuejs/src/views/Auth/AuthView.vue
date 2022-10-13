@@ -13,7 +13,8 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          :rules="requiredRules"
+          type="number"
+          :rules="innRules"
           required
           class="mt-1 auth_form"
         ></v-text-field>
@@ -82,7 +83,11 @@ export default {
   data: () => ({
     valid: true,
     name: "",
-    innRules: [(v) => !!v || "Name is required"],
+    innRules: [
+      (v) => !!v || "Это поле обязательно",
+      (v) => (v && v.length >= 10)  || "ИНН не может содержать меньше 10 симоволов",
+      (v) => (v && v.length <= 12 ) || "ИНН не может содержать больше 12 симоволов",
+    ],
     email: "",
     requiredRules: [(v) => !!v || "Это поле обязательно"],
     nameCompanyRules: [
