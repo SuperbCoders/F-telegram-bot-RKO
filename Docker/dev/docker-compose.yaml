@@ -65,7 +65,7 @@ services:
     build:
       context: ../../
       dockerfile: ./Docker/dev/vuejs/Dockerfile
-    command: yarn serve
+    command: npm run serve
     volumes:
       - ../../vuejs/:/usr/src/app/
       - /usr/src/app/node_modules

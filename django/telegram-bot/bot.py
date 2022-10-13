@@ -13,7 +13,7 @@ from telegram.constants import ParseMode
 
 async def start(update, context):
     text = (
-        "Официальный бот Банка ЗЕНИТ для частных лиц, малого бизнеса " +
+        "Официальный бот Банка 'Ренессанс' для частных лиц, малого бизнеса " +
         "и компаний." +
         "\n\n" +
         "/start начать работу с ботом\n" +
@@ -28,12 +28,12 @@ async def start(update, context):
 
 
 async def chat(update, context):
-    CHAT_URL = "https://www.zenit.ru/bank/general/contacts/"
+    CHAT_URL = "https://rencredit.ru/"
     button = InlineKeyboardButton(
         text="Чат с сотрудником банка",
         url=CHAT_URL,
     )
-    keyboard = InlineKeyboardMarkup.from_button(button)
+    # keyboard = InlineKeyboardMarkup.from_button(button)
     text = (
         "Связаться с поддержкой банка можно нажав на кнопку и " +
         "перейдя на сайт банка."
@@ -41,7 +41,7 @@ async def chat(update, context):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=text,
-        reply_markup=keyboard,
+        reply_markup=button,
     )
 
 
@@ -51,7 +51,7 @@ async def loan(update, context):
         text="Подать заявку",
         web_app=WebAppInfo(url=WEB_APP_URL)
     )
-    keyboard = InlineKeyboardMarkup.from_button(button)
+    # keyboard = InlineKeyboardMarkup.from_button(button)
     text = (
         "Оформите заявку чтобы получить потребительский кредит " +
         "наличными на выгодных условиях с низкой ставкой."
@@ -59,14 +59,13 @@ async def loan(update, context):
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=text,
-        reply_markup=keyboard,
+        reply_markup=button,
     )
 
 
 def get_user_applications(chat_id):
     api_url = (
-        "http://localhost:8000/" +
-        f"loan-application/{chat_id}/"
+        "http://localhost:8000/loan-application/{chat_id}/".format(chat_id)
     )
     user_applications = []
     try:

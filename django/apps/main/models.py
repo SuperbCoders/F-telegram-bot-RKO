@@ -5,7 +5,8 @@ from django.utils import timezone
 from .tasks import send_telegram_bot_message
 
 INN_MAX_LENGTH = 12
-MAX_STRING_LENGTH = 70
+MAX_CITY_NAME_STRING = 30
+MAX_STRING_LENGTH = 100
 MAX_PHONE_LENGTH = 12
 MAX_ADDRESS_LENGTH = 120
 MAX_JSON_STRING_LENGTH = 300
@@ -13,6 +14,15 @@ MAX_JSON_STRING_LENGTH = 300
 class User(AbstractUser):
     pass
 
+class TypeToChoose(models.Model):
+    type_name = models.CharField(max_length=MAX_CITY_NAME_STRING)
+
+class TariffPlan(models.Model):
+    name = models.CharField(max_length=MAX_CITY_NAME_STRING)
+    limit_descr = models.CharField(max_length=MAX_STRING_LENGTH)
+    transaction_policy = models.CharField(max_length=MAX_STRING_LENGTH)
+    payment_policy = models.CharField(max_length=MAX_STRING_LENGTH)
+    price = models.IntegerField()
 
 
 class LoanRequest(models.Model):
@@ -29,10 +39,8 @@ class LoanRequest(models.Model):
     company_name = models.CharField(max_length=MAX_STRING_LENGTH)
     contact_number = models.CharField(max_length=MAX_PHONE_LENGTH)
     address = models.CharField(max_length=MAX_ADDRESS_LENGTH)
-    type = models.CharField(max_length=MAX_STRING_LENGTH)
+    type = models.ForeignKey(TypeToChoose, on_delete=models.DO_NOTHING)
     basis = models.CharField(max_length=MAX_STRING_LENGTH)
-    legal_address = models.CharField(max_length=MAX_ADDRESS_LENGTH)
-    physical_address = models.CharField(max_length=MAX_ADDRESS_LENGTH, blank=True, null=True)
     mail_address = models.CharField(max_length=MAX_ADDRESS_LENGTH)
     supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH)
     supervisor = models.CharField(max_length=MAX_STRING_LENGTH)
@@ -55,6 +63,7 @@ class LoanRequest(models.Model):
         null=True,
     )
     rate = models.CharField(max_length=MAX_STRING_LENGTH)
+    tariff = models.ForeignKey(TariffPlan, on_delete=models.DO_NOTHING)
     telegram_chat_id = models.CharField(max_length=140, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
