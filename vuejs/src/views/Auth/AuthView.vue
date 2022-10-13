@@ -38,13 +38,13 @@
         <div class="auth_form_cheked_block d-flex w-100">
           <v-checkbox :rules="requiredRules" v-model="checkbox">
             <template v-slot:label>
-              <div class="text-left">
+              <div class="text-left auth_form_link_container">
                 <span>Я ознакомился и согласен с условиями</span>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <a
                       target="_blank"
-                      class="text-decoration-none"
+                      class="text-decoration-none text-left"
                       href="https://vuetifyjs.com"
                       @click.stop
                       v-on="on"
@@ -114,9 +114,6 @@ export default {
 };
 </script>
 <style scoped>
-.auth_section {
-  margin: 30px 20px;
-}
 .auth_title_block {
   margin-top: 30px;
 }
@@ -124,10 +121,14 @@ export default {
 }
 .auth_form {
   border-radius: 8px;
+  font-family: face;
 }
 .auth_form_bth {
   border-radius: 10px;
   text-transform: capitalize;
+  font-size: 14px;
+}
+.auth_form_link_container {
   font-size: 14px;
 }
 </style>

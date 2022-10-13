@@ -56,9 +56,9 @@
           class="
             text-center
             d-flex
+
             align-center
             justify-center
-            font-weight-bold
             ml-10
             add_form
           "
@@ -67,6 +67,7 @@
           <span class="pr-3">Добавить</span>
           <v-icon>mdi-plus-circle-outline</v-icon>
         </v-btn>
+
       </div>
       <v-btn
         block
@@ -122,9 +123,20 @@ export default {
 </script>
 
 <style>
-.add_form {
-  padding: 15px 15px !important;
+.auth_form_bth {
+  font-size: 14px;
   border-radius: 8px;
+}
+.form_block {
+
+}
+.add_form {
+  padding: 25px 15px !important;
+  border-radius: 8px;
+  font-family: Roboto;
+  font-weight: 500;
+  box-shadow: none;
+  color: #5B656D !important;
   text-transform: capitalize;
 }
 </style>

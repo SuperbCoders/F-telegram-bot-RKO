@@ -37,13 +37,24 @@ export default {
   font-family: 'Geometria';
   src: url('./assets/font/Geometria/geometria_light.otf');
 }
+@font-face {
+  font-family: face;
+  src: url('./assets/font/Roboto/Roboto-Regular.ttf')
+}
 html,
 body,
 #base {
+  margin: 10px;
   font-family: Geometria;
 }
 fieldset{
   border: 1px solid #D6D8DA !important;
   border-radius: 8px;
+  background: none;
+}
+.v-input__slot {
+  font-family: face;
+  font-weight: 400 !important;
+  background: none !important;
 }
 </style>
