@@ -42,7 +42,7 @@
       track-color="#F1BAD2"
       track-fill-color="primary"
     ></v-slider>
-    <p class="mt-5 title grey--text">Ежемесячный платеж</p>
+    <p class="mt-5 pay_text grey--text">Ежемесячный платеж</p>
     <v-scroll-y-transition hide-on-leave>
       <p :key="monthlyPayment" class="display-1 primary--text">
         <!-- {{ getFormattedCurrency(monthlyPayment) }} -->
@@ -138,5 +138,8 @@ export default {
 }
 .credit_section {
     font-family: Roboto;
+}
+.pay_text {
+    font-size: 18px;
 }
 </style>

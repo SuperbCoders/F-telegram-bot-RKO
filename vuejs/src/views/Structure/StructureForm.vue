@@ -30,14 +30,13 @@
       ></v-text-field>
     </div>
     <div class="form_group">
-      <p class="text-left mb-5 form_block_title">Наличие наблюдательного совета</p>
+      <p class="text-left mb-5 form_block_label">Наличие наблюдательного совета</p>
       <RadioGroup />
     </div>
     <div class="form_block mt-5">
-      <p class="text-left form_block_label">Наименования наблюдательного совета</p>
+      <p class="text-left form_block_title">Наименования наблюдательного совета</p>
       <v-text-field
         id="oldName"
-        append-icon="mdi-map-marker"
         placeholder="Наименования"
         class="align-center border-none"
         name="oldName"
@@ -46,11 +45,11 @@
       ></v-text-field>
     </div>
     <div class="form_group">
-      <p class="text-left form_block_label mb-5">Наличие коллегиального исполнительного органа</p>
+      <p class="text-left form_block_title mb-5">Наличие коллегиального исполнительного органа</p>
       <RadioGroup />
     </div>
     <div class="form_block mt-5">
-      <p class="text-left form_block_label">Наименование коллегиального исполнительног органа</p>
+      <p class="text-left form_block_title">Наименование коллегиального исполнительног органа</p>
       <v-text-field
         id="oldName"
         placeholder="Наименование"
@@ -61,7 +60,7 @@
       ></v-text-field>
     </div>
     <div class="form_block mt-5">
-      <p class="text-left">Члены коллегиального исполнительного органа</p>
+      <p class="text-left form_block_title">Члены коллегиального исполнительного органа</p>
       <v-text-field
         id="oldName"
         placeholder="Укажите Физ лицо"
@@ -88,6 +87,7 @@ export default { components: { RadioGroup } };
 }
 .form_block_title {
   font-size: 12px;
+  width: 200px;
 }
 .form_block_label {
   font-family: Roboto;

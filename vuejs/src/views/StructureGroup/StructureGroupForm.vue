@@ -1,6 +1,6 @@
 <template>
   <div class="structure_group_section">
-    <h2 class="text-left mb-10">Структура группы компаний</h2>
+    <h3 class="text-left structure_group_title mb-10">Состав группы компаний</h3>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div
         v-for="(itemForm, index) in groupList"
@@ -8,7 +8,7 @@
         class="form_input_block"
       >
         <div class="form_block">
-          <p class="text-left">Название компании</p>
+          <p class="text-left form_block_title">Название компании</p>
           <v-text-field
             id="oldName"
             placeholder="Наименование"
@@ -21,7 +21,7 @@
           ></v-text-field>
         </div>
         <div class="form_block">
-          <p class="text-left">ИНН</p>
+          <p class="text-left form_block_title">ИНН</p>
           <v-text-field
             id="oldName"
             placeholder="Наименование"
@@ -34,7 +34,7 @@
           ></v-text-field>
         </div>
         <div class="form_block">
-          <p class="text-left">ОГРН</p>
+          <p class="text-left form_block_title">ОГРН</p>
           <v-text-field
             id="oldName"
             placeholder="Наименование"
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="form_block d-flex align-center justify-center">
-        <a @click="deleteGroupList" class="text-decoration-none" href="#">
+        <a @click="deleteGroupList" class="form_block_delete_link text-decoration-none" href="#">
           <v-icon>mdi-trash-can-outline</v-icon>
           Удалить
         </a>
@@ -139,4 +139,10 @@ export default {
   color: #5B656D !important;
   text-transform: capitalize;
 }
+.form_block_delete_link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #8E909B !important;
+}
+
 </style>
