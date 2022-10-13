@@ -51,6 +51,7 @@ fieldset{
 }
 .v-input__slot {
   font-family: face;
+  border-radius: 8px !important;
   font-weight: 400 !important;
   background: none !important;
 }
