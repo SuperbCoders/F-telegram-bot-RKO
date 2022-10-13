@@ -6,7 +6,10 @@ import Address from '../views/Address/AdressView.vue'
 import Structure from '../views/Structure/StructureForm.vue'
 import Intelligence from '../views/intelligence/intelligenceForm.vue'
 import StructureGroup from '../views/StructureGroup/StructureGroupForm.vue'
-
+import informationStaff from '../views/informationStaff/informationStaffForm.vue'
+import CreditForm from '../views/credit/creditForm.vue'
+import DocumentPage from '../views/Documents/documentForm.vue'
+import Rate from '../views/Rate/RateForm.vue'
 Vue.use(VueRouter);
 
 const routes = [
@@ -36,11 +39,31 @@ const routes = [
     component: Structure
   },
   {
+    path: "/information-staff",
+    name: "information-staff",
+    component: informationStaff
+  },
+  {
     path: "/intelligence",
     name: "intelligence-form",
     component: Intelligence
+  },
+  {
+    path: "/credit-page",
+    name: "credit-page",
+    component: CreditForm
+  },
+  {
+    path: "/document",
+    name: "document",
+    component: DocumentPage
+  },
+  {
+    path: "/rate",
+    name: "rate",
+    component: Rate
   }
-];к
+];
 
 const router = new VueRouter({
   mode: "history",

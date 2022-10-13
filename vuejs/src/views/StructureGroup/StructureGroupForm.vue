@@ -7,7 +7,7 @@
         :key="index"
         class="form_input_block"
       >
-        <div class="form_block mt-5">
+        <div class="form_block">
           <p class="text-left">Название компании</p>
           <v-text-field
             id="oldName"
@@ -20,7 +20,7 @@
             :required="true"
           ></v-text-field>
         </div>
-        <div class="form_block mt-5">
+        <div class="form_block">
           <p class="text-left">ИНН</p>
           <v-text-field
             id="oldName"
@@ -33,7 +33,7 @@
             :required="true"
           ></v-text-field>
         </div>
-        <div class="form_block mt-5">
+        <div class="form_block">
           <p class="text-left">ОГРН</p>
           <v-text-field
             id="oldName"

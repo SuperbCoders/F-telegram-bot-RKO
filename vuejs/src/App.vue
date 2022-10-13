@@ -29,13 +29,10 @@ export default {
 </script>
 
 <style>
+@import url('./assets/font/Geometria/stylesheet.css');
 @font-face {
   font-family: "Montserrat";
   src: url("./assets/font/Montserrat/Montserrat-VariableFont_wght.ttf");
-}
-@font-face {
-  font-family: 'Geometria';
-  src: url('./assets/font/Geometria/geometria_light.otf');
 }
 @font-face {
   font-family: face;
@@ -57,4 +54,7 @@ fieldset{
   font-weight: 400 !important;
   background: none !important;
 }
+/* button {
+  font-family: Roboto;
+} */
 </style>
