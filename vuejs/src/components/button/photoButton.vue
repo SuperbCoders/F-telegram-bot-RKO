@@ -20,6 +20,7 @@
   <style scoped>
   .photo_button {
     padding: 20px 10px;
+    box-shadow: none;
     font-family: Roboto;
     font-weight: 500;
     color: #5B656D !important;

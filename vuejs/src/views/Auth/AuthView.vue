@@ -1,7 +1,7 @@
 <template>
   <div class="auth_section">
-    <div class="auth_logo_block">
-      <img src="@/assets/images/logo.png" alt="" />
+    <div class="auth_logo_block mt-3">
+      <img src="@/assets/images/logo.svg" alt="" />
     </div>
     <div class="auth_title_block">
       <h2 class="auth_title font-weight-bold">
@@ -102,9 +102,9 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-       this.$router.push('/address')
+        this.$router.push("/address");
       }
-    }
+    },
   },
 };
 </script>
@@ -122,6 +122,7 @@ export default {
   border-radius: 10px;
   text-transform: capitalize;
   font-size: 14px;
+  font-weight: 400;
 }
 .auth_form_link_container {
   font-size: 14px;

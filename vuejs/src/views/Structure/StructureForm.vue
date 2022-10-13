@@ -1,84 +1,122 @@
 <template>
   <div class="structure_form">
     <h2 class="text-left mb-10 font-bold">Структура органов управления</h2>
-    <div class="form_block">
-      <p class="text-left form_block_title">Выберите из списка</p>
-      <v-combobox
-        filled
-        outlined
-        placeholder="Выберите из списка"
-      ></v-combobox>
-    </div>
-    <default-input />
-    <div class="form_block">
-      <p class="text-left form_block_title">Руководитель</p>
-      <v-combobox
-        filled
-        outlined
-        placeholder="Тип"
-      ></v-combobox>
-    </div>
-    <div class="form_block">
-      <p class="text-left form_block_title">ИНН</p>
-      <v-text-field
-        id="oldName"
-        placeholder="Введите ИНН или название компании"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <div class="form_group">
-      <p class="text-left mb-5 form_block_title">Наличие наблюдательного совета</p>
-      <RadioGroup />
-    </div>
-    <div class="form_block mt-5">
-      <p class="text-left form_block_label">Наименования наблюдательного совета</p>
-      <v-text-field
-        id="oldName"
-        append-icon="mdi-map-marker"
-        placeholder="Наименования"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <div class="form_group">
-      <p class="text-left form_block_label mb-5">Наличие коллегиального исполнительного органа</p>
-      <RadioGroup />
-    </div>
-    <div class="form_block mt-5">
-      <p class="text-left form_block_label">Наименование коллегиального исполнительног органа</p>
-      <v-text-field
-        id="oldName"
-        placeholder="Наименование"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <div class="form_block mt-5">
-      <p class="text-left">Члены коллегиального исполнительного органа</p>
-      <v-text-field
-        id="oldName"
-        placeholder="Укажите Физ лицо"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <v-btn block large class="mt-10 auth_form_bth" color="primary">
-      <router-link class="auth_form_bth color-white text-decoration-none" to="/information-staff"> Продолжить </router-link>
-    </v-btn>
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <div class="form_block">
+        <p class="text-left form_block_title">Выберите из списка</p>
+        <v-combobox
+          filled
+          :rules="requiredRules"
+          required
+          outlined
+          placeholder="Выберите из списка"
+        ></v-combobox>
+      </div>
+      <default-input />
+      <div class="form_block">
+        <p class="text-left form_block_title">Руководитель</p>
+        <v-combobox filled outlined placeholder="Тип"></v-combobox>
+      </div>
+      <div class="form_block">
+        <p class="text-left form_block_title">ИНН</p>
+        <v-text-field
+          id="oldName"
+          placeholder="Введите ИНН или название компании"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+      <div class="form_group">
+        <p class="text-left mb-5 form_block_label">
+          Наличие наблюдательного совета
+        </p>
+        <RadioGroup name="Existence of a supervisory board" />
+      </div>
+      <div class="form_block mt-5">
+        <p class="text-left form_block_title">
+          Наименования наблюдательного совета
+        </p>
+        <v-text-field
+          id="oldName"
+          placeholder="Наименования"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+      <div class="form_group">
+        <p class="text-left form_block_title mb-5">
+          Наличие коллегиального исполнительного органа
+        </p>
+        <RadioGroup name="The presence of a collegial executive body" />
+      </div>
+      <div class="form_block mt-5">
+        <p class="text-left form_block_title">
+          Наименование коллегиального исполнительног органа
+        </p>
+        <v-text-field
+          id="oldName"
+          placeholder="Наименование"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+      <div class="form_block mt-5">
+        <p class="text-left form_block_title">
+          Члены коллегиального исполнительного органа
+        </p>
+        <v-text-field
+          id="oldName"
+          placeholder="Укажите Физ лицо"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+    </v-form>
+    <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="validate"
+      >Продолжить</v-btn
+    >
   </div>
 </template>
 <script>
-import RadioGroup from '../../components/radioButton/radioGroup/radioGroup.vue';
-export default { components: { RadioGroup } };
+import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
+
+export default {
+  data: () => ({
+    valid: true,
+    requiredRules: [(v) => !!v || "Это поле обязательно"]
+  }),
+
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+
+      if (this.$refs.form.validate()) {
+        this.$router.push("/information-staff");
+      }
+    },
+  },
+  components: {
+    RadioGroup,
+  },
+};
 </script>
 
 <style>
@@ -88,6 +126,7 @@ export default { components: { RadioGroup } };
 }
 .form_block_title {
   font-size: 12px;
+  width: 200px;
 }
 .form_block_label {
   font-family: Roboto;

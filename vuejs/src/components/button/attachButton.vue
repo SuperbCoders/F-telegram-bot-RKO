@@ -19,6 +19,7 @@ export default {
 
 <style scoped>
 .attach_button {
+  box-shadow: none;
   font-family: Roboto;
   color: #5B656D !important;
   padding: 20px 10px;
