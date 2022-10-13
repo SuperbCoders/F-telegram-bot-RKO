@@ -1,29 +1,48 @@
 <template>
   <div class="radio_group_block">
     <div class="form_radio_group d-flex">
-        <div class="form_radio_btn">
-          <input
-            class="form_radio_btn_input"
-            id="radio-1"
-            type="radio"
-            name="radio"
-            value="1"
-            checked
-          />
-          <label class="form_radio form_radio_btn_input_radius__left" for="radio-1">Да</label>
-        </div>
-        <div class="form_radio_btn ">
-          <input class="form_radio_btn_input" id="radio-2" type="radio" name="radio" value="2" />
-          <label class="form_radio_btn_input_radius__right" for="radio-2">Нет</label>
-        </div>
+      <div class="form_radio_btn">
+        <input
+          class="form_radio_btn_input"
+          :id="name + '_1'"
+          type="radio"
+          :name="name"
+          value="1"
+          checked
+        />
+        <label
+          class="form_radio form_radio_btn_input_radius__left"
+          :for="name + '_1'"
+          >Да</label
+        >
       </div>
+      <div class="form_radio_btn">
+        <input
+          class="form_radio_btn_input"
+          :id="name + '_2'"
+          type="radio"
+          :name="name"
+          value="2"
+        />
+        <label class="form_radio_btn_input_radius__right" :for="name + '_2'"
+          >Нет</label
+        >
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  props: {
+    name: {
+      type: String
+    },
+    defaultButton: {
+      type: String
+    }
+  }
+};
 </script>
 
 <style scoped>
@@ -41,11 +60,11 @@ export default {
 }
 .form_radio_btn input[type="radio"]:checked + label {
   color: white;
-  background: #D41367;
+  background: #d41367;
 }
 .form_radio_btn > label {
-  background:#F0F2F5;
-  color: #323E48;
+  background: #f0f2f5;
+  color: #323e48;
   padding: 8px 24px;
 }
 .form_radio_btn input[type="radio"]:disabled + label {
