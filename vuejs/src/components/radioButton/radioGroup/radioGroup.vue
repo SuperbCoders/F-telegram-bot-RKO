@@ -7,12 +7,16 @@
           :id="name + '_1'"
           type="radio"
           :name="name"
-          value="1"
+          value="false"
+          v-model="status"
+          @checked="updateStatus(true)"
+          @change="updateStatus(true)"
           checked
         />
         <label
           class="form_radio form_radio_btn_input_radius__left"
           :for="name + '_1'"
+          @click="updateStatus(true)"
           >Да</label
         >
       </div>
@@ -24,16 +28,29 @@
           :name="name"
           value="2"
         />
-        <label class="form_radio_btn_input_radius__right" :for="name + '_2'"
+        <label @click="updateStatus(false)" class="form_radio_btn_input_radius__right" :for="name + '_2'"
           >Нет</label
         >
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      status: false
+    }
+  },
+  methods: {
+    updateStatus (status) {
+      this.status = status
+      console.log('wgwehawe')
+      this.$emit('isStatus', this.status)
+    }
+  },
   props: {
     name: {
       type: String
