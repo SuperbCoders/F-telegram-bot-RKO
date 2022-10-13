@@ -1,84 +1,111 @@
 <template>
   <div class="address_form">
-    <h2 class="text-left mb-5 font-weight-bold">Адрес</h2>
-    <div class="form_block mt-2">
-      <p class="text-left form_block_title">Адрес</p>
-      <v-text-field
-        id="oldName"
-        placeholder="ООО Ромашка"
-        class="align-center border-none address_form_input"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <default-input />
-    <div class="form_block">
-      <p class="text-left form_block_title">Тип</p>
-      <v-combobox
-        filled
-        outlined
-        class="default_select"
-        placeholder="Тип"
-        :items="availableCities"
-      ></v-combobox>
-    </div>
-    <div class="form_block">
-      <p class="text-left form_block_title">Основания</p>
-      <v-text-field
-        id="oldName"
-        placeholder="ООО Ромашка"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <div class="form_group">
-      <p class="text-left mb-5 form_group_label form_block_title">
-        Фактический и юридический адреса совпадают?
-      </p>
-      <RadioGroup />
-    </div>
-    <div class="form_block mt-5">
-      <p class="text-left form_block_title">Адрес</p>
-      <v-text-field
-        id="oldName"
-        placeholder="Адрес"
-        class="align-center form_block_input border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <div class="form_group">
-      <p class="text-left mb-5 form_group_label form_block_title">
-        Фактический и почтовый адрес совпадают?
-      </p>
-      <RadioGroup />
-    </div>
-    <div class="form_block mt-5">
-      <p class="text-left form_block_title">Адрес</p>
-      <v-text-field
-        id="oldName"
-        placeholder="Адрес"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <v-btn block large class="mt-10 auth_form_bth" color="primary">
-      <router-link class="auth_form_bth color-white text-decoration-none" to="/sctructure"> Продолжить </router-link>
-    </v-btn>
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <h2 class="text-left mb-5 font-weight-bold">Адрес</h2>
+      <div class="form_block mt-2">
+        <p class="text-left form_block_title">Адрес</p>
+        <v-text-field
+          id="oldName"
+          placeholder="ООО Ромашка"
+          class="align-center border-none address_form_input"
+          name="oldName"
+          :rules="requiredRules"
+          outlined
+          :required="true"
+        ></v-text-field>
+      </div>
+      <default-input />
+      <div class="form_block">
+        <p class="text-left form_block_title">Тип</p>
+        <v-combobox
+          filled
+          outlined
+          :rules="requiredRules"
+          :required="true"
+          class="default_select"
+          placeholder="Тип"
+          :items="availableCities"
+        ></v-combobox>
+      </div>
+      <div class="form_block">
+        <p class="text-left form_block_title">Основания</p>
+        <v-text-field
+          id="oldName"
+          placeholder="ООО Ромашка"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+      <div class="form_group">
+        <p class="text-left mb-5 form_group_label form_block_title">
+          Фактический и юридический адреса совпадают?
+        </p>
+        <RadioGroup name="ActualAndLegalAddress" />
+      </div>
+      <div class="form_block mt-5">
+        <p class="text-left form_block_title">Адрес</p>
+        <v-text-field
+          id="oldName"
+          placeholder="Адрес"
+          class="align-center form_block_input border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+      <div class="form_group">
+        <p class="text-left mb-5 form_group_label form_block_title">
+          Фактический и почтовый адрес совпадают?
+        </p>
+        <RadioGroup name="Actualandpostaladdress" />
+      </div>
+      <div class="form_block mt-5">
+        <p class="text-left form_block_title">Адрес</p>
+        <v-text-field
+          id="oldName"
+          placeholder="Адрес"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+    </v-form>
+    <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="validate"
+      >Продолжить</v-btn
+    >
   </div>
 </template>
 
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
+
 export default {
   data() {
-    return {};
+    return {
+      valid: false,
+      requiredRules: [(v) => !!v || "Это поле обязательно"],
+    };
+  },
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+
+      if (this.$refs.form.validate()) {
+        this.$router.push("/sctructure");
+      }
+    },
   },
   components: { RadioGroup },
 };
