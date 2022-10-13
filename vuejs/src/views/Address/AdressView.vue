@@ -24,7 +24,7 @@
       ></v-combobox>
     </div>
     <div class="form_block">
-      <p class="text-left form_block_label">Основания</p>
+      <p class="text-left form_block_title">Основания</p>
       <v-text-field
         id="oldName"
         placeholder="ООО Ромашка"
@@ -41,7 +41,7 @@
       <RadioGroup />
     </div>
     <div class="form_block mt-5">
-      <p class="text-left form_group_label">Адрес</p>
+      <p class="text-left form_block_title">Адрес</p>
       <v-text-field
         id="oldName"
         placeholder="Адрес"
@@ -58,7 +58,7 @@
       <RadioGroup />
     </div>
     <div class="form_block mt-5">
-      <p class="text-left">Адрес</p>
+      <p class="text-left form_block_title">Адрес</p>
       <v-text-field
         id="oldName"
         placeholder="Адрес"
