@@ -9,6 +9,7 @@ import StructureGroup from '../views/StructureGroup/StructureGroupForm.vue'
 import informationStaff from '../views/informationStaff/informationStaffForm.vue'
 import CreditForm from '../views/credit/creditForm.vue'
 import DocumentPage from '../views/Documents/documentForm.vue'
+import individualsForm from '../views/informationIndivduals/individualsForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
 Vue.use(VueRouter);
 
@@ -57,6 +58,11 @@ const routes = [
     path: "/document",
     name: "document",
     component: DocumentPage
+  },
+  {
+    path: "/individual-info",
+    name: "individual-info",
+    component: individualsForm
   },
   {
     path: "/rate",
