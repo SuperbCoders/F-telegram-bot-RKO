@@ -46,8 +46,7 @@ class LoanApplicationAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(LoanApplication, LoanApplicationAdmin)
-admin.site.register(User, UserAdmin)
 admin.site.unregister(Token)
 admin.site.unregister(Group)
 admin.site.register(LoanRequest)
+admin.site.register(User)

@@ -19,6 +19,8 @@ from telegram import (
 )
 from telegram.constants import ParseMode
 
+
+
 def is_chat_id_confirmed(chat_id):
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
@@ -59,6 +61,7 @@ async def chat(update, context):
 
 async def apply(update, context):
     if not is_chat_id_confirmed(update.effective_chat.id):
+        print(update.effective_chat)
         keyboard = KeyboardButton(
             text="Подтвердить",
             request_contact=True,
@@ -86,6 +89,7 @@ async def apply(update, context):
                 "Номер успешно подтверждён!\n" +
                 "Перейдите на форму создания заявки"
         )
+        print(update.effective_chat)
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
@@ -107,6 +111,7 @@ def save_user_chat_id(chat_id, phone_number):
         os.getenv("DJANGO_APP_API_ROOT_URL") +
         f"user/{chat_id}/"
     )
+    print(phone_number)
     try:
         stripped_phone_number = "".join(
             char for char in phone_number if char in string.digits
@@ -122,6 +127,7 @@ def save_user_chat_id(chat_id, phone_number):
     except Exception:
         raise Exception()
 
+
 async def handle_phone_number(update, context):
     if update.message.contact:
         try:
@@ -129,7 +135,9 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
+            print(update.message.contact.phone_number)
+            WEB_APP_URL = "https://loan-application-bot.baraba.sh/?phone={}".format(update.message.contact.phone_number)
+            print(WEB_APP_URL)
             button = InlineKeyboardButton(
                 text="Создать заявку",
                 web_app=WebAppInfo(url=WEB_APP_URL)
@@ -153,20 +161,26 @@ async def handle_phone_number(update, context):
 
 def get_user_applications(chat_id):
     api_url = (
-        "http://localhost:8000/loan-application/{chat_id}/".format(chat_id)
+        "http://django:8000/"+
+        "loan-application/{}".format(chat_id)
     )
     user_applications = []
-    try:
+    try:   
         response = requests.get(api_url, timeout=10)
+        print("Отправили респонс")
+        print(response)
         if response.json():
             user_applications = response.json()
-    except Exception:
+            print(user_applications)
+    except:
+        print("ошибка подключения")
         pass
     return user_applications
 
 
 async def status(update, context):
     chat_id = update.effective_chat.id
+    print(chat_id)
     user_applications = get_user_applications(chat_id)
     if user_applications:
         status_list = [
@@ -183,7 +197,7 @@ async def status(update, context):
     await context.bot.send_message(
         chat_id=chat_id,
         text=text,
-        parse_mode=ParseMode.MARKDOWN_V2,
+        parse_mode='Markdown',
     )
 
 
