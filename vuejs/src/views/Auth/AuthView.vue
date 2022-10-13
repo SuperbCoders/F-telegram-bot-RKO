@@ -13,7 +13,6 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          v-model="name"
           :rules="requiredRules"
           required
           class="mt-1 auth_form"
@@ -21,7 +20,6 @@
         <v-text-field
           label="Наименования компании"
           outlined
-          v-model="email"
           :rules="requiredRules"
           required
           type="email"
@@ -36,7 +34,7 @@
           class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
-          <v-checkbox :rules="requiredRules" v-model="checkbox">
+          <v-checkbox :rules="requiredRules">
             <template v-slot:label>
               <div class="text-left auth_form_link_container">
                 <span>Я ознакомился и согласен с условиями</span>
@@ -46,7 +44,6 @@
                       target="_blank"
                       class="text-decoration-none text-left"
                       href="https://vuetifyjs.com"
-                      @click.stop
                       v-on="on"
                     >
                       резервирного счета,
@@ -58,7 +55,6 @@
                   target="_blank"
                   class="text-decoration-none"
                   href="https://vuetifyjs.com"
-                  @click.stop
                   v-on="on"
                 >
                   обработки и хранения персональных данных
@@ -99,7 +95,6 @@ export default {
     ],
     select: null,
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
   }),
 
   methods: {
@@ -107,7 +102,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        alert(1);
+       this.$router.push('/address')
       }
     }
   },
