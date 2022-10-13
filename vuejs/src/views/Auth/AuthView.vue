@@ -73,12 +73,19 @@
           @click="validate"
           >Продолжить</v-btn
         >
+        <v-btn
+          class="mt-10"
+          color="primary"
+          @click="apiGetCompany"
+          >DATA</v-btn
+        >
       </v-form>
     </div>
   </div>
 </template>
 
 <script>
+import { getCompany } from '../../api/getInfoCompany';
 export default {
   data: () => ({
     valid: true,
@@ -110,6 +117,10 @@ export default {
         this.$router.push("/address");
       }
     },
+
+    apiGetCompany() {
+      getCompany(451002475100);
+    }
   },
 };
 </script>
