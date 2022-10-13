@@ -28,15 +28,34 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+@import url('./assets/font/Geometria/stylesheet.css');
 @font-face {
   font-family: "Montserrat";
-  src: url("./assets/font/Montserrat-VariableFont_wght.ttf");
+  src: url("./assets/font/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+@font-face {
+  font-family: face;
+  src: url('./assets/font/Roboto/Roboto-Regular.ttf')
 }
 html,
 body,
 #base {
-  font-family: Montserrat;
-  padding: 20px;
+  margin: 10px;
+  font-family: Geometria;
 }
+fieldset{
+  border: 1px solid #D6D8DA !important;
+  border-radius: 8px;
+  background: none;
+}
+.v-input__slot {
+  font-family: face;
+  border-radius: 8px !important;
+  font-weight: 400 !important;
+  background: none !important;
+}
+/* button {
+  font-family: Roboto;
+} */
 </style>
