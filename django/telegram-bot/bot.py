@@ -76,7 +76,7 @@ async def apply(update, context):
             reply_markup=reply_markup,
         )
     else:
-        WEB_APP_URL = "http://185.91.52.232:8083/"
+        WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)
@@ -129,7 +129,7 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            WEB_APP_URL = "http://185.91.52.232:8083/"
+            WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
             button = InlineKeyboardButton(
                 text="Создать заявку",
                 web_app=WebAppInfo(url=WEB_APP_URL)
