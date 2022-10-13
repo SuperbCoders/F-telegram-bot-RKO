@@ -1,81 +1,129 @@
 <template>
   <div class="auth_section">
     <div class="auth_logo_block">
-      <img src="@/assets/images/logo.png" alt="">
+      <img src="@/assets/images/logo.png" alt="" />
     </div>
     <div class="auth_title_block">
-      <h2 class="auth_title font-weight-bold">Заявка на открытие рассчетного счета</h2>
+      <h2 class="auth_title font-weight-bold">
+        Заявка на открытие рассчетного счета
+      </h2>
     </div>
     <div class="auth_form mt-12">
-      <v-text-field
+      <v-form ref="form" v-model="valid" lazy-validation>
+        <v-text-field
           label="Введите ИНН"
           outlined
-          class="mt-2 auth_form"
+          :rules="requiredRules"
+          required
+          class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
           label="Наименования компании"
           outlined
-          class="mt-2 auth_form"
+          :rules="requiredRules"
+          required
+          type="email"
+          error-message="true"
+          class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
           label="Контактный номер телефона"
           outlined
-          class="mt-2 auth_form"
+          :rules="requiredRules"
+          :required="true"
+          class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
-          <v-checkbox v-model="checkbox">
-      <template v-slot:label>
-        <div class="text-left">
-          <span>Я ознакомился и согласен с условиями</span>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
-              <a
-                target="_blank"
-                class="text-decoration-none"
-                href="https://vuetifyjs.com"
-                @click.stop
-                v-on="on"
-              >
-                резервирного счета,
-              </a>
+          <v-checkbox :rules="requiredRules">
+            <template v-slot:label>
+              <div class="text-left auth_form_link_container">
+                <span>Я ознакомился и согласен с условиями</span>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <a
+                      target="_blank"
+                      class="text-decoration-none text-left"
+                      href="https://vuetifyjs.com"
+                      v-on="on"
+                    >
+                      резервирного счета,
+                    </a>
+                  </template>
+                </v-tooltip>
+                а также с условиями
+                <a
+                  target="_blank"
+                  class="text-decoration-none"
+                  href="https://vuetifyjs.com"
+                  v-on="on"
+                >
+                  обработки и хранения персональных данных
+                </a>
+              </div>
             </template>
-          </v-tooltip>
-          а также с условиями
-          <a
-            target="_blank"
-            class="text-decoration-none"
-                href="https://vuetifyjs.com"
-                @click.stop
-                v-on="on"
-              >
-                обработки и хранения персональных данных
-              </a>
+          </v-checkbox>
         </div>
-      </template>
-    </v-checkbox>
-      <!-- <p>ewafglih;weaghega;hge;esouhsego;ehpsghe</p> -->
-        </div>
+        <v-btn
+          block
+          large
+          :disabled="!valid"
+          class="mt-10 auth_form_bth"
+          color="primary"
+          @click="validate"
+          >Продолжить</v-btn
+        >
+      </v-form>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    valid: true,
+    name: "",
+    innRules: [(v) => !!v || "Name is required"],
+    email: "",
+    requiredRules: [(v) => !!v || "Это поле обязательно"],
+    nameCompanyRules: [
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+    ],
+    numberRules: [
+      (v) => !!v || "Name is required",
+      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+    ],
+    select: null,
+    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+  }),
 
-}
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+
+      if (this.$refs.form.validate()) {
+       this.$router.push('/address')
+      }
+    }
+  },
+};
 </script>
-
 <style scoped>
-.auth_section {
-  margin: 30px 20px;
-}
 .auth_title_block {
   margin-top: 30px;
 }
 .auth_title {
-
 }
 .auth_form {
   border-radius: 8px;
+  font-family: face;
+}
+.auth_form_bth {
+  border-radius: 10px;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+.auth_form_link_container {
+  font-size: 14px;
 }
 </style>
