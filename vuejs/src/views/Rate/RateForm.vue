@@ -3,7 +3,7 @@
     <h2 class="text-left rate_section_title mb-10 w-60">
       Тарифы на расчетно-кассовое обслуживание
     </h2>
-    <v-card elevation="2" class="mb-10 rounded-xl">
+    <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
         <h2 class="text-left mb-3 card_content_title">Простой</h2>
         <p class="text-left mb-3 card_content_text">
@@ -24,7 +24,7 @@
         <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
       </div>
     </v-card>
-    <v-card elevation="2" class="mb-10 rounded-xl">
+    <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
         <h2 class="text-left mb-3 card_content_title">Простой</h2>
         <p class="text-left mb-3 card_content_text">
@@ -45,7 +45,7 @@
         <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
       </div>
     </v-card>
-    <v-card elevation="2" class="mb-10 rounded-xl">
+    <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
         <h2 class="text-left mb-3 card_content_title">Простой</h2>
         <p class="text-left mb-3 card_content_text">
@@ -82,6 +82,9 @@ export default {};
   width: 80%;
   font-family: Geometria;
   color: #0C0C0D;
+}
+.rate_card {
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.11) !important;
 }
 .card_content_button {
   margin-top: 20px;

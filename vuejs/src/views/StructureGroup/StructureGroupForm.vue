@@ -107,7 +107,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        alert(1);
+        this.$router.push('/credit-page')
       }
     },
     addGroupList() {
