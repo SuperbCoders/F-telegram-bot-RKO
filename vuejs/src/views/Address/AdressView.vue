@@ -76,6 +76,7 @@
         ></v-text-field>
       </div>
     </v-form>
+    <line-step :step='1' />
     <v-btn
       block
       large
@@ -90,6 +91,7 @@
 
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
+import LineStep from '../../components/line_step/line_step.vue';
 
 export default {
   data() {
@@ -115,7 +117,7 @@ export default {
       this.emailActualShow = e
     }
   },
-  components: { RadioGroup },
+  components: { RadioGroup, LineStep },
 };
 </script>
 

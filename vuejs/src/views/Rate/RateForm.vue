@@ -66,11 +66,17 @@
         <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
       </div>
     </v-card>
+    <LineStep :step="7" />
   </div>
 </template>
 
 <script>
-export default {};
+import LineStep from '../../components/line_step/line_step.vue';
+export default {
+  components: {
+    LineStep
+  }
+};
 </script>
 
 <style>
