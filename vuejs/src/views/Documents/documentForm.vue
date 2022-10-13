@@ -6,6 +6,9 @@
     </p>
     <AttachButton class="mb-5 " text="Выбрать файл" />
     <PhotoButton text="Сфотографировать" />
+    <v-btn block large class="mt-10 auth_form_bth" color="primary">
+      <router-link class="auth_form_bth color-white text-decoration-none" to="/rate"> Продолжить </router-link>
+    </v-btn>
   </div>
 </template>
 

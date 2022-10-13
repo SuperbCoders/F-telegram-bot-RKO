@@ -69,6 +69,9 @@
       Процентная ставка:
       <span class="black--text">{{ interestRate * 100 }}%</span>
     </p>
+    <v-btn block large class="mt-10 auth_form_bth" color="primary">
+      <router-link class="auth_form_bth color-white text-decoration-none" to="/document"> Продолжить </router-link>
+    </v-btn>
   </div>
 </template>
 

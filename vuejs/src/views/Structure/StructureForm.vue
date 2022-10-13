@@ -31,19 +31,7 @@
     </div>
     <div class="form_group">
       <p class="text-left mb-5 form_block_title">Наличие наблюдательного совета</p>
-      <v-btn-toggle
-        active-class
-        color="pink darken-1"
-        class="d-flex align-start"
-        v-model="toggle_exclusive"
-      >
-        <v-btn class="d-flex align-center">
-          <p class="pl-5 pr-5 mb-0">Да</p>
-        </v-btn>
-        <v-btn>
-          <p class="pl-5 pr-5 mb-0">Нет</p>
-        </v-btn>
-      </v-btn-toggle>
+      <RadioGroup />
     </div>
     <div class="form_block mt-5">
       <p class="text-left form_block_label">Наименования наблюдательного совета</p>
@@ -59,18 +47,7 @@
     </div>
     <div class="form_group">
       <p class="text-left form_block_label mb-5">Наличие коллегиального исполнительного органа</p>
-      <v-btn-toggle
-        active-class
-        color="pink darken-1"
-        class="d-flex align-start"
-      >
-        <v-btn class="d-flex align-center">
-          <p class="pl-5 pr-5 mb-0">Да</p>
-        </v-btn>
-        <v-btn>
-          <p class="pl-5 pr-5 mb-0">Нет</p>
-        </v-btn>
-      </v-btn-toggle>
+      <RadioGroup />
     </div>
     <div class="form_block mt-5">
       <p class="text-left form_block_label">Наименование коллегиального исполнительног органа</p>
@@ -94,10 +71,14 @@
         :required="true"
       ></v-text-field>
     </div>
+    <v-btn block large class="mt-10 auth_form_bth" color="primary">
+      <router-link class="auth_form_bth color-white text-decoration-none" to="/information-staff"> Продолжить </router-link>
+    </v-btn>
   </div>
 </template>
 <script>
-export default {};
+import RadioGroup from '../../components/radioButton/radioGroup/radioGroup.vue';
+export default { components: { RadioGroup } };
 </script>
 
 <style>
@@ -111,5 +92,11 @@ export default {};
 .form_block_label {
   font-family: Roboto;
   color: black;
+}
+.auth_form_bth {
+  border-radius: 10px;
+  color: white !important;
+  text-transform: capitalize;
+  font-size: 14px;
 }
 </style>

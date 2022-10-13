@@ -61,6 +61,9 @@
         <v-date-picker @input="passportIssueDateMenu = false"></v-date-picker>
       </v-menu>
     </div>
+    <v-btn block large class="mt-10 auth_form_bth" color="primary">
+      <router-link class="auth_form_bth color-white text-decoration-none" to="/sctructure-group"> Продолжить </router-link>
+    </v-btn>
   </div>
 </template>
 
