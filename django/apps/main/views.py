@@ -55,6 +55,7 @@ class UserAPIView(APIView):
 
     def get(self, request, format=None, *args, **kwargs):
         telegram_chat_id = kwargs.get("telegram_chat_id")
+
         list_user = User.objects.filter(telegram_chat_id=telegram_chat_id)
         if len(list_user) == 1:
             return Response({}, status=status.HTTP_200_OK)
@@ -82,3 +83,13 @@ class UserAPIView(APIView):
     #         return Response({}, status=status.HTTP_200_OK)
     #     except User.DoesNotExist:
     #         return Response({}, status=status.HTTP_400_BAD_REQUEST)
+class PhoneApiView(APIView):
+    permission_classes = [permissions.AllowAny]
+    def get(self, request, format=None, *args, **kwargs):
+        telegram_chat_id = kwargs.get("telegram_chat_id")
+        list_user = User.objects.filter(telegram_chat_id=telegram_chat_id)
+        if len(list_user) == 1:
+            return Response({
+                'phone': list_user[0].phone_number
+            }, status=status.HTTP_200_OK)
+        return Response({}, status=status.HTTP_404_NOT_FOUND)

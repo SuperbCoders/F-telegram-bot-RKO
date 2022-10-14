@@ -99,7 +99,13 @@ async def apply(update, context):
             reply_markup=reply_markup,
         )
     else:
-        WEB_APP_URL = "https://185.91.52.232/?phone={}".format(update.message.contact.phone_number)
+        res_phone = requests.get(
+            os.getenv("DJANGO_APP_API_ROOT_URL") +
+            f"get_phone/{update.effective_chat.id}/"
+        )
+        phone = (res_phone.json()['phone'].replace('+', ''))
+
+        WEB_APP_URL = "https://185.91.52.232/?phone={}".format(phone)
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)

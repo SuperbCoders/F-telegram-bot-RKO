@@ -22,6 +22,7 @@ from rest_framework.routers import DefaultRouter
 from apps.main.views import (
     # LoanApplicationCreateAPIView,
     UserAPIView,
+    PhoneApiView,
     LoanRequestCreateAPIView,
     LoanApplicationListAPIView,
 )
@@ -44,6 +45,7 @@ urlpatterns = [
         UserAPIView.as_view(),
     ),
     path('adminpage/', admin.site.urls),
+    path('get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view())
 ]
 
 if settings.DEBUG:
