@@ -1,5 +1,6 @@
 <template>
   <div class="intelligence_section">
+    <v-form ref="form" v-model="valid" lazy-validation>
     <h2 class="text-left mb-10">Сведенья о персонале</h2>
     <div class="form_block mt-5">
       <p class="text-left form_block_title">Численность персонала</p>
@@ -8,11 +9,12 @@
         placeholder="Наименование"
         class="align-center border-none"
         name="oldName"
+        :rules="requiredRules"
         outlined
         :required="true"
       ></v-text-field>
     </div>
-    <div class="form_block mt-5">
+    <div class="form_block">
       <p class="text-left form_block_input">Задолжность по зп</p>
       <v-text-field
         id="oldName"
@@ -20,11 +22,22 @@
         class="align-center border-none form_block_input"
         name="oldName"
         type="number"
+        :rules="requiredRules"
         append-icon="mdi-currency-rub"
         outlined
         :required="true"
       ></v-text-field>
+      <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="validate"
+      >Продолжить</v-btn
+    >
     </div>
+  </v-form>
   </div>
 </template>
 
@@ -32,8 +45,19 @@
 export default {
   data() {
     return {
+      valid: true,
+      requiredRules: [(v) => !!v || "Это поле обязательно"],
       test: false
     }
+  },
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+
+      if (this.$refs.form.validate()) {
+        this.$router.push('/license-info')
+      }
+    },
   }
 }
 </script>

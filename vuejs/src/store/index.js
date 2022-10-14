@@ -9,6 +9,7 @@ export default new Vuex.Store({
     authToken: localStorage.getItem("authToken") || null,
     user: null,
     data: null,
+    isForegin: false,
     leaderList: [
       {
         id: 1,
@@ -66,6 +67,9 @@ export default new Vuex.Store({
     setDataCompany(state, value){
       state.dataCompany = value;
     },
+    isForeginStatus(state, status) {
+      state.isForegin = status
+    }
   },
   actions: {
   },

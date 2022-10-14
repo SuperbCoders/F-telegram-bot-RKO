@@ -63,7 +63,7 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$router.push("/documents-forms");
+        this.$router.push("/address-form");
       }
     },
   },

@@ -17,6 +17,7 @@ import ForeignPerson from '../views/isAForeignPerson/ForeignPerson.vue'
 import EmailForm from '../views/EmailForm/EmailForm.vue'
 import ClientInfo from '../views/ClientInfo/ClientInfoForm.vue'
 import DocumentFogeiner from '../views/DocumentFogeiner/DocumentFogeinerForm.vue'
+import LicenseInfo from '../views/LicenseInformation/LicenseInformationForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
 Vue.use(VueRouter);
 
@@ -33,7 +34,7 @@ const routes = [
   },
   {
     path: "/address",
-    name: "address-form",
+    name: "address",
     component: Address
   },
   {
@@ -80,6 +81,11 @@ const routes = [
     path: "/individual-info",
     name: "individual-info",
     component: individualsForm
+  },
+  {
+    path: "/license-info",
+    name: "license-info",
+    component: LicenseInfo
   },
   {
     path: "/documents-forms",
