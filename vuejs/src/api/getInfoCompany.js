@@ -18,7 +18,7 @@ export const getCompany = async (inn) => {
     }
 
     const response = await fetch(url, options);
-    const text = await response.json();
-    console.log(text);
+    const data = await response.json();
+    return data
     
 }

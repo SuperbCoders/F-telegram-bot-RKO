@@ -16,6 +16,7 @@
           type="number"
           :rules="innRules"
           required
+          @input="getCompanyFromInn"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
@@ -73,12 +74,6 @@
           @click="validate"
           >Продолжить</v-btn
         >
-        <v-btn
-          class="mt-10"
-          color="primary"
-          @click="apiGetCompany"
-          >DATA</v-btn
-        >
       </v-form>
     </div>
   </div>
@@ -116,6 +111,18 @@ export default {
       if (this.$refs.form.validate()) {
         this.$router.push("/address");
       }
+    },
+
+    async getCompanyFromInn(inn){
+      if(inn.length >= 10 & inn.length <= 12) {
+        const company = await getCompany(inn);
+        if(company?.suggestions.length > 0) {
+          this.$store.commit("setDataCompany", company?.suggestions[0]);
+          console.log(this.$store.state.dataCompany);
+        }
+        
+      }
+      
     },
 
     apiGetCompany() {

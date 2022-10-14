@@ -40,7 +40,8 @@ export default new Vuex.Store({
         id: 2,
         title: 'Управляющая компания'
       }
-    ]
+    ],
+    dataCompany: {}
   },
   getters: {
     isList (state) {
@@ -61,6 +62,9 @@ export default new Vuex.Store({
   mutations: {
     toggleDrawer(state, value) {
       state.drawer = value;
+    },
+    setDataCompany(state, value){
+      state.dataCompany = value;
     },
   },
   actions: {
