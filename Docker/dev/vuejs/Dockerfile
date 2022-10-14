@@ -10,9 +10,10 @@ RUN chown -R node:node /usr/src/app
 
 RUN yarn global add @vue/cli
 
-
-COPY ./vuejs/package*.json ./vuejs/yarn.lock ./
+COPY ./vuejs/package*.json ./vuejs/yarn.lock ./vuejs/
 
 RUN yarn install --check-files
+
+RUN yarn add vue-the-mask
 
 COPY --chown=node:node ./vuejs/ /usr/src/app/
