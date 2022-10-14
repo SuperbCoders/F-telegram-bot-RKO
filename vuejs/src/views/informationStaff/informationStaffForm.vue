@@ -140,7 +140,7 @@
         </v-btn>
       </div>
     </v-form>
-    <line-step :step='3' />
+    <line-step :step='10' />
     <v-btn
       block
       large

@@ -142,6 +142,7 @@
       ></v-text-field>
     </div>
     </v-form>
+    <line-step :step='12' />
     <v-btn
       block
       large
@@ -155,6 +156,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -172,6 +174,9 @@ export default {
       }
     },
   },
+  components: {
+    LineStep,
+  }
 };
 </script>
 

@@ -19,7 +19,7 @@ export default {
     },
     data(){
         return {
-            count_step: 11,
+            count_step: 13,
         }
     },
     methods: {
