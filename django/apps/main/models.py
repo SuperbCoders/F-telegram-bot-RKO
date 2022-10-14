@@ -129,6 +129,7 @@ class LoanApplication(models.Model):
         ("under_review", "На рассмотрении"),
         ("declined", "Отклонена"),
         ("approved", "Одобрена"),
+        ("update", "Доработка заявки")
     ]
     status = models.CharField(max_length=140, choices=STATUS_CHOICES,
                               default="under_review", blank=True)
