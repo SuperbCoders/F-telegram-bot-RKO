@@ -5,7 +5,7 @@
             Является ли лицо иностранно публичным должностным лицом либо лицом, связанным с таком родственным
             партнеским или иными отношениями
         </p>
-        <RadioGroup @isStatus="(status) => test = status " name="foreign_person_section" />
+        <RadioGroup @isStatus="(status) => currentData = status " name="foreign_person_section" />
     </div>
     <line-step :step='5' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
@@ -20,13 +20,15 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
     data () {
       return {
-        test: true
+        currentData: {
+          Foreign: null
+        },
       }
     },
     components: { RadioGroup, LineStep },
     methods: {
       redirect () {
-        this.$store.commit('isForeginStatus', this.test)
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/kinship-status-forms')
       }
     },
