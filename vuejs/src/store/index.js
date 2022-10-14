@@ -9,6 +9,7 @@ export default new Vuex.Store({
     authToken: localStorage.getItem("authToken") || null,
     user: null,
     data: null,
+    isForegin: false,
     leaderList: [
       {
         id: 1,
@@ -62,6 +63,9 @@ export default new Vuex.Store({
     toggleDrawer(state, value) {
       state.drawer = value;
     },
+    isForeginStatus(state, status) {
+      state.isForegin = status
+    }
   },
   actions: {
   },
