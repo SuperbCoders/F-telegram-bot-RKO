@@ -24,7 +24,7 @@
       </div>
       <p class="error_message" v-if="!valid && checkboxList.length < 1">Выберите пункт</p>
       <div
-        v-for="(itemForm, index) in groupList"
+        v-for="(itemForm, index) in currentData.groupList"
         :key="index"
         class="form_input_block"
       >
@@ -34,7 +34,7 @@
             id="oldName"
             placeholder="Напишите адрес"
             class="align-center border-none"
-            v-model="currentData.Address"
+            v-model="itemForm.Address"
             name="oldName"
             outlined
             :rules="requiredRules"
@@ -46,7 +46,7 @@
           <v-combobox
             filled
             outlined
-            v-model="currentData.footing"
+            v-model="itemForm.footing"
             :rules="requiredRules"
             placeholder="Выберите основание"
           ></v-combobox>
@@ -125,8 +125,12 @@ export default {
       },
       currentData: {
         typeAddress: [],
-        Address: null,
-        footing: null
+        groupList: [
+        {
+          footing: null,
+          Address: null,
+        },
+        ]
       },
       checkboxList: [],
       valid: true,
@@ -150,11 +154,11 @@ export default {
       }
     },
     addGroupList() {
-      this.groupList.push(this.defaultGroupItem);
+      this.currentData.groupList.push(this.defaultGroupItem);
     },
     deleteGroupList() {
-      if (this.groupList.length > 1) {
-        this.groupList.pop();
+      if (this.currentData.groupList.length > 1) {
+        this.currentData.groupList.pop();
       }
     },
   },
