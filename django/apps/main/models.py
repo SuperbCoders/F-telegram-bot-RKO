@@ -133,7 +133,7 @@ class LoanRequest(models.Model):
                 delay=1,
             )
             self.last_status = self.status
-        elif self.status == "decline":
+        elif self.status == "declined":
             print(self.status)
             text = (
                 "К сожалению, заявка на открытие счета была отклонена банком"
@@ -161,7 +161,7 @@ class LoanRequest(models.Model):
                 text,
                 button_url=button_url,
                 button_text=button_text,
-                delay=60,
+                delay=1,
             )
             self.last_status = self.status
     class Meta:
