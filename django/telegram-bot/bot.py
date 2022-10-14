@@ -19,6 +19,8 @@ from telegram import (
 )
 from telegram.constants import ParseMode
 
+
+
 def is_chat_id_confirmed(chat_id):
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
@@ -122,6 +124,7 @@ def save_user_chat_id(chat_id, phone_number):
     except Exception:
         raise Exception()
 
+
 async def handle_phone_number(update, context):
     if update.message.contact:
         try:
@@ -129,7 +132,8 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            WEB_APP_URL = "https://185.91.52.232/"
+            WEB_APP_URL = "https://185.91.52.232/?phone={}".format(update.message.contact.phone_number)
+
             button = InlineKeyboardButton(
                 text="Создать заявку",
                 web_app=WebAppInfo(url=WEB_APP_URL)
@@ -153,15 +157,18 @@ async def handle_phone_number(update, context):
 
 def get_user_applications(chat_id):
     api_url = (
-        "https://api.loan-application-bot.baraba.sh/" +
-        f"loan-application/{chat_id}/"
+        "http://django:8000/"+
+        "loan-application/{}".format(chat_id)
     )
     user_applications = []
-    try:
+    try:   
         response = requests.get(api_url, timeout=10)
+        print("Отправили респонс")
+        print(response)
         if response.json():
             user_applications = response.json()
-    except Exception:
+            print(user_applications)
+    except:
         pass
     return user_applications
 
@@ -184,7 +191,7 @@ async def status(update, context):
     await context.bot.send_message(
         chat_id=chat_id,
         text=text,
-        parse_mode=ParseMode.MARKDOWN_V2,
+        parse_mode='Markdown',
     )
 
 

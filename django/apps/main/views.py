@@ -15,22 +15,23 @@ from djangorestframework_camel_case.parser import (
 import uuid
 
 from .models import (
-    LoanApplication,
+    LoanRequest,
     User,
 )
 from .serializers import (
-    LoanApplicationSerializer,
+    # LoanApplicationSerializer,
+    LoanRequestSerializer,
 )
 
 
-class LoanApplicationCreateAPIView(CreateAPIView):
+class LoanRequestCreateAPIView(CreateAPIView):
     permission_classes = [permissions.AllowAny]
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]
     renderer_classes = [CamelCaseJSONRenderer]
-    model = LoanApplication
-    queryset = LoanApplication.objects.all()
-    serializer_class = LoanApplicationSerializer
+    model = LoanRequest
+    queryset = LoanRequest.objects.all()
+    serializer_class = LoanRequestSerializer
 
 
 class LoanApplicationListAPIView(ListAPIView):
@@ -38,13 +39,13 @@ class LoanApplicationListAPIView(ListAPIView):
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]
     renderer_classes = [CamelCaseJSONRenderer]
-    model = LoanApplication
-    serializer_class = LoanApplicationSerializer
+    model = LoanRequest
+    serializer_class = LoanRequestSerializer
 
     def get_queryset(self):
         telegram_chat_id = self.kwargs['telegram_chat_id']
         return (
-            LoanApplication.objects
+            LoanRequest.objects
             .filter(telegram_chat_id=telegram_chat_id)
             .order_by("created_at")
         )

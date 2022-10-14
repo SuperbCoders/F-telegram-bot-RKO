@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from rest_framework.authtoken.models import Token
 
-from .models import User, LoanApplication
+from .models import User, LoanApplication, LoanRequest
 from .tasks import send_telegram_bot_message
 
 
@@ -46,7 +46,7 @@ class LoanApplicationAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(LoanApplication, LoanApplicationAdmin)
-admin.site.register(User, UserAdmin)
 admin.site.unregister(Token)
 admin.site.unregister(Group)
+admin.site.register(LoanRequest)
+admin.site.register(User)

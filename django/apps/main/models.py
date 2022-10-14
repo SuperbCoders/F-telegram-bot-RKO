@@ -7,6 +7,12 @@ from django.utils import timezone
 
 from .tasks import send_telegram_bot_message
 
+INN_MAX_LENGTH = 12
+MAX_CITY_NAME_STRING = 30
+MAX_STRING_LENGTH = 100
+MAX_PHONE_LENGTH = 12
+MAX_ADDRESS_LENGTH = 120
+MAX_JSON_STRING_LENGTH = 300
 
 def generate_dhl_track_id():
     characters = string.ascii_uppercase + string.digits
@@ -24,6 +30,98 @@ def generate_application_id():
     )
     return f"{characters}-{digits}"
 
+
+class TypeToChoose(models.Model):
+    type_name = models.CharField(max_length=MAX_CITY_NAME_STRING)
+
+class TariffPlan(models.Model):
+    name = models.CharField(max_length=MAX_CITY_NAME_STRING)
+    limit_descr = models.CharField(max_length=MAX_STRING_LENGTH)
+    transaction_policy = models.CharField(max_length=MAX_STRING_LENGTH)
+    payment_policy = models.CharField(max_length=MAX_STRING_LENGTH)
+    price = models.IntegerField()
+
+
+class LoanRequest(models.Model):
+    STATUS_CHOICES = [
+        ("under_review", "На рассмотрении"),
+        ("declined", "Отклонена"),
+        ("approved", "Одобрена"),
+    ]
+    status = models.CharField(max_length=140,
+                              choices=STATUS_CHOICES,
+                              default="under_review",
+                              blank=True)
+    inn = models.CharField(max_length=INN_MAX_LENGTH)
+    company_name = models.CharField(max_length=MAX_STRING_LENGTH)
+    contact_number = models.CharField(max_length=MAX_PHONE_LENGTH)
+    legal_address = models.CharField(max_length=MAX_ADDRESS_LENGTH)
+    physic_address = models.CharField(max_length=MAX_ADDRESS_LENGTH, blank=True, null=True)
+    type = models.CharField(max_length=MAX_STRING_LENGTH)
+    basis = models.CharField(max_length=MAX_STRING_LENGTH)
+    legal_mail_address = models.CharField(max_length=MAX_ADDRESS_LENGTH)
+    real_mail_address = models.CharField(max_length=MAX_ADDRESS_LENGTH, blank=True, null=True)
+    supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH)
+    supervisor = models.CharField(max_length=MAX_STRING_LENGTH)
+    supervisor_inn = models.CharField(max_length=INN_MAX_LENGTH)
+    supervisory = models.CharField(max_length=MAX_STRING_LENGTH)
+    collegiate_body = models.CharField(max_length=MAX_STRING_LENGTH)
+    collegiate_person = models.CharField(max_length=MAX_STRING_LENGTH)
+    employers_volume = models.IntegerField()
+    salary_debt = models.IntegerField()
+    company_group_name = models.CharField(max_length=MAX_STRING_LENGTH)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH)
+    loan_amount = models.IntegerField()
+    loan_time = models.IntegerField()
+    loan_rate = models.FloatField()
+    documents = models.ImageField( # это перепишем на много документов позже
+        upload_to="documents",
+        blank=True,
+        null=True,
+    )
+    rate = models.CharField(max_length=MAX_STRING_LENGTH)
+    tariff = models.CharField(max_length=MAX_STRING_LENGTH)
+    telegram_chat_id = models.CharField(max_length=140, blank=True)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    def _send_success_message_to_telegram(self):
+        text = (
+            "Ваша заявка отправлена в банк на рассмотрение.\n" +
+            "Информация с результатами рассмотрения будет отправлена " +
+            "вам по телефону и электронной почте."
+        )
+        send_telegram_bot_message.delay(self.telegram_chat_id, text)
+
+    def _send_upload_message_to_telegram(self):
+        text = (
+            "Для успешного рассмотрения заявки банку необходимы " +
+            "дополнительные документы. Пожалуйста, перейдите по " +
+            "ссылке на сайт банка и загрузите их."
+        )
+        button_text = "Загрузить документы"
+        button_url = "https://www.zenit.ru/"
+        send_telegram_bot_message.delay(
+            self.telegram_chat_id,
+            text,
+            button_url=button_url,
+            button_text=button_text,
+            delay=60,
+        )
+
+    class Meta:
+        verbose_name = 'заявление'
+        verbose_name_plural = "заявления"
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self._send_success_message_to_telegram()
+            self._send_upload_message_to_telegram()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.company_name
 
 
 class LoanApplication(models.Model):
