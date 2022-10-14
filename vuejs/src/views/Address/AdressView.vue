@@ -128,7 +128,7 @@ export default {
         ogrn: null,
       },
       currentData: {
-        typeAddress: null,
+        typeAddress: [],
         Address: null,
         footing: null
       },
@@ -148,9 +148,9 @@ export default {
     validate() {
       this.$refs.form.validate();
 
-      if (this.$refs.form.validate() && this.checkboxList.length > 0) {
+      if (this.$refs.form.validate() && this.currentData.typeAddress.length > 0) {
         this.$router.push("/sctructure");
-        this.$store.commit('')
+        this.$store.commit('addItemFormData', this.currentData)
       }
     },
     addGroupList() {
