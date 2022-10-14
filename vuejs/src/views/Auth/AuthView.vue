@@ -35,32 +35,35 @@
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
           <v-checkbox :rules="requiredRules">
-            <template v-slot:label> </template>
-          </v-checkbox>
-          <div class="text-left auth_form_link_container">
-            <span>Я ознакомился и согласен с условиями</span>
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
+            <template v-slot:label>
+              <div class="text-left auth_form_link_container">
+                <span>Я ознакомился и согласен с условиями</span>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <a
+                      target="_blank"
+                      class="text-decoration-none text-left"
+                      href="https://vuetifyjs.com"
+                      v-on="on"
+                      @click.stop
+                    >
+                      резервирного счета,
+                    </a>
+                  </template>
+                </v-tooltip>
+                а также с условиями
                 <a
                   target="_blank"
-                  class="text-decoration-none text-left"
+                  class="text-decoration-none"
                   href="https://vuetifyjs.com"
                   v-on="on"
+                  @click.stop
                 >
-                  резервирного счета,
+                  обработки и хранения персональных данных
                 </a>
-              </template>
-            </v-tooltip>
-            а также с условиями
-            <a
-              target="_blank"
-              class="text-decoration-none"
-              href="https://vuetifyjs.com"
-              v-on="on"
-            >
-              обработки и хранения персональных данных
-            </a>
-          </div>
+              </div>
+            </template>
+          </v-checkbox>
         </div>
         <v-btn
           block
