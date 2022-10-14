@@ -13,8 +13,10 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          type="number"
+          type="text"
           :rules="innRules"
+          v-mask="'############'"
+          masked="true"
           required
           @input="getCompanyFromInn"
           class="mt-1 auth_form"
@@ -34,6 +36,8 @@
           :rules="requiredRules"
           :required="true"
           v-model="phone_number"
+          v-mask="'+# (###) ### ## ##'"
+          masked="true"
           class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
@@ -84,12 +88,17 @@
 
 <script>
 import { getCompany } from '../../api/getInfoCompany';
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     name: "",
     phone_number: "",
     name_company: "",
+    maskPhone: {
+
+    },
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>

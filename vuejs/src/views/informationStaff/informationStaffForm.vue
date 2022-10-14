@@ -27,6 +27,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
               placeholder="xx.xx.xxxx"
+              
               id="passportIssueDate"
               name="passportIssueDate"
               outlined

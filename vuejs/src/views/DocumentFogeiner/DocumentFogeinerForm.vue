@@ -7,12 +7,14 @@
             </div>
             <div class="form_block">
                 <p class="text-left form_block_title">Серия (если имеется)</p>
-                <v-text-field id="oldName" placeholder="Введите серию документа" class="align-center border-none"
+                <v-text-field id="oldName" v-mask="'## ##'"
+          masked="true" placeholder="Введите серию документа" class="align-center border-none"
                     outlined :required="true"></v-text-field>
             </div>
             <div class="form_block">
                 <p class="text-left form_block_title">Номер документа удостоверяющего личность</p>
-                <v-text-field id="oldName" placeholder="Введите номер документа" class="align-center border-none"
+                <v-text-field id="oldName" v-mask="'### ###'"
+          masked="true" placeholder="Введите номер документа" class="align-center border-none"
                     outlined :rules="requiredRules" :required="true"></v-text-field>
             </div>
             <div class="form_block">

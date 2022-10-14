@@ -21,7 +21,8 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Телефон</p>
-        <v-text-field id="oldName" placeholder="Телефон" class="align-center border-none" outlined
+        <v-text-field id="oldName" placeholder="Телефон" v-mask="'+# (###) ### ## ##'"
+          masked="true" class="align-center border-none" outlined
           :rules="requiredRules" :required="true">
         </v-text-field>
       </div>
@@ -40,7 +41,9 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data() {
     return {
       valid: true,

@@ -61,6 +61,8 @@
           id="oldName"
           placeholder="Введите серию документа"
           class="align-center border-none"
+          v-mask="'## ##'"
+          masked="true"
           outlined
           :required="true"
         ></v-text-field>
@@ -73,6 +75,8 @@
           id="oldName"
           placeholder="Введите номер документа"
           class="align-center border-none"
+          v-mask="'######'"
+          masked="true"
           outlined
           :rules="requiredRules"
           :required="true"
@@ -173,7 +177,9 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     listRole: [],

@@ -8,7 +8,7 @@
       </p>
       <v-select
           :items="relationDegree"
-          label="Standard"
+          label="Степень родства"
           filled
           :rules="requiredRules"
           required
