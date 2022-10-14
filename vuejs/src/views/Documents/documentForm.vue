@@ -22,11 +22,11 @@ import AttachButton from "../../components/button/attachButton.vue";
 export default {
   components: { AttachButton },
   methods: {
-    redirect () {
-      this.$router.push('/client-info')
-    }
-  }
-  };
+    redirect() {
+      this.$router.push("/client-info");
+    },
+  },
+};
 </script>
 
 <style scoped>

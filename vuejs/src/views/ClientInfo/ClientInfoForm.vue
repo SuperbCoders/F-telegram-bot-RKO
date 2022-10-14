@@ -189,7 +189,7 @@ export default {
         if (isStatusFogeiner) {
           this.$router.push("/document-fogeiner");
         } else {
-            this.$router.push("/sctructure");
+            this.$router.push("/information-staff");
         }
       }
     },
