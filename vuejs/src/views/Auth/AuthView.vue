@@ -52,7 +52,7 @@
                     </a>
                   </template>
                 </v-tooltip>
-                а также с условиями
+                  а также с условиями
                 <a
                   target="_blank"
                   class="text-decoration-none"
@@ -110,7 +110,7 @@ export default {
   mounted(){
     const phone = this.$route.query?.phone;
     if(phone){
-      console.log();
+      console.log(phone);
     }
   },
 
