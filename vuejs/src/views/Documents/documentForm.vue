@@ -8,7 +8,6 @@
     <v-btn
       block
       large
-      :disabled="!valid"
       class="mt-10 auth_form_bth"
       color="primary"
       @click="redirect()"
