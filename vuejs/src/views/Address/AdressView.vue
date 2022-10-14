@@ -93,6 +93,7 @@
           <v-icon>mdi-plus-circle-outline</v-icon>
         </v-btn>
       </div>
+      <line-step :step='1' />
       <v-btn
         block
         large
@@ -103,17 +104,6 @@
         >Продолжить</v-btn
       >
     </v-form>
-
-    <line-step :step='1' />
-    <v-btn
-      block
-      large
-      :disabled="!valid"
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить</v-btn
-    >
 
   </div>
 </template>
