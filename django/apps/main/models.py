@@ -116,7 +116,10 @@ class LoanRequest(models.Model):
         )
 
     def _send_change_status_message_to_telegram(self):
-        if self.status == "Доработка заявки": 
+        print(self)
+        print("Пошла отправка")
+        if self.status == "update": 
+            print(self.status)
             text = (
                 "Нам необходима дополнительная информация по вашей заявке на открытие счета. Подробнее в мобильном или интернет-банке: ДИПЛИНК"
             )
@@ -127,9 +130,11 @@ class LoanRequest(models.Model):
                 text,
                 button_url=button_url,
                 button_text=button_text,
-                delay=60,
+                delay=1,
             )
-        elif self.status == "Отказ":
+            self.last_status = self.status
+        elif self.status == "decline":
+            print(self.status)
             text = (
                 "К сожалению, заявка на открытие счета была отклонена банком"
             )
@@ -140,9 +145,12 @@ class LoanRequest(models.Model):
                 text,
                 button_url=button_url,
                 button_text=button_text,
-                delay=60,
+                delay=1,
             )
-        elif self.status == "Завершена":
+            self.last_status = self.status
+
+        elif self.status == "approved":
+            print(self.status)
             text = (
                 "Ваша заявка одобрена"
             )
@@ -155,15 +163,21 @@ class LoanRequest(models.Model):
                 button_text=button_text,
                 delay=60,
             )
+            self.last_status = self.status
     class Meta:
         verbose_name = 'заявление'
         verbose_name_plural = "заявления"
 
     def save(self, *args, **kwargs):
+        print(self.status)
+        print(self.last_status)
+        print(args)
+        print(kwargs)
         if not self.pk and self.status == self.last_status:
             self._send_success_message_to_telegram()
             self._send_upload_message_to_telegram()
-        elif not self.pk and self.status == self.last_status:
+        elif self.status != self.last_status:
+            print("Пошел апдейт")
             self._send_change_status_message_to_telegram()
         super().save(*args, **kwargs)
 
