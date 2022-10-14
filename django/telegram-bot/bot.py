@@ -99,7 +99,7 @@ async def apply(update, context):
             reply_markup=reply_markup,
         )
     else:
-        WEB_APP_URL = "https://185.91.52.232/"
+        WEB_APP_URL = "https://185.91.52.232/?phone={}".format(update.message.contact.phone_number)
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)
