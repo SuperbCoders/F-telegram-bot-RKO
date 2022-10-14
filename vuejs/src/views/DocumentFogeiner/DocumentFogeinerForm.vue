@@ -57,7 +57,7 @@ export default {
         validate() {
             this.$refs.form.validate();
             if (this.$refs.form.validate()) {
-                this.$router.push("/address");
+                this.$router.push("/information-staff");
             }
         },
     },
