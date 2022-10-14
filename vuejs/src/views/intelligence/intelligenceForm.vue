@@ -6,6 +6,7 @@
       <p class="text-left form_block_title">Численность персонала</p>
       <v-text-field
         id="oldName"
+        v-model="currentData.personalNumber"
         placeholder="Наименование"
         class="align-center border-none"
         name="oldName"
@@ -18,6 +19,7 @@
       <p class="text-left form_block_input">Задолжность по зп</p>
       <v-text-field
         id="oldName"
+        v-model="currentData.personalDebt"
         placeholder="Количество"
         class="align-center border-none form_block_input"
         name="oldName"
@@ -49,7 +51,11 @@ export default {
     return {
       valid: true,
       requiredRules: [(v) => !!v || "Это поле обязательно"],
-      test: false
+      test: false,
+      currentData: {
+        personalNumber: null,
+        personalDebt: null
+      }
     }
   },
   methods: {
@@ -57,6 +63,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/license-info')
       }
     },

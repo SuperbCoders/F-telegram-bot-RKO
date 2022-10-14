@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import line_step from '../../components/line_step/line_step.vue';
+
 export default {
   data() {
     return {
@@ -62,10 +64,13 @@ export default {
         this.valid = false;
       } else {
         this.valid = true;
-        this.$router.push("/rate");
+        this.$router.push("/beneficiaries");
       }
     },
   },
+  components: {
+    line_step
+  }
 };
 </script>
 

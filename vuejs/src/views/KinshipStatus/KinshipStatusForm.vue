@@ -10,6 +10,7 @@
           :items="relationDegree"
           label="Степень родства"
           filled
+          v-model="currentData.stepRole"
           :rules="requiredRules"
           required
           outlined
@@ -19,6 +20,7 @@
         <p class="text-left form_block_title">Адрес регистрации</p>
         <v-text-field
           id="oldName"
+          v-model="currentData.dateStarting"
           placeholder="Введите имя"
           class="align-center border-none"
           outlined
@@ -31,6 +33,7 @@
         <v-text-field
           id="oldName"
           placeholder="Введите имя"
+          v-model="currentData.dateEnd"
           class="align-center border-none"
           outlined
           :rules="requiredRules"
@@ -58,10 +61,11 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
-    listRole: [],
-    dateStarting: null,
-    dateEnd: null,
-    test: [],
+    currentData: {
+      stepRole: null,
+      dateStarting: null,
+      dateEnd: null
+    },
     relationDegree: [
       "Супруг",
       "Супруга"
@@ -72,6 +76,7 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/address-form");
       }
     },

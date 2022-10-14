@@ -8,6 +8,7 @@
           placeholder="Введите адрес"
           class="align-center border-none"
           outlined
+          v-model="currentData.placeOfBirth"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -28,7 +29,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.dateOfBirh"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -36,7 +37,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            v-model="currentData.dateOfBirh"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -49,6 +50,7 @@
           filled
           outlined
           :rules="requiredRules"
+          v-model="currentData.typeDocumnet"
           placeholder="Выберите тип"
           :items="type_document"
         ></v-select>
@@ -63,6 +65,7 @@
           class="align-center border-none"
           v-mask="'## ##'"
           masked="true"
+          v-model="currentData.serialDocument"
           outlined
           :required="true"
         ></v-text-field>
@@ -89,6 +92,7 @@
           placeholder="Наименование"
           class="align-center border-none"
           outlined
+          v-model="currentData.issued"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -100,6 +104,7 @@
         <v-text-field
           id="oldName"
           placeholder="Введите имя"
+          v-model="currentData.codeDocument"
           class="align-center border-none"
           outlined
           :required="true"
@@ -121,7 +126,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.dateOfBirh"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -129,7 +134,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            v-model="currentData.dateOfBirh"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -150,7 +155,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.dateOfIssue"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -158,7 +163,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            v-model="currentData.dateOfIssue"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -183,6 +188,16 @@ export default {
   data: () => ({
     valid: true,
     listRole: [],
+    currentData: {
+      placeOfBirth: null,
+      dateOfBirh: null,
+      typeDocumnet: null,
+      serialDocument: null,
+      codeDocument: null,
+      issued: null,
+      dateOfIssue: null,
+      period: null
+    },
     dateStarting: null,
     dateEnd: null,
     test: [],
@@ -199,6 +214,7 @@ export default {
         } else {
             this.$router.push("/information-staff");
         }
+        this.$store.commit('addItemFormData', this.currentData)
       }
     },
   },
