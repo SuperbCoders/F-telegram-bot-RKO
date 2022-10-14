@@ -47,8 +47,13 @@ class LoanRequest(models.Model):
         ("under_review", "На рассмотрении"),
         ("declined", "Отклонена"),
         ("approved", "Одобрена"),
+        ("update", "Доработка заявки")
     ]
     status = models.CharField(max_length=140,
+                              choices=STATUS_CHOICES,
+                              default="under_review",
+                              blank=True)
+    last_status = models.CharField(max_length=140,
                               choices=STATUS_CHOICES,
                               default="under_review",
                               blank=True)
@@ -110,15 +115,60 @@ class LoanRequest(models.Model):
             delay=60,
         )
 
+    def _send_change_status_message_to_telegram(self):
+        if self.status == "Доработка заявки": 
+            text = (
+                "Нам необходима дополнительная информация по вашей заявке на открытие счета. Подробнее в мобильном или интернет-банке: ДИПЛИНК"
+            )
+            button_text = "Перейти в мобильный банк"
+            button_url = "https://www.yandex.ru/"
+            send_telegram_bot_message.delay(
+                self.telegram_chat_id,
+                text,
+                button_url=button_url,
+                button_text=button_text,
+                delay=60,
+            )
+        elif self.status == "Отказ":
+            text = (
+                "К сожалению, заявка на открытие счета была отклонена банком"
+            )
+            button_text = "Контактный центр"
+            button_url = "https://www.yandex.ru/"
+            send_telegram_bot_message.delay(
+                self.telegram_chat_id,
+                text,
+                button_url=button_url,
+                button_text=button_text,
+                delay=60,
+            )
+        elif self.status == "Завершена":
+            text = (
+                "Ваша заявка одобрена"
+            )
+            button_text = "Контактный центр"
+            button_url = "https://www.yandex.ru/"
+            send_telegram_bot_message.delay(
+                self.telegram_chat_id,
+                text,
+                button_url=button_url,
+                button_text=button_text,
+                delay=60,
+            )
     class Meta:
         verbose_name = 'заявление'
         verbose_name_plural = "заявления"
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        if not self.pk and self.status == self.last_status:
             self._send_success_message_to_telegram()
             self._send_upload_message_to_telegram()
+        elif not self.pk and self.status == self.last_status:
+            self._send_change_status_message_to_telegram()
         super().save(*args, **kwargs)
+
+
+    # def update
 
     def __str__(self):
         return self.company_name
