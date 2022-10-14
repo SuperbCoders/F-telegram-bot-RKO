@@ -1,4 +1,6 @@
+from datetime import datetime
 import os
+import random
 
 import requests
 import string
@@ -176,14 +178,41 @@ def get_user_applications(chat_id):
 async def status(update, context):
     chat_id = update.effective_chat.id
     user_applications = get_user_applications(chat_id)
+    print(user_applications)
+    status_list = []
     if user_applications:
+        # for status in status_list:
+        #     status_string = (f"Номер заявки: {status['id']}\n" +
+        #         f"Дата заявки {status['created_at']}\n" +
+        #         f"Тип - открытие счета\n" +
+        #         f"Компания:\n"+
+        #         f"    - Имя:{status['company_name']}\n" +
+        #         f"    - ИНН:{status['inn']}\n"
+        #         f"    - ОГРН:{random.randint(1000000, 999999)}\n"
+        #         f"Cтатус заявки - {'status[status]'}"
+        #     )
+        #     if 'На рассмотрении' == status["status"] or "Доработка заявки" == status["status"]:
+        #         status_string = status_string + f"Номер счета: {random.randint(1000000, 999999)} \n" 
+        #         +f"Валюта счета: RUB\n" + f"Дата открытия {datetime.now()}\n" + f"Статус: Зарезервирован\n"
+        
+        #     status_list.append(status_list)
+        #   
         status_list = [
             (
-                f"Заявка #{i} от {application['createdAt'][:10]} " +
-                f"на {application['loanAmount']} рублей\n" +
-                f'Статус заявки: \"{application["status"]}\"'
+                f"Номер заявки: {status['id']}\n" +
+                f"Дата заявки {status['createdAt']}\n" +
+                f"Тип - открытие счета\n" +
+                f"Компания:\n"+
+                f"    - Имя: {status['companyName']}\n" +
+                f"    - ИНН: {status['inn']}\n" +
+                f"    - ОГРН: {random.randint(100000, 999999)}\n" +
+                f"Cтатус заявки - {status['status']}\n" +
+                (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') + 
+                (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
+                (f"Дата открытия {datetime.now()}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
+                (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
             )
-            for i, application in enumerate(user_applications, start=1)
+            for i, status in enumerate(user_applications, start=1)
         ]
         text = "\n\n".join(status_list)
     else:
