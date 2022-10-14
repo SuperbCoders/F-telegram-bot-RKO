@@ -10,7 +10,7 @@ RUN chown -R node:node /usr/src/app
 
 RUN yarn global add @vue/cli
 
-COPY ./vuejs/package*.json ./vuejs/yarn.lock ./vuejs/
+COPY ./vuejs/package*.json ./vuejs/yarn.lock ./
 
 RUN yarn install --check-files
 
