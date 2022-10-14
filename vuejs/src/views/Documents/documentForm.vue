@@ -62,7 +62,6 @@ export default {
   components: { AttachButton, LineStep }
 };
 
-
 </script>
 
 <style scoped>
