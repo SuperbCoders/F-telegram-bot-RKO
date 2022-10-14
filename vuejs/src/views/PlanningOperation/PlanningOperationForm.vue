@@ -7,35 +7,30 @@
         label="Договор купли продажи (товарный)"
         value="Договор купли продажи (товарный)"
         hide-details
-        @click="validate()"
       ></v-checkbox>
       <v-checkbox
         v-model="operationlist"
         label="Агенсткий договор"
         value="Агенсткий договор"
         hide-details
-        @click="validate"
       ></v-checkbox>
       <v-checkbox
         v-model="operationlist"
         label="Договор комиссии"
         value="Договор комиссии"
         hide-details
-        @click="validate"
       ></v-checkbox>
       <v-checkbox
         v-model="operationlist"
         label="Договор купли продажи ценных бумаг"
         value="Договор купли продажи ценных бумаг"
         hide-details
-        @click="validate"
       ></v-checkbox>
       <v-checkbox
         v-model="operationlist"
         label="Договор аренды"
         value="Договор аренды"
         hide-details
-        @click="validate"
       ></v-checkbox>
     </div>
     <p class="error_message" v-if="!valid && operationlist.length < 1">
@@ -67,6 +62,7 @@ export default {
         this.valid = false;
       } else {
         this.valid = true;
+        this.$router.push("/rate");
       }
     },
   },

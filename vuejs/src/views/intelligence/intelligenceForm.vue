@@ -18,7 +18,7 @@
       <p class="text-left form_block_input">Задолжность по зп</p>
       <v-text-field
         id="oldName"
-        placeholder="Наименование"
+        placeholder="Количество"
         class="align-center border-none form_block_input"
         name="oldName"
         type="number"
@@ -27,6 +27,7 @@
         outlined
         :required="true"
       ></v-text-field>
+      <line-step :step='11' />
       <v-btn
       block
       large
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -58,6 +60,9 @@ export default {
         this.$router.push('/license-info')
       }
     },
+  },
+  components: {
+    LineStep
   }
 }
 </script>

@@ -13,10 +13,13 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          type="number"
+          type="text"
           v-model="currentData.inn"
           :rules="innRules"
+          v-mask="'############'"
+          masked="true"
           required
+          @input="getCompanyFromInn"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
@@ -34,6 +37,8 @@
           v-model="currentData.phone"
           :rules="requiredRules"
           :required="true"
+          v-mask="'+# (###) ### ## ##'"
+          masked="true"
           class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
@@ -54,7 +59,7 @@
                     </a>
                   </template>
                 </v-tooltip>
-                а также с условиями
+                  а также с условиями
                 <a
                   target="_blank"
                   class="text-decoration-none"
@@ -83,7 +88,10 @@
 </template>
 
 <script>
+import { getCompany } from '../../api/getInfoCompany';
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data: () => ({
     currentData: {
       inn: null,
@@ -92,6 +100,11 @@ export default {
     },
     valid: true,
     name: "",
+    phone_number: "",
+    name_company: "",
+    maskPhone: {
+
+    },
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -113,6 +126,13 @@ export default {
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
   }),
 
+  mounted(){
+    const phone = this.$route.query?.phone;
+    if(phone){
+      this.currentData.phone = phone;
+    }
+  },
+
   methods: {
     validate() {
       this.$refs.form.validate();
@@ -120,6 +140,17 @@ export default {
       if (this.$refs.form.validate()) {
         this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/address");
+      }
+    },
+
+    async getCompanyFromInn(inn){
+      if(inn.length >= 10 & inn.length <= 12) {
+        const company = await getCompany(inn);
+        if(company?.suggestions.length > 0) {
+          this.$store.commit("setDataCompany", company?.suggestions[0]);
+          this.name_company = company?.suggestions[0].value
+          this.currentData.companyName = company?.suggestions[0].value;
+        }
       }
     },
   },

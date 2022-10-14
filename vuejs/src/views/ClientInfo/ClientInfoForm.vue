@@ -45,12 +45,13 @@
         <p class="text-left form_block_title">
           Тип документа удостоверяющего личность
         </p>
-        <v-combobox
+        <v-select
           filled
           outlined
           :rules="requiredRules"
           placeholder="Выберите тип"
-        ></v-combobox>
+          :items="type_document"
+        ></v-select>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
@@ -60,6 +61,8 @@
           id="oldName"
           placeholder="Введите серию документа"
           class="align-center border-none"
+          v-mask="'## ##'"
+          masked="true"
           outlined
           :required="true"
         ></v-text-field>
@@ -72,6 +75,8 @@
           id="oldName"
           placeholder="Введите номер документа"
           class="align-center border-none"
+          v-mask="'######'"
+          masked="true"
           outlined
           :rules="requiredRules"
           :required="true"
@@ -172,7 +177,9 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     listRole: [],
@@ -180,6 +187,7 @@ export default {
     dateEnd: null,
     test: [],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
+    type_document: ["Паспорт"],
   }),
   methods: {
     validate() {

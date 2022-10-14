@@ -7,6 +7,7 @@
         </p>
         <RadioGroup @isStatus="(status) => currentData.foreign = status " name="foreign_person_section" />
     </div>
+    <line-step :step='5' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
   </div>
@@ -14,6 +15,8 @@
 
 <script>
 import RadioGroup from '../../components/radioButton/radioGroup/radioGroup.vue';
+import LineStep from '../../components/line_step/line_step.vue';
+
 export default {
     data () {
       return {
@@ -22,13 +25,13 @@ export default {
         },
       }
     },
-    components: { RadioGroup },
+    components: { RadioGroup, LineStep },
     methods: {
       redirect () {
         this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/kinship-status-forms')
       }
-    }
+    },
 }
 </script>
 

@@ -45,16 +45,14 @@
     <p class="mt-5 pay_text grey--text">Ежемесячный платеж</p>
     <v-scroll-y-transition hide-on-leave>
       <p :key="monthlyPayment" class="display-1 primary--text">
-        <!-- {{ getFormattedCurrency(monthlyPayment) }} -->
-        0  &#8381;
+        {{ getFormattedCurrency(monthlyPayment()) }} &#8381;
       </p>
     </v-scroll-y-transition>
     <p class="grey--text">
       Сумма переплаты:
       <span class="black--text"
         >
-        <!-- {{ getFormattedCurrency(interestAmount) }} &#8381; -->
-        0 &#8381;
+        {{ getFormattedCurrency(interestAmount()) }} &#8381;
       </span
       >
     </p>
@@ -62,15 +60,14 @@
       Сумма кредита:
       <span class="black--text"
         >
-        <!-- {{ getFormattedCurrency(totalLoanAmount) }} &#8381; -->
-        0 &#8381;
-        </span
-      >
+        {{ getFormattedCurrency(totalLoanAmount()) }} &#8381;
+        </span>
     </p>
     <p class="grey--text">
       Процентная ставка:
       <span class="black--text">{{ interestRate * 100 }}%</span>
     </p>
+    <LineStep :step="5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary">
       <router-link
         class="auth_form_bth color-white text-decoration-none"
@@ -83,6 +80,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -96,6 +94,7 @@ export default {
   },
   methods: {
     getFormattedCurrency: function (number) {
+      console.log(number);
       if (number) {
         return parseFloat(number).toLocaleString("ru-RU");
       }
@@ -103,12 +102,12 @@ export default {
     interestAmount: function () {
       let loanTerm = this.formData["loanTerm"] * 12 || 24;
       let loanAmount = this.formData["loanAmount"] || 1000000;
-      let result = this.monthlyPayment * loanTerm - loanAmount;
+      let result = this.monthlyPayment() * loanTerm - loanAmount;
       return parseFloat(result).toFixed(2);
     },
     totalLoanAmount: function () {
       let loanAmount = this.formData["loanAmount"] || 1000000;
-      let result = parseFloat(loanAmount) + parseFloat(this.interestAmount);
+      let result = parseFloat(loanAmount) + parseFloat(this.interestAmount());
       return result.toFixed(2);
     },
     monthlyPayment: function () {
@@ -128,10 +127,45 @@ export default {
       return DECLENSIONS[declension];
     },
   },
+  components: {
+    LineStep
+  }
 };
 </script>
 
 <style>
+.v-slider__tick {
+  position: relative;
+}
+.v-slider__tick::after {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: #fff;
+  border: 3px solid #D41367;
+  border-radius: 50%;
+  transform: translate(-25%, -25%);
+}
+.v-slider__track-container {
+  height: 4px !important;
+}
+.v-slider__thumb {
+  width: 20px !important;
+  height: 20px !important;
+}
+.v-slider__thumb::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  border: 4px solid #D41367;
+  border-radius: 50%;
+}
+.v-slider__thumb::before {
+  content: none !important;
+}
 .credit_section_title {
     color: black !important;
     font-family: Roboto;

@@ -27,6 +27,7 @@
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
               placeholder="xx.xx.xxxx"
+              
               id="passportIssueDate"
               name="passportIssueDate"
               outlined
@@ -140,6 +141,7 @@
         </v-btn>
       </div>
     </v-form>
+    <line-step :step='10' />
     <v-btn
       block
       large
@@ -153,6 +155,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
@@ -196,6 +199,9 @@ export default {
       }
     },
   },
+  components: {
+    LineStep,
+  }
 };
 </script>
 

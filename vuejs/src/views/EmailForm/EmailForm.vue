@@ -2,7 +2,7 @@
   <div class="email_section">
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
-        <p class="text-left form_block_title">Адрес фактического проживания</p>
+        <p class="text-left form_block_title">Почтовый адрес</p>
         <v-radio-group v-model="isAddress" mandatory>
           <v-radio
             label="Совпадает с адресом регистации"
@@ -17,18 +17,21 @@
             value="false"
           ></v-radio>
         </v-radio-group>
-        <p class="form_block_title">Адрес фактического проживания</p>
-        <v-text-field
-          id="oldName"
-          v-if="isAddress === 'false'"
-          placeholder="Введите адрес"
-          class="align-center border-none mt-5"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
+        <div v-if="isAddress === 'false'">
+          <p class="form_block_title">Адрес фактического проживания</p>
+          <v-text-field
+            id="oldName"
+            placeholder="Введите адрес"
+            class="align-center border-none mt-5"
+            outlined
+            :rules="requiredRules"
+            :required="true"
+          ></v-text-field>
+        </div>
+        
       </div>
     </v-form>
+    <line-step :step='8' class="mt-5" />
     <v-btn
       block
       large
@@ -41,6 +44,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -57,6 +61,9 @@ export default {
       }
     },
   },
+  components: {
+    LineStep,
+  }
 };
 </script>
 

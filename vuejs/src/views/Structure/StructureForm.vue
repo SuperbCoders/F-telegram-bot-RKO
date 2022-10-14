@@ -33,10 +33,10 @@
         ></v-text-field>
       </div>
       <div class="form_group">
-        <p class="text-left mb-5 form_block_label">
+        <p class="text-left mb-2 form_block_label">
           Наличие наблюдательного совета
         </p>
-        <RadioGroup @isStatus="(status) => isTest1 = status" name="Existence of a supervisory board" />
+        <RadioGroup @isStatus="(status) => (isTest1 = status)" name="Existence of a supervisory board" />
       </div>
       <div v-if="isTest1" class="form_block mt-5">
         <p class="text-left form_block_title">
@@ -45,7 +45,6 @@
         <v-text-field
           id="oldName"
           placeholder="Наименования"
-          v-model="currentData.supervisoryBoard"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -54,7 +53,8 @@
         ></v-text-field>
       </div>
       <div class="form_group">
-        <p class="text-left form_block_label mb-5">
+        <p class="text-left form_block_label mb-2 mt-5">
+
           Наличие коллегиального исполнительного органа
         </p>
         <RadioGroup @isStatus="(status) => isTest2 = status" name="The presence of a collegial executive body" />
@@ -66,7 +66,6 @@
         <v-text-field
           id="oldName"
           placeholder="Наименование"
-          v-model="currentData.collegialBody"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -90,6 +89,7 @@
         ></v-text-field>
       </div>
     </v-form>
+    <line-step :step='2' />
     <v-btn
       block
       large
@@ -103,6 +103,7 @@
 </template>
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
+import LineStep from '../../components/line_step/line_step.vue';
 
 export default {
   data: () => ({
@@ -147,6 +148,7 @@ export default {
   },
   components: {
     RadioGroup,
+    LineStep
   },
 };
 </script>

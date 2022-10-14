@@ -5,7 +5,7 @@
     </h2>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Простой</h2>
+        <h2 class="text-left mb-3 card_content_title">Тариф 1</h2>
         <p class="text-left mb-3 card_content_text">
           Для начинающих предприниматель
         </p>
@@ -21,12 +21,12 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="sendData('Тариф 1')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Простой</h2>
+        <h2 class="text-left mb-3 card_content_title">Тариф 2</h2>
         <p class="text-left mb-3 card_content_text">
           Для начинающих предприниматель
         </p>
@@ -42,12 +42,12 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="sendData('Тариф 2')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Простой</h2>
+        <h2 class="text-left mb-3 card_content_title">Тариф 3</h2>
         <p class="text-left mb-3 card_content_text">
           Для начинающих предприниматель
         </p>
@@ -63,14 +63,32 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="sendData('Тариф 3')"  large>Выбрать</v-btn>
       </div>
     </v-card>
+    <LineStep :step="13" />
   </div>
 </template>
 
 <script>
-export default {};
+import LineStep from '../../components/line_step/line_step.vue';
+export default {
+  components: {
+    LineStep
+  },
+  methods: {
+    sendData(tarif){
+      tarif;
+      const formData = new FormData();
+      formData.append("tariff", tarif);
+      
+      fetch("http://localhost:8000/loan-application/create/", {
+        method: "POST",
+        body: formData,
+      })
+    }
+  },
+};
 </script>
 
 <style>
@@ -87,6 +105,10 @@ export default {};
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.11) !important;
 }
 .card_content_button {
+  cursor: pointer;
+  box-shadow: 0 0 4px #00000030;
+  background: #F3F4F4;
+  border-radius: 6px;
   margin-top: 20px;
   font-family: Roboto;
   font-size: 14px !important;

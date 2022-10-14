@@ -41,7 +41,7 @@ body,
 #base {
   padding: 10px;
   min-height: 0 !important;
-  font-family: Geometria;
+  font-family: Roboto !important;
 }
 .v-application--wrap {
   min-height: 0 !important;
