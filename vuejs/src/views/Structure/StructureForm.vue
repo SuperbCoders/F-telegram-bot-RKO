@@ -110,11 +110,10 @@ export default {
     currentData: {
       leaderList: null,
       DirectorList: null,
-      company: null,
       inn: null,
       supervisoryBoard: true,
       collegialBody: true,
-      naturalPerson: null,
+      individual: null,
     },
     isTest1: true,
     isTest2: true,
