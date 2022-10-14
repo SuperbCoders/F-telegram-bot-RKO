@@ -26,7 +26,8 @@
           class="align-center border-none"
           name="oldName"
           outlined
-          :rules="requiredRules"
+          type="number"
+          :rules="innRules"
         ></v-text-field>
       </div>
       <div class="form_group">
@@ -105,6 +106,13 @@ export default {
     valid: true,
     isTest1: false,
     isTest2: false,
+    innRules: [
+      (v) => !!v || "Это поле обязательно",
+      (v) =>
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
+      (v) =>
+        (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
+    ],
     requiredRules: [(v) => !!v || "Это поле обязательно"]
   }),
 

@@ -7,7 +7,7 @@
         </p>
         <RadioGroup name="foreign_person_section" />
     </div>
-    <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect()">Продолжить
+    <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
   </div>
 </template>
@@ -15,8 +15,13 @@
 <script>
 import RadioGroup from '../../components/radioButton/radioGroup/radioGroup.vue';
 export default {
-    components: { RadioGroup }
-
+    components: { RadioGroup },
+    methods: {
+      redirect () {
+        this.$router.push('/')
+        this.$router.push('/kinship-status-forms')
+      }
+    }
 }
 </script>
 

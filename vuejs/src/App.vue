@@ -40,8 +40,11 @@ html,
 body,
 #base {
   padding: 10px;
-  min-height: 0;
+  min-height: 0 !important;
   font-family: Geometria;
+}
+.v-application--wrap {
+  min-height: 0 !important;
 }
 fieldset{
   border: 1px solid #D6D8DA !important;

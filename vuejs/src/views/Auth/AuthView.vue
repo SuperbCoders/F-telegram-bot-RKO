@@ -25,7 +25,6 @@
           :rules="requiredRules"
           required
           type="email"
-          error-message="true"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
@@ -47,6 +46,7 @@
                       class="text-decoration-none text-left"
                       href="https://vuetifyjs.com"
                       v-on="on"
+                      @click.stop
                     >
                       резервирного счета,
                     </a>
@@ -58,6 +58,7 @@
                   class="text-decoration-none"
                   href="https://vuetifyjs.com"
                   v-on="on"
+                  @click.stop
                 >
                   обработки и хранения персональных данных
                 </a>
@@ -87,8 +88,10 @@ export default {
     name: "",
     innRules: [
       (v) => !!v || "Это поле обязательно",
-      (v) => (v && v.length >= 10)  || "ИНН не может содержать меньше 10 симоволов",
-      (v) => (v && v.length <= 12 ) || "ИНН не может содержать больше 12 симоволов",
+      (v) =>
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
+      (v) =>
+        (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
     ],
     email: "",
     requiredRules: [(v) => !!v || "Это поле обязательно"],

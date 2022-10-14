@@ -11,7 +11,6 @@
       <v-checkbox v-model="test" label="Бенефированый владелец" value="Бенефированый владелец" hide-details>
       </v-checkbox>
       <v-checkbox v-model="test" label="Подписант" value="red" hide-details></v-checkbox>
-      <!-- <p>Заполните поле</p> -->
       <p v-if="!valid && test.length < 1" class="error_message">Выберите пункт</p>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">Фамилия</p>
@@ -27,7 +26,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Отчество (при наличии)</p>
         <v-text-field id="oldName" placeholder="Напишите адрес" class="align-center border-none" outlined
-          :rules="requiredRules" :required="true"></v-text-field>
+         :required="true"></v-text-field>
       </div>
       <v-radio-group v-model="isAddress" mandatory>
         <v-radio  label="Мужской" value="Мужской"></v-radio>
@@ -54,7 +53,7 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$router.push("/address");
+        this.$router.push("/documents-forms");
       }
     },
   },
