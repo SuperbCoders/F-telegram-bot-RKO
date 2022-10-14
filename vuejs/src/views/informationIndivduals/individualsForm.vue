@@ -29,6 +29,11 @@
         <v-text-field id="oldName" placeholder="Напишите адрес" class="align-center border-none" outlined
           :rules="requiredRules" :required="true"></v-text-field>
       </div>
+      <v-radio-group v-model="isAddress" mandatory>
+        <v-radio  label="Мужской" value="Мужской"></v-radio>
+        <v-radio  label="Женский" value="Женский">
+        </v-radio>
+      </v-radio-group>
     </v-form>
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>

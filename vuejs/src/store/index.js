@@ -30,12 +30,29 @@ export default new Vuex.Store({
         id: 5,
         title: 'Общее собрание акционеров (несколько акционеров'
       },
+    ],
+    leaderType: [
+      {
+        id: 1,
+        title: 'Руководитель'
+      },
+      {
+        id: 2,
+        title: 'Управляющая компания'
+      }
     ]
   },
   getters: {
     isList (state) {
       const result = []
       state.leaderList.map((item) => {
+        result.push(item.title)
+      })
+      return result
+    },
+    isLeaderType (state) {
+      const result = []
+      state.leaderType.map((item) => {
         result.push(item.title)
       })
       return result

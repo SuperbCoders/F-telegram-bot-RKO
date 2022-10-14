@@ -4,24 +4,25 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mb-5">
         <v-checkbox
-          v-model="ex4"
+          v-model="checkboxList"
           label="Юридический"
           value="red"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="ex4"
+          v-model="checkboxList"
           label="Фактический"
           value="Фактический"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="ex4"
+          v-model="checkboxList"
           label="Почтовый"
           value="Почтовый"
           hide-details
         ></v-checkbox>
       </div>
+      <p class="error_message" v-if="!valid && checkboxList.length < 1">Выберите пункт</p>
       <div
         v-for="(itemForm, index) in groupList"
         :key="index"
@@ -121,6 +122,7 @@ export default {
         inn: null,
         ogrn: null,
       },
+      checkboxList: [],
       valid: true,
       innRules: [
         (v) => !!v || "Это поле обязательно",
@@ -136,8 +138,8 @@ export default {
     validate() {
       this.$refs.form.validate();
 
-      if (this.$refs.form.validate()) {
-        this.$router.push("/credit-page");
+      if (this.$refs.form.validate() && this.checkboxList.length > 0) {
+        this.$router.push("/sctructure");
       }
     },
     addGroupList() {
@@ -158,6 +160,13 @@ export default {
   border-radius: 8px;
 }
 .form_block {
+}
+.error_message {
+  color: red;
+  font-family: Roboto;
+  margin-left: 10px;
+  margin-top: 10px;
+  font-size: 12px !important;
 }
 .add_form {
   padding: 25px 15px !important;
