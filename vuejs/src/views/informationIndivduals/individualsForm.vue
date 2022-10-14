@@ -27,7 +27,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Отчество (при наличии)</p>
         <v-text-field id="oldName" placeholder="Напишите адрес" class="align-center border-none" outlined
-          :rules="requiredRules" :required="true"></v-text-field>
+         :required="true"></v-text-field>
       </div>
       <v-radio-group v-model="isAddress" mandatory>
         <v-radio  label="Мужской" value="Мужской"></v-radio>
