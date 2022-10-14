@@ -80,7 +80,9 @@ export default {
     sendData(tarif){
       tarif;
       const formData = new FormData();
-      fetch("http://django/loan-application/create/", {
+      formData.append("tariff", tarif);
+      
+      fetch("http://localhost:8000/loan-application/create/", {
         method: "POST",
         body: formData,
       })
