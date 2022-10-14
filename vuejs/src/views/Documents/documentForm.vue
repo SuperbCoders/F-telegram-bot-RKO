@@ -2,19 +2,16 @@
   <div class="document_section">
     <h2 class="text-left mb-10 ">Документы</h2>
     <p class="subtitle text-left document_section_text mb-5">
-      Сведения о лицензии на право осуществления деятельности
+      Загрузить первую страницу паспорта
     </p>
 
     <div v-if="files" class="list_file">
       <div v-for="(file, index) in files" :key="index" class="block_file">
         <div class="card_file">
-          <div class="type_file">PDF</div>
-          <div class="size_file">12 Мб</div>
+          <div class="type_file">{{ getType(file.type) }}</div>
+          <div class="size_file">{{ getSize(file.size) }} Мб</div>
         </div>
-        <div class="name_file">Test</div>
-        <!-- {{ file.name }}
-        {{ file.type }}
-        {{ file.size }} -->
+        <div class="name_file">{{ file.name }}</div>
       </div>
     </div>
 
@@ -42,6 +39,17 @@ export default {
     onfile(files) {
       console.log(files);
       this.files = files;
+    },
+    getType(type) {
+      type = type.split('/')[1];
+      return type;
+    },
+    getSize(size) {
+      size = ""+size;
+      return size[0] + size[1];
+    },
+    getName(name) {
+      return name;
     }
   },
   components: { AttachButton, LineStep }
@@ -67,11 +75,16 @@ export default {
   font-weight: bold;
   color: #D41367;
   text-align: center;
+  text-transform: uppercase;
 }
 .name_file {
   margin-top: 5px;
   margin-bottom: 10px;
   font-size: 12px;
+  width: 60px;
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .document_section_text {
     font-family: Roboto;

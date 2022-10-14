@@ -107,6 +107,13 @@ export default {
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
   }),
 
+  mounted(){
+    const phone = this.$route.query?.phone;
+    if(phone){
+      console.log();
+    }
+  },
+
   methods: {
     validate() {
       this.$refs.form.validate();
