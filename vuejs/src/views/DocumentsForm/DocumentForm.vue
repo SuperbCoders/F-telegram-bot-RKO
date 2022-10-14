@@ -3,32 +3,32 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">ИНН</p>
-        <v-text-field id="oldName" placeholder="Введите ИНН" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.inn" placeholder="Введите ИНН" class="align-center border-none" outlined
           :rules="requiredRules" :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">СНИЛС (при наличии)</p>
-        <v-text-field id="oldName" placeholder="Введите ИНН" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.snils" placeholder="Введите ИНН" class="align-center border-none" outlined
          :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Гражданство</p>
         <v-text-field id="oldName" placeholder="Введите ИНН" class="align-center border-none" outlined
-          :rules="requiredRules" :required="true">
+          :rules="requiredRules" v-model="currentData.citizenship" :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Телефон</p>
         <v-text-field id="oldName" placeholder="Введите ИНН" class="align-center border-none" outlined
-          :rules="requiredRules" :required="true">
+          :rules="requiredRules" v-model="currentData.phone" :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Доля владения</p>
         <v-text-field id="oldName" placeholder="Введите текст" class="align-center border-none" outlined
-          :rules="requiredRules" :required="true">
+          :rules="requiredRules" v-model="currentData.ownershipShare" :required="true">
         </v-text-field>
       </div>
       <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
@@ -42,6 +42,13 @@ export default {
   data() {
     return {
       valid: true,
+      currentData: {
+        inn: null,
+        snils: null,
+        citizenship: null,
+        phone: null,
+        ownershipShare: null
+      },
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     }
   },
@@ -49,6 +56,7 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/foreign-person");
       }
     },
