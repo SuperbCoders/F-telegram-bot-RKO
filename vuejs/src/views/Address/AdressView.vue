@@ -43,13 +43,14 @@
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">Основание</p>
-          <v-combobox
+          <v-select
             filled
             outlined
             v-model="itemForm.footing"
             :rules="requiredRules"
             placeholder="Выберите основание"
-          ></v-combobox>
+            :items="base"
+          ></v-select>
         </div>
         <!-- <div class="form_block">
         <p class="text-left form_block_title">ИНН</p>
@@ -115,6 +116,7 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
+      base: ["Аренда"],
       groupList: [
         {
           name: null,

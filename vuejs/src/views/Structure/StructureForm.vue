@@ -45,7 +45,6 @@
         <v-text-field
           id="oldName"
           placeholder="Наименования"
-          v-model="currentData.supervisoryBoard"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -67,7 +66,6 @@
         <v-text-field
           id="oldName"
           placeholder="Наименование"
-          v-model="currentData.collegialBody"
           class="align-center border-none"
           name="oldName"
           outlined
