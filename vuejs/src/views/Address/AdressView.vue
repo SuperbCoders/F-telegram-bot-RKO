@@ -4,25 +4,25 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mb-5">
         <v-checkbox
-          v-model="currentData.typeAddress"
+          v-model="currentData.legal_address"
           label="Юридический"
-          value="red"
+          value="Юридический"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="currentData.typeAddress"
+          v-model="currentData.physic_address"
           label="Фактический"
           value="Фактический"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="currentData.typeAddress"
+          v-model="currentData.mail_address"
           label="Почтовый"
           value="Почтовый"
           hide-details
         ></v-checkbox>
       </div>
-      <p class="error_message" v-if="!valid && currentData.typeAddress.length < 1">
+      <p class="error_message" v-if="!valid && currentData.legal_address != false">
         Выберите пункт
       </p>
       <div
@@ -36,7 +36,7 @@
             id="oldName"
             placeholder="Напишите адрес"
             class="align-center border-none"
-            v-model="itemForm.Address"
+            v-model="itemForm.physic_address"
             name="oldName"
             outlined
             :rules="requiredRules"
@@ -48,7 +48,7 @@
           <v-select
             filled
             outlined
-            v-model="itemForm.footing"
+            v-model="itemForm.mail_address"
             :rules="requiredRules"
             placeholder="Выберите основание"
             :items="base"
@@ -127,15 +127,17 @@ export default {
         },
       ],
       defaultGroupItem: {
-        footing: null,
-        Address: null,
+        physic_address: null,
+        mail_address: null,
       },
       currentData: {
-        typeAddress: [],
+        legal_address: false,
+        physic_address: false,
+        mail_address: false,
         groupList: [
           {
-            footing: null,
-            Address: null,
+            physic_address: null,
+            mail_address: null,
           },
         ],
       },
@@ -157,7 +159,7 @@ export default {
 
       if (
         this.$refs.form.validate() &&
-        this.currentData.typeAddress.length > 0
+        this.currentData.legal_address.length > 0
       ) {
         this.$router.push("/sctructure");
         this.$store.commit("addItemFormData", this.currentData);
@@ -165,8 +167,8 @@ export default {
     },
     addGroupList() {
       const defaultGroupItem = {
-        footing: null,
-        Address: null,
+        physic_address: null,
+        mail_address: null,
       }
       this.currentData.groupList.push(defaultGroupItem);
     },

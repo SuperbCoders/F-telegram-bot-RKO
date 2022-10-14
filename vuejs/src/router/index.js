@@ -22,6 +22,8 @@ import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.
 import Beneficiaries from '../views/Beneficiaries/BeneficiariesForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
 import Purposes from '../views/Purposes/PurposesForm.vue'
+import AllData from '../views/AllData/AllData.vue'
+import Already from '../views/Already/Already.vue'
 Vue.use(VueRouter);
 
 const routes = [
@@ -129,6 +131,16 @@ const routes = [
     path: "/foreign-person",
     name: "foreign-person",
     component: ForeignPerson
+  },
+  {
+    path: "/all-data",
+    name: "all-data",
+    component: AllData
+  },
+  {
+    path: "/already",
+    name: "already",
+    component: Already
   },
   {
     path: "/rate",

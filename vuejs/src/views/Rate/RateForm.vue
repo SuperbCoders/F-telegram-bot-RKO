@@ -21,7 +21,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" @click="sendData('Тариф 1')" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -42,7 +42,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" @click="sendData('Тариф 2')" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -63,7 +63,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" @click="sendData('Тариф 3')"  large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 3')"  large>Выбрать</v-btn>
       </div>
     </v-card>
     <LineStep :step="13" />
@@ -76,17 +76,17 @@ export default {
   components: {
     LineStep
   },
-  methods: {
-    sendData(tarif){
-      tarif;
-      const formData = new FormData();
-      formData.append("tariff", tarif);
-      
-      fetch("http://localhost:8000/loan-application/create/", {
-        method: "POST",
-        body: formData,
-      })
+  data(){
+    return {
+      tarif: '',
     }
+  },
+  methods: {
+    setTarif(tarif){
+      this.tarif = tarif;
+      this.$store.commit('addItemFormData', {'tarif': tarif})
+      this.$router.push('/all-data')
+    },
   },
 };
 </script>

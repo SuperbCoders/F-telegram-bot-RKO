@@ -5,7 +5,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Выберите из списка</p>
         <v-combobox
-          v-model="currentData.leaderList"
+          v-model="currentData.supreme_management_body"
           filled
           :rules="requiredRules"
           required
@@ -14,16 +14,21 @@
           placeholder="Выберите из списка"
         ></v-combobox>
       </div>
-      <default-input />
       <div class="form_block">
         <p class="text-left form_block_title">Руководитель</p>
-        <v-combobox filled v-model="currentData.DirectorList" :items="isLeaderType" outlined :rules="requiredRules" placeholder="Тип"></v-combobox>
+        <v-combobox 
+          filled 
+          v-model="currentData.supreme_management_type" 
+          :items="isLeaderType" outlined 
+          :rules="requiredRules" 
+          placeholder="Тип"
+        ></v-combobox>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">ИНН</p>
         <v-text-field
           id="oldName"
-          v-model="currentData.inn"
+          v-model="currentData.supreme_management_inn"
           placeholder="Введите ИНН или название компании"
           class="align-center border-none"
           name="oldName"
@@ -47,6 +52,7 @@
           placeholder="Наименования"
           class="align-center border-none"
           name="oldName"
+          v-model="currentData.collegiate_body"
           outlined
           :rules="requiredRules"
           :required="true"
@@ -69,6 +75,7 @@
           class="align-center border-none"
           name="oldName"
           outlined
+          v-model="currentData.collegiate_person"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -80,7 +87,7 @@
         <v-text-field
           id="oldName"
           placeholder="Укажите Физ лицо"
-          v-model="currentData.individual"
+          v-model="currentData.collegiate_person_fio"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -109,12 +116,12 @@ export default {
   data: () => ({
     valid: true,
     currentData: {
-      leaderList: null,
-      DirectorList: null,
-      inn: null,
-      supervisoryBoard: null,
-      collegialBody: null,
-      individual: null,
+      supreme_management_body: null,
+      supreme_management_type: null,
+      supreme_management_inn: null,
+      collegiate_body: null,
+      collegiate_person: null,
+      collegiate_person_fio: null,
     },
     isTest1: true,
     isTest2: true,

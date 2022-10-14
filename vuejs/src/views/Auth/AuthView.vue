@@ -25,7 +25,7 @@
         <v-text-field
           label="Наименования компании"
           outlined
-          v-model="currentData.companyName"
+          v-model="currentData.company_name"
           :rules="requiredRules"
           required
           type="email"
@@ -34,7 +34,7 @@
         <v-text-field
           label="Контактный номер телефона"
           outlined
-          v-model="currentData.phone"
+          v-model="currentData.contact_number"
           :rules="requiredRules"
           :required="true"
           v-mask="'+# (###) ### ## ##'"
@@ -95,13 +95,11 @@ export default {
   data: () => ({
     currentData: {
       inn: null,
-      companyName: null,
-      phone: null
+      company_name: null,
+      contact_number: null
     },
     valid: true,
     name: "",
-    phone_number: "",
-    name_company: "",
     maskPhone: {
 
     },
@@ -129,7 +127,7 @@ export default {
   mounted(){
     const phone = this.$route.query?.phone;
     if(phone){
-      this.currentData.phone = phone;
+      this.currentData.contact_number = phone;
     }
   },
 
@@ -148,8 +146,7 @@ export default {
         const company = await getCompany(inn);
         if(company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
-          this.name_company = company?.suggestions[0].value
-          this.currentData.companyName = company?.suggestions[0].value;
+          this.currentData.company_name = company?.suggestions[0].value;
         }
       }
     },
