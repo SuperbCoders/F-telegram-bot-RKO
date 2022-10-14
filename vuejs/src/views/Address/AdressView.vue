@@ -119,7 +119,6 @@
 </template>
 
 <script>
-import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
 import LineStep from '../../components/line_step/line_step.vue';
 
 export default {
@@ -166,7 +165,7 @@ export default {
       }
     },
   },
-  components: { RadioGroup, LineStep },
+  components: { LineStep },
 
 };
 </script>

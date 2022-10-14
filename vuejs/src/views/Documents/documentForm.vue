@@ -21,7 +21,7 @@
 import AttachButton from '../../components/button/attachButton.vue';
 import LineStep from '../../components/line_step/line_step.vue';
 
-export default { components: { AttachButton, PhotoButton, LineStep } };
+export default { components: { AttachButton, LineStep } };
 
 </script>
 
