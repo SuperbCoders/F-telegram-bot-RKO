@@ -9,8 +9,6 @@
           :name="name"
           value="false"
           v-model="status"
-          @checked="updateStatus(true)"
-          @change="updateStatus(true)"
           checked
         />
         <label
@@ -32,7 +30,6 @@
           >Нет</label
         >
       </div>
-
     </div>
   </div>
 </template>
@@ -50,6 +47,9 @@ export default {
       console.log('wgwehawe')
       this.$emit('isStatus', this.status)
     }
+  },
+  mounted () {
+    this.updateStatus(true)
   },
   props: {
     name: {

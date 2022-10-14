@@ -8,6 +8,7 @@
           filled
           :rules="requiredRules"
           required
+          :items="isLeaderList"
           outlined
           placeholder="Выберите из списка"
         ></v-combobox>
@@ -15,7 +16,7 @@
       <default-input />
       <div class="form_block">
         <p class="text-left form_block_title">Руководитель</p>
-        <v-combobox filled outlined placeholder="Тип"></v-combobox>
+        <v-combobox filled :items="isLeaderType" outlined :rules="requiredRules" placeholder="Тип"></v-combobox>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">ИНН</p>
@@ -26,16 +27,15 @@
           name="oldName"
           outlined
           :rules="requiredRules"
-          :required="true"
         ></v-text-field>
       </div>
       <div class="form_group">
         <p class="text-left mb-5 form_block_label">
           Наличие наблюдательного совета
         </p>
-        <RadioGroup name="Existence of a supervisory board" />
+        <RadioGroup @isStatus="(status) => isTest1 = status" name="Existence of a supervisory board" />
       </div>
-      <div class="form_block mt-5">
+      <div v-if="!isTest1" class="form_block mt-5">
         <p class="text-left form_block_title">
           Наименования наблюдательного совета
         </p>
@@ -53,9 +53,9 @@
         <p class="text-left form_block_title mb-5">
           Наличие коллегиального исполнительного органа
         </p>
-        <RadioGroup name="The presence of a collegial executive body" />
+        <RadioGroup @isStatus="(status) => isTest2 = status" name="The presence of a collegial executive body" />
       </div>
-      <div class="form_block mt-5">
+      <div v-if="!isTest2" class="form_block mt-5">
         <p class="text-left form_block_title">
           Наименование коллегиального исполнительног органа
         </p>
@@ -103,6 +103,8 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
+    isTest1: false,
+    isTest2: false,
     requiredRules: [(v) => !!v || "Это поле обязательно"]
   }),
 
@@ -111,9 +113,17 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.$router.push("/information-staff");
+        this.$router.push("/individual-info");
       }
     },
+  },
+  computed: {
+    isLeaderList () {
+      return this.$store.getters.isList
+    },
+    isLeaderType () {
+      return this.$store.getters.isLeaderType
+    }
   },
   components: {
     RadioGroup,
