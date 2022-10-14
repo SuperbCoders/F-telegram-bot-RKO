@@ -66,7 +66,7 @@
         <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
       </div>
     </v-card>
-    <LineStep :step="11" />
+    <LineStep :step="13" />
   </div>
 </template>
 
