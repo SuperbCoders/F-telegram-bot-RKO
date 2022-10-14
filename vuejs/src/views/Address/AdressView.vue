@@ -22,7 +22,9 @@
           hide-details
         ></v-checkbox>
       </div>
-      <p class="error_message" v-if="!valid && checkboxList.length < 1">Выберите пункт</p>
+      <p class="error_message" v-if="!valid && checkboxList.length < 1">
+        Выберите пункт
+      </p>
       <div
         v-for="(itemForm, index) in currentData.groupList"
         :key="index"
@@ -30,6 +32,7 @@
       >
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
+          {{ itemForm }}
           <v-text-field
             id="oldName"
             placeholder="Напишите адрес"
@@ -111,26 +114,18 @@
 export default {
   data() {
     return {
-      groupList: [
-        {
-          name: null,
-          inn: null,
-          ogrn: null,
-        },
-      ],
       defaultGroupItem: {
-        name: null,
-        inn: null,
-        ogrn: null,
+        footing: null,
+        Address: null,
       },
       currentData: {
         typeAddress: [],
         groupList: [
-        {
-          footing: null,
-          Address: null,
-        },
-        ]
+          {
+            footing: null,
+            Address: null,
+          },
+        ],
       },
       checkboxList: [],
       valid: true,
@@ -148,13 +143,20 @@ export default {
     validate() {
       this.$refs.form.validate();
 
-      if (this.$refs.form.validate() && this.currentData.typeAddress.length > 0) {
+      if (
+        this.$refs.form.validate() &&
+        this.currentData.typeAddress.length > 0
+      ) {
         this.$router.push("/sctructure");
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.commit("addItemFormData", this.currentData);
       }
     },
     addGroupList() {
-      this.currentData.groupList.push(this.defaultGroupItem);
+      const defaultGroupItem = {
+        footing: null,
+        Address: null,
+      }
+      this.currentData.groupList.push(defaultGroupItem);
     },
     deleteGroupList() {
       if (this.currentData.groupList.length > 1) {
