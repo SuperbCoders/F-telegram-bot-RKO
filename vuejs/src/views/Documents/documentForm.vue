@@ -1,6 +1,5 @@
 <template>
   <div class="document_section">
-    <h2 class="text-left mb-10 ">Документы</h2>
     <p class="subtitle text-left document_section_text mb-5">
       Загрузить первую страницу паспорта
     </p>
@@ -17,7 +16,7 @@
 
     <AttachButton class="mb-5 " text="Загрузить документ" @file="onfile" />
 
-    <LineStep :step="6" class="mt-5" />
+    <LineStep :step="9" class="mt-5" />
 
     <v-btn block large class="mt-10 auth_form_bth" color="primary">
       <router-link class="auth_form_bth color-white text-decoration-none" to="/client-info"> Продолжить </router-link>

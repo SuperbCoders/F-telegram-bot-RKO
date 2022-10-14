@@ -34,12 +34,14 @@
         </v-radio>
       </v-radio-group>
     </v-form>
+    <line-step :step='3' />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
@@ -56,6 +58,9 @@ export default {
         this.$router.push("/documents-forms");
       }
     },
+  },
+  components: {
+    LineStep
   },
 };
 </script>

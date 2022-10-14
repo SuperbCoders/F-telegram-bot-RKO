@@ -24,6 +24,7 @@
           outlined
           :rules="requiredRules"
           required
+          v-model="name_company"
           type="email"
           class="mt-1 auth_form"
         ></v-text-field>
@@ -32,6 +33,7 @@
           outlined
           :rules="requiredRules"
           :required="true"
+          v-model="phone_number"
           class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
@@ -86,6 +88,8 @@ export default {
   data: () => ({
     valid: true,
     name: "",
+    phone_number: "",
+    name_company: "",
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -110,7 +114,7 @@ export default {
   mounted(){
     const phone = this.$route.query?.phone;
     if(phone){
-      console.log(phone);
+      this.phone_number = phone;
     }
   },
 
@@ -128,6 +132,7 @@ export default {
         const company = await getCompany(inn);
         if(company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
+          this.name_company = company?.suggestions[0].value
           console.log(this.$store.state.dataCompany);
         }
       }

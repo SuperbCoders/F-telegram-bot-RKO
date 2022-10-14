@@ -31,10 +31,10 @@
         ></v-text-field>
       </div>
       <div class="form_group">
-        <p class="text-left mb-5 form_block_label">
+        <p class="text-left mb-2 form_block_label">
           Наличие наблюдательного совета
         </p>
-        <RadioGroup @isStatus="(status) => isTest1 = status" name="Existence of a supervisory board" />
+        <RadioGroup @isStatus="(status) => (isTest1 = status)" name="Existence of a supervisory board" />
       </div>
       <div v-if="!isTest1" class="form_block mt-5">
         <p class="text-left form_block_title">
@@ -51,7 +51,7 @@
         ></v-text-field>
       </div>
       <div class="form_group">
-        <p class="text-left form_block_title mb-5">
+        <p class="text-left form_block_label mb-2 mt-5">
           Наличие коллегиального исполнительного органа
         </p>
         <RadioGroup @isStatus="(status) => isTest2 = status" name="The presence of a collegial executive body" />
@@ -104,8 +104,8 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
-    isTest1: false,
-    isTest2: false,
+    isTest1: true,
+    isTest2: true,
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>

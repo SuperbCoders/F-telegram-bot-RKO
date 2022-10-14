@@ -6,13 +6,15 @@
         Степень родства либо статус (супруг или супруга) по отношению к
         публичному должностному лицу
       </p>
-      <v-combobox
-        filled
-        :rules="requiredRules"
-        required
-        outlined
-        placeholder="Выберите из списка"
-      ></v-combobox>
+      <v-select
+          :items="relationDegree"
+          label="Standard"
+          filled
+          :rules="requiredRules"
+          required
+          outlined
+          placeholder="Выберите из списка"
+        ></v-select>
       <div class="form_block">
         <p class="text-left form_block_title">Адрес регистрации</p>
         <v-text-field
@@ -37,6 +39,7 @@
       </div>
     </div>
     </v-form>
+    <line-step :step='6' class="mt-5" />
     <v-btn
       block
       large
@@ -50,6 +53,8 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
+
 export default {
   data: () => ({
     valid: true,
@@ -57,6 +62,10 @@ export default {
     dateStarting: null,
     dateEnd: null,
     test: [],
+    relationDegree: [
+      "Супруг",
+      "Супруга"
+    ],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
   methods: {
@@ -67,6 +76,7 @@ export default {
       }
     },
   },
+  components: { LineStep },
 };
 </script>
 
