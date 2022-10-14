@@ -14,6 +14,7 @@
           label="Введите ИНН"
           outlined
           type="text"
+          v-model="currentData.inn"
           :rules="innRules"
           v-mask="'############'"
           masked="true"
@@ -24,18 +25,18 @@
         <v-text-field
           label="Наименования компании"
           outlined
+          v-model="currentData.companyName"
           :rules="requiredRules"
           required
-          v-model="name_company"
           type="email"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
           label="Контактный номер телефона"
           outlined
+          v-model="currentData.phone"
           :rules="requiredRules"
           :required="true"
-          v-model="phone_number"
           v-mask="'+# (###) ### ## ##'"
           masked="true"
           class="mt-1 auth_form"
@@ -92,6 +93,11 @@ import { mask } from "vue-the-mask";
 export default {
   directives: { mask },
   data: () => ({
+    currentData: {
+      inn: null,
+      companyName: null,
+      phone: null
+    },
     valid: true,
     name: "",
     phone_number: "",
@@ -123,7 +129,7 @@ export default {
   mounted(){
     const phone = this.$route.query?.phone;
     if(phone){
-      this.phone_number = phone;
+      this.currentData.phone = phone;
     }
   },
 
@@ -132,6 +138,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/address");
       }
     },
@@ -142,11 +149,13 @@ export default {
         if(company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
           this.name_company = company?.suggestions[0].value
-          console.log(this.$store.state.dataCompany);
+          this.currentData.companyName = company?.suggestions[0].value;
         }
       }
     },
   },
+  computed: {
+  }
 };
 </script>
 <style scoped>

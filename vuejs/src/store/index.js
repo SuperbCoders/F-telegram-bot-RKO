@@ -10,6 +10,7 @@ export default new Vuex.Store({
     user: null,
     data: null,
     isForegin: false,
+    formData: [],
     leaderList: [
       {
         id: 1,
@@ -58,7 +59,7 @@ export default new Vuex.Store({
         result.push(item.title)
       })
       return result
-    }
+    },
   },
   mutations: {
     toggleDrawer(state, value) {
@@ -69,6 +70,9 @@ export default new Vuex.Store({
     },
     isForeginStatus(state, status) {
       state.isForegin = status
+    },
+    addItemFormData (state, item) {
+      state.formData.push(item)
     }
   },
   actions: {
