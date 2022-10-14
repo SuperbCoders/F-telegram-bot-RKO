@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn large class="w-100 block attach_button" block>
+    <v-btn large class="w-100 block attach_button" @click="clickFile">
       <v-icon class="attach_button_" color="grey darken-1">
         mdi-attachment
       </v-icon>
@@ -8,7 +8,7 @@
         {{ text }}
       </span>
     </v-btn>
-    <input class="attach_upload_input" @click="udpateFile" value="" :placeholder="eaaggn" type="file">
+    <input class="attach_upload_input" ref="input_file" @change="uploadFile" type="file" style="display: none">
   </div>
 </template>
 
@@ -17,11 +17,20 @@ export default {
   props: {
     text: String,
   },
-  methods: {
-    udpateFile () {
-      const fileList = document.querySelector('attach_upload_input')
-      console.log(fileList)
+  data(){
+    return {
     }
+  },
+  methods: {
+    clickFile () {
+      this.$refs.input_file.click();
+    },
+    uploadFile(event) {
+      const input = event.target;
+      const file = input.files;
+      this.$emit("file", file);
+    }
+
   }
 };
 </script>
@@ -33,7 +42,6 @@ export default {
   color: #5B656D !important;
 }
 .attach_upload_input {
-  width: 100%;
   height: 50px;
   font-weight: 500;
   display: flex;

@@ -120,14 +120,8 @@ export default {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
           console.log(this.$store.state.dataCompany);
         }
-        
       }
-      
     },
-
-    apiGetCompany() {
-      getCompany(451002475100);
-    }
   },
 };
 </script>
