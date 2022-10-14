@@ -5,7 +5,7 @@
             Является ли лицо иностранно публичным должностным лицом либо лицом, связанным с таком родственным
             партнеским или иными отношениями
         </p>
-        <RadioGroup @isStatus="(status) => currentData = status " name="foreign_person_section" />
+        <RadioGroup @isStatus="(status) => currentData.foreign = status " name="foreign_person_section" />
     </div>
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
@@ -18,7 +18,7 @@ export default {
     data () {
       return {
         currentData: {
-          Foreign: null
+          foreign: null
         },
       }
     },
