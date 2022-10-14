@@ -26,6 +26,7 @@
           class="align-center border-none"
           name="oldName"
           outlined
+          type="number"
           :rules="innRules"
         ></v-text-field>
       </div>
