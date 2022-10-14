@@ -45,12 +45,13 @@
         <p class="text-left form_block_title">
           Тип документа удостоверяющего личность
         </p>
-        <v-combobox
+        <v-select
           filled
           outlined
           :rules="requiredRules"
           placeholder="Выберите тип"
-        ></v-combobox>
+          :items="type_document"
+        ></v-select>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
@@ -180,6 +181,7 @@ export default {
     dateEnd: null,
     test: [],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
+    type_document: ["Паспорт"],
   }),
   methods: {
     validate() {
