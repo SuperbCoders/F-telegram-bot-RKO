@@ -101,6 +101,13 @@ class LoanRequest(models.Model):
     date_issue = models.DateField()
     validity = models.DateField()
     
+    foreign_doc_type = models.CharField(max_length=MAX_STRING_LENGTH)
+    foreign_doc_serial = models.CharField(max_length=MAX_STRING_LENGTH)
+    foreign_doc_number = models.CharField(max_length=MAX_STRING_LENGTH)
+    foreign_start = models.DateField()
+    foreign_end = models.DateField()
+
+
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH)
     licence_issued_by = models.CharField(max_length=MAX_STRING_LENGTH)
