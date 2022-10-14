@@ -40,7 +40,7 @@ urlpatterns = [
         LoanApplicationListAPIView.as_view()
     ),
     path(
-        "user/<str:telegram_phone>/",
+        "user/<str:telegram_chat_id>/",
         UserAPIView.as_view(),
     ),
     path('adminpage/', admin.site.urls),
