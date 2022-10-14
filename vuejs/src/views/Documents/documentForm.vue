@@ -18,8 +18,14 @@
 
     <LineStep :step="9" class="mt-5" />
 
-    <v-btn block large class="mt-10 auth_form_bth" color="primary">
-      <router-link class="auth_form_bth color-white text-decoration-none" to="/client-info"> Продолжить </router-link>
+    <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="redirect()"
+      >Продолжить
     </v-btn>
   </div>
 </template>
@@ -49,10 +55,14 @@ export default {
     },
     getName(name) {
       return name;
+    },
+    redirect () {
+      this.$router.push('/client-info')
     }
   },
   components: { AttachButton, LineStep }
 };
+
 
 </script>
 
@@ -86,7 +96,7 @@ export default {
   text-overflow: ellipsis;
 }
 .document_section_text {
-    font-family: Roboto;
-    font-size: 18px;
+  font-family: Roboto;
+  font-size: 18px;
 }
 </style>
