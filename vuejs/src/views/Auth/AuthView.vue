@@ -24,7 +24,6 @@
           :rules="requiredRules"
           required
           type="email"
-          error-message="true"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
@@ -36,33 +35,32 @@
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
           <v-checkbox :rules="requiredRules">
-            <template v-slot:label>
-              <div class="text-left auth_form_link_container">
-                <span>Я ознакомился и согласен с условиями</span>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <a
-                      target="_blank"
-                      class="text-decoration-none text-left"
-                      href="https://vuetifyjs.com"
-                      v-on="on"
-                    >
-                      резервирного счета,
-                    </a>
-                  </template>
-                </v-tooltip>
-                а также с условиями
+            <template v-slot:label> </template>
+          </v-checkbox>
+          <div class="text-left auth_form_link_container">
+            <span>Я ознакомился и согласен с условиями</span>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
                 <a
                   target="_blank"
-                  class="text-decoration-none"
+                  class="text-decoration-none text-left"
                   href="https://vuetifyjs.com"
                   v-on="on"
                 >
-                  обработки и хранения персональных данных
+                  резервирного счета,
                 </a>
-              </div>
-            </template>
-          </v-checkbox>
+              </template>
+            </v-tooltip>
+            а также с условиями
+            <a
+              target="_blank"
+              class="text-decoration-none"
+              href="https://vuetifyjs.com"
+              v-on="on"
+            >
+              обработки и хранения персональных данных
+            </a>
+          </div>
         </div>
         <v-btn
           block
@@ -85,8 +83,10 @@ export default {
     name: "",
     innRules: [
       (v) => !!v || "Это поле обязательно",
-      (v) => (v && v.length >= 10)  || "ИНН не может содержать меньше 10 симоволов",
-      (v) => (v && v.length <= 12 ) || "ИНН не может содержать больше 12 симоволов",
+      (v) =>
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
+      (v) =>
+        (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
     ],
     email: "",
     requiredRules: [(v) => !!v || "Это поле обязательно"],
