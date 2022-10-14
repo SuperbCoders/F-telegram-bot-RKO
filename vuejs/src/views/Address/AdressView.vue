@@ -22,7 +22,7 @@
           hide-details
         ></v-checkbox>
       </div>
-      <p class="error_message" v-if="!valid && checkboxList.length < 1">
+      <p class="error_message" v-if="!valid && currentData.typeAddress.length < 1">
         Выберите пункт
       </p>
       <div
