@@ -26,10 +26,8 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             "supreme_management_body",
             "supreme_management_type",
             "supreme_management_inn",
-            "supervisor",
             "supervisory",
             "collegiate_body",
-            "collegiate_person",
             "collegiate_person_fio",
 
             "account_onw_role",

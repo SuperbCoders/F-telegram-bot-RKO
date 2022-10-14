@@ -8,7 +8,9 @@ import string
 from telegram.ext import (
     ApplicationBuilder,
     CommandHandler,
-    TypeHandler
+    TypeHandler,
+    filters,
+    MessageHandler,
 )
 
 from telegram import (
@@ -34,6 +36,23 @@ def is_chat_id_confirmed(chat_id):
             return True
     except Exception as error:
         return False
+
+async def handle_custom_start(update, context):
+    print(update.message.text)
+    if (update.message.text).lower() == 'старт':
+        text = (
+        "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
+        "\n\n" +
+        "/start начать работу с ботом\n" +
+        "/apply подать заявку на РКО\n" +
+        "/status узнать статус заявок\n" +
+        "/chat связаться с поддержкой банка"
+    )
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text,
+        )
+
 
 async def start(update, context):
     text = (
@@ -96,15 +115,6 @@ async def apply(update, context):
             reply_markup=keyboard,
         )
     
-    # text = (
-    #     "Оформите заявку чтобы получить потребительский кредит " +
-    #     "наличными на выгодных условиях с низкой ставкой."
-    # )
-    # await context.bot.send_message(
-    #     chat_id=update.effective_chat.id,
-    #     text=text,
-    #     reply_markup=keyboard,
-    # )
 
 def save_user_chat_id(chat_id, phone_number):
     api_url = (
@@ -165,11 +175,8 @@ def get_user_applications(chat_id):
     user_applications = []
     try:   
         response = requests.get(api_url, timeout=10)
-        print("Отправили респонс")
-        print(response)
         if response.json():
             user_applications = response.json()
-            print(user_applications)
     except:
         pass
     return user_applications
@@ -178,25 +185,8 @@ def get_user_applications(chat_id):
 async def status(update, context):
     chat_id = update.effective_chat.id
     user_applications = get_user_applications(chat_id)
-    print(user_applications)
     status_list = []
     if user_applications:
-        # for status in status_list:
-        #     status_string = (f"Номер заявки: {status['id']}\n" +
-        #         f"Дата заявки {status['created_at']}\n" +
-        #         f"Тип - открытие счета\n" +
-        #         f"Компания:\n"+
-        #         f"    - Имя:{status['company_name']}\n" +
-        #         f"    - ИНН:{status['inn']}\n"
-        #         f"    - ОГРН:{random.randint(1000000, 999999)}\n"
-        #         f"Cтатус заявки - {'status[status]'}"
-        #     )
-        #     if 'На рассмотрении' == status["status"] or "Доработка заявки" == status["status"]:
-        #         status_string = status_string + f"Номер счета: {random.randint(1000000, 999999)} \n" 
-        #         +f"Валюта счета: RUB\n" + f"Дата открытия {datetime.now()}\n" + f"Статус: Зарезервирован\n"
-        
-        #     status_list.append(status_list)
-        #   
         status_list = [
             (
                 f"Номер заявки: {status['id']}\n" +
@@ -228,11 +218,14 @@ def run_bot():
     api_token = os.getenv('TELEGRAM_BOT_API_TOKEN')
     application = ApplicationBuilder().token(api_token).build()
 
+    custom_start_handler = MessageHandler(filters.TEXT & (~filters.COMMAND),handle_custom_start)
     start_handler = CommandHandler('start', start)
     apply_handler = CommandHandler('apply', apply)
     status_handler = CommandHandler('status', status)
     chat_handler = CommandHandler('chat', chat)
     phone_number_handler = TypeHandler(Update, handle_phone_number)
+    
+    application.add_handler(custom_start_handler)
     application.add_handler(start_handler)
     application.add_handler(apply_handler)
     application.add_handler(status_handler)

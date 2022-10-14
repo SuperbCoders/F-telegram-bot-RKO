@@ -92,7 +92,10 @@ class LoanRequest(models.Model):
     accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
     account_own_mail = models.CharField(max_length=MAX_STRING_LENGTH)
     
-    first_passport_page = models.ImageField()
+    first_passport_page = models.ImageField(
+        upload_to="documents",
+        blank=True,
+        null=True,)
     account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH)
     account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH)
     passport_serial = models.CharField(max_length=MAX_STRING_LENGTH)
