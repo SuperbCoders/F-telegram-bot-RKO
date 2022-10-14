@@ -18,6 +18,7 @@ import EmailForm from '../views/EmailForm/EmailForm.vue'
 import ClientInfo from '../views/ClientInfo/ClientInfoForm.vue'
 import DocumentFogeiner from '../views/DocumentFogeiner/DocumentFogeinerForm.vue'
 import LicenseInfo from '../views/LicenseInformation/LicenseInformationForm.vue'
+import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
 Vue.use(VueRouter);
 
@@ -51,6 +52,11 @@ const routes = [
     path: "/information-staff",
     name: "information-staff",
     component: informationStaff
+  },
+  {
+    path: "/planning",
+    name: "planning",
+    component: PlanningOperation
   },
   {
     path: "/intelligence",

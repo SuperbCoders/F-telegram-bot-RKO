@@ -1,5 +1,6 @@
 <template>
   <div class="license_information_form">
+    <v-form ref="form" v-model="valid" lazy-validation>
     <h2 class="form_block_label">Сведения о лицензии</h2>
     <div class="form_block mt-5">
       <p class="text-left form_block_title">Вид</p>
@@ -13,7 +14,7 @@
         :required="true"
       ></v-text-field>
     </div>
-    <div class="form_block mt-5">
+    <div class="form_block">
       <p class="text-left form_block_title">Номер</p>
       <v-text-field
         id="oldName"
@@ -25,7 +26,7 @@
         :required="true"
       ></v-text-field>
     </div>
-    <div class="form_block mt-5">
+    <div class="form_block">
       <p class="text-left form_block_title">Кем выдан</p>
       <v-text-field
         id="oldName"
@@ -38,9 +39,7 @@
       ></v-text-field>
     </div>
     <div class="form_block">
-      <p class="text-left form_block_title">
-        Дата выдачи лицензии
-      </p>
+      <p class="text-left form_block_title">Дата выдачи лицензии</p>
       <v-menu
         :close-on-content-click="false"
         transition="scale-transition"
@@ -68,7 +67,7 @@
         ></v-date-picker>
       </v-menu>
     </div>
-    <div class="form_block">
+    <!-- <div class="form_block">
       <p class="text-left form_block_title">
         Срок дей
       </p>
@@ -98,8 +97,8 @@
           @input="passportIssueDateMenu = false"
         ></v-date-picker>
       </v-menu>
-    </div>
-    <div class="form_block mt-5">
+    </div> -->
+    <div class="form_block">
       <p class="text-left form_block_title">Срок действия</p>
       <v-menu
         :close-on-content-click="false"
@@ -129,10 +128,12 @@
       </v-menu>
     </div>
     <div class="form_block mt-5">
-      <p class="text-left form_block_title">Численность персонала</p>
+      <p class="text-left form_block_title">
+        Перечень видов лицензируемой деятельности
+      </p>
       <v-text-field
         id="oldName"
-        placeholder="Наименование"
+        placeholder="xxxxxx"
         class="align-center border-none"
         name="oldName"
         :rules="requiredRules"
@@ -140,11 +141,38 @@
         :required="true"
       ></v-text-field>
     </div>
+    </v-form>
+    <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="validate"
+      >Продолжить</v-btn
+    >
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isAddress: false,
+      valid: true,
+      show1: false,
+      requiredRules: [(v) => !!v || "Это поле обязательно"],
+    };
+  },
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        this.$router.push("/planning");
+      }
+    },
+  },
+};
 </script>
 
 <style>
