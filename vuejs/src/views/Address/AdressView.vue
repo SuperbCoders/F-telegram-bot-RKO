@@ -32,7 +32,6 @@
       >
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
-          {{ itemForm }}
           <v-text-field
             id="oldName"
             placeholder="Напишите адрес"
