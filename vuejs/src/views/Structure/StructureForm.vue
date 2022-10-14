@@ -5,6 +5,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Выберите из списка</p>
         <v-combobox
+          v-model="currentData.leaderList"
           filled
           :rules="requiredRules"
           required
@@ -16,12 +17,13 @@
       <default-input />
       <div class="form_block">
         <p class="text-left form_block_title">Руководитель</p>
-        <v-combobox filled :items="isLeaderType" outlined :rules="requiredRules" placeholder="Тип"></v-combobox>
+        <v-combobox filled v-model="currentData.DirectorList" :items="isLeaderType" outlined :rules="requiredRules" placeholder="Тип"></v-combobox>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">ИНН</p>
         <v-text-field
           id="oldName"
+          v-model="currentData.inn"
           placeholder="Введите ИНН или название компании"
           class="align-center border-none"
           name="oldName"
@@ -36,13 +38,14 @@
         </p>
         <RadioGroup @isStatus="(status) => (isTest1 = status)" name="Existence of a supervisory board" />
       </div>
-      <div v-if="!isTest1" class="form_block mt-5">
+      <div v-if="isTest1" class="form_block mt-5">
         <p class="text-left form_block_title">
           Наименования наблюдательного совета
         </p>
         <v-text-field
           id="oldName"
           placeholder="Наименования"
+          v-model="currentData.supervisoryBoard"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -52,17 +55,19 @@
       </div>
       <div class="form_group">
         <p class="text-left form_block_label mb-2 mt-5">
+
           Наличие коллегиального исполнительного органа
         </p>
         <RadioGroup @isStatus="(status) => isTest2 = status" name="The presence of a collegial executive body" />
       </div>
-      <div v-if="!isTest2" class="form_block mt-5">
+      <div v-if="isTest2" class="form_block mt-5">
         <p class="text-left form_block_title">
           Наименование коллегиального исполнительног органа
         </p>
         <v-text-field
           id="oldName"
           placeholder="Наименование"
+          v-model="currentData.collegialBody"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -77,6 +82,7 @@
         <v-text-field
           id="oldName"
           placeholder="Укажите Физ лицо"
+          v-model="currentData.individual"
           class="align-center border-none"
           name="oldName"
           outlined
@@ -104,6 +110,15 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
+    currentData: {
+      leaderList: null,
+      DirectorList: null,
+      company: null,
+      inn: null,
+      supervisoryBoard: true,
+      collegialBody: true,
+      naturalPerson: null,
+    },
     isTest1: true,
     isTest2: true,
     innRules: [
@@ -121,6 +136,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/individual-info");
       }
     },
