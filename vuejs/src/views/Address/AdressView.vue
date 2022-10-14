@@ -4,19 +4,19 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mb-5">
         <v-checkbox
-          v-model="checkboxList"
+          v-model="currentData.typeAddress"
           label="Юридический"
           value="red"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="checkboxList"
+          v-model="currentData.typeAddress"
           label="Фактический"
           value="Фактический"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="checkboxList"
+          v-model="currentData.typeAddress"
           label="Почтовый"
           value="Почтовый"
           hide-details
@@ -34,7 +34,7 @@
             id="oldName"
             placeholder="Напишите адрес"
             class="align-center border-none"
-            v-model="itemForm.name"
+            v-model="currentData.Address"
             name="oldName"
             outlined
             :rules="requiredRules"
@@ -46,6 +46,7 @@
           <v-combobox
             filled
             outlined
+            v-model="currentData.footing"
             :rules="requiredRules"
             placeholder="Выберите основание"
           ></v-combobox>
@@ -122,6 +123,11 @@ export default {
         inn: null,
         ogrn: null,
       },
+      currentData: {
+        typeAddress: null,
+        Address: null,
+        footing: null
+      },
       checkboxList: [],
       valid: true,
       innRules: [
@@ -140,6 +146,7 @@ export default {
 
       if (this.$refs.form.validate() && this.checkboxList.length > 0) {
         this.$router.push("/sctructure");
+        this.$store.commit('')
       }
     },
     addGroupList() {

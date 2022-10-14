@@ -14,6 +14,7 @@
           label="Введите ИНН"
           outlined
           type="number"
+          v-model="currentData.inn"
           :rules="innRules"
           required
           class="mt-1 auth_form"
@@ -21,6 +22,7 @@
         <v-text-field
           label="Наименования компании"
           outlined
+          v-model="currentData.companyName"
           :rules="requiredRules"
           required
           type="email"
@@ -29,6 +31,7 @@
         <v-text-field
           label="Контактный номер телефона"
           outlined
+          v-model="currentData.phone"
           :rules="requiredRules"
           :required="true"
           class="mt-1 auth_form"
@@ -82,6 +85,11 @@
 <script>
 export default {
   data: () => ({
+    currentData: {
+      inn: null,
+      companyName: null,
+      phone: null
+    },
     valid: true,
     name: "",
     innRules: [
@@ -110,10 +118,13 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/address");
       }
     },
   },
+  computed: {
+  }
 };
 </script>
 <style scoped>

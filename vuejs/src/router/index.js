@@ -19,7 +19,9 @@ import ClientInfo from '../views/ClientInfo/ClientInfoForm.vue'
 import DocumentFogeiner from '../views/DocumentFogeiner/DocumentFogeinerForm.vue'
 import LicenseInfo from '../views/LicenseInformation/LicenseInformationForm.vue'
 import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.vue'
+import Beneficiaries from '../views/Beneficiaries/BeneficiariesForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
+import Purposes from '../views/Purposes/PurposesForm.vue'
 Vue.use(VueRouter);
 
 const routes = [
@@ -57,6 +59,16 @@ const routes = [
     path: "/planning",
     name: "planning",
     component: PlanningOperation
+  },
+  {
+    path: "/beneficiaries",
+    name: "beneficiaries",
+    component: Beneficiaries
+  },
+  {
+    path: "/purposes",
+    name: "purposes",
+    component: Purposes
   },
   {
     path: "/intelligence",
