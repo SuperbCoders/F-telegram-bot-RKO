@@ -1,74 +1,207 @@
 <template>
   <div class="imformation_staff_section">
-    <h2 class="text-left mb-10 font-bold w-50">
-      Группа взаимосвязанных компаний
-    </h2>
-    <div class="form_block">
-      <p class="text-left form_block_title">Название группы компаний</p>
-      <v-text-field
-        id="oldName"
-        placeholder="Напишите назание"
-        class="align-center border-none"
-        name="oldName"
-        outlined
-        :required="true"
-      ></v-text-field>
-    </div>
-    <div class="form_block">
-      <p class="text-left form_block_title">Дата начала действия</p>
-      <v-menu
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <h3 class="text-left mb-10 font-bold w-50">
+        Группа взаимосвязанных компаний
+      </h3>
+      <div class="form_block">
+        <p class="text-left form_block_title">Название группы компаний</p>
+        <v-text-field
+          id="oldName"
+          placeholder="Напишите назание"
+          class="align-center border-none"
+          name="oldName"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
+      </div>
+      <div class="form_block">
+        <p class="text-left form_block_title">Дата начала действия</p>
+        <v-menu
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              placeholder="xx.xx.xxxx"
+              id="passportIssueDate"
+              name="passportIssueDate"
+              outlined
+              append-icon="mdi-calendar-blank"
+              readonly
+              v-model="dateStarting"
+              :rules="requiredRules"
+              :required="true"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="dateStarting"
+            @input="passportIssueDateMenu = false"
+          ></v-date-picker>
+        </v-menu>
+      </div>
+      <div class="form_block mb-5">
+        <p class="text-left form_block_title">Дата окончания действия</p>
+        <v-menu
+          v-model="passportIssueDateMenu"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              placeholder="xx.xx.xxxx"
+              id="passportIssueDate"
+              name="passportIssueDate"
+              append-icon="mdi-calendar-blank"
+              outlined
+              readonly
+              v-model="dateEnd"
+              :rules="requiredRules"
+              :required="true"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="dateEnd"
+            @input="passportIssueDateMenu = false"
+          ></v-date-picker>
+        </v-menu>
+      </div>
+      <h3 class="text-left structure_group_label mb-10">Состав группы компаний</h3>
+      <div
+        v-for="(itemForm, index) in groupList"
+        :key="index"
+        class="form_input_block"
       >
-        <template v-slot:activator="{ on, attrs }">
+        <div class="form_block">
+          <p class="text-left form_block_title">Название компании</p>
           <v-text-field
-            placeholder="xx.xx.xxxx"
-            id="passportIssueDate"
-            name="passportIssueDate"
+            id="oldName"
+            placeholder="Наименование"
+            class="align-center border-none"
+            v-model="itemForm.name"
+            name="oldName"
             outlined
-            append-icon="mdi-calendar-blank"
-            readonly
-            v-bind="attrs"
-            v-on="on"
+            :rules="requiredRules"
+            :required="true"
           ></v-text-field>
-        </template>
-        <v-date-picker @input="passportIssueDateMenu = false"></v-date-picker>
-      </v-menu>
-    </div>
-    <div class="form_block mt-5">
-      <p class="text-left form_block_title">Дата окончания действия</p>
-      <v-menu
-        v-model="passportIssueDateMenu"
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
+        </div>
+        <div class="form_block">
+          <p class="text-left form_block_title">ИНН</p>
           <v-text-field
-            placeholder="xx.xx.xxxx"
-            id="passportIssueDate"
-            name="passportIssueDate"
-            append-icon="mdi-calendar-blank"
+            id="oldName"
+            placeholder="Наименование"
+            class="align-center border-none"
+            name="oldName"
+            type="number"
+            v-model="itemForm.inn"
             outlined
-            readonly
-            v-bind="attrs"
-            v-on="on"
+            :rules="innRules"
+            :required="true"
           ></v-text-field>
-        </template>
-        <v-date-picker @input="passportIssueDateMenu = false"></v-date-picker>
-      </v-menu>
-    </div>
-    <v-btn block large class="mt-10 auth_form_bth" color="primary">
-      <router-link class="auth_form_bth color-white text-decoration-none" to="/sctructure-group"> Продолжить </router-link>
-    </v-btn>
+        </div>
+        <div class="form_block">
+          <p class="text-left form_block_title">ОГРН</p>
+          <v-text-field
+            id="oldName"
+            placeholder="Наименование"
+            class="align-center border-none"
+            name="oldName"
+            v-model="itemForm.ogrn"
+            outlined
+            :rules="requiredRules"
+            :required="true"
+          ></v-text-field>
+        </div>
+      </div>
+      <div class="form_block d-flex align-center justify-center">
+        <a
+          @click="deleteGroupList"
+          class="form_block_delete_link text-decoration-none"
+          href="#"
+        >
+          <v-icon>mdi-trash-can-outline</v-icon>
+          Удалить
+        </a>
+        <v-btn
+          class="text-center d-flex align-center justify-center ml-10 add_form"
+          @click="addGroupList()"
+        >
+          <span class="pr-3">Добавить</span>
+          <v-icon>mdi-plus-circle-outline</v-icon>
+        </v-btn>
+      </div>
+    </v-form>
+    <line-step :step='10' />
+    <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="validate"
+      >Продолжить</v-btn
+    >
   </div>
 </template>
 
 <script>
-export default {};
+import LineStep from '../../components/line_step/line_step.vue';
+export default {
+  data: () => ({
+    valid: true,
+    dateStarting: null,
+    dateEnd: null,
+    groupList: [
+      {
+        name: null,
+        inn: null,
+        ogrn: null,
+      },
+    ],
+    defaultGroupItem: {
+      name: null,
+      inn: null,
+      ogrn: null,
+    },
+    innRules: [
+      (v) => !!v || "Это поле обязательно",
+      (v) => (v && v.length >= 10)  || "ИНН не может содержать меньше 10 симоволов",
+      (v) => (v && v.length <= 12 ) || "ИНН не может содержать больше 12 симоволов",
+      ],
+    passportIssueDateMenu: null,
+    requiredRules: [(v) => !!v || "Это поле обязательно"],
+  }),
+
+  methods: {
+    validate() {
+      this.$refs.form.validate();
+
+      if (this.$refs.form.validate()) {
+        this.$router.push("/intelligence");
+      }
+    },
+    addGroupList() {
+      this.groupList.push(this.defaultGroupItem);
+    },
+    deleteGroupList() {
+      if (this.groupList.length > 1) {
+        this.groupList.pop();
+      }
+    },
+  },
+  components: {
+    LineStep,
+  }
+};
 </script>
 
 <style>

@@ -5,7 +5,7 @@
     </h2>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Простой</h2>
+        <h2 class="text-left mb-3 card_content_title">Тариф 1</h2>
         <p class="text-left mb-3 card_content_text">
           Для начинающих предприниматель
         </p>
@@ -26,7 +26,7 @@
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Простой</h2>
+        <h2 class="text-left mb-3 card_content_title">Тариф 2</h2>
         <p class="text-left mb-3 card_content_text">
           Для начинающих предприниматель
         </p>
@@ -47,7 +47,7 @@
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Простой</h2>
+        <h2 class="text-left mb-3 card_content_title">Тариф 3</h2>
         <p class="text-left mb-3 card_content_text">
           Для начинающих предприниматель
         </p>
@@ -66,11 +66,17 @@
         <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
       </div>
     </v-card>
+    <LineStep :step="11" />
   </div>
 </template>
 
 <script>
-export default {};
+import LineStep from '../../components/line_step/line_step.vue';
+export default {
+  components: {
+    LineStep
+  }
+};
 </script>
 
 <style>

@@ -24,42 +24,17 @@
               <v-row>
                 <v-col cols="12">
                   <h1 class="display-1 text-left mb-10">Адрес</h1>
+                  <defalt-input v-model="formData['oldName']" />
                   <div class="form_block mt-5">
-                    <p class="text-left">ИНН</p>
+                    <p class="text-left">Адрес</p>
                     <v-text-field
-                      v-model="formData['inn']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       placeholder="ООО Ромашка"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['inn']"
-                      :required="true"
-                    ></v-text-field>
-                  </div>
-                  <div class="form_block mt-5">
-                    <p class="text-left">Имя Компании</p>
-                    <v-text-field
-                      v-model="formData['company_name']"
-                      id="oldName"
-                      placeholder="ООО Ромашка"
-                      class="align-center border-none"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['company_name']"
-                      :required="true"
-                    ></v-text-field>
-                  </div>
-                  <div class="form_block mt-5">
-                    <p class="text-left">Контактный телефон</p>
-                    <v-text-field
-                      v-model="formData['contact_number']"
-                      id="oldName"
-                      placeholder="ООО Ромашка"
-                      class="align-center border-none"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['contact_number']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
@@ -76,18 +51,18 @@
                   <div class="form_block mt-5">
                     <p class="text-left">Основания</p>
                     <v-text-field
-                      v-model="formData['basis']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       placeholder="ООО Ромашка"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['basis']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
                   <div class="form_group">
-                    <p class="text-left mb-5">Юридический адрес совпадает с физическим?</p>
+                    <p class="text-left mb-5">Основания</p>
                     <v-btn-toggle
                       active-class
                       color="pink darken-1"
@@ -104,48 +79,141 @@
                     </v-btn-toggle>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">физический адрес</p>
+                    <p class="text-left">Адрес</p>
                     <v-text-field
-                      v-model="formData['physical_address']"
-                      id="oldName"
-                      placeholder="Физический адрес"
-                      class="align-center border-none"
-                      name="oldName"
-                      outlined
-                      :error-messages="formErrors['physical_address']"
-                      :required="true"
-                    ></v-text-field>
-                  </div>
-                  <div class="form_group">
-                    <p class="text-left mb-5">почтовый адрес совпадает с юридическим?</p>
-                    <v-btn-toggle
-                      active-class
-                      color="pink darken-1"
-                      class="d-flex align-start"
-                      v-model="toggle_exclusive"
-                    >
-                      <v-btn class="d-flex align-center">
-                        <p class="pl-5 pr-5 mb-0">Да</p>
-                      </v-btn>
-
-                      <v-btn>
-                        <p class="pl-5 pr-5 mb-0">Нет</p>
-                      </v-btn>
-                    </v-btn-toggle>
-                  </div>
-                  <div class="form_block mt-5">
-                    <p class="text-left">Почтовый адрес</p>
-                    <v-text-field
-                      v-model="formData['mail_address']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       placeholder="Адрес"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['mail_address']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
+                  <div class="form_group">
+                    <p class="text-left mb-5">Основания</p>
+                    <v-btn-toggle
+                      active-class
+                      color="pink darken-1"
+                      class="d-flex align-start"
+                      v-model="toggle_exclusive"
+                    >
+                      <v-btn class="d-flex align-center">
+                        <p class="pl-5 pr-5 mb-0">Да</p>
+                      </v-btn>
+
+                      <v-btn>
+                        <p class="pl-5 pr-5 mb-0">Нет</p>
+                      </v-btn>
+                    </v-btn-toggle>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Адрес</p>
+                    <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="Адрес"
+                      class="align-center border-none"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                    ></v-text-field>
+                  </div>
+                  <!-- <v-btn-toggle
+                  color="pink darken-1"
+                  class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 m-0">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 m-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle> -->
+                  <!-- <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="ООО Ромашка"
+                      class="align-center mt-10"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field> -->
+                  <!-- <p class="title blue-grey--text">
+                    <span class="primary--text"
+                      >{{
+                        getFormattedCurrency(formData["loanAmount"])
+                      }}
+                      &#8381;</span
+                    >
+                  </p>
+                  <v-slider
+                    v-model="formData['loanAmount']"
+                    :max="5000000"
+                    :min="1000000"
+                    step="500000"
+                    track-color="light-grey"
+                    tick-size="5"
+                    ticks="always"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <p class="title blue-grey--text">
+                    Срок:
+                    <span class="primary--text">
+                      {{ formData["loanTerm"] }}
+                      {{ getFormattedYearNoun(formData["loanTerm"]) }}
+                    </span>
+                  </p>
+                  <v-slider
+                    class="d-none d-sm-block"
+                    v-model="formData['loanTerm']"
+                    :tick-labels="loanTermTickLabels"
+                    :max="7"
+                    :min="2"
+                    step="1"
+                    ticks
+                    track-color="light-grey"
+                    tick-size="5"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <v-slider
+                    class="d-sm-none"
+                    v-model="formData['loanTerm']"
+                    :tick-labels="smallLoanTermTickLabels"
+                    :max="7"
+                    :min="2"
+                    step="1"
+                    ticks
+                    track-color="light-grey"
+                    tick-size="5"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <p class="mt-5 title grey--text">Ежемесячный платеж</p>
+                  <v-scroll-y-transition hide-on-leave>
+                    <p :key="monthlyPayment" class="display-1 primary--text">
+                      {{ getFormattedCurrency(monthlyPayment) }} &#8381;
+                    </p>
+                  </v-scroll-y-transition>
+                  <p class="grey--text">
+                    Сумма переплаты:
+                    <span class="black--text"
+                      >{{ getFormattedCurrency(interestAmount) }} &#8381;</span
+                    >
+                  </p>
+                  <p class="grey--text">
+                    Сумма кредита:
+                    <span class="black--text"
+                      >{{ getFormattedCurrency(totalLoanAmount) }} &#8381;</span
+                    >
+                  </p>
+                  <p class="grey--text">
+                    Процентная ставка:
+                    <span class="black--text">{{ interestRate * 100 }}%</span>
+                  </p> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -154,39 +222,34 @@
                 <v-col cols="12">
                   <h2 class="text-left mb-10">Структура органов управления</h2>
                   <div class="form_block mt-5">
-                    <p class="text-left">Высший орган управления</p>
+                    <p class="text-left">Выберите из списка</p>
                     <v-combobox
                       filled
                       outlined
                       placeholder="Выберите из списка"
                       :items="availableCities"
-                      v-model="formData['supreme_management_body']"
                     ></v-combobox>
                   </div>
                   <default-input />
                   <div class="form_block mt-5">
                     <p class="text-left">Руководитель</p>
-                    <v-text-field
-                      v-model="formData['mail_address']"
-                      id="oldName"
-                      placeholder="ФИО Руководителя"
-                      class="align-center border-none"
-                      name="oldName"
+                    <v-combobox
+                      filled
                       outlined
-                      :error-messages="formErrors['supervisor']"
-                      :required="true"
-                      />
+                      placeholder="Тип"
+                      :items="availableCities"
+                    ></v-combobox>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">ИНН руководителя</p>
+                    <p class="text-left">ИНН</p>
                     <v-text-field
                       v-model="formData['oldName']"
                       id="oldName"
-                      placeholder="Введите ИНН "
+                      placeholder="Введите ИНН или название компании"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['supervisor_inn']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
@@ -210,14 +273,14 @@
                   <div class="form_block mt-5">
                     <p class="text-left">Наименования наблюдательного совета</p>
                     <v-text-field
-                      v-model="formData['supervisory']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       append-icon="mdi-map-marker"
                       placeholder="Адрес"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['supervisory']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
@@ -245,13 +308,13 @@
                       Наименование коллегиального исполнительног органа
                     </p>
                     <v-text-field
-                      v-model="formData['collegiate_body']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       placeholder="Наименование"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['collegiate_body']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
@@ -260,16 +323,109 @@
                       Члены коллегиального исполнительного органа
                     </p>
                     <v-text-field
-                      v-model="formData['collegiate_person']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       placeholder="Укажите ФИЗ"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['collegiate_person']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
+                  <!-- <v-btn-toggle
+                  color="pink darken-1"
+                  class="d-flex align-start" v-model="toggle_exclusive">
+                    <v-btn
+                      class="d-flex align-center">
+                      <p class="pl-5 pr-5 m-0">Да</p>
+                    </v-btn>
+
+                    <v-btn>
+                      <p class="pl-5 pr-5 m-0">Нет</p>
+                    </v-btn>
+                  </v-btn-toggle> -->
+                  <!-- <v-text-field
+                      v-model="formData['oldName']"
+                      id="oldName"
+                      placeholder="ООО Ромашка"
+                      class="align-center mt-10"
+                      name="oldName"
+                      outlined
+                      :error-messages="formErrors['oldName']"
+                      :required="true"
+                  ></v-text-field> -->
+                  <!-- <p class="title blue-grey--text">
+                    <span class="primary--text"
+                      >{{
+                        getFormattedCurrency(formData["loanAmount"])
+                      }}
+                      &#8381;</span
+                    >
+                  </p>
+                  <v-slider
+                    v-model="formData['loanAmount']"
+                    :max="5000000"
+                    :min="1000000"
+                    step="500000"
+                    track-color="light-grey"
+                    tick-size="5"
+                    ticks="always"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <p class="title blue-grey--text">
+                    Срок:
+                    <span class="primary--text">
+                      {{ formData["loanTerm"] }}
+                      {{ getFormattedYearNoun(formData["loanTerm"]) }}
+                    </span>
+                  </p>
+                  <v-slider
+                    class="d-none d-sm-block"
+                    v-model="formData['loanTerm']"
+                    :tick-labels="loanTermTickLabels"
+                    :max="7"
+                    :min="2"
+                    step="1"
+                    ticks
+                    track-color="light-grey"
+                    tick-size="5"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <v-slider
+                    class="d-sm-none"
+                    v-model="formData['loanTerm']"
+                    :tick-labels="smallLoanTermTickLabels"
+                    :max="7"
+                    :min="2"
+                    step="1"
+                    ticks
+                    track-color="light-grey"
+                    tick-size="5"
+                    track-fill-color="primary"
+                  ></v-slider>
+                  <p class="mt-5 title grey--text">Ежемесячный платеж</p>
+                  <v-scroll-y-transition hide-on-leave>
+                    <p :key="monthlyPayment" class="display-1 primary--text">
+                      {{ getFormattedCurrency(monthlyPayment) }} &#8381;
+                    </p>
+                  </v-scroll-y-transition>
+                  <p class="grey--text">
+                    Сумма переплаты:
+                    <span class="black--text"
+                      >{{ getFormattedCurrency(interestAmount) }} &#8381;</span
+                    >
+                  </p>
+                  <p class="grey--text">
+                    Сумма кредита:
+                    <span class="black--text"
+                      >{{ getFormattedCurrency(totalLoanAmount) }} &#8381;</span
+                    >
+                  </p>
+                  <p class="grey--text">
+                    Процентная ставка:
+                    <span class="black--text">{{ interestRate * 100 }}%</span>
+                  </p> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -277,35 +433,54 @@
             <v-stepper-content step="3">
               <v-row>
                 <v-col cols="12">
-                  <h2 class="text-left mb-10">Сведения о персонале</h2>
+                  <h2 class="text-left mb-10">Сведенья о персонале</h2>
                   <div class="form_block mt-5">
                     <p class="text-left">Численность персонала</p>
                     <v-text-field
-                      v-model="formData['employers_volume']"
+                      v-model="formData['oldName']"
                       id="oldName"
-                      placeholder="Введите численность персонала"
+                      placeholder="Наименование"
                       class="align-center border-none"
                       name="oldName"
-                      append-icon="mdi-currency-rub"
                       outlined
-                      :error-messages="formErrors['employers_volume']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">Задолженность по зарплате</p>
+                    <p class="text-left">Численность персонала</p>
                     <v-text-field
-                      v-model="formData['salary_debt']"
+                      v-model="formData['oldName']"
                       id="oldName"
-                      placeholder="Введите задолженность по зарплате"
+                      placeholder="Наименование"
                       class="align-center border-none"
                       name="oldName"
                       append-icon="mdi-currency-rub"
                       outlined
-                      :error-messages="formErrors['salary_debt']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
+                  <!-- <v-text-field
+                    v-model="formData['phoneNumber']"
+                    label="Мобильный телефон"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    outlined
+                    type="tel"
+                    :error-messages="formErrors['phoneNumber']"
+                    :required="true"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formData['email']"
+                    label="Электронная почта"
+                    id="email"
+                    name="email"
+                    type="email"
+                    outlined
+                    :error-messages="formErrors['email']"
+                    :required="true"
+                  ></v-text-field> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -317,22 +492,22 @@
                     Группа взаимосвязанных компаний
                   </h2>
                   <div class="form_block mt-5">
-                    <p class="text-left">Название группы компаний</p>
+                    <p class="text-left">Название компании</p>
                     <v-text-field
-                      v-model="formData['company_group_name']"
+                      v-model="formData['oldName']"
                       id="oldName"
                       placeholder="Наименование"
                       class="align-center border-none"
                       name="oldName"
                       outlined
-                      :error-messages="formErrors['company_group_name']"
+                      :error-messages="formErrors['oldName']"
                       :required="true"
                     ></v-text-field>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">Дата начала действия</p>
+                    <p class="text-left">Численность о персонале</p>
                     <v-menu
-                      v-model="formData['stop_date']"
+                      v-model="passportIssueDateMenu"
                       :close-on-content-click="false"
                       transition="scale-transition"
                       offset-y
@@ -340,7 +515,36 @@
                     >
                       <template v-slot:activator="{ on, attrs }">
                         <v-text-field
-                          v-model="formData['start_date']"
+                          v-model="formData['passportIssueDate']"
+                          label="Дата выдачи"
+                          id="passportIssueDate"
+                          name="passportIssueDate"
+                          outlined
+                          append-icon="mdi-calendar-blank"
+                          :error-messages="formErrors['passportIssueDate']"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                        ></v-text-field>
+                      </template>
+                      <v-date-picker
+                        v-model="formData['passportIssueDate']"
+                        @input="passportIssueDateMenu = false"
+                      ></v-date-picker>
+                    </v-menu>
+                  </div>
+                  <div class="form_block mt-5">
+                    <p class="text-left">Численность о персонале</p>
+                    <v-menu
+                      v-model="passportIssueDateMenu"
+                      :close-on-content-click="false"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-text-field
+                          v-model="formData['passportIssueDate']"
                           label="Дата выдачи"
                           id="passportIssueDate"
                           name="passportIssueDate"
@@ -353,40 +557,130 @@
                         ></v-text-field>
                       </template>
                       <v-date-picker
-                        v-model="formData['start_date']"
+                        v-model="formData['passportIssueDate']"
                         @input="passportIssueDateMenu = false"
                       ></v-date-picker>
                     </v-menu>
                   </div>
-                  <div class="form_block mt-5">
-                    <p class="text-left">Дата окончания действия</p>
-                    <v-menu
-                      v-model="formData['stop_date']"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      min-width="auto"
+                  <!-- <v-text-field
+                    v-model="formData['passportCode']"
+                    label="Код подразделения"
+                    id="passportCode"
+                    name="passportCode"
+                    outlined
+                    :error-messages="formErrors['passportCode']"
+                    :required="true"
+                  ></v-text-field>
+                  <v-menu
+                    v-model="passportIssueDateMenu"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="formData['passportIssueDate']"
+                        label="Дата выдачи"
+                        id="passportIssueDate"
+                        name="passportIssueDate"
+                        outlined
+                        :error-messages="formErrors['passportIssueDate']"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="formData['passportIssueDate']"
+                      @input="passportIssueDateMenu = false"
+                    ></v-date-picker>
+                  </v-menu>
+                  <v-scroll-y-transition hide-on-leave>
+                    <v-card
+                      v-if="shouldAddOldPassportData"
+                      class="mt-0 mb-5"
+                      color="grey lighten-4"
                     >
-                      <template v-slot:activator="{ on, attrs }">
+                      <v-card-text align="left" justify="center">
+                        <h4>Предыдущие данные паспорта</h4>
+                        <p class="caption">
+                          Обязательно к заполнению, если текущему паспорту менее
+                          2-х лет
+                        </p>
                         <v-text-field
-                          v-model="formData['stop_date']"
-                          label="Дата выдачи"
-                          id="passportIssueDate"
-                          name="passportIssueDate"
-                          append-icon="mdi-calendar-blank"
+                          v-model="formData['oldPassportSeries']"
+                          label="Серия"
+                          id="oldPassportSeries"
+                          name="oldPassportSeries"
                           outlined
-                          :error-messages="formErrors['stop_date']"
-                          readonly
-                          v-bind="attrs"
-                          v-on="on"
+                          :error-messages="formErrors['oldPassportSeries']"
+                          :required="true"
                         ></v-text-field>
-                      </template>
-                      <v-date-picker
-                        v-model="formData['stop_date']"
-                        @input="passportIssueDateMenu = false"
-                      ></v-date-picker>
-                    </v-menu>
-                  </div>
+                        <v-text-field
+                          v-model="formData['oldPassportNumber']"
+                          label="Номер"
+                          id="oldPassportNumber"
+                          name="oldPassportNumber"
+                          outlined
+                          :error-messages="formErrors['oldPassportNumber']"
+                          :required="true"
+                        ></v-text-field>
+                        <v-text-field
+                          v-model="formData['oldPassportCode']"
+                          label="Код подразделения"
+                          id="oldPassportCode"
+                          name="oldPassportCode"
+                          outlined
+                          :error-messages="formErrors['oldPassportCode']"
+                          :required="true"
+                        ></v-text-field>
+                      </v-card-text>
+                    </v-card>
+                  </v-scroll-y-transition>
+                  <v-text-field
+                    v-model="formData['passportIssuedBy']"
+                    label="Кем выдан"
+                    id="passportIssuedBy"
+                    name="passportIssuedBy"
+                    outlined
+                    :error-messages="formErrors['passportIssuedBy']"
+                    :required="true"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="formData['passportPlaceOfBirth']"
+                    label="Место рождения"
+                    id="passportPlaceOfBirth"
+                    name="passportPlaceOfBirth"
+                    outlined
+                    :error-messages="formErrors['passportPlaceOfBirth']"
+                    :required="true"
+                  ></v-text-field>
+                  <v-menu
+                    v-model="passportBirthDateMenu"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="formData['passportDateOfBirth']"
+                        label="Дата рождения"
+                        id="passportDateOfBirth"
+                        name="passportDateOfBirth"
+                        outlined
+                        :error-messages="formErrors['passportDateOfBirth']"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="formData['passportDateOfBirth']"
+                      @input="passportBirthDateMenu = false"
+                    ></v-date-picker>
+                  </v-menu> -->
                 </v-col>
               </v-row>
             </v-stepper-content>
@@ -399,7 +693,7 @@
                     Сведения о лицензии на право осуществления деятельности
                   </p>
                   <v-file-input
-                    v-model="document"
+                    v-model="passportPhotoOne"
                     :error-messages="formErrors['passportPhotoOne']"
                     label="Главная страница"
                     outlined
@@ -597,6 +891,7 @@
 import axios from "axios";
 import { DateTime } from "luxon";
 import AttachButton from "../../components/button/attachButton.vue";
+import defaltInput from "../../components/input/defaltInput.vue";
 export default {
   name: "LoanForm",
   data: () => ({
@@ -869,8 +1164,8 @@ export default {
       const formData = this.getFormData();
       axios
         .post(
-          `http://localhost:8000/loan-application/create/`,
-          formData,
+          `${process.env.VUE_APP_API_ROOT_URL}loan-application/create/`,
+          formData
         )
         .then(() => {
           this.isWaitingForResponse = false;
@@ -886,7 +1181,7 @@ export default {
         });
     },
   },
-  components: { AttachButton },
+  components: { AttachButton, defaltInput },
 };
 </script>
 

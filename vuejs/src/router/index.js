@@ -1,6 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import LoanForm from "../views/loan/LoanForm";
+import LoanForm from "../views/loan/LoanForm";
 import AuthView from '../views/Auth/AuthView.vue'
 import Address from '../views/Address/AdressView.vue'
 import Structure from '../views/Structure/StructureForm.vue'
@@ -9,15 +9,25 @@ import StructureGroup from '../views/StructureGroup/StructureGroupForm.vue'
 import informationStaff from '../views/informationStaff/informationStaffForm.vue'
 import CreditForm from '../views/credit/creditForm.vue'
 import DocumentPage from '../views/Documents/documentForm.vue'
+import individualsForm from '../views/informationIndivduals/individualsForm.vue'
+import DocumentsForms from '../views/DocumentsForm/DocumentForm.vue'
+import AddressForm from '../views/AddressForm/AddressForm.vue'
+import KinshipStatus from '../views/KinshipStatus/KinshipStatusForm.vue'
+import ForeignPerson from '../views/isAForeignPerson/ForeignPerson.vue'
+import EmailForm from '../views/EmailForm/EmailForm.vue'
+import ClientInfo from '../views/ClientInfo/ClientInfoForm.vue'
+import DocumentFogeiner from '../views/DocumentFogeiner/DocumentFogeinerForm.vue'
+import LicenseInfo from '../views/LicenseInformation/LicenseInformationForm.vue'
+import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "loan-form",
-  //   component: LoanForm,
-  // },
+  {
+    path: "/loan-form",
+    name: "loan-form",
+    component: LoanForm,
+  },
   {
     path: "/",
     name: "auth-form",
@@ -25,7 +35,7 @@ const routes = [
   },
   {
     path: "/address",
-    name: "address-form",
+    name: "address",
     component: Address
   },
   {
@@ -44,9 +54,24 @@ const routes = [
     component: informationStaff
   },
   {
+    path: "/planning",
+    name: "planning",
+    component: PlanningOperation
+  },
+  {
     path: "/intelligence",
     name: "intelligence-form",
     component: Intelligence
+  },
+  {
+    path: "/email-form",
+    name: "email-form",
+    component: EmailForm
+  },
+  {
+    path: "/client-info",
+    name: "client-info",
+    component: ClientInfo
   },
   {
     path: "/credit-page",
@@ -57,6 +82,41 @@ const routes = [
     path: "/document",
     name: "document",
     component: DocumentPage
+  },
+  {
+    path: "/individual-info",
+    name: "individual-info",
+    component: individualsForm
+  },
+  {
+    path: "/license-info",
+    name: "license-info",
+    component: LicenseInfo
+  },
+  {
+    path: "/documents-forms",
+    name: "documents-forms",
+    component: DocumentsForms
+  },
+  {
+    path: "/kinship-status-forms",
+    name: "kinship-status-forms",
+    component: KinshipStatus
+  },
+  {
+    path: "/address-form",
+    name: "address-form2",
+    component: AddressForm
+  },
+  {
+    path: "/document-fogeiner",
+    name: "document-fogeiner",
+    component: DocumentFogeiner
+  },
+  {
+    path: "/foreign-person",
+    name: "foreign-person",
+    component: ForeignPerson
   },
   {
     path: "/rate",

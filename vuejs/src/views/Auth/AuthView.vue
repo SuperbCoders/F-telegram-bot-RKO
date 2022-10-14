@@ -1,7 +1,7 @@
 <template>
   <div class="auth_section">
-    <div class="auth_logo_block">
-      <img src="@/assets/images/logo.png" alt="" />
+    <div class="auth_logo_block mt-3">
+      <img src="@/assets/images/logo.svg" alt="" />
     </div>
     <div class="auth_title_block">
       <h2 class="auth_title font-weight-bold">
@@ -13,8 +13,10 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          :rules="requiredRules"
+          type="number"
+          :rules="innRules"
           required
+          @input="getCompanyFromInn"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
@@ -22,8 +24,8 @@
           outlined
           :rules="requiredRules"
           required
+          v-model="name_company"
           type="email"
-          error-message="true"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
@@ -31,6 +33,7 @@
           outlined
           :rules="requiredRules"
           :required="true"
+          v-model="phone_number"
           class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
@@ -45,17 +48,19 @@
                       class="text-decoration-none text-left"
                       href="https://vuetifyjs.com"
                       v-on="on"
+                      @click.stop
                     >
                       резервирного счета,
                     </a>
                   </template>
                 </v-tooltip>
-                а также с условиями
+                  а также с условиями
                 <a
                   target="_blank"
                   class="text-decoration-none"
                   href="https://vuetifyjs.com"
                   v-on="on"
+                  @click.stop
                 >
                   обработки и хранения персональных данных
                 </a>
@@ -78,11 +83,20 @@
 </template>
 
 <script>
+import { getCompany } from '../../api/getInfoCompany';
 export default {
   data: () => ({
     valid: true,
     name: "",
-    innRules: [(v) => !!v || "Name is required"],
+    phone_number: "",
+    name_company: "",
+    innRules: [
+      (v) => !!v || "Это поле обязательно",
+      (v) =>
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
+      (v) =>
+        (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
+    ],
     email: "",
     requiredRules: [(v) => !!v || "Это поле обязательно"],
     nameCompanyRules: [
@@ -97,14 +111,32 @@ export default {
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
   }),
 
+  mounted(){
+    const phone = this.$route.query?.phone;
+    if(phone){
+      this.phone_number = phone;
+    }
+  },
+
   methods: {
     validate() {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-       this.$router.push('/address')
+        this.$router.push("/address");
       }
-    }
+    },
+
+    async getCompanyFromInn(inn){
+      if(inn.length >= 10 & inn.length <= 12) {
+        const company = await getCompany(inn);
+        if(company?.suggestions.length > 0) {
+          this.$store.commit("setDataCompany", company?.suggestions[0]);
+          this.name_company = company?.suggestions[0].value
+          console.log(this.$store.state.dataCompany);
+        }
+      }
+    },
   },
 };
 </script>
@@ -122,6 +154,7 @@ export default {
   border-radius: 10px;
   text-transform: capitalize;
   font-size: 14px;
+  font-weight: 400;
 }
 .auth_form_link_container {
   font-size: 14px;

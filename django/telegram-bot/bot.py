@@ -63,7 +63,6 @@ async def chat(update, context):
 
 async def apply(update, context):
     if not is_chat_id_confirmed(update.effective_chat.id):
-        print(update.effective_chat)
         keyboard = KeyboardButton(
             text="Подтвердить",
             request_contact=True,
@@ -81,7 +80,7 @@ async def apply(update, context):
             reply_markup=reply_markup,
         )
     else:
-        WEB_APP_URL = "https://loan-application-bot.baraba.sh/"
+        WEB_APP_URL = "https://185.91.52.232/"
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)
@@ -91,7 +90,6 @@ async def apply(update, context):
                 "Номер успешно подтверждён!\n" +
                 "Перейдите на форму создания заявки"
         )
-        print(update.effective_chat)
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
@@ -113,7 +111,6 @@ def save_user_chat_id(chat_id, phone_number):
         os.getenv("DJANGO_APP_API_ROOT_URL") +
         f"user/{chat_id}/"
     )
-    print(phone_number)
     try:
         stripped_phone_number = "".join(
             char for char in phone_number if char in string.digits
@@ -137,9 +134,8 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            print(update.message.contact.phone_number)
-            WEB_APP_URL = "https://loan-application-bot.baraba.sh/?phone={}".format(update.message.contact.phone_number)
-            print(WEB_APP_URL)
+            WEB_APP_URL = "https://185.91.52.232/?phone={}".format(update.message.contact.phone_number)
+
             button = InlineKeyboardButton(
                 text="Создать заявку",
                 web_app=WebAppInfo(url=WEB_APP_URL)
@@ -175,14 +171,12 @@ def get_user_applications(chat_id):
             user_applications = response.json()
             print(user_applications)
     except:
-        print("ошибка подключения")
         pass
     return user_applications
 
 
 async def status(update, context):
     chat_id = update.effective_chat.id
-    print(chat_id)
     user_applications = get_user_applications(chat_id)
     print(user_applications)
     status_list = []

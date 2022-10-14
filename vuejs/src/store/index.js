@@ -9,14 +9,67 @@ export default new Vuex.Store({
     authToken: localStorage.getItem("authToken") || null,
     user: null,
     data: null,
-    formData: {}
+    isForegin: false,
+    leaderList: [
+      {
+        id: 1,
+        title: 'Единственный участник (один участник с долей 100%)'
+      },
+      {
+        id: 2,
+        title: 'Общее собрание участников (несколько участников)'
+      },
+      {
+        id: 3,
+        title: 'Индивидуальный предприниматель'
+      },
+      {
+        id: 4,
+        title: 'Единственный акционер'
+      },
+      {
+        id: 5,
+        title: 'Общее собрание акционеров (несколько акционеров'
+      },
+    ],
+    leaderType: [
+      {
+        id: 1,
+        title: 'Руководитель'
+      },
+      {
+        id: 2,
+        title: 'Управляющая компания'
+      }
+    ],
+    dataCompany: {}
   },
   getters: {
+    isList (state) {
+      const result = []
+      state.leaderList.map((item) => {
+        result.push(item.title)
+      })
+      return result
+    },
+    isLeaderType (state) {
+      const result = []
+      state.leaderType.map((item) => {
+        result.push(item.title)
+      })
+      return result
+    }
   },
   mutations: {
     toggleDrawer(state, value) {
       state.drawer = value;
     },
+    setDataCompany(state, value){
+      state.dataCompany = value;
+    },
+    isForeginStatus(state, status) {
+      state.isForegin = status
+    }
   },
   actions: {
   },
