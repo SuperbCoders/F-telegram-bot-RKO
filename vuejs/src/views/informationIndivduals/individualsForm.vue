@@ -20,7 +20,7 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Имя</p>
-        <v-text-field id="oldName" v-model="currentData.account_own_lastname" placeholder="Введите имя" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_own_firstname" placeholder="Введите имя" class="align-center border-none" outlined
           :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
