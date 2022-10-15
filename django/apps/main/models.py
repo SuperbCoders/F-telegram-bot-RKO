@@ -1,5 +1,6 @@
 from pyexpat import model
 import random
+from re import S
 import string
 
 from django.contrib.auth.models import AbstractUser
@@ -87,9 +88,10 @@ class LoanRequest(models.Model):
     account_own_piece = models.CharField(max_length=MAX_STRING_LENGTH)
     
     assigned_publ_pers_relation = models.CharField(max_length=MAX_STRING_LENGTH)
+    assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
     account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH)
     
-    accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
+    account_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
     account_own_mail = models.CharField(max_length=MAX_STRING_LENGTH)
     
     first_passport_page = models.ImageField(
@@ -101,6 +103,7 @@ class LoanRequest(models.Model):
     passport_serial = models.CharField(max_length=MAX_STRING_LENGTH)
     passport_number = models.CharField(max_length=MAX_STRING_LENGTH)
     issued_by = models.CharField(max_length=MAX_STRING_LENGTH)
+    division_code = models.CharField(max_length=MAX_STRING_LENGTH)
     date_issue = models.DateField()
     validity = models.DateField()
     
@@ -120,11 +123,14 @@ class LoanRequest(models.Model):
 
     employers_volume = models.IntegerField()
     salary_debt = models.IntegerField()
+
     company_group_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    
     start_date = models.DateField()
     end_date = models.DateField()
     group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH)
+    
+    beneficiaries = models.BooleanField()
+    
     loan_amount = models.IntegerField()
     loan_time = models.IntegerField()
     loan_rate = models.FloatField()
@@ -133,7 +139,16 @@ class LoanRequest(models.Model):
         blank=True,
         null=True,
     )
+
     planned_operations = models.CharField(max_length=MAX_STRING_LENGTH)
+    
+    account_operations = models.CharField(max_length=MAX_STRING_LENGTH)
+    operation__volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
+    cash_source = models.CharField(max_length=MAX_STRING_LENGTH)
+    outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    state_employers = models.CharField(max_length=MAX_STRING_LENGTH)
+
     rate = models.CharField(max_length=MAX_STRING_LENGTH)
     tariff = models.CharField(max_length=MAX_STRING_LENGTH)
     telegram_chat_id = models.CharField(max_length=140, blank=True)
