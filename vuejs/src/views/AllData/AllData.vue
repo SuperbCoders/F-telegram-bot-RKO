@@ -24,7 +24,13 @@
                     </p>
                 </div>
                 <div class="data_table_block">
-                    <p class="form_block_title">
+                    <div v-if="test(item[1])" class="form_block_title">
+                        <!-- <div v-if="test(item[1])"></div> -->
+                        <div v-for="(item, index) in item[1]" :key="index">
+                            <p class="text-left">{{ item }}</p>
+                        </div>
+                    </div>
+                    <p class="text-left form_block_title" v-else>
                         {{ item[1] }}
                     </p>
                 </div>
@@ -55,11 +61,9 @@ export default {
         },
         test (element) {
             if (Array.isArray(element)) {
-                element.map((item) => {
-                    console.log('элемент', item)
-                })
+                return true
             } else if(element !== '' || null) {
-                return element
+                return false
             }
         },
         isTitle (element) {
