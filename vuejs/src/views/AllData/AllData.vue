@@ -68,7 +68,6 @@ export default {
             switch (element) {
                 case 'tariff': return 'Тариф'
                 case 'account_birth_place': return 'Место рождения'
-                case 'account_birth_place': return 'Дата рождения'
                 case 'account_onw_inn': return 'Инн'
                 case 'account_onw_role': return 'Роль'
                 case 'account_own_citizenship': return 'Гражданство'
