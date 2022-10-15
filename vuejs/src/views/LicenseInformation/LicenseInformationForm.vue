@@ -24,7 +24,7 @@
         name="oldName"
         :rules="requiredRules"
         outlined
-        v-model="licence_number"
+        v-model="currentData.licence_number"
         :required="true"
       ></v-text-field>
     </div>
@@ -35,7 +35,7 @@
         placeholder="Наименование"
         class="align-center border-none"
         name="oldName"
-        v-model="licence_issued_by"
+        v-model="currentData.licence_issued_by"
         :rules="requiredRules"
         outlined
         :required="true"
