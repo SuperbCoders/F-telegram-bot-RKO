@@ -21,7 +21,7 @@
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
                 <div class="data_table_block">
                     <p class="form_block_title">
-                        {{item[0] }}
+                        {{isTitle(item[0]) }}
                     </p>
                 </div>
                 <div class="data_table_block">
@@ -45,7 +45,6 @@ export default {
     },
     methods: {
         async sendData() {
-
             this.$store.commit('IsFormData')
             this.isResult = new FormData();
             await fetch("http://localhost:8000/loan-application/create/", {
@@ -65,17 +64,27 @@ export default {
                 return element
             }
         },
-        // isTitle (element) {
-        //     switch (element) {
-        //         case 'tariff': return 'Тариф'
-        //         case 'tariff': return 'Тариф'
-        //         case 'tariff': return 'Тариф'
-        //         case 'tariff': return 'Тариф'
-        //         case 'tariff': return 'Тариф'
-        //         case 'tariff': return 'Тариф'
-        //         case 'tariff': return 'Тариф'
-        //     }
-        // }
+        isTitle (element) {
+            switch (element) {
+                case 'tariff': return 'Тариф'
+                case 'account_birth_place': return 'Место рождения'
+                case 'account_birth_place': return 'Дата рождения'
+                case 'account_onw_inn': return 'Инн'
+                case 'account_onw_role': return 'Роль'
+                case 'account_own_citizenship': return 'Гражданство'
+                case 'account_own_firstname': return 'Имя'
+                case 'account_own_lastname': return 'Фамилия'
+                case 'account_own_surname': return 'Отчество'
+                case 'account_own_mail': return 'Адрес фактического проживания'
+                case 'account_own_name': return 'Пол'
+                case 'account_own_phone': return 'Телефон'
+                case 'account_own_piece': return 'Доля владения'
+                case 'account_own_registration': return 'Адрес регистрации'
+                case 'account_own_snils': return 'Снилс'
+                case 'accownt_own_living': return 'Адрес проживания'
+                // case 'tariff': return 'Тариф'
+            }
+        }
     },
     computed: {
         isResult() {
