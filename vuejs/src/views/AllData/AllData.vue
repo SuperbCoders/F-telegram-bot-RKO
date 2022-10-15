@@ -1,22 +1,6 @@
 <template>
     <div>
-        <div>
-            <span>ИНН</span>
-        </div>
         <div class="all_data_table">
-            <div class="all_data_table-row d-flex">
-                <div class="data_table_block">
-                    <p class="form_block_title ">
-                        Ключ
-                    </p>
-                </div>
-                <div class="data_table_block">
-                    <p class="form_block_title">
-                       Значение
-                    </p>
-                </div>
-                <hr>
-            </div>
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
                 <div class="data_table_block">
                     <p class="form_block_title">
