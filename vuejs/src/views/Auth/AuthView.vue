@@ -100,8 +100,6 @@ export default {
     },
     valid: true,
     name: "",
-    phone_number: "",
-    name_company: "",
     maskPhone: {
 
     },
@@ -129,7 +127,7 @@ export default {
   mounted(){
     const phone = this.$route.query?.phone;
     if(phone){
-      this.currentData.phone = phone;
+      this.currentData.contact_number = phone;
     }
   },
 
@@ -149,7 +147,6 @@ export default {
         if(company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
           this.name_company = company?.suggestions[0].value
-          this.currentData.company_name = company?.suggestions[0].value;
         }
       }
     },

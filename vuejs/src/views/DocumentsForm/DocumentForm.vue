@@ -55,11 +55,11 @@ export default {
     return {
       valid: true,
       currentData: {
-        inn: null,
-        snils: null,
-        citizenship: null,
-        phone: null,
-        ownershipShare: null
+        account_onw_inn: null,
+        account_own_snils: null,
+        account_own_citizenship: null,
+        account_own_phone: null,
+        account_own_piece: null
       },
       requiredRules: [(v) => !!v || "Это поле обязательно"],
       innRules: [
