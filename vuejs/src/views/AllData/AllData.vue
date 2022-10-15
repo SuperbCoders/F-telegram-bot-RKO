@@ -46,10 +46,15 @@ export default {
     methods: {
         async sendData() {
             this.$store.commit('IsFormData')
-            this.isResult = new FormData();
+            this.FormData = new FormData();
+            this.FormData.append("test", 1);
+
             await fetch("http://localhost:8000/loan-application/create/", {
                 method: "POST",
-                body: this.isResult,
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(this.isResult),
             })
 
             this.$router.push("/already")
@@ -68,7 +73,6 @@ export default {
             switch (element) {
                 case 'tariff': return 'Тариф'
                 case 'account_birth_place': return 'Место рождения'
-                case 'account_birth_place': return 'Дата рождения'
                 case 'account_onw_inn': return 'Инн'
                 case 'account_onw_role': return 'Роль'
                 case 'account_own_citizenship': return 'Гражданство'
