@@ -86,11 +86,7 @@ export default {
   methods: {
     setTarif(tarif) {
       const data = this.$store.state.formData
-      let result = {}
       this.$store.commit('addItemFormData', { tariff:tarif })
-      data.map((item) => {
-        result = Object.assign(item, result)
-      })
       this.$router.push('/all-data')
     }
   }
