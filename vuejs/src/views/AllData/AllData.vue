@@ -3,7 +3,6 @@
         <div>
             <span>ИНН</span>
         </div>
-        {{  test(List) }}
         <div class="all_data_table">
             <div class="all_data_table-row d-flex">
                 <div class="data_table_block">
@@ -59,7 +58,7 @@ export default {
                 element.map((item) => {
                     console.log('элемент', item)
                 })
-            } else if(element !== 0 && null) {
+            } else if(element !== '' || null) {
                 return element
             }
         },
