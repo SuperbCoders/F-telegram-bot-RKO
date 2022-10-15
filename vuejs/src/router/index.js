@@ -74,7 +74,7 @@ const routes = [
   },
   {
     path: "/approvals",
-    name: "purposes",
+    name: "approvals",
     component: Approvals
   },
   {

@@ -10,7 +10,7 @@
                 </v-checkbox>
             </div>
         </div>
-        <v-btn block large :disabled="!isList" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
+        <v-btn block large :disabled="!isList" @click="redirect()" class="mt-10 auth_form_bth" color="primary">Продолжить
         </v-btn>
     </div>
 </template>
@@ -66,6 +66,11 @@ export default {
                     value: 'Компания не относиться к указанным в настоящем пунтке юридическим лицам'
                 }
             ]
+        }
+    },
+    methods: {
+        redirect () {
+         this.$router.push('/rate')
         }
     },
     computed: {

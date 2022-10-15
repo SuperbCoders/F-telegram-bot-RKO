@@ -8,9 +8,9 @@
       <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
       </v-checkbox>
       <v-checkbox label="Учредитель" value="red" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.currentData.account_onw_role" label="Бенефированый владелец" value="Бенефированый владелец" hide-details>
+      <v-checkbox v-model="currentData.account_onw_role" label="Бенефированый владелец" value="Бенефированый владелец" hide-details>
       </v-checkbox>
-      <v-checkbox v-model="currentData.currentData.account_onw_role" label="Подписант" value="red" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.account_onw_role" label="Подписант" value="red" hide-details></v-checkbox>
       <p v-if="!valid && currentData.listRole.length < 1" class="error_message">Выберите пункт</p>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">Фамилия</p>

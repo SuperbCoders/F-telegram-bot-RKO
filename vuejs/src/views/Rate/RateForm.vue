@@ -79,9 +79,15 @@ export default {
   methods: {
     sendData(tarif){
       tarif;
+      const data = this.$store.state.formData
+      let result = {}
+      data.map((item) => {
+        result = Object.assign(item, result)
+      })
+      console.log('result', result)
+      this.$store.commit('isFormData')
       const formData = new FormData();
       formData.append("tariff", tarif);
-      
       fetch("http://localhost:8000/loan-application/create/", {
         method: "POST",
         body: formData,

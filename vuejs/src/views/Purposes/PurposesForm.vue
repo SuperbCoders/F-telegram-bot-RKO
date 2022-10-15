@@ -54,7 +54,6 @@
         value="Заменные средства (займы от третих лиц, учредителей и т.д)" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.cash_source" label="Иные" value="Иные" hide-details></v-checkbox>
     </div>
-    {{ currentData.sourceOfOrigin }}
     <p v-if="!valid && !isValidatesourceOfOrigin" class="error_message">Выберите поле</p>
     <div class="form_block mt-10">
       <p class="form_block_title">Штатная численость сотрудников</p>
@@ -79,8 +78,8 @@ export default {
         operation_volume: null,
         sum_per_month: null,
         outside_contracts_volume: null,
-        cash_source: null,
-        state_employers: []
+        state_employers: null,
+        cash_source: []
       }
 
     }
@@ -89,7 +88,7 @@ export default {
     validate() {
       if (this.isValidation) {
         this.$store.commit('addItemFormData', this.currentData)
-        this.$router.push('/license-info')
+        this.$router.push('/approvals')
       }
       else {
         this.valid = false
@@ -98,13 +97,13 @@ export default {
   },
   computed: {
     isValidateInformationGoals () {
-      if (this.currentData.informationGoals.length < 1) {
+      if (this.currentData.account_operations.length < 1) {
         return false
       }
       return true
     },
     isValidatesourceOfOrigin () {
-      if (this.currentData.sourceOfOrigin.length < 1) {
+      if (this.currentData.cash_source.length < 1) {
         return false
       }
       return true
