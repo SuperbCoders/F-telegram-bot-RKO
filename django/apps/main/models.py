@@ -138,7 +138,13 @@ class LoanRequest(models.Model):
         blank=True,
         null=True,
     )
+
     planned_operations = models.CharField(max_length=MAX_STRING_LENGTH)
+    
+    account_operations = models.CharField(max_length=MAX_STRING_LENGTH)
+    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
+
     rate = models.CharField(max_length=MAX_STRING_LENGTH)
     tariff = models.CharField(max_length=MAX_STRING_LENGTH)
     telegram_chat_id = models.CharField(max_length=140, blank=True)
