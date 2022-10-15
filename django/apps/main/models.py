@@ -90,7 +90,7 @@ class LoanRequest(models.Model):
     assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH)
     account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH)
     
-    accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
+    account_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
     account_own_mail = models.CharField(max_length=MAX_STRING_LENGTH)
     
     first_passport_page = models.ImageField(
