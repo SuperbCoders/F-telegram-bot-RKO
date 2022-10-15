@@ -91,7 +91,7 @@ export default {
       data.map((item) => {
         result = Object.assign(item, result)
       })
-      this.$store.commit('isFormData')
+      this.$store.commit('IsFormData')
       const formData = new FormData();
       formData.append("tariff", tarif);
       fetch("http://localhost:8000/loan-application/create/", {
