@@ -85,19 +85,9 @@ export default {
   },
   methods: {
     setTarif(tarif) {
-      const data = this.$store.state.formData
-      let result = {}
-      this.$store.commit('addItemFormData', this.currentData.tariff)
-      data.map((item) => {
-        result = Object.assign(item, result)
-      })
-      this.$store.commit('IsFormData')
-      const formData = new FormData();
-      formData.append("tariff", tarif);
-      fetch("http://localhost:8000/loan-application/create/", {
-        method: "POST",
-        body: result,
-      })
+      // const data = this.$store.state.formData
+      this.$store.commit('addItemFormData', { tariff:tarif })
+      this.$router.push('/all-data')
     }
   }
 }
