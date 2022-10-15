@@ -19,7 +19,7 @@
                 <hr>
             </div>
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
-                <div v-if="item[1] !== ''" class="data_table_block">
+                <div class="data_table_block">
                     <p class="form_block_title">
                         {{isTitle(item[0]) }}
                     </p>
@@ -123,11 +123,11 @@ export default {
         isResult() {
             return this.$store.state.result;
         },
-        isValueString (value) {
-          if (value[1] !== '') {
-            return true
-          }
-        }
+        // isValueString (value) {
+        //   if (value[1] !== '' && null) {
+        //     return true
+        //   }
+        // }
     },
     mounted() {
         this.$store.commit('IsFormData')
