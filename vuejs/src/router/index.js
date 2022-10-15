@@ -22,6 +22,8 @@ import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.
 import Beneficiaries from '../views/Beneficiaries/BeneficiariesForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
 import Purposes from '../views/Purposes/PurposesForm.vue'
+import Approvals from '../views/Approvals/ApprovalsForm.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -69,6 +71,11 @@ const routes = [
     path: "/purposes",
     name: "purposes",
     component: Purposes
+  },
+  {
+    path: "/approvals",
+    name: "purposes",
+    component: Approvals
   },
   {
     path: "/intelligence",

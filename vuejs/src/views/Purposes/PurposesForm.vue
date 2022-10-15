@@ -88,6 +88,8 @@ export default {
   methods: {
     validate() {
       if (this.isValidation) {
+        this.$store.commit('addItemFormData', this.currentData)
+        this.$router.push('/license-info')
       }
       else {
         this.valid = false
