@@ -87,6 +87,7 @@ class LoanRequest(models.Model):
     account_own_piece = models.CharField(max_length=MAX_STRING_LENGTH)
     
     assigned_publ_pers_relation = models.CharField(max_length=MAX_STRING_LENGTH)
+    assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH)
     account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH)
     
     accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
