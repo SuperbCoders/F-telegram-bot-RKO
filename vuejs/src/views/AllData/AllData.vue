@@ -25,7 +25,7 @@
                 </div>
                 <div class="data_table_block">
                     <p class="form_block_title">
-                        {{ test(item[1]) }}
+                        {{ item[1] }}
                     </p>
                 </div>
                 <hr>
@@ -106,6 +106,7 @@ export default {
                 case 'passport_serial': return 'Серия паспорта'
                 case 'physic_address': return 'Физический адрес'
                 case 'placeOfBirth': return 'Место рождения'
+                case 'operation_volume': return 'Количество операций по безлимитным платежам в месяц'
                 case 'planned_operations': return 'Сведения о планируемых опреациях по счету'
                 case 'start_date': return 'Дата начала действия'
                 case 'supreme_management_body': return 'Тип'
