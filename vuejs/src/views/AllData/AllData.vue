@@ -24,10 +24,10 @@
                     </p>
                 </div>
                 <div class="data_table_block">
-                    <div v-if="test(item[1])" class="form_block_title">
+                    <div v-if="test(item[1])" class="form_block_title d-block">
                         <!-- <div v-if="test(item[1])"></div> -->
-                        <div v-for="(item, index) in item[1]" :key="index">
-                            <p class="text-left">{{ item }}</p>
+                        <div class="d-flex" v-for="(item, index) in item[1]" :key="index">
+                            <p class="d-flex" >{{ index + 1}})  {{ item }}</p>
                         </div>
                     </div>
                     <p class="text-left form_block_title" v-else>
