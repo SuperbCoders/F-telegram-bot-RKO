@@ -1,5 +1,6 @@
 from pyexpat import model
 import random
+from re import S
 import string
 
 from django.contrib.auth.models import AbstractUser
@@ -122,8 +123,8 @@ class LoanRequest(models.Model):
 
     employers_volume = models.IntegerField()
     salary_debt = models.IntegerField()
+
     company_group_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    
     start_date = models.DateField()
     end_date = models.DateField()
     group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH)
@@ -142,8 +143,11 @@ class LoanRequest(models.Model):
     planned_operations = models.CharField(max_length=MAX_STRING_LENGTH)
     
     account_operations = models.CharField(max_length=MAX_STRING_LENGTH)
-    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    operation__volume = models.CharField(max_length=MAX_STRING_LENGTH)
     sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
+    cash_source = models.CharField(max_length=MAX_STRING_LENGTH)
+    outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    state_employers = models.CharField(max_length=MAX_STRING_LENGTH)
 
     rate = models.CharField(max_length=MAX_STRING_LENGTH)
     tariff = models.CharField(max_length=MAX_STRING_LENGTH)
