@@ -59,7 +59,7 @@ export default {
                 element.map((item) => {
                     console.log('элемент', item)
                 })
-            } else {
+            } else if(element !== 0 && null) {
                 return element
             }
         },
@@ -93,6 +93,27 @@ export default {
                 case 'salary_debt': return 'Задолжность по зп'
                 case 'state_employers': return 'Штатная численость сотрудников'
                 case 'sum_per_month': return 'Сумма по снятию за месяц'
+                case 'date_issue': return 'Дата выдачи'
+                case 'division_code': return 'Код подразделения'
+                case 'employers_volume': return 'Численность персонала'
+                case 'end_date': return 'Дата окончания действия'
+                case 'groupList': return 'Список групп'
+                case 'group_members': return 'Состав группы компаний'
+                case 'issued_by': return 'Кем выдан'
+                case 'legal_address': return 'Юридический адрес'
+                case 'mail_address': return 'Количество операций по безлимитным платежам в месяц'
+                case 'outside_contracts_volume': return 'Количество операций по безлимитным платежам в месяц'
+                case 'passport_number': return 'Номер паспорта'
+                case 'passport_serial': return 'Серия паспорта'
+                case 'physic_address': return 'Физический адрес'
+                case 'placeOfBirth': return 'Место рождения'
+                case 'planned_operations': return 'Сведения о планируемых опреациях по счету'
+                case 'start_date': return 'Дата начала действия'
+                case 'supreme_management_body': return 'Тип'
+                case 'supreme_management_inn': return 'Инн'
+                case 'supreme_management_type': return 'Роль'
+                case 'typeDocumnet': return 'Тип документа'
+                case 'validity': return 'Срок действия'
                 // case 'accownt_own_living': return 'Адрес проживания'
                 // case 'tariff': return 'Тариф'
             }
