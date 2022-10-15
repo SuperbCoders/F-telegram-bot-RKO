@@ -127,6 +127,9 @@ class LoanRequest(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH)
+    
+    beneficiaries = models.BooleanField()
+    
     loan_amount = models.IntegerField()
     loan_time = models.IntegerField()
     loan_rate = models.FloatField()
