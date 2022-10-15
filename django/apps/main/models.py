@@ -143,7 +143,7 @@ class LoanRequest(models.Model):
     planned_operations = models.CharField(max_length=MAX_STRING_LENGTH)
     
     account_operations = models.CharField(max_length=MAX_STRING_LENGTH)
-    operation__volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH)
     sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
     cash_source = models.CharField(max_length=MAX_STRING_LENGTH)
     outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH)
