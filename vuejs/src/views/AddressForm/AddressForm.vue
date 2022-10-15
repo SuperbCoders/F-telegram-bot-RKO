@@ -3,7 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
     <div class="form_block">
       <p class="text-left form_block_title">Адрес фактического проживания</p>
-      <v-radio-group v-model="currentData.isAddress" mandatory>
+      <v-radio-group v-model="currentData.account_own_mail" mandatory>
         <v-radio label="Совпадает с адресом регистации" value="true"></v-radio>
         <v-radio label="Не совпадает с адресом регистации" value="false"></v-radio>
       </v-radio-group>
@@ -12,7 +12,7 @@
           Адрес фактического проживания
         </p>
         <v-text-field id="oldName" placeholder="Введите адрес" class="align-center border-none mt-5"
-          :rules="requiredRules" v-model="currentData.Address" outlined :required="true"></v-text-field>
+          :rules="requiredRules" v-model="currentData.account_own_mail" outlined :required="true"></v-text-field>
       </div>
     </div>
     </v-form>
@@ -30,8 +30,7 @@ export default {
     return {
       valid: false,
       currentData: {
-        isAddress: null,
-        Address: null
+        accownt_own_living: null
       },
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     }

@@ -8,7 +8,7 @@
           placeholder="Введите адрес"
           class="align-center border-none"
           outlined
-          v-model="currentData.placeOfBirth"
+          v-model="currentData.account_birth_place"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -29,7 +29,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="currentData.dateOfBirh"
+              v-model="currentData.account_datebirth"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -37,7 +37,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="currentData.dateOfBirh"
+            v-model="currentData.account_datebirth"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -65,7 +65,7 @@
           class="align-center border-none"
           v-mask="'## ##'"
           masked="true"
-          v-model="currentData.serialDocument"
+          v-model="currentData.passport_serial"
           outlined
           :required="true"
         ></v-text-field>
@@ -81,6 +81,7 @@
           v-mask="'######'"
           masked="true"
           outlined
+          v-model="currentData.passport_number"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -92,7 +93,7 @@
           placeholder="Наименование"
           class="align-center border-none"
           outlined
-          v-model="currentData.issued"
+          v-model="currentData.issued_by"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -104,7 +105,7 @@
         <v-text-field
           id="oldName"
           placeholder="Введите имя"
-          v-model="currentData.codeDocument"
+          v-model="currentData.division_code"
           class="align-center border-none"
           outlined
           :required="true"
@@ -126,7 +127,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="currentData.dateOfBirh"
+              v-model="currentData.date_issue"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -134,7 +135,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="currentData.dateOfBirh"
+            v-model="currentData.date_issue"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -155,7 +156,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="currentData.dateOfIssue"
+              v-model="currentData.validity"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -163,7 +164,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="currentData.dateOfIssue"
+            v-model="currentData.validity"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>

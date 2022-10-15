@@ -3,31 +3,31 @@
     <h3 class="form_block_label">Сведения о планируемых опреациях по счету</h3>
     <div class="form_block">
       <v-checkbox
-        v-model="currentData.operationlist"
+        v-model="currentData.planned_operations"
         label="Договор купли продажи (товарный)"
         value="Договор купли продажи (товарный)"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="currentData.operationlist"
+        v-model="currentData.planned_operations"
         label="Агенсткий договор"
         value="Агенсткий договор"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="currentData.operationlist"
+        v-model="currentData.planned_operations"
         label="Договор комиссии"
         value="Договор комиссии"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="currentData.operationlist"
+        v-model="currentData.planned_operations"
         label="Договор купли продажи ценных бумаг"
         value="Договор купли продажи ценных бумаг"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="currentData.operationlist"
+        v-model="currentData.planned_operations"
         label="Договор аренды"
         value="Договор аренды"
         hide-details
@@ -55,13 +55,13 @@ export default {
     return {
       valid: true,
       currentData: {
-        operationlist: []
+        planned_operations: []
       },
     };
   },
   methods: {
     validate() {
-      if (this.valid && this.currentData.operationlist.length < 1) {
+      if (this.valid && this.currentData.planned_operations.length < 1) {
         this.valid = false;
       } else {
         this.valid = true;

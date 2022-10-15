@@ -6,7 +6,7 @@
       <p class="text-left form_block_title">Численность персонала</p>
       <v-text-field
         id="oldName"
-        v-model="currentData.personalNumber"
+        v-model="currentData.employers_volume"
         placeholder="Наименование"
         class="align-center border-none"
         name="oldName"
@@ -19,7 +19,7 @@
       <p class="text-left form_block_input">Задолжность по зп</p>
       <v-text-field
         id="oldName"
-        v-model="currentData.personalDebt"
+        v-model="currentData.salary_debt"
         placeholder="Количество"
         class="align-center border-none form_block_input"
         name="oldName"
@@ -53,8 +53,8 @@ export default {
       requiredRules: [(v) => !!v || "Это поле обязательно"],
       test: false,
       currentData: {
-        personalNumber: null,
-        personalDebt: null
+        employers_volume: null,
+        salary_debt: null
       }
     }
   },

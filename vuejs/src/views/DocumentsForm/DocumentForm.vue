@@ -4,14 +4,14 @@
       <div class="form_block mt-5">
         <p class="text-left form_block_title">ИНН</p>
 
-        <v-text-field id="oldName" v-model="currentData.inn" placeholder="Введите ИНН" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_onw_inn" placeholder="Введите ИНН" class="align-center border-none" outlined
           :rules="innRules" :required="true">
 
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">СНИЛС (при наличии)</p>
-        <v-text-field id="oldName" v-model="currentData.snils" placeholder="СНИЛС" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_own_snils" placeholder="СНИЛС" class="align-center border-none" outlined
 
          :required="true">
         </v-text-field>
@@ -20,7 +20,7 @@
         <p class="text-left form_block_title">Гражданство</p>
 
         <v-text-field id="oldName" placeholder="Гражданство" class="align-center border-none" outlined
-          :rules="requiredRules" v-model="currentData.citizenship" :required="true">
+          :rules="requiredRules" v-model="currentData.account_own_citizenship" :required="true">
 
         </v-text-field>
       </div>
@@ -29,14 +29,14 @@
 
         <v-text-field id="oldName" placeholder="Телефон" v-mask="'+# (###) ### ## ##'"
           masked="true" class="align-center border-none" outlined
-          :rules="requiredRules" v-model="currentData.phone" :required="true">
+          :rules="requiredRules" v-model="currentData.account_own_phone" :required="true">
 
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Доля владения</p>
         <v-text-field id="oldName" placeholder="Доля владения" class="align-center border-none" outlined
-          :rules="requiredRules" v-model="currentData.ownershipShare" :required="true">
+          :rules="requiredRules" v-model="currentData.account_own_piece" :required="true">
         </v-text-field>
       </div>
       <line-step :step='4' />

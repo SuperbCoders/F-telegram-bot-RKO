@@ -5,22 +5,22 @@
 
       </div>
       <p class="text-left form_block_title">Роль лица</p>
-      <v-checkbox label="Руководитель" v-model="currentData.listRole" value="Руководитель" hide-details>
+      <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
       </v-checkbox>
       <v-checkbox label="Учредитель" value="red" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.listRole" label="Бенефированый владелец" value="Бенефированый владелец" hide-details>
+      <v-checkbox v-model="currentData.currentData.account_onw_role" label="Бенефированый владелец" value="Бенефированый владелец" hide-details>
       </v-checkbox>
-      <v-checkbox v-model="currentData.listRole" label="Подписант" value="red" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.currentData.account_onw_role" label="Подписант" value="red" hide-details></v-checkbox>
       <p v-if="!valid && currentData.listRole.length < 1" class="error_message">Выберите пункт</p>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">Фамилия</p>
-        <v-text-field id="oldName" v-model="currentData.surname" placeholder="Введите фамилию" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Введите фамилию" class="align-center border-none" outlined
           :rules="requiredRules" :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Имя</p>
-        <v-text-field id="oldName" v-model="currentData.lastname" placeholder="Введите имя" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_own_lastname" placeholder="Введите имя" class="align-center border-none" outlined
           :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
@@ -28,7 +28,7 @@
         <v-text-field id="oldName" v-model="currentData.patronymic" placeholder="Напишите адрес" class="align-center border-none" outlined
          :required="true"></v-text-field>
       </div>
-      <v-radio-group v-model="currentData.gender" mandatory>
+      <v-radio-group v-model="currentData.account_own_name" mandatory>
         <v-radio  label="Мужской" value="Мужской"></v-radio>
         <v-radio  label="Женский" value="Женский">
         </v-radio>

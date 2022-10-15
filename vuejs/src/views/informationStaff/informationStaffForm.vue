@@ -7,17 +7,17 @@
       <div class="form_block">
         <p class="text-left form_block_title">Название группы компаний</p>
         <v-text-field id="oldName" placeholder="Напишите назание" class="align-center border-none" name="oldName"
-          outlined :rules="requiredRules" :required="true"></v-text-field>
+          v-model="currentData.company_group_name" outlined :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Дата начала действия</p>
         <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate" outlined
-              append-icon="mdi-calendar-blank" readonly v-model="currentData.dateStarting" :rules="requiredRules" :required="true"
+              append-icon="mdi-calendar-blank" readonly v-model="currentData.start_date" :rules="requiredRules" :required="true"
               v-bind="attrs" v-on="on"></v-text-field>
           </template>
-          <v-date-picker v-model="currentData.dateStarting" @input="passportIssueDateMenu = false"></v-date-picker>
+          <v-date-picker v-model="currentData.start_date" @input="passportIssueDateMenu = false"></v-date-picker>
         </v-menu>
       </div>
       <div class="form_block mb-5">
@@ -26,14 +26,14 @@
           min-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate"
-              append-icon="mdi-calendar-blank" outlined readonly v-model="currentData.dateEnd" :rules="requiredRules"
+              append-icon="mdi-calendar-blank" outlined readonly v-model="currentData.end_date" :rules="requiredRules"
               :required="true" v-bind="attrs" v-on="on"></v-text-field>
           </template>
-          <v-date-picker v-model="currentData.dateEnd" @input="passportIssueDateMenu = false"></v-date-picker>
+          <v-date-picker v-model="currentData.end_date" @input="passportIssueDateMenu = false"></v-date-picker>
         </v-menu>
       </div>
       <h3 class="text-left structure_group_label mb-10">Состав группы компаний</h3>
-      <div v-for="(itemForm, index) in currentData.groupList" :key="index" class="form_input_block">
+      <div v-for="(itemForm, index) in currentData.group_members" :key="index" class="form_input_block">
         <div class="form_block">
           <p class="text-left form_block_title">Название компании</p>
           <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" v-model="itemForm.name"
@@ -73,13 +73,14 @@ export default {
   data: () => ({
     valid: true,
     currentData: {
-      dataStarting: null,
-      dataEnd: null,
-      groupList: [
+      company_group_name: null,
+      start_date: null,
+      end_date: null,
+      group_members: [
         {
-          name: null,
-          inn: null,
-          ogrn: null,
+          company_group_name: null,
+          start_date: null,
+          end_date: null,
         },
       ]
     },
@@ -107,11 +108,11 @@ export default {
         inn: null,
         ogrn: null,
       }
-      this.currentData.groupList.push(defaultGroupItem);
+      this.currentData.group_members.push(defaultGroupItem);
     },
     deleteGroupList() {
-      if (this.currentData.groupList.length > 1) {
-        this.currentData.groupList.pop();
+      if (this.currentData.group_members.length > 1) {
+        this.currentData.group_members.pop();
       }
     },
   },
