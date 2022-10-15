@@ -187,6 +187,9 @@ export default {
       }
     },
   },
+  computed: {
+    
+  },
   components: { LineStep },
 
 };
