@@ -3,7 +3,6 @@
         <div>
             <span>ИНН</span>
         </div>
-        {{  test(List) }}
         <div class="all_data_table">
             <div class="all_data_table-row d-flex">
                 <div class="data_table_block">
@@ -19,14 +18,20 @@
                 <hr>
             </div>
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
-                <div v-if="item[1] !== ''" class="data_table_block">
+                <div class="data_table_block">
                     <p class="form_block_title">
                         {{isTitle(item[0]) }}
                     </p>
                 </div>
                 <div class="data_table_block">
-                    <p class="form_block_title">
-                        {{ test(item[1]) }}
+                    <div v-if="test(item[1])" class="form_block_title d-block">
+                        <!-- <div v-if="test(item[1])"></div> -->
+                        <div class="d-flex" v-for="(item, index) in item[1]" :key="index">
+                            <p class="d-flex" >{{ index + 1}})  {{ item }}</p>
+                        </div>
+                    </div>
+                    <p class="text-left form_block_title" v-else>
+                        {{ item[1] }}
                     </p>
                 </div>
                 <hr>
@@ -61,11 +66,9 @@ export default {
         },
         test (element) {
             if (Array.isArray(element)) {
-                element.map((item) => {
-                    console.log('элемент', item)
-                })
-            } else if(element !== 0 && null) {
-                return element
+                return true
+            } else if(element !== '' || null) {
+                return false
             }
         },
         isTitle (element) {
@@ -112,6 +115,7 @@ export default {
                 case 'passport_serial': return 'Серия паспорта'
                 case 'physic_address': return 'Физический адрес'
                 case 'placeOfBirth': return 'Место рождения'
+                case 'operation_volume': return 'Количество операций по безлимитным платежам в месяц'
                 case 'planned_operations': return 'Сведения о планируемых опреациях по счету'
                 case 'start_date': return 'Дата начала действия'
                 case 'supreme_management_body': return 'Тип'
@@ -128,11 +132,11 @@ export default {
         isResult() {
             return this.$store.state.result;
         },
-        isValueString (value) {
-          if (value[1] !== '') {
-            return true
-          }
-        }
+        // isValueString (value) {
+        //   if (value[1] !== '' && null) {
+        //     return true
+        //   }
+        // }
     },
     mounted() {
         this.$store.commit('IsFormData')
