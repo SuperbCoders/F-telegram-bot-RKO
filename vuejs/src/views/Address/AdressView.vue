@@ -159,8 +159,8 @@ export default {
 
       if (
         this.$refs.form.validate() &&
-        this.currentData.legal_address.length > 0 &&
-        this.currentData.physic_address.length > 0 &&
+        this.currentData.legal_address.length > 0 ||
+        this.currentData.physic_address.length > 0 ||
         this.currentData.mail_address.length > 0 
       ) {
         this.$router.push("/sctructure");
