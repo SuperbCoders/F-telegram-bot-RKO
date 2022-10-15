@@ -22,7 +22,12 @@
           hide-details
         ></v-checkbox>
       </div>
-      <p class="error_message" v-if="!valid && currentData.legal_address != false">
+      <p class="error_message" v-if="
+        !valid && (
+        currentData.legal_address != false ||
+        currentData.physic_address != false ||
+        currentData.mail_address != false )
+        ">
         Выберите пункт
       </p>
       <div
@@ -158,8 +163,12 @@ export default {
       this.$refs.form.validate();
 
       if (
-        this.$refs.form.validate() &&
-        this.currentData.legal_address.length > 0
+        this.$refs.form.validate() && (
+          this.currentData.legal_address ||
+          this.currentData.physic_address ||
+          this.currentData.mail_address
+        )
+        
       ) {
         this.$router.push("/sctructure");
         this.$store.commit("addItemFormData", this.currentData);
