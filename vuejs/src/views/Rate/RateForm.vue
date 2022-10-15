@@ -78,24 +78,25 @@ export default {
   },
   data() {
     return {
-      tarif: '',
+      currentData: {
+        tariff: '',
+      }
     }
   },
   methods: {
-    sendData(tarif) {
-      tarif;
+    setTarif(tarif) {
       const data = this.$store.state.formData
       let result = {}
+      this.$store.commit('addItemFormData', this.currentData.tariff)
       data.map((item) => {
         result = Object.assign(item, result)
       })
-      console.log('result', result)
       this.$store.commit('isFormData')
       const formData = new FormData();
       formData.append("tariff", tarif);
       fetch("http://localhost:8000/loan-application/create/", {
         method: "POST",
-        body: formData,
+        body: result,
       })
     }
   }
