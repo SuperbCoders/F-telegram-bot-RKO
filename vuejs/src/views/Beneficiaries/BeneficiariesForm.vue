@@ -3,7 +3,7 @@
     <h3 class="form_block_label">Выгодоприобретатели</h3>
     <div class="form_block">
       <p class="form_block_title">Имеються ли Выгодоприобретатели</p>
-      <v-radio-group mandatory v-model="isShow" column>
+      <v-radio-group mandatory v-model="currentData.beneficiaries" column>
         <v-radio label="Отсуствуют" value="Отсуствуют"></v-radio>
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
@@ -23,11 +23,15 @@
 export default {
   data() {
     return {
-     isShow: false
+     isShow: false,
+     currentData: {
+      beneficiaries: null
+     }
     };
   },
   methods: {
     redirect () {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/purposes')
     }
   }

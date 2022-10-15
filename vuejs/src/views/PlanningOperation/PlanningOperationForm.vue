@@ -3,31 +3,31 @@
     <h3 class="form_block_label">Сведения о планируемых опреациях по счету</h3>
     <div class="form_block">
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.operationlist"
         label="Договор купли продажи (товарный)"
         value="Договор купли продажи (товарный)"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.operationlist"
         label="Агенсткий договор"
         value="Агенсткий договор"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.operationlist"
         label="Договор комиссии"
         value="Договор комиссии"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.operationlist"
         label="Договор купли продажи ценных бумаг"
         value="Договор купли продажи ценных бумаг"
         hide-details
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.operationlist"
         label="Договор аренды"
         value="Договор аренды"
         hide-details
@@ -49,27 +49,26 @@
 </template>
 
 <script>
-import line_step from '../../components/line_step/line_step.vue';
 
 export default {
   data() {
     return {
       valid: true,
-      operationlist: [],
+      currentData: {
+        operationlist: []
+      },
     };
   },
   methods: {
     validate() {
-      if (this.valid && this.operationlist.length < 1) {
+      if (this.valid && this.currentData.operationlist.length < 1) {
         this.valid = false;
       } else {
         this.valid = true;
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/beneficiaries");
       }
     },
-  },
-  components: {
-    line_step
   }
 };
 </script>
