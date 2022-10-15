@@ -58,7 +58,6 @@ export default {
             if (Array.isArray(element)) {
                 element.map((item) => {
                     console.log('элемент', item)
-                    return item
                 })
             } else {
                 return element
@@ -68,6 +67,7 @@ export default {
             switch (element) {
                 case 'tariff': return 'Тариф'
                 case 'account_birth_place': return 'Место рождения'
+                case 'account_datebirth': return 'Дата рождения'
                 case 'account_onw_inn': return 'Инн'
                 case 'account_onw_role': return 'Роль'
                 case 'account_own_citizenship': return 'Гражданство'
@@ -80,7 +80,20 @@ export default {
                 case 'account_own_piece': return 'Доля владения'
                 case 'account_own_registration': return 'Адрес регистрации'
                 case 'account_own_snils': return 'Снилс'
+                case 'account_operations': return 'Рассчетно касовое обслуживание'
                 case 'accownt_own_living': return 'Адрес проживания'
+                case 'assigned_publ_pers_registraion': return 'Адрес регистрации'
+                case 'assigned_publ_pers_relation': return 'Степень родства либо статус (супруг или супруга) по отношению кпубличному должностному лицу'
+                case 'beneficiaries': return 'Выгодоприобретатели'
+                case 'cash_source': return 'Источники происхождения денежных средств'
+                case 'collegiate_body': return 'Наименования наблюдательного совета'
+                case 'collegiate_person': return 'Наименование коллегиального исполнительног органа'
+                case 'company_group_name': return 'Наименование группы компаний'
+                case 'company_name': return 'Наименование группы компаний'
+                case 'salary_debt': return 'Задолжность по зп'
+                case 'state_employers': return 'Штатная численость сотрудников'
+                case 'sum_per_month': return 'Сумма по снятию за месяц'
+                // case 'accownt_own_living': return 'Адрес проживания'
                 // case 'tariff': return 'Тариф'
             }
         }
