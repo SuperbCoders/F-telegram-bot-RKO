@@ -87,7 +87,7 @@ class LoanRequest(models.Model):
     account_own_piece = models.CharField(max_length=MAX_STRING_LENGTH)
     
     assigned_publ_pers_relation = models.CharField(max_length=MAX_STRING_LENGTH)
-    assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH)
+    assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
     account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH)
     
     account_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
@@ -102,6 +102,7 @@ class LoanRequest(models.Model):
     passport_serial = models.CharField(max_length=MAX_STRING_LENGTH)
     passport_number = models.CharField(max_length=MAX_STRING_LENGTH)
     issued_by = models.CharField(max_length=MAX_STRING_LENGTH)
+    division_code = models.CharField(max_length=MAX_STRING_LENGTH)
     date_issue = models.DateField()
     validity = models.DateField()
     
