@@ -3,8 +3,34 @@
         <div>
             <span>ИНН</span>
         </div>
+        {{  test(List) }}
         <div class="all_data_table">
-            
+            <div class="all_data_table-row d-flex">
+                <div class="data_table_block">
+                    <p class="form_block_title ">
+                        Ключ
+                    </p>
+                </div>
+                <div class="data_table_block">
+                    <p class="form_block_title">
+                       Значение
+                    </p>
+                </div>
+                <hr>
+            </div>
+            <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
+                <div class="data_table_block">
+                    <p class="form_block_title">
+                        {{item[0] }}
+                    </p>
+                </div>
+                <div class="data_table_block">
+                    <p class="form_block_title">
+                        {{ test(item[1]) }}
+                    </p>
+                </div>
+                <hr>
+            </div>
         </div>
         <v-btn elevation="2" class="card_content_button" large @click="sendData()">Отправить</v-btn>
     </div>
@@ -14,10 +40,8 @@ export default {
     data() {
         return {
             formData: {},
+            List: ['fwwfawfa', 'gagawgwg', 'wgawagwaggwa']
         }
-    },
-    mounted() {
-        this.$store.commit('IsFormData')
     },
     methods: {
         async sendData() {
@@ -26,17 +50,41 @@ export default {
             this.isResult = new FormData();
             await fetch("http://localhost:8000/loan-application/create/", {
                 method: "POST",
-                body: isResult,
+                body: this.isResult,
             })
 
-            // this.$router.push("/already")
-        }
+            this.$router.push("/already")
+        },
+        test (element) {
+            if (Array.isArray(element)) {
+                element.map((item) => {
+                    console.log('элемент', item)
+                    return item
+                })
+            } else {
+                return element
+            }
+        },
+        // isTitle (element) {
+        //     switch (element) {
+        //         case 'tariff': return 'Тариф'
+        //         case 'tariff': return 'Тариф'
+        //         case 'tariff': return 'Тариф'
+        //         case 'tariff': return 'Тариф'
+        //         case 'tariff': return 'Тариф'
+        //         case 'tariff': return 'Тариф'
+        //         case 'tariff': return 'Тариф'
+        //     }
+        // }
     },
     computed: {
-        isResult () {
+        isResult() {
             return this.$store.state.result;
         }
-    }
+    },
+    mounted() {
+        this.$store.commit('IsFormData')
+    },
 }
 </script>
 <style>
@@ -52,5 +100,24 @@ export default {
     font-weight: 500;
     padding: 16px 30px !important;
     text-transform: none;
+}
+
+.all_data_table {
+    width: 100%;
+}
+
+.data_table_block {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form_block_title {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.all_data_table-row  {
 }
 </style>

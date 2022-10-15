@@ -61,12 +61,12 @@ export default new Vuex.Store({
       })
       return result
     },
-    isFormData (state) {
-      state.formData.map((item) => {
-       state.result = Object.assign(item)
-      })
-      return state.result
-    }
+    // isFormData (state) {
+    //   state.formData.map((item) => {
+    //    state.result = Object.assign(item)
+    //   })
+    //   return state.result
+    // }
   },
   mutations: {
     toggleDrawer(state, value) {
@@ -83,7 +83,7 @@ export default new Vuex.Store({
     },
     IsFormData (state) {
       state.formData.map((item) => {
-        Object.assign(item, state.result)
+        state.result = Object.assign(item, state.result)
       })
     }
   },
