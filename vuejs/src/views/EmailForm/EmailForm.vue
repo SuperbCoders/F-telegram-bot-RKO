@@ -14,7 +14,7 @@
           ></v-radio>
           <v-radio
             label="Не совпадает с адресом регистации и адресом проживания"
-            value="false"
+            value="Не совпадает с адресом регистации и адресом проживания"
           ></v-radio>
         </v-radio-group>
         <div v-if="currentData.isAddress === 'false'">
