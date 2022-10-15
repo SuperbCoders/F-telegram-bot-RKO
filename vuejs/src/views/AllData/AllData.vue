@@ -23,18 +23,10 @@ export default {
         async sendData() {
 
             this.$store.commit('IsFormData')
-            const formData = new FormData();
-            for (const obj of this.formData) {
-                for (const element in obj) {
-                    const name = element;
-                    const value = obj[element];
-                    console.log(name, value)
-                    formData.append(name, value);
-                }
-            }
+            this.isResult = new FormData();
             await fetch("http://localhost:8000/loan-application/create/", {
                 method: "POST",
-                body: this.isResult,
+                body: isResult,
             })
 
             // this.$router.push("/already")
