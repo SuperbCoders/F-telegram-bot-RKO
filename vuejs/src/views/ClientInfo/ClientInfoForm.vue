@@ -191,10 +191,8 @@ export default {
     listRole: [],
     currentData: {
       placeOfBirth: null,
-      dateOfBirh: null,
       typeDocumnet: null,
       serialDocument: null,
-      codeDocument: null,
       period: null
     },
     dateStarting: null,
