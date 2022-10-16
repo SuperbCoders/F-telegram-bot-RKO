@@ -3,7 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Почтовый адрес</p>
-        <v-radio-group v-model="currentData.isAddress" mandatory>
+        <v-radio-group v-model="isAddress" mandatory>
           <v-radio
             label="Совпадает с адресом регистации"
             value="Совпадает с адресом регистации"
@@ -17,12 +17,12 @@
             value="Не совпадает с адресом регистации и адресом проживания"
           ></v-radio>
         </v-radio-group>
-        <div v-if="currentData.isAddress === 'false'">
+        <div v-if="isAddress === 'Не совпадает с адресом регистации и адресом проживания'">
           <p class="form_block_title">Адрес фактического проживания</p>
           <v-text-field
             id="oldName"
             placeholder="Введите адрес"
-            v-model="currentData.actualAddress"
+            v-model="address"
             class="align-center border-none mt-5"
             outlined
             :rules="requiredRules"
@@ -49,9 +49,9 @@ export default {
   data() {
     return {
       isAddress: false,
+      address: '',
       currentData: {
-        isAddress: false,
-        actualAddress: null
+        account_own_mail: null
       },
       valid: false,
       requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -61,6 +61,14 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
+        this.$store.commit('IsFormData')
+        if (this.isAddress === 'Совпадает с адресом регистации') {
+          this.currentData.account_own_mail = this.$store.state.result.account_own_registration
+        } else if (this.isAddress === 'Совпадает с адресом проживания') {
+          this.currentData.account_own_mail = this.$store.state.result.accownt_own_living
+        } else if (this.isAddress === 'Не совпадает с адресом регистации и адресом проживания') {
+          this.currentData.account_own_mail = this.address
+        }
         this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/document");
       }
@@ -68,6 +76,11 @@ export default {
   },
   components: {
     LineStep,
+  },
+  computed: {
+    isTest () {
+      return this.$store.state.account_own_registration
+    }
   }
 };
 </script>

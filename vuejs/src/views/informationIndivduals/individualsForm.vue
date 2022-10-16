@@ -20,17 +20,17 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Имя</p>
-        <v-text-field id="oldName" v-model="currentData.account_own_firstname" placeholder="Введите имя" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_own_name" placeholder="Введите имя" class="align-center border-none" outlined
           :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Отчество (при наличии)</p>
-        <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Напишите адрес" class="align-center border-none" outlined
+        <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Введите отчество" class="align-center border-none" outlined
          :required="true"></v-text-field>
       </div>
-      <v-radio-group v-model="currentData.account_own_name" mandatory>
-        <v-radio  label="Мужской" value="Мужской"></v-radio>
-        <v-radio  label="Женский" value="Женский">
+      <v-radio-group v-model="currentData.account_own_gender" mandatory>
+        <v-radio label="Мужской" value="Мужской"></v-radio>
+        <v-radio label="Женский" value="Женский">
       </v-radio>
       </v-radio-group>
     </v-form>

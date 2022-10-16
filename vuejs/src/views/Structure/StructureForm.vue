@@ -18,7 +18,7 @@
         <p class="text-left form_block_title">Руководитель</p>
         <v-combobox 
           filled 
-          v-model="currentData.supreme_management_type" 
+          v-model="currentData.supreme_management_person" 
           :items="isLeaderType" outlined 
           :rules="requiredRules" 
           placeholder="Тип"
@@ -52,7 +52,7 @@
           placeholder="Наименования"
           class="align-center border-none"
           name="oldName"
-          v-model="currentData.collegiate_body"
+          v-model="currentData.supervisory"
           outlined
           :rules="requiredRules"
           :required="true"
@@ -75,7 +75,7 @@
           class="align-center border-none"
           name="oldName"
           outlined
-          v-model="currentData.collegiate_person"
+          v-model="currentData.collegiate_body"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>

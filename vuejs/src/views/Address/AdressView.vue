@@ -1,117 +1,48 @@
 <template>
   <div class="structure_group_section">
     <h2 class="text-left structure_group_title mb-10">Адрес</h2>
+    {{ currentResult }}
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div class="form_block mb-5">
-        <v-checkbox
-          v-model="currentData.legal_address"
-          label="Юридический"
-          value="Юридический"
-          hide-details
-        ></v-checkbox>
-        <v-checkbox
-          v-model="currentData.physic_address"
-          label="Фактический"
-          value="Фактический"
-          hide-details
-        ></v-checkbox>
-        <v-checkbox
-          v-model="currentData.mail_address"
-          label="Почтовый"
-          value="Почтовый"
-          hide-details
-        ></v-checkbox>
-      </div>
-      <p class="error_message" v-if="
-        !valid && (
-        currentData.legal_address != false ||
-        currentData.physic_address != false ||
-        currentData.mail_address != false )
-        ">
-        Выберите пункт
-      </p>
-      <div
-        v-for="(itemForm, index) in currentData.groupList"
-        :key="index"
-        class="form_input_block"
-      >
+      <div v-for="(itemForm, index) in currentData" :key="index" class="form_input_block">
+        <div class="form_block mb-5">
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
+          </v-checkbox>
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Фактический" value="Фактический" hide-details>
+          </v-checkbox>
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый" hide-details></v-checkbox>
+        </div>
+        <p class="error_message" v-if="!valid && currentData.legal_address != false">
+          Выберите пункт
+        </p>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
-          <v-text-field
-            id="oldName"
-            placeholder="Напишите адрес"
-            class="align-center border-none"
-            v-model="itemForm.physic_address"
-            name="oldName"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
+          <v-text-field id="oldName" placeholder="Напишите адрес" class="align-center border-none"
+            v-model="itemForm.address" @change="isTypeAdress(itemForm)" name="oldName" outlined :rules="requiredRules"
+            :required="true">
+          </v-text-field>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">Основание</p>
-          <v-select
-            filled
-            outlined
-            v-model="itemForm.mail_address"
-            :rules="requiredRules"
-            placeholder="Выберите основание"
-            :items="base"
-          ></v-select>
+          <v-select filled outlined v-model="itemForm.basis" :rules="requiredRules" placeholder="Выберите основание"
+            :items="base"></v-select>
         </div>
-        <!-- <div class="form_block">
-        <p class="text-left form_block_title">ИНН</p>
-        <v-text-field
-          id="oldName"
-          placeholder="Введите ИНН или название компании"
-          class="align-center border-none"
-          name="oldName"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
-      </div>
-        <div class="form_block">
-          <p class="text-left form_block_title">ОГРН</p>
-          <v-text-field
-            id="oldName"
-            placeholder="Наименование"
-            class="align-center border-none"
-            name="oldName"
-            v-model="itemForm.ogrn"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
-        </div> -->
       </div>
       <div class="form_block d-flex align-center justify-center">
-        <a
-          @click="deleteGroupList"
-          class="form_block_delete_link text-decoration-none"
-          href="#"
-        >
+        <a @click="deleteGroupList" class="form_block_delete_link text-decoration-none" href="#">
           <v-icon>mdi-trash-can-outline</v-icon>
           Удалить
         </a>
-        <v-btn
-          class="text-center d-flex align-center justify-center ml-10 add_form"
-          @click="addGroupList()"
-        >
+        <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="addGroupList()">
           <span class="pr-3">Добавить</span>
           <v-icon>mdi-plus-circle-outline</v-icon>
         </v-btn>
       </div>
       <line-step :step='1' />
-      <v-btn
-        block
-        large
-        :disabled="!valid"
-        class="mt-10 auth_form_bth"
-        color="primary"
-        @click="validate"
-        >Продолжить</v-btn
-      >
+      <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+      </v-btn>
     </v-form>
 
   </div>
@@ -135,17 +66,17 @@ export default {
         physic_address: null,
         mail_address: null,
       },
-      currentData: {
-        legal_address: false,
-        physic_address: false,
-        mail_address: false,
-        groupList: [
-          {
-            physic_address: null,
-            mail_address: null,
-          },
-        ],
-      },
+      currentData: [
+        {
+          typeAdress: [],
+          legal_address: false,
+          physic_address: false,
+          mail_address: false,
+          basis: null,
+          address: ''
+        }
+      ],
+      currentResult: [],
       checkboxList: [],
       valid: true,
       innRules: [
@@ -160,18 +91,37 @@ export default {
   },
   methods: {
     validate() {
+      // const result = []  
+      this.currentData.map((item) => {
+        this.currentResult.push({
+          legal_address: item.legal_address,
+          physic_address: item.physic_address,
+          mail_address: item.mail_address
+        })
+      })
       this.$refs.form.validate();
-
-      if (
-        this.$refs.form.validate() && (
-          this.currentData.legal_address ||
-          this.currentData.physic_address ||
-          this.currentData.mail_address
-        )
-        
-      ) {
+      console.log('agageaio[]', this.currentResult)
+      if (this.$refs.form.validate()) {
+        this.$store.commit("addItemFormData", this.currentResult);
         this.$router.push("/sctructure");
-        this.$store.commit("addItemFormData", this.currentData);
+      }
+      // if (
+      //   this.$refs.form.validate() &&
+      //   this.currentData.legal_address.length > 0 ||
+      //   this.currentData.physic_address.length > 0 ||
+      //   this.currentData.mail_address.length > 0
+      // ) {
+      //   // this.$router.push("/sctructure");
+      //   this.$store.commit("addItemFormData", this.currentResult);
+      // }
+    },
+    isTypeAdress(object) {
+      if (object.typeAdress.includes('Фактический')) {
+        object.physic_address = object.address
+      } else if (object.typeAdress.includes('Почтовый')) {
+        object.mail_address = object.address
+      } else if (object.typeAdress.includes('Юридический')) {
+        object.legal_address = object.address
       }
     },
     addGroupList() {
@@ -179,16 +129,15 @@ export default {
         physic_address: null,
         mail_address: null,
       }
-      this.currentData.groupList.push(defaultGroupItem);
+      this.currentData.push(defaultGroupItem);
     },
     deleteGroupList() {
-      if (this.currentData.groupList.length > 1) {
-        this.currentData.groupList.pop();
+      if (this.currentData.length > 1) {
+        this.currentData.pop();
       }
     },
   },
   computed: {
-    
   },
   components: { LineStep },
 
@@ -200,8 +149,9 @@ export default {
   font-size: 14px;
   border-radius: 8px;
 }
-.form_block {
-}
+
+.form_block {}
+
 .error_message {
   color: red;
   font-family: Roboto;
@@ -209,6 +159,7 @@ export default {
   margin-top: 10px;
   font-size: 12px !important;
 }
+
 .add_form {
   padding: 25px 15px !important;
   border-radius: 8px;
@@ -218,6 +169,7 @@ export default {
   color: #5b656d !important;
   text-transform: capitalize;
 }
+
 .form_block_delete_link {
   font-size: 14px;
   font-weight: 500;

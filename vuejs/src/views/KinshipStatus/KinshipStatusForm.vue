@@ -77,6 +77,8 @@ export default {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         this.$store.commit('addItemFormData', this.currentData)
+        this.$store.commit('updateAssigned_publ_pers_relation', this.currentData.account_own_registration)
+        this.$store.commit('updateAssigned_publ_pers_registraion', this.currentData.assigned_publ_pers_registraion)
         this.$router.push("/address-form");
       }
     },

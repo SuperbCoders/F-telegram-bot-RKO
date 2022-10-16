@@ -1,6 +1,21 @@
 <template>
     <div>
+        <div>
+        </div>
         <div class="all_data_table">
+            <div class="all_data_table-row d-flex">
+                <div class="data_table_block">
+                    <p class="form_block_title ">
+                        Ключ
+                    </p>
+                </div>
+                <div class="data_table_block">
+                    <p class="form_block_title">
+                        Значение
+                    </p>
+                </div>
+                <hr>
+            </div>
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
                 <div class="data_table_block">
                     <p class="form_block_title">
@@ -10,13 +25,17 @@
                 <div class="data_table_block">
                     <div v-if="test(item[1])" class="form_block_title d-block">
                         <!-- <div v-if="test(item[1])"></div> -->
-                        <div class="d-flex" v-for="(item, index) in item[1]" :key="index">
-                            <p class="d-flex" >{{ index + 1}})  {{ item }}</p>
+                        <div v-for="(item, index) in item[1]" :key="index">
+                            <p class="d-flex">{{ index + 1}}) {{ item }}</p>
                         </div>
                     </div>
                     <p class="text-left form_block_title" v-else>
                         {{ item[1] }}
                     </p>
+                    {{ typeof item[1] === 'object' && Array.isArray(item[1])}}
+                    <div v-if="typeof item[1] === 'object' && !Array.isArray(item)">
+                        <h1>wa'gjgaeiw</h1>
+                    </div>
                 </div>
                 <hr>
             </div>
@@ -48,14 +67,20 @@ export default {
 
             this.$router.push("/already")
         },
-        test (element) {
+        test(element) {
             if (Array.isArray(element)) {
                 return true
-            } else if(element !== '' || null) {
+            } else if (element !== '' || null) {
                 return false
             }
         },
-        isTitle (element) {
+        isTypeObject(object) {
+            if (Array.isArray(object)) {
+                return ''
+            }
+            return ''
+        },
+        isTitle(element) {
             switch (element) {
                 case 'tariff': return 'Тариф'
                 case 'account_birth_place': return 'Место рождения'
@@ -149,7 +174,7 @@ export default {
 .data_table_block {
     width: 50%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -158,6 +183,6 @@ export default {
     align-items: center;
     justify-content: flex-start;
 }
-.all_data_table-row  {
-}
+
+.all_data_table-row {}
 </style>
