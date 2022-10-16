@@ -109,13 +109,6 @@ class LoanRequest(models.Model):
     division_code = models.CharField(max_length=MAX_STRING_LENGTH)
     date_issue = models.DateField()
     validity = models.DateField()
-    
-    # foreign_doc_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    # foreign_doc_serial = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    # foreign_doc_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    # foreign_start = models.DateField(blank=True, null=True)
-    # foreign_end = models.DateField(blank=True, null=True)
-
 
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -134,21 +127,12 @@ class LoanRequest(models.Model):
     
     beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
-    # loan_amount = models.IntegerField(blank=True, null=True)
-    # loan_time = models.IntegerField(blank=True, null=True)
-    # loan_rate = models.FloatField(blank=True, null=True)
-    # documents = models.ImageField( # это перепишем на много документов позже
-    #     upload_to="documents",
-    #     blank=True,
-    #     null=True,
-    # )
-
-    planned_operations = models.CharField(max_length=MAX_STRING_LENGTH)
+    planned_operations = models.JSONField(max_length=MAX_STRING_LENGTH)
     
-    account_operations = models.CharField(max_length=MAX_STRING_LENGTH)
+    account_operations = models.JSONField(max_length=MAX_STRING_LENGTH)
     operation_volume = models.CharField(max_length=MAX_STRING_LENGTH)
     sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
-    cash_source = models.CharField(max_length=MAX_STRING_LENGTH)
+    cash_source = models.JSONField(max_length=MAX_STRING_LENGTH)
     outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH)
     state_employers = models.CharField(max_length=MAX_STRING_LENGTH)
 
