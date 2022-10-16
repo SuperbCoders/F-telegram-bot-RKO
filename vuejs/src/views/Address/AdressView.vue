@@ -106,7 +106,9 @@ export default {
       this.$refs.form.validate();
       console.log('agageaio[]', this.currentResult)
       if (this.$refs.form.validate()) {
-        this.$store.commit("addItemFormData", this.addresses);
+
+        this.$store.commit("addItemFormData", this.currentResult);
+
         this.$router.push("/sctructure");
       }
       // if (
@@ -149,7 +151,8 @@ export default {
       this.currentData.addresses.push(defaultGroupItem);
     },
     deleteGroupList() {
-      if (this.currentData.length > 1) {
+
+      if (this.currentData.addresses.length > 1) {
         this.currentData.addresses.pop();
       }
     },
