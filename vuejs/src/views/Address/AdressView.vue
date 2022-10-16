@@ -1,22 +1,27 @@
 <template>
   <div class="structure_group_section">
     <h2 class="text-left structure_group_title mb-10">Адрес</h2>
+    {{ currentResult }}
     <v-form ref="form" v-model="valid" lazy-validation>
-      <p class="error_message" v-if="!valid && currentData.legal_address != false">
-        Выберите пункт
-      </p>
       <div v-for="(itemForm, index) in currentData" :key="index" class="form_input_block">
         <div class="form_block mb-5">
-          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
           </v-checkbox>
-          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Фактический" value="Фактический" hide-details>
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Фактический" value="Фактический" hide-details>
           </v-checkbox>
-          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый" hide-details></v-checkbox>
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый" hide-details></v-checkbox>
         </div>
+        <p class="error_message" v-if="!valid && currentData.legal_address != false">
+          Выберите пункт
+        </p>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
           <v-text-field id="oldName" placeholder="Напишите адрес" class="align-center border-none"
-            v-model="itemForm.address" @change="isTypeAdress(itemForm)" name="oldName" outlined :rules="requiredRules" :required="true">
+            v-model="itemForm.address" @change="isTypeAdress(itemForm)" name="oldName" outlined :rules="requiredRules"
+            :required="true">
           </v-text-field>
         </div>
         <div class="form_block">
@@ -71,7 +76,7 @@ export default {
           address: ''
         }
       ],
-      currentResult: {},
+      currentResult: [],
       checkboxList: [],
       valid: true,
       innRules: [
@@ -86,25 +91,32 @@ export default {
   },
   methods: {
     validate() {
+      // const result = []  
+      this.currentData.map((item) => {
+        this.currentResult.push({
+          legal_address: item.legal_address,
+          physic_address: item.physic_address,
+          mail_address: item.mail_address
+        })
+      })
       this.$refs.form.validate();
-      this.currentResult = {
-        legal_address: this.currentData.legal_address,
-        physic_address: this.currentData.physic_address,
-        mail_address: this.currentData.mail_address
-      }
-      if (
-        this.$refs.form.validate() &&
-        this.currentData.legal_address.length > 0 ||
-        this.currentData.physic_address.length > 0 ||
-        this.currentData.mail_address.length > 0
-      ) {
-        this.$router.push("/sctructure");
+      console.log('agageaio[]', this.currentResult)
+      if (this.$refs.form.validate()) {
         this.$store.commit("addItemFormData", this.currentResult);
+        this.$router.push("/sctructure");
       }
+      // if (
+      //   this.$refs.form.validate() &&
+      //   this.currentData.legal_address.length > 0 ||
+      //   this.currentData.physic_address.length > 0 ||
+      //   this.currentData.mail_address.length > 0
+      // ) {
+      //   // this.$router.push("/sctructure");
+      //   this.$store.commit("addItemFormData", this.currentResult);
+      // }
     },
-    isTypeAdress (object) {
+    isTypeAdress(object) {
       if (object.typeAdress.includes('Фактический')) {
-        console.log(object)
         object.physic_address = object.address
       } else if (object.typeAdress.includes('Почтовый')) {
         object.mail_address = object.address
@@ -117,24 +129,15 @@ export default {
         physic_address: null,
         mail_address: null,
       }
-      this.currentData.groupList.push(defaultGroupItem);
+      this.currentData.push(defaultGroupItem);
     },
     deleteGroupList() {
-      if (this.currentData.groupList.length > 1) {
-        this.currentData.groupList.pop();
+      if (this.currentData.length > 1) {
+        this.currentData.pop();
       }
     },
   },
   computed: {
-    // isAdressType (element) {
-    //   typeAdress.map((type) => {
-    //     if (type === 'Фактический') {
-
-    //     }
-    //   })
-    // if (element.typeAdress.includes('Фактический')) {
-    // }
-    // }
   },
   components: { LineStep },
 

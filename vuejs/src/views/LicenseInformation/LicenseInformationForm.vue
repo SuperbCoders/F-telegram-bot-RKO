@@ -117,7 +117,7 @@
             outlined
             append-icon="mdi-calendar-blank"
             readonly
-            v-model="currentData.licenced_activity"
+            v-model="currentData.licenced_validity"
             :rules="requiredRules"
             :required="true"
             v-bind="attrs"
@@ -125,7 +125,7 @@
           ></v-text-field>
         </template>
         <v-date-picker
-          v-model="currentData.licenced_activity"
+          v-model="currentData.licenced_validity"
           @input="passportIssueDateMenu = false"
         ></v-date-picker>
       </v-menu>
@@ -139,7 +139,7 @@
         placeholder="xxxxxx"
         class="align-center border-none"
         name="oldName"
-        v-model="currentData.licence_validity"
+        v-model="currentData.licenced_activity"
         :rules="requiredRules"
         outlined
         :required="true"
