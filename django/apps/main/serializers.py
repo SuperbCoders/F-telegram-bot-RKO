@@ -22,9 +22,8 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             "physic_address",
             "mail_address",
 
-            "basis",
             "supreme_management_body",
-            "supreme_management_type",
+            "supreme_management_person",
             "supreme_management_inn",
             "supervisory",
             "collegiate_body",
@@ -50,18 +49,13 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             "first_passport_page",
             "account_birth_place",
             "account_datebirth",
-            "passport_serial",
-            "passport_number",
+            "doc_type",
+            "doc_serial",
+            "doc_number",
             "issued_by",
             "date_issue",
             "validity",
 
-            "foreign_doc_type",
-            "foreign_doc_serial",
-            "foreign_doc_number",
-            "foreign_start",
-            "foreign_end",
-            
             "licence_type",
             "licence_number",
             "licence_issued_by",
@@ -77,12 +71,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             "end_date",
             "group_members",
             
-            "loan_amount",
-            "loan_time",
-            "loan_rate",
-            
-            "documents",
-            "rate",
+            "first_passport_page",
             "telegram_chat_id",
             "created_at",
         ]
