@@ -17,9 +17,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'company_name',
                 'contact_number',
                 
-                'legal_address',
-                'physic_address',
-                'mail_address',
+                'addresses',
                 
                 'supreme_management_body',
                 'supreme_management_person',

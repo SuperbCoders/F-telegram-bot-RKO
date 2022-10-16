@@ -63,9 +63,7 @@ class LoanRequest(models.Model):
     company_name = models.CharField(max_length=MAX_STRING_LENGTH)
     contact_number = models.CharField(max_length=20, blank=True, null=True)
     
-    legal_address = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
-    physic_address = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
-    mail_address = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
+    addresses = models.JSONField(max_length=300)
     # basis = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
     supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
