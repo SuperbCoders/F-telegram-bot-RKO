@@ -94,9 +94,9 @@ export default {
   },
   methods: {
     validate() {
-      // const result = []
+
       this.currentData.addresses.map((item) => {
-        this.currentData.addresses.push({
+        this.addresses.push({
           legal_address: item.legal_address,
           physic_address: item.physic_address,
           mail_address: item.mail_address
@@ -107,32 +107,13 @@ export default {
       console.log('agageaio[]', this.currentResult)
       if (this.$refs.form.validate()) {
 
-        this.$store.commit("addItemFormData", this.currentResult);
+        this.$store.commit("addItemFormData", { addresses:this.addresses } );
 
         this.$router.push("/sctructure");
       }
-      // if (
-      //   this.$refs.form.validate() &&
-      //   this.currentData.legal_address.length > 0 ||
-      //   this.currentData.physic_address.length > 0 ||
-      //   this.currentData.mail_address.length > 0
-      // ) {
-      //   // this.$router.push("/sctructure");
-      //   this.$store.commit("addItemFormData", this.currentResult);
-      // }
     },
     isTypeAdress(object) {
-      // object.typeAdress.map((item) => {
-      //   if (item === 'Фактический') {
-      //     object.physic_address = object.address
-      //   }
-      //   if (item.typeAdress.includes('Почтовый')) {
-      //     object.mail_address = object.address
-      //   }
-      //   if (item.typeAdress.includes('Юридический')) {
-      //     object.legal_address = object.address
-      //   }
-      // })
+     
       if (object.typeAdress.includes('Фактический')) {
         object.physic_address = object.address
       }
