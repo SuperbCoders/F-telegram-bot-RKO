@@ -96,7 +96,7 @@ export default {
     validate() {
 
       this.currentData.addresses.map((item) => {
-        this.addresses.push({
+        this.currentData.addresses.push({
           legal_address: item.legal_address,
           physic_address: item.physic_address,
           mail_address: item.mail_address
@@ -107,13 +107,12 @@ export default {
       console.log('agageaio[]', this.currentResult)
       if (this.$refs.form.validate()) {
 
-        this.$store.commit("addItemFormData", { addresses:this.addresses } );
+        this.$store.commit("addItemFormData", this.currentData  );
 
         this.$router.push("/sctructure");
       }
     },
     isTypeAdress(object) {
-     
       if (object.typeAdress.includes('Фактический')) {
         object.physic_address = object.address
       }
