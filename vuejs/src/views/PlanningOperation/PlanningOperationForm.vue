@@ -3,39 +3,34 @@
     <h3 class="form_block_label">Сведения о планируемых опреациях по счету</h3>
     <div class="form_block">
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.planned_operations"
         label="Договор купли продажи (товарный)"
         value="Договор купли продажи (товарный)"
         hide-details
-        @click="validate()"
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.planned_operations"
         label="Агенсткий договор"
         value="Агенсткий договор"
         hide-details
-        @click="validate"
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.planned_operations"
         label="Договор комиссии"
         value="Договор комиссии"
         hide-details
-        @click="validate"
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.planned_operations"
         label="Договор купли продажи ценных бумаг"
         value="Договор купли продажи ценных бумаг"
         hide-details
-        @click="validate"
       ></v-checkbox>
       <v-checkbox
-        v-model="operationlist"
+        v-model="currentData.planned_operations"
         label="Договор аренды"
         value="Договор аренды"
         hide-details
-        @click="validate"
       ></v-checkbox>
     </div>
     <p class="error_message" v-if="!valid && operationlist.length < 1">
@@ -54,22 +49,27 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       valid: true,
-      operationlist: [],
+      currentData: {
+        planned_operations: []
+      },
     };
   },
   methods: {
     validate() {
-      if (this.valid && this.operationlist.length < 1) {
+      if (this.valid && this.currentData.planned_operations.length < 1) {
         this.valid = false;
       } else {
         this.valid = true;
+        this.$store.commit('addItemFormData', this.currentData)
+        this.$router.push("/beneficiaries");
       }
     },
-  },
+  }
 };
 </script>
 

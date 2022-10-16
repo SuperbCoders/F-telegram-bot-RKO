@@ -4,27 +4,34 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mb-5">
         <v-checkbox
-          v-model="checkboxList"
+          v-model="currentData.legal_address"
           label="Юридический"
-          value="red"
+          value="Юридический"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="checkboxList"
+          v-model="currentData.physic_address"
           label="Фактический"
           value="Фактический"
           hide-details
         ></v-checkbox>
         <v-checkbox
-          v-model="checkboxList"
+          v-model="currentData.mail_address"
           label="Почтовый"
           value="Почтовый"
           hide-details
         ></v-checkbox>
       </div>
-      <p class="error_message" v-if="!valid && checkboxList.length < 1">Выберите пункт</p>
+      <p class="error_message" v-if="
+        !valid && (
+        currentData.legal_address != false ||
+        currentData.physic_address != false ||
+        currentData.mail_address != false )
+        ">
+        Выберите пункт
+      </p>
       <div
-        v-for="(itemForm, index) in groupList"
+        v-for="(itemForm, index) in currentData.groupList"
         :key="index"
         class="form_input_block"
       >
@@ -34,7 +41,7 @@
             id="oldName"
             placeholder="Напишите адрес"
             class="align-center border-none"
-            v-model="itemForm.name"
+            v-model="itemForm.physic_address"
             name="oldName"
             outlined
             :rules="requiredRules"
@@ -43,12 +50,14 @@
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">Основание</p>
-          <v-combobox
+          <v-select
             filled
             outlined
+            v-model="itemForm.mail_address"
             :rules="requiredRules"
             placeholder="Выберите основание"
-          ></v-combobox>
+            :items="base"
+          ></v-select>
         </div>
         <!-- <div class="form_block">
         <p class="text-left form_block_title">ИНН</p>
@@ -114,6 +123,7 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
+      base: ["Аренда"],
       groupList: [
         {
           name: null,
@@ -122,9 +132,19 @@ export default {
         },
       ],
       defaultGroupItem: {
-        name: null,
-        inn: null,
-        ogrn: null,
+        physic_address: null,
+        mail_address: null,
+      },
+      currentData: {
+        legal_address: false,
+        physic_address: false,
+        mail_address: false,
+        groupList: [
+          {
+            physic_address: null,
+            mail_address: null,
+          },
+        ],
       },
       checkboxList: [],
       valid: true,
@@ -142,18 +162,33 @@ export default {
     validate() {
       this.$refs.form.validate();
 
-      if (this.$refs.form.validate() && this.checkboxList.length > 0) {
+      if (
+        this.$refs.form.validate() && (
+          this.currentData.legal_address ||
+          this.currentData.physic_address ||
+          this.currentData.mail_address
+        )
+        
+      ) {
         this.$router.push("/sctructure");
+        this.$store.commit("addItemFormData", this.currentData);
       }
     },
     addGroupList() {
-      this.groupList.push(this.defaultGroupItem);
+      const defaultGroupItem = {
+        physic_address: null,
+        mail_address: null,
+      }
+      this.currentData.groupList.push(defaultGroupItem);
     },
     deleteGroupList() {
-      if (this.groupList.length > 1) {
-        this.groupList.pop();
+      if (this.currentData.groupList.length > 1) {
+        this.currentData.groupList.pop();
       }
     },
+  },
+  computed: {
+    
   },
   components: { LineStep },
 

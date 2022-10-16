@@ -11,6 +11,7 @@
         name="oldName"
         :rules="requiredRules"
         outlined
+        v-model="currentData.licence_type"
         :required="true"
       ></v-text-field>
     </div>
@@ -23,6 +24,7 @@
         name="oldName"
         :rules="requiredRules"
         outlined
+        v-model="currentData.licence_number"
         :required="true"
       ></v-text-field>
     </div>
@@ -33,6 +35,7 @@
         placeholder="Наименование"
         class="align-center border-none"
         name="oldName"
+        v-model="currentData.licence_issued_by"
         :rules="requiredRules"
         outlined
         :required="true"
@@ -54,7 +57,7 @@
             outlined
             append-icon="mdi-calendar-blank"
             readonly
-            v-model="dateStarting"
+            v-model="currentData.licence_date_issue"
             :rules="requiredRules"
             :required="true"
             v-bind="attrs"
@@ -62,7 +65,7 @@
           ></v-text-field>
         </template>
         <v-date-picker
-          v-model="dateStarting"
+          v-model="currentData.licence_date_issue"
           @input="passportIssueDateMenu = false"
         ></v-date-picker>
       </v-menu>
@@ -114,7 +117,7 @@
             outlined
             append-icon="mdi-calendar-blank"
             readonly
-            v-model="dateStarting"
+            v-model="currentData.licenced_activity"
             :rules="requiredRules"
             :required="true"
             v-bind="attrs"
@@ -122,7 +125,7 @@
           ></v-text-field>
         </template>
         <v-date-picker
-          v-model="dateStarting"
+          v-model="currentData.licenced_activity"
           @input="passportIssueDateMenu = false"
         ></v-date-picker>
       </v-menu>
@@ -136,6 +139,7 @@
         placeholder="xxxxxx"
         class="align-center border-none"
         name="oldName"
+        v-model="currentData.licence_validity"
         :rules="requiredRules"
         outlined
         :required="true"
@@ -163,6 +167,9 @@ export default {
       isAddress: false,
       valid: true,
       show1: false,
+      currentData: {
+
+      },
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };
   },

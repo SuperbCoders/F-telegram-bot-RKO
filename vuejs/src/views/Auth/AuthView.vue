@@ -13,8 +13,11 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          type="number"
+          type="text"
+          v-model="currentData.inn"
           :rules="innRules"
+          v-mask="'############'"
+          masked="true"
           required
           @input="getCompanyFromInn"
           class="mt-1 auth_form"
@@ -22,18 +25,20 @@
         <v-text-field
           label="Наименования компании"
           outlined
+          v-model="currentData.company_name"
           :rules="requiredRules"
           required
-          v-model="name_company"
           type="email"
           class="mt-1 auth_form"
         ></v-text-field>
         <v-text-field
           label="Контактный номер телефона"
           outlined
+          v-model="currentData.contact_number"
           :rules="requiredRules"
           :required="true"
-          v-model="phone_number"
+          v-mask="'+# (###) ### ## ##'"
+          masked="true"
           class="mt-1 auth_form"
         ></v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
@@ -84,12 +89,20 @@
 
 <script>
 import { getCompany } from '../../api/getInfoCompany';
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data: () => ({
+    currentData: {
+      inn: null,
+      company_name: null,
+      contact_number: null
+    },
     valid: true,
     name: "",
-    phone_number: "",
-    name_company: "",
+    maskPhone: {
+
+    },
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -114,7 +127,7 @@ export default {
   mounted(){
     const phone = this.$route.query?.phone;
     if(phone){
-      this.phone_number = phone;
+      this.currentData.contact_number = phone;
     }
   },
 
@@ -123,6 +136,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/address");
       }
     },
@@ -132,12 +146,13 @@ export default {
         const company = await getCompany(inn);
         if(company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
-          this.name_company = company?.suggestions[0].value
-          console.log(this.$store.state.dataCompany);
+          this.currentData.company_name = company?.suggestions[0].value
         }
       }
     },
   },
+  computed: {
+  }
 };
 </script>
 <style scoped>

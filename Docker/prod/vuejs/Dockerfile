@@ -10,11 +10,11 @@ RUN chown -R node:node /usr/src/app
 
 RUN yarn global add @vue/cli
 
-USER node
-
 COPY ./vuejs/package*.json ./vuejs/yarn.lock ./
 
 RUN yarn install --frozen-lockfile --check-files
+
+RUN yarn add vue-the-mask
 
 COPY --chown=node:node ./vuejs/ /usr/src/app/
 

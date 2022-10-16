@@ -38,7 +38,6 @@
                       :required="true"
                     ></v-text-field>
                   </div>
-                  <default-input />
                   <div class="form_block mt-5">
                     <p class="text-left">Тип</p>
                     <v-combobox
@@ -230,7 +229,6 @@
                       :items="availableCities"
                     ></v-combobox>
                   </div>
-                  <default-input />
                   <div class="form_block mt-5">
                     <p class="text-left">Руководитель</p>
                     <v-combobox

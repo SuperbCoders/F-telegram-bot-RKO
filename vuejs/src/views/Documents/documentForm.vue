@@ -4,8 +4,8 @@
       Загрузить первую страницу паспорта
     </p>
 
-    <div v-if="files" class="list_file">
-      <div v-for="(file, index) in files" :key="index" class="block_file">
+    <div v-if="this.currentData.first_passport_page" class="list_file">
+      <div v-for="(file, index) in this.currentData.first_passport_page" :key="index" class="block_file">
         <div class="card_file">
           <div class="type_file">{{ getType(file.type) }}</div>
           <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -36,13 +36,15 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data(){
     return {
-      files: null,
+      currentData: {
+        first_passport_page: null
+      },
     }
   },
   methods: {
     onfile(files) {
       console.log(files);
-      this.files = files;
+      this.currentData.first_passport_page = files;
     },
     getType(type) {
       type = type.split('/')[1];

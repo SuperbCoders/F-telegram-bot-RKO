@@ -3,7 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Почтовый адрес</p>
-        <v-radio-group v-model="isAddress" mandatory>
+        <v-radio-group v-model="currentData.isAddress" mandatory>
           <v-radio
             label="Совпадает с адресом регистации"
             value="Совпадает с адресом регистации"
@@ -14,21 +14,21 @@
           ></v-radio>
           <v-radio
             label="Не совпадает с адресом регистации и адресом проживания"
-            value="false"
+            value="Не совпадает с адресом регистации и адресом проживания"
           ></v-radio>
         </v-radio-group>
-        <div v-if="isAddress === 'false'">
+        <div v-if="currentData.isAddress === 'false'">
           <p class="form_block_title">Адрес фактического проживания</p>
           <v-text-field
             id="oldName"
             placeholder="Введите адрес"
+            v-model="currentData.actualAddress"
             class="align-center border-none mt-5"
             outlined
             :rules="requiredRules"
             :required="true"
           ></v-text-field>
         </div>
-        
       </div>
     </v-form>
     <line-step :step='8' class="mt-5" />
@@ -49,6 +49,10 @@ export default {
   data() {
     return {
       isAddress: false,
+      currentData: {
+        isAddress: false,
+        actualAddress: null
+      },
       valid: false,
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };
@@ -57,6 +61,7 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
+        this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/document");
       }
     },

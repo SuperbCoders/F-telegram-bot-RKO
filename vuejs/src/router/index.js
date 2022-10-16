@@ -19,7 +19,12 @@ import ClientInfo from '../views/ClientInfo/ClientInfoForm.vue'
 import DocumentFogeiner from '../views/DocumentFogeiner/DocumentFogeinerForm.vue'
 import LicenseInfo from '../views/LicenseInformation/LicenseInformationForm.vue'
 import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.vue'
+import Beneficiaries from '../views/Beneficiaries/BeneficiariesForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
+import Purposes from '../views/Purposes/PurposesForm.vue'
+import Approvals from '../views/Approvals/ApprovalsForm.vue'
+import AllData from '../views/AllData/AllData.vue'
+import Already from '../views/Already/Already.vue'
 Vue.use(VueRouter);
 
 const routes = [
@@ -57,6 +62,21 @@ const routes = [
     path: "/planning",
     name: "planning",
     component: PlanningOperation
+  },
+  {
+    path: "/beneficiaries",
+    name: "beneficiaries",
+    component: Beneficiaries
+  },
+  {
+    path: "/purposes",
+    name: "purposes",
+    component: Purposes
+  },
+  {
+    path: "/approvals",
+    name: "approvals",
+    component: Approvals
   },
   {
     path: "/intelligence",
@@ -117,6 +137,16 @@ const routes = [
     path: "/foreign-person",
     name: "foreign-person",
     component: ForeignPerson
+  },
+  {
+    path: "/all-data",
+    name: "all-data",
+    component: AllData
+  },
+  {
+    path: "/already",
+    name: "already",
+    component: Already
   },
   {
     path: "/rate",

@@ -21,7 +21,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -42,7 +42,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -63,10 +63,10 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
       </div>
     </v-card>
-    <LineStep :step="11" />
+    <LineStep :step="13" />
   </div>
 </template>
 
@@ -75,8 +75,23 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   components: {
     LineStep
+  },
+  data() {
+    return {
+      currentData: {
+        tariff: '',
+  
+      }
+    }
+  },
+  methods: {
+    setTarif(tarif) {
+      // const data = this.$store.state.formData
+      this.$store.commit('addItemFormData', { tariff:tarif })
+      this.$router.push('/all-data')
+    }
   }
-};
+}
 </script>
 
 <style>
@@ -84,15 +99,22 @@ export default {
   padding: 20px;
   font-family: Roboto;
 }
+
 .rate_section_title {
   width: 80%;
   font-family: Geometria;
   color: #0C0C0D;
 }
+
 .rate_card {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.11) !important;
 }
+
 .card_content_button {
+  cursor: pointer;
+  box-shadow: 0 0 4px #00000030;
+  background: #F3F4F4;
+  border-radius: 6px;
   margin-top: 20px;
   font-family: Roboto;
   font-size: 14px !important;
@@ -101,19 +123,23 @@ export default {
   padding: 16px 30px !important;
   text-transform: none;
 }
-.rate_section_list > li {
+
+.rate_section_list>li {
   font-size: 14px;
   color: #757f86 !important;
 }
+
 .rate_content_price {
   font-weight: 400;
   color: #323e48;
 }
+
 .card_content_text {
   font-size: 12px;
   font-weight: 400;
   color: #323e48;
 }
+
 .card_content_title {
   letter-spacing: 0.6px;
   line-height: 28px;

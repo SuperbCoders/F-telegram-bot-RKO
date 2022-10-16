@@ -8,6 +8,7 @@
           placeholder="Введите адрес"
           class="align-center border-none"
           outlined
+          v-model="currentData.account_birth_place"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -28,7 +29,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.account_datebirth"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -36,7 +37,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            v-model="currentData.account_datebirth"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -49,6 +50,7 @@
           filled
           outlined
           :rules="requiredRules"
+          v-model="currentData.typeDocumnet"
           placeholder="Выберите тип"
           :items="type_document"
         ></v-select>
@@ -61,6 +63,9 @@
           id="oldName"
           placeholder="Введите серию документа"
           class="align-center border-none"
+          v-mask="'## ##'"
+          masked="true"
+          v-model="currentData.passport_serial"
           outlined
           :required="true"
         ></v-text-field>
@@ -73,7 +78,10 @@
           id="oldName"
           placeholder="Введите номер документа"
           class="align-center border-none"
+          v-mask="'######'"
+          masked="true"
           outlined
+          v-model="currentData.passport_number"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -85,6 +93,7 @@
           placeholder="Наименование"
           class="align-center border-none"
           outlined
+          v-model="currentData.issued_by"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -96,6 +105,7 @@
         <v-text-field
           id="oldName"
           placeholder="Введите имя"
+          v-model="currentData.division_code"
           class="align-center border-none"
           outlined
           :required="true"
@@ -117,7 +127,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.date_issue"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -125,7 +135,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            v-model="currentData.date_issue"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -146,7 +156,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.validity"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -154,7 +164,7 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            v-model="currentData.validity"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -173,10 +183,22 @@
 </template>
 
 <script>
+import { mask } from "vue-the-mask";
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     listRole: [],
+    currentData: {
+      placeOfBirth: null,
+      dateOfBirh: null,
+      typeDocumnet: null,
+      serialDocument: null,
+      codeDocument: null,
+      issued: null,
+      dateOfIssue: null,
+      period: null
+    },
     dateStarting: null,
     dateEnd: null,
     test: [],
@@ -193,6 +215,7 @@ export default {
         } else {
             this.$router.push("/information-staff");
         }
+        this.$store.commit('addItemFormData', this.currentData)
       }
     },
   },
