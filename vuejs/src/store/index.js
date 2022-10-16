@@ -10,6 +10,9 @@ export default new Vuex.Store({
     user: null,
     data: null,
     isForegin: false,
+    assigned_publ_pers_relation: false,
+    accownt_own_living: false,
+    assigned_publ_pers_registraion: false,
     result: {},
     formData: [],
     leaderList: [
@@ -71,6 +74,15 @@ export default new Vuex.Store({
   mutations: {
     toggleDrawer(state, value) {
       state.drawer = value;
+    },
+    updateAssigned_publ_pers_relation (state, value) {
+      state.assigned_publ_pers_relation = value
+    },
+    updateAssigned_publ_pers_registraion (state, value) {
+      state.assigned_publ_pers_registraion = value
+    },
+    updateAccownt_own_living (state, value) {
+      state.accownt_own_living = value
     },
     setDataCompany(state, value){
       state.dataCompany = value;

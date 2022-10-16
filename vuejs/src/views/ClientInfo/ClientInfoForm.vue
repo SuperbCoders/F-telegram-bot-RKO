@@ -50,7 +50,7 @@
           filled
           outlined
           :rules="requiredRules"
-          v-model="currentData.typeDocumnet"
+          v-model="currentData.doc_type"
           placeholder="Выберите тип"
           :items="type_document"
         ></v-select>
@@ -65,7 +65,7 @@
           class="align-center border-none"
           v-mask="'## ##'"
           masked="true"
-          v-model="currentData.passport_serial"
+          v-model="currentData.doc_serial"
           outlined
           :required="true"
         ></v-text-field>
@@ -81,7 +81,7 @@
           v-mask="'######'"
           masked="true"
           outlined
-          v-model="currentData.passport_number"
+          v-model="currentData.doc_number"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
