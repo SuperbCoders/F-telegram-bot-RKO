@@ -21,8 +21,8 @@ export default {
     data () {
       return {
         currentData: {
-          assigned_publ_pers_relation: false,
-          account_own_registration: false,
+          assigned_publ_pers_relation: '',
+          account_own_registration: '',
         },
         isForegn: true
       }
@@ -31,9 +31,9 @@ export default {
     methods: {
       redirect () {
         if (this.isForegn) {
-          this.currentData.assigned_publ_pers_relation = true
+          this.currentData.assigned_publ_pers_relation = 'Да'
         } else {
-          this.account_own_registration = true
+          this.account_own_registration = 'Да'
         }
         this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/kinship-status-forms')
