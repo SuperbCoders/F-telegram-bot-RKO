@@ -66,7 +66,7 @@ export default {
         mail_address: null,
       },
       currentData: {
-        addresses: [ {
+        addresses: [{
           typeAdress: [],
           legal_address: '',
           physic_address: '',
@@ -74,7 +74,7 @@ export default {
           basis: null,
           address: ''
         }]
-       
+
       },
       currentResult: [],
       checkboxList: [],
