@@ -3,30 +3,18 @@
         <div>
         </div>
         <div class="all_data_table">
-            <div class="all_data_table-row d-flex">
-                <div class="data_table_block">
-                    <p class="form_block_title ">
-                        Ключ
-                    </p>
-                </div>
-                <div class="data_table_block">
-                    <p class="form_block_title">
-                        Значение
-                    </p>
-                </div>
-                <hr>
-            </div>
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
-                <div class="data_table_block">
+                <div class="data_table_block" v-if="item[1]">
                     <p class="form_block_title">
                         {{isTitle(item[0]) }}
                     </p>
                 </div>
-                <div class="data_table_block">
+                <div class="data_table_block" v-if="item[1]">
                     <div v-if="test(item[1])" class="form_block_title d-block">
+                        
                         <!-- <div v-if="test(item[1])"></div> -->
                         <div v-for="(item, index) in item[1]" :key="index">
-                            <p class="d-flex">{{ index + 1}}) {{ item }}</p>
+                            <p class="d-flex">- {{ item }}</p>
                         </div>
                     </div>
                     <p class="text-left form_block_title" v-else>
@@ -131,6 +119,22 @@ export default {
                 case 'supreme_management_type': return 'Роль'
                 case 'typeDocumnet': return 'Тип документа'
                 case 'validity': return 'Срок действия'
+                case 'contact_number': return 'Номер телефона'
+                case 'inn': return 'ИНН'
+                case 'addresses': return 'Адресс'
+                case 'supreme_management_person': return 'Тип Руководителя'
+                case 'collegiate_person_fio': return 'Члены коллегиального исполнительного органа'
+                case 'account_own_gender': return 'Пол'
+                case 'doc_number': return 'Номер документа удостоверяющего личность'
+                case 'doc_serial': return 'Серия документа удостоверяющего личность'
+                case 'doc_type': return 'Тип документа удостоверяющего личность'
+                case 'licenced_activity': return 'Перечень видов лицензируемой деятельности'
+                case 'licenced_validity': return 'Срок действия'
+                case 'licence_date_issue': return 'Дата выдачи лицензии'
+                case 'licence_issued_by': return 'Кем выдан'
+                case 'licence_number': return 'Номер'
+                case 'licence_type': return 'Сведения о лицензии'
+                default: return element
                 // case 'accownt_own_living': return 'Адрес проживания'
                 // case 'tariff': return 'Тариф'
             }
