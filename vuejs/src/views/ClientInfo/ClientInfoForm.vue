@@ -195,8 +195,6 @@ export default {
       typeDocumnet: null,
       serialDocument: null,
       codeDocument: null,
-      issued: null,
-      dateOfIssue: null,
       period: null
     },
     dateStarting: null,

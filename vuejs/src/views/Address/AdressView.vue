@@ -1,7 +1,6 @@
 <template>
   <div class="structure_group_section">
     <h2 class="text-left structure_group_title mb-10">Адрес</h2>
-    {{ currentResult }}
     <v-form ref="form" v-model="valid" lazy-validation>
       <div v-for="(itemForm, index) in currentData" :key="index" class="form_input_block">
         <div class="form_block mb-5">
@@ -69,8 +68,8 @@ export default {
       currentData: [
         {
           typeAdress: [],
-          legal_address: false,
-          physic_address: false,
+          legal_address: '',
+          physic_address: '',
           mail_address: false,
           basis: null,
           address: ''
@@ -116,11 +115,24 @@ export default {
       // }
     },
     isTypeAdress(object) {
+      // object.typeAdress.map((item) => {
+      //   if (item === 'Фактический') {
+      //     object.physic_address = object.address
+      //   }
+      //   if (item.typeAdress.includes('Почтовый')) {
+      //     object.mail_address = object.address
+      //   }
+      //   if (item.typeAdress.includes('Юридический')) {
+      //     object.legal_address = object.address
+      //   }
+      // })
       if (object.typeAdress.includes('Фактический')) {
         object.physic_address = object.address
-      } else if (object.typeAdress.includes('Почтовый')) {
+      }
+      if (object.typeAdress.includes('Почтовый')) {
         object.mail_address = object.address
-      } else if (object.typeAdress.includes('Юридический')) {
+      }
+      if (object.typeAdress.includes('Юридический')) {
         object.legal_address = object.address
       }
     },

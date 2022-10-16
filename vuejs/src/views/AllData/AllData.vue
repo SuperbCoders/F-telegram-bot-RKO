@@ -32,9 +32,8 @@
                     <p class="text-left form_block_title" v-else>
                         {{ item[1] }}
                     </p>
-                    {{ typeof item[1] === 'object' && Array.isArray(item[1])}}
                     <div v-if="typeof item[1] === 'object' && !Array.isArray(item)">
-                        <h1>wa'gjgaeiw</h1>
+                        
                     </div>
                 </div>
                 <hr>
