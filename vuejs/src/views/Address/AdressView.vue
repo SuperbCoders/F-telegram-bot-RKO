@@ -2,7 +2,7 @@
   <div class="structure_group_section">
     <h2 class="text-left structure_group_title mb-10">Адрес</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div v-for="(itemForm, index) in currentData" :key="index" class="form_input_block">
+      <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block">
         <div class="form_block mb-5">
           <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
             v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
@@ -65,16 +65,17 @@ export default {
         physic_address: null,
         mail_address: null,
       },
-      currentData: [
-        {
+      currentData: {
+        addresses: [ {
           typeAdress: [],
           legal_address: '',
           physic_address: '',
           mail_address: false,
           basis: null,
           address: ''
-        }
-      ],
+        }]
+       
+      },
       currentResult: [],
       checkboxList: [],
       valid: true,
@@ -91,7 +92,7 @@ export default {
   methods: {
     validate() {
       // const result = []  
-      this.currentData.map((item) => {
+      this.currentData.addresses.map((item) => {
         this.currentResult.push({
           legal_address: item.legal_address,
           physic_address: item.physic_address,
