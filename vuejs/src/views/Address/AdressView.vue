@@ -2,7 +2,7 @@
   <div class="structure_group_section">
     <h2 class="text-left structure_group_title mb-10">Адрес</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block">
+      <div v-for="(itemForm, index) in currentData" :key="index" class="form_input_block">
         <div class="form_block mb-5">
           <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
             v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
@@ -66,7 +66,7 @@ export default {
         mail_address: null,
       },
       currentData: {
-        addresses: [{
+        addresses: [ {
           typeAdress: [],
           legal_address: '',
           physic_address: '',
@@ -74,6 +74,7 @@ export default {
           basis: null,
           address: ''
         }]
+       
       },
       currentResult: [],
       checkboxList: [],
@@ -101,7 +102,7 @@ export default {
       this.$refs.form.validate();
       console.log('agageaio[]', this.currentResult)
       if (this.$refs.form.validate()) {
-        this.$store.commit("addItemFormData", this.currentResult);
+        this.$store.commit("addItemFormData", this.currentResult.addresses);
         this.$router.push("/sctructure");
       }
       // if (
