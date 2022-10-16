@@ -96,7 +96,7 @@ export default {
     validate() {
       // const result = []
       this.currentData.addresses.map((item) => {
-        this.addresses.push({
+        this.currentData.addresses.push({
           legal_address: item.legal_address,
           physic_address: item.physic_address,
           mail_address: item.mail_address
