@@ -2,7 +2,7 @@
   <div class="structure_group_section">
     <h2 class="text-left structure_group_title mb-10">Адрес</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div v-for="(itemForm, index) in currentData" :key="index" class="form_input_block">
+      <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block">
         <div class="form_block mb-5">
           <v-checkbox @click="isTypeAdress(itemForm)" :rules="[v => v.length > 0 || 'You must agree to continue!']"
             v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
@@ -75,9 +75,11 @@ export default {
           basis: null,
           address: ''
         }]
-       
       },
-      currentResult: [],
+      currentResult: {
+        addresses: []
+      },
+      addresses: [],
       checkboxList: [],
       valid: true,
       innRules: [
@@ -92,18 +94,19 @@ export default {
   },
   methods: {
     validate() {
-      // const result = []  
+      // const result = []
       this.currentData.addresses.map((item) => {
-        this.currentResult.push({
+        this.addresses.push({
           legal_address: item.legal_address,
           physic_address: item.physic_address,
           mail_address: item.mail_address
         })
+        console.log('currentData', this.currentData)
       })
       this.$refs.form.validate();
       console.log('agageaio[]', this.currentResult)
       if (this.$refs.form.validate()) {
-        this.$store.commit("addItemFormData", this.currentResult.addresses);
+        this.$store.commit("addItemFormData", this.addresses);
         this.$router.push("/sctructure");
       }
       // if (
@@ -143,11 +146,11 @@ export default {
         physic_address: null,
         mail_address: null,
       }
-      this.currentData.push(defaultGroupItem);
+      this.currentData.addresses.push(defaultGroupItem);
     },
     deleteGroupList() {
       if (this.currentData.length > 1) {
-        this.currentData.pop();
+        this.currentData.addresses.pop();
       }
     },
   },
