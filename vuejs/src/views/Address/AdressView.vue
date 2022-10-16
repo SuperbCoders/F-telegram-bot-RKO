@@ -96,18 +96,17 @@ export default {
     validate() {
 
       this.currentData.addresses.map((item) => {
-        this.currentData.addresses.push({
+        this.currentResult.addresses.push({
           legal_address: item.legal_address,
           physic_address: item.physic_address,
           mail_address: item.mail_address
         })
-        console.log('currentData', this.currentData)
       })
       this.$refs.form.validate();
       console.log('agageaio[]', this.currentResult)
       if (this.$refs.form.validate()) {
 
-        this.$store.commit("addItemFormData", this.currentData  );
+        this.$store.commit("addItemFormData", this.currentResult );
 
         this.$router.push("/sctructure");
       }
@@ -125,6 +124,8 @@ export default {
     },
     addGroupList() {
       const defaultGroupItem = {
+        typeAdress: [],
+        legal_address: null,
         physic_address: null,
         mail_address: null,
       }
