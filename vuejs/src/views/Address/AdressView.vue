@@ -74,7 +74,6 @@ export default {
           basis: null,
           address: ''
         }]
-
       },
       currentResult: [],
       checkboxList: [],
