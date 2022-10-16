@@ -24,7 +24,7 @@
           <p class="text-left form_block_title">ИНН</p>
           <v-text-field
             id="oldName"
-            placeholder="Наименование"
+            placeholder="ИНН"
             class="align-center border-none"
             name="oldName"
             type="number"
@@ -38,7 +38,7 @@
           <p class="text-left form_block_title">ОГРН</p>
           <v-text-field
             id="oldName"
-            placeholder="Наименование"
+            placeholder="ОГРН"
             class="align-center border-none"
             name="oldName"
             v-model="itemForm.ogrn"

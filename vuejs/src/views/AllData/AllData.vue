@@ -14,7 +14,15 @@
                         
                         <!-- <div v-if="test(item[1])"></div> -->
                         <div v-for="(item, index) in item[1]" :key="index">
-                            <p class="d-flex">- {{ item }}</p>
+                            <div v-if="isObject(item)">
+                                <div v-for="(val, key) in item" :key="key">
+                                    <div v-if="val">
+                                        {{ isTitle(key) }} => {{ val }}
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="d-flex" v-else>- {{ item }}</p>
+
                         </div>
                     </div>
                     <p class="text-left form_block_title" v-else>
@@ -54,10 +62,17 @@ export default {
 
             this.$router.push("/already")
         },
+        isObject(element){
+            if (typeof element == 'object') {
+                return true
+            } else {
+                return false
+            }
+        },
         test(element) {
             if (Array.isArray(element)) {
                 return true
-            } else if (element !== '' || null) {
+            } else {
                 return false
             }
         },
@@ -105,7 +120,7 @@ export default {
                 case 'group_members': return 'Состав группы компаний'
                 case 'issued_by': return 'Кем выдан'
                 case 'legal_address': return 'Юридический адрес'
-                case 'mail_address': return 'Количество операций по безлимитным платежам в месяц'
+                case 'mail_address': return 'Почтовый адрес'
                 case 'outside_contracts_volume': return 'Количество операций по безлимитным платежам в месяц'
                 case 'passport_number': return 'Номер паспорта'
                 case 'passport_serial': return 'Серия паспорта'
@@ -134,6 +149,9 @@ export default {
                 case 'licence_issued_by': return 'Кем выдан'
                 case 'licence_number': return 'Номер'
                 case 'licence_type': return 'Сведения о лицензии'
+                case 'name': return 'Наименование'
+                case 'ogrn': return 'ОГРН'
+                case 'supervisory': return 'Наименования наблюдательного совета'
                 default: return element
                 // case 'accownt_own_living': return 'Адрес проживания'
                 // case 'tariff': return 'Тариф'

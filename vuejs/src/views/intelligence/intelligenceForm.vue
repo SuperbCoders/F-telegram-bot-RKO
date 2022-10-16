@@ -21,7 +21,7 @@
         id="oldName"
         v-model="currentData.salary_debt"
         placeholder="Количество"
-        class="align-center border-none form_block_input"
+        class="align-center border-none"
         name="oldName"
         type="number"
         :rules="requiredRules"
