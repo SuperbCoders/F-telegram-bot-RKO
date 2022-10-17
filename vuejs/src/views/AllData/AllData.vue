@@ -52,7 +52,7 @@ export default {
             this.FormData = new FormData();
             this.FormData.append("test", 1);
 
-            await fetch("http://localhost:8000/loan-application/create/", {
+            await fetch("http://185.91.52.232:8004/loan-application/create/", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
