@@ -1,5 +1,6 @@
 from pyexpat import model
 import random
+from re import S
 import string
 
 from django.contrib.auth.models import AbstractUser
@@ -60,37 +61,38 @@ class LoanRequest(models.Model):
                               blank=True)
     inn = models.CharField(max_length=INN_MAX_LENGTH)
     company_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    contact_number = models.CharField(max_length=MAX_PHONE_LENGTH)
+    contact_number = models.CharField(max_length=20, blank=True, null=True)
     
-    legal_address = models.CharField(max_length=MAX_ADDRESS_LENGTH)
-    physic_address = models.CharField(max_length=MAX_ADDRESS_LENGTH, blank=True, null=True)
-    mail_address = models.CharField(max_length=MAX_ADDRESS_LENGTH, blank=True, null=True)
+    addresses = models.JSONField(max_length=300)
+    # basis = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
-    basis = models.CharField(max_length=MAX_STRING_LENGTH)
-    supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH)
-    supreme_management_type = models.CharField(max_length=MAX_STRING_LENGTH)
-    supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH)
-    supervisory = models.CharField(max_length=MAX_STRING_LENGTH)
-    supervisor_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    collegiate_body = models.CharField(max_length=MAX_STRING_LENGTH)
-    collegiate_person_fio = models.CharField(max_length=MAX_STRING_LENGTH)
+    supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
-    account_onw_role = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_lastname =models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_surname = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_gender = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_onw_inn = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_snils = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_citizenship = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_phone = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_piece = models.CharField(max_length=MAX_STRING_LENGTH)
+    supervisory = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
-    assigned_publ_pers_relation = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH)
+    collegiate_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    collegiate_person_fio = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
-    accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_own_mail = models.CharField(max_length=MAX_STRING_LENGTH)
+    account_onw_role = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
+    account_own_lastname =models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_surname = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_gender = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    
+    account_onw_inn = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_snils = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    account_own_citizenship = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_phone = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_piece = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    
+    assigned_publ_pers_relation = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    
+    accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    account_own_mail = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
     first_passport_page = models.ImageField(
         upload_to="documents",
@@ -98,43 +100,41 @@ class LoanRequest(models.Model):
         null=True,)
     account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH)
     account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH)
-    passport_serial = models.CharField(max_length=MAX_STRING_LENGTH)
-    passport_number = models.CharField(max_length=MAX_STRING_LENGTH)
+    doc_type = models.CharField(max_length=MAX_STRING_LENGTH)
+    doc_serial = models.CharField(max_length=MAX_STRING_LENGTH)
+    doc_number = models.CharField(max_length=MAX_STRING_LENGTH)
     issued_by = models.CharField(max_length=MAX_STRING_LENGTH)
+    division_code = models.CharField(max_length=MAX_STRING_LENGTH)
     date_issue = models.DateField()
     validity = models.DateField()
-    
-    foreign_doc_type = models.CharField(max_length=MAX_STRING_LENGTH)
-    foreign_doc_serial = models.CharField(max_length=MAX_STRING_LENGTH)
-    foreign_doc_number = models.CharField(max_length=MAX_STRING_LENGTH)
-    foreign_start = models.DateField()
-    foreign_end = models.DateField()
 
+    licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licence_issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licence_date_issue = models.DateField(blank=True, null=True)
+    licence_validity = models.DateField(blank=True, null=True)
+    licenced_activity = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
 
-    licence_type = models.CharField(max_length=MAX_STRING_LENGTH)
-    licence_number = models.CharField(max_length=MAX_STRING_LENGTH)
-    licence_issued_by = models.CharField(max_length=MAX_STRING_LENGTH)
-    licence_date_issue = models.DateField()
-    licence_validity = models.DateField()
-    licenced_activity = models.CharField(max_length=MAX_STRING_LENGTH)
-
-    employers_volume = models.IntegerField()
+    employers_volume = models.CharField(max_length=MAX_STRING_LENGTH)
     salary_debt = models.IntegerField()
+
     company_group_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    
     start_date = models.DateField()
     end_date = models.DateField()
     group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH)
-    loan_amount = models.IntegerField()
-    loan_time = models.IntegerField()
-    loan_rate = models.FloatField()
-    documents = models.ImageField( # это перепишем на много документов позже
-        upload_to="documents",
-        blank=True,
-        null=True,
-    )
-    planned_operations = models.CharField(max_length=MAX_STRING_LENGTH)
-    rate = models.CharField(max_length=MAX_STRING_LENGTH)
+    
+    beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    
+    planned_operations = models.JSONField(max_length=MAX_STRING_LENGTH)
+    
+    account_operations = models.JSONField(max_length=MAX_STRING_LENGTH)
+    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
+    cash_source = models.JSONField(max_length=MAX_STRING_LENGTH)
+    outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH)
+    state_employers = models.CharField(max_length=MAX_STRING_LENGTH)
+
+    # rate = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     tariff = models.CharField(max_length=MAX_STRING_LENGTH)
     telegram_chat_id = models.CharField(max_length=140, blank=True)
     created_at = models.DateTimeField(default=timezone.now)

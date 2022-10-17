@@ -195,7 +195,7 @@ async def status(update, context):
     if user_applications:
         status_list = [
             (
-                f"Номер заявки: {status['id']}\n" +
+                f"Номер заявки: {random.randint(100000, 999999)}\n" +
                 f"Дата заявки {status['createdAt']}\n" +
                 f"Тип - открытие счета\n" +
                 f"Компания:\n"+
@@ -204,8 +204,8 @@ async def status(update, context):
                 f"    - ОГРН: {random.randint(100000, 999999)}\n" +
                 f"Cтатус заявки - {status['status']}\n" +
                 (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') + 
-                (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
-                (f"Дата открытия {datetime.now()}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
+                (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') +
+                (f"Дата открытия {datetime.now()}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') +
                 (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
             )
             for i, status in enumerate(user_applications, start=1)

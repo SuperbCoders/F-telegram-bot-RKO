@@ -192,8 +192,6 @@ export default {
     currentData: {
       placeOfBirth: null,
       typeDocumnet: null,
-      serialDocument: null,
-      period: null
     },
     dateStarting: null,
     dateEnd: null,

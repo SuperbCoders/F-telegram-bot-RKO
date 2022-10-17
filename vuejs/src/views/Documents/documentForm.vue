@@ -44,7 +44,7 @@ export default {
   methods: {
     onfile(files) {
       console.log(files);
-      this.this.currentData.first_passport_page = files;
+      this.currentData.first_passport_page = files;
     },
     getType(type) {
       type = type.split('/')[1];

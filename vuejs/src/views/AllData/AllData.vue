@@ -3,30 +3,26 @@
         <div>
         </div>
         <div class="all_data_table">
-            <div class="all_data_table-row d-flex">
-                <div class="data_table_block">
-                    <p class="form_block_title ">
-                        Ключ
-                    </p>
-                </div>
-                <div class="data_table_block">
-                    <p class="form_block_title">
-                        Значение
-                    </p>
-                </div>
-                <hr>
-            </div>
             <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row d-flex">
-                <div class="data_table_block">
+                <div class="data_table_block" v-if="item[1]">
                     <p class="form_block_title">
                         {{isTitle(item[0]) }}
                     </p>
                 </div>
-                <div class="data_table_block">
+                <div class="data_table_block" v-if="item[1]">
                     <div v-if="test(item[1])" class="form_block_title d-block">
+                        
                         <!-- <div v-if="test(item[1])"></div> -->
                         <div v-for="(item, index) in item[1]" :key="index">
-                            <p class="d-flex">{{ index + 1}}) {{ item }}</p>
+                            <div v-if="isObject(item)">
+                                <div v-for="(val, key) in item" :key="key">
+                                    <div v-if="val">
+                                        {{ isTitle(key) }} => {{ val }}
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="d-flex" v-else>- {{ item }}</p>
+
                         </div>
                     </div>
                     <p class="text-left form_block_title" v-else>
@@ -53,18 +49,30 @@ export default {
     methods: {
         async sendData() {
             this.$store.commit('IsFormData')
-            this.isResult = new FormData();
+            this.FormData = new FormData();
+            this.FormData.append("test", 1);
+
             await fetch("http://localhost:8000/loan-application/create/", {
                 method: "POST",
-                body: this.isResult,
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify(this.isResult),
             })
 
             this.$router.push("/already")
         },
+        isObject(element){
+            if (typeof element == 'object') {
+                return true
+            } else {
+                return false
+            }
+        },
         test(element) {
             if (Array.isArray(element)) {
                 return true
-            } else if (element !== '' || null) {
+            } else {
                 return false
             }
         },
@@ -112,7 +120,7 @@ export default {
                 case 'group_members': return 'Состав группы компаний'
                 case 'issued_by': return 'Кем выдан'
                 case 'legal_address': return 'Юридический адрес'
-                case 'mail_address': return 'Количество операций по безлимитным платежам в месяц'
+                case 'mail_address': return 'Почтовый адрес'
                 case 'outside_contracts_volume': return 'Количество операций по безлимитным платежам в месяц'
                 case 'doc_number': return 'Номер паспорта'
                 case 'passport_serial': return 'Серия паспорта'
@@ -131,6 +139,25 @@ export default {
                 case 'supreme_management_inn': return 'Инн'
                 case 'supreme_management_type': return 'Роль'
                 case 'validity': return 'Срок действия'
+                case 'contact_number': return 'Номер телефона'
+                case 'inn': return 'ИНН'
+                case 'addresses': return 'Адресс'
+                case 'supreme_management_person': return 'Тип Руководителя'
+                case 'collegiate_person_fio': return 'Члены коллегиального исполнительного органа'
+                case 'account_own_gender': return 'Пол'
+                case 'doc_number': return 'Номер документа удостоверяющего личность'
+                case 'doc_serial': return 'Серия документа удостоверяющего личность'
+                case 'doc_type': return 'Тип документа удостоверяющего личность'
+                case 'licenced_activity': return 'Перечень видов лицензируемой деятельности'
+                case 'licenced_validity': return 'Срок действия'
+                case 'licence_date_issue': return 'Дата выдачи лицензии'
+                case 'licence_issued_by': return 'Кем выдан'
+                case 'licence_number': return 'Номер'
+                case 'licence_type': return 'Сведения о лицензии'
+                case 'name': return 'Наименование'
+                case 'ogrn': return 'ОГРН'
+                case 'supervisory': return 'Наименования наблюдательного совета'
+                default: return element
                 // case 'accownt_own_living': return 'Адрес проживания'
                 // case 'tariff': return 'Тариф'
             }

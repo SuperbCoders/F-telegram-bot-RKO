@@ -146,7 +146,7 @@ export default {
         const company = await getCompany(inn);
         if(company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
-          this.name_company = company?.suggestions[0].value
+          this.currentData.company_name = company?.suggestions[0].value
         }
       }
     },

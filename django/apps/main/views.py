@@ -44,9 +44,13 @@ class LoanApplicationListAPIView(ListAPIView):
 
     def get_queryset(self):
         telegram_chat_id = self.kwargs['telegram_chat_id']
+        user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
+        print(user.phone_number)
+        pn = user.phone_number
+        phone_number_format = f"+{pn[1]} ({pn[2]}{pn[3]}{pn[4]}) {pn[5]}{pn[6]}{pn[7]} {pn[8]}{pn[9]} {pn[10]}{pn[11]}"
         return (
             LoanRequest.objects
-            .filter(telegram_chat_id=telegram_chat_id)
+            .filter(contact_number=phone_number_format)
             .order_by("created_at")
         )
 
