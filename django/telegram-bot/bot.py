@@ -201,7 +201,6 @@ async def status(update, context):
     await context.bot.send_message(
         chat_id=chat_id,
         text=text,
-        parse_mode='Markdown',
     )
 
 async def handle_custom_start(update, context):
@@ -251,7 +250,6 @@ async def handle_custom_start(update, context):
         await context.bot.send_message(
             chat_id=chat_id,
             text=text,
-            parse_mode='Markdown',
         )
 
 
