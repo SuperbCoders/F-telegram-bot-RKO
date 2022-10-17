@@ -168,6 +168,7 @@ def get_user_applications(chat_id):
             user_applications = response.json()
     except:
         pass
+    print(user_applications)
     return user_applications
 
 
@@ -175,6 +176,7 @@ async def status(update, context):
     chat_id = update.effective_chat.id
     user_applications = get_user_applications(chat_id)
     status_list = []
+    print(user_applications)
     if user_applications:
         status_list = [
             (
@@ -205,6 +207,7 @@ async def status(update, context):
 async def handle_custom_start(update, context):
     print(update.message.text)
     print("Отлавливаем кастом старт")
+    print(update.effective_chat.id)
     if (update.message.text).lower() == 'старт' or (update.message.text).lower() == 'start':
         text = (
         "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
