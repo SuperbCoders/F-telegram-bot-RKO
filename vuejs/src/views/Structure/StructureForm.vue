@@ -37,8 +37,8 @@
           :rules="innRules"
         ></v-text-field>
       </div>
-      <div class="form_group">
-        <p class="text-left mb-2 form_block_label">
+      <div class="form_group mb-10">
+        <p class="text-left form_block_label mt-5">
           Наличие наблюдательного совета
         </p>
         <RadioGroup @isStatus="(status) => (isTest1 = status)" name="Existence of a supervisory board" />
@@ -58,8 +58,8 @@
           :required="true"
         ></v-text-field>
       </div>
-      <div class="form_group">
-        <p class="text-left form_block_label mb-2 mt-5">
+      <div class="form_group mt-5">
+        <p class="text-left form_block_label mb-2">
 
           Наличие коллегиального исполнительного органа
         </p>
@@ -67,7 +67,7 @@
       </div>
       <div v-if="isTest2" class="form_block mt-5">
         <p class="text-left form_block_title">
-          Наименование коллегиального исполнительног органа
+          Наименование коллегиального исполнительного органа
         </p>
         <v-text-field
           id="oldName"

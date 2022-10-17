@@ -21,7 +21,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="rate_card_content_button" @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -42,7 +42,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
+        <v-btn elevation="2" class="rate_card_content_button" @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -62,8 +62,8 @@
             До 400 000 ₽ себе на счет для ИП бесплатно
           </li>
         </ul>
-        <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="card_content_button" @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
+        <h2 gray class="text-left rate_content_price mb-3">490 руб/мес</h2>
+        <v-btn elevation="2" class="rate_card_content_button" @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <LineStep :step="13" />
@@ -110,11 +110,13 @@ export default {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.11) !important;
 }
 
-.card_content_button {
+.rate_card_content_button {
+  width: 150px !important;
   cursor: pointer;
   box-shadow: 0 0 4px #00000030;
-  background: #F3F4F4;
+  background: #F3F4F4 !important;
   border-radius: 6px;
+  text-transform: none !important;
   margin-top: 20px;
   font-family: Roboto;
   font-size: 14px !important;

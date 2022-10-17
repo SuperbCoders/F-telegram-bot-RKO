@@ -50,6 +50,16 @@
                   <template v-slot:activator="{ on }">
                     <a
                       target="_blank"
+                      class="text-decoration-none"
+                      href="https://vuetifyjs.com"
+                      v-on="on"
+                      @click.stop
+                    >
+                      обработки и хранения персональных данных
+                    </a>
+                    а также с условиями
+                    <a
+                      target="_blank"
                       class="text-decoration-none text-left"
                       href="https://vuetifyjs.com"
                       v-on="on"
@@ -59,16 +69,6 @@
                     </a>
                   </template>
                 </v-tooltip>
-                  а также с условиями
-                <a
-                  target="_blank"
-                  class="text-decoration-none"
-                  href="https://vuetifyjs.com"
-                  v-on="on"
-                  @click.stop
-                >
-                  обработки и хранения персональных данных
-                </a>
               </div>
             </template>
           </v-checkbox>
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { getCompany } from '../../api/getInfoCompany';
+import { getCompany } from "../../api/getInfoCompany";
 import { mask } from "vue-the-mask";
 export default {
   directives: { mask },
@@ -96,13 +96,11 @@ export default {
     currentData: {
       inn: null,
       company_name: null,
-      contact_number: null
+      contact_number: null,
     },
     valid: true,
     name: "",
-    maskPhone: {
-
-    },
+    maskPhone: {},
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -124,9 +122,9 @@ export default {
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
   }),
 
-  mounted(){
+  mounted() {
     const phone = this.$route.query?.phone;
-    if(phone){
+    if (phone) {
       this.currentData.contact_number = phone;
     }
   },
@@ -136,23 +134,22 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.commit("addItemFormData", this.currentData);
         this.$router.push("/address");
       }
     },
 
-    async getCompanyFromInn(inn){
-      if(inn.length >= 10 & inn.length <= 12) {
+    async getCompanyFromInn(inn) {
+      if ((inn.length >= 10) & (inn.length <= 12)) {
         const company = await getCompany(inn);
-        if(company?.suggestions.length > 0) {
+        if (company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
-          this.currentData.company_name = company?.suggestions[0].value
+          this.currentData.company_name = company?.suggestions[0].value;
         }
       }
     },
   },
-  computed: {
-  }
+  computed: {},
 };
 </script>
 <style scoped>
