@@ -7,13 +7,11 @@ from .models import (
 )
 
 class LoanRequestSerializer(serializers.ModelSerializer):
-    status = serializers.CharField(source='get_status_display', required=False)
     class Meta:
         model = LoanRequest
         fields = [
-                'id'
+                'id',
                 'status',
-                'last_status',
                 'inn',
                 'company_name',
                 'contact_number',
@@ -91,6 +89,5 @@ class LoanRequestSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = [
             "id",
-            "status",
             "created_at",
         ]
