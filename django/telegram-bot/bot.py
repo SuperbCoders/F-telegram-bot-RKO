@@ -37,23 +37,6 @@ def is_chat_id_confirmed(chat_id):
     except Exception as error:
         return False
 
-async def handle_custom_start(update, context):
-    print(update.message.text)
-    if (update.message.text).lower() == 'старт':
-        text = (
-        "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
-        "\n\n" +
-        "/start начать работу с ботом\n" +
-        "/apply подать заявку на РКО\n" +
-        "/status узнать статус заявок\n" +
-        "/chat связаться с поддержкой банка"
-    )
-        await context.bot.send_message(
-            chat_id=update.effective_chat.id,
-            text=text,
-        )
-
-
 async def start(update, context):
     text = (
         "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
@@ -219,12 +202,63 @@ async def status(update, context):
         parse_mode='Markdown',
     )
 
+async def handle_custom_start(update, context):
+    print(update.message.text)
+    print("Отлавливаем кастом старт")
+    if (update.message.text).lower() == 'старт' or (update.message.text).lower() == 'start':
+        text = (
+        "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
+        "\n\n" +
+        "/start начать работу с ботом\n" +
+        "/apply подать заявку на РКО\n" +
+        "/status узнать статус заявок\n" +
+        "/chat связаться с поддержкой банка"
+    )
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text=text,
+        )
+    print(update.message.text)
+    print("Отлавливаем кастом старт")
+    if (update.message.text).lower() == 'статус' or (update.message.text).lower() == 'status':
+        chat_id = update.effective_chat.id
+        user_applications = get_user_applications(chat_id)
+        status_list = []
+        if user_applications:
+            status_list = [
+                (
+                    f"Номер заявки: {status['id']}\n" +
+                    f"Дата заявки {status['createdAt']}\n" +
+                    f"Тип - открытие счета\n" +
+                    f"Компания:\n"+
+                    f"    - Имя: {status['companyName']}\n" +
+                    f"    - ИНН: {status['inn']}\n" +
+                    f"    - ОГРН: {random.randint(100000, 999999)}\n" +
+                    f"Cтатус заявки - {status['status']}\n" +
+                    (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') + 
+                    (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
+                    (f"Дата открытия {datetime.now()}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
+                    (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+                )
+                for i, status in enumerate(user_applications, start=1)
+            ]
+            text = "\n\n".join(status_list)
+        else:
+            text = "Заявок не найдено."
+        await context.bot.send_message(
+            chat_id=chat_id,
+            text=text,
+            parse_mode='Markdown',
+        )
+
+
 
 def run_bot():
     api_token = os.getenv('TELEGRAM_BOT_API_TOKEN')
     application = ApplicationBuilder().token(api_token).build()
 
     custom_start_handler = MessageHandler(filters.TEXT & (~filters.COMMAND),handle_custom_start)
+
     start_handler = CommandHandler('start', start)
     apply_handler = CommandHandler('apply', apply)
     status_handler = CommandHandler('status', status)
@@ -232,6 +266,7 @@ def run_bot():
     phone_number_handler = TypeHandler(Update, handle_phone_number)
     
     application.add_handler(custom_start_handler)
+
     application.add_handler(start_handler)
     application.add_handler(apply_handler)
     application.add_handler(status_handler)
