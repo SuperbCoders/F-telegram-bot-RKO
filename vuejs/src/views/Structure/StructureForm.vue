@@ -1,6 +1,6 @@
 <template>
   <div class="structure_form">
-    <h2 class="text-left mb-10 font-bold">Структура органов управления</h2>
+    <h2 class="text-left mb-10 font-bold form_block_label">Структура органов управления</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Выберите из списка</p>
@@ -80,7 +80,7 @@
           :required="true"
         ></v-text-field>
       </div>
-      <div class="form_block mt-5">
+      <div class="form_block mt-10">
         <p class="text-left form_block_title">
           Члены коллегиального исполнительного органа
         </p>
@@ -161,6 +161,9 @@ export default {
 </script>
 
 <style>
+.structure_form_title {
+  font-family: Geom;
+}
 .form_block {
   font-family: Roboto;
   font-size: 14px;
