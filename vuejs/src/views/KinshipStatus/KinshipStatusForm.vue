@@ -29,7 +29,7 @@
         ></v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Адресс регистрации</p>
+        <p class="text-left form_block_title">Адрес регистрации</p>
         <v-text-field
           id="oldName"
           placeholder="Введите имя"

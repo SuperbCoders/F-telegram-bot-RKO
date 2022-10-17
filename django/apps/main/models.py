@@ -116,7 +116,7 @@ class LoanRequest(models.Model):
     licenced_activity = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
 
     employers_volume = models.CharField(max_length=MAX_STRING_LENGTH)
-    salary_debt = models.IntegerField()
+    salary_debt = models.BigIntegerField()
 
     company_group_name = models.CharField(max_length=MAX_STRING_LENGTH)
     start_date = models.DateField()
