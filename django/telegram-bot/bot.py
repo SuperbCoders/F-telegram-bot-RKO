@@ -28,7 +28,7 @@ from telegram.constants import ParseMode
 def is_chat_id_confirmed(chat_id):
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
-        f"user/{chat_id}/"
+        f"api/user/{chat_id}/"
     )
     try:
         response = requests.get(api_url, timeout=10, verify=False)
@@ -84,7 +84,7 @@ async def apply(update, context):
     else:
         res_phone = requests.get(
             os.getenv("DJANGO_APP_API_ROOT_URL") +
-            f"get_phone/{update.effective_chat.id}/"
+            f"api/get_phone/{update.effective_chat.id}/"
         )
         phone = (res_phone.json()['phone'].replace('+', ''))
 
@@ -108,7 +108,7 @@ async def apply(update, context):
 def save_user_chat_id(chat_id, phone_number):
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
-        f"user/{chat_id}/"
+        f"api/user/{chat_id}/"
     )
     try:
         stripped_phone_number = "".join(

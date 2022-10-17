@@ -33,19 +33,19 @@ router = DefaultRouter()
 urlpatterns = [
     path('', include(router.urls)),
     path(
-        "loan-application/create/",
+        "api/loan-application/create/",
         LoanRequestCreateAPIView.as_view()
     ),
     path(
-        "loan-application/<int:telegram_chat_id>/",
+        "api/loan-application/<int:telegram_chat_id>/",
         LoanApplicationListAPIView.as_view()
     ),
     path(
-        "user/<str:telegram_chat_id>/",
+        "api/user/<str:telegram_chat_id>/",
         UserAPIView.as_view(),
     ),
     path('adminpage/', admin.site.urls),
-    path('get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view())
+    path('api/get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view())
 ]
 
 if settings.DEBUG:
