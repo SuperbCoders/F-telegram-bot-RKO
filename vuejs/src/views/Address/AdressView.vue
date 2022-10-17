@@ -71,7 +71,7 @@ export default {
           typeAdress: [],
           legal_address: '',
           physic_address: '',
-          mail_address: false,
+          mail_address: '',
           basis: null,
           address: ''
         }]
@@ -103,7 +103,7 @@ export default {
         })
       })
       this.$refs.form.validate();
-      console.log('agageaio[]', this.currentResult)
+      console.log('agageaio[]', { addresses: this.addresses })
       if (this.$refs.form.validate()) {
 
         this.$store.commit("addItemFormData", this.currentResult );
