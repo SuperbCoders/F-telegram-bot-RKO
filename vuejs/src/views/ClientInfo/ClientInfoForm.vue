@@ -39,6 +39,7 @@
           </template>
           <v-date-picker
             v-model="currentData.account_datebirth"
+            :min="isDate()"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -171,6 +172,7 @@
         </v-menu>
       </div>
     </v-form>
+    {{ isDate() }}
     <v-btn
       block
       large
@@ -203,18 +205,39 @@ export default {
   methods: {
     validate() {
       // let isStatusFogeiner = this.$store.state.isForegin;
-      this.$store.commit('IsFormData')
-      const isStatusFogeiner = this.$store.state.result.assigned_publ_pers_relation
+      this.$store.commit("IsFormData");
+      const isStatusFogeiner =
+        this.$store.state.result.assigned_publ_pers_relation;
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         if (isStatusFogeiner) {
           this.$router.push("/document-fogeiner");
         } else {
-            this.$router.push("/information-staff");
+          this.$router.push("/information-staff");
         }
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.commit("addItemFormData", this.currentData);
       }
     },
+    isDate() {
+      const year = new Date();
+      // const month = new Date().getMonth()
+      // const day = new Date().getDate()
+      return this.toJSONLocal(year)
+      // console.log(this.toJSONLocal(year));
+      // console.log(year, month, day)
+    },
+    toJSONLocal(date) {
+      const local = new Date(date)
+      local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+      return local.toJSON().slice(0, 10);
+    },
+  },
+  computed: {
+    // test() {
+    //   const year = new Date().getFullYear();
+    //   console.log(year);
+    //   return year;
+    // },
   },
 };
 </script>
