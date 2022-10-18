@@ -94,7 +94,6 @@ export default {
   },
   methods: {
     getFormattedCurrency: function (number) {
-      console.log(number);
       if (number) {
         return parseFloat(number).toLocaleString("ru-RU");
       }

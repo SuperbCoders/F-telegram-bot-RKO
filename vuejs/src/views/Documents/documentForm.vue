@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     onfile(files) {
-      console.log(files);
       this.currentData.first_passport_page = files;
     },
     getType(type) {
