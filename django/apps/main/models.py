@@ -169,7 +169,9 @@ class LoanRequest(models.Model):
         if self.status == "update": 
             print(self.status)
             text = (
-                "Нам необходима дополнительная информация по вашей заявке на открытие счета. Подробнее в мобильном или интернет-банке: ДИПЛИНК"
+                f"{self.account_own_name} {self.account_own_lastname}, нам необходима дополнительная"
+                + "информация по вашей заявке на открытие счёта."
+                + "Подробнее — в мобильном и интернет-банке: ДИПЛИНК"
             )
             button_text = "Перейти в мобильный банк"
             button_url = "https://www.yandex.ru/"
@@ -184,7 +186,8 @@ class LoanRequest(models.Model):
         elif self.status == "declined":
             print(self.status)
             text = (
-                "К сожалению, заявка на открытие счета была отклонена банком"
+                f"{self.account_own_name} {self.account_own_lastname}, к сожалению,"
+                + "заявка на открытие счёта отменена банком. Контакты кц"
             )
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
@@ -199,9 +202,41 @@ class LoanRequest(models.Model):
 
         elif self.status == "approved":
             print(self.status)
-            text = (
-                "Ваша заявка одобрена"
+            print(self.company_name)
+            text = ''
+            print(self.company_name.find('ИП '))
+            if self.company_name.find('ИП ') != -1:
+                print("чел ип")
+                text = (
+                    f"{self.account_own_name} {self.account_own_lastname}," 
+                    + "вам одобрено открытие расчётного счёта. В ближайшее время мы позвоним,"
+                    + "чтобы назначить встречу с представителем банка. Конакты КЦ"
+                )
+            elif self.company_name.find('ООО ') !=-1:
+                print("Чел ООО")
+                text = (
+                    f"{self.account_own_name} {self.account_own_lastname}," 
+                    + f"для {self.company_name} одобрено открытие расчётного счёта." 
+                    +"В ближайшее время мы позвоним, чтобы назначить встречу с представителем банка.  Конакты КЦ" 
+                )
+            button_text = "Контактный центр"
+            button_url = "https://www.yandex.ru/"
+            send_telegram_bot_message.delay(
+                self.telegram_chat_id,
+                text,
+                button_url=button_url,
+                button_text=button_text,
+                delay=1,
             )
+            self.last_status = self.status
+        elif self.status == "under_review":
+            
+            text = (
+                f"{self.account_own_name} {self.account_own_lastname}," 
+                +"Ваша заявка на открытие счёта находится на рассмотрении." 
+                +"Подробнее — в мобильном и интернет-банке: ДИПЛИНК"
+            )
+            print(text)
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
             send_telegram_bot_message.delay(
