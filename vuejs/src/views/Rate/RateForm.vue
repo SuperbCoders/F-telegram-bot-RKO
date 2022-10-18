@@ -42,7 +42,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="rate_card_content_button" @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -63,7 +63,7 @@
           </li>
         </ul>
         <h2 gray class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn elevation="2" class="rate_card_content_button" @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <LineStep :step="13" />

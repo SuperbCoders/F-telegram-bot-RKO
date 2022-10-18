@@ -202,7 +202,9 @@ export default {
   }),
   methods: {
     validate() {
-      let isStatusFogeiner = this.$store.state.isForegin;
+      // let isStatusFogeiner = this.$store.state.isForegin;
+      this.$store.commit('IsFormData')
+      const isStatusFogeiner = this.$store.state.result.assigned_publ_pers_relation
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         if (isStatusFogeiner) {

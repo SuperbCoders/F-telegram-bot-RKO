@@ -1,6 +1,6 @@
 <template>
   <div class="structure_form">
-    <h2 class="text-left mb-10 font-bold">Структура органов управления</h2>
+    <h2 class="text-left mb-10 font-bold form_block_label">Структура органов управления</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Выберите из списка</p>
@@ -19,12 +19,12 @@
         <v-combobox 
           filled 
           v-model="currentData.supreme_management_person" 
-          :items="isLeaderType" outlined 
-          :rules="requiredRules" 
+          :items="isLeaderType" outlined
+          :rules="requiredRules"
           placeholder="Тип"
         ></v-combobox>
       </div>
-      <div class="form_block">
+      <div v-if="isManagementCompany" class="form_block">
         <p class="text-left form_block_title">ИНН</p>
         <v-text-field
           id="oldName"
@@ -80,7 +80,7 @@
           :required="true"
         ></v-text-field>
       </div>
-      <div class="form_block mt-5">
+      <div class="form_block mt-10">
         <p class="text-left form_block_title">
           Члены коллегиального исполнительного органа
         </p>
@@ -150,7 +150,10 @@ export default {
       return this.$store.getters.isList
     },
     isLeaderType () {
-      return this.$store.getters.isLeaderType
+      return this.$store.getters.isLeaderTypeTitle
+    },
+    isManagementCompany () {
+      return this.currentData.supreme_management_person === 'Управляющая компания'
     }
   },
   components: {
@@ -161,6 +164,9 @@ export default {
 </script>
 
 <style>
+.structure_form_title {
+  font-family: Geometria;
+}
 .form_block {
   font-family: Roboto;
   font-size: 14px;
