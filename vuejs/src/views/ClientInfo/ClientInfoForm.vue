@@ -43,32 +43,6 @@
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
-        <v-menu
-      ref="menu"
-      v-model="menu"
-      :close-on-content-click="false"
-      transition="scale-transition"
-      offset-y
-      min-width="auto"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <v-text-field
-          v-model="date"
-          label="Birthday date"
-          prepend-icon="mdi-calendar"
-          readonly
-          v-bind="attrs"
-          v-on="on"
-        ></v-text-field>
-      </template>
-      <v-date-picker
-        v-model="date"
-        :active-picker.sync="activePicker"
-        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
-        min="1950-01-01"
-        @change="save"
-      ></v-date-picker>
-    </v-menu>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
@@ -201,8 +175,7 @@
         </v-menu>
       </div>
     </v-form>
-    {{ isDate() }}
-    <v-menu
+    <!-- <v-menu
       ref="menu"
       v-model="menu"
       :close-on-content-click="false"
@@ -223,12 +196,16 @@
       <v-date-picker
         v-model="date"
         :active-picker.sync="activePicker"
-        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        :max="
+          new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+            .toISOString()
+            .substr(0, 10)
+        "
         min="1950-01-01"
         @change="save"
       ></v-date-picker>
-    </v-menu>
-    <line-step :step='10' />
+    </v-menu> -->
+    <line-step :step="10" />
     <v-btn
       block
       large
@@ -242,7 +219,7 @@
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
+import LineStep from "../../components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
 export default {
   directives: { mask },
@@ -260,10 +237,10 @@ export default {
     type_document: ["Паспорт"],
   }),
   watch: {
-      menu (val) {
-        val && setTimeout(() => (this.activePicker = 'YEAR'))
-      },
+    menu(val) {
+      val && setTimeout(() => (this.activePicker = "YEAR"));
     },
+  },
   methods: {
     validate() {
       // let isStatusFogeiner = this.$store.state.isForegin;
@@ -281,14 +258,14 @@ export default {
       }
     },
     isDate() {
-      const year = new Date().getFullYear() - 18
-      console.log(year)
-      return `${year}-12-31`
+      const year = new Date().getFullYear() - 18;
+      console.log(year);
+      return `${year}-12-31`;
       // console.log(this.toJSONLocal(year));
       // console.log(year, month, day)
     },
     toJSONLocal(date) {
-      const local = new Date(date)
+      const local = new Date(date);
       return local.toJSON().slice(0, 10);
     },
   },
@@ -300,8 +277,8 @@ export default {
     // },
   },
   components: {
-    LineStep
-  }
+    LineStep,
+  },
 };
 </script>
 
