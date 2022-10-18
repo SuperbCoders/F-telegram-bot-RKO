@@ -19,7 +19,6 @@
         v-mask="'### ### ### ##'"
         masked="true"
         v-model="currentData.account_own_snils" placeholder="СНИЛС" class="align-center border-none" outlined
-
          :required="true">
         </v-text-field>
       </div>

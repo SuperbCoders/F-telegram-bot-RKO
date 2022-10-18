@@ -1,6 +1,5 @@
 <template>
   <div class="individuals_form">
-    <v-form ref="form" v-model="valid" lazy-validation>
       <p class="text-left form_block_title">Роль лица</p>
       <v-checkbox
         label="Руководитель"
@@ -73,36 +72,40 @@
         <v-radio label="Мужской" value="Мужской"></v-radio>
         <v-radio label="Женский" value="Женский"> </v-radio>
       </v-radio-group>
-    </v-form>
-    <!-- <line-step :step='3' /> -->
-    <!-- <v-btn
-      block
-      large
-      :disabled="!valid"
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить
-    </v-btn> -->
   </div>
 </template>
-
-<script>
+  
+  <script>
 // import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
     listRole: [],
-    currentData: {
+    currentData: [{
       account_onw_role: [],
       account_own_lastname: null,
       account_own_gender: null,
       account_own_name: null,
       account_own_surname: null,
-    },
+    }],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
   methods: {
+    addObject() {
+      const test = {
+        account_onw_role: [],
+        account_own_lastname: null,
+        account_own_gender: null,
+        account_own_name: null,
+        account_own_surname: null,
+      };
+      this.currentData.push(test);
+    },
+    deleteObject () {
+        if (this.currentData.length > 1) {
+            this.currentData.pop()
+        }
+    },
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
@@ -110,14 +113,15 @@ export default {
         this.$router.push("/documents-forms");
       }
     },
+    addForm() {},
   },
   components: {
     // LineStep
   },
 };
 </script>
-
-<style scoped>
+  
+  <style scoped>
 .error_message {
   color: red;
   font-family: Roboto;
