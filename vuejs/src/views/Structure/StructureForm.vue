@@ -58,7 +58,7 @@
             placeholder="Наименования"
             class="align-center border-none"
             name="oldName"
-            v-model="currentData.account_company_name"
+            v-model="currentData.supervisory.account_company_name"
             outlined
             :rules="requiredRules"
             :required="true"
