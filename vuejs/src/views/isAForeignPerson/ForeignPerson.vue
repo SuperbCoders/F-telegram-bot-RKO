@@ -7,7 +7,6 @@
         </p>
         <RadioGroup @isStatus="(status) => isForegn = status " name="foreign_person_section" />
     </div>
-    {{ isForegn }}
     <line-step :step='5' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
