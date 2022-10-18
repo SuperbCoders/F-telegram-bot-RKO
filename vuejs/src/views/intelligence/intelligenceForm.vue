@@ -1,7 +1,7 @@
 <template>
   <div class="intelligence_section">
     <v-form ref="form" v-model="valid" lazy-validation>
-    <h2 class="text-left mb-10">Сведенья о персонале</h2>
+    <h2 class="text-left mb-10">Сведения о персонале</h2>
     <div class="form_block mt-5">
       <p class="text-left form_block_title">Численность персонала</p>
       <v-text-field

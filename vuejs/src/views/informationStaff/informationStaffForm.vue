@@ -41,8 +41,17 @@
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ИНН</p>
-          <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName"
-            type="number" v-model="itemForm.inn" outlined :rules="innRules" :required="true"></v-text-field>
+          <v-text-field
+            id="oldName"
+            placeholder="ИНН"
+            class="align-center border-none"
+            name="oldName"
+            v-model="itemForm.inn" 
+            v-mask="'### ### ### ###'"
+            masked="true" 
+            outlined 
+            :rules="innRules" 
+            :required="true"></v-text-field>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
@@ -69,7 +78,10 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+import { mask } from "vue-the-mask";
+
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     currentData: {

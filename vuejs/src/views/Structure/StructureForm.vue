@@ -31,6 +31,8 @@
           v-model="currentData.supreme_management_inn"
           placeholder="Введите ИНН или название компании"
           class="align-center border-none"
+          v-mask="'############'"
+          masked="true"
           name="oldName"
           outlined
           type="number"
@@ -111,8 +113,10 @@
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
 import LineStep from '../../components/line_step/line_step.vue';
+import { mask } from "vue-the-mask";
 
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     currentData: {
