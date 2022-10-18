@@ -39,10 +39,36 @@
           </template>
           <v-date-picker
             v-model="currentData.account_datebirth"
-            :min="isDate()"
+            :max="isDate()"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
+        <v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+          v-model="date"
+          label="Birthday date"
+          prepend-icon="mdi-calendar"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+        v-model="date"
+        :active-picker.sync="activePicker"
+        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        min="1950-01-01"
+        @change="save"
+      ></v-date-picker>
+    </v-menu>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
@@ -173,6 +199,32 @@
       </div>
     </v-form>
     {{ isDate() }}
+    <v-menu
+      ref="menu"
+      v-model="menu"
+      :close-on-content-click="false"
+      transition="scale-transition"
+      offset-y
+      min-width="auto"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-text-field
+          v-model="date"
+          label="Birthday date"
+          prepend-icon="mdi-calendar"
+          readonly
+          v-bind="attrs"
+          v-on="on"
+        ></v-text-field>
+      </template>
+      <v-date-picker
+        v-model="date"
+        :active-picker.sync="activePicker"
+        :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+        min="1950-01-01"
+        @change="save"
+      ></v-date-picker>
+    </v-menu>
     <v-btn
       block
       large
@@ -202,6 +254,11 @@ export default {
     requiredRules: [(v) => !!v || "Это поле обязательно"],
     type_document: ["Паспорт"],
   }),
+  watch: {
+      menu (val) {
+        val && setTimeout(() => (this.activePicker = 'YEAR'))
+      },
+    },
   methods: {
     validate() {
       // let isStatusFogeiner = this.$store.state.isForegin;
@@ -219,16 +276,14 @@ export default {
       }
     },
     isDate() {
-      const year = new Date();
-      // const month = new Date().getMonth()
-      // const day = new Date().getDate()
-      return this.toJSONLocal(year)
+      const year = new Date().getFullYear() - 18
+      console.log(year)
+      return `${year}-12-31`
       // console.log(this.toJSONLocal(year));
       // console.log(year, month, day)
     },
     toJSONLocal(date) {
       const local = new Date(date)
-      local.setMinutes(date.getMinutes() - date.getTimezoneOffset());
       return local.toJSON().slice(0, 10);
     },
   },
