@@ -1,16 +1,13 @@
 <template>
   <div class="individuals_form">
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div class="form_block">
-
-      </div>
       <p class="text-left form_block_title">Роль лица</p>
       <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
       </v-checkbox>
-      <v-checkbox label="Учредитель" value="red" hide-details></v-checkbox>
+      <v-checkbox label="Учредитель" value="Учредитель" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.account_onw_role" label="Бенефированый владелец" value="Бенефированый владелец" hide-details>
       </v-checkbox>
-      <v-checkbox v-model="currentData.account_onw_role" label="Подписант" value="red" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.account_onw_role" label="Подписант" value="Подписант" hide-details></v-checkbox>
       <p v-if="!valid && currentData.account_onw_role.length < 1" class="error_message">Выберите пункт</p>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">Фамилия</p>
@@ -53,9 +50,6 @@ export default {
       account_own_name: null,
       account_own_surname: null,
     },
-    dateStarting: null,
-    dateEnd: null,
-    test: [],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
   methods: {

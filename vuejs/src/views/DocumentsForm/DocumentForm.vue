@@ -4,14 +4,14 @@
       <div class="form_block mt-5">
         <p class="text-left form_block_title">ИНН</p>
 
-        <v-text-field id="oldName" v-model="currentData.account_onw_inn" placeholder="Введите ИНН" class="align-center border-none" outlined
+        <v-text-field id="oldName" type="number" v-model="currentData.account_onw_inn" placeholder="Введите ИНН" class="align-center border-none" outlined
           :rules="innRules" :required="true">
 
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">СНИЛС (при наличии)</p>
-        <v-text-field id="oldName" v-model="currentData.account_own_snils" placeholder="СНИЛС" class="align-center border-none" outlined
+        <v-text-field id="oldName" type="number" v-model="currentData.account_own_snils" placeholder="СНИЛС" class="align-center border-none" outlined
 
          :required="true">
         </v-text-field>

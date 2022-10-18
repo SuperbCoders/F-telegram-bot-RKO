@@ -19,6 +19,7 @@
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
+          class="client_info_datapicker"
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
@@ -217,4 +218,7 @@ export default {
 </script>
 
 <style>
+.client_info_datapicker {
+  max-width: 100%;
+}
 </style>

@@ -11,7 +11,6 @@
                 </div>
                 <div class="data_table_block" v-if="item[1]">
                     <div v-if="test(item[1])" class="form_block_title d-block">
-                        
                         <!-- <div v-if="test(item[1])"></div> -->
                         <div v-for="(item, index) in item[1]" :key="index">
                             <div v-if="isObject(item)">
@@ -122,12 +121,10 @@ export default {
                 case 'legal_address': return 'Юридический адрес'
                 case 'mail_address': return 'Почтовый адрес'
                 case 'outside_contracts_volume': return 'Количество операций по безлимитным платежам в месяц'
-                case 'doc_number': return 'Номер паспорта'
                 case 'passport_serial': return 'Серия паспорта'
                 case 'physic_address': return 'Физический адрес'
                 case 'placeOfBirth': return 'Место рождения'
                 case 'licence_type': return 'Тип лицензии'
-                case 'licenced_activity': return 'Перечень'
                 case 'licence_number': return 'Номер лицензии'
                 case 'licence_date_issue': return 'Дата выдачи лицензии'
                 case 'licenced_validity': return 'Срок действия'
@@ -149,11 +146,11 @@ export default {
                 case 'doc_serial': return 'Серия документа удостоверяющего личность'
                 case 'doc_type': return 'Тип документа удостоверяющего личность'
                 case 'licenced_activity': return 'Перечень видов лицензируемой деятельности'
-                case 'licenced_validity': return 'Срок действия'
-                case 'licence_date_issue': return 'Дата выдачи лицензии'
-                case 'licence_issued_by': return 'Кем выдан'
-                case 'licence_number': return 'Номер'
-                case 'licence_type': return 'Сведения о лицензии'
+                // case 'licenced_validity': return 'Срок действия'
+                // case 'licence_date_issue': return 'Дата выдачи лицензии'
+                // case 'licence_issued_by': return 'Кем выдан'
+                // case 'licence_number': return 'Номер лицензии'
+                // case 'licence_type': return 'Сведения о лицензии'
                 case 'name': return 'Наименование'
                 case 'ogrn': return 'ОГРН'
                 case 'supervisory': return 'Наименования наблюдательного совета'
