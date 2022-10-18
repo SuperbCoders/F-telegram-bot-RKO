@@ -31,11 +31,10 @@
           v-model="currentData.supreme_management_inn"
           placeholder="Введите ИНН или название компании"
           class="align-center border-none"
-          v-mask="'############'"
+          v-mask="'### ### ### ###'"
           masked="true"
           name="oldName"
           outlined
-          type="number"
           :rules="innRules"
         ></v-text-field>
       </div>
@@ -132,9 +131,7 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
-        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
-      (v) =>
-        (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов"
     ],
     requiredRules: [(v) => !!v || "Это поле обязательно"]
   }),

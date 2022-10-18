@@ -70,7 +70,7 @@
         </v-btn>
       </div>
     </v-form>
-    <line-step :step='10' />
+    <line-step :step='11' />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
@@ -99,7 +99,6 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) => (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
-      (v) => (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
     ],
     passportIssueDateMenu: null,
     requiredRules: [(v) => !!v || "Это поле обязательно"],

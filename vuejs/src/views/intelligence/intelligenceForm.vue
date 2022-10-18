@@ -7,7 +7,7 @@
       <v-text-field
         id="oldName"
         v-model="currentData.employers_volume"
-        placeholder="Наименование"
+        placeholder="Напишите значение"
         class="align-center border-none"
         name="oldName"
         :rules="requiredRules"
@@ -16,11 +16,11 @@
       ></v-text-field>
     </div>
     <div class="form_block">
-      <p class="text-left form_block_input">Задолжность по зп</p>
+      <p class="text-left form_block_input">Задолжность по з/п</p>
       <v-text-field
         id="oldName"
         v-model="currentData.salary_debt"
-        placeholder="Количество"
+        placeholder="Укажите сумму"
         class="align-center border-none"
         name="oldName"
         type="number"
@@ -29,7 +29,7 @@
         outlined
         :required="true"
       ></v-text-field>
-      <line-step :step='11' />
+      <line-step :step='12' />
       <v-btn
       block
       large

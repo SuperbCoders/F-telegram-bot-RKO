@@ -70,37 +70,6 @@
         ></v-date-picker>
       </v-menu>
     </div>
-    <!-- <div class="form_block">
-      <p class="text-left form_block_title">
-        Срок дей
-      </p>
-      <v-menu
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            placeholder="Дата"
-            id="passportIssueDate"
-            name="passportIssueDate"
-            outlined
-            append-icon="mdi-calendar-blank"
-            readonly
-            v-model="dateStarting"
-            :rules="requiredRules"
-            :required="true"
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="dateStarting"
-          @input="passportIssueDateMenu = false"
-        ></v-date-picker>
-      </v-menu>
-    </div> -->
     <div class="form_block">
       <p class="text-left form_block_title">Срок действия</p>
       <v-menu
@@ -146,7 +115,7 @@
       ></v-text-field>
     </div>
     </v-form>
-    <line-step :step='12' />
+    <line-step :step='13' />
     <v-btn
       block
       large
@@ -161,14 +130,32 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+import {getLicense} from '../../api/getLicense';
+
 export default {
+  async mounted(){
+    const data = await getLicense();
+    console.log(data);
+    this.currentData.licence_type = data.view;
+    this.currentData.licence_number = data.number;
+    this.currentData.licence_issued_by = data.Issued_by;
+    this.currentData.licence_date_issue = data.License_issue_date;
+    this.currentData.licenced_validity = data.Validity;
+    this.currentData.licenced_activity = data.List_types_licensed_activities;
+    console.log(this.currentData);
+  },
   data() {
     return {
       isAddress: false,
       valid: true,
       show1: false,
       currentData: {
-
+        licence_type: "",
+        licence_number: "",
+        licence_issued_by: "",
+        licence_date_issue: "",
+        licenced_validity: "",
+        licenced_activity: "",
       },
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };

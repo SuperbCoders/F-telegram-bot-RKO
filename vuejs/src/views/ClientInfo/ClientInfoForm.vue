@@ -78,7 +78,7 @@
           id="oldName"
           placeholder="Введите номер документа"
           class="align-center border-none"
-          v-mask="'######'"
+          v-mask="'## ## ##'"
           masked="true"
           outlined
           v-model="currentData.doc_number"
@@ -107,6 +107,8 @@
           placeholder="Введите имя"
           v-model="currentData.division_code"
           class="align-center border-none"
+          v-mask="'###-###'"
+          masked="true"
           outlined
           :required="true"
         ></v-text-field>
@@ -170,6 +172,7 @@
         </v-menu>
       </div>
     </v-form>
+    <line-step :step='10' />
     <v-btn
       block
       large
@@ -183,6 +186,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 import { mask } from "vue-the-mask";
 export default {
   directives: { mask },
@@ -213,6 +217,9 @@ export default {
       }
     },
   },
+  components: {
+    LineStep
+  }
 };
 </script>
 

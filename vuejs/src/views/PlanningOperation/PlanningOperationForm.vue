@@ -36,6 +36,7 @@
     <p class="error_message" v-if="!valid && operationlist.length < 1">
       Выберите пункт
     </p>
+    <line-step :step='14' class="mt-5"/>
     <v-btn
       block
       large
@@ -49,7 +50,7 @@
 </template>
 
 <script>
-
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -69,6 +70,9 @@ export default {
         this.$router.push("/beneficiaries");
       }
     },
+  },
+  components: {
+    LineStep
   }
 };
 </script>
