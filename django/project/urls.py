@@ -23,6 +23,7 @@ from apps.main.views import (
     # LoanApplicationCreateAPIView,
     UserAPIView,
     PhoneApiView,
+    LicensionApiView,
     LoanRequestCreateAPIView,
     LoanApplicationListAPIView,
 )
@@ -45,7 +46,8 @@ urlpatterns = [
         UserAPIView.as_view(),
     ),
     path('adminpage/', admin.site.urls),
-    path('api/get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view())
+    path('api/get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view()),
+    path('api/get_license/', LicensionApiView.as_view()),
 ]
 
 if settings.DEBUG:
