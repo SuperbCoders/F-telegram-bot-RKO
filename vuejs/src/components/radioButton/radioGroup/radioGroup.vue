@@ -44,7 +44,6 @@ export default {
   methods: {
     updateStatus (status) {
       this.status = status
-      console.log('wgwehawe')
       this.$emit('isStatus', this.status)
     }
   },

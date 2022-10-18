@@ -10,13 +10,18 @@
                 </v-checkbox>
             </div>
         </div>
+        <LineStep :step="17" class="mt-5"/>
         <v-btn block large :disabled="!isList" @click="redirect()" class="mt-10 auth_form_bth" color="primary">Продолжить
         </v-btn>
     </div>
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
+    components: {
+        LineStep
+    },
     data() {
         return {
             currentData: {
@@ -70,12 +75,12 @@ export default {
     },
     methods: {
         redirect () {
-         this.$router.push('/rate')
+            this.$router.push('/rate')
         }
     },
     computed: {
         isList() {
-            if (this.currentData.informationGoals.length === this.currentData.list.length) {
+            if (this.currentData.informationGoals.length >= 1) {
                 return true
             }
             return false

@@ -13,6 +13,7 @@ from djangorestframework_camel_case.parser import (
 )
 
 import uuid
+from datetime import date
 
 from .models import (
     LoanRequest,
@@ -97,3 +98,17 @@ class PhoneApiView(APIView):
                 'phone': list_user[0].phone_number
             }, status=status.HTTP_200_OK)
         return Response({}, status=status.HTTP_404_NOT_FOUND)
+
+
+class LicensionApiView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, format=None, *args, **kwargs):
+        return Response({
+            "view": "Вид",
+            "number": 25432634,
+            "Issued_by": "Выдан Московским департаментом",
+            "License_issue_date": date.today(),
+            "Validity": date.today(),
+            "List_types_licensed_activities": "Перечни",
+        }, status=status.HTTP_200_OK)

@@ -57,7 +57,7 @@ export default new Vuex.Store({
       })
       return result
     },
-    isLeaderType (state) {
+    isLeaderTypeTitle (state) {
       const result = []
       state.leaderType.map((item) => {
         result.push(item.title)

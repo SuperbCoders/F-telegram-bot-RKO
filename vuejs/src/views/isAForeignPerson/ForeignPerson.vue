@@ -5,7 +5,7 @@
             Является ли лицо иностранно публичным должностным лицом либо лицом, связанным с таком родственным
             партнеским или иными отношениями
         </p>
-        <RadioGroup @isStatus="(status) => status = status " name="foreign_person_section" />
+        <RadioGroup @isStatus="(status) => isForegn = status " name="foreign_person_section" />
     </div>
     <line-step :step='5' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
@@ -30,10 +30,11 @@ export default {
     components: { RadioGroup, LineStep },
     methods: {
       redirect () {
+        this.$store.commit('isForeginStatus')
         if (this.isForegn) {
           this.currentData.assigned_publ_pers_relation = 'Да'
         } else {
-          this.account_own_registration = 'Да'
+          this.currentData.account_own_registration = 'Нет'
         }
         this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/kinship-status-forms')

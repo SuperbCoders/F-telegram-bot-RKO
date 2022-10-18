@@ -13,24 +13,24 @@
         <v-text-field
           label="Введите ИНН"
           outlined
-          type="text"
           v-model="currentData.inn"
           :rules="innRules"
-          v-mask="'############'"
+          v-mask="'### ### ### ###'"
           masked="true"
           required
           @input="getCompanyFromInn"
           class="mt-1 auth_form"
         ></v-text-field>
-        <v-text-field
+        <v-combobox 
           label="Наименования компании"
           outlined
           v-model="currentData.company_name"
           :rules="requiredRules"
           required
-          type="email"
           class="mt-1 auth_form"
-        ></v-text-field>
+          @keyup="getCompanyFromName"
+          :items="listCompany"
+        ></v-combobox>
         <v-text-field
           label="Контактный номер телефона"
           outlined
@@ -88,8 +88,9 @@
 </template>
 
 <script>
-import { getCompany } from "../../api/getInfoCompany";
+import { getCompanyInn, getCompanyName } from "../../api/getInfoCompany";
 import { mask } from "vue-the-mask";
+
 export default {
   directives: { mask },
   data: () => ({
@@ -98,6 +99,7 @@ export default {
       company_name: null,
       contact_number: null,
     },
+    listCompany: [],
     valid: true,
     name: "",
     maskPhone: {},
@@ -105,8 +107,6 @@ export default {
       (v) => !!v || "Это поле обязательно",
       (v) =>
         (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
-      (v) =>
-        (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
     ],
     email: "",
     requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -141,13 +141,22 @@ export default {
 
     async getCompanyFromInn(inn) {
       if ((inn.length >= 10) & (inn.length <= 12)) {
-        const company = await getCompany(inn);
+        const company = await getCompanyInn(inn);
         if (company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
           this.currentData.company_name = company?.suggestions[0].value;
         }
       }
     },
+
+    async getCompanyFromName(e) {
+      const value = e.target.value;
+      console.log(value);
+      const data = await getCompanyName(value);
+      console.log(data);
+      this.listCompany = data.suggestions.map((elem)=>elem.value);
+      // console.log(this.currentData.company_name);
+    }
   },
   computed: {},
 };

@@ -1,5 +1,36 @@
 <template>
     <div>
+        <v-dialog
+      v-model="dialog"
+      width="700"
+    >
+      <v-card>
+
+        <v-card-text class="pa-5">
+            <div style=" text-align: center;">
+                <v-icon
+                large
+                color="pink darken-1"
+                style="font-size: 100px;"
+                >
+                mdi-check-circle-outline
+                </v-icon>
+            </div>
+          <div 
+          style="font-size: 24px; font-weight: bold;" 
+          class="black--text mt-4 text-center">
+            Ваша заявка успешно отправлена!
+          </div>
+
+          <div class="mt-4 text-center" style="font-size: 12px">
+            В ближайшее время с вами свяжутся
+          </div>
+            
+        </v-card-text>
+
+
+      </v-card>
+    </v-dialog>
         <div>
         </div>
         <div class="all_data_table">
@@ -41,6 +72,7 @@
 export default {
     data() {
         return {
+            dialog: false,
             formData: {},
             List: ['fwwfawfa', 'gagawgwg', 'wgawagwaggwa']
         }
@@ -59,7 +91,7 @@ export default {
                 body: JSON.stringify(this.isResult),
             })
 
-            this.$router.push("/already")
+            this.dialog = true;
         },
         isObject(element){
             if (typeof element == 'object') {
