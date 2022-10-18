@@ -92,6 +92,7 @@ export default new Vuex.Store({
     },
     addItemFormData (state, item) {
       state.formData.push(item)
+      scroll(0,0);
     },
     IsFormData (state) {
       state.formData.map((item) => {
