@@ -10,6 +10,7 @@
         placeholder="Напишите значение"
         class="align-center border-none"
         name="oldName"
+        type="number"
         :rules="requiredRules"
         outlined
         :required="true"

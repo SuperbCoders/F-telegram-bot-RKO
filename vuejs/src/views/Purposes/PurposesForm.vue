@@ -27,6 +27,16 @@
     </div>
     <div class="form_block mt-10">
       <p class="form_block_title">
+        Количество операций по снятию наличности в месяц
+      </p>
+      <v-radio-group v-model="currentData.operation_nalition" column>
+        <v-radio label="0-29 000 руб" value="0-29 000 руб"></v-radio>
+        <v-radio label="100 000-1 000 000 руб" value="100 000-1 000 000 руб"></v-radio>
+        <v-radio label="более 1 000 000 руб" value="более 1 000 000 руб"></v-radio>
+      </v-radio-group>
+    </div>
+    <div class="form_block mt-10">
+      <p class="form_block_title">
         Сумма операций по снятию наличности в месяц
       </p>
       <v-radio-group v-model="currentData.sum_per_month" column>
@@ -58,9 +68,9 @@
     <div class="form_block mt-10">
       <p class="form_block_title">Штатная численость сотрудников</p>
       <v-radio-group v-model="currentData.state_employers" column>
-        <v-radio label="0 - 99 000 руб" value="0-99 000 руб"></v-radio>
-        <v-radio label="100 000 - 1 000 000 руб" value="100 000 - 1 000 000 руб"></v-radio>
-        <v-radio label="более 1 000 000 руб" value="более 1 000 000 руб"></v-radio>
+        <v-radio label="0-29" value="0-29"></v-radio>
+        <v-radio label="30-100" value="30-100"></v-radio>
+        <v-radio label="более 100" value="более 100"></v-radio>
       </v-radio-group>
     </div>
     <line-step :step='16' class="mt-5"/>

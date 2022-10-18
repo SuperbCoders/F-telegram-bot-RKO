@@ -13,6 +13,7 @@
         outlined
         v-model="currentData.licence_type"
         :required="true"
+        :disabled="currentData.licence_type !== ''"
       ></v-text-field>
     </div>
     <div class="form_block">
@@ -25,6 +26,7 @@
         :rules="requiredRules"
         outlined
         v-model="currentData.licence_number"
+        :disabled="currentData.licence_number !== ''"
         :required="true"
       ></v-text-field>
     </div>
@@ -37,6 +39,7 @@
         name="oldName"
         v-model="currentData.licence_issued_by"
         :rules="requiredRules"
+        :disabled="currentData.licence_issued_by !== ''"
         outlined
         :required="true"
       ></v-text-field>
@@ -60,6 +63,7 @@
             v-model="currentData.licence_date_issue"
             :rules="requiredRules"
             :required="true"
+            :disabled="currentData.licence_date_issue !== ''"
             v-bind="attrs"
             v-on="on"
           ></v-text-field>
@@ -87,6 +91,7 @@
             append-icon="mdi-calendar-blank"
             readonly
             v-model="currentData.licenced_validity"
+            :disabled="currentData.licenced_validity !== ''"
             :rules="requiredRules"
             :required="true"
             v-bind="attrs"
@@ -109,6 +114,7 @@
         class="align-center border-none"
         name="oldName"
         v-model="currentData.licenced_activity"
+        :disabled="currentData.licenced_activity !== ''"
         :rules="requiredRules"
         outlined
         :required="true"
