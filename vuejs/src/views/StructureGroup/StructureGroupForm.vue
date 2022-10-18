@@ -27,7 +27,8 @@
             placeholder="ИНН"
             class="align-center border-none"
             name="oldName"
-            type="number"
+            v-mask="'### ### ### ###'"
+            masked="true"
             v-model="itemForm.inn"
             outlined
             :rules="innRules"
@@ -86,7 +87,10 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+import { mask } from "vue-the-mask";
+
 export default {
+  directives: { mask },
   data() {
     return {
       groupList: [
@@ -105,7 +109,6 @@ export default {
       innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) => (v && v.length >= 10)  || "ИНН не может содержать меньше 10 симоволов",
-      (v) => (v && v.length <= 12 ) || "ИНН не может содержать больше 12 симоволов",
       ],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };

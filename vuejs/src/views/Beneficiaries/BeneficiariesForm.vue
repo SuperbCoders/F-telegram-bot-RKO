@@ -8,6 +8,7 @@
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
     </div>
+    <line-step :step='15' class="mt-5"/>
     <v-btn
       block
       large
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -34,6 +36,9 @@ export default {
         this.$store.commit('addItemFormData', this.currentData)
         this.$router.push('/purposes')
     }
+  },
+  components: {
+    LineStep,
   }
 };
 </script>

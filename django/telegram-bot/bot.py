@@ -28,7 +28,7 @@ from telegram.constants import ParseMode
 def is_chat_id_confirmed(chat_id):
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
-        f"user/{chat_id}/"
+        f"api/user/{chat_id}/"
     )
     try:
         response = requests.get(api_url, timeout=10, verify=False)
@@ -84,11 +84,11 @@ async def apply(update, context):
     else:
         res_phone = requests.get(
             os.getenv("DJANGO_APP_API_ROOT_URL") +
-            f"get_phone/{update.effective_chat.id}/"
+            f"api/get_phone/{update.effective_chat.id}/"
         )
         phone = (res_phone.json()['phone'].replace('+', ''))
 
-        WEB_APP_URL = "http://rko-bot.spaaace.io/?phone={}".format(phone)
+        WEB_APP_URL = "https://rko-bot.spaaace.io/?phone={}".format(phone)
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)
@@ -108,7 +108,7 @@ async def apply(update, context):
 def save_user_chat_id(chat_id, phone_number):
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
-        f"user/{chat_id}/"
+        f"api/user/{chat_id}/"
     )
     try:
         stripped_phone_number = "".join(
@@ -133,7 +133,7 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            WEB_APP_URL = "http://rko-bot.spaaace.io/?phone={}".format(update.message.contact.phone_number)
+            WEB_APP_URL = "https://rko-bot.spaaace.io/?phone={}".format(update.message.contact.phone_number)
 
             button = InlineKeyboardButton(
                 text="Создать заявку",
@@ -159,7 +159,7 @@ async def handle_phone_number(update, context):
 def get_user_applications(chat_id):
     api_url = (
         "http://django:8000/"+
-        "loan-application/{}".format(chat_id)
+        "api/loan-application/{}".format(chat_id)
     )
     user_applications = []
     try:   
@@ -201,7 +201,6 @@ async def status(update, context):
     await context.bot.send_message(
         chat_id=chat_id,
         text=text,
-        parse_mode='Markdown',
     )
 
 async def handle_custom_start(update, context):
@@ -251,7 +250,6 @@ async def handle_custom_start(update, context):
         await context.bot.send_message(
             chat_id=chat_id,
             text=text,
-            parse_mode='Markdown',
         )
 
 

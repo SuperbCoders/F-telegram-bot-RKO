@@ -41,8 +41,17 @@
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ИНН</p>
-          <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName"
-            type="number" v-model="itemForm.inn" outlined :rules="innRules" :required="true"></v-text-field>
+          <v-text-field
+            id="oldName"
+            placeholder="ИНН"
+            class="align-center border-none"
+            name="oldName"
+            v-model="itemForm.inn" 
+            v-mask="'### ### ### ###'"
+            masked="true" 
+            outlined 
+            :rules="innRules" 
+            :required="true"></v-text-field>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
@@ -61,7 +70,7 @@
         </v-btn>
       </div>
     </v-form>
-    <line-step :step='10' />
+    <line-step :step='11' />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
@@ -69,7 +78,10 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+import { mask } from "vue-the-mask";
+
 export default {
+  directives: { mask },
   data: () => ({
     valid: true,
     currentData: {
@@ -87,7 +99,6 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) => (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
-      (v) => (v && v.length <= 12) || "ИНН не может содержать больше 12 симоволов",
     ],
     passportIssueDateMenu: null,
     requiredRules: [(v) => !!v || "Это поле обязательно"],
