@@ -21,14 +21,14 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn class="rate_card_content_button-activate" v-if="currentData.tariff === 'Тариф 1'" @click="unsetTarif()" large>
-          <span class="pink--text darken-1--text">
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 1'" @click="unsetTarif()" large>
+          <span class="white--text">
             Выбрано 
           </span>
           
           <v-icon
             large
-            color="pink darken-1"
+            color="white"
             class="ml-2"
             style="font-size: 20px;"
           >
@@ -57,14 +57,14 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn class="rate_card_content_button-activate" v-if="currentData.tariff === 'Тариф 2'" @click="unsetTarif()" large>
-          <span class="pink--text darken-1--text">
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 2'" @click="unsetTarif()" large>
+          <span class="white--text">
             Выбрано 
           </span>
           
           <v-icon
             large
-            color="pink darken-1"
+            color="white"
             class="ml-2"
             style="font-size: 20px;"
           >
@@ -92,14 +92,14 @@
           </li>
         </ul>
         <h2 gray class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn class="rate_card_content_button-activate" v-if="currentData.tariff === 'Тариф 3'" @click="unsetTarif()" large>
-          <span class="pink--text darken-1--text">
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 3'" @click="unsetTarif()" large>
+          <span class="white--text">
             Выбрано 
           </span>
           
           <v-icon
             large
-            color="pink darken-1"
+            color="white"
             class="ml-2"
             style="font-size: 20px;"
           >
@@ -112,7 +112,7 @@
     <LineStep :step="18" />
     <v-btn block large :disabled="!currentData.tariff" @click="redirect()" class="mt-10 auth_form_bth" color="primary">
       Продолжить
-        </v-btn>
+    </v-btn>
   </div>
 </template>
 
@@ -182,18 +182,14 @@ export default {
   width: 150px !important;
   cursor: pointer;
   box-shadow: 0 0 4px #00000010;
-  background: none !important;
   border-radius: 6px;
   text-transform: none !important;
   margin-top: 20px;
   font-family: Roboto;
   font-size: 14px !important;
-  font-weight: 500;
+  font-weight: 400;
   padding: 16px 30px !important;
   text-transform: none;
-}
-.rate_card_content_button-activate:hover::before{
-  content: none;
 }
 
 .rate_section_list>li {
