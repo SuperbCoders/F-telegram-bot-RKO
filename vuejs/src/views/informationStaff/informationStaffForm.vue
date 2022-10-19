@@ -62,7 +62,6 @@
               append-icon="mdi-calendar-blank"
               outlined
               readonly
-              :min="currentData.start_date"
               v-model="currentData.end_date"
               :rules="requiredRules"
               :required="true"
@@ -72,6 +71,7 @@
           </template>
           <v-date-picker
             v-model="currentData.end_date"
+            :min="currentData.start_date"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
