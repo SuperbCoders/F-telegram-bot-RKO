@@ -4,10 +4,20 @@
             <!-- <div class="form_block_title">Отметьте все верные утверждени</div> -->
             <p class="form_block_title">Отметье все верные утверждения</p>
             <div class="form_block">
-                <v-checkbox v-for="(item, index) in currentData.list" :key="index" :label="item.value"
-                    v-model="currentData.informationGoals" :value="item.value" hide-details>
-                    fwawaf
-                </v-checkbox>
+                <v-radio-group v-model="currentData.informationGoals">
+                    <v-radio v-for="(item, index) in currentData.list" :key="index"
+                    :value="item.value" hide-details>
+                        <template v-slot:label>
+                            <div :class="{toggleText: currentData.informationGoals != item.value}">
+                                {{ item.value }}
+                            </div>
+                            
+                        </template>
+                    </v-radio>
+                    
+                </v-radio-group>
+                
+                
             </div>
         </div>
         <LineStep :step="17" class="mt-5"/>
@@ -76,6 +86,10 @@ export default {
     methods: {
         redirect () {
             this.$router.push('/rate')
+        },
+        toggleText(e) {
+            console.log("test");
+            e.preventDefault();
         }
     },
     computed: {
@@ -90,5 +104,10 @@ export default {
 </script>
 
 <style>
-
+.toggleText {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 </style>

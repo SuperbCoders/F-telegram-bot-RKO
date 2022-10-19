@@ -70,10 +70,9 @@ class LoanRequest(models.Model):
     supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
-    supervisory = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supervisory = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
-    collegiate_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    collegiate_person_fio = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    collegiate_body = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
     account_onw_role = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
     account_own_lastname =models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -107,6 +106,12 @@ class LoanRequest(models.Model):
     division_code = models.CharField(max_length=MAX_STRING_LENGTH)
     date_issue = models.DateField()
     validity = models.DateField()
+
+    foreigner_doc_type = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null = True)
+    foreigner_doc_serial = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null = True)
+    foreigner_doc_number = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null = True)
+    foreigner_doc_issued = models.DateField(blank=True, null=True)
+    foreigner_doc_validity = models.DateField(blank=True, null=True)
 
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)

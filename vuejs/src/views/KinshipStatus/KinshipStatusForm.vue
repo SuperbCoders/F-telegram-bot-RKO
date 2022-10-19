@@ -21,7 +21,7 @@
         <v-text-field
           id="oldName"
           v-model="currentData.assigned_publ_pers_registraion"
-          placeholder="Введите имя"
+          placeholder="Введите адрес"
           class="align-center border-none"
           outlined
           :rules="requiredRules"
@@ -32,7 +32,7 @@
         <p class="text-left form_block_title">Адрес регистрации</p>
         <v-text-field
           id="oldName"
-          placeholder="Введите имя"
+          placeholder="Введите адрес"
           v-model="currentData.account_own_registration"
           class="align-center border-none"
           outlined
