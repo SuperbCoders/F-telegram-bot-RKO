@@ -1,13 +1,18 @@
 <template>
   <div class="document_fogeiner_block">
-    <h4 class="">ДАННЫЕ ДОКУМЕНТА, ПОТВЕРЖДАЮЩЕГО ПРАВО ИНОСТРАННОГО ГРАЖДАНИНА ИЛИ ЛИЦА БЕЗ ГРАЖДНСТВА НА ПРЕБЫВАНИЯ(ПРОЖИВАНИЯ) В РФ </h4>
+    <h4>
+      ДАННЫЕ ДОКУМЕНТА, ПОТВЕРЖДАЮЩЕГО ПРАВО ИНОСТРАННОГО ГРАЖДАНИНА ИЛИ ЛИЦА
+      БЕЗ ГРАЖДНСТВА НА ПРЕБЫВАНИЯ(ПРОЖИВАНИЯ) В РФ
+    </h4>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">Тип документа</p>
         <v-combobox
           filled
           outlined
+          :items="docType"
           :rules="requiredRules"
+          v-model="currentData.foreigner_doc_type"
           placeholder="Выберите тип"
         ></v-combobox>
       </div>
@@ -20,6 +25,7 @@
           placeholder="Введите серию документа"
           class="align-center border-none"
           outlined
+          v-model="currentData.foreigner_doc_serial"
           :required="true"
         ></v-text-field>
       </div>
@@ -34,6 +40,7 @@
           placeholder="Введите номер документа"
           class="align-center border-none"
           outlined
+          v-model="currentData.foreigner_doc_number"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
@@ -56,7 +63,8 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              @click="currentData.foreigner_doc_validity = ''"
+              v-model="currentData.foreigner_doc_issued"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -64,7 +72,8 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            :min="currentData.foreigner_doc_number"
+            v-model="currentData.foreigner_doc_issued"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -87,7 +96,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
-              v-model="dateStarting"
+              v-model="currentData.foreigner_doc_validity"
               :rules="requiredRules"
               :required="true"
               v-bind="attrs"
@@ -95,7 +104,8 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            v-model="dateStarting"
+            :min="currentData.foreigner_doc_issued"
+            v-model="currentData.foreigner_doc_validity"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
@@ -115,7 +125,7 @@
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue'
+import LineStep from "../../components/line_step/line_step.vue";
 
 export default {
   data: () => ({
@@ -123,6 +133,14 @@ export default {
     listRole: [],
     dateStarting: null,
     dateEnd: null,
+    docType: ["Паспорт"],
+    currentData: {
+      foreigner_doc_type: '',
+      foreigner_doc_serial: '',
+      foreigner_doc_number: '',
+      foreigner_doc_issued: '',
+      foreigner_doc_validity: '',
+    },
     test: [],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
@@ -133,10 +151,13 @@ export default {
         this.$router.push("/information-staff");
       }
     },
+    foreigner_doc_validity_null() {
+      this.foreigner_doc_validity = "";
+    },
   },
   components: {
-    LineStep
-  }
+    LineStep,
+  },
 };
 </script>
 
