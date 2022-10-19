@@ -29,17 +29,16 @@
       </div>
       <div v-if="isManagementCompany" class="form_block">
         <p class="text-left form_block_title">ИНН</p>
-        <v-text-field
-          id="oldName"
-          v-model="currentData.supreme_management_inn"
-          placeholder="Введите ИНН или название компании"
-          class="align-center border-none"
-          v-mask="'### ### ### ###'"
-          masked="true"
-          name="oldName"
+        <v-combobox 
+          label="Введите ИНН или название компании"
           outlined
-          :rules="innRules"
-        ></v-text-field>
+          v-model="currentData.supreme_management_inn"
+          :rules="requiredRules"
+          required
+          class="mt-1 auth_form combobox"
+          @keyup="getListCompanyFromName"
+          :items="listCompany"
+        ></v-combobox>
       </div>
       <div class="form_group mb-10">
         <p class="text-left form_block_label mt-5">
@@ -322,12 +321,14 @@
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
 import LineStep from '../../components/line_step/line_step.vue';
+import { getCompanyName } from "../../api/getInfoCompany";
 import { mask } from "vue-the-mask";
 
 export default {
   directives: { mask },
   data: () => ({
     valid: true,
+    listCompany: [],
     currentData: {
       supreme_management_body: null,
       supreme_management_type: null,
@@ -388,7 +389,16 @@ export default {
       if (object.length > 1) {
         object.pop();
       }
-      // object.pop()
+    },
+    async getListCompanyFromName(e) {
+      const value = e.target.value;
+      const data = await getCompanyName(value);
+      if(value.match(/^\d+/)){
+        this.listCompany = data.suggestions.map((elem)=>elem.data.inn);
+      }else {
+        this.listCompany = data.suggestions.map((elem)=>elem.value);
+      }
+     
     },
   },
   computed: {
