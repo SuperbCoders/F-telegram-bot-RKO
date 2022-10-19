@@ -12,7 +12,7 @@
       <v-checkbox v-model="currentData.account_operations" label="Интернет-экваринг" value="Интернет-экваринг" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.account_operations" label="Кредитование" value="Кредитование" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.account_operations" label="Торговый экваринг" value="Торговый экваринг" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Переводы СБП (c2b)" color="red" value="Переводы СБП (c2b)" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.account_operations" label="Переводы СБП (c2b)"  value="Переводы СБП (c2b)" hide-details></v-checkbox>
     </div>
     <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     <div class="form_block mt-10">

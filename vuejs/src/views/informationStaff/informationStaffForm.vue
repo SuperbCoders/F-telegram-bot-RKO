@@ -34,28 +34,39 @@
       </div>
       <h3 class="text-left structure_group_label mb-10">Состав группы компаний</h3>
       <div v-for="(itemForm, index) in currentData.group_members" :key="index" class="form_input_block">
+        
         <div class="form_block">
           <p class="text-left form_block_title">Название компании</p>
-          <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" v-model="itemForm.name"
-            name="oldName" outlined :rules="requiredRules" :required="true"></v-text-field>
+            <v-combobox 
+              label="Напишите название"
+              outlined
+              v-model="itemForm.name"
+              :rules="requiredRules"
+              required
+              class="align-center border-none combobox"
+              @keyup="getListCompanyFromName"
+              @input="getCompanyFromName(itemForm)"
+              :items="listCompany"
+            ></v-combobox>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ИНН</p>
           <v-text-field
             id="oldName"
-            placeholder="ИНН"
+            placeholder="Напишите ИНН"
             class="align-center border-none"
             name="oldName"
             v-model="itemForm.inn" 
             v-mask="'### ### ### ###'"
             masked="true" 
+            @input="getCompanyFromInn(itemForm)"
             outlined 
             :rules="innRules" 
             :required="true"></v-text-field>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
-          <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName"
+          <v-text-field id="oldName" placeholder="Напишите ОГРН" class="align-center border-none" name="oldName"
             v-mask="'### ### ### ### ###'"
             masked="true" 
             v-model="itemForm.ogrn" outlined :rules="requiredRules" :required="true"></v-text-field>
@@ -81,20 +92,22 @@
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
 import { mask } from "vue-the-mask";
+import { getCompanyInn, getCompanyName } from "../../api/getInfoCompany";
 
 export default {
   directives: { mask },
   data: () => ({
     valid: true,
+    listCompany: [],
     currentData: {
       company_group_name: null,
       start_date: null,
       end_date: null,
       group_members: [
         {
-          company_group_name: null,
-          start_date: null,
-          end_date: null,
+          name: null,
+          inn: null,
+          ogrn: null,
         },
       ]
     },
@@ -128,6 +141,28 @@ export default {
         this.currentData.group_members.pop();
       }
     },
+    async getListCompanyFromName(e) {
+      const value = e.target.value;
+      const data = await getCompanyName(value);
+      this.listCompany = data.suggestions.map((elem)=>elem.value);
+    },
+    async getCompanyFromName(itemForm) {
+      const data = await getCompanyName(itemForm.name);
+      if(data.suggestions.length === 1) {
+        itemForm.inn = data.suggestions[0].data.inn
+      }
+    },
+    async getCompanyFromInn(itemForm) {
+      const inn = itemForm.inn;
+      if ((inn.length >= 12)) {
+        const company = await getCompanyInn(inn);
+        if (company?.suggestions.length > 0) {
+          console.log(company?.suggestions[0])
+          itemForm.name = company?.suggestions[0].value;
+          itemForm.ogrn = company?.suggestions[0].data.ogrn;
+        }
+      }
+    },
   },
   components: {
     LineStep,
@@ -138,5 +173,11 @@ export default {
 <style>
 .w-50 {
   width: 50%;
+}
+.combobox .v-label {
+  color: #b3b2b2;
+}
+.combobox .v-icon {
+  display: none;
 }
 </style>

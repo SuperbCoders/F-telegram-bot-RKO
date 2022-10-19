@@ -27,8 +27,9 @@
           v-model="currentData.company_name"
           :rules="requiredRules"
           required
-          class="mt-1 auth_form"
-          @keyup="getCompanyFromName"
+          class="mt-1 auth_form combobox"
+          @keyup="getListCompanyFromName"
+          @input="getCompanyFromName"
           :items="listCompany"
         ></v-combobox>
         <v-text-field
@@ -149,10 +150,16 @@ export default {
       }
     },
 
-    async getCompanyFromName(e) {
+    async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
       this.listCompany = data.suggestions.map((elem)=>elem.value);
+    },
+    async getCompanyFromName() {
+      const data = await getCompanyName(this.currentData.company_name);
+      if(data.suggestions.length === 1) {
+        this.currentData.inn = data.suggestions[0].data.inn
+      }
     }
   },
   computed: {},
@@ -176,5 +183,9 @@ export default {
 }
 .auth_form_link_container {
   font-size: 14px;
+}
+
+.combobox .v-icon {
+  display: none;
 }
 </style>
