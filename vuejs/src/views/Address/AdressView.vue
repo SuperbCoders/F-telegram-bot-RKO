@@ -105,10 +105,11 @@ export default {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
 
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_2',
-          value: this.currentData
-        });
+        // this.$store.dispatch('addObjectFormData', {
+        //   object: 'step_2',
+        //   value: this.currentData
+        // });
+        this.$store.commit('addItemFormData', this.currentData)
         this.$store.commit('IsFormData')
         this.$router.push("/sctructure");
       }

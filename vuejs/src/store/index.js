@@ -14,7 +14,7 @@ export default new Vuex.Store({
         accownt_own_living: false,
         assigned_publ_pers_registraion: false,
         result: {},
-        formData: {},
+        formData: [],
         leaderList: [
             {
                 id: 1,
@@ -92,6 +92,7 @@ export default new Vuex.Store({
         },
         addItemFormData(state, item) {
             state.formData.push(item);
+            state.formData.reverse()
             scroll(0, 0);
         },
         IsFormData(state) {
