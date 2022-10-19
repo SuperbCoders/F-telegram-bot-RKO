@@ -56,6 +56,8 @@
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
           <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName"
+            v-mask="'### ### ### ### ###'"
+            masked="true" 
             v-model="itemForm.ogrn" outlined :rules="requiredRules" :required="true"></v-text-field>
         </div>
       </div>

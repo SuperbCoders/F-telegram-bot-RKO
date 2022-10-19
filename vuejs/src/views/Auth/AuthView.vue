@@ -151,11 +151,8 @@ export default {
 
     async getCompanyFromName(e) {
       const value = e.target.value;
-      console.log(value);
       const data = await getCompanyName(value);
-      console.log(data);
       this.listCompany = data.suggestions.map((elem)=>elem.value);
-      // console.log(this.currentData.company_name);
     }
   },
   computed: {},
