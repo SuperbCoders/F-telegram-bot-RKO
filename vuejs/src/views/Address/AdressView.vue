@@ -103,11 +103,13 @@ export default {
         })
       })
       this.$refs.form.validate();
-      console.log('agageaio[]', { addresses: this.addresses })
       if (this.$refs.form.validate()) {
 
-        this.$store.commit("addItemFormData", this.currentResult );
-
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_2',
+          value: this.currentData
+        });
+        this.$store.commit('IsFormData')
         this.$router.push("/sctructure");
       }
     },
