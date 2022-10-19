@@ -6,48 +6,96 @@
       </h3>
       <div class="form_block">
         <p class="text-left form_block_title">Название группы компаний</p>
-        <v-text-field id="oldName" placeholder="Напишите назание" class="align-center border-none" name="oldName"
-          v-model="currentData.company_group_name" outlined :rules="requiredRules" :required="true"></v-text-field>
+        <v-text-field
+          id="oldName"
+          placeholder="Напишите назание"
+          class="align-center border-none"
+          name="oldName"
+          v-model="currentData.company_group_name"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Дата начала действия</p>
-        <v-menu :close-on-content-click="false" transition="scale-transition" offset-y min-width="auto">
+        <v-menu
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
           <template v-slot:activator="{ on, attrs }">
-            <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate" outlined
-              append-icon="mdi-calendar-blank" readonly v-model="currentData.start_date" :rules="requiredRules" :required="true"
-              v-bind="attrs" v-on="on"></v-text-field>
+            <v-text-field
+              placeholder="xx.xx.xxxx"
+              id="passportIssueDate"
+              name="passportIssueDate"
+              outlined
+              append-icon="mdi-calendar-blank"
+              readonly
+              v-model="currentData.start_date"
+              :rules="requiredRules"
+              :required="true"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
           </template>
-          <v-date-picker v-model="currentData.start_date" @input="passportIssueDateMenu = false"></v-date-picker>
+          <v-date-picker
+            v-model="currentData.start_date"
+            @input="passportIssueDateMenu = false"
+          ></v-date-picker>
         </v-menu>
       </div>
       <div class="form_block mb-5">
         <p class="text-left form_block_title">Дата окончания действия</p>
-        <v-menu :close-on-content-click="false" transition="scale-transition" offset-y
-          min-width="auto">
+        <v-menu
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          min-width="auto"
+        >
           <template v-slot:activator="{ on, attrs }">
-            <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate"
-              append-icon="mdi-calendar-blank" outlined readonly v-model="currentData.end_date" :rules="requiredRules"
-              :required="true" v-bind="attrs" v-on="on"></v-text-field>
+            <v-text-field
+              placeholder="xx.xx.xxxx"
+              id="passportIssueDate"
+              name="passportIssueDate"
+              append-icon="mdi-calendar-blank"
+              outlined
+              readonly
+              v-model="currentData.end_date"
+              :rules="requiredRules"
+              :required="true"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
           </template>
-          <v-date-picker v-model="currentData.end_date" @input="passportIssueDateMenu = false"></v-date-picker>
+          <v-date-picker
+            v-model="currentData.end_date"
+            @input="passportIssueDateMenu = false"
+          ></v-date-picker>
         </v-menu>
       </div>
-      <h3 class="text-left structure_group_label mb-10">Состав группы компаний</h3>
-      <div v-for="(itemForm, index) in currentData.group_members" :key="index" class="form_input_block">
-        
+      <h3 class="text-left structure_group_label mb-10">
+        Состав группы компаний
+      </h3>
+      <div
+        v-for="(itemForm, index) in currentData.group_members"
+        :key="index"
+        class="form_input_block"
+      >
         <div class="form_block">
           <p class="text-left form_block_title">Название компании</p>
-            <v-combobox 
-              label="Напишите название"
-              outlined
-              v-model="itemForm.name"
-              :rules="requiredRules"
-              required
-              class="align-center border-none combobox"
-              @keyup="getListCompanyFromName"
-              @input="getCompanyFromName(itemForm)"
-              :items="listCompany"
-            ></v-combobox>
+          <v-combobox
+            label="Напишите название"
+            outlined
+            v-model="itemForm.name"
+            :rules="requiredRules"
+            required
+            class="align-center border-none combobox"
+            @keyup="getListCompanyFromName"
+            @input="getCompanyFromName(itemForm)"
+            :items="listCompany"
+          ></v-combobox>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ИНН</p>
@@ -56,41 +104,64 @@
             placeholder="Напишите ИНН"
             class="align-center border-none"
             name="oldName"
-            v-model="itemForm.inn" 
+            v-model="itemForm.inn"
             v-mask="'### ### ### ###'"
-            masked="true" 
+            masked="true"
             @input="getCompanyFromInn(itemForm)"
-            outlined 
-            :rules="innRules" 
-            :required="true"></v-text-field>
+            outlined
+            :rules="innRules"
+            :required="true"
+          ></v-text-field>
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
-          <v-text-field id="oldName" placeholder="Напишите ОГРН" class="align-center border-none" name="oldName"
+          <v-text-field
+            id="oldName"
+            placeholder="Напишите ОГРН"
+            class="align-center border-none"
+            name="oldName"
             v-mask="'### ### ### ### ###'"
-            masked="true" 
-            v-model="itemForm.ogrn" outlined :rules="requiredRules" :required="true"></v-text-field>
+            masked="true"
+            v-model="itemForm.ogrn"
+            outlined
+            :rules="requiredRules"
+            :required="true"
+          ></v-text-field>
         </div>
       </div>
       <div class="form_block d-flex align-center justify-center">
-        <a @click="deleteGroupList" class="form_block_delete_link text-decoration-none" href="#">
+        <a
+          @click="deleteGroupList"
+          class="form_block_delete_link text-decoration-none"
+          href="#"
+        >
           <v-icon>mdi-trash-can-outline</v-icon>
           Удалить
         </a>
-        <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="addGroupList()">
+        <v-btn
+          class="text-center d-flex align-center justify-center ml-10 add_form"
+          @click="addGroupList()"
+        >
           <span class="pr-3">Добавить</span>
           <v-icon>mdi-plus-circle-outline</v-icon>
         </v-btn>
       </div>
     </v-form>
-    <line-step :step='11' />
-    <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+    <line-step :step="11" />
+    <v-btn
+      block
+      large
+      :disabled="!valid"
+      class="mt-10 auth_form_bth"
+      color="primary"
+      @click="validate"
+      >Продолжить
     </v-btn>
   </div>
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
+import LineStep from "../../components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
 import { getCompanyInn, getCompanyName } from "../../api/getInfoCompany";
 
@@ -109,11 +180,12 @@ export default {
           inn: null,
           ogrn: null,
         },
-      ]
+      ],
     },
     innRules: [
       (v) => !!v || "Это поле обязательно",
-      (v) => (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
+      (v) =>
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
     ],
     passportIssueDateMenu: null,
     requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -124,7 +196,7 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.commit("addItemFormData", this.currentData);
         this.$router.push("/intelligence");
       }
     },
@@ -133,7 +205,7 @@ export default {
         name: null,
         inn: null,
         ogrn: null,
-      }
+      };
       this.currentData.group_members.push(defaultGroupItem);
     },
     deleteGroupList() {
@@ -144,20 +216,20 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      this.listCompany = data.suggestions.map((elem)=>elem.value);
+      this.listCompany = data.suggestions.map((elem) => elem.value);
     },
     async getCompanyFromName(itemForm) {
       const data = await getCompanyName(itemForm.name);
-      if(data.suggestions.length === 1) {
-        itemForm.inn = data.suggestions[0].data.inn
+      if (data.suggestions.length === 1) {
+        itemForm.inn = data.suggestions[0].data.inn;
       }
     },
     async getCompanyFromInn(itemForm) {
       const inn = itemForm.inn;
-      if ((inn.length >= 12)) {
+      if (inn.length >= 12) {
         const company = await getCompanyInn(inn);
         if (company?.suggestions.length > 0) {
-          console.log(company?.suggestions[0])
+          console.log(company?.suggestions[0]);
           itemForm.name = company?.suggestions[0].value;
           itemForm.ogrn = company?.suggestions[0].data.ogrn;
         }
@@ -166,7 +238,7 @@ export default {
   },
   components: {
     LineStep,
-  }
+  },
 };
 </script>
 

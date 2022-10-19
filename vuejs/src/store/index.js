@@ -14,7 +14,8 @@ export default new Vuex.Store({
     accownt_own_living: false,
     assigned_publ_pers_registraion: false,
     result: {},
-    formData: [],
+    formData: {
+    },
     leaderList: [
       {
         id: 1,
@@ -95,12 +96,26 @@ export default new Vuex.Store({
       scroll(0,0);
     },
     IsFormData (state) {
-      state.formData.map((item) => {
-        state.result = Object.assign(item, state.result)
+      const object = Object.keys(state.formData)
+      object.forEach((key) =>  {
+        state.formData = Object.assign({
+          key: state.formData[key]
+        }, state.result)
+        console.log(`${key} : ${state.formData[key]}`)
       })
+      console.log(this.state.result)
+      // state.formData.map((item) => {
+      //   state.result = Object.assign(item, state.result)
+      // })
+    },
+    addItemFormDataObject (state, payolad) {
+      state.formData[payolad.object] = payolad.value
     }
   },
   actions: {
+    addObjectFormData (context, payolad) {
+      context.commit('addItemFormDataObject', payolad)
+    }
   },
   modules: {},
 });
