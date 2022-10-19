@@ -141,6 +141,7 @@ export default {
                 case 'company_group_name': return 'Наименование группы компаний'
                 case 'company_name': return 'Наименование группы компаний'
                 case 'salary_debt': return 'Задолжность по зп'
+                case 'operation_nalition': return 'Количество операций по снятию наличности в месяц'
                 case 'state_employers': return 'Штатная численость сотрудников'
                 case 'sum_per_month': return 'Сумма по снятию за месяц'
                 case 'date_issue': return 'Дата выдачи'
