@@ -1,7 +1,8 @@
 <template>
   <div class="document_fogeiner_block">
+    <h4 class="">ДАННЫЕ ДОКУМЕНТА, ПОТВЕРЖДАЮЩЕГО ПРАВО ИНОСТРАННОГО ГРАЖДАНИНА ИЛИ ЛИЦА БЕЗ ГРАЖДНСТВА НА ПРЕБЫВАНИЯ(ПРОЖИВАНИЯ) В РФ </h4>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div class="form_block">
+      <div class="form_block mt-5">
         <p class="text-left form_block_title">Тип документа</p>
         <v-combobox
           filled
@@ -100,6 +101,7 @@
         </v-menu>
       </div>
     </v-form>
+    <LineStep :step="11" class="mt-5" />
     <v-btn
       block
       large
@@ -113,6 +115,8 @@
 </template>
 
 <script>
+import LineStep from '../../components/line_step/line_step.vue'
+
 export default {
   data: () => ({
     valid: true,
@@ -130,6 +134,9 @@ export default {
       }
     },
   },
+  components: {
+    LineStep
+  }
 };
 </script>
 
