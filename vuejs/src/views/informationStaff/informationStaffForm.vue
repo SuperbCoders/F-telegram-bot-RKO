@@ -62,6 +62,7 @@
               append-icon="mdi-calendar-blank"
               outlined
               readonly
+              :min="currentData.start_date"
               v-model="currentData.end_date"
               :rules="requiredRules"
               :required="true"
