@@ -66,7 +66,10 @@ export default {
         this.valid = false;
       } else {
         this.valid = true;
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_14',
+          value: this.currentData
+        })
         this.$router.push("/beneficiaries");
       }
     },

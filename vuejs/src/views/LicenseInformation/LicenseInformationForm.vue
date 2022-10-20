@@ -170,7 +170,10 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_13',
+          value: this.currentData
+        })
         this.$router.push("/planning");
       }
     },

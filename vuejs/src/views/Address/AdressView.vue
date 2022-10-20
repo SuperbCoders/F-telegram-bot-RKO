@@ -109,7 +109,6 @@ export default {
           object: 'step_2',
           value: this.currentData
         });
-        this.$store.commit('IsFormData')
         this.$router.push("/sctructure");
       }
     },

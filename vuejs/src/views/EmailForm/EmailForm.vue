@@ -69,7 +69,10 @@ export default {
         } else if (this.isAddress === 'Не совпадает с адресом регистации и адресом проживания') {
           this.currentData.account_own_mail = this.address
         }
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_8',
+          value: this.currentData
+        })
         this.$router.push("/document");
       }
     },

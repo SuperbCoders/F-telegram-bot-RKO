@@ -151,7 +151,6 @@
           transition="scale-transition"
           offset-y
           min-width="auto"
-          disabled="true"
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
@@ -255,7 +254,10 @@ export default {
         } else {
           this.$router.push("/information-staff");
         }
-        this.$store.commit("addItemFormData", this.currentData);
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_10',
+          value: this.currentData
+        })
       }
     },
     isDate() {

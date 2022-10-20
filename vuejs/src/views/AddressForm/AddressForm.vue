@@ -46,7 +46,10 @@ export default {
         } else {
           this.currentData.accownt_own_living = 'Совпадает'
         }
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_7',
+          value: this.currentData
+        })
         this.$store.commit('updateAccownt_own_living', this.currentData.accownt_own_living)
         this.$store.commit('IsFormData')
         this.$router.push("/email-form");

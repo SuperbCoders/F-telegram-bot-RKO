@@ -97,16 +97,16 @@ export default new Vuex.Store({
     },
     IsFormData (state) {
       const object = Object.keys(state.formData)
+      const result = []
       object.forEach((key) =>  {
-        state.formData = Object.assign({
-          key: state.formData[key]
-        }, state.result)
-        console.log(`${key} : ${state.formData[key]}`)
+        // state.result = Object.assign({
+        //   key: state.formData[key]
+        // }, state.result)
+        result.push(state.formData[key])
       })
-      console.log(this.state.result)
-      // state.formData.map((item) => {
-      //   state.result = Object.assign(item, state.result)
-      // })
+      result.map((item) => {
+        state.result = Object.assign(item, state.result)
+      })
     },
     addItemFormDataObject (state, payolad) {
       state.formData[payolad.object] = payolad.value

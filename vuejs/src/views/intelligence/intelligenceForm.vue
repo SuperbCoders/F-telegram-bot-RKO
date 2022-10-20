@@ -64,7 +64,10 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_12',
+          value: this.currentData
+        })
         this.$router.push('/license-info')
       }
     },

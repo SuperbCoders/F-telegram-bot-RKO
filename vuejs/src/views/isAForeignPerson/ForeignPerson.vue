@@ -36,7 +36,10 @@ export default {
         } else {
           this.currentData.account_own_registration = 'Нет'
         }
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_5',
+          value: this.currentData
+        })
         this.$router.push('/kinship-status-forms')
       }
     },
