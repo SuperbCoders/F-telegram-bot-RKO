@@ -421,6 +421,15 @@ export default {
     RadioGroup,
     LineStep,
   },
+  mounted () {
+    const dataStep = this.$store.state.formData.step_3
+    if (dataStep) {
+      this.currentData.account_onw_role = dataStep.account_onw_role
+      this.currentData.account_own_lastname = dataStep.account_own_lastname
+      this.currentData.account_own_gender = dataStep.account_own_gender
+      this.currentData.account_own_surname = dataStep.account_own_surname
+    }
+  }
 };
 </script>
 
