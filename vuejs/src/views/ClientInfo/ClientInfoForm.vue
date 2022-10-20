@@ -16,10 +16,11 @@
       <div class="form_block">
         <p class="text-left form_block_title">Дата рождения</p>
         <v-menu
+          ref="menu"
+          v-model="menu"
           :close-on-content-click="false"
           transition="scale-transition"
           offset-y
-          class="client_info_datapicker"
           min-width="auto"
         >
           <template v-slot:activator="{ on, attrs }">
@@ -39,8 +40,10 @@
           </template>
           <v-date-picker
             v-model="currentData.account_datebirth"
+            :active-picker.sync="activePicker"
             :max="isDate()"
-            @input="passportIssueDateMenu = false"
+            min="1950-01-01"
+            @change="save"
           ></v-date-picker>
         </v-menu>
       </div>
@@ -118,7 +121,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Дата выдачи</p>
         <v-menu
-          :close-on-content-click="false"
+          :close-on-content-click="true"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -131,6 +134,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
+              @click="currentData.validity = ''"
               v-model="currentData.date_issue"
               :rules="requiredRules"
               :required="true"
@@ -147,7 +151,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Срок действия</p>
         <v-menu
-          :close-on-content-click="false"
+          :close-on-content-click="true"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -233,6 +237,9 @@ export default {
     dateStarting: null,
     dateEnd: null,
     test: [],
+    activePicker: null,
+    date: null,
+    menu: false,
     requiredRules: [(v) => !!v || "Это поле обязательно"],
     type_document: ["Паспорт"],
   }),
@@ -254,12 +261,16 @@ export default {
         } else {
           this.$router.push("/information-staff");
         }
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_10',
-          value: this.currentData
-        })
+        this.$store.dispatch("addObjectFormData", {
+          object: "step_10",
+          value: this.currentData,
+        });
       }
     },
+    
+    // validityNull () {
+    //   currentData.validity = ''
+    // },
     isDate() {
       const year = new Date().getFullYear() - 18;
       console.log(year);

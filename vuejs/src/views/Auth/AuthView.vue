@@ -135,11 +135,11 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        // this.$store.dispatch('addObjectFormData', {
-        //   object: 'step_1',
-        //   value: this.currentData
-        // });
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_1',
+          value: this.currentData
+        });
+        // this.$store.commit('addItemFormData', this.currentData)
         this.$router.push("/address");
       }
     },
