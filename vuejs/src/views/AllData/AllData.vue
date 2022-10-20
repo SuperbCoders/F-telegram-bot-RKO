@@ -1,46 +1,5 @@
 <template>
   <div>
-    geogehaghsa
-    <v-simple-table>
-      <template v-slot:default>
-        <thead>
-          <tr>
-            <th>Вопрос</th>
-            <th>Ответ</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            v-for="(item, index) in Object.entries(isResult)"
-            :key="index"
-            class="all_data_table-row d-flex"
-          >
-            <td class="data_table_block" v-if="item[1]">
-              <p class="form_block_title">
-                {{ isTitle(item[0]) }}
-              </p>
-            </td>
-            <div v-if="test(item[1])" class="form_block_title d-block">
-              <div v-if="test(item[1])"></div>
-              <td v-for="(item, index) in item[1]" :key="index">
-                <div v-if="isObject(item)">
-                  <div v-for="(val, key) in item" :key="key">
-                    <div v-if="val">{{ isTitle(key) }} => {{ val }}</div>
-                  </div>
-                </div>
-                <p class="d-flex" v-else>- {{ item }}</p>
-              </td>
-            </div>
-            <td class="text-left form_block_title" v-else>
-              {{ item[1] }}
-            </td>
-            <div
-              v-if="typeof item[1] === 'object' && !Array.isArray(item)"
-            ></div>
-          </tr>
-        </tbody>
-      </template>
-    </v-simple-table>
     <v-dialog v-model="dialog" width="700">
       <v-card>
         <v-card-text class="pa-5">
@@ -106,11 +65,15 @@
               ></div>
             </div>
           </div>
-          <hr>
+          <hr />
         </div>
       </div>
     </div>
-    <v-btn elevation="2" class="card_content_button" large @click="sendData()"
+    <v-btn
+      elevation="2"
+      class="card_content_button mt-10"
+      large
+      @click="sendData()"
       >Отправить</v-btn
     >
   </div>
