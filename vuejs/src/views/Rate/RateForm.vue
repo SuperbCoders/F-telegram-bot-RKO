@@ -21,22 +21,25 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 1'" @click="unsetTarif()" large>
-          <span class="white--text">
-            Выбрано 
-          </span>
-          
-          <v-icon
-            large
-            color="white"
-            class="ml-2"
-            style="font-size: 20px;"
-          >
+        <v-btn
+          class="rate_card_content_button-activate pink darken-1"
+          v-if="currentData.tariff === 'Тариф 1'"
+          @click="unsetTarif()"
+          large
+        >
+          <span class="white--text"> Выбрано </span>
+
+          <v-icon large color="white" class="ml-2" style="font-size: 20px">
             mdi-check-bold
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
-        
+        <v-btn
+          class="rate_card_content_button"
+          v-else
+          @click="setTarif('Тариф 1')"
+          large
+          >Выбрать</v-btn
+        >
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -57,21 +60,25 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 2'" @click="unsetTarif()" large>
-          <span class="white--text">
-            Выбрано 
-          </span>
-          
-          <v-icon
-            large
-            color="white"
-            class="ml-2"
-            style="font-size: 20px;"
-          >
+        <v-btn
+          class="rate_card_content_button-activate pink darken-1"
+          v-if="currentData.tariff === 'Тариф 2'"
+          @click="unsetTarif()"
+          large
+        >
+          <span class="white--text"> Выбрано </span>
+
+          <v-icon large color="white" class="ml-2" style="font-size: 20px">
             mdi-check-bold
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
+        <v-btn
+          class="rate_card_content_button"
+          v-else
+          @click="setTarif('Тариф 2')"
+          large
+          >Выбрать</v-btn
+        >
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -92,59 +99,71 @@
           </li>
         </ul>
         <h2 gray class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 3'" @click="unsetTarif()" large>
-          <span class="white--text">
-            Выбрано 
-          </span>
-          
-          <v-icon
-            large
-            color="white"
-            class="ml-2"
-            style="font-size: 20px;"
-          >
+        <v-btn
+          class="rate_card_content_button-activate pink darken-1"
+          v-if="currentData.tariff === 'Тариф 3'"
+          @click="unsetTarif()"
+          large
+        >
+          <span class="white--text"> Выбрано </span>
+
+          <v-icon large color="white" class="ml-2" style="font-size: 20px">
             mdi-check-bold
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
+        <v-btn
+          class="rate_card_content_button"
+          v-else
+          @click="setTarif('Тариф 3')"
+          large
+          >Выбрать</v-btn
+        >
       </div>
     </v-card>
     <LineStep :step="18" />
-    <v-btn block large :disabled="!currentData.tariff" @click="redirect()" class="mt-10 auth_form_bth" color="primary">
+    <v-btn
+      block
+      large
+      :disabled="!currentData.tariff"
+      @click="redirect()"
+      class="mt-10 auth_form_bth"
+      color="primary"
+    >
       Продолжить
     </v-btn>
   </div>
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
+import LineStep from "../../components/line_step/line_step.vue";
 export default {
   components: {
-    LineStep
+    LineStep,
   },
   data() {
     return {
       currentData: {
         tariff: null,
-  
-      }
-    }
+      },
+    };
   },
   methods: {
     setTarif(tarif) {
       this.currentData.tariff = tarif;
       // const data = this.$store.state.formData
-      
     },
     unsetTarif() {
       this.currentData.tariff = null;
     },
-    redirect(){
-      this.$store.commit('addItemFormData', this.currentData)
-      this.$router.push('/all-data')
-    }
-  }
-}
+    redirect() {
+      this.$store.dispatch('addObjectFormData', {
+          object: 'step_18',
+          value: this.currentData
+        })
+      this.$router.push("/all-data");
+    },
+  },
+};
 </script>
 
 <style>
@@ -156,7 +175,7 @@ export default {
 .rate_section_title {
   width: 80%;
   font-family: Geometria;
-  color: #0C0C0D;
+  color: #0c0c0d;
 }
 
 .rate_card {
@@ -167,7 +186,7 @@ export default {
   width: 150px !important;
   cursor: pointer;
   box-shadow: 0 0 4px #00000030;
-  background: #F3F4F4 !important;
+  background: #f3f4f4 !important;
   border-radius: 6px;
   text-transform: none !important;
   margin-top: 20px;
@@ -192,7 +211,7 @@ export default {
   text-transform: none;
 }
 
-.rate_section_list>li {
+.rate_section_list > li {
   font-size: 14px;
   color: #757f86 !important;
 }

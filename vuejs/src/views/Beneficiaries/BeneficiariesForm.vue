@@ -33,7 +33,10 @@ export default {
   },
   methods: {
     redirect () {
-        this.$store.commit('addItemFormData', this.currentData)
+      this.$store.dispatch('addObjectFormData', {
+          object: 'step_15',
+          value: this.currentData
+        })
         this.$router.push('/purposes')
     }
   },

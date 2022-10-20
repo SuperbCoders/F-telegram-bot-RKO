@@ -99,7 +99,10 @@ export default {
   methods: {
     validate() {
       if (this.isValidation) {
-        this.$store.commit('addItemFormData', this.currentData)
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_16',
+          value: this.currentData
+        })
         this.$router.push('/approvals')
       }
       else {

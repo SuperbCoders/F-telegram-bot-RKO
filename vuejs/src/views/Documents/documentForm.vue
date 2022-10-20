@@ -5,7 +5,11 @@
     </p>
 
     <div v-if="this.currentData.first_passport_page" class="list_file">
-      <div v-for="(file, index) in this.currentData.first_passport_page" :key="index" class="block_file">
+      <div
+        v-for="(file, index) in this.currentData.first_passport_page"
+        :key="index"
+        class="block_file"
+      >
         <div class="card_file">
           <div class="type_file">{{ getType(file.type) }}</div>
           <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -14,7 +18,7 @@
       </div>
     </div>
 
-    <AttachButton class="mb-5 " text="Загрузить документ" @file="onfile" />
+    <AttachButton class="mb-5" text="Загрузить документ" @file="onfile" />
 
     <v-btn
       block
@@ -31,24 +35,25 @@
 <script>
 import AttachButton from '../../components/button/attachButton.vue';
 
+
 export default {
-  data(){
+  data() {
     return {
       currentData: {
-        first_passport_page: null
+        first_passport_page: null,
       },
-    }
+    };
   },
   methods: {
     onfile(files) {
       this.currentData.first_passport_page = files;
     },
     getType(type) {
-      type = type.split('/')[1];
+      type = type.split("/")[1];
       return type;
     },
     getSize(size) {
-      size = ""+size;
+      size = "" + size;
       return size[0] + size[1];
     },
     getName(name) {
@@ -66,16 +71,16 @@ export default {
     }
   },
   components: { AttachButton }
-};
 
+};
 </script>
 
 <style scoped>
 .list_file {
   display: flex;
 }
-.card_file{
-  background: #F3F4F4;
+.card_file {
+  background: #f3f4f4;
   padding: 10px 14px;
   border-radius: 6px;
 }
@@ -86,7 +91,7 @@ export default {
 .type_file {
   font-size: 20px;
   font-weight: bold;
-  color: #D41367;
+  color: #d41367;
   text-align: center;
   text-transform: uppercase;
 }

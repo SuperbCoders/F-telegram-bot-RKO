@@ -67,7 +67,6 @@ export default {
         } else if (this.isAddress === 'Не совпадает с адресом регистации и адресом проживания') {
           this.currentData.account_own_mail = this.address
         }
-        
         if(this.$route.query?.type === 'SupervisoryBoard') {
           this.$store.commit("setSupervisoryBoardPersone", {key: "page-6", value: this.currentData});
         }else if(this.$route.query?.type === 'CollegialExecutive') {
