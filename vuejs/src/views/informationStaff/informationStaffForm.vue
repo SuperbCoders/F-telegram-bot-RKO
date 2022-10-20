@@ -71,6 +71,7 @@
           </template>
           <v-date-picker
             v-model="currentData.end_date"
+            :min="currentData.start_date"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>
         </v-menu>
