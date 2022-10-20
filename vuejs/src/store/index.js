@@ -65,11 +65,26 @@ export default new Vuex.Store({
       })
       return result
     },
+    // isFormData (state) {
+    //   state.formData.map((item) => {
+    //    state.result = Object.assign(item)
+    //   })
+    //   return state.result
+    // }
   },
   mutations: {
     toggleDrawer(state, value) {
       state.drawer = value;
     },
+    // updateAssigned_publ_pers_relation (state, value) {
+    //   state.assigned_publ_pers_relation = value
+    // },
+    // updateAssigned_publ_pers_registraion (state, value) {
+    //   state.assigned_publ_pers_registraion = value
+    // },
+    // updateAccownt_own_living (state, value) {
+    //   state.accownt_own_living = value
+    // },
     setDataCompany(state, value){
       state.dataCompany = value;
     },
@@ -84,9 +99,6 @@ export default new Vuex.Store({
       const object = Object.keys(state.formData)
       const result = []
       object.forEach((key) =>  {
-        // state.result = Object.assign({
-        //   key: state.formData[key]
-        // }, state.result)
         result.push(state.formData[key])
       })
       result.reverse
