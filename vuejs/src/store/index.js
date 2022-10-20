@@ -71,41 +71,34 @@ export default new Vuex.Store({
         })
         return result
     },
+  },
     mutations: {
-        toggleDrawer(state, value) {
-            state.drawer = value;
+      toggleDrawer(state, value) {
+        state.drawer = value;
+      },
+      setDataCompany(state, value){
+        state.dataCompany = value;
+      },
+      isForeginStatus(state, status) {
+        state.isForegin = status
+      },
+      addItemFormData (state, item) {
+        state.formData.push(item)
+        scroll(0,0);
+      },
+        IsFormData (state) {
+          const object = Object.keys(state.formData)
+          const result = []
+          object.forEach((key) =>  {
+            result.push(state.formData[key])
+          })
+          result.reverse
+          result.map((item) => {
+            state.result = Object.assign(item, state.result)
+          })
         },
-        setDataCompany(state, value) {
-            state.dataCompany = value;
-        },
-        isForeginStatus(state, status) {
-            state.isForegin = status;
-        },
-        addItemFormData(state, item) {
-            state.formData.push(item);
-            state.formData.reverse()
-            scroll(0, 0);
-        },
-        IsFormData(state) {
-            state.formData.map((item) => {
-                state.result = Object.assign(item, state.result);
-            });
-        },
-        IsFormDataObject(state) {
-            const object = Object.keys(state.formData);
-            object.forEach((key) => {
-                state.formData = Object.assign(
-                    {
-                        key: state.formData[key],
-                    },
-                    state.result
-                );
-                console.log(`${key} : ${state.formData[key]}`);
-            });
-            console.log(this.state.result);
-        },
-        addItemFormDataObject(state, payolad) {
-            state.formData[payolad.object] = payolad.value;
+        addItemFormDataObject (state, payolad) {
+          state.formData[payolad.object] = payolad.value
         },
 
         setSupervisoryBoardPersone(state, {key, value}) {
@@ -126,55 +119,9 @@ export default new Vuex.Store({
             state.collegialExecutiveBody = {};
         }
     },
-    // isFormData (state) {
-    //   state.formData.map((item) => {
-    //    state.result = Object.assign(item)
-    //   })
-    //   return state.result
-    // }
-    },
-  mutations: {
-    toggleDrawer(state, value) {
-      state.drawer = value;
-    },
-    // updateAssigned_publ_pers_relation (state, value) {
-    //   state.assigned_publ_pers_relation = value
-    // },
-    // updateAssigned_publ_pers_registraion (state, value) {
-    //   state.assigned_publ_pers_registraion = value
-    // },
-    // updateAccownt_own_living (state, value) {
-    //   state.accownt_own_living = value
-    // },
-    setDataCompany(state, value){
-      state.dataCompany = value;
-    },
-    isForeginStatus(state, status) {
-      state.isForegin = status
-    },
-    addItemFormData (state, item) {
-      state.formData.push(item)
-      scroll(0,0);
-    },
-    IsFormData (state) {
-      const object = Object.keys(state.formData)
-      const result = []
-      object.forEach((key) =>  {
-        result.push(state.formData[key])
-      })
-      result.reverse
-      result.map((item) => {
-        state.result = Object.assign(item, state.result)
-      })
-    },
-    addItemFormDataObject (state, payolad) {
-      state.formData[payolad.object] = payolad.value
-    }
-  },
   actions: {
     addObjectFormData (context, payolad) {
       context.commit('addItemFormDataObject', payolad)
     }
   },
-  modules: {},
 });

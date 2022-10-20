@@ -239,6 +239,10 @@ export default {
       }
     },
     createSupervisoryBoard() {
+      this.$store.dispatch('addObjectFormData', {
+          object: 'step_3',
+          value: this.currentData
+        })
       this.$router.push({
         path: "/individual-info", 
         query: {
@@ -247,6 +251,10 @@ export default {
       })
     },
     createCollegialExecutive() {
+      this.$store.dispatch('addObjectFormData', {
+          object: 'step_3',
+          value: this.currentData
+        })
       this.$router.push({
         path: "/individual-info", 
         query: {
@@ -280,7 +288,7 @@ export default {
     LineStep,
   },
   mounted () {
-    const dataStep = this.$store.state.formData.step_3
+    const dataStep = this.$store.state.formData.step_3;
     if (dataStep) {
       this.currentData.account_onw_role = dataStep.account_onw_role
       this.currentData.account_own_lastname = dataStep.account_own_lastname
