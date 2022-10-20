@@ -104,6 +104,7 @@ export default new Vuex.Store({
         // }, state.result)
         result.push(state.formData[key])
       })
+      result.reverse()
       result.map((item) => {
         state.result = Object.assign(item, state.result)
       })
