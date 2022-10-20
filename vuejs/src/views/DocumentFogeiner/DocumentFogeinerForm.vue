@@ -50,7 +50,7 @@
           Дата начала срока действия права пребывания(проживания)
         </p>
         <v-menu
-          :close-on-content-click="false"
+          :close-on-content-click="true"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -83,7 +83,7 @@
           Дата окончания срока действия пребывания (проживания)
         </p>
         <v-menu
-          :close-on-content-click="false"
+          :close-on-content-click="true"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -133,11 +133,11 @@ export default {
     dateEnd: null,
     docType: ["Паспорт"],
     currentData: {
-      foreigner_doc_type: '',
-      foreigner_doc_serial: '',
-      foreigner_doc_number: '',
-      foreigner_doc_issued: '',
-      foreigner_doc_validity: '',
+      foreigner_doc_type: "",
+      foreigner_doc_serial: "",
+      foreigner_doc_number: "",
+      foreigner_doc_issued: "",
+      foreigner_doc_validity: "",
     },
     test: [],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
