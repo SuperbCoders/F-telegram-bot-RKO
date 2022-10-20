@@ -7,9 +7,8 @@
           :id="name + '_1'"
           type="radio"
           :name="name"
-          value="false"
-          v-model="status"
-          checked
+          :value="true"
+          
         />
         <label
           class="form_radio form_radio_btn_input_radius__left"
@@ -24,7 +23,8 @@
           :id="name + '_2'"
           type="radio"
           :name="name"
-          value="2"
+          :value="false"
+          checked
         />
         <label @click="updateStatus(false)" class="form_radio_btn_input_radius__right" :for="name + '_2'"
           >Нет</label

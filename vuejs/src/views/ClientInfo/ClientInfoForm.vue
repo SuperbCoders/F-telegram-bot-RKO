@@ -246,15 +246,22 @@ export default {
       // let isStatusFogeiner = this.$store.state.isForegin;
       this.$store.commit("IsFormData");
       const isStatusFogeiner =
-        this.$store.state.result.assigned_publ_pers_relation;
+        this.$store.state?.supervisoryBoardPersone?.['page-3']?.assigned_publ_pers_relation;
+        console.log(this.$store.state?.supervisoryBoardPersone?.['page-3']?.assigned_publ_pers_relation);
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        if (isStatusFogeiner) {
-          this.$router.push("/document-fogeiner");
-        } else {
-          this.$router.push("/information-staff");
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-8", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-8", value: this.currentData});
         }
-        this.$store.commit("addItemFormData", this.currentData);
+        
+        
+        if (isStatusFogeiner === 'Да') {
+          this.$router.push({path:"/document-fogeiner", query: this.$route.query});
+        } else {
+          this.$router.push({path:"/all-data-persone", query: this.$route.query});
+        }
       }
     },
     isDate() {

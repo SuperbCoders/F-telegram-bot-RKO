@@ -31,7 +31,6 @@
         </div>
       </div>
     </v-form>
-    <line-step :step='8' class="mt-5" />
     <v-btn
       block
       large
@@ -44,7 +43,6 @@
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
@@ -69,13 +67,18 @@ export default {
         } else if (this.isAddress === 'Не совпадает с адресом регистации и адресом проживания') {
           this.currentData.account_own_mail = this.address
         }
-        this.$store.commit('addItemFormData', this.currentData)
-        this.$router.push("/document");
+        
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-6", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-6", value: this.currentData});
+        }
+        
+        this.$router.push({path:"/document", query: this.$route.query});
       }
     },
   },
   components: {
-    LineStep,
   },
   computed: {
     isTest () {

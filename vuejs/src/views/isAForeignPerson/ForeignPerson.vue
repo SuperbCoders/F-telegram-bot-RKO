@@ -5,48 +5,46 @@
             Является ли лицо иностранно публичным должностным лицом либо лицом, связанным с таком родственным
             партнеским или иными отношениями
         </p>
-        <RadioGroup @isStatus="(status) => isForegn = status " name="foreign_person_section" />
+        <RadioGroup @isStatus="(status) => isForegn = status" name="foreign_person_section" />
     </div>
-    <line-step :step='5' class="mt-5" />
-    <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
+
+    <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">
+      Продолжить
     </v-btn>
   </div>
 </template>
 
 <script>
 import RadioGroup from '../../components/radioButton/radioGroup/radioGroup.vue';
-import LineStep from '../../components/line_step/line_step.vue';
 
 export default {
     data () {
       return {
         currentData: {
           assigned_publ_pers_relation: '',
-          account_own_registration: '',
         },
-        isForegn: true
+        isForegn: false
       }
     },
-    components: { RadioGroup, LineStep },
+    components: { RadioGroup },
     methods: {
       redirect () {
         this.$store.commit('isForeginStatus')
         if (this.isForegn) {
           this.currentData.assigned_publ_pers_relation = 'Да'
         } else {
-          this.currentData.account_own_registration = 'Нет'
+          this.currentData.assigned_publ_pers_relation = 'Нет'
         }
-        this.$store.commit('addItemFormData', this.currentData)
-        this.$router.push('/kinship-status-forms')
+
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-3", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-3", value: this.currentData});
+        }
+        
+        this.$router.push({path:"/kinship-status-forms", query: this.$route.query});
       }
     },
-    // computed: {
-    //   isForegnStatus () {
-    //     if (this.isForegn) {
-    //       this.currentData.assigned_publ_pers_relation = true
-    //     }
-    //   }
-    // }
 }
 </script>
 

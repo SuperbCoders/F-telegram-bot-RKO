@@ -49,7 +49,7 @@
           name="Existence of a supervisory board"
         />
       </div>
-      <div v-if="isTest1" class="form_block mt-5">
+      <div v-if="isTest1" class="form_block mt-2">
         <p class="text-left form_block_title">
           Наименования наблюдательного совета
         </p>
@@ -63,107 +63,24 @@
             :rules="requiredRules"
             :required="true"
           ></v-text-field>
-        <div
-          v-for="(item, index) in currentData.supervisory"
-          :key="index"
-          class="form_block"
-        >
-          <p class="text-left form_block_title">Роль лица</p>
-          <v-checkbox
-            label="Руководитель"
-            v-model="item.account_onw_role"
-            value="Руководитель"
-            hide-details
+          <v-card
+            elevation="2"
+            class="pa-4 mb-2"
+            v-for="(val, key) in listSupervisotyBoardPersone" :key="key"
           >
-          </v-checkbox>
-          <v-checkbox
-            label="Учредитель"
-            value="Учредитель"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="item.account_onw_role"
-            label="Бенефированый владелец"
-            value="Бенефированый владелец"
-            hide-details
-          >
-          </v-checkbox>
-          <v-checkbox
-            v-model="item.account_onw_role"
-            label="Подписант"
-            value="Подписант"
-            hide-details
-          ></v-checkbox>
-          <!-- <p
-            v-if="!valid && item.supervisory.account_onw_role.length < 1"
-            class="error_message"
-          >
-            Выберите пункт
-          </p> -->
-          <div class="form_block mt-5">
-            <p class="text-left form_block_title">Фамилия</p>
-            <v-text-field
-              id="oldName"
-              v-model="item.account_own_lastname"
-              placeholder="Введите фамилию"
-              class="align-center border-none"
-              outlined
-              :rules="requiredRules"
-              :required="true"
-            >
-            </v-text-field>
-          </div>
-          <div class="form_block">
-            <p class="text-left form_block_title">Имя</p>
-            <v-text-field
-              id="oldName"
-              v-model="item.account_own_name"
-              placeholder="Введите имя"
-              class="align-center border-none"
-              outlined
-              :rules="requiredRules"
-              :required="true"
-            ></v-text-field>
-          </div>
-          <div class="form_block">
-            <p class="text-left form_block_title">Отчество (при наличии)</p>
-            <v-text-field
-              id="oldName"
-              v-model="item.account_own_surname"
-              placeholder="Введите отчество"
-              class="align-center border-none"
-              outlined
-              :required="true"
-            ></v-text-field>
-          </div>
-          <v-radio-group v-model="currentData.account_own_gender" mandatory>
-            <v-radio label="Мужской" value="Мужской"></v-radio>
-            <v-radio label="Женский" value="Женский"> </v-radio>
-          </v-radio-group>
-        </div>
-        <div class="form_block d-flex align-center justify-center">
-          <a
-            @click="deleteObjectList(currentData.supervisory)"
-            class="form_block_delete_link text-decoration-none"
-            href="#form_block"
-          >
-            Отменить
-          </a>
+            {{ val['page-1'].account_own_lastname }}
+            {{ val['page-1'].account_own_name }}
+            {{ val['page-1'].account_own_surname }}
+          </v-card>
           <v-btn
-            @click="addObjectList(currentData.supervisory)"
-            class="
-              text-center
-              d-flex
-              align-center
-              justify-center
-              ml-10
-              add_form
-            "
+            block
+            large
+            class="mt-5 auth_form_bth"
+            color="primary"
+            @click="createSupervisoryBoard"
           >
-            <span class="pr-3">Добавить</span>
-            <v-icon>mdi-plus-circle-outline</v-icon>
+            Добавить
           </v-btn>
-        </div>
       </div>
       <div class="form_group mt-5">
         <p class="text-left form_block_label mb-2">
@@ -188,107 +105,24 @@
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
-        <div
-          v-for="(item, index) in currentData.collegiate_body"
-          :key="index"
-          class="form_block"
-        >
-          <p class="text-left form_block_title">Роль лица</p>
-          <v-checkbox
-            label="Руководитель"
-            v-model="item.account_onw_role"
-            value="Руководитель"
-            hide-details
+        <v-card
+            elevation="2"
+            class="pa-4 mb-2"
+            v-for="(val, key) in listSupervisotyBoardPersone" :key="key"
           >
-          </v-checkbox>
-          <v-checkbox
-            label="Учредитель"
-            value="Учредитель"
-            hide-details
-          ></v-checkbox>
-          <v-checkbox
-            v-model="item.account_onw_role"
-            label="Бенефированый владелец"
-            value="Бенефированый владелец"
-            hide-details
+            {{ val['page-1'].account_own_lastname }}
+            {{ val['page-1'].account_own_name }}
+            {{ val['page-1'].account_own_surname }}
+          </v-card>
+        <v-btn
+            block
+            large
+            class="mt-5 auth_form_bth"
+            color="primary"
+            @click="createCollegialExecutive"
           >
-          </v-checkbox>
-          <v-checkbox
-            v-model="item.account_onw_role"
-            label="Подписант"
-            value="Подписант"
-            hide-details
-          ></v-checkbox>
-          <p
-            v-if="!valid && item.account_onw_role.length < 1"
-            class="error_message"
-          >
-            Выберите пункт
-          </p>
-          <div class="form_block mt-5">
-            <p class="text-left form_block_title">Фамилия</p>
-            <v-text-field
-              id="oldName"
-              v-model="item.account_own_lastname"
-              placeholder="Введите фамилию"
-              class="align-center border-none"
-              outlined
-              :rules="requiredRules"
-              :required="true"
-            >
-            </v-text-field>
-          </div>
-          <div class="form_block">
-            <p class="text-left form_block_title">Имя</p>
-            <v-text-field
-              id="oldName"
-              v-model="item.account_own_name"
-              placeholder="Введите имя"
-              class="align-center border-none"
-              outlined
-              :rules="requiredRules"
-              :required="true"
-            ></v-text-field>
-          </div>
-          <div class="form_block">
-            <p class="text-left form_block_title">Отчество (при наличии)</p>
-            <v-text-field
-              id="oldName"
-              v-model="item.account_own_surname"
-              placeholder="Введите отчество"
-              class="align-center border-none"
-              outlined
-              :required="true"
-            ></v-text-field>
-          </div>
-          <v-radio-group v-model="item.account_own_gender" mandatory>
-            <v-radio label="Мужской" value="Мужской"></v-radio>
-            <v-radio label="Женский" value="Женский"> </v-radio>
-          </v-radio-group>
-        </div>
-        <div class="form_block d-flex align-center justify-center">
-          <a
-            @click="deleteObjectList(currentData.collegiate_body)"
-            class="form_block_delete_link text-decoration-none"
-            href="#form_block"
-          >
-            Отменить
-          </a>
-          <v-btn
-            @click="addObjectList(currentData.collegiate_body)"
-            class="
-              text-center
-              d-flex
-              align-center
-              justify-center
-              ml-10
-              add_form
-            "
-          >
-            <span class="pr-3">Добавить</span>
-            <v-icon>mdi-plus-circle-outline</v-icon>
+            Добавить
           </v-btn>
-        </div>
       </div>
       <div class="form_block mt-10">
         <p class="text-left form_block_title">
@@ -314,8 +148,9 @@
       class="mt-10 auth_form_bth"
       color="primary"
       @click="validate"
-      >Продолжить</v-btn
     >
+      Продолжить
+    </v-btn>
   </div>
 </template>
 <script>
@@ -356,8 +191,8 @@ export default {
         },
       ],
     },
-    isTest1: true,
-    isTest2: true,
+    isTest1: false,
+    isTest2: false,
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -372,7 +207,7 @@ export default {
 
       if (this.$refs.form.validate()) {
         this.$store.commit("addItemFormData", this.currentData);
-        this.$router.push("/documents-forms");
+        this.$router.push("/information-staff");
       }
     },
     addObjectList(object) {
@@ -398,8 +233,24 @@ export default {
       }else {
         this.listCompany = data.suggestions.map((elem)=>elem.value);
       }
-     
     },
+    createSupervisoryBoard() {
+      this.$router.push({
+        path: "/individual-info", 
+        query: {
+          "type": "SupervisoryBoard"
+        }
+      })
+    },
+    createCollegialExecutive() {
+      this.$router.push({
+        path: "/individual-info", 
+        query: {
+          "type": "CollegialExecutive"
+        }
+      })
+    },
+
   },
   computed: {
     isLeaderList() {
@@ -413,6 +264,12 @@ export default {
         this.currentData.supreme_management_person === "Управляющая компания"
       );
     },
+    listSupervisotyBoardPersone() {
+      return this.$store.state.listSupervisotyBoardPersone
+    },
+    listCollegialExecutiveBody() {
+      return this.$store.state.listCollegialExecutiveBody
+    }
   },
   components: {
     RadioGroup,

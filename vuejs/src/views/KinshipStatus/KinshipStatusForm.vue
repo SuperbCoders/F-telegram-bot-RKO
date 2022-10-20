@@ -42,7 +42,6 @@
       </div>
     </div>
     </v-form>
-    <line-step :step='6' class="mt-5" />
     <v-btn
       block
       large
@@ -56,7 +55,6 @@
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
 
 export default {
   data: () => ({
@@ -76,14 +74,18 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit('addItemFormData', this.currentData)
-        // this.$store.commit('updateAssigned_publ_pers_relation', this.currentData.account_own_registration)
         this.$store.commit('updateAssigned_publ_pers_registraion', this.currentData.assigned_publ_pers_registraion)
-        this.$router.push("/address-form");
+
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-4", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-4", value: this.currentData});
+        }
+        
+        this.$router.push({path:"/address-form", query: this.$route.query});
       }
     },
   },
-  components: { LineStep },
 };
 </script>
 

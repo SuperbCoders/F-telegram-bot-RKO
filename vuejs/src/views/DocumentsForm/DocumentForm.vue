@@ -45,7 +45,6 @@
           :rules="requiredRules" v-model="currentData.account_own_piece" :required="true">
         </v-text-field>
       </div>
-      <line-step :step='4' />
       <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
       </v-btn>
     </v-form>
@@ -53,7 +52,6 @@
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
 import { mask } from "vue-the-mask";
 export default {
   directives: { mask },
@@ -79,13 +77,17 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit('addItemFormData', this.currentData)
-        this.$router.push("/foreign-person");
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-2", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-2", value: this.currentData});
+        }
+        
+        this.$router.push({path:"/foreign-person", query: this.$route.query});
       }
     },
   },
   components: {
-    LineStep
   },
 }
 </script>

@@ -15,6 +15,13 @@ export default new Vuex.Store({
         assigned_publ_pers_registraion: false,
         result: {},
         formData: [],
+        
+        listSupervisotyBoardPersone: [],
+        supervisoryBoardPersone: {},
+
+        listCollegialExecutiveBody: [],
+        collegialExecutiveBody: {},
+
         leaderList: [
             {
                 id: 1,
@@ -64,26 +71,11 @@ export default new Vuex.Store({
             });
             return result;
         },
-        // isFormData (state) {
-        //   state.formData.map((item) => {
-        //    state.result = Object.assign(item)
-        //   })
-        //   return state.result
-        // }
     },
     mutations: {
         toggleDrawer(state, value) {
             state.drawer = value;
         },
-        // updateAssigned_publ_pers_relation (state, value) {
-        //   state.assigned_publ_pers_relation = value
-        // },
-        // updateAssigned_publ_pers_registraion (state, value) {
-        //   state.assigned_publ_pers_registraion = value
-        // },
-        // updateAccownt_own_living (state, value) {
-        //   state.accownt_own_living = value
-        // },
         setDataCompany(state, value) {
             state.dataCompany = value;
         },
@@ -116,6 +108,24 @@ export default new Vuex.Store({
         addItemFormDataObject(state, payolad) {
             state.formData[payolad.object] = payolad.value;
         },
+
+        setSupervisoryBoardPersone(state, {key, value}) {
+            state.supervisoryBoardPersone[key] = value;
+            scroll(0, 0);
+        },
+        setListSupervisoryBoardPersone(state) {
+            state.listSupervisotyBoardPersone.push(Object.assign({}, state.supervisoryBoardPersone));
+            state.supervisoryBoardPersone = {};
+        },
+
+        setCollegialExecutiveBody(state, {key, value}) {
+            state.collegialExecutiveBody[key] = value;
+            scroll(0, 0);
+        },
+        setListCollegialExecutiveBody(state) {
+            state.listCollegialExecutiveBody.push(Object.assign({}, state.collegialExecutiveBody));
+            state.collegialExecutiveBody = {};
+        }
     },
     actions: {
         addObjectFormData(context, payolad) {
