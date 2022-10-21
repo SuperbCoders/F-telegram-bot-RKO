@@ -102,7 +102,6 @@ export default new Vuex.Store({
             state.formData[payolad.object] = payolad.value;
             scroll(0, 0);
         },
-
         setSupervisoryBoardPersone(state, { key, value }) {
             state.supervisoryBoardPersone[key] = value;
             scroll(0, 0);
