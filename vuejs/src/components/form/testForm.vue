@@ -37,7 +37,7 @@
         <v-text-field
           id="oldName"
           v-model="currentData.account_own_lastname"
-          placeholder="Введите фамилию"
+          placeholder="Введите Фамилию"
           class="align-center border-none"
           outlined
           :rules="requiredRules"
@@ -50,7 +50,7 @@
         <v-text-field
           id="oldName"
           v-model="currentData.account_own_name"
-          placeholder="Введите имя"
+          placeholder="Введите Имя"
           class="align-center border-none"
           outlined
           :rules="requiredRules"
@@ -62,7 +62,7 @@
         <v-text-field
           id="oldName"
           v-model="currentData.account_own_surname"
-          placeholder="Введите отчество"
+          placeholder="Введите Отчество"
           class="align-center border-none"
           outlined
           :required="true"
