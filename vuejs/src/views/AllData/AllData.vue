@@ -49,9 +49,20 @@
               <div v-if="test(item[1])" class="form_block_title d-block">
                 <div v-if="test(item[1])"></div>
                 <div v-for="(item, index) in item[1]" :key="index">
-                  <div v-if="isObject(item)">
+                  <div v-if="isObject(item) ">
                     <div v-for="(val, key) in item" :key="key">
-                      <div v-if="val">{{ isTitle(key) }} => {{ val }}</div>
+                      <div>
+                        {{ isTitle(key) }} =>
+                        <p v-if="!isObject(val)">{{ val }}</p>
+                      </div>
+                      <div v-if="isObject(val)">
+                        <div
+                          v-for="(elementObject, indexObject) in val"
+                          :key="indexObject"
+                        >
+                          - {{ elementObject }}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <p class="d-flex" v-else>- {{ item }}</p>
@@ -151,6 +162,8 @@ export default {
           return "Телефон";
         case "account_own_piece":
           return "Доля владения";
+        case "operation_nalition":
+          return "Количество операций по снятию наличности в месяц";
         case "account_own_registration":
           return "Адрес регистрации";
         case "account_own_snils":
@@ -236,7 +249,7 @@ export default {
         case "inn":
           return "ИНН";
         case "addresses":
-          return "Адресс";
+          return "Адрес";
         case "supreme_management_person":
           return "Тип Руководителя";
         case "collegiate_person_fio":
@@ -307,7 +320,7 @@ export default {
   width: 100%;
   display: flex;
   align-items: flex-start;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .form_block_title {

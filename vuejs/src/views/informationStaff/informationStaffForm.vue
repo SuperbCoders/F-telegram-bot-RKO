@@ -20,7 +20,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Дата начала действия</p>
         <v-menu
-          :close-on-content-click="false"
+          :close-on-content-click="true"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -33,6 +33,7 @@
               outlined
               append-icon="mdi-calendar-blank"
               readonly
+              @click="currentData.end_date = ''"
               v-model="currentData.start_date"
               :rules="requiredRules"
               :required="true"
@@ -49,7 +50,7 @@
       <div class="form_block mb-5">
         <p class="text-left form_block_title">Дата окончания действия</p>
         <v-menu
-          :close-on-content-click="false"
+          :close-on-content-click="true"
           transition="scale-transition"
           offset-y
           min-width="auto"

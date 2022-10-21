@@ -29,7 +29,7 @@
       </div>
       <div v-if="isManagementCompany" class="form_block">
         <p class="text-left form_block_title">ИНН</p>
-        <v-combobox 
+        <v-combobox
           label="Введите ИНН или название компании"
           outlined
           v-model="currentData.supreme_management_inn"
@@ -54,15 +54,15 @@
           Наименования наблюдательного совета
         </p>
         <v-text-field
-            id="oldName"
-            placeholder="Наименования"
-            class="align-center border-none"
-            name="oldName"
-            v-model="currentData.supervisory.account_company_name"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
+          id="oldName"
+          placeholder="Наименования"
+          class="align-center border-none"
+          name="oldName"
+          v-model="currentData.supervisory.account_company_name"
+          outlined
+          :rules="requiredRules"
+          :required="true"
+        ></v-text-field>
         <div
           v-for="(item, index) in currentData.supervisory"
           :key="index"
@@ -320,7 +320,7 @@
 </template>
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
-import LineStep from '../../components/line_step/line_step.vue';
+import LineStep from "../../components/line_step/line_step.vue";
 import { getCompanyName } from "../../api/getInfoCompany";
 import { mask } from "vue-the-mask";
 
@@ -335,7 +335,7 @@ export default {
       supreme_management_inn: null,
       collegiate_body: [
         {
-          account_company_name: "",
+          account_company_name: null,
           account_onw_role: [],
           account_own_lastname: null,
           account_own_gender: null,
@@ -347,7 +347,7 @@ export default {
       collegiate_person_fio: null,
       supervisory: [
         {
-          account_company_name: "",
+          account_company_name: null,
           account_onw_role: [],
           account_own_lastname: null,
           account_own_gender: null,
@@ -361,7 +361,7 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
-        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов"
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
     ],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
@@ -371,10 +371,10 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_3',
-          value: this.currentData
-        })
+        this.$store.dispatch("addObjectFormData", {
+          object: "step_3",
+          value: this.currentData,
+        });
         this.$router.push("/documents-forms");
       }
     },
@@ -396,12 +396,11 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      if(value.match(/^\d+/)){
-        this.listCompany = data.suggestions.map((elem)=>elem.data.inn);
-      }else {
-        this.listCompany = data.suggestions.map((elem)=>elem.value);
+      if (value.match(/^\d+/)) {
+        this.listCompany = data.suggestions.map((elem) => elem.data.inn);
+      } else {
+        this.listCompany = data.suggestions.map((elem) => elem.value);
       }
-     
     },
   },
   computed: {
@@ -421,15 +420,47 @@ export default {
     RadioGroup,
     LineStep,
   },
-  mounted () {
-    const dataStep = this.$store.state.formData.step_3
+  mounted() {
+    const dataStep = this.$store.state.formData.step_3;
     if (dataStep) {
-      this.currentData.account_onw_role = dataStep.account_onw_role
-      this.currentData.account_own_lastname = dataStep.account_own_lastname
-      this.currentData.account_own_gender = dataStep.account_own_gender
-      this.currentData.account_own_surname = dataStep.account_own_surname
+      this.currentData.supreme_management_body =
+        dataStep.supreme_management_body;
+      this.currentData.supreme_management_type =
+        dataStep.supreme_management_type;
+      this.currentData.supreme_management_inn = dataStep.supreme_management_inn;
+      this.currentData.account_onw_role = dataStep.account_onw_role;
+      this.currentData.account_own_lastname = dataStep.account_own_lastname;
+      this.currentData.account_own_gender = dataStep.account_own_gender;
+      this.currentData.account_own_surname = dataStep.account_own_surname;
     }
-  }
+    // currentData = {
+    //   supreme_management_body: null,
+    //   supreme_management_type: null,
+    //   supreme_management_inn: null,
+    //   collegiate_body: [
+    //     {
+    //       account_company_name: "",
+    //       account_onw_role: [],
+    //       account_own_lastname: null,
+    //       account_own_gender: null,
+    //       account_own_name: null,
+    //       account_own_surname: null,
+    //     },
+    //   ],
+    //   collegiate_person: null,
+    //   collegiate_person_fio: null,
+    //   supervisory: [
+    //     {
+    //       account_company_name: "",
+    //       account_onw_role: [],
+    //       account_own_lastname: null,
+    //       account_own_gender: null,
+    //       account_own_name: null,
+    //       account_own_surname: null,
+    //     },
+    //   ],
+    // }
+  },
 };
 </script>
 
