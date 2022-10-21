@@ -16,4 +16,8 @@ RUN yarn install --check-files
 
 RUN yarn add vue-the-mask
 
+RUN yarn add vuetify@2.6.12
+
 COPY --chown=node:node ./vuejs/ /usr/src/app/
+
+EXPOSE 8080
