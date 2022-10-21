@@ -149,7 +149,8 @@ export default {
         const company = await getCompanyInn(inn);
         if (company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
-          this.currentData.company_name = company?.suggestions[0].value;
+          const data = company?.suggestions[0];
+          this.currentData.company_name = `${data.value} ${data.data.address.unrestricted_value}`;
         }
       }
     },
@@ -157,7 +158,8 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      this.listCompany = data.suggestions.map((elem)=>elem.value);
+      console.log(data);
+      this.listCompany = data.suggestions.map((elem)=> `${elem.value} ${elem.data?.address?.unrestricted_value}`);
     },
     async getCompanyFromName() {
       const data = await getCompanyName(this.currentData.company_name);

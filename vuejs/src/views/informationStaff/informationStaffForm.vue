@@ -221,7 +221,7 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      this.listCompany = data.suggestions.map((elem) => elem.value);
+      this.listCompany = data.suggestions.map((elem) => `${elem.value} ${elem.data?.address?.unrestricted_value}`);
     },
     async getCompanyFromName(itemForm) {
       const data = await getCompanyName(itemForm.name);
@@ -234,8 +234,8 @@ export default {
       if (inn.length >= 12) {
         const company = await getCompanyInn(inn);
         if (company?.suggestions.length > 0) {
-          console.log(company?.suggestions[0]);
-          itemForm.name = company?.suggestions[0].value;
+          const data = company?.suggestions[0]
+          itemForm.name = `${data.value} ${data.data?.address?.unrestricted_value}`;
           itemForm.ogrn = company?.suggestions[0].data.ogrn;
         }
       }

@@ -72,6 +72,7 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
+          <div class="title_btn">Члены наблюдательного совета</div>
           <div class="contain_btn_add">
             <v-btn
               large
@@ -121,6 +122,7 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
+          <div class="title_btn">Члены наблюдательного совета</div>
           <div class="contain_btn_add">
             <v-btn
               large
@@ -247,7 +249,7 @@ export default {
       if (value.match(/^\d+/)) {
         this.listCompany = data.suggestions.map((elem) => elem.data.inn);
       } else {
-        this.listCompany = data.suggestions.map((elem) => elem.value);
+        this.listCompany = data.suggestions.map((elem) => `${elem.value} ${elem.data?.address?.unrestricted_value}`);
       }
     },
     createSupervisoryBoard() {
@@ -373,5 +375,10 @@ export default {
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+}
+.title_btn {
+  color: #8E909B;
+  font-size: 13px;
+  margin-bottom: 3px;
 }
 </style>

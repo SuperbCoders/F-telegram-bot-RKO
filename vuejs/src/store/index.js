@@ -100,6 +100,7 @@ export default new Vuex.Store({
 
         addItemFormDataObject(state, payolad) {
             state.formData[payolad.object] = payolad.value;
+            scroll(0, 0);
         },
 
         setSupervisoryBoardPersone(state, { key, value }) {
@@ -111,6 +112,7 @@ export default new Vuex.Store({
                 Object.assign({}, state.supervisoryBoardPersone)
             );
             state.supervisoryBoardPersone = {};
+            scroll(0, 0);
         },
 
         setCollegialExecutiveBody(state, { key, value }) {
@@ -122,6 +124,7 @@ export default new Vuex.Store({
                 Object.assign({}, state.collegialExecutiveBody)
             );
             state.collegialExecutiveBody = {};
+            scroll(0, 0);
         },
     },
     actions: {

@@ -19,7 +19,7 @@ export default {
     },
     data(){
         return {
-            count_step: 18,
+            count_step: 12,
         }
     },
     methods: {
@@ -34,7 +34,7 @@ export default {
 }
 .step {
     width: 100%;
-    height: 6px;
+    height: 5px;
     background: #F1BAD2;
     border-radius: 4px;
 }
