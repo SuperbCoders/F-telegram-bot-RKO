@@ -25,6 +25,8 @@ import Purposes from '../views/Purposes/PurposesForm.vue'
 import Approvals from '../views/Approvals/ApprovalsForm.vue'
 import AllData from '../views/AllData/AllData.vue'
 import Already from '../views/Already/Already.vue'
+import AllDataPersone from '../views/allDataPersone/AllDataPersone.vue'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -152,7 +154,12 @@ const routes = [
     path: "/rate",
     name: "rate",
     component: Rate
-  }
+  },
+  {
+    path: "/all-data-persone",
+    name: "all-data-persone",
+    component: AllDataPersone
+  },
 ];
 
 const router = new VueRouter({

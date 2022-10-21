@@ -16,14 +16,12 @@
       </div>
     </div>
     </v-form>
-    <line-step :step='7' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
 
 export default {
   data() {
@@ -46,17 +44,21 @@ export default {
         } else {
           this.currentData.accownt_own_living = 'Совпадает'
         }
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_7',
-          value: this.currentData
-        })
         this.$store.commit('updateAccownt_own_living', this.currentData.accownt_own_living)
+        
+
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-5", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-5", value: this.currentData});
+        }
+
         this.$store.commit('IsFormData')
-        this.$router.push("/email-form");
+        
+        this.$router.push({path:"/email-form", query: this.$route.query});
       }
     },
   },
-  components: { LineStep },
   computed: {
     isFormdata () {
       return this.$store.state.formData.account_own_registration

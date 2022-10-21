@@ -74,8 +74,8 @@
         <v-radio label="Женский" value="Женский"> </v-radio>
       </v-radio-group>
     </v-form>
-    <!-- <line-step :step='3' /> -->
-    <!-- <v-btn
+
+    <v-btn
       block
       large
       :disabled="!valid"
@@ -83,12 +83,11 @@
       color="primary"
       @click="validate"
       >Продолжить
-    </v-btn> -->
+    </v-btn>
   </div>
 </template>
 
 <script>
-// import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data: () => ({
     valid: true,
@@ -106,13 +105,17 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit("addItemFormData", this.currentData);
-        this.$router.push("/documents-forms");
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-1", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-1", value: this.currentData});
+        }
+        
+        this.$router.push({path:"/documents-forms", query: this.$route.query});
       }
     },
   },
   components: {
-    // LineStep
   },
 };
 </script>

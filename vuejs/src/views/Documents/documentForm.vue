@@ -20,13 +20,12 @@
 
     <AttachButton class="mb-5" text="Загрузить документ" @file="onfile" />
 
-    <LineStep :step="9" class="mt-5" />
-
     <v-btn
       block
       large
       class="mt-10 auth_form_bth"
       color="primary"
+      :disabled="currentData.first_passport_page === null"
       @click="redirect()"
       >Продолжить
     </v-btn>
@@ -34,8 +33,8 @@
 </template>
 
 <script>
-import AttachButton from "../../components/button/attachButton.vue";
-import LineStep from "../../components/line_step/line_step.vue";
+import AttachButton from '../../components/button/attachButton.vue';
+
 
 export default {
   data() {
@@ -60,15 +59,19 @@ export default {
     getName(name) {
       return name;
     },
-    redirect() {
-      // this.$store.dispatch("addObjectFormData", {
-      //   object: "step_9",
-      //   value: this.currentData,
-      // });
-      this.$router.push("/client-info");
-    },
+    redirect () {
+
+      if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-7", value: this.currentData});
+      }else if(this.$route.query?.type === 'CollegialExecutive') {
+        this.$store.commit("setCollegialExecutiveBody", {key: "page-7", value: this.currentData});
+      }
+      
+      this.$router.push({path:"/client-info", query: this.$route.query});
+    }
   },
-  components: { AttachButton, LineStep },
+  components: { AttachButton }
+
 };
 </script>
 

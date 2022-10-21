@@ -110,7 +110,6 @@
         </v-menu>
       </div>
     </v-form>
-    <LineStep :step="11" class="mt-5" />
     <v-btn
       block
       large
@@ -124,7 +123,6 @@
 </template>
 
 <script>
-import LineStep from "../../components/line_step/line_step.vue";
 
 export default {
   data: () => ({
@@ -147,7 +145,13 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$router.push("/information-staff");
+        if(this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", {key: "page-9", value: this.currentData});
+        }else if(this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", {key: "page-9", value: this.currentData});
+        }
+      
+      this.$router.push({path:"/all-data-persone", query: this.$route.query});
       }
     },
     foreigner_doc_validity_null() {
@@ -155,7 +159,6 @@ export default {
     },
   },
   components: {
-    LineStep,
   },
 };
 </script>
