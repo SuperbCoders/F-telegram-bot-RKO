@@ -72,7 +72,6 @@
             ></v-text-field>
           </template>
           <v-date-picker
-            :min="currentData.foreigner_doc_number"
             v-model="currentData.foreigner_doc_issued"
             @input="passportIssueDateMenu = false"
           ></v-date-picker>

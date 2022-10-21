@@ -43,7 +43,6 @@
             :active-picker.sync="activePicker"
             :max="isDate()"
             min="1950-01-01"
-            @change="save"
           ></v-date-picker>
         </v-menu>
       </div>
