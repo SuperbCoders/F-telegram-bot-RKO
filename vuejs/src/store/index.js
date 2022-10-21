@@ -72,57 +72,10 @@ export default new Vuex.Store({
         return result
     },
   },
-    mutations: {
-      toggleDrawer(state, value) {
-        state.drawer = value;
-      },
-      setDataCompany(state, value){
-        state.dataCompany = value;
-      },
-      isForeginStatus(state, status) {
-        state.isForegin = status
-      },
-      addItemFormData (state, item) {
-        state.formData.push(item)
-        scroll(0,0);
-      },
-      
-  },
-  getters: {
-    isList (state) {
-      const result = []
-      state.leaderList.map((item) => {
-        result.push(item.title)
-      })
-      return result
-    },
-    isLeaderTypeTitle (state) {
-      const result = []
-      state.leaderType.map((item) => {
-        result.push(item.title)
-      })
-      return result
-    },
-    // isFormData (state) {
-    //   state.formData.map((item) => {
-    //    state.result = Object.assign(item)
-    //   })
-    //   return state.result
-    // }
-  },
   mutations: {
     toggleDrawer(state, value) {
       state.drawer = value;
     },
-    // updateAssigned_publ_pers_relation (state, value) {
-    //   state.assigned_publ_pers_relation = value
-    // },
-    // updateAssigned_publ_pers_registraion (state, value) {
-    //   state.assigned_publ_pers_registraion = value
-    // },
-    // updateAccownt_own_living (state, value) {
-    //   state.accownt_own_living = value
-    // },
     setDataCompany(state, value){
       state.dataCompany = value;
     },
