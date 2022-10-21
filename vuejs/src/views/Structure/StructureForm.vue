@@ -72,15 +72,22 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
-          <v-btn
-            block
-            large
-            class="mt-5 auth_form_bth"
-            color="primary"
-            @click="createSupervisoryBoard"
-          >
-            Добавить
-          </v-btn>
+          <div class="contain_btn_add">
+            <v-btn
+              large
+              style="width: 50%; background: #F3F4F4 !important; color: #5B656D !important"
+              class="text-center
+                d-flex
+                align-center
+                justify-center
+                add_form"
+              @click="createSupervisoryBoard"
+            >
+              <span class="pr-3">Добавить</span>  
+              <v-icon>mdi-plus-circle-outline</v-icon>
+            </v-btn>
+          </div>
+          
       </div>
       <div class="form_group mt-5">
         <p class="text-left form_block_label mb-2">
@@ -114,15 +121,20 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
-        <v-btn
-            block
-            large
-            class="mt-5 auth_form_bth"
-            color="primary"
-            @click="createCollegialExecutive"
-          >
-            Добавить
-          </v-btn>
+          <div class="contain_btn_add">
+            <v-btn
+              large
+              class="d-flex
+                align-center
+                justify-center
+                add_form"
+              style="width: 50%; background: #F3F4F4 !important; color: #5B656D !important"
+              @click="createCollegialExecutive"
+            >
+              <span class="pr-3">Добавить</span>  
+              <v-icon>mdi-plus-circle-outline</v-icon>
+            </v-btn>
+          </div>
       </div>
       <div class="form_block mt-10">
         <p class="text-left form_block_title">
@@ -315,10 +327,19 @@ export default {
   font-family: Roboto;
   color: black;
 }
+.add_btn {
+  background: #F3F4F4 !important;
+  color: #000 !important;
+}
 .auth_form_bth {
   border-radius: 10px;
   color: white !important;
   text-transform: capitalize;
   font-size: 14px;
+}
+.contain_btn_add {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 </style>
