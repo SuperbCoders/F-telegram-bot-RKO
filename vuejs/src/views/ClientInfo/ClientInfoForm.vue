@@ -5,7 +5,7 @@
         <p class="text-left form_block_title">Место рождения</p>
         <v-text-field
           id="oldName"
-          placeholder="Введите адрес"
+          placeholder="Введите место рождение"
           class="align-center border-none"
           outlined
           v-model="currentData.account_birth_place"
