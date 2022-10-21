@@ -40,7 +40,7 @@
           </template>
           <v-date-picker
             v-model="currentData.account_datebirth"
-            :active-picker.sync="activePicker"
+            active-picker="YEAR"
             :max="isDate()"
             min="1950-01-01"
           ></v-date-picker>
