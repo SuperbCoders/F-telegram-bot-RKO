@@ -2,8 +2,8 @@
   <div class="foreign_person_section">
     <div class="form_block">
         <p class="form_block_label">
-            Является ли лицо иностранно публичным должностным лицом либо лицом, связанным с таком родственным
-            партнеским или иными отношениями
+            Является ли лицо иностранным публичным должностным лицом либо лицом, связанным с таковым родственными
+            партнескими или иными отношениями ?
         </p>
         <RadioGroup @isStatus="(status) => isForegn = status" name="foreign_person_section" />
     </div>

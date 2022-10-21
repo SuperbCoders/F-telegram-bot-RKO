@@ -2,7 +2,7 @@
   <div class="document_fogeiner_block">
     <h4>
       ДАННЫЕ ДОКУМЕНТА, ПОТВЕРЖДАЮЩЕГО ПРАВО ИНОСТРАННОГО ГРАЖДАНИНА ИЛИ ЛИЦА
-      БЕЗ ГРАЖДНСТВА НА ПРЕБЫВАНИЯ(ПРОЖИВАНИЯ) В РФ
+      БЕЗ ГРАЖДНСТВА НА ПРЕБЫВАНИЕ (ПРОЖИВАНИЕ) В РФ
     </h4>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block mt-5">
