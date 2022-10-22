@@ -70,10 +70,12 @@ class LoanRequest(models.Model):
     supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
-    supervisory = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    
+    supervisory_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supervisory_body =models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+
+    collegiate_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     collegiate_body = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    
+
     account_onw_role = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
     account_own_lastname =models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     account_own_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
