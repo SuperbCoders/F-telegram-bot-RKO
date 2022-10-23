@@ -262,6 +262,14 @@ export default {
           return "Серия документа удостоверяющего личность";
         case "doc_type":
           return "Тип документа удостоверяющего личность";
+        case "foreigner_doc_type":
+          return "Тип документа";
+        case "foreigner_doc_serial":
+          return "Серия (если имеется)";
+        case "foreigner_doc_issued":
+          return "Дата начала срока действия права пребывания(проживания)";
+        case "foreigner_doc_validity":
+          return "Дата окончания срока действия права пребывания(проживания)";
         case "licenced_activity":
           return "Перечень видов лицензируемой деятельности";
         // case 'licenced_validity': return 'Срок действия'
