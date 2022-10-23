@@ -8,10 +8,7 @@
               mdi-check-circle-outline
             </v-icon>
           </div>
-          <div
-            style="font-size: 24px; font-weight: bold"
-            class="black--text mt-4 text-center"
-          >
+          <div style="font-size: 24px; font-weight: bold" class="black--text mt-4 text-center">
             Ваша заявка успешно отправлена!
           </div>
 
@@ -32,12 +29,8 @@
         </div>
       </div>
       <hr />
-      <div
-        v-for="(item, index) in Object.entries(isResult)"
-        :key="index"
-        class="all_data_table-row mt-1"
-      >
-        <div class="d-flex"></div>
+      <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row mt-1">
+        
         <div v-if="item[1]">
           <div class="d-flex data1_table_block mt-5">
             <div class="data_table_block" v-if="item[1]">
@@ -46,8 +39,8 @@
               </p>
             </div>
             <div class="data_table_block" v-if="item[1]">
-              <div v-if="test(item[1])" class="form_block_title d-block">
-                <div v-if="test(item[1])"></div>
+              <div v-if="isArray(item[1])" class="form_block_title d-block">
+                <div v-if="isArray(item[1])"></div>
                 <div v-for="(item, index) in item[1]" :key="index">
                   <div v-if="isObject(item) ">
                     <div v-for="(val, key) in item" :key="key">
@@ -56,10 +49,7 @@
                         <p v-if="!isObject(val)">{{ val }}</p>
                       </div>
                       <div v-if="isObject(val)">
-                        <div
-                          v-for="(elementObject, indexObject) in val"
-                          :key="indexObject"
-                        >
+                        <div v-for="(elementObject, indexObject) in val" :key="indexObject">
                           - {{ elementObject }}
                         </div>
                       </div>
@@ -68,25 +58,21 @@
                   <p class="d-flex" v-else>- {{ item }}</p>
                 </div>
               </div>
+              <p class="text-left form_block_title" v-else-if="typeof item[1] == 'boolean'">
+                <span v-if="item[1]">Да</span>
+                <span v-else>Нет</span>
+              </p>
               <p class="text-left form_block_title" v-else>
                 {{ item[1] }}
               </p>
-              <div
-                v-if="typeof item[1] === 'object' && !Array.isArray(item)"
-              ></div>
+              <div v-if="typeof item[1] === 'object' && !Array.isArray(item)"></div>
             </div>
           </div>
           <hr />
         </div>
       </div>
     </div>
-    <v-btn
-      elevation="2"
-      class="card_content_button mt-10"
-      large
-      @click="sendData()"
-      >Отправить</v-btn
-    >
+    <v-btn elevation="2" class="card_content_button mt-10" large @click="sendData()">Отправить</v-btn>
   </div>
 </template>
 <script>
@@ -95,7 +81,6 @@ export default {
     return {
       dialog: false,
       formData: {},
-      List: ["fwwfawfa", "gagawgwg", "wgawagwaggwa"],
     };
   },
   methods: {
@@ -121,7 +106,7 @@ export default {
         return false;
       }
     },
-    test(element) {
+    isArray(element) {
       if (Array.isArray(element)) {
         return true;
       } else {
@@ -283,6 +268,8 @@ export default {
           return "ОГРН";
         case "supervisory":
           return "Наименования наблюдательного совета";
+        case "is_collegiate_body":
+          return "Наименования наблюдательного совета";
         default:
           return element;
         // case 'accownt_own_living': return 'Адрес проживания'
@@ -337,6 +324,5 @@ export default {
   justify-content: flex-start;
 }
 
-.all_data_table-row {
-}
+.all_data_table-row {}
 </style>

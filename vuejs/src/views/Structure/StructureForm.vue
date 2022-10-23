@@ -212,7 +212,7 @@ export default {
           object: "step_3",
           value: this.currentData,
         });
-        this.$router.push("/documents-forms");
+        this.$router.push("/information-staff");
       }
     },
     addObjectList(object) {
