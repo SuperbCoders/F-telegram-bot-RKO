@@ -59,7 +59,6 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit('IsFormData')
         if (this.isAddress === 'Совпадает с адресом регистации') {
           this.currentData.account_own_mail = this.$store.state.result.account_own_registration
         } else if (this.isAddress === 'Совпадает с адресом проживания') {

@@ -1,7 +1,17 @@
 <template>
     <div>
         <div class="all_data_table">
-            <div v-for="(item, index) in isResult" :key="index" class="">
+
+            <div class="data_table-row-title d-flex">
+                <div class="data_table_block">
+                    <p class="form_block_title">Вопрос</p>
+                </div>
+                <div class="data_table_block">
+                    <p class="form_block_title">Ответ</p>
+                </div>
+            </div>
+            <hr />
+            <div v-for="(item, index) in isResult" :key="index" class="pt-5">
                 <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
                     <div class="data_table_block" v-if="val">
                         <p class="form_block_title">
@@ -10,7 +20,7 @@
                     </div>
 
                     <div class="data_table_block" v-if="val">
-                        <div v-if="name === 'first_passport_page'" class="form_block_title d-block"> 
+                        <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
                             {{ val[0].name }}
                         </div>
                         <div v-else-if="isArray(val)" class="form_block_title d-block">
@@ -46,7 +56,7 @@ export default {
         }
     },
     methods: {
-        isObject(element){
+        isObject(element) {
             if (typeof element == 'object') {
                 return true
             } else {
@@ -74,11 +84,10 @@ export default {
                 case 'account_onw_inn': return 'Инн'
                 case 'account_onw_role': return 'Роль'
                 case 'account_own_citizenship': return 'Гражданство'
-                case 'account_own_firstname': return 'Имя'
+                case 'account_own_name': return 'Имя'
                 case 'account_own_lastname': return 'Фамилия'
                 case 'account_own_surname': return 'Отчество'
                 case 'account_own_mail': return 'Адрес фактического проживания'
-                case 'account_own_name': return 'Пол'
                 case 'account_own_phone': return 'Телефон'
                 case 'account_own_piece': return 'Доля владения'
                 case 'account_own_registration': return 'Адрес регистрации'
@@ -134,26 +143,45 @@ export default {
                 case 'licenced_activity': return 'Перечень видов лицензируемой деятельности'
                 case 'name': return 'Наименование'
                 case 'ogrn': return 'ОГРН'
+                case 'foreigner_doc_type': return 'Тип документа'
+                case 'foreigner_doc_serial': return 'Серия документа'
+                case 'foreigner_doc_number': return 'Номер документа удостоверяющего личность'
+                case 'foreigner_doc_issued': return 'Дата начала срока действия права пребывания'
+                case 'foreigner_doc_validity': return 'Дата окончания срока действия пребывания'
                 case 'supervisory': return 'Наименования наблюдательного совета'
                 case 'first_passport_page': return 'Паспорт'
                 default: return element
             }
         },
-        del(){
+        del() {
             this.$router.push("/sctructure")
         },
-        add(){
-            this.$store.commit('setListSupervisoryBoardPersone')
+        add() {
+            if (this.$route.query?.type === 'SupervisoryBoard') {
+                this.$store.commit('setListSupervisoryBoardPersone')
+            } else if (this.$route.query?.type === 'CollegialExecutive') {
+                this.$store.commit('setListCollegialExecutiveBody')
+            }
             this.$router.push("/individual-info")
         },
-        next(){
-            this.$store.commit('setListSupervisoryBoardPersone')
+        next() {
+            if (this.$route.query?.type === 'SupervisoryBoard') {
+                this.$store.commit('setListSupervisoryBoardPersone')
+            } else if (this.$route.query?.type === 'CollegialExecutive') {
+                this.$store.commit('setListCollegialExecutiveBody')
+            }
             this.$router.push("/sctructure")
         }
     },
     computed: {
         isResult() {
-            return this.$store.state.supervisoryBoardPersone;
+            if (this.$route.query?.type === 'SupervisoryBoard') {
+                return this.$store.state.supervisoryBoardPersone;
+            } else if (this.$route.query?.type === 'CollegialExecutive') {
+                return this.$store.state.collegialExecutiveBody;
+            }else {
+                return {}
+            }
         },
         // isValueString (value) {
         //   if (value[1] !== '' && null) {
@@ -162,7 +190,6 @@ export default {
         // }
     },
     mounted() {
-        this.$store.commit('IsFormData')
     },
 }
 </script>

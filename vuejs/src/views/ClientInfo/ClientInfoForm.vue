@@ -178,7 +178,6 @@
         </v-menu>
       </div>
     </v-form>
-    <line-step :step="10" />
     <v-btn
       block
       large
@@ -192,7 +191,6 @@
 </template>
 
 <script>
-import LineStep from "../../components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
 export default {
   directives: { mask },
@@ -220,7 +218,6 @@ export default {
   methods: {
     validate() {
       // let isStatusFogeiner = this.$store.state.isForegin;
-      this.$store.commit("IsFormData");
       const isStatusFogeiner =
         this.$store.state?.supervisoryBoardPersone?.['page-3']?.assigned_publ_pers_relation;
         console.log(this.$store.state?.supervisoryBoardPersone?.['page-3']?.assigned_publ_pers_relation);
@@ -264,7 +261,6 @@ export default {
     // },
   },
   components: {
-    LineStep,
   },
 };
 </script>

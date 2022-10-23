@@ -45,11 +45,12 @@
           Наличие наблюдательного совета
         </p>
         <RadioGroup
-          @isStatus="(status) => (isTest1 = status)"
+          @isStatus="(status) => (currentData.is_collegiate_body = status)"
+          :status="currentData.is_collegiate_body"
           name="Existence of a supervisory board"
         />
       </div>
-      <div v-if="isTest1" class="form_block mt-2">
+      <div v-if="currentData.is_collegiate_body" class="form_block mt-2">
         <p class="text-left form_block_title">
           Наименования наблюдательного совета
         </p>
@@ -58,7 +59,7 @@
             placeholder="Наименования"
             class="align-center border-none"
             name="oldName"
-            v-model="currentData.supervisory.account_company_name"
+            v-model="currentData.supervisory"
             outlined
             :rules="requiredRules"
             :required="true"
@@ -95,11 +96,12 @@
           Наличие коллегиального исполнительного органа
         </p>
         <RadioGroup
-          @isStatus="(status) => (isTest2 = status)"
+          @isStatus="(status) => (currentData.is_supervisoty = status)"
+          :status="currentData.is_supervisoty"
           name="The presence of a collegial executive body"
         />
       </div>
-      <div v-if="isTest2" class="form_block mt-5">
+      <div v-if="currentData.is_supervisoty" class="form_block mt-5">
         <p class="text-left form_block_title">
           Наименование коллегиального исполнительного органа
         </p>
@@ -109,14 +111,14 @@
           class="align-center border-none"
           name="oldName"
           outlined
-          v-model="currentData.collegiate_body.company_name"
+          v-model="currentData.supervisotyBoardPersone_name"
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
         <v-card
             elevation="2"
             class="pa-4 mb-2"
-            v-for="(val, key) in listSupervisotyBoardPersone" :key="key"
+            v-for="(val, key) in listCollegialExecutiveBody" :key="key"
           >
             {{ val['page-1'].account_own_lastname }}
             {{ val['page-1'].account_own_name }}
@@ -182,28 +184,13 @@ export default {
       supreme_management_body: null,
       supreme_management_type: null,
       supreme_management_inn: null,
-      collegiate_body: [
-        {
-          account_company_name: null,
-          account_onw_role: [],
-          account_own_lastname: null,
-          account_own_gender: null,
-          account_own_name: null,
-          account_own_surname: null,
-        },
-      ],
+      supreme_management_person: null,
+      is_collegiate_body: false,
+      supervisory: "",
+      supervisotyBoardPersone_name: "",
+      is_supervisoty: false,
       collegiate_person: null,
       collegiate_person_fio: null,
-      supervisory: [
-        {
-          account_company_name: null,
-          account_onw_role: [],
-          account_own_lastname: null,
-          account_own_gender: null,
-          account_own_name: null,
-          account_own_surname: null,
-        },
-      ],
     },
     isTest1: false,
     isTest2: false,
@@ -309,38 +296,14 @@ export default {
       this.currentData.supreme_management_type =
         dataStep.supreme_management_type;
       this.currentData.supreme_management_inn = dataStep.supreme_management_inn;
-      this.currentData.account_onw_role = dataStep.account_onw_role;
-      this.currentData.account_own_lastname = dataStep.account_own_lastname;
-      this.currentData.account_own_gender = dataStep.account_own_gender;
-      this.currentData.account_own_surname = dataStep.account_own_surname;
+
+      this.currentData.supreme_management_person = dataStep.supreme_management_person;
+      this.currentData.supervisotyBoardPersone_name = dataStep.supervisotyBoardPersone_name;
+      this.currentData.supervisory = dataStep.supervisory;
+      this.currentData.is_supervisoty = dataStep.is_supervisoty;
+      this.currentData.is_collegiate_body = dataStep.is_collegiate_body;
+      this.currentData.collegiate_person_fio = dataStep.collegiate_person_fio;
     }
-    // currentData = {
-    //   supreme_management_body: null,
-    //   supreme_management_type: null,
-    //   supreme_management_inn: null,
-    //   collegiate_body: [
-    //     {
-    //       account_company_name: "",
-    //       account_onw_role: [],
-    //       account_own_lastname: null,
-    //       account_own_gender: null,
-    //       account_own_name: null,
-    //       account_own_surname: null,
-    //     },
-    //   ],
-    //   collegiate_person: null,
-    //   collegiate_person_fio: null,
-    //   supervisory: [
-    //     {
-    //       account_company_name: "",
-    //       account_onw_role: [],
-    //       account_own_lastname: null,
-    //       account_own_gender: null,
-    //       account_own_name: null,
-    //       account_own_surname: null,
-    //     },
-    //   ],
-    // }
   },
 };
 </script>

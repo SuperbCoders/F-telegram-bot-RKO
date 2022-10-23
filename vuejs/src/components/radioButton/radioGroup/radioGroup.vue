@@ -8,7 +8,7 @@
           type="radio"
           :name="name"
           :value="true"
-          
+          :checked="is_checked"
         />
         <label
           class="form_radio form_radio_btn_input_radius__left"
@@ -24,7 +24,7 @@
           type="radio"
           :name="name"
           :value="false"
-          checked
+          :checked="!is_checked"
         />
         <label @click="updateStatus(false)" class="form_radio_btn_input_radius__right" :for="name + '_2'"
           >Нет</label
@@ -38,16 +38,20 @@
 export default {
   data () {
     return {
-      status: false
+      
     }
   },
   methods: {
     updateStatus (status) {
-      this.status = status
-      this.$emit('isStatus', this.status)
+      this.$emit('isStatus', status)
     }
   },
   mounted () {
+  },
+  computed: {
+    is_checked(){
+      return this.status
+    }
   },
   props: {
     name: {
@@ -55,6 +59,10 @@ export default {
     },
     defaultButton: {
       type: String
+    },
+    status: {
+      type: Boolean,
+      default: false,
     }
   }
 };
