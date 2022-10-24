@@ -22,7 +22,7 @@
           class="mt-1 auth_form"
         ></v-text-field>
         <v-combobox 
-          label="Наименования компании"
+          label="Наименование компании"
           outlined
           v-model="currentData.company_name"
           :rules="requiredRules"
@@ -66,7 +66,7 @@
                       v-on="on"
                       @click.stop
                     >
-                      резервирного счета,
+                      резервирования счета,
                     </a>
                   </template>
                 </v-tooltip>

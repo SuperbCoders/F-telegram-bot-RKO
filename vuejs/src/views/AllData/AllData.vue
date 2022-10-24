@@ -173,7 +173,7 @@ export default {
         case "account_own_registration":
           return "Адрес регистрации";
         case "account_own_snils":
-          return "Снилс";
+          return "СНИЛС";
         case "account_operations":
           return "Рассчетно касовое обслуживание";
         case "accownt_own_living":
@@ -187,7 +187,7 @@ export default {
         case "cash_source":
           return "Источники происхождения денежных средств";
         case "collegiate_body":
-          return "Наименования наблюдательного совета";
+          return "Наименование наблюдательного совета";
         case "collegiate_person":
           return "Наименование коллегиального исполнительног органа";
         case "company_group_name":
@@ -195,7 +195,7 @@ export default {
         case "company_name":
           return "Наименование группы компаний";
         case "salary_debt":
-          return "Задолжность по зп";
+          return "Задолженность по зп";
         case "state_employers":
           return "Штатная численость сотрудников";
         case "sum_per_month":
@@ -249,7 +249,7 @@ export default {
         case "is_supervisoty":
           return "Наличие коллегиального исполнительного органа";
         case "supreme_management_inn":
-          return "Инн";
+          return "ИНН";
         case "supreme_management_type":
           return "Роль";
         case "validity":
@@ -287,9 +287,9 @@ export default {
         case "ogrn":
           return "ОГРН";
         case "supervisory":
-          return "Наименования наблюдательного совета";
+          return "Наименование наблюдательного совета";
         case "is_collegiate_body":
-          return "Наименования наблюдательного совета";
+          return "Наименование наблюдательного совета";
         default:
           return element;
       }

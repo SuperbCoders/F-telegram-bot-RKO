@@ -4,14 +4,14 @@
     <div class="form_block">
       <v-checkbox
         v-model="currentData.planned_operations"
-        label="Договор купли продажи (товарный)"
-        value="Договор купли продажи (товарный)"
+        label="Договор купли-продажи (товарный)"
+        value="Договор купли-продажи (товарный)"
         hide-details
       ></v-checkbox>
       <v-checkbox
         v-model="currentData.planned_operations"
-        label="Агенсткий договор"
-        value="Агенсткий договор"
+        label="Агентский договор"
+        value="Агентский договор"
         hide-details
       ></v-checkbox>
       <v-checkbox
@@ -22,8 +22,8 @@
       ></v-checkbox>
       <v-checkbox
         v-model="currentData.planned_operations"
-        label="Договор купли продажи ценных бумаг"
-        value="Договор купли продажи ценных бумаг"
+        label="Договор купли-продажи ценных бумаг"
+        value="Договор купли-продажи ценных бумаг"
         hide-details
       ></v-checkbox>
       <v-checkbox
