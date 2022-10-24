@@ -4,7 +4,6 @@
       <!-- <div class="form_block_title">Отметьте все верные утверждени</div> -->
       <p class="form_block_title">Отметьте все верные утверждения</p>
       <div class="form_block">
-        <v-radio-group v-model="currentData.informationGoals">
           <v-checkbox
             v-for="(item, index) in currentData.list"
             :key="index"
@@ -16,14 +15,13 @@
             <template v-slot:label>
               <div
                 :class="{
-                  toggleText: currentData.informationGoals != item.value,
+                  toggleText: !currentData.informationGoals.includes(item.value),
                 }"
               >
                 {{ item.value }}
               </div>
             </template>
           </v-checkbox>
-        </v-radio-group>
       </div>
     </div>
     <LineStep :step="17" class="mt-5" />

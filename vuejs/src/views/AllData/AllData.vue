@@ -30,7 +30,6 @@
       </div>
       <hr />
       <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row mt-1">
-        
         <div v-if="item[1]">
           <div class="d-flex data1_table_block mt-5">
             <div class="data_table_block" v-if="item[1]">
@@ -223,6 +222,10 @@ export default {
           return "Дата начала действия";
         case "supreme_management_body":
           return "Тип";
+        case "supervisotyBoardPersone_name":
+          return "Наименование коллегиального исполнительного органа";
+        case "is_supervisoty":
+          return "Наличие коллегиального исполнительного органа";
         case "supreme_management_inn":
           return "Инн";
         case "supreme_management_type":
