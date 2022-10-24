@@ -133,7 +133,7 @@ export default {
                 "division_code",
                 "date_issue",
                 "validity",
-                
+
                 "foreigner_doc_issued",
                 "foreigner_doc_number",
                 "foreigner_doc_serial",
@@ -162,8 +162,10 @@ export default {
         isTypeObject(object) {
             if (Array.isArray(object)) {
                 return ''
+            } else {
+                return ''
             }
-            return ''
+            
         },
         isTitle(element) {
             switch (element) {
@@ -322,5 +324,13 @@ export default {
     justify-content: flex-start;
 }
 
-.all_data_table-row {}
+.form_block_delete_link, .add_form {
+    width: 50%;
+    text-align: center;
+    font-family: 'Roboto' !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
+}
 </style>
