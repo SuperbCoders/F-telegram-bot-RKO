@@ -183,7 +183,7 @@ export default {
                 case 'account_own_phone': return 'Телефон'
                 case 'account_own_piece': return 'Доля владения'
                 case 'account_own_registration': return 'Адрес регистрации'
-                case 'account_own_snils': return 'Снилс'
+                case 'account_own_snils': return 'СНИЛС'
                 case 'account_operations': return 'Рассчетно касовое обслуживание'
                 case 'accownt_own_living': return 'Адрес проживания'
                 case 'assigned_publ_pers_registraion': return 'Адрес регистрации'
@@ -220,7 +220,7 @@ export default {
                 case 'planned_operations': return 'Сведения о планируемых опреациях по счету'
                 case 'start_date': return 'Дата начала действия'
                 case 'supreme_management_body': return 'Тип'
-                case 'supreme_management_inn': return 'Инн'
+                case 'supreme_management_inn': return 'ИНН'
                 case 'supreme_management_type': return 'Роль'
                 case 'validity': return 'Срок действия'
                 case 'contact_number': return 'Номер телефона'
@@ -240,9 +240,7 @@ export default {
                 case 'foreigner_doc_number': return 'Номер документа удостоверяющего личность'
                 case 'foreigner_doc_issued': return 'Дата начала срока действия права пребывания'
                 case 'foreigner_doc_validity': return 'Дата окончания срока действия пребывания'
-
                 case 'supervisory': return 'Наименование наблюдательного совета'
-
                 case 'is_person_a_foreign_public': return `Является ли лицо иностранным публичным должностным лицом либо лицом, связанным с таковым родственными
             партнескими или иными отношениями?`
 

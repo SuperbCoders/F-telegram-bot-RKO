@@ -66,7 +66,7 @@
                       v-on="on"
                       @click.stop
                     >
-                      резервирного счета,
+                      резервирования счета,
                     </a>
                   </template>
                 </v-tooltip>

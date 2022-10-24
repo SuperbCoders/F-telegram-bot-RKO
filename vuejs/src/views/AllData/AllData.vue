@@ -152,7 +152,7 @@ export default {
         case "account_own_registration":
           return "Адрес регистрации";
         case "account_own_snils":
-          return "Снилс";
+          return "СНИЛС";
         case "account_operations":
           return "Рассчетно касовое обслуживание";
         case "accownt_own_living":
@@ -174,7 +174,7 @@ export default {
         case "company_name":
           return "Наименование группы компаний";
         case "salary_debt":
-          return "Задолжность по зп";
+          return "Задолженность по зп";
         case "state_employers":
           return "Штатная численость сотрудников";
         case "sum_per_month":
@@ -228,7 +228,7 @@ export default {
         case "is_supervisoty":
           return "Наличие коллегиального исполнительного органа";
         case "supreme_management_inn":
-          return "Инн";
+          return "ИНН";
         case "supreme_management_type":
           return "Роль";
         case "validity":
