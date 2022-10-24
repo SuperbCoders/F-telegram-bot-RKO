@@ -71,7 +71,7 @@
         </div>
       </div>
     </div>
-    <line-step :step="19" />
+    <line-step :step="19" class="mt-10" />
     <v-btn elevation="2" class="card_content_button mt-10" large @click="sendData()">Отправить</v-btn>
   </div>
 </template>
