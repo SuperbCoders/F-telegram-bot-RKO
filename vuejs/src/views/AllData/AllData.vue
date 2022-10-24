@@ -166,7 +166,7 @@ export default {
         case "cash_source":
           return "Источники происхождения денежных средств";
         case "collegiate_body":
-          return "Наименования наблюдательного совета";
+          return "Наименование наблюдательного совета";
         case "collegiate_person":
           return "Наименование коллегиального исполнительног органа";
         case "company_group_name":
@@ -257,6 +257,12 @@ export default {
           return "Дата окончания срока действия права пребывания(проживания)";
         case "licenced_activity":
           return "Перечень видов лицензируемой деятельности";
+        case "typeAdress":
+          return "Тип Адреса";
+        case "basis":
+          return "Основание";
+        case "address":
+          return "Адрес";
         // case 'licenced_validity': return 'Срок действия'
         // case 'licence_date_issue': return 'Дата выдачи лицензии'
         // case 'licence_issued_by': return 'Кем выдан'
@@ -267,9 +273,9 @@ export default {
         case "ogrn":
           return "ОГРН";
         case "supervisory":
-          return "Наименования наблюдательного совета";
+          return "Наименование наблюдательного совета";
         case "is_collegiate_body":
-          return "Наименования наблюдательного совета";
+          return "Наименование наблюдательного совета";
         default:
           return element;
         // case 'accownt_own_living': return 'Адрес проживания'

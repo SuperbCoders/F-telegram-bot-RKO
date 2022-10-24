@@ -269,7 +269,7 @@
                     </v-btn-toggle>
                   </div>
                   <div class="form_block mt-5">
-                    <p class="text-left">Наименования наблюдательного совета</p>
+                    <p class="text-left">Наименование наблюдательного совета</p>
                     <v-text-field
                       v-model="formData['oldName']"
                       id="oldName"

@@ -98,7 +98,7 @@ export default {
                 case 'assigned_publ_pers_relation': return 'Степень родства либо статус (супруг или супруга) по отношению кпубличному должностному лицу'
                 case 'beneficiaries': return 'Выгодоприобретатели'
                 case 'cash_source': return 'Источники происхождения денежных средств'
-                case 'collegiate_body': return 'Наименования наблюдательного совета'
+                case 'collegiate_body': return 'Наименование наблюдательного совета'
                 case 'collegiate_person': return 'Наименование коллегиального исполнительног органа'
                 case 'company_group_name': return 'Наименование группы компаний'
                 case 'company_name': return 'Наименование группы компаний'
@@ -148,7 +148,7 @@ export default {
                 case 'foreigner_doc_number': return 'Номер документа удостоверяющего личность'
                 case 'foreigner_doc_issued': return 'Дата начала срока действия права пребывания'
                 case 'foreigner_doc_validity': return 'Дата окончания срока действия пребывания'
-                case 'supervisory': return 'Наименования наблюдательного совета'
+                case 'supervisory': return 'Наименование наблюдательного совета'
                 case 'first_passport_page': return 'Паспорт'
                 default: return element
             }

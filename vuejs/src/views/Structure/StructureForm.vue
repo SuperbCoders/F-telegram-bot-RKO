@@ -52,11 +52,11 @@
       </div>
       <div v-if="currentData.is_collegiate_body" class="form_block mt-2">
         <p class="text-left form_block_title">
-          Наименования наблюдательного совета
+          Наименование наблюдательного совета
         </p>
         <v-text-field
             id="oldName"
-            placeholder="Наименования"
+            placeholder="Наименование"
             class="align-center border-none"
             name="oldName"
             v-model="currentData.supervisory"
