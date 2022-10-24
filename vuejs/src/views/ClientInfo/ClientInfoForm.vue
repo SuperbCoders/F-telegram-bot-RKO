@@ -5,7 +5,7 @@
         <p class="text-left form_block_title">Место рождения</p>
         <v-text-field
           id="oldName"
-          placeholder="Введите место рождение"
+          placeholder="Введите адрес"
           class="align-center border-none"
           outlined
           v-model="currentData.account_birth_place"
@@ -49,7 +49,7 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
-          Тип документа удостоверяющего личность
+          Тип документа, удостоверяющего личность
         </p>
         <v-select
           filled
@@ -109,7 +109,7 @@
         </p>
         <v-text-field
           id="oldName"
-          placeholder="Введите имя"
+          placeholder="Введите код"
           v-model="currentData.division_code"
           class="align-center border-none"
           v-mask="'###-###'"

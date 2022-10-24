@@ -17,7 +17,7 @@
       ></v-text-field>
     </div>
     <div class="form_block">
-      <p class="text-left form_block_input">Задолжность по з/п</p>
+      <p class="text-left form_block_input">Задолженность по з/п</p>
       <v-text-field
         id="oldName"
         v-model="currentData.salary_debt"

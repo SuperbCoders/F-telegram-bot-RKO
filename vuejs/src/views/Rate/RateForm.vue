@@ -7,7 +7,7 @@
       <div class="card_content p-10 text-left m-11">
         <h2 class="text-left mb-3 card_content_title">Тариф 1</h2>
         <p class="text-left mb-3 card_content_text">
-          Для начинающих предприниматель
+          Для начинающих предпринимателей
         </p>
         <ul class="mb-3 rate_section_list">
           <li class="text-left mb-3">
