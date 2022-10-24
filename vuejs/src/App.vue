@@ -59,6 +59,10 @@ fieldset{
   font-weight: 400 !important;
   background: none !important;
 }
+input, p, label, .v-list-item__title, .v-select__selection {
+  font-size: 14px !important;
+}
+
 /* button {
   font-family: Roboto;
 } */

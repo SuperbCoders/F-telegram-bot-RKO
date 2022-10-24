@@ -81,12 +81,13 @@
 
             <div class="form_block d-flex align-center justify-center mt-4">
                 <a @click="del()" class="form_block_delete_link text-decoration-none" href="#">
-                    <v-icon>mdi-trash-can-outline</v-icon>
-                    Удалить
+                    <img src="../../assets/trash.svg" alt="">
+                    <span class="pl-2">Удалить</span>
+                    
                 </a>
                 <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="add()">
-                    <span class="pr-3">Добавить</span>
-                    <v-icon>mdi-plus-circle-outline</v-icon>
+                    <span class="pr-2">Добавить</span>
+                    <img src="../../assets/plus-circle.svg" alt="">
                 </v-btn>
             </div>
             <v-btn elevation="2" class="card_content_button" large @click="next()">Продолжить</v-btn>
@@ -325,6 +326,9 @@ export default {
 }
 
 .form_block_delete_link, .add_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 50%;
     text-align: center;
     font-family: 'Roboto' !important;
