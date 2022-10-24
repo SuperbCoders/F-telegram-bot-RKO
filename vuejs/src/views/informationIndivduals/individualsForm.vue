@@ -10,6 +10,7 @@
       >
       </v-checkbox>
       <v-checkbox
+        v-model="currentData.account_onw_founder"
         label="Учредитель"
         value="Учредитель"
         hide-details
@@ -70,6 +71,7 @@
         ></v-text-field>
       </div>
       <v-radio-group v-model="currentData.account_own_gender" mandatory>
+        <p class="text-left form_block_title">Пол</p>
         <v-radio label="Мужской" value="Мужской"></v-radio>
         <v-radio label="Женский" value="Женский"> </v-radio>
       </v-radio-group>

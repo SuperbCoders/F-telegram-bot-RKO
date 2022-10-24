@@ -101,31 +101,39 @@ export default {
             formData: {},
             formOrder: [
                 "account_onw_role",
-                "account_own_gender",
                 "account_own_lastname",
                 "account_own_name",
                 "account_own_surname",
+                "account_own_gender",
+                
                 "account_onw_inn",
+                "account_own_snils",
                 "account_own_citizenship",
                 "account_own_phone",
                 "account_own_piece",
-                "account_own_snils",
+                
+                "is_person_a_foreign_public",
+                
                 "assigned_publ_pers_relation",
                 "account_own_registration",
                 "assigned_publ_pers_registraion",
-                "assigned_publ_pers_relation",
+
                 "accownt_own_living",
+
                 "account_own_mail",
+
                 "first_passport_page",
+
                 "account_birth_place",
                 "account_datebirth",
-                "date_issue",
-                "division_code",
-                "doc_number",
-                "doc_serial",
                 "doc_type",
+                "doc_serial",
+                "doc_number",
                 "issued_by",
+                "division_code",
+                "date_issue",
                 "validity",
+                
                 "foreigner_doc_issued",
                 "foreigner_doc_number",
                 "foreigner_doc_serial",
@@ -230,6 +238,8 @@ export default {
                 case 'foreigner_doc_issued': return 'Дата начала срока действия права пребывания'
                 case 'foreigner_doc_validity': return 'Дата окончания срока действия пребывания'
                 case 'supervisory': return 'Наименования наблюдательного совета'
+                case 'is_person_a_foreign_public': return `Является ли лицо иностранным публичным должностным лицом либо лицом, связанным с таковым родственными
+            партнескими или иными отношениями?`
                 case 'first_passport_page': return 'Паспорт'
                 default: return element
             }
