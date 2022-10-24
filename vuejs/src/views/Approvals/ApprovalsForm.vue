@@ -2,26 +2,26 @@
   <div class="approvals_section">
     <div class="form_block">
       <!-- <div class="form_block_title">Отметьте все верные утверждени</div> -->
-      <p class="form_block_title">Отметье все верные утверждения</p>
+      <p class="form_block_title">Отметьте все верные утверждения</p>
       <div class="form_block">
-        <v-radio-group v-model="currentData.informationGoals">
-          <v-radio
+          <v-checkbox
             v-for="(item, index) in currentData.list"
             :key="index"
+            class="d-flex align-items-start"
+            v-model="currentData.informationGoals"
             :value="item.value"
             hide-details
           >
             <template v-slot:label>
               <div
                 :class="{
-                  toggleText: currentData.informationGoals != item.value,
+                  toggleText: !currentData.informationGoals.includes(item.value),
                 }"
               >
                 {{ item.value }}
               </div>
             </template>
-          </v-radio>
-        </v-radio-group>
+          </v-checkbox>
       </div>
     </div>
     <LineStep :step="17" class="mt-5" />
@@ -109,7 +109,6 @@ export default {
       this.$router.push("/rate");
     },
     toggleText(e) {
-      console.log("test");
       e.preventDefault();
     },
   },
@@ -125,6 +124,10 @@ export default {
 </script>
 
 <style>
+.v-input__slot {
+  display: flex;
+  align-items: flex-start;
+}
 .toggleText {
   display: -webkit-box;
   -webkit-line-clamp: 2;

@@ -60,7 +60,7 @@
       <v-checkbox v-model="currentData.cash_source" label="Средства, полученные в рамках осуществляемой хозяйственой деятельности"
         value="Средства, полученные в рамках осуществляемой хозяйственой деятельности" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.cash_source" label="Сообственные средства" value="Сооственные средства" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.cash_source" label="Заменные средства (займы от третих лиц, учредителей и т.д)"
+      <v-checkbox v-model="currentData.cash_source" label="Заемные средства (займы от третих лиц, учредителей и т.д)"
         value="Заменные средства (займы от третих лиц, учредителей и т.д)" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.cash_source" label="Иные" value="Иные" hide-details></v-checkbox>
     </div>
