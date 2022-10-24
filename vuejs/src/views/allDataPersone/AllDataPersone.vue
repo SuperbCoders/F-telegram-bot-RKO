@@ -289,8 +289,6 @@ export default {
 
     },
 
-
-
 };
 </script>
 <style>

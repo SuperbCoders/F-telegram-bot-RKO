@@ -5,7 +5,7 @@
     </h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
-        <p class="text-left form_block_title">Выберите из списка</p>
+        <p class="text-left form_block_title">Высший орган управления</p>
         <v-combobox
           v-model="currentData.supreme_management_body"
           filled
@@ -13,7 +13,7 @@
           required
           :items="isLeaderList"
           outlined
-          placeholder="Высший орган управления"
+          placeholder="Выберите из списка"
         ></v-combobox>
       </div>
       <div class="form_block">
