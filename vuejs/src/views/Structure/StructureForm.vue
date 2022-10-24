@@ -124,7 +124,7 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
-          <div class="title_btn">Члены наблюдательного совета</div>
+          <div class="title_btn">Члены коллегиального исполнительного органа</div>
           <div class="contain_btn_add">
             <v-btn
               large
@@ -140,23 +140,8 @@
             </v-btn>
           </div>
       </div>
-      <div class="form_block mt-10">
-        <p class="text-left form_block_title">
-          Члены коллегиального исполнительного органа
-        </p>
-        <v-text-field
-          id="oldName"
-          placeholder="Укажите Физ лицо"
-          v-model="currentData.collegiate_person_fio"
-          class="align-center border-none"
-          name="oldName"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
-      </div>
     </v-form>
-    <line-step :step="2" />
+    <line-step :step="2" class="mt-2" />
     <v-btn
       block
       large
@@ -190,7 +175,6 @@ export default {
       supervisotyBoardPersone_name: "",
       is_supervisoty: false,
       collegiate_person: null,
-      collegiate_person_fio: null,
     },
     isTest1: false,
     isTest2: false,
@@ -302,7 +286,6 @@ export default {
       this.currentData.supervisory = dataStep.supervisory;
       this.currentData.is_supervisoty = dataStep.is_supervisoty;
       this.currentData.is_collegiate_body = dataStep.is_collegiate_body;
-      this.currentData.collegiate_person_fio = dataStep.collegiate_person_fio;
     }
   },
 };

@@ -21,7 +21,7 @@ export default {
     data () {
       return {
         currentData: {
-          assigned_publ_pers_relation: '',
+          is_person_a_foreign_public: '',
         },
         isForegn: false
       }
@@ -31,9 +31,9 @@ export default {
       redirect () {
         this.$store.commit('isForeginStatus')
         if (this.isForegn) {
-          this.currentData.assigned_publ_pers_relation = 'Да'
+          this.currentData.is_person_a_foreign_public = 'Да'
         } else {
-          this.currentData.assigned_publ_pers_relation = 'Нет'
+          this.currentData.is_person_a_foreign_public = 'Нет'
         }
 
         if(this.$route.query?.type === 'SupervisoryBoard') {
