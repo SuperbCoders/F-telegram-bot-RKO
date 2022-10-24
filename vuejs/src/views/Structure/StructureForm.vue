@@ -13,7 +13,7 @@
           required
           :items="isLeaderList"
           outlined
-          placeholder="Выберите из списка"
+          placeholder="Высший орган управления"
         ></v-combobox>
       </div>
       <div class="form_block">
