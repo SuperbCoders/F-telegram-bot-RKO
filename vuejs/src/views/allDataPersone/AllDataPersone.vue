@@ -116,7 +116,7 @@ export default {
         case "assigned_publ_pers_registraion":
           return "Адрес регистрации";
         case "assigned_publ_pers_relation":
-          return "Степень родства либо статус (супруг или супруга) по отношению кпубличному должностному лицу";
+          return "Степень родства либо статус (супруг или супруга) по отношению к публичному должностному лицу";
         case "beneficiaries":
           return "Выгодоприобретатели";
         case "cash_source":
