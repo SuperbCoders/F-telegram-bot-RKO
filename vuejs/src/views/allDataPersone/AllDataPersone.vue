@@ -5,19 +5,54 @@
                 Сведения о связанных физических лицах
             </h2>
 
-
-
-            <hr />
             <div v-for="(listObj, indexObj) in isList" :key="indexObj">
-                <div v-for="(item, index) in listObj" :key="index" class="pt-5">
+                <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
+                    <div v-for="(item, index) in isResult" :key="index">
+
+                        <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
+                            <div class="data_table_block" v-if="val && itemOrder === name">
+                                <p class="form_block_title">
+                                    {{ isTitle(name) }}
+                                </p>
+                            </div>
+
+                            <div class="data_table_block" v-if="val && itemOrder === name">
+                                <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
+                                    {{ val[0].name }}
+                                </div>
+                                <div v-else-if="isArray(val)" class="form_block_title d-block">
+                                    <div v-for="(val2, name2) in val" :key="name2">
+                                        <div v-if="isObject(val2)">
+                                            <div v-for="(val3, key) in item" :key="key">
+                                                <div v-if="val3">
+                                                    {{ isTitle(key) }} => {{ val3 }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="d-flex" v-else>- {{ val2 }}</p>
+
+                                    </div>
+                                </div>
+                                <p class="text-left form_block_title" v-else>
+                                    {{ val }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
+                <div v-for="(item, index) in isResult" :key="index" class="">
+
                     <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
-                        <div class="data_table_block" v-if="val">
+                        <div class="data_table_block" v-if="val && itemOrder === name">
                             <p class="form_block_title">
                                 {{ isTitle(name) }}
                             </p>
                         </div>
 
-                        <div class="data_table_block" v-if="val">
+                        <div class="data_table_block" v-if="val && itemOrder === name">
                             <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
                                 {{ val[0].name }}
                             </div>
@@ -40,39 +75,8 @@
                         </div>
                     </div>
                 </div>
-                <hr />
             </div>
-            <div v-for="(item, index) in isResult" :key="index" class="pt-5">
-                <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
-                    <div class="data_table_block" v-if="val">
-                        <p class="form_block_title">
-                            {{ isTitle(name) }}
-                        </p>
-                    </div>
 
-                    <div class="data_table_block" v-if="val">
-                        <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
-                            {{ val[0].name }}
-                        </div>
-                        <div v-else-if="isArray(val)" class="form_block_title d-block">
-                            <div v-for="(val2, name2) in val" :key="name2">
-                                <div v-if="isObject(val2)">
-                                    <div v-for="(val3, key) in item" :key="key">
-                                        <div v-if="val3">
-                                            {{ isTitle(key) }} => {{ val3 }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="d-flex" v-else>- {{ val2 }}</p>
-
-                            </div>
-                        </div>
-                        <p class="text-left form_block_title" v-else>
-                            {{ val }}
-                        </p>
-                    </div>
-                </div>
-            </div>
 
 
             <div class="form_block d-flex align-center justify-center mt-4">
@@ -95,6 +99,40 @@ export default {
     data() {
         return {
             formData: {},
+            formOrder: [
+                "account_onw_role",
+                "account_own_gender",
+                "account_own_lastname",
+                "account_own_name",
+                "account_own_surname",
+                "account_onw_inn",
+                "account_own_citizenship",
+                "account_own_phone",
+                "account_own_piece",
+                "account_own_snils",
+                "assigned_publ_pers_relation",
+                "account_own_registration",
+                "assigned_publ_pers_registraion",
+                "assigned_publ_pers_relation",
+                "accownt_own_living",
+                "account_own_mail",
+                "first_passport_page",
+                "account_birth_place",
+                "account_datebirth",
+                "date_issue",
+                "division_code",
+                "doc_number",
+                "doc_serial",
+                "doc_type",
+                "issued_by",
+                "validity",
+                "foreigner_doc_issued",
+                "foreigner_doc_number",
+                "foreigner_doc_serial",
+                "foreigner_doc_type",
+                "foreigner_doc_validity",
+
+            ]
         };
     },
 
@@ -214,7 +252,7 @@ export default {
                 this.$store.commit('setListCollegialExecutiveBody')
             }
             this.$router.push("/sctructure")
-        }
+        },
     },
     computed: {
         isResult() {
