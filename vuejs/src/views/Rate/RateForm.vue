@@ -147,6 +147,9 @@ export default {
       },
     };
   },
+  mounted(){
+    scroll(0, 0);
+  },
   methods: {
     setTarif(tarif) {
       this.currentData.tariff = tarif;
