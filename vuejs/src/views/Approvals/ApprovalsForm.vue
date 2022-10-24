@@ -2,26 +2,26 @@
   <div class="approvals_section">
     <div class="form_block">
       <!-- <div class="form_block_title">Отметьте все верные утверждени</div> -->
-      <p class="form_block_title">Отметье все верные утверждения</p>
+      <p class="form_block_title">Отметьте все верные утверждения</p>
       <div class="form_block">
-        <v-radio-group v-model="currentData.informationGoals">
-          <v-radio
+          <v-checkbox
             v-for="(item, index) in currentData.list"
             :key="index"
+            class="d-flex align-items-start"
+            v-model="currentData.informationGoals"
             :value="item.value"
             hide-details
           >
             <template v-slot:label>
               <div
                 :class="{
-                  toggleText: currentData.informationGoals != item.value,
+                  toggleText: !currentData.informationGoals.includes(item.value),
                 }"
               >
                 {{ item.value }}
               </div>
             </template>
-          </v-radio>
-        </v-radio-group>
+          </v-checkbox>
       </div>
     </div>
     <LineStep :step="17" class="mt-5" />
@@ -51,17 +51,17 @@ export default {
           {
             id: 1,
             value:
-              "Компания является финансовым институтом в соотвестии с законом США о налогооблажении иностранных счетов (FATCA) и/или главой 20.1",
+              "Компания является финансовым институтом в соотвествии с законом США о налогообложении иностранных счетов (FATCA) и/или главой 20.1",
           },
           {
             id: 2,
             value:
-              "Компания, выгодоприобретатель или бенецифиар компания является налоговым резидентом США",
+              "Компания, выгодоприобретатель или бенефициар компания является налоговым резидентом США",
           },
           {
             id: 3,
             value:
-              "Компания является хозяйственным обществом, имеющим стратегическое значение для оборонно-промышленного комплекса и безопасности РФ, либо обществом, находящийся под его прямым или косвенным контроллем, которые указаны в Федеральном законе от 27.07.2014 N 213-Ф3",
+              "Компания является хозяйственным обществом, имеющим стратегическое значение для оборонно-промышленного комплекса и безопасности РФ, либо обществом, находящийся под его прямым или косвенным контролем, которые указаны в Федеральном законе от 27.07.2014 N 213-Ф3",
           },
           {
             id: 4,
@@ -109,7 +109,6 @@ export default {
       this.$router.push("/rate");
     },
     toggleText(e) {
-      console.log("test");
       e.preventDefault();
     },
   },
@@ -125,6 +124,10 @@ export default {
 </script>
 
 <style>
+.v-input__slot {
+  display: flex;
+  align-items: flex-start;
+}
 .toggleText {
   display: -webkit-box;
   -webkit-line-clamp: 2;

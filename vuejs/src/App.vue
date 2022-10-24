@@ -41,7 +41,9 @@ body,
 #base {
   padding: 10px;
   min-height: 0 !important;
-  font-family: Roboto !important;
+}
+* {
+  font-family: 'Roboto' !important;
 }
 .v-application--wrap {
   min-height: 0 !important;
@@ -57,6 +59,10 @@ fieldset{
   font-weight: 400 !important;
   background: none !important;
 }
+input, p, label, .v-list-item__title, .v-select__selection {
+  font-size: 14px !important;
+}
+
 /* button {
   font-family: Roboto;
 } */
@@ -65,5 +71,11 @@ input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
     margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.v-btn__content {
+  font-family: 'Roboto' !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 22px !important;
 }
 </style>

@@ -30,7 +30,6 @@
       </div>
       <hr />
       <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row mt-1">
-        
         <div v-if="item[1]">
           <div class="d-flex data1_table_block mt-5">
             <div class="data_table_block" v-if="item[1]">
@@ -42,7 +41,7 @@
               <div v-if="isArray(item[1])" class="form_block_title d-block">
                 <div v-if="isArray(item[1])"></div>
                 <div v-for="(item, index) in item[1]" :key="index">
-                  <div v-if="isObject(item) ">
+                  <div v-if="isObject(item)">
                     <div v-for="(val, key) in item" :key="key">
                       <div>
                         {{ isTitle(key) }} =>
@@ -72,10 +71,13 @@
         </div>
       </div>
     </div>
+    <line-step :step="19" class="mt-10" />
     <v-btn elevation="2" class="card_content_button mt-10" large @click="sendData()">Отправить</v-btn>
   </div>
 </template>
 <script>
+import LineStep from "../../components/line_step/line_step.vue";
+
 export default {
   data() {
     return {
@@ -88,7 +90,6 @@ export default {
       this.$store.commit("IsFormData");
       this.FormData = new FormData();
       this.FormData.append("test", 1);
-
       await fetch("https://rko-bot.spaaace.io/api/loan-application/create/", {
         method: "POST",
         headers: {
@@ -96,7 +97,6 @@ export default {
         },
         body: JSON.stringify(this.isResult),
       });
-
       this.dialog = true;
     },
     isObject(element) {
@@ -128,7 +128,7 @@ export default {
         case "account_datebirth":
           return "Дата рождения";
         case "account_onw_inn":
-          return "Инн";
+          return "ИНН";
         case "account_onw_role":
           return "Роль";
         case "account_own_citizenship":
@@ -160,7 +160,7 @@ export default {
         case "assigned_publ_pers_registraion":
           return "Адрес регистрации";
         case "assigned_publ_pers_relation":
-          return "Степень родства либо статус (супруг или супруга) по отношению кпубличному должностному лицу";
+          return "Степень родства либо статус (супруг или супруга) по отношению к публичному должностному лицу";
         case "beneficiaries":
           return "Выгодоприобретатели";
         case "cash_source":
@@ -223,6 +223,10 @@ export default {
           return "Дата начала действия";
         case "supreme_management_body":
           return "Тип";
+        case "supervisotyBoardPersone_name":
+          return "Наименование коллегиального исполнительного органа";
+        case "is_supervisoty":
+          return "Наличие коллегиального исполнительного органа";
         case "supreme_management_inn":
           return "Инн";
         case "supreme_management_type":
@@ -263,11 +267,6 @@ export default {
           return "Основание";
         case "address":
           return "Адрес";
-        // case 'licenced_validity': return 'Срок действия'
-        // case 'licence_date_issue': return 'Дата выдачи лицензии'
-        // case 'licence_issued_by': return 'Кем выдан'
-        // case 'licence_number': return 'Номер лицензии'
-        // case 'licence_type': return 'Сведения о лицензии'
         case "name":
           return "Наименование";
         case "ogrn":
@@ -278,8 +277,6 @@ export default {
           return "Наименование наблюдательного совета";
         default:
           return element;
-        // case 'accownt_own_living': return 'Адрес проживания'
-        // case 'tariff': return 'Тариф'
       }
     },
   },
@@ -296,6 +293,7 @@ export default {
   mounted() {
     this.$store.commit("IsFormData");
   },
+  components: { LineStep },
 };
 </script>
 <style>

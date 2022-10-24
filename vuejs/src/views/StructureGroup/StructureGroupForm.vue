@@ -51,8 +51,8 @@
       </div>
       <div class="form_block d-flex align-center justify-center">
         <a @click="deleteGroupList" class="form_block_delete_link text-decoration-none" href="#">
-          <v-icon>mdi-trash-can-outline</v-icon>
-          Удалить
+          <img src="../../assets/trash.svg" alt="">
+          <span class="pl-2">Удалить</span>
         </a>
         <v-btn
           class="
@@ -66,8 +66,8 @@
           "
           @click="addGroupList()"
         >
-          <span class="pr-3">Добавить</span>
-          <v-icon>mdi-plus-circle-outline</v-icon>
+          <span class="pr-2">Добавить</span>
+          <img src="../../assets/plus-circle.svg" alt="">
         </v-btn>
 
       </div>

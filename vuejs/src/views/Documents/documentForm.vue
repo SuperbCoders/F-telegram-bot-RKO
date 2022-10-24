@@ -66,7 +66,7 @@ export default {
       }else if(this.$route.query?.type === 'CollegialExecutive') {
         this.$store.commit("setCollegialExecutiveBody", {key: "page-7", value: this.currentData});
       }
-      
+
       this.$router.push({path:"/client-info", query: this.$route.query});
     }
   },

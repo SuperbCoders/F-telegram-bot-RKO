@@ -18,7 +18,7 @@
         <v-menu
           ref="menu"
           v-model="menu"
-          :close-on-content-click="false"
+          :close-on-content-click="isActivePicker()"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -29,6 +29,7 @@
               id="passportIssueDate"
               name="passportIssueDate"
               outlined
+              @click="currentData.account_datebirth = ''"
               append-icon="mdi-calendar-blank"
               readonly
               v-model="currentData.account_datebirth"
@@ -200,7 +201,9 @@ export default {
     currentData: {
       placeOfBirth: null,
       typeDocumnet: null,
+      account_datebirth: null
     },
+    account_datebirth: null,
     dateStarting: null,
     dateEnd: null,
     test: [],
@@ -213,7 +216,7 @@ export default {
   watch: {
     menu(val) {
       val && setTimeout(() => (this.activePicker = "YEAR"));
-    },
+    }
   },
   methods: {
     validate() {
@@ -228,8 +231,7 @@ export default {
         }else if(this.$route.query?.type === 'CollegialExecutive') {
           this.$store.commit("setCollegialExecutiveBody", {key: "page-8", value: this.currentData});
         }
-        
-        
+
         if (isStatusFogeiner === 'Да') {
           this.$router.push({path:"/document-fogeiner", query: this.$route.query});
         } else {
@@ -237,7 +239,6 @@ export default {
         }
       }
     },
-    
     // validityNull () {
     //   currentData.validity = ''
     // },
@@ -247,6 +248,12 @@ export default {
       return `${year}-12-31`;
       // console.log(this.toJSONLocal(year));
       // console.log(year, month, day)
+    },
+    isActivePicker () {
+      if (this.currentData.account_datebirth !=='' && this.activePicker === 'DATE') {
+        return true
+      }
+      return false
     },
     toJSONLocal(date) {
       const local = new Date(date);

@@ -6,16 +6,15 @@
           Степень родства либо статус (супруг или супруга) по отношению к
           публичному должностному лицу
         </p>
-        <v-select
+        <p class="text-left form_block_title">Степень родства</p>
+        <v-combobox
           :items="relationDegree"
-          label="Степень родства"
-          filled
           v-model="currentData.assigned_publ_pers_relation"
           :rules="requiredRules"
           required
           outlined
-          placeholder="Выберите из списка"
-        ></v-select>
+          placeholder="Степень родства"
+        ></v-combobox>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес регистрации</p>
           <v-text-field

@@ -1,51 +1,98 @@
 <template>
     <div>
         <div class="all_data_table">
+            <h2 class="form_block_label mb-10">
+                Сведения о связанных физических лицах
+            </h2>
 
-            <div class="data_table-row-title d-flex">
-                <div class="data_table_block">
-                    <p class="form_block_title">Вопрос</p>
-                </div>
-                <div class="data_table_block">
-                    <p class="form_block_title">Ответ</p>
-                </div>
-            </div>
-            <hr />
-            <div v-for="(item, index) in isResult" :key="index" class="pt-5">
-                <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
-                    <div class="data_table_block" v-if="val">
-                        <p class="form_block_title">
-                            {{isTitle(name) }}
-                        </p>
-                    </div>
+            <div v-for="(listObj, indexObj) in isList" :key="indexObj">
+                <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
+                    <div v-for="(item, index) in isResult" :key="index">
 
-                    <div class="data_table_block" v-if="val">
-                        <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
-                            {{ val[0].name }}
-                        </div>
-                        <div v-else-if="isArray(val)" class="form_block_title d-block">
-                            <div v-for="(val2, name2) in val" :key="name2">
-                                <div v-if="isObject(val2)">
-                                    <div v-for="(val3, key) in item" :key="key">
-                                        <div v-if="val3">
-                                            {{ isTitle(key) }} => {{ val3 }}
+                        <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
+                            <div class="data_table_block" v-if="val && itemOrder === name">
+                                <p class="form_block_title">
+                                    {{ isTitle(name) }}
+                                </p>
+                            </div>
+
+                            <div class="data_table_block" v-if="val && itemOrder === name">
+                                <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
+                                    {{ val[0].name }}
+                                </div>
+                                <div v-else-if="isArray(val)" class="form_block_title d-block">
+                                    <div v-for="(val2, name2) in val" :key="name2">
+                                        <div v-if="isObject(val2)">
+                                            <div v-for="(val3, key) in item" :key="key">
+                                                <div v-if="val3">
+                                                    {{ isTitle(key) }} => {{ val3 }}
+                                                </div>
+                                            </div>
                                         </div>
+                                        <p class="d-flex" v-else>- {{ val2 }}</p>
+
                                     </div>
                                 </div>
-                                <p class="d-flex" v-else>- {{ val2 }}</p>
-
+                                <p class="text-left form_block_title" v-else>
+                                    {{ val }}
+                                </p>
                             </div>
                         </div>
-                        <p class="text-left form_block_title" v-else>
-                            {{ val }}
-                        </p>
+                    </div>
+                </div>
+                <hr />
+            </div>
+            <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
+                <div v-for="(item, index) in isResult" :key="index" class="">
+
+                    <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
+                        <div class="data_table_block" v-if="val && itemOrder === name">
+                            <p class="form_block_title">
+                                {{ isTitle(name) }}
+                            </p>
+                        </div>
+
+                        <div class="data_table_block" v-if="val && itemOrder === name">
+                            <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
+                                {{ val[0].name }}
+                            </div>
+                            <div v-else-if="isArray(val)" class="form_block_title d-block">
+                                <div v-for="(val2, name2) in val" :key="name2">
+                                    <div v-if="isObject(val2)">
+                                        <div v-for="(val3, key) in item" :key="key">
+                                            <div v-if="val3">
+                                                {{ isTitle(key) }} => {{ val3 }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="d-flex" v-else>- {{ val2 }}</p>
+
+                                </div>
+                            </div>
+                            <p class="text-left form_block_title" v-else>
+                                {{ val }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="form_block d-flex align-center justify-center mt-4">
+                <a @click="del()" class="form_block_delete_link text-decoration-none" href="#">
+                    <img src="../../assets/trash.svg" alt="">
+                    <span class="pl-2">Удалить</span>
+                    
+                </a>
+                <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="add()">
+                    <span class="pr-2">Добавить</span>
+                    <img src="../../assets/plus-circle.svg" alt="">
+                </v-btn>
+            </div>
+            <v-btn elevation="2" class="card_content_button" large @click="next()">Продолжить</v-btn>
+
         </div>
-        <v-btn elevation="2" class="card_content_button" large @click="del()">Удалить</v-btn>
-        <v-btn elevation="2" class="card_content_button" large @click="add()">Добавить</v-btn>
-        <v-btn elevation="2" class="card_content_button" large @click="next()">Продолжить</v-btn>
     </div>
 </template>
 <script>
@@ -53,8 +100,51 @@ export default {
     data() {
         return {
             formData: {},
-        }
+            formOrder: [
+                "account_onw_role",
+                "account_own_lastname",
+                "account_own_name",
+                "account_own_surname",
+                "account_own_gender",
+                
+                "account_onw_inn",
+                "account_own_snils",
+                "account_own_citizenship",
+                "account_own_phone",
+                "account_own_piece",
+                
+                "is_person_a_foreign_public",
+                
+                "assigned_publ_pers_relation",
+                "account_own_registration",
+                "assigned_publ_pers_registraion",
+
+                "accownt_own_living",
+
+                "account_own_mail",
+
+                "first_passport_page",
+
+                "account_birth_place",
+                "account_datebirth",
+                "doc_type",
+                "doc_serial",
+                "doc_number",
+                "issued_by",
+                "division_code",
+                "date_issue",
+                "validity",
+
+                "foreigner_doc_issued",
+                "foreigner_doc_number",
+                "foreigner_doc_serial",
+                "foreigner_doc_type",
+                "foreigner_doc_validity",
+
+            ]
+        };
     },
+
     methods: {
         isObject(element) {
             if (typeof element == 'object') {
@@ -73,8 +163,10 @@ export default {
         isTypeObject(object) {
             if (Array.isArray(object)) {
                 return ''
+            } else {
+                return ''
             }
-            return ''
+            
         },
         isTitle(element) {
             switch (element) {
@@ -148,7 +240,12 @@ export default {
                 case 'foreigner_doc_number': return 'Номер документа удостоверяющего личность'
                 case 'foreigner_doc_issued': return 'Дата начала срока действия права пребывания'
                 case 'foreigner_doc_validity': return 'Дата окончания срока действия пребывания'
+
                 case 'supervisory': return 'Наименование наблюдательного совета'
+
+                case 'is_person_a_foreign_public': return `Является ли лицо иностранным публичным должностным лицом либо лицом, связанным с таковым родственными
+            партнескими или иными отношениями?`
+
                 case 'first_passport_page': return 'Паспорт'
                 default: return element
             }
@@ -162,7 +259,7 @@ export default {
             } else if (this.$route.query?.type === 'CollegialExecutive') {
                 this.$store.commit('setListCollegialExecutiveBody')
             }
-            this.$router.push("/individual-info")
+            this.$router.push({ path: "/individual-info", query: this.$route.query })
         },
         next() {
             if (this.$route.query?.type === 'SupervisoryBoard') {
@@ -171,7 +268,7 @@ export default {
                 this.$store.commit('setListCollegialExecutiveBody')
             }
             this.$router.push("/sctructure")
-        }
+        },
     },
     computed: {
         isResult() {
@@ -179,19 +276,23 @@ export default {
                 return this.$store.state.supervisoryBoardPersone;
             } else if (this.$route.query?.type === 'CollegialExecutive') {
                 return this.$store.state.collegialExecutiveBody;
-            }else {
+            } else {
                 return {}
             }
         },
-        // isValueString (value) {
-        //   if (value[1] !== '' && null) {
-        //     return true
-        //   }
-        // }
+        isList() {
+            if (this.$route.query?.type === 'SupervisoryBoard') {
+                return this.$store.state.listSupervisotyBoardPersone;
+            } else if (this.$route.query?.type === 'CollegialExecutive') {
+                return this.$store.state.listCollegialExecutiveBody;
+            } else {
+                return []
+            }
+        }
+
     },
-    mounted() {
-    },
-}
+
+};
 </script>
 <style>
 .card_content_button {
@@ -225,5 +326,16 @@ export default {
     justify-content: flex-start;
 }
 
-.all_data_table-row {}
+.form_block_delete_link, .add_form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    text-align: center;
+    font-family: 'Roboto' !important;
+    font-style: normal !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 22px !important;
+}
 </style>
