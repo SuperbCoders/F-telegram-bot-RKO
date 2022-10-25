@@ -71,11 +71,12 @@
       <div class="form_block d-flex align-center justify-center">
         <a
           @click="deleteGroupList"
+          :class="{form_block_delete_link_active: currentData.addresses.length > 1 }"
           class="form_block_delete_link text-decoration-none"
           href="#"
         >
         <img src="../../assets/trash.svg" alt="">
-        <span class="pl-2">Удалить</span>
+        <span class="pl-2 ">Удалить</span>
         </a>
         <v-btn
           class="text-center d-flex align-center justify-center ml-10 add_form"
@@ -224,5 +225,8 @@ export default {
   font-size: 14px;
   font-weight: 500;
   color: #8e909b !important;
+}
+.form_block_delete_link_active {
+  filter: invert(16%) sepia(98%) saturate(3234%) hue-rotate(321deg) brightness(82%) contrast(102%);
 }
 </style>
