@@ -141,7 +141,7 @@
           </div>
       </div>
     </v-form>
-    <line-step :step="2" class="mt-2" />
+    <line-step :step="2" class="mt-4" />
     <v-btn
       block
       large
@@ -181,7 +181,7 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
-        (v && v.length >= 13) || "ИНН не может содержать меньше 10 симоволов",
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
     ],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),

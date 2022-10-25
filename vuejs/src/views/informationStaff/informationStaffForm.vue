@@ -86,9 +86,9 @@
         class="form_input_block"
       >
         <div class="form_block">
-          <p class="text-left form_block_title">Название компании</p>
+          <p class="text-left form_block_title">Наименование компании</p>
           <v-combobox
-            label="Напишите название"
+            label="Напишите наименование "
             outlined
             v-model="itemForm.name"
             :rules="requiredRules"
@@ -221,10 +221,10 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      this.listCompany = data.suggestions.map((elem) => `${elem.value} ${elem.data?.address?.unrestricted_value}`);
+      this.listCompany = data.suggestions.map((elem) => `${elem.value}, ${elem.data?.address?.unrestricted_value}`);
     },
     async getCompanyFromName(itemForm) {
-      const data = await getCompanyName(itemForm.name);
+      const data = await getCompanyName(itemForm.name.split(",")[0]);
       if (data.suggestions.length === 1) {
         itemForm.inn = data.suggestions[0].data.inn;
       }
@@ -235,7 +235,7 @@ export default {
         const company = await getCompanyInn(inn);
         if (company?.suggestions.length > 0) {
           const data = company?.suggestions[0]
-          itemForm.name = `${data.value} ${data.data?.address?.unrestricted_value}`;
+          itemForm.name = `${data.value}, ${data.data?.address?.unrestricted_value}`;
           itemForm.ogrn = company?.suggestions[0].data.ogrn;
         }
       }

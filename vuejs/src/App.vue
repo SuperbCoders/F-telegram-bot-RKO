@@ -61,6 +61,7 @@ fieldset{
 }
 input, p, label, .v-list-item__title, .v-select__selection, .v-label {
   font-size: 14px !important;
+  font-family: 'Roboto' !important;
 }
 .v-label {
   color: #b6b4b4 !important;
@@ -71,9 +72,8 @@ input, p, label, .v-list-item__title, .v-select__selection, .v-label {
 } */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    /* display: none; <- Crashes Chrome on hover */
     -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    margin: 0;
 }
 .v-btn__content {
   font-family: 'Roboto' !important;

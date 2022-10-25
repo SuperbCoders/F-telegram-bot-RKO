@@ -32,14 +32,15 @@
       ></v-text-field>
       <line-step :step='12' />
       <v-btn
-      block
-      large
-      :disabled="!valid"
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить</v-btn
+        block
+        large
+        :disabled="!valid"
+        class="mt-10 auth_form_bth"
+        color="primary"
+        @click="validate"
     >
+      Продолжить
+    </v-btn>
     </div>
   </v-form>
   </div>
@@ -47,6 +48,8 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+import { getLicense } from '../../api/getLicense';
+
 export default {
   data() {
     return {
@@ -60,7 +63,7 @@ export default {
     }
   },
   methods: {
-    validate() {
+    async validate() {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
@@ -68,7 +71,23 @@ export default {
           object: 'step_12',
           value: this.currentData
         })
-        this.$router.push('/license-info')
+        const data = await getLicense();
+        console.log(data);
+        
+        const store = {};
+        
+        store.licence_type = data.view;
+        store.licence_number = data.number;
+        store.licence_issued_by = data.Issued_by;
+        store.licence_date_issue = data.License_issue_date;
+        store.licenced_validity = data.Validity;
+        store.licenced_activity = data.List_types_licensed_activities;
+
+        this.$store.dispatch('addObjectFormData', {
+          object: 'step_13',
+          value: store
+        })
+        this.$router.push("/planning");
       }
     },
   },

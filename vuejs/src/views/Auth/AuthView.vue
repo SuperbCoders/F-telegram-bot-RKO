@@ -107,7 +107,7 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
-        (v && v.length >= 13) || "ИНН не может содержать меньше 10 симоволов",
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
     ],
     email: "",
     requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -145,12 +145,12 @@ export default {
     },
 
     async getCompanyFromInn(inn) {
-      if ((inn.length >= 10) & (inn.length <= 12)) {
+      if ((inn.length >= 10)) {
         const company = await getCompanyInn(inn);
         if (company?.suggestions.length > 0) {
           this.$store.commit("setDataCompany", company?.suggestions[0]);
           const data = company?.suggestions[0];
-          this.currentData.company_name = `${data.value} ${data.data.address.unrestricted_value}`;
+          this.currentData.company_name = `${data.value}, ${data.data.address.unrestricted_value}`;
         }
       }
     },
@@ -158,11 +158,10 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      console.log(data);
-      this.listCompany = data.suggestions.map((elem)=> `${elem.value} ${elem.data?.address?.unrestricted_value}`);
+      this.listCompany = data.suggestions.map((elem)=> `${elem.value}, ${elem.data?.address?.unrestricted_value}`);
     },
     async getCompanyFromName() {
-      const data = await getCompanyName(this.currentData.company_name);
+      const data = await getCompanyName(this.currentData.company_name.split(',')[0]);
       if(data.suggestions.length === 1) {
         this.currentData.inn = data.suggestions[0].data.inn
       }
