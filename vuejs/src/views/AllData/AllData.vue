@@ -201,12 +201,6 @@ export default {
           return "Количество операций по безлимитным платежам в месяц";
         case "passport_serial":
           return "Серия паспорта";
-        case "typeAdress":
-          return "Серия паспорта";
-        case "address":
-          return "Адрес";
-        case 'basis':
-          return "Основание"
         case "physic_address":
           return "Физический адрес";
         case "placeOfBirth":
