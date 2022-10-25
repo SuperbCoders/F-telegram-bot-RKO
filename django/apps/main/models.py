@@ -60,7 +60,7 @@ class LoanRequest(models.Model):
                               default="under_review",
                               blank=True)
     inn = models.CharField(max_length=INN_MAX_LENGTH)
-    company_name = models.CharField(max_length=MAX_STRING_LENGTH)
+    company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     contact_number = models.CharField(max_length=20, blank=True, null=True)
     
     addresses = models.JSONField(max_length=300)
