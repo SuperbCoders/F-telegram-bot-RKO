@@ -19,22 +19,14 @@
         </v-radio-group>
         <div v-if="isAddress === 'Не совпадает с адресом регистации и адресом проживания'">
           <p class="form_block_title">Адрес фактического проживания</p>
-          <v-text-field
-            id="oldName"
-            placeholder="Введите адрес"
-            v-model="address"
-            class="align-center border-none mt-5"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
+          <AddressInput label="Введите адрес" v-model="currentData.account_own_mail" />
         </div>
       </div>
     </v-form>
     <v-btn
       block
       large
-      class="mt-10 auth_form_bth"
+      class="mt-3 auth_form_bth"
       color="primary"
       @click="validate"
       >Продолжить
@@ -43,6 +35,8 @@
 </template>
 
 <script>
+import AddressInput from '../../components/addressInput.vue';
+
 export default {
   data() {
     return {
@@ -77,6 +71,7 @@ export default {
     },
   },
   components: {
+    AddressInput,
   },
   computed: {
     isTest () {

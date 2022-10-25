@@ -18,7 +18,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <div></div>
+    <div><h4 class="mb-6 text-center">Подтвердите введенные данные</h4></div>
     <div class="all_data_table">
       <div class="data_table-row-title d-flex">
         <div class="data_table_block">

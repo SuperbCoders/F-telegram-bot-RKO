@@ -9,31 +9,7 @@
       >
         <div class="form_block">
           <p class="text-left form_block_title">Название компании</p>
-          <v-text-field
-            id="oldName"
-            placeholder="Наименование"
-            class="align-center border-none"
-            v-model="itemForm.name"
-            name="oldName"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
-        </div>
-        <div class="form_block">
-          <p class="text-left form_block_title">ИНН</p>
-          <v-text-field
-            id="oldName"
-            placeholder="ИНН"
-            class="align-center border-none"
-            name="oldName"
-            v-mask="'### ### ### ###'"
-            masked="true"
-            v-model="itemForm.inn"
-            outlined
-            :rules="innRules"
-            :required="true"
-          ></v-text-field>
+          <InnAndNameInput v-model="itemForm.name" />
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
@@ -88,6 +64,7 @@
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
 import { mask } from "vue-the-mask";
+import InnAndNameInput from '../../components/innAndNameInput.vue'
 
 export default {
   directives: { mask },
@@ -132,6 +109,7 @@ export default {
   },
   components: {
     LineStep,
+    InnAndNameInput,
   }
 };
 </script>

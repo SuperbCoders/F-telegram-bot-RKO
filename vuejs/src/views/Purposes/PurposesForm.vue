@@ -147,5 +147,7 @@ export default {
 </script>
 
 <style>
-
+.purposes_block .v-label {
+  color: #323E48 !important;
+}
 </style>

@@ -29,16 +29,7 @@
       </div>
       <div v-if="isManagementCompany" class="form_block">
         <p class="text-left form_block_title">ИНН</p>
-        <v-combobox
-          label="Введите ИНН или название компании"
-          outlined
-          v-model="currentData.supreme_management_inn"
-          :rules="requiredRules"
-          required
-          class="mt-1 auth_form combobox"
-          @keyup="getListCompanyFromName"
-          :items="listCompany"
-        ></v-combobox>
+        <InnAndNameInput v-model="currentData.supreme_management_inn" />
       </div>
       <div class="form_group mb-10">
         <p class="text-left form_block_label mt-5">
@@ -157,7 +148,7 @@
 <script>
 import RadioGroup from "../../components/radioButton/radioGroup/radioGroup.vue";
 import LineStep from "../../components/line_step/line_step.vue";
-import { getCompanyName } from "../../api/getInfoCompany";
+import InnAndNameInput from '../../components/innAndNameInput.vue'
 import { mask } from "vue-the-mask";
 
 export default {
@@ -170,10 +161,10 @@ export default {
       supreme_management_type: null,
       supreme_management_inn: null,
       supreme_management_person: null,
-      is_collegiate_body: false,
+      is_collegiate_body: true,
       supervisory: "",
       supervisotyBoardPersone_name: "",
-      is_supervisoty: false,
+      is_supervisoty: true,
       collegiate_person: null,
     },
     isTest1: false,
@@ -212,15 +203,6 @@ export default {
     deleteObjectList(object) {
       if (object.length > 1) {
         object.pop();
-      }
-    },
-    async getListCompanyFromName(e) {
-      const value = e.target.value;
-      const data = await getCompanyName(value);
-      if (value.match(/^\d+/)) {
-        this.listCompany = data.suggestions.map((elem) => elem.data.inn);
-      } else {
-        this.listCompany = data.suggestions.map((elem) => `${elem.value} ${elem.data?.address?.unrestricted_value}`);
       }
     },
     createSupervisoryBoard() {
@@ -271,6 +253,7 @@ export default {
   components: {
     RadioGroup,
     LineStep,
+    InnAndNameInput,
   },
   mounted () {
     const dataStep = this.$store.state.formData.step_3;

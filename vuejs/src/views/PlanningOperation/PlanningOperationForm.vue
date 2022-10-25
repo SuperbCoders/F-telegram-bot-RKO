@@ -1,6 +1,6 @@
 <template>
   <div class="planning_operation_section">
-    <h3 class="form_block_label">Сведения о планируемых опреациях по счету</h3>
+    <h3 class="form_block_label">Сведения о планируемых операциях по счету</h3>
     <div class="form_block">
       <v-checkbox
         v-model="currentData.planned_operations"
@@ -81,4 +81,7 @@ export default {
 </script>
 
 <style>
+.planning_operation_section .v-label {
+  color: #000 !important;
+}
 </style>

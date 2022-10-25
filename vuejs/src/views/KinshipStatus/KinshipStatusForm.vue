@@ -17,27 +17,11 @@
         ></v-combobox>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес регистрации</p>
-          <v-text-field
-            id="oldName"
-            v-model="currentData.assigned_publ_pers_registraion"
-            placeholder="Введите адрес"
-            class="align-center border-none"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
+          <AddressInput label="Введите адрес" v-model="currentData.assigned_publ_pers_registraion" />
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес регистрации</p>
-          <v-text-field
-            id="oldName"
-            placeholder="Введите адрес"
-            v-model="currentData.account_own_registration"
-            class="align-center border-none"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          ></v-text-field>
+          <AddressInput label="Введите адрес" v-model="currentData.account_own_registration" />
         </div>
       </div>
     </v-form>
@@ -54,6 +38,7 @@
 </template>
 
 <script>
+import AddressInput from '../../components/addressInput.vue';
 
 export default {
   data: () => ({
@@ -85,6 +70,9 @@ export default {
       }
     },
   },
+  components: {
+    AddressInput,
+  }
 };
 </script>
 

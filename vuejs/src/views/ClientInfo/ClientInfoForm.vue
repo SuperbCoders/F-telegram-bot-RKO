@@ -3,15 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Место рождения</p>
-        <v-text-field
-          id="oldName"
-          placeholder="Введите адрес"
-          class="align-center border-none"
-          outlined
-          v-model="currentData.account_birth_place"
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
+        <AddressInput label="Введите адрес" v-model="currentData.account_birth_place" />
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Дата рождения</p>
@@ -193,6 +185,8 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import AddressInput from '../../components/addressInput.vue';
+
 export default {
   directives: { mask },
   data: () => ({
@@ -261,13 +255,9 @@ export default {
     },
   },
   computed: {
-    // test() {
-    //   const year = new Date().getFullYear();
-    //   console.log(year);
-    //   return year;
-    // },
   },
   components: {
+    AddressInput
   },
 };
 </script>

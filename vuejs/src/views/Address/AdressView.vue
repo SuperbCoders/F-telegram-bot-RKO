@@ -71,7 +71,7 @@
       <div class="form_block d-flex align-center justify-center">
         <a
           @click="deleteGroupList"
-          :class="{form_block_delete_link_active: currentData.addresses.length > 1 }"
+          :class="{form_block_delete_link_delete: currentData.addresses.length <= 1 }"
           class="form_block_delete_link text-decoration-none"
           href="#"
         >
@@ -202,7 +202,10 @@ export default {
 
 .form_block {
 }
-
+.form_block_delete_link_delete {
+  opacity: 0;
+  cursor: default !important;
+}
 .error_message {
   color: red;
   font-family: Roboto;

@@ -11,8 +11,7 @@
           <p class="form_block_title">
             Адрес фактического проживания
           </p>
-          <v-combobox label="Введите адрес" outlined v-model="currentData.accownt_own_living" :rules="requiredRules"
-            required class="mt-1 auth_form combobox mt-5" @keyup="getAddressFromName" :items="listAddres"></v-combobox>
+          <AddressInput label="Введите адрес" v-model="currentData.accownt_own_living" />
         </div>
       </div>
     </v-form>
@@ -22,7 +21,7 @@
 </template>
 
 <script>
-import { getAddress } from '../../api/GetAddress';
+import AddressInput from '../../components/addressInput.vue';
 
 export default {
   data() {
@@ -55,16 +54,14 @@ export default {
         this.$router.push({ path: "/email-form", query: this.$route.query });
       }
     },
-    async getAddressFromName(e) {
-      const value = e.target.value;
-      const data = await getAddress(value);
-      this.listAddres = data.suggestions.map((elem) => `${elem.value}, ${elem.data?.address?.unrestricted_value}`);
-    },
   },
   computed: {
     isFormdata() {
       return this.$store.state.formData.account_own_registration
     }
+  },
+  components: {
+    AddressInput,
   }
 }
 </script>

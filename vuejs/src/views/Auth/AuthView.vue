@@ -10,28 +10,7 @@
     </div>
     <div class="auth_form mt-12">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field
-          label="Введите ИНН"
-          outlined
-          v-model="currentData.inn"
-          :rules="innRules"
-          v-mask="'### ### ### ###'"
-          masked="true"
-          required
-          @input="getCompanyFromInn"
-          class="mt-1 auth_form"
-        ></v-text-field>
-        <v-combobox 
-          label="Наименование компании"
-          outlined
-          v-model="currentData.company_name"
-          :rules="requiredRules"
-          required
-          class="mt-1 auth_form combobox"
-          @keyup="getListCompanyFromName"
-          @input="getCompanyFromName"
-          :items="listCompany"
-        ></v-combobox>
+        <InnAndNameInput v-model="currentData.inn" />
         <v-text-field
           label="Контактный номер телефона"
           outlined
@@ -91,6 +70,7 @@
 <script>
 import { getCompanyInn, getCompanyName } from "../../api/getInfoCompany";
 import { mask } from "vue-the-mask";
+import InnAndNameInput from '../../components/innAndNameInput.vue';
 
 export default {
   directives: { mask },
@@ -168,6 +148,9 @@ export default {
     }
   },
   computed: {},
+  components: {
+    InnAndNameInput
+  }
 };
 </script>
 <style scoped>
