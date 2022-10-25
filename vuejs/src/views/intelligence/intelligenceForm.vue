@@ -30,7 +30,7 @@
         outlined
         :required="true"
       ></v-text-field>
-      <line-step :step='12' />
+      <line-step :step='4' />
       <v-btn
         block
         large
@@ -54,11 +54,11 @@ export default {
   data() {
     return {
       valid: true,
-      requiredRules: [(v) => !!v || "Это поле обязательно"],
+      requiredRules: [(v) => v !== "" || "Это поле обязательно"],
       test: false,
       currentData: {
-        employers_volume: null,
-        salary_debt: null
+        employers_volume: "",
+        salary_debt: 0
       }
     }
   },

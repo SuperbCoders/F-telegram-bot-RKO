@@ -83,7 +83,7 @@
         <v-radio label="более 100" value="более 100"></v-radio>
       </v-radio-group>
     </div>
-    <line-step :step='16' class="mt-5"/>
+    <line-step :step='7' class="mt-5"/>
     <v-btn block large :disabled="!valid" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>
   </div>

@@ -149,7 +149,7 @@
         </v-btn>
       </div>
     </v-form>
-    <line-step :step="11" />
+    <line-step :step="3" />
     <v-btn
       block
       large
@@ -187,7 +187,7 @@ export default {
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
-        (v && v.length >= 13) || "ИНН не может содержать меньше 10 симоволов",
+        (v && v.length >= 10) || "ИНН не может содержать меньше 10 симоволов",
     ],
     passportIssueDateMenu: null,
     requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -227,6 +227,7 @@ export default {
       const data = await getCompanyName(itemForm.name.split(",")[0]);
       if (data.suggestions.length === 1) {
         itemForm.inn = data.suggestions[0].data.inn;
+        itemForm.ogrn = data?.suggestions[0].data.ogrn;
       }
     },
     async getCompanyFromInn(itemForm) {

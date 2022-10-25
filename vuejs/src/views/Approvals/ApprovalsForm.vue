@@ -24,7 +24,7 @@
           </v-checkbox>
       </div>
     </div>
-    <LineStep :step="17" class="mt-5" />
+    <LineStep :step="8" class="mt-5" />
     <v-btn
       block
       large

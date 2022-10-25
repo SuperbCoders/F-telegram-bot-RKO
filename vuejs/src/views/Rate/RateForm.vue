@@ -120,7 +120,7 @@
         >
       </div>
     </v-card>
-    <LineStep :step="18" />
+    <LineStep :step="9" />
     <v-btn
       block
       large

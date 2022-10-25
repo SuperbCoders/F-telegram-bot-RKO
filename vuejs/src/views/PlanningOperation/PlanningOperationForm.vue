@@ -36,7 +36,7 @@
     <p class="error_message" v-if="!valid && operationlist.length < 1">
       Выберите пункт
     </p>
-    <line-step :step='14' class="mt-5"/>
+    <line-step :step='5' class="mt-5"/>
     <v-btn
       block
       large

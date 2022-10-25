@@ -8,7 +8,7 @@
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
     </div>
-    <line-step :step='15' class="mt-5"/>
+    <line-step :step='6' class="mt-5"/>
     <v-btn
       block
       large
