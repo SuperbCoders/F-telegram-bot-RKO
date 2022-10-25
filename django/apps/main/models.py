@@ -99,13 +99,13 @@ class LoanRequest(models.Model):
         upload_to="documents",
         blank=True,
         null=True,)
-    account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH)
-    account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH)
-    doc_type = models.CharField(max_length=MAX_STRING_LENGTH)
-    doc_serial = models.CharField(max_length=MAX_STRING_LENGTH)
-    doc_number = models.CharField(max_length=MAX_STRING_LENGTH)
-    issued_by = models.CharField(max_length=MAX_STRING_LENGTH)
-    division_code = models.CharField(max_length=MAX_STRING_LENGTH)
+    account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
+    account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
+    doc_type = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
+    doc_serial = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
+    doc_number = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
+    issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
+    division_code = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
     date_issue = models.DateField()
     validity = models.DateField()
 
