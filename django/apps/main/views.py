@@ -69,6 +69,8 @@ class UserAPIView(APIView):
     def post(self, request, format=None, *args, **kwargs):
         telegram_chat_id = self.kwargs.get("telegram_chat_id")
         phone_number = self.request.data.get("phone_number")
+        print(telegram_chat_id, phone_number)
+        print(User.objects.all())
         try:
             user = User(
                 username=uuid.uuid4(),
