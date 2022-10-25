@@ -226,7 +226,10 @@ export default {
   font-weight: 500;
   color: #8e909b !important;
 }
-.form_block_delete_link_active {
+.form_block_delete_link:hover {
   filter: invert(16%) sepia(98%) saturate(3234%) hue-rotate(321deg) brightness(82%) contrast(102%);
+}
+.form_block_delete_link_active {
+  /* filter: invert(16%) sepia(98%) saturate(3234%) hue-rotate(321deg) brightness(82%) contrast(102%); */
 }
 </style>
