@@ -22,8 +22,11 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'supreme_management_person',
                 'supreme_management_inn',
                 
+                'supervisory_name',
+                'supervisory_body',
+                
+                'collegiate_name',
                 'collegiate_body',
-                'collegiate_person_fio',
                 
                 'account_onw_role',
                 'account_own_lastname',
@@ -54,6 +57,12 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'division_code',
                 'date_issue',
                 'validity',
+                
+                'foreigner_doc_type',
+                'foreigner_doc_serial',
+                'foreigner_doc_number',
+                'foreigner_doc_issued',
+                'foreigner_doc_validity',
                 
                 'licence_type',
                 'licence_number',
