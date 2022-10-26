@@ -41,7 +41,11 @@
       <div v-for="(itemForm, index) in currentData.group_members" :key="index" class="form_input_block">
         <div class="form_block">
           <p class="text-left form_block_title">Наименование компании или ИНН</p>
-          <InnAndNameInput v-model="itemForm.name" />
+          <InnAndNameInput :value="itemForm.name" @input="(e)=>{
+              itemForm.name = e; 
+              inputName(itemForm);
+            }
+          " />
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">ОГРН</p>
@@ -71,6 +75,7 @@
 import LineStep from "../../components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
 import InnAndNameInput from '../../components/innAndNameInput.vue';
+import { getCompanyInn } from '../../api/getInfoCompany';
 
 export default {
   directives: { mask },
@@ -109,6 +114,15 @@ export default {
         })
         this.$router.push("/intelligence");
       }
+    },
+    async inputName(itemForm) {
+      const name = itemForm.name;
+      const data = await getCompanyInn(name);
+      if(data.suggestions.length > 0){
+        const ogrn = data.suggestions[0]?.data?.ogrn;
+        itemForm.ogrn = ogrn;
+      }
+      
     },
     skip() {
       this.$router.push("/intelligence");
