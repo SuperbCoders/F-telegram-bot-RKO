@@ -1,9 +1,9 @@
 <template>
   <div class="beneficiaries_section">
     <h3 class="form_block_label">Выгодоприобретатели</h3>
-    <div class="form_block mt-5">
+    <div class="form_block mt-5 ">
       <p class="form_block_title">Имеются ли Выгодоприобретатели</p>
-      <v-radio-group mandatory v-model="currentData.beneficiaries" column>
+      <v-radio-group mandatory v-model="currentData.beneficiaries" column class="checkboxs">
         <v-radio label="Отсуствуют" value="Отсуствуют"></v-radio>
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
@@ -22,6 +22,7 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
+
 export default {
   data() {
     return {
@@ -47,4 +48,7 @@ export default {
 </script>
 
 <style>
+.checkboxs label{
+  color: #323E48 !important;
+}
 </style>

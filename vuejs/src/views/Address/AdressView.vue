@@ -5,7 +5,7 @@
       <div
         v-for="(itemForm, index) in currentData.addresses"
         :key="index"
-        class="form_input_block"
+        class="form_input_block checkboxs"
       >
         <div class="form_block mb-5">
           <v-checkbox
@@ -199,7 +199,9 @@ export default {
   font-size: 14px;
   border-radius: 8px;
 }
-
+.checkboxs label {
+  color: #323E48 !important;
+}
 .form_block {
 }
 .form_block_delete_link_delete {

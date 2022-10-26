@@ -70,6 +70,7 @@
 <script>
 import LineStep from "../../components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
+import InnAndNameInput from '../../components/innAndNameInput.vue';
 
 export default {
   directives: { mask },
@@ -128,6 +129,7 @@ export default {
   },
   components: {
     LineStep,
+    InnAndNameInput,
   },
 };
 </script>

@@ -18,7 +18,9 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-    <div><h4 class="mb-6 text-center">Подтвердите введенные данные</h4></div>
+    <div>
+      <h4 class="mb-6 text-center">Подтвердите введенные данные</h4>
+    </div>
     <div class="all_data_table">
       <div class="data_table-row-title d-flex">
         <div class="data_table_block">
@@ -28,47 +30,48 @@
           <p class="form_block_title">Ответ</p>
         </div>
       </div>
-      <hr />
-      <div v-for="(item, index) in Object.entries(isResult)" :key="index" class="all_data_table-row mt-1">
-        <div v-if="item[1]">
-          <div class="d-flex data1_table_block mt-5">
-            <div class="data_table_block" v-if="item[1]">
-              <p class="form_block_title">
-                {{ isTitle(item[0]) }}
-              </p>
-            </div>
-            <div class="data_table_block" v-if="item[1]">
-              <div v-if="isArray(item[1])" class="form_block_title d-block">
-                <div v-if="isArray(item[1])"></div>
-                <div v-for="(item, index) in item[1]" :key="index">
-                  <div v-if="isObject(item)">
-                    <div v-for="(val, key) in item" :key="key">
-                      <div>
-                        {{ isTitle(key) }} =>
-                        <p v-if="!isObject(val)">{{ val }}</p>
-                      </div>
-                      <div v-if="isObject(val)">
-                        <div v-for="(elementObject, indexObject) in val" :key="indexObject">
-                          - {{ elementObject }}
+      <div v-for="(step, step_index) in getFormData" :key="step_index">
+        <hr>
+          <div v-for="(item, index) in step" :key="index" class="all_data_table-row mt-1">
+
+            <div class="d-flex data1_table_block mt-5">
+              <div class="data_table_block" v-if="item">
+                <p class="form_block_title">
+                  {{ isTitle(index) }}
+                </p>
+              </div>
+              <div class="data_table_block" v-if="item">
+                <div v-if="isArray(item)" class="form_block_title d-block">
+                  <div v-for="(sub_item, sub_index) in item" :key="sub_index">
+                    <div v-if="isObject(sub_item)">
+                      <div v-for="(val, key) in sub_item" :key="key">
+                        <div>
+                          {{ isTitle(key) }} =>
+                          <p v-if="!isObject(val)">{{ val }}</p>
+                        </div>
+                        <div v-if="isObject(val)">
+                          <div v-for="(elementObject, indexObject) in val" :key="indexObject">
+                            - {{ elementObject }}
+                          </div>
                         </div>
                       </div>
                     </div>
+                    <p class="d-flex" v-else>- {{ sub_item }}</p>
                   </div>
-                  <p class="d-flex" v-else>- {{ item }}</p>
                 </div>
+                <p class="text-left form_block_title" v-else-if="typeof item == 'boolean'">
+                  <span v-if="item">Да</span>
+                  <span v-else>Нет</span>
+                </p>
+                <p class="text-left form_block_title" v-else>
+                  {{ item }}
+                </p>
+                <div v-if="typeof item === 'object' && !Array.isArray(item)"></div>
               </div>
-              <p class="text-left form_block_title" v-else-if="typeof item[1] == 'boolean'">
-                <span v-if="item[1]">Да</span>
-                <span v-else>Нет</span>
-              </p>
-              <p class="text-left form_block_title" v-else>
-                {{ item[1] }}
-              </p>
-              <div v-if="typeof item[1] === 'object' && !Array.isArray(item)"></div>
             </div>
           </div>
-          <hr />
-        </div>
+
+
       </div>
     </div>
     <line-step :step="10" class="mt-10" />
@@ -87,7 +90,7 @@ export default {
   },
   methods: {
     async sendData() {
-      this.$store.commit("IsFormData");
+      // this.$store.commit("IsFormData");
       this.FormData = new FormData();
       this.FormData.append("test", 1);
       await fetch("https://rko-bot.spaaace.io/api/loan-application/create/", {
@@ -95,7 +98,7 @@ export default {
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify(this.isResult),
+        body: JSON.stringify({}),
       });
       this.dialog = true;
     },
@@ -236,7 +239,7 @@ export default {
         case "contact_number":
           return "Номер телефона";
         case "inn":
-          return "ИНН";
+          return "ИНН или наименование компании";
         case "addresses":
           return "Адрес";
         case "supreme_management_person":
@@ -275,15 +278,24 @@ export default {
           return "Наименование наблюдательного совета";
         case "is_collegiate_body":
           return "Наименование наблюдательного совета";
+        case "operation_sum":
+          return "Сумма операций по безналичным платежам в месяц";
         default:
           return element;
       }
     },
+    isFormData(index) {
+      return !!this.$store.state.formData['step_' + index]
+    },
+    getStepFromFormData(index) {
+      return this.$store.state.formData?.['step_' + index]
+    },
   },
   computed: {
-    isResult() {
-      return this.$store.state.result;
-    },
+    getFormData() {
+      return this.$store.state.formData;
+    }
+
     // isValueString (value) {
     //   if (value[1] !== '' && null) {
     //     return true
@@ -291,7 +303,6 @@ export default {
     // }
   },
   mounted() {
-    this.$store.commit("IsFormData");
   },
   components: { LineStep },
 };
@@ -326,6 +337,8 @@ export default {
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  padding-right: 15px;
+  box-sizing: border-box;
 }
 
 .all_data_table-row {}

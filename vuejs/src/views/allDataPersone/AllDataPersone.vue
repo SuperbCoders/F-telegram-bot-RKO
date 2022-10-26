@@ -40,7 +40,7 @@
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr class="mt-2 mb-2" />
             </div>
             <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
                 <div v-for="(item, index) in isResult" :key="index" class="">

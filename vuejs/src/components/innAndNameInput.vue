@@ -1,6 +1,6 @@
 <template>
     <v-combobox label="Введите ИНН или название компании" outlined
-        :rules="requiredRules" required 
+       required 
         class="mt-1 auth_form combobox"
         :value="value"
         @input="emitData"

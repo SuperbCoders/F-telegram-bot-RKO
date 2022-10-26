@@ -3,7 +3,7 @@
     <div class="form_block">
       <!-- <div class="form_block_title">Отметьте все верные утверждени</div> -->
       <p class="form_block_title">Отметьте все верные утверждения</p>
-      <div class="form_block">
+      <div class="form_block checkboxs">
           <v-checkbox
             v-for="(item, index) in currentData.list"
             :key="index"
@@ -139,5 +139,8 @@ export default {
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+.checkboxs label {
+  color: #323E48 !important;
 }
 </style>

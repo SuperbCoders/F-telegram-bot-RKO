@@ -113,7 +113,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Дата выдачи</p>
         <v-menu
-          :close-on-content-click="true"
+          :close-on-content-click="isActivePickerIssue()"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -137,13 +137,14 @@
           <v-date-picker
             v-model="currentData.date_issue"
             @input="passportIssueDateMenu = false"
+            :active-picker.sync="activePickerIssue"
           ></v-date-picker>
         </v-menu>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Срок действия</p>
         <v-menu
-          :close-on-content-click="true"
+          :close-on-content-click="isActivePickerValidity()"
           transition="scale-transition"
           offset-y
           min-width="auto"
@@ -167,6 +168,7 @@
             v-model="currentData.validity"
             :min="currentData.date_issue"
             @input="passportIssueDateMenu = false"
+            :active-picker.sync="activePickerValidity"
           ></v-date-picker>
         </v-menu>
       </div>
@@ -195,13 +197,17 @@ export default {
     currentData: {
       placeOfBirth: null,
       typeDocumnet: null,
-      account_datebirth: null
+      account_datebirth: null,
+      date_issue: '',
+      validity: '',
     },
     account_datebirth: null,
     dateStarting: null,
     dateEnd: null,
     test: [],
     activePicker: null,
+    activePickerIssue: null,
+    activePickerValidity: null,
     date: null,
     menu: false,
     requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -245,6 +251,18 @@ export default {
     },
     isActivePicker () {
       if (this.currentData.account_datebirth !=='' && this.activePicker === 'DATE') {
+        return true
+      }
+      return false
+    },
+    isActivePickerIssue () {
+      if (this.currentData.date_issue !=='' && this.activePickerIssue === 'DATE') {
+        return true
+      }
+      return false
+    },
+    isActivePickerValidity () {
+      if (this.currentData.validity !=='' && this.activePickerValidity === 'DATE') {
         return true
       }
       return false

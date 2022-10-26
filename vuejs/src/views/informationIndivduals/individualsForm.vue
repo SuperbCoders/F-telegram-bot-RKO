@@ -2,89 +2,45 @@
   <div class="individuals_form">
     <v-form ref="form" v-model="valid" lazy-validation>
       <p class="text-left form_block_title">Роль лица</p>
-      <v-checkbox
-        label="Руководитель"
-        v-model="currentData.account_onw_role"
-        value="Руководитель"
-        hide-details
-      >
-      </v-checkbox>
-      <v-checkbox
-        v-model="currentData.account_onw_founder"
-        label="Учредитель"
-        value="Учредитель"
-        hide-details
-      ></v-checkbox>
-      <v-checkbox
-        v-model="currentData.account_onw_role"
-        label="Бенефированый владелец"
-        value="Бенефированый владелец"
-        hide-details
-      >
-      </v-checkbox>
-      <v-checkbox
-        v-model="currentData.account_onw_role"
-        label="Подписант"
-        value="Подписант"
-        hide-details
-      ></v-checkbox>
-      <p
-        v-if="!valid && currentData.account_onw_role.length < 1"
-        class="error_message"
-      >
+      <div class="checkboxs">
+        <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
+        </v-checkbox>
+        <v-checkbox v-model="currentData.account_onw_founder" label="Учредитель" value="Учредитель" hide-details>
+        </v-checkbox>
+        <v-checkbox v-model="currentData.account_onw_role" label="Бенефированый владелец" value="Бенефированый владелец"
+          hide-details>
+        </v-checkbox>
+        <v-checkbox v-model="currentData.account_onw_role" label="Подписант" value="Подписант" hide-details>
+        </v-checkbox>
+      </div>
+
+      <p v-if="!valid && currentData.account_onw_role.length < 1" class="error_message">
         Выберите пункт
       </p>
       <div class="form_block mt-5">
         <p class="text-left form_block_title">Фамилия</p>
-        <v-text-field
-          id="oldName"
-          v-model="currentData.account_own_lastname"
-          placeholder="Введите Фамилию"
-          class="align-center border-none"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        >
+        <v-text-field id="oldName" v-model="currentData.account_own_lastname" placeholder="Введите Фамилию"
+          class="align-center border-none" outlined :rules="requiredRules" :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Имя</p>
-        <v-text-field
-          id="oldName"
-          v-model="currentData.account_own_name"
-          placeholder="Введите Имя"
-          class="align-center border-none"
-          outlined
-          :rules="requiredRules"
-          :required="true"
-        ></v-text-field>
+        <v-text-field id="oldName" v-model="currentData.account_own_name" placeholder="Введите Имя"
+          class="align-center border-none" outlined :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Отчество (при наличии)</p>
-        <v-text-field
-          id="oldName"
-          v-model="currentData.account_own_surname"
-          placeholder="Введите Отчество"
-          class="align-center border-none"
-          outlined
-          :required="true"
-        ></v-text-field>
+        <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Введите Отчество"
+          class="align-center border-none" outlined :required="true"></v-text-field>
       </div>
-      <v-radio-group v-model="currentData.account_own_gender" mandatory>
+      <v-radio-group v-model="currentData.account_own_gender" mandatory class="checkboxs">
         <p class="text-left form_block_title">Пол</p>
         <v-radio label="Мужской" value="Мужской"></v-radio>
         <v-radio label="Женский" value="Женский"> </v-radio>
       </v-radio-group>
     </v-form>
 
-    <v-btn
-      block
-      large
-      :disabled="!valid"
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить
+    <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
 </template>
@@ -107,13 +63,13 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        if(this.$route.query?.type === 'SupervisoryBoard') {
-          this.$store.commit("setSupervisoryBoardPersone", {key: "page-1", value: this.currentData});
-        }else if(this.$route.query?.type === 'CollegialExecutive') {
-          this.$store.commit("setCollegialExecutiveBody", {key: "page-1", value: this.currentData});
+        if (this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", { key: "page-1", value: this.currentData });
+        } else if (this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", { key: "page-1", value: this.currentData });
         }
-        
-        this.$router.push({path:"/documents-forms", query: this.$route.query});
+
+        this.$router.push({ path: "/documents-forms", query: this.$route.query });
       }
     },
   },
@@ -129,5 +85,8 @@ export default {
   margin-left: 10px;
   margin-top: 10px;
   font-size: 12px !important;
+}
+.checkboxs label {
+  color: #323E48 !important;
 }
 </style>

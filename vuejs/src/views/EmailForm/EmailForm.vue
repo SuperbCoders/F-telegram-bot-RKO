@@ -3,7 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Почтовый адрес</p>
-        <v-radio-group v-model="isAddress" mandatory>
+        <v-radio-group v-model="isAddress" mandatory class="checkboxs">
           <v-radio
             label="Совпадает с адресом регистации"
             value="Совпадает с адресом регистации"

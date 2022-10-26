@@ -30,7 +30,7 @@
           <span class="white--text"> Выбрано </span>
 
           <v-icon large color="white" class="ml-2" style="font-size: 20px">
-            mdi-check-bold
+            mdi-check
           </v-icon>
         </v-btn>
         <v-btn
@@ -69,7 +69,7 @@
           <span class="white--text"> Выбрано </span>
 
           <v-icon large color="white" class="ml-2" style="font-size: 20px">
-            mdi-check-bold
+            mdi-check
           </v-icon>
         </v-btn>
         <v-btn
@@ -108,7 +108,7 @@
           <span class="white--text"> Выбрано </span>
 
           <v-icon large color="white" class="ml-2" style="font-size: 20px">
-            mdi-check-bold
+            mdi-check
           </v-icon>
         </v-btn>
         <v-btn

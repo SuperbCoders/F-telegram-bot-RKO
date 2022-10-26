@@ -45,6 +45,7 @@
         <p class="text-left form_block_title">
           Наименование наблюдательного совета
         </p>
+        <div class="title_btn">Члены наблюдательного совета</div>
         <v-text-field
             id="oldName"
             placeholder="Наименование"
@@ -64,7 +65,7 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
-          <div class="title_btn">Члены наблюдательного совета</div>
+          
           <div class="contain_btn_add">
             <v-btn
               large
@@ -106,6 +107,7 @@
           :rules="requiredRules"
           :required="true"
         ></v-text-field>
+        <div class="title_btn">Члены коллегиального исполнительного органа</div>
         <v-card
             elevation="2"
             class="pa-4 mb-2"
@@ -115,7 +117,7 @@
             {{ val['page-1'].account_own_name }}
             {{ val['page-1'].account_own_surname }}
           </v-card>
-          <div class="title_btn">Члены коллегиального исполнительного органа</div>
+          
           <div class="contain_btn_add">
             <v-btn
               large
@@ -157,18 +159,16 @@ export default {
     valid: true,
     listCompany: [],
     currentData: {
-      supreme_management_body: null,
+      supreme_management_body: "Единственный участник (один участник с долей 100%)",
       supreme_management_type: null,
       supreme_management_inn: null,
-      supreme_management_person: null,
-      is_collegiate_body: true,
+      supreme_management_person: "Руководитель",
+      is_collegiate_body: false,
       supervisory: "",
       supervisotyBoardPersone_name: "",
-      is_supervisoty: true,
+      is_supervisoty: false,
       collegiate_person: null,
     },
-    isTest1: false,
-    isTest2: false,
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -284,7 +284,7 @@ export default {
 }
 .form_block_title {
   font-size: 12px;
-  width: 200px;
+  width: 300px;
 }
 .form_block_label {
   font-family: Roboto;
