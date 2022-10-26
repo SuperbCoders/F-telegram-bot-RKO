@@ -9,7 +9,7 @@
 </template>
 <script>
 
-import { getAddress } from '../api/getAddress';
+import { getAddress } from '../api/GetAddress';
 
 export default {
     props: {
