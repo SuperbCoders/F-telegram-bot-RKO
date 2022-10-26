@@ -25,7 +25,7 @@
           <v-checkbox :rules="requiredRules">
             <template v-slot:label>
               <div class="text-left auth_form_link_container">
-                <span>Я ознакомился и согласен с условиями</span>
+                <span class="black--text">Я ознакомился и согласен с условиями </span>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <a
@@ -37,7 +37,8 @@
                     >
                       обработки и хранения персональных данных
                     </a>
-                    а также с условиями
+                    <span class="black--text"> а также с условиями </span>
+                    
                     <a
                       target="_blank"
                       class="text-decoration-none text-left"
@@ -45,7 +46,8 @@
                       v-on="on"
                       @click.stop
                     >
-                      резервирования счета,
+                    <span>резервирования счета,</span>
+                      
                     </a>
                   </template>
                 </v-tooltip>

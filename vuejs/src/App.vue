@@ -63,6 +63,9 @@ input, p, label, .v-list-item__title, .v-select__selection, .v-label {
   font-size: 14px !important;
   font-family: 'Roboto' !important;
 }
+.v-btn {
+  letter-spacing: none;
+}
 .v-label {
   color: #b6b4b4 !important;
 }
