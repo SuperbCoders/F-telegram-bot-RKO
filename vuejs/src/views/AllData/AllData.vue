@@ -147,7 +147,7 @@ export default {
       return "";
     },
     closeAll(){
-      window.location.href = "tg:resolve";
+      window.Telegram.WebApp.close();
     },
     isTitle(element) {
       switch (element) {
