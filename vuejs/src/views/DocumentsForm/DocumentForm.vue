@@ -9,7 +9,7 @@
           v-mask="'### ### ### ###'"
           masked="true"
           placeholder="Введите ИНН" class="align-center border-none" outlined
-          :rules="innRules" :required="true">
+          :rules="innRules">
 
         </v-text-field>
       </div>
@@ -19,7 +19,7 @@
         v-mask="'### ### ### ##'"
         masked="true"
         v-model="currentData.account_own_snils" placeholder="СНИЛС" class="align-center border-none" outlined
-         :required="true">
+        >
         </v-text-field>
       </div>
       <div class="form_block">
@@ -67,9 +67,8 @@ export default {
       },
       requiredRules: [(v) => !!v || "Это поле обязательно"],
       innRules: [
-      (v) => !!v || "Это поле обязательно",
       (v) =>
-        (v && v.length >= 13) || "ИНН не может содержать меньше 10 симоволов",
+        ((v && v.length >= 13) || !v || v.length == 0) || "ИНН не может содержать меньше 10 симоволов",
     ],
     }
   },

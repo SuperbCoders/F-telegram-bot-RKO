@@ -64,7 +64,6 @@
           masked="true"
           v-model="currentData.doc_serial"
           outlined
-          :required="true"
         ></v-text-field>
       </div>
       <div class="form_block">
@@ -107,7 +106,6 @@
           v-mask="'###-###'"
           masked="true"
           outlined
-          :required="true"
         ></v-text-field>
       </div>
       <div class="form_block">

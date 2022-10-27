@@ -31,7 +31,7 @@
       <div class="form_block">
         <p class="text-left form_block_title">Отчество (при наличии)</p>
         <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Введите Отчество"
-          class="align-center border-none" outlined :required="true"></v-text-field>
+          class="align-center border-none" outlined></v-text-field>
       </div>
       <v-radio-group v-model="currentData.account_own_gender" mandatory class="checkboxs">
         <p class="text-left form_block_title">Пол</p>
