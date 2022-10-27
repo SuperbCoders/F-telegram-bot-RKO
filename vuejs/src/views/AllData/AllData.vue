@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="700">
-      <v-card>
-        <v-card-text class="pa-5">
+    <v-dialog v-model="dialog" width="700" >
+      <v-card @click="closeAll()">
+        <v-card-text class="pa-5" >
           <div style="text-align: center">
             <v-icon large color="pink darken-1" style="font-size: 100px">
               mdi-check-circle-outline
@@ -145,6 +145,9 @@ export default {
         return "";
       }
       return "";
+    },
+    closeAll(){
+      window.location.href = "tg:resolve";
     },
     isTitle(element) {
       switch (element) {
