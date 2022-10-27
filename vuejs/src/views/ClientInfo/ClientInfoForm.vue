@@ -223,7 +223,6 @@ export default {
       // let isStatusFogeiner = this.$store.state.isForegin;
       const isStatusFogeiner =
         this.$store.state?.supervisoryBoardPersone?.['page-3']?.assigned_publ_pers_relation;
-        console.log(this.$store.state?.supervisoryBoardPersone?.['page-3']?.assigned_publ_pers_relation);
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         if(this.$route.query?.type === 'SupervisoryBoard') {
@@ -244,10 +243,7 @@ export default {
     // },
     isDate() {
       const year = new Date().getFullYear() - 18;
-      console.log(year);
       return `${year}-12-31`;
-      // console.log(this.toJSONLocal(year));
-      // console.log(year, month, day)
     },
     isActivePicker () {
       if (this.currentData.account_datebirth !=='' && this.activePicker === 'DATE') {

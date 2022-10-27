@@ -67,14 +67,12 @@ import { getLicense } from '../../api/getLicense';
 export default {
   async mounted() {
     const data = await getLicense();
-    console.log(data);
     this.currentData.licence_type = data.view;
     this.currentData.licence_number = data.number;
     this.currentData.licence_issued_by = data.Issued_by;
     this.currentData.licence_date_issue = data.License_issue_date;
     this.currentData.licenced_validity = data.Validity;
     this.currentData.licenced_activity = data.List_types_licensed_activities;
-    console.log(this.currentData);
     this.$store.dispatch('addObjectFormData', {
       object: 'step_13',
       value: this.currentData

@@ -1,8 +1,9 @@
 <template>
-    <v-combobox label="Введите ИНН или название компании" outlined
+    <v-combobox label="Введите ИНН или наименование компании" outlined
        required 
         class="mt-1 auth_form combobox"
         :value="value"
+        @input="emitData"
         @keyup="getListCompanyFromName" 
         :items="list"
         >
@@ -34,7 +35,6 @@ export default {
             } else {
                 this.list = data.suggestions.map((elem) => `${elem.value}, ${elem.data?.address?.unrestricted_value}`);
             }
-            this.$emit("input", value);
         },
 
         emitData(e){

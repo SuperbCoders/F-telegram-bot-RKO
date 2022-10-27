@@ -7,7 +7,7 @@
         </v-checkbox>
         <v-checkbox v-model="currentData.account_onw_founder" label="Учредитель" value="Учредитель" hide-details>
         </v-checkbox>
-        <v-checkbox v-model="currentData.account_onw_role" label="Бенефированый владелец" value="Бенефированый владелец"
+        <v-checkbox v-model="currentData.account_onw_role" label="Бенефициарный владелец" value="Бенефициарный владелец"
           hide-details>
         </v-checkbox>
         <v-checkbox v-model="currentData.account_onw_role" label="Подписант" value="Подписант" hide-details>

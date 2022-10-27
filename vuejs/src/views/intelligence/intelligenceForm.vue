@@ -72,7 +72,6 @@ export default {
           value: this.currentData
         })
         const data = await getLicense();
-        console.log(data);
         
         const store = {};
         

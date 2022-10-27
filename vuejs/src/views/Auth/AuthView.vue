@@ -10,17 +10,10 @@
     </div>
     <div class="auth_form mt-12">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <InnAndNameInput v-model="currentData.inn" />
-        <v-text-field
-          label="Контактный номер телефона"
-          outlined
-          v-model="currentData.contact_number"
-          :rules="requiredRules"
-          :required="true"
-          v-mask="'+# (###) ### ## ##'"
-          masked="true"
-          class="mt-1 auth_form"
-        ></v-text-field>
+        <InnAndNameInput :value="inn_or_name" @input="getInnAndNameComnany" />
+        <v-text-field label="Контактный номер телефона" outlined v-model="currentData.contact_number"
+          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
+        </v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
           <v-checkbox :rules="requiredRules">
             <template v-slot:label>
@@ -28,26 +21,15 @@
                 <span class="black--text">Я ознакомился и согласен с условиями </span>
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <a
-                      target="_blank"
-                      class="text-decoration-none"
-                      href="https://vuetifyjs.com"
-                      v-on="on"
-                      @click.stop
-                    >
+                    <a target="_blank" class="text-decoration-none" href="https://vuetifyjs.com" v-on="on" @click.stop>
                       обработки и хранения персональных данных
                     </a>
                     <span class="black--text"> а также с условиями </span>
-                    
-                    <a
-                      target="_blank"
-                      class="text-decoration-none text-left"
-                      href="https://vuetifyjs.com"
-                      v-on="on"
-                      @click.stop
-                    >
-                    <span>резервирования счета,</span>
-                      
+
+                    <a target="_blank" class="text-decoration-none text-left" href="https://vuetifyjs.com" v-on="on"
+                      @click.stop>
+                      <span>резервирования счета,</span>
+
                     </a>
                   </template>
                 </v-tooltip>
@@ -55,15 +37,8 @@
             </template>
           </v-checkbox>
         </div>
-        <v-btn
-          block
-          large
-          :disabled="!valid"
-          class="mt-10 auth_form_bth"
-          color="primary"
-          @click="validate"
-          >Продолжить</v-btn
-        >
+        <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+        </v-btn>
       </v-form>
     </div>
   </div>
@@ -82,6 +57,7 @@ export default {
       company_name: null,
       contact_number: null,
     },
+    inn_or_name: '',
     listCompany: [],
     valid: true,
     name: "",
@@ -140,12 +116,28 @@ export default {
     async getListCompanyFromName(e) {
       const value = e.target.value;
       const data = await getCompanyName(value);
-      this.listCompany = data.suggestions.map((elem)=> `${elem.value}, ${elem.data?.address?.unrestricted_value}`);
+      this.listCompany = data.suggestions.map((elem) => `${elem.value}, ${elem.data?.address?.unrestricted_value}`);
     },
     async getCompanyFromName() {
       const data = await getCompanyName(this.currentData.company_name.split(',')[0]);
-      if(data.suggestions.length === 1) {
+      if (data.suggestions.length === 1) {
         this.currentData.inn = data.suggestions[0].data.inn
+      }
+    },
+    async getInnAndNameComnany(input) {
+      this.inn_or_name = input;
+      if (input.match(/^\d+/)) {
+        const data = await getCompanyInn(input);
+        this.currentData.inn = input;
+        if (data.suggestions.length > 0) {
+          this.currentData.company_name = data.suggestions[0].value;
+        }
+      } else {
+        const data = await getCompanyInn(input.split(',')[0]);
+        this.currentData.company_name = input;
+        if (data.suggestions.length > 0) {
+          this.currentData.inn = data.suggestions[0].data.inn;
+        }
       }
     }
   },
@@ -159,18 +151,21 @@ export default {
 .auth_title_block {
   margin-top: 30px;
 }
-.auth_title {
-}
+
+.auth_title {}
+
 .auth_form {
   border-radius: 8px;
   font-family: face;
 }
+
 .auth_form_bth {
   border-radius: 10px;
   text-transform: capitalize;
   font-size: 14px;
   font-weight: 400;
 }
+
 .auth_form_link_container {
   font-size: 14px;
 }

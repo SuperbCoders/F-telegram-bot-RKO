@@ -15,8 +15,8 @@
       ></v-checkbox>
       <v-checkbox
         v-model="currentData.account_onw_role"
-        label="Бенефированый владелец"
-        value="Бенефированый владелец"
+        label="Бенефициарный владелец"
+        value="Бенефициарный владелец"
         hide-details
       >
       </v-checkbox>

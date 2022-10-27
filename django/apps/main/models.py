@@ -125,10 +125,10 @@ class LoanRequest(models.Model):
     employers_volume = models.CharField(max_length=MAX_STRING_LENGTH)
     salary_debt = models.BigIntegerField()
 
-    company_group_name = models.CharField(max_length=MAX_STRING_LENGTH)
-    start_date = models.DateField()
-    end_date = models.DateField()
-    group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH)
+    company_group_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
     
     beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     

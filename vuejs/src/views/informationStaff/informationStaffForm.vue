@@ -13,27 +13,30 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">Дата начала действия</p>
-        <v-menu :close-on-content-click="true" transition="scale-transition" offset-y min-width="auto">
+        <v-menu :close-on-content-click="isActiveStartDate()" transition="scale-transition" offset-y min-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate" outlined
               append-icon="mdi-calendar-blank" readonly @click="currentData.end_date = ''"
               v-model="currentData.start_date" :rules="requiredRules" :required="true" v-bind="attrs" v-on="on">
             </v-text-field>
           </template>
-          <v-date-picker v-model="currentData.start_date" @input="passportIssueDateMenu = false"></v-date-picker>
+          <v-date-picker v-model="currentData.start_date" :active-picker.sync="activePickerStartDate"
+            @input="passportIssueDateMenu = false"></v-date-picker>
         </v-menu>
       </div>
       <div class="form_block mb-5">
         <p class="text-left form_block_title">Дата окончания действия</p>
-        <v-menu :close-on-content-click="true" transition="scale-transition" offset-y min-width="auto">
+
+        <v-menu :close-on-content-click="isActiveEndDate()" transition="scale-transition" offset-y min-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate"
               append-icon="mdi-calendar-blank" outlined readonly v-model="currentData.end_date" :rules="requiredRules"
               :required="true" v-bind="attrs" v-on="on"></v-text-field>
           </template>
           <v-date-picker v-model="currentData.end_date" :min="currentData.start_date"
-            @input="passportIssueDateMenu = false"></v-date-picker>
+            :active-picker.sync="activePickerEndDate" @input="passportIssueDateMenu = false"></v-date-picker>
         </v-menu>
+
       </div>
       <h3 class="text-left structure_group_label mb-10">
         Состав группы компаний
@@ -41,10 +44,10 @@
       <div v-for="(itemForm, index) in currentData.group_members" :key="index" class="form_input_block">
         <div class="form_block">
           <p class="text-left form_block_title">Наименование компании или ИНН</p>
-          <InnAndNameInput :value="itemForm.name" @input="(e)=>{
-              itemForm.name = e; 
-              inputName(itemForm);
-            }
+          <InnAndNameInput :value="itemForm.name" @input="(e) => {
+            itemForm.name = e;
+            inputName(itemForm);
+          }
           " />
         </div>
         <div class="form_block">
@@ -93,7 +96,10 @@ export default {
           ogrn: null,
         },
       ],
+
     },
+    activePickerEndDate: null,
+    activePickerStartDate: null,
     innRules: [
       (v) => !!v || "Это поле обязательно",
       (v) =>
@@ -117,12 +123,21 @@ export default {
     },
     async inputName(itemForm) {
       const name = itemForm.name;
-      const data = await getCompanyInn(name);
-      if(data.suggestions.length > 0){
-        const ogrn = data.suggestions[0]?.data?.ogrn;
-        itemForm.ogrn = ogrn;
+      if (name.match(/^\d+/)) {
+        const data = await getCompanyInn(name);
+        if (data.suggestions.length > 0) {
+          const ogrn = data.suggestions[0]?.data?.ogrn;
+          itemForm.ogrn = ogrn;
+        }
+      } else {
+        const data = await getCompanyInn(name.split(',')[0]);
+        if (data.suggestions.length > 0) {
+          const ogrn = data.suggestions[0]?.data?.ogrn;
+          itemForm.ogrn = ogrn;
+        }
       }
-      
+
+
     },
     skip() {
       this.$router.push("/intelligence");
@@ -139,6 +154,18 @@ export default {
       if (this.currentData.group_members.length > 1) {
         this.currentData.group_members.pop();
       }
+    },
+    isActiveEndDate() {
+      if (this.currentData.end_date !== '' && this.activePickerEndDate === 'DATE') {
+        return true
+      }
+      return false
+    },
+    isActiveStartDate() {
+      if (this.currentData.start_date !== '' && this.activePickerStartDate === 'DATE') {
+        return true
+      }
+      return false
     },
   },
   components: {

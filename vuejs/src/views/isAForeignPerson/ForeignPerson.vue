@@ -41,7 +41,12 @@ export default {
         }else if(this.$route.query?.type === 'CollegialExecutive') {
           this.$store.commit("setCollegialExecutiveBody", {key: "page-3", value: this.currentData});
         }
-        this.$router.push({path:"/kinship-status-forms", query: this.$route.query});
+        if(this.currentData.is_person_a_foreign_public === 'Да') {
+          this.$router.push({path:"/kinship-status-forms", query: this.$route.query});
+        } else {
+          this.$router.push({path:"/address-form", query: this.$route.query});
+        }
+        
 
       }
     },

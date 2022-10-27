@@ -59,11 +59,15 @@
                             <div v-else-if="isArray(val)" class="form_block_title d-block">
                                 <div v-for="(val2, name2) in val" :key="name2">
                                     <div v-if="isObject(val2)">
+
+
                                         <div v-for="(val3, key) in item" :key="key">
                                             <div v-if="val3">
                                                 {{ isTitle(key) }} => {{ val3 }}
                                             </div>
                                         </div>
+                                    
+                                    
                                     </div>
                                     <p class="d-flex" v-else>- {{ val2 }}</p>
 

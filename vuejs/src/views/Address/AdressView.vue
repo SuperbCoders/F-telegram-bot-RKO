@@ -43,18 +43,7 @@
         </p>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
-          <v-text-field
-            id="oldName"
-            placeholder="Напишите адрес"
-            class="align-center border-none"
-            v-model="itemForm.address"
-            @change="isTypeAdress(itemForm)"
-            name="oldName"
-            outlined
-            :rules="requiredRules"
-            :required="true"
-          >
-          </v-text-field>
+          <AddressInput label="Введите адрес" v-model="itemForm.address"  />
         </div>
         <div class="form_block">
           <p class="text-left form_block_title">Основание</p>
@@ -102,6 +91,7 @@
 
 <script>
 import LineStep from "../../components/line_step/line_step.vue";
+import AddressInput from '../../components/addressInput.vue';
 
 export default {
   data() {
@@ -190,7 +180,7 @@ export default {
     },
   },
   computed: {},
-  components: { LineStep },
+  components: { LineStep, AddressInput },
 };
 </script>
 

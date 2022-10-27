@@ -31,45 +31,64 @@
         </div>
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
-        <hr>
-          <div v-for="(item, index) in step" :key="index" class="all_data_table-row mt-1">
-
-            <div class="d-flex data1_table_block mt-5">
-              <div class="data_table_block" v-if="item">
-                <p class="form_block_title">
-                  {{ isTitle(index) }}
-                </p>
-              </div>
-              <div class="data_table_block" v-if="item">
-                <div v-if="isArray(item)" class="form_block_title d-block">
-                  <div v-for="(sub_item, sub_index) in item" :key="sub_index">
-                    <div v-if="isObject(sub_item)">
-                      <div v-for="(val, key) in sub_item" :key="key">
-                        <div>
-                          {{ isTitle(key) }} =>
-                          <p v-if="!isObject(val)">{{ val }}</p>
-                        </div>
-                        <div v-if="isObject(val)">
-                          <div v-for="(elementObject, indexObject) in val" :key="indexObject">
-                            - {{ elementObject }}
-                          </div>
+        <hr class="mt-2 mb-2">
+        <div v-for="(item, index) in step" :key="index" class="mt-1">
+          <div v-if="item || item === 0">
+            <div v-if="isArray(item)">
+              <p class="d-flex title-table form_block_title" v-if="item.length > 0">
+                {{ isTitle(index) }}
+              </p>
+              <div v-for="(sub_item, sub_index) in item" :key="sub_index">
+                <div v-if="isObject(sub_item)">
+                  <div v-for="(val, key) in sub_item" :key="key">
+                    <div class="d-flex" v-if="val">
+                      <div class="form_block_title w-50 pt-2 pb-2">
+                        {{ isTitle(key) }}
+                      </div>
+                      <div class="w-50 pt-2 pb-2">
+                        <div v-if="!isObject(val)" class="form_block_title">{{ val }}</div>
+                      </div>
+                      
+                    </div>
+                    <div class="block_right">
+                      <div v-if="isObject(val)">
+                        <div v-for="(elementObject, indexObject) in val" :key="indexObject" class="form_block_title">
+                          - {{ elementObject }}
                         </div>
                       </div>
                     </div>
-                    <p class="d-flex" v-else>- {{ sub_item }}</p>
                   </div>
                 </div>
-                <p class="text-left form_block_title" v-else-if="typeof item == 'boolean'">
-                  <span v-if="item">Да</span>
-                  <span v-else>Нет</span>
-                </p>
-                <p class="text-left form_block_title" v-else>
-                  {{ item }}
-                </p>
-                <div v-if="typeof item === 'object' && !Array.isArray(item)"></div>
+                <div v-else class="block_right">
+                  <div class="form_block_title">- {{ sub_item }}</div>
+                </div>
               </div>
             </div>
+            <div class="d-flex" v-else-if="typeof item == 'boolean'">
+              <p class="form_block_title w-50">
+                {{ isTitle(index) }}
+              </p>
+              <div class="form_block_title w-50">
+                <div>
+                  <span v-if="item">Да</span>
+                  <span v-else>Нет</span>
+                </div>
+                
+              </div>
+              
+            </div>
+            <div class="d-flex" v-else>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(index) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ item }}
+              </div>
+
+            </div>
           </div>
+
+        </div>
 
 
       </div>
@@ -92,13 +111,18 @@ export default {
     async sendData() {
       // this.$store.commit("IsFormData");
       this.FormData = new FormData();
-      this.FormData.append("test", 1);
+      const formData = this.getFormData
+      let fullData = {};
+      for(const step in formData) {
+        const obj = formData[step];
+        fullData = Object.assign(fullData, obj);
+      }
       await fetch("https://rko-bot.spaaace.io/api/loan-application/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
         },
-        body: JSON.stringify({}),
+        body: JSON.stringify(fullData),
       });
       this.dialog = true;
     },
@@ -239,7 +263,7 @@ export default {
         case "contact_number":
           return "Номер телефона";
         case "inn":
-          return "ИНН или наименование компании";
+          return "ИНН";
         case "addresses":
           return "Адрес";
         case "supreme_management_person":
@@ -277,9 +301,13 @@ export default {
         case "supervisory":
           return "Наименование наблюдательного совета";
         case "is_collegiate_body":
-          return "Наименование наблюдательного совета";
+          return "Наличие наблюдательного совета";
         case "operation_sum":
           return "Сумма операций по безналичным платежам в месяц";
+        case "listCollegialExecutiveBody":
+          return "Члены коллегиального исполнительного органа";
+        case "listSupervisotyBoardPersone":
+          return "Члены наблюдательного совета";
         default:
           return element;
       }
@@ -293,7 +321,10 @@ export default {
   },
   computed: {
     getFormData() {
-      return this.$store.state.formData;
+      let formData = Object.assign({}, this.$store.state.formData)
+
+
+      return formData;
     }
 
     // isValueString (value) {
@@ -339,6 +370,22 @@ export default {
   justify-content: flex-start;
   padding-right: 15px;
   box-sizing: border-box;
+}
+
+.w-50 {
+  width: 50%;
+}
+.title-table {
+  font-size: 14px !important;
+  padding-top: 4px;
+}
+.block_right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.block_right>* {
+  width: 50%;
 }
 
 .all_data_table-row {}

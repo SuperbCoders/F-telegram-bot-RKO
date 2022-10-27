@@ -45,7 +45,7 @@
         <p class="text-left form_block_title">
           Наименование наблюдательного совета
         </p>
-        <div class="title_btn">Члены наблюдательного совета</div>
+      
         <v-text-field
             id="oldName"
             placeholder="Наименование"
@@ -56,6 +56,7 @@
             :rules="requiredRules"
             :required="true"
           ></v-text-field>
+          <div class="title_btn">Члены наблюдательного совета</div>
           <v-card
             elevation="2"
             class="pa-4 mb-2"
@@ -168,6 +169,8 @@ export default {
       supervisotyBoardPersone_name: "",
       is_supervisoty: false,
       collegiate_person: null,
+      listCollegialExecutiveBody : [],
+      listSupervisotyBoardPersone: [],
     },
     innRules: [
       (v) => !!v || "Это поле обязательно",
@@ -182,6 +185,15 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
+        this.currentData.listCollegialExecutiveBody = this.listCollegialExecutiveBody.map((item)=>{
+          const page = item['page-1'];
+          return `${page.account_own_lastname} ${page.account_own_name} ${page.account_own_surname}`;
+        });
+        this.currentData.listSupervisotyBoardPersone = this.listSupervisotyBoardPersone.map((item)=>{
+          const page = item['page-1'];
+          return `${page.account_own_lastname} ${page.account_own_name} ${page.account_own_surname}`;
+        })
+
 
         this.$store.dispatch("addObjectFormData", {
           object: "step_3",
