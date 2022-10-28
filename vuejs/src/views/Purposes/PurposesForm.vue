@@ -4,9 +4,9 @@
       Сведения о целях установления деловых отношений с банком
     </h4>
     <div @click="valid = true" class="form_block">
-      <v-checkbox label="Рассчетно-кассовое обслуживание" value="Расчетно-кассовое обслуживание"
+      <v-checkbox label="Расчетно-кассовое обслуживание" value="Расчетно-кассовое обслуживание"
         v-model="currentData.account_operations" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Дистанционное обслуживание" value="Дистанционное обслуживание" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.account_operations" label="Дистанционное банковское обслуживание" value="Дистанционное банковское обслуживание" hide-details></v-checkbox>
       <v-checkbox label="Внешнеэкономические операции" value="Внешнеэкономические операции" v-model="currentData.account_operations" hide-details>
       </v-checkbox>
       <v-checkbox v-model="currentData.account_operations" label="Интернет-эквайринг" value="Интернет-эквайринг" hide-details></v-checkbox>

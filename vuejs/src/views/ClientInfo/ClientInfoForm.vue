@@ -98,7 +98,7 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
-          Код подзразделения (при наличии)
+          Код подразделения (при наличии)
         </p>
         <v-text-field
           id="oldName"

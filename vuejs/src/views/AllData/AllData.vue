@@ -311,7 +311,7 @@ export default {
         case "account_own_snils":
           return "СНИЛС";
         case "account_operations":
-          return "Рассчетно касовое обслуживание";
+          return "Расчетно-кассовое обслуживание";
         case "accownt_own_living":
           return "Адрес проживания";
         case "assigned_publ_pers_registraion":

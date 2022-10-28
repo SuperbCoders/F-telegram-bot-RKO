@@ -4,7 +4,7 @@
     <div class="form_block mt-5 ">
       <p class="form_block_title">Имеются ли Выгодоприобретатели</p>
       <v-radio-group mandatory v-model="currentData.beneficiaries" column class="checkboxs">
-        <v-radio label="Отсуствуют" value="Отсуствуют"></v-radio>
+        <v-radio label="Отсутствуют" value="Отсутствуют"></v-radio>
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
     </div>

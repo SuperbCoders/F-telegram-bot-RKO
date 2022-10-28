@@ -4,12 +4,12 @@
       <div class="form_block">
         <p class="text-left form_block_title">Почтовый адрес</p>
         <v-radio-group v-model="isAddress" mandatory class="checkboxs">
-          <v-radio label="Совпадает с адресом регистации" value="Совпадает с адресом регистации"></v-radio>
+          <v-radio label="Совпадает с адресом регистрации" value="Совпадает с адресом регистрации"></v-radio>
           <v-radio label="Совпадает с адресом проживания" value="Совпадает с адресом проживания"></v-radio>
-          <v-radio label="Не совпадает с адресом регистации и адресом проживания"
-            value="Не совпадает с адресом регистации и адресом проживания"></v-radio>
+          <v-radio label="Не совпадает с адресом регистрации и адресом проживания"
+            value="Не совпадает с адресом регистрации и адресом проживания"></v-radio>
         </v-radio-group>
-        <div v-if="isAddress === 'Не совпадает с адресом регистации и адресом проживания'">
+        <div v-if="isAddress === 'Не совпадает с адресом регистрации и адресом проживания'">
           <p class="form_block_title">
             <span class="star">*</span>
             Адрес фактического проживания
@@ -42,11 +42,11 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        if (this.isAddress === 'Совпадает с адресом регистации') {
+        if (this.isAddress === 'Совпадает с адресом регистрации') {
           this.currentData.account_own_mail = this.$store.state.result.account_own_registration
         } else if (this.isAddress === 'Совпадает с адресом проживания') {
           this.currentData.account_own_mail = this.$store.state.result.accownt_own_living
-        } else if (this.isAddress === 'Не совпадает с адресом регистации и адресом проживания') {
+        } else if (this.isAddress === 'Не совпадает с адресом регистрации и адресом проживания') {
           this.currentData.account_own_mail = this.address
         }
         if (this.$route.query?.type === 'SupervisoryBoard') {
