@@ -178,23 +178,29 @@ async def status(update, context):
     status_list = []
     print(user_applications)
     if user_applications:
-        status_list = [
-            (
-                f"Номер заявки: {random.randint(100000, 999999)}\n" +
-                f"Дата заявки {status['createdAt'].split('T')[0]}\n" +
-                f"Тип - открытие счета\n" +
-                f"Компания:\n"+
-                f"    - Имя: {status['companyName']}\n" +
-                f"    - ИНН: {status['inn']}\n" +
-                f"    - ОГРН: {random.randint(100000, 999999)}\n" +
-                f"Cтатус заявки - {status['status']}\n" +
-                (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') + 
-                (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') +
-                (f"Дата открытия {date.today().strftime('%Y-%m-%d')}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') +
-                (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
-            )
-            for i, status in enumerate(user_applications, start=1)
-        ]
+        status_list = []
+        for i, status in enumerate(user_applications, start=1):
+            mess = ""
+            mess += f"Номер заявки: {random.randint(100000, 999999)}\n"
+            mess += f"Дата заявки {status['createdAt'].split('T')[0]}\n"
+            mess += f"Тип - открытие счета\n"
+            mess += f"Компания:\n"
+            mess += f"    - Имя: {status['companyName']}\n"
+            mess += f"    - ИНН: {status['inn']}\n"
+            mess += f"    - ОГРН: {random.randint(100000, 999999)}\n"
+            if status['status'] == 'under_review':
+                mess += f"Cтатус заявки - На рассмотрении\n"
+            elif status['status'] == 'declined':
+                mess += f"Cтатус заявки - Отклонена\n"
+            elif status['status'] == 'approved':
+                mess += f"Cтатус заявки - Одобрена\n"
+            elif status['status'] == 'update':
+                mess += f"Cтатус заявки - Доработка заявки\n"
+            mess += (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+            mess += (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+            mess += (f"Дата открытия {date.today().strftime('%Y-%m-%d')}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+            mess += (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')            
+            
         text = "\n\n".join(status_list)
     else:
         text = "Заявок не найдено."
