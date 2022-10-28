@@ -199,7 +199,8 @@ async def status(update, context):
             mess += (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
             mess += (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
             mess += (f"Дата открытия {date.today().strftime('%Y-%m-%d')}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
-            mess += (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')            
+            mess += (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+            status_list.append(mess)         
             
         text = "\n\n".join(status_list)
     else:
