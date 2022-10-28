@@ -46,18 +46,18 @@ class TariffPlan(models.Model):
 
 class LoanRequest(models.Model):
     STATUS_CHOICES = [
-        ("under_review", "На рассмотрении"),
-        ("declined", "Отклонена"),
-        ("approved", "Одобрена"),
-        ("update", "Доработка заявки")
+        ("На рассмотрении", "На рассмотрении"),
+        ("Отклонена", "Отклонена"),
+        ("Одобрена", "Одобрена"),
+        ("Доработка заявки", "Доработка заявки")
     ]
     status = models.CharField(max_length=140,
                               choices=STATUS_CHOICES,
-                              default="under_review",
+                              default="На рассмотрении",
                               blank=True)
     last_status = models.CharField(max_length=140,
                               choices=STATUS_CHOICES,
-                              default="under_review",
+                              default="На рассмотрении",
                               blank=True)
     inn = models.CharField(max_length=20)
     company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
