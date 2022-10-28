@@ -23,7 +23,7 @@
         </v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Гражданство</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Гражданство</p>
 
         <v-text-field id="oldName" placeholder="Гражданство" class="align-center border-none" outlined
           :rules="requiredRules" v-model="currentData.account_own_citizenship" :required="true">
@@ -31,7 +31,7 @@
         </v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Телефон</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Телефон</p>
 
         <v-text-field id="oldName" placeholder="Телефон" v-mask="'+# (###) ### ## ##'"
           masked="true" class="align-center border-none" outlined
@@ -40,7 +40,7 @@
         </v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Доля владения</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Доля владения</p>
         <v-text-field id="oldName" placeholder="Доля владения" class="align-center border-none" outlined
           :rules="requiredRules" v-model="currentData.account_own_piece" :required="true">
         </v-text-field>

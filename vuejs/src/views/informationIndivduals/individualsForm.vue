@@ -1,7 +1,7 @@
 <template>
   <div class="individuals_form">
     <v-form ref="form" v-model="valid" lazy-validation>
-      <p class="text-left form_block_title">Роль лица</p>
+      <p class="text-left form_block_title"><span class="star">*</span>Роль лица</p>
       <div class="checkboxs">
         <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
         </v-checkbox>
@@ -18,13 +18,13 @@
         Выберите пункт
       </p>
       <div class="form_block mt-5">
-        <p class="text-left form_block_title">Фамилия</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Фамилия</p>
         <v-text-field id="oldName" v-model="currentData.account_own_lastname" placeholder="Введите Фамилию"
           class="align-center border-none" outlined :rules="requiredRules" :required="true">
         </v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Имя</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Имя</p>
         <v-text-field id="oldName" v-model="currentData.account_own_name" placeholder="Введите Имя"
           class="align-center border-none" outlined :rules="requiredRules" :required="true"></v-text-field>
       </div>
@@ -34,7 +34,7 @@
           class="align-center border-none" outlined></v-text-field>
       </div>
       <v-radio-group v-model="currentData.account_own_gender" mandatory class="checkboxs">
-        <p class="text-left form_block_title">Пол</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Пол</p>
         <v-radio label="Мужской" value="Мужской"></v-radio>
         <v-radio label="Женский" value="Женский"> </v-radio>
       </v-radio-group>
@@ -79,6 +79,7 @@ export default {
 </script>
 
 <style scoped>
+
 .error_message {
   color: red;
   font-family: Roboto;

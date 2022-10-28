@@ -3,7 +3,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
     <h2 class="text-left mb-10">Сведения о персонале</h2>
     <div class="form_block mt-5">
-      <p class="text-left form_block_title">Численность персонала</p>
+      <p class="text-left form_block_title"><span class="star">*</span>Численность персонала</p>
       <v-text-field
         id="oldName"
         v-model="currentData.employers_volume"
@@ -17,7 +17,7 @@
       ></v-text-field>
     </div>
     <div class="form_block">
-      <p class="text-left form_block_input">Задолженность по з/п</p>
+      <p class="text-left form_block_input"><span class="star">*</span>Задолженность по з/п</p>
       <v-text-field
         id="oldName"
         v-model="currentData.salary_debt"

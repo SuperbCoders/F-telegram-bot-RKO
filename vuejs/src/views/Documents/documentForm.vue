@@ -1,6 +1,7 @@
 <template>
   <div class="document_section">
     <p class="subtitle text-left document_section_text mb-5">
+      <span class="star">*</span>
       Загрузить первую страницу паспорта
     </p>
 

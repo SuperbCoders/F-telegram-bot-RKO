@@ -552,7 +552,7 @@ export default {
 
 .form_block_title {
   display: block !important;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   padding-right: 15px;
   box-sizing: border-box;

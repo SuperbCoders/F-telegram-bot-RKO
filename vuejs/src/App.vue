@@ -69,7 +69,10 @@ input, p, label, .v-list-item__title, .v-select__selection, .v-label {
 .v-label {
   color: #b6b4b4 !important;
 }
-
+.star {
+  color: #D41367;
+  margin-right: 3px;
+}
 /* button {
   font-family: Roboto;
 } */

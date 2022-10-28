@@ -5,7 +5,7 @@
     </h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
-        <p class="text-left form_block_title">Высший орган управления</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Высший орган управления</p>
         <v-combobox
           v-model="currentData.supreme_management_body"
           filled
@@ -17,7 +17,7 @@
         ></v-combobox>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Руководитель</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Руководитель</p>
         <v-combobox
           filled
           v-model="currentData.supreme_management_person"
@@ -43,6 +43,7 @@
       </div>
       <div v-if="currentData.is_collegiate_body" class="form_block mt-2">
         <p class="text-left form_block_title">
+          <span class="star">*</span>
           Наименование наблюдательного совета
         </p>
       
@@ -96,6 +97,7 @@
       </div>
       <div v-if="currentData.is_supervisoty" class="form_block mt-5">
         <p class="text-left form_block_title">
+          <span class="star">*</span>
           Наименование коллегиального исполнительного органа
         </p>
         <v-text-field

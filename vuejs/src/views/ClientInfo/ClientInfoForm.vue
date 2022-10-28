@@ -2,11 +2,11 @@
   <div class="client_info_section">
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
-        <p class="text-left form_block_title">Место рождения</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Место рождения</p>
         <AddressInput label="Введите адрес" v-model="currentData.account_birth_place" />
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Дата рождения</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Дата рождения</p>
         <v-menu
           ref="menu"
           v-model="menu"
@@ -41,7 +41,7 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
-          Тип документа, удостоверяющего личность
+          <span class="star">*</span>Тип документа, удостоверяющего личность
         </p>
         <v-select
           filled
@@ -50,11 +50,12 @@
           v-model="currentData.doc_type"
           placeholder="Выберите тип"
           :items="type_document"
+          :required="true"
         ></v-select>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
-          Серия документа удостоверяющего личность (при наличии)
+          <span class="star">*</span>Серия документа удостоверяющего личность
         </p>
         <v-text-field
           id="oldName"
@@ -64,11 +65,12 @@
           masked="true"
           v-model="currentData.doc_serial"
           outlined
+          :required="true"
         ></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
-          Номер документа удостоверяющего личность
+          <span class="star">*</span>Номер документа удостоверяющего личность
         </p>
         <v-text-field
           id="oldName"
@@ -83,7 +85,7 @@
         ></v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Кем выдан</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Кем выдан</p>
         <v-text-field
           id="oldName"
           placeholder="Наименование"
@@ -109,7 +111,7 @@
         ></v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Дата выдачи</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Дата выдачи</p>
         <v-menu
           :close-on-content-click="isActivePickerIssue()"
           transition="scale-transition"
@@ -140,7 +142,7 @@
         </v-menu>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Срок действия</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Срок действия</p>
         <v-menu
           :close-on-content-click="isActivePickerValidity()"
           transition="scale-transition"

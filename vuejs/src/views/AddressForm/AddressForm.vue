@@ -9,6 +9,7 @@
         </v-radio-group>
         <div v-if="data === 'Нет'">
           <p class="form_block_title">
+            <span class="star">*</span>
             Адрес фактического проживания
           </p>
           <AddressInput label="Введите адрес" v-model="currentData.accownt_own_living" />

@@ -324,7 +324,7 @@ export default {
 
 .form_block_title {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
 }
 

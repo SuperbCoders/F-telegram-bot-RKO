@@ -4,32 +4,21 @@
       <div class="form_block">
         <p class="text-left form_block_title">Почтовый адрес</p>
         <v-radio-group v-model="isAddress" mandatory class="checkboxs">
-          <v-radio
-            label="Совпадает с адресом регистации"
-            value="Совпадает с адресом регистации"
-          ></v-radio>
-          <v-radio
-            label="Совпадает с адресом проживания"
-            value="Совпадает с адресом проживания"
-          ></v-radio>
-          <v-radio
-            label="Не совпадает с адресом регистации и адресом проживания"
-            value="Не совпадает с адресом регистации и адресом проживания"
-          ></v-radio>
+          <v-radio label="Совпадает с адресом регистации" value="Совпадает с адресом регистации"></v-radio>
+          <v-radio label="Совпадает с адресом проживания" value="Совпадает с адресом проживания"></v-radio>
+          <v-radio label="Не совпадает с адресом регистации и адресом проживания"
+            value="Не совпадает с адресом регистации и адресом проживания"></v-radio>
         </v-radio-group>
         <div v-if="isAddress === 'Не совпадает с адресом регистации и адресом проживания'">
-          <p class="form_block_title">Адрес фактического проживания</p>
+          <p class="form_block_title">
+            <span class="star">*</span>
+            Адрес фактического проживания
+          </p>
           <AddressInput label="Введите адрес" v-model="currentData.account_own_mail" />
         </div>
       </div>
     </v-form>
-    <v-btn
-      block
-      large
-      class="mt-3 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить
+    <v-btn block large class="mt-3 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
 </template>
@@ -60,13 +49,13 @@ export default {
         } else if (this.isAddress === 'Не совпадает с адресом регистации и адресом проживания') {
           this.currentData.account_own_mail = this.address
         }
-        if(this.$route.query?.type === 'SupervisoryBoard') {
-          this.$store.commit("setSupervisoryBoardPersone", {key: "page-6", value: this.currentData});
-        }else if(this.$route.query?.type === 'CollegialExecutive') {
-          this.$store.commit("setCollegialExecutiveBody", {key: "page-6", value: this.currentData});
+        if (this.$route.query?.type === 'SupervisoryBoard') {
+          this.$store.commit("setSupervisoryBoardPersone", { key: "page-6", value: this.currentData });
+        } else if (this.$route.query?.type === 'CollegialExecutive') {
+          this.$store.commit("setCollegialExecutiveBody", { key: "page-6", value: this.currentData });
         }
-        
-        this.$router.push({path:"/document", query: this.$route.query});
+
+        this.$router.push({ path: "/document", query: this.$route.query });
       }
     },
   },
@@ -74,7 +63,7 @@ export default {
     AddressInput,
   },
   computed: {
-    isTest () {
+    isTest() {
       return this.$store.state.account_own_registration
     }
   }
@@ -82,4 +71,5 @@ export default {
 </script>
 
 <style>
+
 </style>
