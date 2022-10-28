@@ -1,8 +1,8 @@
 <template>
   <div>
-    <v-dialog v-model="dialog" width="700" >
+    <v-dialog v-model="dialog" width="700">
       <v-card @click="closeAll()">
-        <v-card-text class="pa-5" >
+        <v-card-text class="pa-5">
           <div style="text-align: center">
             <v-icon large color="pink darken-1" style="font-size: 100px">
               mdi-check-circle-outline
@@ -32,7 +32,112 @@
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
         <hr class="mt-2 mb-2">
-        <div v-for="(item, index) in step" :key="index" class="mt-1">
+        <div v-if="step_index === 'step_2'">
+          Структура органов управления
+        </div>
+        <div v-if="step_index === 'step_3'">
+          Группа взаимосвязанных компаний
+        </div>
+        <div v-if="step_index === 'step_12'">
+          Сведения о персонале
+        </div>
+        <div v-if="step_index === 'step_13'">
+          Сведения о лицензии
+        </div>
+        <div v-if="step_index === 'step_14'">
+          Сведения о планируемых операциях по счету
+        </div>
+        <div v-if="step_index === 'step_15'">
+          Выгодоприобретатели
+        </div>
+        <div v-if="step_index === 'step_16'">
+          Сведения о целях установления деловых отношений с банком
+        </div>
+        <div v-if="step_index === 'step_18'">
+          Форма выбора тарифа
+        </div>
+        <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
+          <div v-if="objectAnswer.type === 'Object'">
+            <div v-if="objectAnswer.body">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ objectAnswer.body }}
+              </div>
+            </div>
+
+          </div>
+          <div v-else-if="objectAnswer.type === 'Array'">
+            <div class="d-flex" v-if="objectAnswer.typeArray === 'Variable'">
+              <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+                <div v-for="(subAnswer, subKey) in objectAnswer.body" :key="subKey">
+                  - {{ subAnswer.body }}
+                </div>
+              </div>
+            </div>
+
+            <div class="" v-if="objectAnswer.typeArray === 'Object'">
+              <div class="form_block_title pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+                {{ isTitle(question) }}
+              </div>
+
+              <div v-for="(arrayAnswer, arrayKey) in objectAnswer.body" :key="arrayKey">
+                <div v-for="(subAnswer, subKey) in arrayAnswer.body" :key="subKey">
+                  <div v-if="subAnswer" class="d-flex">
+                    <div class="form_block_title w-50 pb-2 pt-2">
+                      {{ isTitle(subKey) }}
+                    </div>
+                    <div class="form_block_title w-50 pb-2 pt-2">
+                      <div v-if="isArray(subAnswer)">
+                        <div v-for="(arr, key) in subAnswer" :key="key">
+                          - {{ arr }}
+                        </div>
+                      </div>
+                      <div v-else>
+                        {{ subAnswer }}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+          <div v-else-if="objectAnswer.type === 'Boolean'">
+            <div class="d-flex">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                <div>
+                  <span v-if="objectAnswer.body">Да</span>
+                  <span v-else>Нет</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div v-else-if="objectAnswer.type === 'Variable'">
+            <div class="d-flex">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ objectAnswer.body }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- <div v-for="(item, index) in step" :key="index" class="mt-1">
           <div v-if="item || item === 0">
             <div v-if="isArray(item)">
               <p class="d-flex title-table form_block_title" v-if="item.length > 0">
@@ -88,7 +193,7 @@
             </div>
           </div>
 
-        </div>
+        </div> -->
 
 
       </div>
@@ -109,11 +214,10 @@ export default {
   },
   methods: {
     async sendData() {
-      // this.$store.commit("IsFormData");
       this.FormData = new FormData();
-      const formData = this.getFormData
+      const formData = Object.assign({}, this.$store.state.formData)
       let fullData = {};
-      for(const step in formData) {
+      for (const step in formData) {
         const obj = formData[step];
         fullData = Object.assign(fullData, obj);
       }
@@ -126,8 +230,31 @@ export default {
       });
       this.dialog = true;
     },
+    deepClone(obj) {
+      if (obj === null) return null;
+      let clone = Object.assign({}, obj);
+
+      Object.keys(clone).forEach(
+        key =>
+        (clone[key] =
+          typeof obj[key] === "object" ? this.deepClone(obj[key]) : obj[key])
+      );
+
+      return Array.isArray(obj) && obj.length
+        ? (clone.length = obj.length) && Array.from(clone)
+        : Array.isArray(obj)
+          ? Array.from(obj)
+          : clone;
+    },
     isObject(element) {
       if (typeof element == "object") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isBoolean(element) {
+      if (typeof element == "boolean") {
         return true;
       } else {
         return false;
@@ -146,7 +273,7 @@ export default {
       }
       return "";
     },
-    closeAll(){
+    closeAll() {
       window.Telegram.WebApp.close();
     },
     isTitle(element) {
@@ -252,7 +379,7 @@ export default {
         case "start_date":
           return "Дата начала действия";
         case "supreme_management_body":
-          return "Тип";
+          return "Высший орган управления";
         case "supervisotyBoardPersone_name":
           return "Наименование коллегиального исполнительного органа";
         case "is_supervisoty":
@@ -268,9 +395,9 @@ export default {
         case "inn":
           return "ИНН";
         case "addresses":
-          return "Адрес";
+          return "Адреса:";
         case "supreme_management_person":
-          return "Тип Руководителя";
+          return "Тип руководителя";
         case "collegiate_person_fio":
           return "Члены коллегиального исполнительного органа";
         case "account_own_gender":
@@ -324,24 +451,80 @@ export default {
   },
   computed: {
     getFormData() {
-      let formData = Object.assign({}, this.$store.state.formData)
-
+      let formData = this.deepClone(this.$store.state.formData);
+      for (const stepName in formData) {
+        let step = formData[stepName]
+        for (let keyStep in step) {
+          let valueStep = step[keyStep]
+          if (this.isArray(valueStep)) {
+            let isTypeArray = null;
+            for (let keySubStep in valueStep) {
+              let valueSubStep = valueStep[keySubStep];
+              if (this.isArray(valueSubStep)) {
+                valueStep[keySubStep] = {
+                  type: 'Array',
+                  body: valueSubStep,
+                }
+                isTypeArray = "Array";
+              } else if (this.isObject(valueSubStep)) {
+                valueStep[keySubStep] = {
+                  type: 'Object',
+                  body: valueSubStep,
+                }
+                isTypeArray = "Object";
+              } else if (this.isBoolean(valueSubStep)) {
+                valueStep[keyStep] = {
+                  type: 'Boolean',
+                  body: valueSubStep,
+                }
+                isTypeArray = "Boolean";
+              } else {
+                valueStep[keySubStep] = {
+                  type: 'Variable',
+                  body: valueSubStep,
+                }
+                isTypeArray = "Variable";
+              }
+            }
+            step[keyStep] = {
+              type: 'Array',
+              typeArray: isTypeArray,
+              body: valueStep,
+            }
+          } else if (this.isObject(valueStep)) {
+            step[keyStep] = {
+              type: 'Object',
+              body: valueStep,
+            }
+          } else if (this.isBoolean(valueStep)) {
+            step[keyStep] = {
+              type: 'Boolean',
+              body: valueStep,
+            }
+          } else if (valueStep || valueStep === 0) {
+            step[keyStep] = {
+              type: 'Variable',
+              body: valueStep,
+            }
+          } else {
+            step[keyStep] = {
+              type: 'Unknow',
+              body: valueStep,
+            }
+          }
+        }
+      }
 
       return formData;
     }
 
-    // isValueString (value) {
-    //   if (value[1] !== '' && null) {
-    //     return true
-    //   }
-    // }
   },
   mounted() {
   },
   components: { LineStep },
 };
 </script>
-<style>
+<style scoped>
 .card_content_button {
   width: 100%;
   box-shadow: 0 0 4px #00000030;
@@ -368,7 +551,7 @@ export default {
 }
 
 .form_block_title {
-  display: flex;
+  display: block !important;
   align-items: center;
   justify-content: flex-start;
   padding-right: 15px;
@@ -378,10 +561,12 @@ export default {
 .w-50 {
   width: 50%;
 }
+
 .title-table {
   font-size: 14px !important;
   padding-top: 4px;
 }
+
 .block_right {
   display: flex;
   justify-content: flex-end;

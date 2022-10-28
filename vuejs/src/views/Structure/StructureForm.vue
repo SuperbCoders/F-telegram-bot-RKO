@@ -165,11 +165,13 @@ export default {
       supreme_management_inn: null,
       supreme_management_person: "Руководитель",
       is_collegiate_body: false,
-      supervisory: "",
       supervisotyBoardPersone_name: "",
+      listCollegialExecutiveBody : [],
+      supervisory: "",
+      
       is_supervisoty: false,
       collegiate_person: null,
-      listCollegialExecutiveBody : [],
+      
       listSupervisotyBoardPersone: [],
     },
     innRules: [

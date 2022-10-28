@@ -198,6 +198,11 @@ export default {
   opacity: 0;
   cursor: default !important;
 }
+div[role="combobox"] .v-label {
+
+  color: #b6b4b4 !important;
+
+}
 .error_message {
   color: red;
   font-family: Roboto;
