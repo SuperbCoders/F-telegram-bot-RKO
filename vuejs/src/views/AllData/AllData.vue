@@ -22,12 +22,12 @@
       <h4 class="mb-6 text-center">Подтвердите введенные данные</h4>
     </div>
     <div class="all_data_table">
-      <div class="data_table-row-title d-flex">
+      <div class="d-flex">
         <div class="data_table_block">
-          <p class="form_block_title">Вопрос</p>
+          <p class="form_block_title  w-50">Вопрос</p>
         </div>
         <div class="data_table_block">
-          <p class="form_block_title">Ответ</p>
+          <p class="form_block_title  w-50">Ответ</p>
         </div>
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
