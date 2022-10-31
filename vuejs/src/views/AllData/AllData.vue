@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="dialog" width="700">
-      <v-card @click="closeAll()">
+      <v-card >
         <v-card-text class="pa-5">
           <div style="text-align: center">
             <v-icon large color="pink darken-1" style="font-size: 100px">
@@ -15,6 +15,9 @@
           <div class="mt-4 text-center" style="font-size: 12px">
             В ближайшее время с вами свяжутся
           </div>
+          <v-btn block large class="mt-10 card_content_button" color="primary" @click="closeAll()">
+            Завершить
+        </v-btn>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -106,7 +109,6 @@
                 </div>
 
               </div>
-
 
             </div>
 
