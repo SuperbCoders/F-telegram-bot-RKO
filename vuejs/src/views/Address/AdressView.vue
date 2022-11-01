@@ -37,7 +37,7 @@
         </div>
         <p
           class="error_message"
-          v-if="!valid && currentData.legal_address != false"
+          v-if="!valid && currentData.typeAdress > 0"
         >
           Выберите пункт
         </p>
