@@ -25,14 +25,39 @@ from .serializers import (
 )
 
 
-class LoanRequestCreateAPIView(CreateAPIView):
+class LoanRequestCurrentAPIView(APIView):
     permission_classes = [permissions.AllowAny]
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]
     renderer_classes = [CamelCaseJSONRenderer]
-    model = LoanRequest
-    queryset = LoanRequest.objects.all()
-    serializer_class = LoanRequestSerializer
+    
+    def get(self, request, format=None, *args, **kwargs):
+        phone_number = kwargs.get("phone_number")
+        
+        loan_request = LoanRequest.objects.filter(
+            contact_number=phone_number,
+            # is_finished=False,
+        ).first()
+
+        loan_request_serializer = LoanRequestSerializer(loan_request)
+
+        return Response(loan_request_serializer.data, status=status.HTTP_200_OK)
+    
+    def post(self, request, format=None, *args, **kwargs):
+        data = request.data
+        loan_request = LoanRequest.objects.filter(
+            contact_number=data.contact_number,
+            is_finished=False,
+        ).first()
+        
+        if loan_request:
+            for field_name, field_value in data.items():
+                setattr(loan_request, field_name, field_value)
+                loan_request.save()
+        else:
+            new_load_request = LoanRequest(**data)
+            new_load_request.save()
+        return Response({}, status=status.HTTP_200_OK)
 
 
 class LoanApplicationListAPIView(ListAPIView):
@@ -46,7 +71,6 @@ class LoanApplicationListAPIView(ListAPIView):
     def get_queryset(self):
         telegram_chat_id = self.kwargs['telegram_chat_id']
         user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
-        print(user.phone_number)
         pn = user.phone_number
         phone_number_format = f"+{pn[1]} ({pn[2]}{pn[3]}{pn[4]}) {pn[5]}{pn[6]}{pn[7]} {pn[8]}{pn[9]} {pn[10]}{pn[11]}"
         return (

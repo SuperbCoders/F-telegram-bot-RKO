@@ -59,11 +59,11 @@ class LoanRequest(models.Model):
                               choices=STATUS_CHOICES,
                               default="under_review",
                               blank=True)
-    inn = models.CharField(max_length=20)
+    inn = models.CharField(max_length=20, blank=True, null=True)
     company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    contact_number = models.CharField(max_length=20, blank=True, null=True)
+    contact_number = models.CharField(max_length=20)
     
-    addresses = models.JSONField(max_length=300)
+    addresses = models.JSONField(max_length=300, blank=True, null=True)
     # basis = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
     supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -99,19 +99,19 @@ class LoanRequest(models.Model):
         upload_to="documents",
         blank=True,
         null=True,)
-    account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    doc_type = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    doc_serial = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    doc_number = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    division_code = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null = True)
-    date_issue = models.DateField(blank = True, null = True)
-    validity = models.DateField(blank = True, null = True)
+    account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    doc_type = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    doc_serial = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    doc_number = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    division_code = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
+    date_issue = models.DateField(blank = True, null=True)
+    validity = models.DateField(blank = True, null=True)
 
-    foreigner_doc_type = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null = True)
-    foreigner_doc_serial = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null = True)
-    foreigner_doc_number = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null = True)
+    foreigner_doc_type = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null=True)
+    foreigner_doc_serial = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null=True)
+    foreigner_doc_number = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null=True)
     foreigner_doc_issued = models.DateField(blank=True, null=True)
     foreigner_doc_validity = models.DateField(blank=True, null=True)
 
@@ -122,8 +122,8 @@ class LoanRequest(models.Model):
     licence_validity = models.DateField(blank=True, null=True)
     licenced_activity = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
 
-    employers_volume = models.CharField(max_length=MAX_STRING_LENGTH)
-    salary_debt = models.BigIntegerField()
+    employers_volume = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    salary_debt = models.BigIntegerField(blank=True, null=True)
 
     company_group_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
@@ -132,27 +132,31 @@ class LoanRequest(models.Model):
     
     beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
-    planned_operations = models.JSONField(max_length=MAX_STRING_LENGTH)
+    planned_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
-    account_operations = models.JSONField(max_length=MAX_STRING_LENGTH)
-    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH)
-    sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH)
-    cash_source = models.JSONField(max_length=MAX_STRING_LENGTH)
-    outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH)
-    state_employers = models.CharField(max_length=MAX_STRING_LENGTH)
+    account_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    cash_source = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    state_employers = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
 
     # rate = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    tariff = models.CharField(max_length=MAX_STRING_LENGTH)
-    telegram_chat_id = models.CharField(max_length=140, blank=True)
+    tariff = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    is_finished = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)
 
     def _send_success_message_to_telegram(self):
+        
         text = (
             "Ваша заявка отправлена в банк на рассмотрение.\n" +
             "Информация с результатами рассмотрения будет отправлена " +
             "вам по телефону и электронной почте."
         )
-        send_telegram_bot_message.delay(self.telegram_chat_id, text)
+        normal_pn = self.contact_number.replace("(", '').replace(")", '').replace(" ", '')
+        user = User.objects.filter(phone_number=normal_pn).first()
+        
+        send_telegram_bot_message.delay(user.telegram_chat_id, text)
 
     def _send_upload_message_to_telegram(self):
         text = (
@@ -162,8 +166,12 @@ class LoanRequest(models.Model):
         )
         button_text = "Загрузить документы"
         button_url = "https://www.zenit.ru/"
+        
+        normal_pn = self.contact_number.replace("(", '').replace(")", '').replace(" ", '')
+        user = User.objects.filter(phone_number=normal_pn).first()
+        
         send_telegram_bot_message.delay(
-            self.telegram_chat_id,
+            user.telegram_chat_id,
             text,
             button_url=button_url,
             button_text=button_text,
@@ -171,8 +179,8 @@ class LoanRequest(models.Model):
         )
 
     def _send_change_status_message_to_telegram(self):
-        print(self)
-        print("Пошла отправка")
+        normal_pn = self.contact_number.replace("(", '').replace(")", '').replace(" ", '')
+        user = User.objects.filter(phone_number=normal_pn).first()
         if self.status == "update": 
             print(self.status)
             text = (
@@ -183,7 +191,7 @@ class LoanRequest(models.Model):
             button_text = "Перейти в мобильный банк"
             button_url = "https://www.yandex.ru/"
             send_telegram_bot_message.delay(
-                self.telegram_chat_id,
+                user.telegram_chat_id,
                 text,
                 button_url=button_url,
                 button_text=button_text,
@@ -191,7 +199,6 @@ class LoanRequest(models.Model):
             )
             self.last_status = self.status
         elif self.status == "declined":
-            print(self.status)
             text = (
                 f"{self.account_own_name} {self.account_own_lastname}, к сожалению,"
                 + "заявка на открытие счёта отменена банком. Контакты кц"
@@ -199,7 +206,7 @@ class LoanRequest(models.Model):
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
             send_telegram_bot_message.delay(
-                self.telegram_chat_id,
+                user.telegram_chat_id,
                 text,
                 button_url=button_url,
                 button_text=button_text,
@@ -208,19 +215,14 @@ class LoanRequest(models.Model):
             self.last_status = self.status
 
         elif self.status == "approved":
-            print(self.status)
-            print(self.company_name)
             text = ''
-            print(self.company_name.find('ИП '))
             if self.company_name.find('ИП ') != -1:
-                print("чел ип")
                 text = (
                     f"{self.account_own_name} {self.account_own_lastname}," 
                     + "вам одобрено открытие расчётного счёта. В ближайшее время мы позвоним,"
                     + "чтобы назначить встречу с представителем банка. Конакты КЦ"
                 )
             elif self.company_name.find('ООО ') !=-1:
-                print("Чел ООО")
                 text = (
                     f"{self.account_own_name} {self.account_own_lastname}," 
                     + f"для {self.company_name} одобрено открытие расчётного счёта." 
@@ -229,7 +231,7 @@ class LoanRequest(models.Model):
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
             send_telegram_bot_message.delay(
-                self.telegram_chat_id,
+                user.telegram_chat_id,
                 text,
                 button_url=button_url,
                 button_text=button_text,
@@ -243,11 +245,10 @@ class LoanRequest(models.Model):
                 +"Ваша заявка на открытие счёта находится на рассмотрении." 
                 +"Подробнее — в мобильном и интернет-банке: ДИПЛИНК"
             )
-            print(text)
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
             send_telegram_bot_message.delay(
-                self.telegram_chat_id,
+                user.telegram_chat_id,
                 text,
                 button_url=button_url,
                 button_text=button_text,
@@ -259,23 +260,19 @@ class LoanRequest(models.Model):
         verbose_name_plural = "заявления"
 
     def save(self, *args, **kwargs):
-        print(self.status)
-        print(self.last_status)
-        print(args)
-        print(kwargs)
-        if not self.pk and self.status == self.last_status:
-            self._send_success_message_to_telegram()
-            self._send_upload_message_to_telegram()
-        elif self.status != self.last_status:
-            print("Пошел апдейт")
-            self._send_change_status_message_to_telegram()
+        if self.is_finished:
+            if not self.pk and self.status == self.last_status:
+                self._send_success_message_to_telegram()
+                # self._send_upload_message_to_telegram()
+            elif self.status != self.last_status:
+                self._send_change_status_message_to_telegram()
         super().save(*args, **kwargs)
 
 
     # def update
 
     def __str__(self):
-        return self.company_name
+        return self.contact_number
 
 
 class LoanApplication(models.Model):

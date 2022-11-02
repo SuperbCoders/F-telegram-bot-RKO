@@ -91,7 +91,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'state_employers',
 
                 'tariff',
-                'telegram_chat_id',
+                'is_finished',
                 'created_at',
         ]
         read_only_fields = [

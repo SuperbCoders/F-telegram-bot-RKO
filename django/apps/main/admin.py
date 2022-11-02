@@ -14,7 +14,7 @@ class UserAdmin(BaseUserAdmin):
 
 class LoanApplicationAdmin(admin.ModelAdmin):
     model = LoanApplication
-    list_display = ["email", "status"]
+    list_display = ["status"]
     readonly_fields = ["status"]
     actions = [
         'status_approved',

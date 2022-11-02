@@ -24,7 +24,7 @@ from apps.main.views import (
     UserAPIView,
     PhoneApiView,
     LicensionApiView,
-    LoanRequestCreateAPIView,
+    LoanRequestCurrentAPIView,
     LoanApplicationListAPIView,
 )
 
@@ -34,8 +34,8 @@ router = DefaultRouter()
 urlpatterns = [
     path('', include(router.urls)),
     path(
-        "api/loan-application/create/",
-        LoanRequestCreateAPIView.as_view()
+        "api/loan-application/current/<str:phone_number>/",
+        LoanRequestCurrentAPIView.as_view()
     ),
     path(
         "api/loan-application/<int:telegram_chat_id>/",
