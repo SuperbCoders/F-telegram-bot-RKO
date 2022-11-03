@@ -7,7 +7,7 @@
 
             <div v-for="(listObj, indexObj) in isList" :key="indexObj">
                 <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
-                    <div v-for="(item, index) in isResult" :key="index">
+                    <div v-for="(item, index) in listObj" :key="index">
 
                         <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
                             <div class="data_table_block" v-if="val && itemOrder === name">
@@ -41,44 +41,6 @@
                     </div>
                 </div>
                 <hr class="mt-2 mb-2" />
-            </div>
-            <div v-for="(itemOrder, indexOrder) in formOrder" :key="indexOrder">
-                <div v-for="(item, index) in isResult" :key="index" class="">
-
-                    <div v-for="(val, name) in item" :key="name" class="all_data_table-row d-flex">
-                        <div class="data_table_block" v-if="val && itemOrder === name">
-                            <p class="form_block_title">
-                                {{ isTitle(name) }}
-                            </p>
-                        </div>
-
-                        <div class="data_table_block" v-if="val && itemOrder === name">
-                            <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
-                                {{ val[0].name }}
-                            </div>
-                            <div v-else-if="isArray(val)" class="form_block_title d-block">
-                                <div v-for="(val2, name2) in val" :key="name2">
-                                    <div v-if="isObject(val2)">
-
-
-                                        <div v-for="(val3, key) in item" :key="key">
-                                            <div v-if="val3">
-                                                {{ isTitle(key) }} => {{ val3 }}
-                                            </div>
-                                        </div>
-                                    
-                                    
-                                    </div>
-                                    <p class="d-flex" v-else>- {{ val2 }}</p>
-
-                                </div>
-                            </div>
-                            <p class="text-left form_block_title" v-else>
-                                {{ val }}
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
 
@@ -255,37 +217,19 @@ export default {
             this.$router.push("/sctructure")
         },
         add() {
-            if (this.$route.query?.type === 'SupervisoryBoard') {
-                this.$store.commit('setListSupervisoryBoardPersone')
-            } else if (this.$route.query?.type === 'CollegialExecutive') {
-                this.$store.commit('setListCollegialExecutiveBody')
-            }
+            this.$store.commit('addSupervisoryBoardPersone')
             this.$router.push({ path: "/individual-info", query: this.$route.query })
         },
         next() {
-            if (this.$route.query?.type === 'SupervisoryBoard') {
-                this.$store.commit('setListSupervisoryBoardPersone')
-            } else if (this.$route.query?.type === 'CollegialExecutive') {
-                this.$store.commit('setListCollegialExecutiveBody')
-            }
             this.$router.push("/sctructure")
         },
     },
     computed: {
-        isResult() {
-            if (this.$route.query?.type === 'SupervisoryBoard') {
-                return this.$store.state.supervisoryBoardPersone;
-            } else if (this.$route.query?.type === 'CollegialExecutive') {
-                return this.$store.state.collegialExecutiveBody;
-            } else {
-                return {}
-            }
-        },
         isList() {
             if (this.$route.query?.type === 'SupervisoryBoard') {
-                return this.$store.state.listSupervisotyBoardPersone;
+                return this.$store.state.formData.step_3.listSupervisotyBoardPersone;
             } else if (this.$route.query?.type === 'CollegialExecutive') {
-                return this.$store.state.listCollegialExecutiveBody;
+                return this.$store.state.formData.step_3.listCollegialExecutiveBody;
             } else {
                 return []
             }

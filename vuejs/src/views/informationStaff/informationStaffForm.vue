@@ -136,8 +136,6 @@ export default {
           itemForm.ogrn = ogrn;
         }
       }
-
-
     },
     skip() {
       this.$store.dispatch('addObjectFormData', {

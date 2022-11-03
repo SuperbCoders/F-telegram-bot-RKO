@@ -37,13 +37,13 @@ export default new Vuex.Store({
                 supreme_management_person: "Руководитель",
                 supreme_management_inn: "",
 
-                is_collegiate_body: false,
-                supervisotyBoardPersone_name: "",
-                listCollegialExecutiveBody: [],
-
                 is_supervisoty: false,
                 collegiate_person: "",
                 listSupervisotyBoardPersone: [],
+
+                is_collegiate_body: false,
+                supervisotyBoardPersone_name: "",
+                listCollegialExecutiveBody: [],
             },
             step_4: {
                 company_group_name: null,
@@ -84,7 +84,7 @@ export default new Vuex.Store({
                 outside_contracts_volume: null,
                 cash_source: [],
                 state_employers: null,
-                
+
             }
         },
 
@@ -174,38 +174,73 @@ export default new Vuex.Store({
         addItemFormDataObject(state, payolad) {
             state.formData[payolad.object] = Object.assign({}, payolad.value);
             scroll(0, 0);
-
-        },
-        setSupervisoryBoardPersone(state, { key, value }) {
-            state.supervisoryBoardPersone[key] = value;
-            scroll(0, 0);
-        },
-        setListSupervisoryBoardPersone(state) {
-            state.listSupervisotyBoardPersone.push(
-                Object.assign({}, state.supervisoryBoardPersone)
-            );
-            state.supervisoryBoardPersone = {};
-            scroll(0, 0);
         },
 
-        setCollegialExecutiveBody(state, { key, value }) {
-            state.collegialExecutiveBody[key] = value;
+
+
+        addSupervisoryBoardPersone(state) {
+            state.formData.step_3.listSupervisotyBoardPersone.push({});
+        },
+        async setSupervisoryBoardPersone(state, { key, value }) {
+            const length = state.formData.step_3.listSupervisotyBoardPersone.length;
+            const is_element = length > 0;
+            console.log(key, value);
+            if (is_element) {
+                console.log(state.formData.step_3);
+                const last_element = state.formData.step_3.listSupervisotyBoardPersone[length - 1];
+                last_element[key] = value;
+                console.log(last_element);
+            }
+            const contact_number = state.formData.step_1.contact_number;
+            const response_data = Object.assign({ last_step: `${key}_supervisory` }, state.formData.step_3);
+
+            await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${contact_number}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(response_data)
+            })
             scroll(0, 0);
         },
-        setListCollegialExecutiveBody(state) {
-            state.listCollegialExecutiveBody.push(
-                Object.assign({}, state.collegialExecutiveBody)
-            );
-            state.collegialExecutiveBody = {};
+
+
+
+
+        addCollegialExecutiveBody(state) {
+            state.formData.step_3.listCollegialExecutiveBody.push({});
+        },
+
+        async setCollegialExecutiveBody(state, { key, value }) {
+            const length = state.formData.step_3.listCollegialExecutiveBody.length;
+            const is_element = length > 0;
+            console.log(key, value);
+            if (is_element) {
+                console.log(state.formData.step_3);
+                const last_element = state.formData.step_3.listCollegialExecutiveBody[length - 1];
+                last_element[key] = value;
+                console.log(last_element);
+            }
+            const contact_number = state.formData.step_1.contact_number;
+            const response_data = Object.assign({ last_step: `${key}_collegial` }, state.formData.step_3);
+
+            await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${contact_number}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(response_data)
+            })
             scroll(0, 0);
         },
     },
     actions: {
         async addObjectFormData(context, payolad) {
-            console.log(payolad);
             await context.commit("addItemFormDataObject", payolad);
+
             const contact_number = context.state.formData.step_1.contact_number;
-            const response_data = Object.assign({last_step: payolad.object}, payolad.value)
+            const response_data = Object.assign({ last_step: payolad.object }, payolad.value);
+
             await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
@@ -218,10 +253,13 @@ export default new Vuex.Store({
             const formData = payolad;
             console.log(formData);
 
-            for(const step_name in context.state.formData){
+            for (const step_name in context.state.formData) {
                 const step = context.state.formData[step_name];
-                for(const key in step){
-                    step[key] = formData[key]
+                for (const key in step) {
+                    if (formData[key]) {
+                        step[key] = formData[key]
+                    }
+
                 }
             }
         }

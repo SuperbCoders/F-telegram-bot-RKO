@@ -42,6 +42,7 @@ export default {
     return {
       currentData: {
         first_passport_page: null,
+        first_passport_page_url: "",
       },
     };
   },
@@ -60,7 +61,19 @@ export default {
     getName(name) {
       return name;
     },
-    redirect () {
+    async redirect () {
+      const formData = new FormData();
+      console.log(this.currentData.first_passport_page);
+      formData.append("passport", this.currentData.first_passport_page[0])
+
+      const response = await fetch(`http://localhost:8000/api/passport-load/`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      this.currentData.first_passport_page_url = data.path;
 
       if(this.$route.query?.type === 'SupervisoryBoard') {
           this.$store.commit("setSupervisoryBoardPersone", {key: "page-7", value: this.currentData});

@@ -362,3 +362,7 @@ class User(AbstractUser):
         null=True,
         unique=True,
     )
+
+
+class PassportFile(models.Model):
+    passport = models.FileField(upload_to="documents")

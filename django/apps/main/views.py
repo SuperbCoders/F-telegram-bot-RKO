@@ -19,6 +19,7 @@ from datetime import date
 from .models import (
     LoanRequest,
     User,
+    PassportFile,
 )
 from .serializers import (
     # LoanApplicationSerializer,
@@ -146,4 +147,17 @@ class LicensionApiView(APIView):
             "License_issue_date": date.today(),
             "Validity": date.today(),
             "List_types_licensed_activities": "Перечни",
+        }, status=status.HTTP_200_OK)
+
+
+class PassportLoad(APIView):
+    permission_classes = [permissions.AllowAny]
+    
+    def post(self, request, format=None, *args, **kwargs):
+        passport = request.FILES.get("passport")
+        passport_model = PassportFile(passport=passport)
+        passport_model.save()
+
+        return Response({
+            "path": passport_model.passport.url
         }, status=status.HTTP_200_OK)
