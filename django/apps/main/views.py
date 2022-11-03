@@ -33,10 +33,10 @@ class LoanRequestCurrentAPIView(APIView):
     renderer_classes = [CamelCaseJSONRenderer]
     
     def get(self, request, format=None, *args, **kwargs):
-        phone_number = kwargs.get("phone_number")
+        phone_number: str | None = kwargs.get("phone_number")
         if phone_number:
-            pn = phone_number
-            phone_number = f"+{pn[1]} ({pn[2]}{pn[3]}{pn[4]}) {pn[5]}{pn[6]}{pn[7]} {pn[8]}{pn[9]} {pn[10]}{pn[11]}"
+            pn = phone_number.strip()
+            phone_number = f"+{pn[0]} ({pn[1]}{pn[2]}{pn[3]}) {pn[4]}{pn[5]}{pn[6]} {pn[7]}{pn[8]} {pn[9]}{pn[10]}"
         
         loan_request = LoanRequest.objects.filter(
             contact_number=phone_number,
