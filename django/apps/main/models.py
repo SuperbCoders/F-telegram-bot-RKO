@@ -11,7 +11,7 @@ from .tasks import send_telegram_bot_message
 
 INN_MAX_LENGTH = 12
 MAX_CITY_NAME_STRING = 30
-MAX_STRING_LENGTH = 100
+MAX_STRING_LENGTH = 255
 MAX_PHONE_LENGTH = 12
 MAX_ADDRESS_LENGTH = 120
 MAX_JSON_STRING_LENGTH = 300
@@ -63,7 +63,7 @@ class LoanRequest(models.Model):
     company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     contact_number = models.CharField(max_length=20)
     
-    addresses = models.JSONField(max_length=300, blank=True, null=True)
+    addresses = models.JSONField(blank=True, null=True)
     # basis = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
     supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -71,10 +71,10 @@ class LoanRequest(models.Model):
     supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
     supervisory_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    supervisory_body = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supervisory_body = models.JSONField(blank=True, null=True)
 
     collegiate_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    collegiate_body = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    collegiate_body = models.JSONField(blank=True, null=True)
 
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -98,7 +98,7 @@ class LoanRequest(models.Model):
     account_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     operation_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    cash_source = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    cash_source = models.JSONField(null=True, blank=True)
     outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     state_employers = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
 
