@@ -3,6 +3,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 from django.shortcuts import get_object_or_404
 from djangorestframework_camel_case.render import CamelCaseJSONRenderer
@@ -33,20 +34,29 @@ class LoanRequestCurrentAPIView(APIView):
     
     def get(self, request, format=None, *args, **kwargs):
         phone_number = kwargs.get("phone_number")
+        if phone_number:
+            pn = phone_number
+            phone_number = f"+{pn[1]} ({pn[2]}{pn[3]}{pn[4]}) {pn[5]}{pn[6]}{pn[7]} {pn[8]}{pn[9]} {pn[10]}{pn[11]}"
         
         loan_request = LoanRequest.objects.filter(
             contact_number=phone_number,
-            # is_finished=False,
+            is_finished=False,
         ).first()
 
-        loan_request_serializer = LoanRequestSerializer(loan_request)
-
-        return Response(loan_request_serializer.data, status=status.HTTP_200_OK)
+        if loan_request:
+            loan_request_serializer = LoanRequestSerializer(loan_request)
+            return JsonResponse(loan_request_serializer.data)
+        else:
+            return Response({}, status=status.HTTP_200_OK)
     
     def post(self, request, format=None, *args, **kwargs):
+        phone_number = kwargs.get("phone_number")
         data = request.data
+        
+        print(data)
+        
         loan_request = LoanRequest.objects.filter(
-            contact_number=data.contact_number,
+            contact_number=phone_number,
             is_finished=False,
         ).first()
         

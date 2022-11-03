@@ -14,7 +14,79 @@ export default new Vuex.Store({
         accownt_own_living: false,
         assigned_publ_pers_registraion: false,
         result: {},
-        formData: {},
+        formData: {
+            step_1: {
+                inn: "",
+                company_name: "",
+                contact_number: "",
+            },
+            step_2: {
+                addresses: [
+                    {
+                        typeAdress: [],
+                        legal_address: "",
+                        physic_address: "",
+                        mail_address: "",
+                        address: "",
+                        basis: "",
+                    },
+                ]
+            },
+            step_3: {
+                supreme_management_body: "Единственный участник (один участник с долей 100%)",
+                supreme_management_person: "Руководитель",
+                supreme_management_inn: "",
+
+                is_collegiate_body: false,
+                supervisotyBoardPersone_name: "",
+                listCollegialExecutiveBody: [],
+
+                is_supervisoty: false,
+                collegiate_person: "",
+                listSupervisotyBoardPersone: [],
+            },
+            step_4: {
+                company_group_name: null,
+                start_date: null,
+                end_date: null,
+                group_members: [
+                    {
+                        name: null,
+                        inn: null,
+                        ogrn: null,
+                    },
+                ],
+            },
+            step_5: {
+                employers_volume: 0,
+                salary_debt: 0,
+            },
+            step_6: {
+                licence_type: null,
+                licence_number: null,
+                licence_issued_by: null,
+                licence_date_issue: null,
+                licenced_validity: null,
+                licenced_activity: null,
+            },
+            step_7: {
+                planned_operations: [],
+            },
+            step_8: {
+                beneficiaries: null,
+            },
+            step_9: {
+                account_operations: [],
+                operation_volume: null,
+                operation_sum: null,
+                operation_nalition: null,
+                sum_per_month: null,
+                outside_contracts_volume: null,
+                cash_source: [],
+                state_employers: null,
+                
+            }
+        },
 
         listSupervisotyBoardPersone: [],
         supervisoryBoardPersone: {},
@@ -86,6 +158,7 @@ export default new Vuex.Store({
             state.formData.push(item);
             scroll(0, 0);
         },
+
         IsFormData(state) {
             const object = Object.keys(state.formData);
             const result = [];
@@ -99,8 +172,9 @@ export default new Vuex.Store({
         },
 
         addItemFormDataObject(state, payolad) {
-            state.formData[payolad.object] = payolad.value;
+            state.formData[payolad.object] = Object.assign({}, payolad.value);
             scroll(0, 0);
+
         },
         setSupervisoryBoardPersone(state, { key, value }) {
             state.supervisoryBoardPersone[key] = value;
@@ -127,8 +201,29 @@ export default new Vuex.Store({
         },
     },
     actions: {
-        addObjectFormData(context, payolad) {
-            context.commit("addItemFormDataObject", payolad);
+        async addObjectFormData(context, payolad) {
+            console.log(payolad);
+            await context.commit("addItemFormDataObject", payolad);
+            const contact_number = context.state.formData.step_1.contact_number;
+            const response_data = Object.assign({last_step: payolad.object}, payolad.value)
+            await fetch(`http://localhost:8000/api/loan-application/current/${contact_number}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                },
+                body: JSON.stringify(response_data)
+            })
         },
+        async loadObjectFormData(context, payolad) {
+            const formData = payolad;
+            console.log(formData);
+            
+            for(const step_name in context.state.formData){
+                const step = context.state.formData[step_name];
+                for(const key in step){
+                    step[key] = formData[key]
+                }
+            }
+        }
     },
 });

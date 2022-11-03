@@ -68,7 +68,7 @@ export default {
 
       if (this.$refs.form.validate()) {
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_12',
+          object: 'step_5',
           value: this.currentData
         })
         const data = await getLicense();
@@ -79,11 +79,11 @@ export default {
         store.licence_number = data.number;
         store.licence_issued_by = data.Issued_by;
         store.licence_date_issue = data.License_issue_date;
-        store.licenced_validity = data.Validity;
+        store.licence_validity = data.Validity;
         store.licenced_activity = data.List_types_licensed_activities;
 
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_13',
+          object: 'step_6',
           value: store
         })
         this.$router.push("/planning");

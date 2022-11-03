@@ -14,8 +14,8 @@ class UserAdmin(BaseUserAdmin):
 
 class LoanApplicationAdmin(admin.ModelAdmin):
     model = LoanApplication
-    list_display = ["status"]
-    readonly_fields = ["status"]
+    list_display = ['company_name', 'contact_number', "status"]
+    readonly_fields = ["last_status"]
     actions = [
         'status_approved',
         'status_declined',
@@ -48,5 +48,5 @@ class LoanApplicationAdmin(admin.ModelAdmin):
 
 admin.site.unregister(Token)
 admin.site.unregister(Group)
-admin.site.register(LoanRequest)
+admin.site.register(LoanRequest, LoanApplicationAdmin)
 admin.site.register(User)

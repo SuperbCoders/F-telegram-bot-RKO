@@ -110,7 +110,7 @@ export default {
     validate() {
       if (this.isValidation) {
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_16',
+          object: 'step_9',
           value: this.currentData
         })
         this.$router.push('/approvals')

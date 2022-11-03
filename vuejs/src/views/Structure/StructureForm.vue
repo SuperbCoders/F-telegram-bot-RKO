@@ -52,7 +52,7 @@
             placeholder="Наименование"
             class="align-center border-none"
             name="oldName"
-            v-model="currentData.supervisory"
+            v-model="currentData.collegiate_person"
             outlined
             :rules="requiredRules"
             :required="true"
@@ -163,17 +163,15 @@ export default {
     listCompany: [],
     currentData: {
       supreme_management_body: "Единственный участник (один участник с долей 100%)",
-      supreme_management_type: null,
-      supreme_management_inn: null,
       supreme_management_person: "Руководитель",
+      supreme_management_inn: "",
+
       is_collegiate_body: false,
       supervisotyBoardPersone_name: "",
       listCollegialExecutiveBody : [],
-      supervisory: "",
       
       is_supervisoty: false,
-      collegiate_person: null,
-      
+      collegiate_person: "",
       listSupervisotyBoardPersone: [],
     },
     innRules: [
@@ -189,14 +187,8 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.currentData.listCollegialExecutiveBody = this.listCollegialExecutiveBody.map((item)=>{
-          const page = item['page-1'];
-          return `${page.account_own_lastname} ${page.account_own_name} ${page.account_own_surname}`;
-        });
-        this.currentData.listSupervisotyBoardPersone = this.listSupervisotyBoardPersone.map((item)=>{
-          const page = item['page-1'];
-          return `${page.account_own_lastname} ${page.account_own_name} ${page.account_own_surname}`;
-        })
+        this.currentData.listCollegialExecutiveBody = this.listCollegialExecutiveBody;
+        this.currentData.listSupervisotyBoardPersone = this.listSupervisotyBoardPersone;
 
 
         this.$store.dispatch("addObjectFormData", {
@@ -276,13 +268,11 @@ export default {
     if (dataStep) {
       this.currentData.supreme_management_body =
         dataStep.supreme_management_body;
-      this.currentData.supreme_management_type =
-        dataStep.supreme_management_type;
       this.currentData.supreme_management_inn = dataStep.supreme_management_inn;
 
       this.currentData.supreme_management_person = dataStep.supreme_management_person;
       this.currentData.supervisotyBoardPersone_name = dataStep.supervisotyBoardPersone_name;
-      this.currentData.supervisory = dataStep.supervisory;
+      this.currentData.collegiate_person = dataStep.collegiate_person;
       this.currentData.is_supervisoty = dataStep.is_supervisoty;
       this.currentData.is_collegiate_body = dataStep.is_collegiate_body;
     }

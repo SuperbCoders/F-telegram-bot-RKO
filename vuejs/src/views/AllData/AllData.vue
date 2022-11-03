@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-dialog v-model="dialog" width="700">
-      <v-card >
+      <v-card>
         <v-card-text class="pa-5">
           <div style="text-align: center">
             <v-icon large color="pink darken-1" style="font-size: 100px">
@@ -17,7 +17,7 @@
           </div>
           <v-btn block large class="mt-10 card_content_button" color="primary" @click="closeAll()">
             Завершить
-        </v-btn>
+          </v-btn>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -41,23 +41,24 @@
         <div v-if="step_index === 'step_3'">
           Группа взаимосвязанных компаний
         </div>
-        <div v-if="step_index === 'step_12'">
-          Сведения о персонале
-        </div>
-        <div v-if="step_index === 'step_13'">
+        
+        <div v-if="step_index === 'step_5'">
           Сведения о лицензии
         </div>
-        <div v-if="step_index === 'step_14'">
+        <div v-if="step_index === 'step_6'">
+          Сведения о персонале
+        </div>
+        <div v-if="step_index === 'step_7'">
           Сведения о планируемых операциях по счету
         </div>
-        <div v-if="step_index === 'step_15'">
+        <div v-if="step_index === 'step_8'">
           Выгодоприобретатели
         </div>
-        <div v-if="step_index === 'step_16'">
+        <div v-if="step_index === 'step_9'">
           Сведения о целях установления деловых отношений с банком
         </div>
-        <div v-if="step_index === 'step_18'">
-          Форма выбора тарифа
+        <div v-if="step_index === 'step_11'">
+          Тарифы на расчетно-кассовое обслуживание
         </div>
         <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
           <div v-if="objectAnswer.type === 'Object'">
@@ -216,20 +217,14 @@ export default {
   },
   methods: {
     async sendData() {
-      this.FormData = new FormData();
-      const formData = Object.assign({}, this.$store.state.formData)
-      let fullData = {};
-      for (const step in formData) {
-        const obj = formData[step];
-        fullData = Object.assign(fullData, obj);
-      }
-      await fetch("https://rko-bot.spaaace.io/api/loan-application/create/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify(fullData),
+      this.$store.dispatch('addObjectFormData', {
+        object: 'step_final',
+        value: {
+          is_finished: true,
+        }
       });
+
+
       this.dialog = true;
     },
     deepClone(obj) {
@@ -440,6 +435,8 @@ export default {
           return "Члены коллегиального исполнительного органа";
         case "listSupervisotyBoardPersone":
           return "Члены наблюдательного совета";
+        case "informationGoals":
+          return "Юридические лица компании";
         default:
           return element;
       }

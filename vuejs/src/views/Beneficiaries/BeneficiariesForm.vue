@@ -35,7 +35,7 @@ export default {
   methods: {
     redirect () {
       this.$store.dispatch('addObjectFormData', {
-          object: 'step_15',
+          object: 'step_8',
           value: this.currentData
         })
         this.$router.push('/purposes')

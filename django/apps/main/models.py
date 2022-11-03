@@ -76,45 +76,6 @@ class LoanRequest(models.Model):
     collegiate_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     collegiate_body = models.JSONField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
 
-    account_onw_role = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
-    account_own_lastname =models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_surname = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_gender = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    
-    account_onw_inn = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_snils = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    account_own_citizenship = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_phone = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_piece = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    
-    assigned_publ_pers_relation = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    assigned_publ_pers_registraion = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    account_own_registration = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    
-    accownt_own_living = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    account_own_mail = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    
-    first_passport_page = models.ImageField(
-        upload_to="documents",
-        blank=True,
-        null=True,)
-    account_birth_place = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    account_datebirth = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    doc_type = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    doc_serial = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    doc_number = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    division_code = models.CharField(max_length=MAX_STRING_LENGTH, blank = True, null=True)
-    date_issue = models.DateField(blank = True, null=True)
-    validity = models.DateField(blank = True, null=True)
-
-    foreigner_doc_type = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null=True)
-    foreigner_doc_serial = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null=True)
-    foreigner_doc_number = models.CharField(max_length = MAX_STRING_LENGTH, blank = True, null=True)
-    foreigner_doc_issued = models.DateField(blank=True, null=True)
-    foreigner_doc_validity = models.DateField(blank=True, null=True)
-
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -144,6 +105,7 @@ class LoanRequest(models.Model):
     # rate = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     tariff = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     is_finished = models.BooleanField(default=False)
+    last_step = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
     def _send_success_message_to_telegram(self):

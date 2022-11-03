@@ -192,7 +192,6 @@ export default {
                 case 'accownt_own_living': return 'Адрес проживания'
                 case 'assigned_publ_pers_registraion': return 'Адрес регистрации'
                 case 'assigned_publ_pers_relation': return 'Степень родства либо статус (супруг или супруга) по отношению к публичному должностному лицу'
-                case 'beneficiaries': return 'Выгодоприобретатели'
                 case 'cash_source': return 'Источники происхождения денежных средств'
                 case 'collegiate_body': return 'Наименование наблюдательного совета'
                 case 'collegiate_person': return 'Наименование коллегиального исполнительног органа'

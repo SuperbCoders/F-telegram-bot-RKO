@@ -67,7 +67,7 @@ export default {
       } else {
         this.valid = true;
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_14',
+          object: 'step_7',
           value: this.currentData
         })
         this.$router.push("/beneficiaries");

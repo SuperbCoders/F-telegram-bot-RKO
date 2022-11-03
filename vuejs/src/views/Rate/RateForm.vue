@@ -160,7 +160,7 @@ export default {
     },
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-          object: 'step_18',
+          object: 'step_11',
           value: this.currentData
         })
       this.$router.push("/all-data");
