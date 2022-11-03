@@ -86,7 +86,7 @@ export default {
     if (phone) {
       this.currentData.contact_number = phone;
     }
-    const response = await fetch(`http://localhost:8000/api/loan-application/current/${phone}/`)
+    const response = await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${phone}/`)
     const formData = await response.json();
     this.$store.dispatch("loadObjectFormData", formData);
     const last_step = formData.last_step;

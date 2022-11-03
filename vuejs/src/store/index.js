@@ -206,7 +206,7 @@ export default new Vuex.Store({
             await context.commit("addItemFormDataObject", payolad);
             const contact_number = context.state.formData.step_1.contact_number;
             const response_data = Object.assign({last_step: payolad.object}, payolad.value)
-            await fetch(`http://localhost:8000/api/loan-application/current/${contact_number}/`, {
+            await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -217,7 +217,7 @@ export default new Vuex.Store({
         async loadObjectFormData(context, payolad) {
             const formData = payolad;
             console.log(formData);
-            
+
             for(const step_name in context.state.formData){
                 const step = context.state.formData[step_name];
                 for(const key in step){
