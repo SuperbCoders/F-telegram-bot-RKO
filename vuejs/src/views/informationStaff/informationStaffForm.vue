@@ -140,13 +140,11 @@ export default {
 
     },
     skip() {
-      if (this.$refs.form.validate()) {
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_4',
-          value: this.currentData
-        })
-        this.$router.push("/intelligence");
-      }
+      this.$store.dispatch('addObjectFormData', {
+        object: 'step_4',
+        value: this.currentData
+      })
+      this.$router.push("/intelligence");
     },
     addGroupList() {
       const defaultGroupItem = {

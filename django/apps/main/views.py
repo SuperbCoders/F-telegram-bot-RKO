@@ -84,9 +84,10 @@ class LoanApplicationListAPIView(ListAPIView):
         pn = user.phone_number
         phone_number_format = f"+{pn[1]} ({pn[2]}{pn[3]}{pn[4]}) {pn[5]}{pn[6]}{pn[7]} {pn[8]}{pn[9]} {pn[10]}{pn[11]}"
         return (
-            LoanRequest.objects
-            .filter(contact_number=phone_number_format)
-            .order_by("created_at")
+            LoanRequest.objects.filter(
+                contact_number=phone_number_format,
+                is_finished=True,
+            ).order_by("created_at")
         )
 
 class UserAPIView(APIView):
