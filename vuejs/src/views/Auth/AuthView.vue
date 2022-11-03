@@ -105,22 +105,22 @@ export default {
       case 'step_4': 
         next_push = '/intelligence';
         break
-      case 'step_5': 
+      case 'step_6': 
         next_push = '/planning';
         break
-      case 'step_6': 
+      case 'step_7': 
         next_push = '/beneficiaries';
         break
-      case 'step_7': 
+      case 'step_8': 
         next_push = '/purposes';
         break
-      case 'step_8': 
+      case 'step_9': 
         next_push = '/approvals';
         break
-      case 'step_9': 
+      case 'step_10': 
         next_push = '/rate';
         break
-      case 'step_10': 
+      case 'step_11': 
         next_push = '/all-data';
         break
     }
