@@ -264,7 +264,12 @@ Alex Barabash (alex@baraba.sh)
 ```
 URL: /api/loan-application/current/<str:phone_number>/
 ```
-GET method returns data
+GET method 
+> Body
+```
+{}
+```
+> Return
 ```
 'status',
 'inn',
@@ -315,8 +320,61 @@ GET method returns data
 'created_at',
 ```
 
-POST method create or updates the data above. If is_finished = False 
+
+POST method create or updates the data. If is_finished = False 
 then update data, and if is_finished = True then create data
+> body
+```
+'inn',
+'company_name',
+'contact_number',
+
+'addresses',
+
+'supreme_management_body',
+'supreme_management_person',
+'supreme_management_inn',
+
+'supervisory_name',
+'supervisory_body',
+
+'collegiate_name',
+'collegiate_body',
+
+'licence_type',
+'licence_number',
+'licence_issued_by',
+'licence_date_issue',
+'licence_validity',
+'licenced_activity',
+
+'employers_volume',
+'salary_debt',
+
+'company_group_name',
+'start_date',
+'end_date',
+'group_members',
+
+'beneficiaries',
+
+'planned_operations',
+
+'account_operations',
+'operation_volume',
+'sum_per_month',
+'cash_source',
+'outside_contracts_volume',
+'state_employers',
+
+'tariff',
+'is_finished',
+'last_step',
+```
+> return
+```
+{}
+```
 
 
 ### upload file
@@ -324,7 +382,11 @@ POST method send file in FormDate
 ```
 /api/passport-load/
 ```
-return
+> body
+```
+passport: typeFile
+```
+> return
 ```
 {
   path: "<URLFile>"
