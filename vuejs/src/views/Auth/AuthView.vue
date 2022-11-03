@@ -92,6 +92,7 @@ export default {
     this.$store.dispatch("loadObjectFormData", formData);
     const last_step = formData.last_step;
     const arr_last_step = last_step.split("*");
+    
     if (arr_last_step.length === 2) {
       const type = arr_last_step[1];
       const sub_last_step = arr_last_step[0];
