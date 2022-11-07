@@ -75,9 +75,9 @@ export default {
   },
   mounted() {
     if (this.$route.query?.type === 'SupervisoryBoard') {
-      this.$store.commit("setSupervisoryBoardPersone", { key: "page-0", value: this.currentData });
+      this.$store.commit("setSupervisoryBoardPersone", { key: "page-0", value: {} });
     } else if (this.$route.query?.type === 'CollegialExecutive') {
-      this.$store.commit("setCollegialExecutiveBody", { key: "page-0", value: this.currentData });
+      this.$store.commit("setCollegialExecutiveBody", { key: "page-0", value: {} });
     }
   },
   components: {
