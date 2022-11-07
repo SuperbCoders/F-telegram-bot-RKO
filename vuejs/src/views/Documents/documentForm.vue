@@ -66,7 +66,7 @@ export default {
       console.log(this.currentData.first_passport_page);
       formData.append("passport", this.currentData.first_passport_page[0])
 
-      const response = await fetch(`http://localhost:8000/api/passport-load/`, {
+      const response = await fetch(`https://rko-bot.spaaace.io/api/passport-load/`, {
         method: "POST",
         body: formData,
       });
