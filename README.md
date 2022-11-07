@@ -259,6 +259,166 @@ Restart the Docker Compose
 Alex Barabash (alex@baraba.sh)
 
 ## API Docs
+
+### Structure Data
+```
+inn: CharField
+company_name: CharField
+contact_number: CharField
+
+addresses: JSONField
+
+supreme_management_body: CharField
+supreme_management_person: CharField
+supreme_management_inn: CharField
+
+supervisory_name: CharField
+supervisory_body: JSONField
+
+collegiate_name: CharField
+collegiate_body: JSONField
+
+licence_type: CharField
+licence_number: CharField
+licence_issued_by: CharField
+licence_date_issue: DateField
+licence_validity: DateField
+licenced_activity: CharField
+
+employers_volume: CharField
+salary_debt: BigIntegerField
+
+company_group_name: CharField
+start_date: DateField
+end_date: DateField
+group_members: JSONField
+
+beneficiaries: CharField
+
+planned_operations: JSONField
+
+account_operations: JSONField
+operation_volume: CharField
+sum_per_month: CharField
+cash_source: JSONField
+outside_contracts_volume: CharField
+state_employers: CharField
+
+tariff: CharField
+is_finished: BooleanField
+last_step: CharField
+```
+### Addresses structure
+```
+{
+  addresses: [
+    {
+      typeAdress: enum('Юридический', 'Фактический', 'Почтовый'),
+      legal_address: str,
+      physic_address: str,
+      mail_address: str,
+      basis: str,
+      address: str,
+    }
+  ]
+}
+```
+
+### Supervisory body and collegiate body
+```
+{
+  account_onw_role: enum('Учредитель', 'Бенефициарный владелец', 'Подписант'),
+  account_own_gender: str
+  account_own_lastname: str
+  account_own_name: str
+  account_own_surname: str
+
+  account_onw_inn: str
+  account_own_citizenship: str
+  account_own_phone: str
+  account_own_piece: str
+  account_own_snils: str
+
+  is_person_a_foreign_public: enum('Да', 'Нет')
+
+  account_own_registration: str
+  assigned_publ_pers_registraion: str
+  assigned_publ_pers_relation: enum('Супруг', 'Супруга')
+
+  accownt_own_living: str | enum('Совпадает')
+
+  account_own_mail: str
+
+  first_passport_page_url: str
+
+  account_birth_place: str
+  account_datebirth: date
+  date_issue: date
+  division_code: str
+  doc_number: str
+  doc_serial: str
+  doc_type: enum('Паспорт')
+  issued_by: str
+  validity: date
+
+}
+```
+### Group members
+```
+[
+  {
+    name: str,
+    inn: str,
+    ogrn: str,
+  },
+]
+```
+### Planned operations
+```
+[
+  'Договор купли-продажи (товарный)',
+  'Агентский договор',
+  'Договор комиссии',
+  'Договор купли-продажи ценных бумаг',
+  'Договор аренды',
+]
+```
+
+### Account operations
+```
+[
+  'Дистанционное банковское обслуживание',
+  'Внешнеэкономические операции',
+  'Интернет-эквайринг',
+  'Кредитование',
+  'Торговый эквайринг',
+  'Переводы СБП (c2b)',
+]
+```
+
+### Account operations
+```
+[
+  'Дистанционное банковское обслуживание',
+  'Внешнеэкономические операции',
+  'Интернет-эквайринг',
+  'Кредитование',
+  'Торговый эквайринг',
+  'Переводы СБП (c2b)',
+]
+```
+
+### Cash source
+```
+[
+  'Средства, полученные в рамках осуществляемой хозяйственной деятельности',
+  'Собственные средства',
+  'Заемные средства (займы от третьих лиц, учредителей и т.д)',
+  'Иные',
+]
+```
+
+
 ### Send and get loan-application
 
 ```
