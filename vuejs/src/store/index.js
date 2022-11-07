@@ -192,7 +192,7 @@ export default new Vuex.Store({
                 console.log(last_element);
             }
             const contact_number = state.formData.step_1.contact_number;
-            const response_data = Object.assign({ last_step: `${key}*supervisory` }, state.formData.step_3);
+            const response_data = Object.assign({ last_step: `${key}*supervisory` }, state.formData);
 
             await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
@@ -222,7 +222,7 @@ export default new Vuex.Store({
                 console.log(last_element);
             }
             const contact_number = state.formData.step_1.contact_number;
-            const response_data = Object.assign({ last_step: `${key}*collegial` }, state.formData.step_3);
+            const response_data = Object.assign({ last_step: `${key}*collegial` }, state.formData);
 
             await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
