@@ -49,7 +49,7 @@
                 <a @click="del()" class="form_block_delete_link text-decoration-none" href="#">
                     <img src="../../assets/trash.svg" alt="">
                     <span class="pl-2">Удалить</span>
-                    
+
                 </a>
                 <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="add()">
                     <span class="pr-2">Добавить</span>
@@ -72,15 +72,15 @@ export default {
                 "account_own_name",
                 "account_own_surname",
                 "account_own_gender",
-                
+
                 "account_onw_inn",
                 "account_own_snils",
                 "account_own_citizenship",
                 "account_own_phone",
                 "account_own_piece",
-                
+
                 "is_person_a_foreign_public",
-                
+
                 "assigned_publ_pers_relation",
                 "account_own_registration",
                 "assigned_publ_pers_registraion",
@@ -132,7 +132,7 @@ export default {
             } else {
                 return ''
             }
-            
+
         },
         isTitle(element) {
             switch (element) {
@@ -221,7 +221,13 @@ export default {
             this.$router.push({ path: "/individual-info", query: this.$route.query })
         },
         next() {
-            this.$router.push("/sctructure")
+            this.$store.dispatch('addObjectFormData', {
+                object: 'step_3',
+                value: {}
+            });
+            this.$router.push("/sctructure");
+
+
         },
     },
     computed: {
@@ -271,7 +277,8 @@ export default {
     justify-content: flex-start;
 }
 
-.form_block_delete_link, .add_form {
+.form_block_delete_link,
+.add_form {
     display: flex;
     align-items: center;
     justify-content: center;

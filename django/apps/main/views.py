@@ -66,6 +66,7 @@ class LoanRequestCurrentAPIView(APIView):
         
         if loan_request:
             for field_name, field_value in data.items():
+                print(field_name, field_value)
                 setattr(loan_request, field_name, field_value)
                 loan_request.save()
         else:
