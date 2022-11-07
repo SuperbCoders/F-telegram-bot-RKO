@@ -71,10 +71,10 @@ class LoanRequest(models.Model):
     supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
     collegiate_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    listSupervisotyBoardPersone = models.JSONField(blank=True, null=True)
+    list_supervisoty_board_persone = models.JSONField(blank=True, null=True)
 
-    supervisotyBoardPersone_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    listCollegialExecutiveBody = models.JSONField(blank=True, null=True)
+    supervisoty_board_persone_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    list_collegial_executive_body = models.JSONField(blank=True, null=True)
 
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)

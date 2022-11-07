@@ -23,10 +23,10 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'supreme_management_inn',
                 
                 'collegiate_person',
-                'listSupervisotyBoardPersone',
+                'list_supervisoty_board_persone',
                 
-                'supervisotyBoardPersone_name',
-                'listCollegialExecutiveBody',
+                'supervisoty_board_persone_name',
+                'list_collegial_executive_body',
                 
                 'licence_type',
                 'licence_number',
