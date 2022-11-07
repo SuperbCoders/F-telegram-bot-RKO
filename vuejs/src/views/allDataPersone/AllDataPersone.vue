@@ -214,10 +214,20 @@ export default {
             }
         },
         del() {
+            if (this.$route.query?.type === 'SupervisoryBoard') {
+                this.$store.commit('delSupervisoryBoardPersone')
+            } else if (this.$route.query?.type === 'CollegialExecutive') {
+                this.$store.commit('delCollegialExecutiveBody')
+            }
+
             this.$router.push("/sctructure")
         },
         add() {
-            this.$store.commit('addSupervisoryBoardPersone')
+            if (this.$route.query?.type === 'SupervisoryBoard') {
+                this.$store.commit('addSupervisoryBoardPersone')
+            } else if (this.$route.query?.type === 'CollegialExecutive') {
+                this.$store.commit('addCollegialExecutiveBody')
+            }
             this.$router.push({ path: "/individual-info", query: this.$route.query })
         },
         next() {

@@ -39,11 +39,11 @@ export default new Vuex.Store({
 
                 is_supervisoty: false,
                 collegiate_person: "",
-                listSupervisotyBoardPersone: [],
+                list_supervisoty_board_persone: [],
 
                 is_collegiate_body: false,
-                supervisotyBoardPersone_name: "",
-                listCollegialExecutiveBody: [],
+                supervisoty_board_persone_name: "",
+                list_collegial_executive_body: [],
             },
             step_4: {
                 company_group_name: null,
@@ -181,6 +181,9 @@ export default new Vuex.Store({
         addSupervisoryBoardPersone(state) {
             state.formData.step_3.listSupervisotyBoardPersone.push({});
         },
+        delSupervisoryBoardPersone(state) {
+            state.formData.step_3.listSupervisotyBoardPersone.pop();
+        },
         async setSupervisoryBoardPersone(state, { key, value }) {
             const length = state.formData.step_3.listSupervisotyBoardPersone.length;
             const is_element = length > 0;
@@ -209,6 +212,10 @@ export default new Vuex.Store({
 
         addCollegialExecutiveBody(state) {
             state.formData.step_3.listCollegialExecutiveBody.push({});
+        },
+
+        addCollegialExecutiveBody(state) {
+            state.formData.step_3.listCollegialExecutiveBody.pop();
         },
 
         async setCollegialExecutiveBody(state, { key, value }) {
