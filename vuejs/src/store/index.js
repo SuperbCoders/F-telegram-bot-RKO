@@ -214,7 +214,7 @@ export default new Vuex.Store({
             state.formData.step_3.listCollegialExecutiveBody.push({});
         },
 
-        addCollegialExecutiveBody(state) {
+        delCollegialExecutiveBody(state) {
             state.formData.step_3.listCollegialExecutiveBody.pop();
         },
 
