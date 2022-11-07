@@ -102,7 +102,7 @@ export default {
         const sub_last_step = arr_last_step[0];
         console.log(sub_last_step, type);
         let next_push = "/";
-        switch (last_step) {
+        switch (sub_last_step) {
           case 'page-0':
             next_push = '/individual-info';
             break;
