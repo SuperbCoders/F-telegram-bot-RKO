@@ -73,13 +73,19 @@ export default {
       }
     },
   },
+  mounted() {
+    if (this.$route.query?.type === 'SupervisoryBoard') {
+      this.$store.commit("setSupervisoryBoardPersone", { key: "page-0", value: this.currentData });
+    } else if (this.$route.query?.type === 'CollegialExecutive') {
+      this.$store.commit("setCollegialExecutiveBody", { key: "page-0", value: this.currentData });
+    }
+  },
   components: {
   },
 };
 </script>
 
 <style scoped>
-
 .error_message {
   color: red;
   font-family: Roboto;
@@ -87,6 +93,7 @@ export default {
   margin-top: 10px;
   font-size: 12px !important;
 }
+
 .checkboxs label {
   color: #323E48 !important;
 }

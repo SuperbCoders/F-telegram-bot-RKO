@@ -85,88 +85,92 @@ export default {
     const phone = this.$route.query?.phone;
     if (phone) {
       this.currentData.contact_number = phone;
-    }
-    const response = await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${phone}/`)
-    // const response = await fetch(`http://localhost:8000/api/loan-application/current/${phone}/`)
-    const formData = await response.json();
-    this.$store.dispatch("loadObjectFormData", formData);
-    const last_step = formData.last_step;
-    const arr_last_step = last_step.split("*");
-    
-    if (arr_last_step.length === 2) {
-      const type = arr_last_step[1];
-      const sub_last_step = arr_last_step[0];
-      console.log(sub_last_step, type);
-      let next_push = "/";
-      switch (last_step) {
-        case 'page-1':
-          next_push = '/documents-forms';
-          break;
-        case 'page-2':
-          next_push = '/foreign-person';
-          break
-        case 'page-3':
-          next_push = '/kinship-status-forms';
-          break
-        case 'page-4':
-          next_push = '/address-form';
-          break
-        case 'page-5':
-          next_push = '/email-form';
-          break
-        case 'page-6':
-          next_push = '/document';
-          break
-        case 'page-7':
-          next_push = '/client-info';
-          break
-        case 'page-8':
-          next_push = '/document-fogeiner';
-          break
-        case 'page-9':
-          next_push = '/all-data-persone';
-          break
+
+      const response = await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${phone}/`)
+      // const response = await fetch(`http://localhost:8000/api/loan-application/current/${phone}/`)
+      const formData = await response.json();
+      this.$store.dispatch("loadObjectFormData", formData);
+      const last_step = formData.last_step;
+      const arr_last_step = last_step.split("*");
+
+      if (arr_last_step.length === 2) {
+        const type = arr_last_step[1];
+        const sub_last_step = arr_last_step[0];
+        console.log(sub_last_step, type);
+        let next_push = "/";
+        switch (last_step) {
+          case 'page-0':
+            next_push = '/individual-info';
+            break;
+          case 'page-1':
+            next_push = '/documents-forms';
+            break;
+          case 'page-2':
+            next_push = '/foreign-person';
+            break
+          case 'page-3':
+            next_push = '/kinship-status-forms';
+            break
+          case 'page-4':
+            next_push = '/address-form';
+            break
+          case 'page-5':
+            next_push = '/email-form';
+            break
+          case 'page-6':
+            next_push = '/document';
+            break
+          case 'page-7':
+            next_push = '/client-info';
+            break
+          case 'page-8':
+            next_push = '/document-fogeiner';
+            break
+          case 'page-9':
+            next_push = '/all-data-persone';
+            break
+        }
+        if (type === 'supervisory') {
+          this.$router.push({ 'path': next_push, query: { "type": "SupervisoryBoard" } });
+        } else if (type === 'collegial') {
+          this.$router.push({ 'path': next_push, query: { "type": "CollegialExecutive" } });
+        }
+      } else {
+        let next_push = "/";
+        switch (last_step) {
+          case 'step_1':
+            next_push = '/address';
+            break;
+          case 'step_2':
+            next_push = '/sctructure';
+            break
+          case 'step_3':
+            next_push = '/information-staff';
+            break
+          case 'step_4':
+            next_push = '/intelligence';
+            break
+          case 'step_6':
+            next_push = '/planning';
+            break
+          case 'step_7':
+            next_push = '/beneficiaries';
+            break
+          case 'step_8':
+            next_push = '/purposes';
+            break
+          case 'step_9':
+            next_push = '/approvals';
+            break
+          case 'step_10':
+            next_push = '/rate';
+            break
+          case 'step_11':
+            next_push = '/all-data';
+            break
+        }
+        this.$router.push(next_push);
       }
-      if (type === 'supervisory') {
-        this.$router.push({ 'path': next_push, query: { "type": "SupervisoryBoard" } });
-      } else if (type === 'collegial') {
-        this.$router.push({ 'path': next_push, query: { "type": "CollegialExecutive" } });
-      }
-    } else {
-      let next_push = "/";
-      switch (last_step) {
-        case 'step_1':
-          next_push = '/address';
-          break;
-        case 'step_2':
-          next_push = '/sctructure';
-          break
-        case 'step_3':
-          next_push = '/information-staff';
-          break
-        case 'step_4':
-          next_push = '/intelligence';
-          break
-        case 'step_6':
-          next_push = '/planning';
-          break
-        case 'step_7':
-          next_push = '/beneficiaries';
-          break
-        case 'step_8':
-          next_push = '/purposes';
-          break
-        case 'step_9':
-          next_push = '/approvals';
-          break
-        case 'step_10':
-          next_push = '/rate';
-          break
-        case 'step_11':
-          next_push = '/all-data';
-          break
-      }
-      this.$router.push(next_push);
     }
 
   },

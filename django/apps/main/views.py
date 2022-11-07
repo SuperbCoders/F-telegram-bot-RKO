@@ -13,6 +13,8 @@ from djangorestframework_camel_case.parser import (
     CamelCaseJSONParser,
 )
 
+from .utils import format_phone
+
 import uuid
 from datetime import date
 
@@ -36,9 +38,8 @@ class LoanRequestCurrentAPIView(APIView):
     def get(self, request, format=None, *args, **kwargs):
         phone_number: str | None = kwargs.get("phone_number")
         if phone_number:
-            pn = phone_number.strip()
-            phone_number = f"+{pn[0]} ({pn[1]}{pn[2]}{pn[3]}) {pn[4]}{pn[5]}{pn[6]} {pn[7]}{pn[8]} {pn[9]}{pn[10]}"
-        
+            phone_number = format_phone(phone_number)
+
         loan_request = LoanRequest.objects.filter(
             contact_number=phone_number,
             is_finished=False,
@@ -52,9 +53,11 @@ class LoanRequestCurrentAPIView(APIView):
     
     def post(self, request, format=None, *args, **kwargs):
         phone_number = kwargs.get("phone_number")
+        phone_number = format_phone(phone_number)
         data = request.data
         
-        print(data)
+        if 'contact_number' in data:
+            data['contact_number'] = format_phone(data['contact_number'])
         
         loan_request = LoanRequest.objects.filter(
             contact_number=phone_number,
@@ -82,11 +85,10 @@ class LoanApplicationListAPIView(ListAPIView):
     def get_queryset(self):
         telegram_chat_id = self.kwargs['telegram_chat_id']
         user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
-        pn = user.phone_number
-        phone_number_format = f"+{pn[1]} ({pn[2]}{pn[3]}{pn[4]}) {pn[5]}{pn[6]}{pn[7]} {pn[8]}{pn[9]} {pn[10]}{pn[11]}"
+
         return (
             LoanRequest.objects.filter(
-                contact_number=phone_number_format,
+                contact_number=user.phone_number,
                 is_finished=True,
             ).order_by("created_at")
         )
