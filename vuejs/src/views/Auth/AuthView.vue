@@ -89,8 +89,12 @@ export default {
       const response = await fetch(`https://rko-bot.spaaace.io/api/loan-application/current/${phone}/`)
       // const response = await fetch(`http://localhost:8000/api/loan-application/current/${phone}/`)
       const formData = await response.json();
+      console.log('formData', formData);
       this.$store.dispatch("loadObjectFormData", formData);
-      const last_step = formData.last_step;
+      const last_step = formData?.last_step;
+      if (!last_step) {
+        return
+      }
       const arr_last_step = last_step.split("*");
 
       if (arr_last_step.length === 2) {
