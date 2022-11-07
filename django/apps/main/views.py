@@ -44,6 +44,9 @@ class LoanRequestCurrentAPIView(APIView):
             contact_number=phone_number,
             is_finished=False,
         ).first()
+        
+        print(loan_request.id)
+        print(loan_request.list_supervisoty_board_persone)
 
         if loan_request:
             loan_request_serializer = LoanRequestSerializer(loan_request)
@@ -56,6 +59,8 @@ class LoanRequestCurrentAPIView(APIView):
         phone_number = format_phone(phone_number)
         data = request.data
         
+        print(data)
+        
         if 'contact_number' in data:
             data['contact_number'] = format_phone(data['contact_number'])
         
@@ -64,11 +69,14 @@ class LoanRequestCurrentAPIView(APIView):
             is_finished=False,
         ).first()
         
+        print(loan_request.id)
+        
         if loan_request:
             for field_name, field_value in data.items():
                 print(field_name, field_value)
                 setattr(loan_request, field_name, field_value)
                 loan_request.save()
+            print(loan_request.list_supervisoty_board_persone) 
         else:
             new_load_request = LoanRequest(**data)
             new_load_request.save()
