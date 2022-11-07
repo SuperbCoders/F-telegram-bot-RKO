@@ -91,7 +91,7 @@ class LoanApplicationListAPIView(ListAPIView):
         
         return (
             LoanRequest.objects.filter(
-                contact_number=user.phone_number,
+                contact_number=format_phone(user.phone_number),
                 is_finished=True,
             ).order_by("created_at")
         )
