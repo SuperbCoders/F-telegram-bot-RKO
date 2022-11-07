@@ -22,11 +22,11 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'supreme_management_person',
                 'supreme_management_inn',
                 
-                'supervisory_name',
-                'supervisory_body',
+                'collegiate_person',
+                'listSupervisotyBoardPersone',
                 
-                'collegiate_name',
-                'collegiate_body',
+                'supervisotyBoardPersone_name',
+                'listCollegialExecutiveBody',
                 
                 'licence_type',
                 'licence_number',
