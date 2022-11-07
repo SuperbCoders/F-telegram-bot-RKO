@@ -85,7 +85,10 @@ class LoanApplicationListAPIView(ListAPIView):
     def get_queryset(self):
         telegram_chat_id = self.kwargs['telegram_chat_id']
         user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
-
+        
+        print(user.phone_number)
+        print(LoanRequest.objects.filter(is_finished=True).all())
+        
         return (
             LoanRequest.objects.filter(
                 contact_number=user.phone_number,
