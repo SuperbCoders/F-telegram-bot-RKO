@@ -408,13 +408,21 @@ export default {
                 }
                 isTypeArray = "Array";
               } else if (this.isObject(valueSubStep)) {
-                console.log(keyStep, valueSubStep)
+
                 if (keyStep === 'list_collegial_executive_body' || keyStep === 'list_supervisoty_board_persone') {
-                  console.log(valueSubStep?.['page-1']?.account_own_name);
-                }
-                valueStep[keySubStep] = {
-                  type: 'Object',
-                  body: valueSubStep,
+                  const account_own_lastname = valueSubStep?.['page-1']?.account_own_lastname;
+                  const account_own_name = valueSubStep?.['page-1']?.account_own_name;
+                  const account_own_surname = valueSubStep?.['page-1']?.account_own_surname;
+
+                  valueStep[keySubStep] = {
+                    type: 'Variable',
+                    body: `${account_own_lastname} ${account_own_name} ${account_own_surname}`,
+                  }
+                } else {
+                  valueStep[keySubStep] = {
+                    type: 'Object',
+                    body: valueSubStep,
+                  }
                 }
                 isTypeArray = "Object";
               } else if (this.isBoolean(valueSubStep)) {
