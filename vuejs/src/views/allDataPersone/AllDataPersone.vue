@@ -243,9 +243,9 @@ export default {
     computed: {
         isList() {
             if (this.$route.query?.type === 'SupervisoryBoard') {
-                return this.$store.state.formData.step_3.listSupervisotyBoardPersone;
+                return this.$store.state.formData.step_3.list_supervisoty_board_persone;
             } else if (this.$route.query?.type === 'CollegialExecutive') {
-                return this.$store.state.formData.step_3.listCollegialExecutiveBody;
+                return this.$store.state.formData.step_3.list_collegial_executive_body;
             } else {
                 return []
             }

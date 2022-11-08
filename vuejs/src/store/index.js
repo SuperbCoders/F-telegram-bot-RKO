@@ -88,10 +88,10 @@ export default new Vuex.Store({
             }
         },
 
-        listSupervisotyBoardPersone: [],
+        list_supervisoty_board_persone: [],
         supervisoryBoardPersone: {},
 
-        listCollegialExecutiveBody: [],
+        list_collegial_executive_body: [],
         collegialExecutiveBody: {},
 
         leaderList: [

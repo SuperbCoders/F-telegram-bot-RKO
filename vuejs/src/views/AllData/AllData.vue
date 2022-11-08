@@ -140,64 +140,6 @@
           </div>
 
         </div>
-        <!-- <div v-for="(item, index) in step" :key="index" class="mt-1">
-          <div v-if="item || item === 0">
-            <div v-if="isArray(item)">
-              <p class="d-flex title-table form_block_title" v-if="item.length > 0">
-                {{ isTitle(index) }}
-              </p>
-              <div v-for="(sub_item, sub_index) in item" :key="sub_index">
-                <div v-if="isObject(sub_item)">
-                  <div v-for="(val, key) in sub_item" :key="key">
-                    <div class="d-flex" v-if="val">
-                      <div class="form_block_title w-50 pt-2 pb-2">
-                        {{ isTitle(key) }}
-                      </div>
-                      <div class="w-50 pt-2 pb-2">
-                        <div v-if="!isObject(val)" class="form_block_title">{{ val }}</div>
-                      </div>
-                      
-                    </div>
-                    <div class="block_right">
-                      <div v-if="isObject(val)">
-                        <div v-for="(elementObject, indexObject) in val" :key="indexObject" class="form_block_title">
-                          - {{ elementObject }}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div v-else class="block_right">
-                  <div class="form_block_title">- {{ sub_item }}</div>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex" v-else-if="typeof item == 'boolean'">
-              <p class="form_block_title w-50">
-                {{ isTitle(index) }}
-              </p>
-              <div class="form_block_title w-50">
-                <div>
-                  <span v-if="item">Да</span>
-                  <span v-else>Нет</span>
-                </div>
-                
-              </div>
-              
-            </div>
-            <div class="d-flex" v-else>
-              <div class="form_block_title w-50 pb-2 pt-2">
-                {{ isTitle(index) }}
-              </div>
-              <div class="form_block_title w-50 pb-2 pt-2">
-                {{ item }}
-              </div>
-
-            </div>
-          </div>
-
-        </div> -->
-
 
       </div>
     </div>
@@ -377,7 +319,7 @@ export default {
           return "Дата начала действия";
         case "supreme_management_body":
           return "Высший орган управления";
-        case "supervisotyBoardPersone_name":
+        case "supervisoty_board_persone_name":
           return "Наименование коллегиального исполнительного органа";
         case "is_supervisoty":
           return "Наличие коллегиального исполнительного органа";
@@ -431,9 +373,9 @@ export default {
           return "Наличие наблюдательного совета";
         case "operation_sum":
           return "Сумма операций по безналичным платежам в месяц";
-        case "listCollegialExecutiveBody":
+        case "list_collegial_executive_body":
           return "Члены коллегиального исполнительного органа";
-        case "listSupervisotyBoardPersone":
+        case "list_supervisoty_board_persone":
           return "Члены наблюдательного совета";
         case "informationGoals":
           return "Юридические лица компании";
