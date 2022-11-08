@@ -41,7 +41,7 @@
         <div v-if="step_index === 'step_3'">
           Группа взаимосвязанных компаний
         </div>
-        
+
         <div v-if="step_index === 'step_5'">
           Сведения о лицензии
         </div>
@@ -408,7 +408,10 @@ export default {
                 }
                 isTypeArray = "Array";
               } else if (this.isObject(valueSubStep)) {
-                console.log(keySubStep, valueSubStep)
+                console.log(keyStep, valueSubStep)
+                if (keyStep === 'list_collegial_executive_body' || keyStep === 'list_supervisoty_board_persone') {
+                  console.log(valueSubStep?.['page-1']?.account_own_name);
+                }
                 valueStep[keySubStep] = {
                   type: 'Object',
                   body: valueSubStep,
