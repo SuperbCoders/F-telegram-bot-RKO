@@ -399,6 +399,19 @@ export default {
           let valueStep = step[keyStep]
           if (this.isArray(valueStep)) {
             let isTypeArray = null;
+
+            if (keyStep === 'list_collegial_executive_body' || keyStep === 'list_supervisoty_board_persone') {
+              const arr_fio = valueStep.map((val) => {
+                const account_own_lastname = val?.['page-1']?.account_own_lastname;
+                const account_own_name = val?.['page-1']?.account_own_name;
+                const account_own_surname = val?.['page-1']?.account_own_surname;
+                return `${account_own_lastname} ${account_own_name} ${account_own_surname}`
+              })
+              console.log('arr_fio', arr_fio);
+              // isTypeArray = "Variable";
+              continue
+            }
+
             for (let keySubStep in valueStep) {
               let valueSubStep = valueStep[keySubStep];
               if (this.isArray(valueSubStep)) {
@@ -408,22 +421,11 @@ export default {
                 }
                 isTypeArray = "Array";
               } else if (this.isObject(valueSubStep)) {
-
-                if (keyStep === 'list_collegial_executive_body' || keyStep === 'list_supervisoty_board_persone') {
-                  const account_own_lastname = valueSubStep?.['page-1']?.account_own_lastname;
-                  const account_own_name = valueSubStep?.['page-1']?.account_own_name;
-                  const account_own_surname = valueSubStep?.['page-1']?.account_own_surname;
-
-                  valueStep[keySubStep] = {
-                    type: 'Variable',
-                    body: `${account_own_lastname} ${account_own_name} ${account_own_surname}`,
-                  }
-                } else {
-                  valueStep[keySubStep] = {
-                    type: 'Object',
-                    body: valueSubStep,
-                  }
+                valueStep[keySubStep] = {
+                  type: 'Object',
+                  body: valueSubStep,
                 }
+
                 isTypeArray = "Object";
               } else if (this.isBoolean(valueSubStep)) {
                 valueStep[keyStep] = {
