@@ -214,6 +214,10 @@ export default {
             }
         },
         del() {
+            this.$store.dispatch('addObjectFormData', {
+                object: 'step_2',
+                value: {}
+            });
             if (this.$route.query?.type === 'SupervisoryBoard') {
                 this.$store.commit('delSupervisoryBoardPersone')
             } else if (this.$route.query?.type === 'CollegialExecutive') {
@@ -232,7 +236,7 @@ export default {
         },
         next() {
             this.$store.dispatch('addObjectFormData', {
-                object: 'step_3',
+                object: 'step_2',
                 value: {}
             });
             this.$router.push("/sctructure");
