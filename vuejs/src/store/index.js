@@ -179,18 +179,18 @@ export default new Vuex.Store({
 
 
         addSupervisoryBoardPersone(state) {
-            state.formData.step_3.listSupervisotyBoardPersone.push({});
+            state.formData.step_3.list_supervisoty_board_persone.push({});
         },
         delSupervisoryBoardPersone(state) {
-            state.formData.step_3.listSupervisotyBoardPersone.pop();
+            state.formData.step_3.list_supervisoty_board_persone.pop();
         },
         async setSupervisoryBoardPersone(state, { key, value }) {
-            const length = state.formData.step_3.listSupervisotyBoardPersone.length;
+            const length = state.formData.step_3.list_supervisoty_board_persone.length;
             const is_element = length > 0;
             console.log(key, value);
             if (is_element) {
                 console.log(state.formData.step_3);
-                const last_element = state.formData.step_3.listSupervisotyBoardPersone[length - 1];
+                const last_element = state.formData.step_3.list_supervisoty_board_persone[length - 1];
                 last_element[key] = value;
                 console.log(last_element);
             }
@@ -211,20 +211,20 @@ export default new Vuex.Store({
 
 
         addCollegialExecutiveBody(state) {
-            state.formData.step_3.listCollegialExecutiveBody.push({});
+            state.formData.step_3.list_collegial_executive_body.push({});
         },
 
         delCollegialExecutiveBody(state) {
-            state.formData.step_3.listCollegialExecutiveBody.pop();
+            state.formData.step_3.list_collegial_executive_body.pop();
         },
 
         async setCollegialExecutiveBody(state, { key, value }) {
-            const length = state.formData.step_3.listCollegialExecutiveBody.length;
+            const length = state.formData.step_3.list_collegial_executive_body.length;
             const is_element = length > 0;
             console.log(key, value);
             if (is_element) {
                 console.log(state.formData.step_3);
-                const last_element = state.formData.step_3.listCollegialExecutiveBody[length - 1];
+                const last_element = state.formData.step_3.list_collegial_executive_body[length - 1];
                 last_element[key] = value;
                 console.log(last_element);
             }
