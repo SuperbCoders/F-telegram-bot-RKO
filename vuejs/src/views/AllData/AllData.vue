@@ -405,10 +405,18 @@ export default {
                 const account_own_lastname = val?.['page-1']?.account_own_lastname;
                 const account_own_name = val?.['page-1']?.account_own_name;
                 const account_own_surname = val?.['page-1']?.account_own_surname;
-                return `${account_own_lastname} ${account_own_name} ${account_own_surname}`
+                return {
+                  type: 'Variable',
+                  body: `${account_own_lastname} ${account_own_name} ${account_own_surname}`,
+                }
               })
               console.log('arr_fio', arr_fio);
-              // isTypeArray = "Variable";
+              step[keyStep] = {
+                type: 'Array',
+                typeArray: 'Variable',
+                body: arr_fio,
+              }
+
               continue
             }
 
