@@ -408,6 +408,7 @@ export default {
                 }
                 isTypeArray = "Array";
               } else if (this.isObject(valueSubStep)) {
+                console.log(keySubStep, valueSubStep)
                 valueStep[keySubStep] = {
                   type: 'Object',
                   body: valueSubStep,
