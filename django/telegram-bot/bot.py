@@ -88,7 +88,7 @@ async def apply(update, context):
         )
         phone = (res_phone.json()['phone'].replace('+', ''))
 
-        WEB_APP_URL = "https://rko-bot.spaaace.io/?phone={}".format(phone)
+        WEB_APP_URL = os.getenv("DOMAIN_APP_URL") + "/?phone={}".format(phone)
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)
@@ -133,7 +133,7 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            WEB_APP_URL = "https://rko-bot.spaaace.io/?phone={}".format(update.message.contact.phone_number)
+            WEB_APP_URL = os.getenv("DOMAIN_APP_URL") + "/?phone={}".format(update.message.contact.phone_number)
 
             button = InlineKeyboardButton(
                 text="Создать заявку",

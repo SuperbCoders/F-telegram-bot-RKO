@@ -26,6 +26,8 @@ services:
       - .env.secret
     depends_on:
       - db
+      - celery
+      - rabbitmq
     restart: always
   celery:
     build:
