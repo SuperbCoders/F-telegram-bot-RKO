@@ -272,11 +272,13 @@ supreme_management_body: CharField
 supreme_management_person: CharField
 supreme_management_inn: CharField
 
-supervisory_name: CharField
-supervisory_body: JSONField
+is_supervisoty: BooleanField
+supervisoty_board_persone_name: CharField
+list_supervisoty_board_persone: JSONField
 
-collegiate_name: CharField
-collegiate_body: JSONField
+is_collegiate_body: BooleanField
+collegiate_person: CharField
+list_collegial_executive_body: JSONField
 
 licence_type: CharField
 licence_number: CharField
@@ -442,11 +444,13 @@ GET method
 'supreme_management_person',
 'supreme_management_inn',
 
-'supervisory_name',
-'supervisory_body',
+'is_supervisoty',
+'supervisoty_board_persone_name',
+'list_supervisoty_board_persone',
 
-'collegiate_name',
-'collegiate_body',
+'is_collegiate_body',
+'collegiate_person',
+'list_collegial_executive_body',
 
 'licence_type',
 'licence_number',
@@ -495,11 +499,13 @@ then update data, and if is_finished = True then create data
 'supreme_management_person',
 'supreme_management_inn',
 
-'supervisory_name',
-'supervisory_body',
+'is_supervisoty',
+'supervisoty_board_persone_name',
+'list_supervisoty_board_persone',
 
-'collegiate_name',
-'collegiate_body',
+'is_collegiate_body',
+'collegiate_person',
+'list_collegial_executive_body',
 
 'licence_type',
 'licence_number',

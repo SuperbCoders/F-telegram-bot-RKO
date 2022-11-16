@@ -44,9 +44,6 @@ class LoanRequestCurrentAPIView(APIView):
             contact_number=phone_number,
             is_finished=False,
         ).first()
-        
-        print(loan_request.id)
-        print(loan_request.list_supervisoty_board_persone)
 
         if loan_request:
             loan_request_serializer = LoanRequestSerializer(loan_request)
@@ -69,14 +66,10 @@ class LoanRequestCurrentAPIView(APIView):
             is_finished=False,
         ).first()
         
-        print(loan_request.id)
-        
         if loan_request:
             for field_name, field_value in data.items():
-                print(field_name, field_value)
                 setattr(loan_request, field_name, field_value)
                 loan_request.save()
-            print(loan_request.list_supervisoty_board_persone) 
         else:
             new_load_request = LoanRequest(**data)
             new_load_request.save()
@@ -94,9 +87,6 @@ class LoanApplicationListAPIView(ListAPIView):
     def get_queryset(self):
         telegram_chat_id = self.kwargs['telegram_chat_id']
         user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
-        
-        print(user.phone_number)
-        print(LoanRequest.objects.filter(is_finished=True).all())
         
         return (
             LoanRequest.objects.filter(

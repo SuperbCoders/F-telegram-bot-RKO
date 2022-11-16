@@ -34,7 +34,7 @@
         <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName"
           v-model="currentData.collegiate_person" outlined :rules="requiredRules" :required="true"></v-text-field>
         <div class="title_btn">Члены наблюдательного совета</div>
-        <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in listSupervisotyBoardPersone" :key="key">
+        <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_supervisoty_board_persone" :key="key">
           {{ val['page-1'].account_own_lastname }}
           {{ val['page-1'].account_own_name }}
           {{ val['page-1'].account_own_surname }}
@@ -65,9 +65,9 @@
           Наименование коллегиального исполнительного органа
         </p>
         <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName" outlined
-          v-model="currentData.supervisotyBoardPersone_name" :rules="requiredRules" :required="true"></v-text-field>
+          v-model="currentData.supervisoty_board_persone_name" :rules="requiredRules" :required="true"></v-text-field>
         <div class="title_btn">Члены коллегиального исполнительного органа</div>
-        <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in listCollegialExecutiveBody" :key="key">
+        <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_collegial_executive_body" :key="key">
           {{ val['page-1'].account_own_lastname }}
           {{ val['page-1'].account_own_name }}
           {{ val['page-1'].account_own_surname }}
@@ -108,12 +108,12 @@ export default {
       supreme_management_inn: "",
 
       is_collegiate_body: false,
-      supervisotyBoardPersone_name: "",
-      listCollegialExecutiveBody: [],
+      supervisoty_board_persone_name: "",
+      list_collegial_executive_body: [],
 
       is_supervisoty: false,
       collegiate_person: "",
-      listSupervisotyBoardPersone: [],
+      list_supervisoty_board_persone: [],
     },
     innRules: [
       (v) => !!v || "Это поле обязательно",
@@ -128,8 +128,8 @@ export default {
       this.$refs.form.validate();
 
       if (this.$refs.form.validate()) {
-        this.currentData.listCollegialExecutiveBody = this.listCollegialExecutiveBody;
-        this.currentData.listSupervisotyBoardPersone = this.listSupervisotyBoardPersone;
+        this.currentData.list_collegial_executive_body = this.list_collegial_executive_body;
+        this.currentData.list_supervisoty_board_persone = this.list_supervisoty_board_persone;
 
 
         this.$store.dispatch("addObjectFormData", {
@@ -156,7 +156,7 @@ export default {
     },
     async createSupervisoryBoard() {
       await this.$store.commit('addSupervisoryBoardPersone')
-      this.currentData.listSupervisotyBoardPersone = this.$store.state.formData.step_3.listSupervisotyBoardPersone;
+      this.currentData.list_supervisoty_board_persone = this.$store.state.formData.step_3.list_supervisoty_board_persone;
       await this.$store.dispatch('addObjectFormData', {
         object: 'step_3',
         value: this.currentData
@@ -170,7 +170,7 @@ export default {
     },
     async createCollegialExecutive() {
       await this.$store.commit('addCollegialExecutiveBody')
-      this.currentData.listCollegialExecutiveBody = this.$store.state.formData.step_3.listCollegialExecutiveBody;
+      this.currentData.list_collegial_executive_body = this.$store.state.formData.step_3.list_collegial_executive_body;
       this.$store.dispatch('addObjectFormData', {
         object: 'step_3',
         value: this.currentData
@@ -196,11 +196,11 @@ export default {
         this.currentData.supreme_management_person === "Управляющая компания"
       );
     },
-    listSupervisotyBoardPersone() {
-      return this.$store.state.formData.step_3.listSupervisotyBoardPersone
+    list_supervisoty_board_persone() {
+      return this.$store.state.formData.step_3.list_supervisoty_board_persone
     },
-    listCollegialExecutiveBody() {
-      return this.$store.state.formData.step_3.listCollegialExecutiveBody
+    list_collegial_executive_body() {
+      return this.$store.state.formData.step_3.list_collegial_executive_body
     }
   },
   components: {
@@ -216,7 +216,7 @@ export default {
       this.currentData.supreme_management_inn = dataStep.supreme_management_inn;
 
       this.currentData.supreme_management_person = dataStep.supreme_management_person;
-      this.currentData.supervisotyBoardPersone_name = dataStep.supervisotyBoardPersone_name;
+      this.currentData.supervisoty_board_persone_name = dataStep.supervisoty_board_persone_name;
       this.currentData.collegiate_person = dataStep.collegiate_person;
       this.currentData.is_supervisoty = dataStep.is_supervisoty;
       this.currentData.is_collegiate_body = dataStep.is_collegiate_body;

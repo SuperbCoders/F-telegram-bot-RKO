@@ -1,4 +1,3 @@
-from pyexpat import model
 import random
 from re import S
 import string
@@ -70,9 +69,11 @@ class LoanRequest(models.Model):
     supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
+    is_collegiate_body = models.BooleanField(default=False)
     collegiate_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     list_supervisoty_board_persone = models.JSONField(blank=True, null=True)
 
+    is_supervisoty = models.BooleanField(default=False)
     supervisoty_board_persone_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     list_collegial_executive_body = models.JSONField(blank=True, null=True)
 
