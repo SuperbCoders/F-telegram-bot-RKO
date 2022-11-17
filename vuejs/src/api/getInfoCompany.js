@@ -1,5 +1,5 @@
 var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party";
-var token = process.env['TOKEN_DADATA'];
+var token = process.env.TOKEN_DADATA;
 
 
 
