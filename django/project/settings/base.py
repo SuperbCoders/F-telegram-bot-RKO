@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['django', 'localhost', '127.0.0.1', '185.91.52.232', 'rko-bot.spaaace.io']
+ALLOWED_HOSTS = ['django', 'localhost', '127.0.0.1', os.getenv('ALLOWED_DOMAIN_NAME')]
 
 
 SECRET_KEY = os.getenv('SECRET_KEY')
