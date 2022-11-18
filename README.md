@@ -558,3 +558,69 @@ passport: typeFile
   path: "<URLFile>"
 }
 ```
+
+### Get phone number by telegram chat id
+GET method
+```
+api/get_phone/<str:telegram_chat_id>/
+```
+> return
+```
+{
+  phone: '722222222222'
+}
+```
+
+### Check phone number
+GET method
+```
+api/user/<str:telegram_chat_id>/
+```
+> return
+```
+If there is telegram_chat_id then status 200
+If not telegram_chat_id then status 404
+```
+
+POST method
+```
+api/user/<str:telegram_chat_id>/
+```
+> body
+```
+{
+  phone_number: '79091233342'
+}
+```
+```
+If success then status 200
+If error then status 400
+```
+
+### License 
+GET method
+```
+api/get_license/
+```
+> return 
+```
+{
+  view,
+  number,
+  Issued_by,
+  License_issue_date,
+  Validity,
+  List_types_licensed_activities,
+}
+```
+
+
+### Status list
+GET method
+```
+api/loan-application/<int:telegram_chat_id>/
+```
+> return
+
+Array "Structure Data"
+
