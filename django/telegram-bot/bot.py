@@ -158,7 +158,7 @@ async def handle_phone_number(update, context):
 
 def get_user_applications(chat_id):
     api_url = (
-        "http://django:8000/"+
+        os.getenv("DJANGO_APP_API_ROOT_URL") +
         "api/loan-application/{}".format(chat_id)
     )
     user_applications = []
