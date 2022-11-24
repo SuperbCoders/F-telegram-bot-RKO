@@ -66,7 +66,7 @@ export default {
       console.log(this.currentData.first_passport_page);
       formData.append("passport", this.currentData.first_passport_page[0])
 
-      const response = await fetch(`/api/passport-load/`, {
+      const response = await fetch(process.env.VUE_APP_HOST_API+`/api/passport-load/`, {
         method: "POST",
         body: formData,
       });

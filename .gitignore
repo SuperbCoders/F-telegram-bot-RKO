@@ -9,6 +9,7 @@ django/project/settings/secrets.py
 db.sqlite3
 htmlcov/*
 .coverage
+.env
 .env.secret
 .vscode
 .DS_Store

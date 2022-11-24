@@ -1,6 +1,6 @@
 var url = "https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address";
 var token = process.env.VUE_APP_TOKEN_DADATA;
-console.log(process.env);
+
 export const getAddress = async (query="") => {
 
     var options = {

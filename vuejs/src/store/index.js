@@ -197,7 +197,7 @@ export default new Vuex.Store({
             const contact_number = state.formData.step_1.contact_number;
             const response_data = Object.assign({ last_step: `${key}*supervisory` }, state.formData.step_3);
 
-            await fetch(`/api/loan-application/current/${contact_number}/`, {
+            await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -231,7 +231,7 @@ export default new Vuex.Store({
             const contact_number = state.formData.step_1.contact_number;
             const response_data = Object.assign({ last_step: `${key}*collegial` }, state.formData.step_3);
 
-            await fetch(`/api/loan-application/current/${contact_number}/`, {
+            await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -248,7 +248,7 @@ export default new Vuex.Store({
             const contact_number = context.state.formData.step_1.contact_number;
             const response_data = Object.assign({ last_step: payolad.object }, payolad.value);
 
-            await fetch(`/api/loan-application/current/${contact_number}/`, {
+            await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
