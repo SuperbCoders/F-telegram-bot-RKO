@@ -15,6 +15,8 @@ from djangorestframework_camel_case.parser import (
 
 from .utils import format_phone
 
+from .adapter import Adapter_LoanRequest
+
 import uuid
 from datetime import date
 
@@ -71,8 +73,12 @@ class LoanRequestCurrentAPIView(APIView):
                 setattr(loan_request, field_name, field_value)
                 loan_request.save()
         else:
-            new_load_request = LoanRequest(**data)
-            new_load_request.save()
+            loan_request = LoanRequest(**data)
+            loan_request.save()
+
+        if loan_request.is_finished:
+            Adapter_LoanRequest(loan_request)
+
         return Response({}, status=status.HTTP_200_OK)
 
 

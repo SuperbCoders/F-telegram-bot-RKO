@@ -35,10 +35,10 @@
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
         <hr class="mt-2 mb-2">
-        <div v-if="step_index === 'step_2'">
+        <div v-if="step_index === 'step_3'">
           Структура органов управления
         </div>
-        <div v-if="step_index === 'step_3'">
+        <div v-if="step_index === 'step_4'">
           Группа взаимосвязанных компаний
         </div>
 
