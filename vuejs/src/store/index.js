@@ -3,6 +3,10 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+function isEmptyObject(value) {
+    return Object.keys(value).length === 0 && value.constructor === Object;
+  }
+
 export default new Vuex.Store({
     state: {
         drawer: null,
@@ -243,10 +247,19 @@ export default new Vuex.Store({
     },
     actions: {
         async addObjectFormData(context, payolad) {
-            await context.commit("addItemFormDataObject", payolad);
+            const object = payolad.object
+            const value = payolad.value;
+            
 
             const contact_number = context.state.formData.step_1.contact_number;
-            const response_data = Object.assign({ last_step: payolad.object }, payolad.value);
+            let response_data = null
+            if (isEmptyObject(value)) {
+                response_data = { last_step: object };
+            } else {
+                response_data = Object.assign({ last_step: object }, value);
+                context.commit("addItemFormDataObject", { object, value });
+            }
+             
 
             await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',

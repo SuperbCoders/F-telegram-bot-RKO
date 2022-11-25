@@ -35,9 +35,7 @@
           v-model="currentData.collegiate_person" outlined :rules="requiredRules" :required="true"></v-text-field>
         <div class="title_btn">Члены наблюдательного совета</div>
         <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_supervisoty_board_persone" :key="key">
-          {{ val['page-1'].account_own_lastname }}
-          {{ val['page-1'].account_own_name }}
-          {{ val['page-1'].account_own_surname }}
+          {{  renderName(val['page-1']) }}
         </v-card>
 
         <div class="contain_btn_add">
@@ -68,9 +66,7 @@
           v-model="currentData.supervisoty_board_persone_name" :rules="requiredRules" :required="true"></v-text-field>
         <div class="title_btn">Члены коллегиального исполнительного органа</div>
         <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_collegial_executive_body" :key="key">
-          {{ val['page-1'].account_own_lastname }}
-          {{ val['page-1'].account_own_name }}
-          {{ val['page-1'].account_own_surname }}
+          {{  renderName(val['page-1']) }}
         </v-card>
 
         <div class="contain_btn_add">
@@ -182,6 +178,9 @@ export default {
         }
       })
     },
+    renderName(obj){
+      return `${obj?.account_own_lastname} ${obj?.account_own_name} ${obj?.account_own_surname}`
+    }
 
   },
   computed: {
