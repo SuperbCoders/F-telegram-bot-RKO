@@ -191,12 +191,9 @@ export default new Vuex.Store({
         async setSupervisoryBoardPersone(state, { key, value }) {
             const length = state.formData.step_3.list_supervisoty_board_persone.length;
             const is_element = length > 0;
-            console.log(key, value);
             if (is_element) {
-                console.log(state.formData.step_3);
                 const last_element = state.formData.step_3.list_supervisoty_board_persone[length - 1];
                 last_element[key] = value;
-                console.log(last_element);
             }
             const contact_number = state.formData.step_1.contact_number;
             const response_data = Object.assign({ last_step: `${key}*supervisory` }, state.formData.step_3);
@@ -225,12 +222,9 @@ export default new Vuex.Store({
         async setCollegialExecutiveBody(state, { key, value }) {
             const length = state.formData.step_3.list_collegial_executive_body.length;
             const is_element = length > 0;
-            console.log(key, value);
             if (is_element) {
-                console.log(state.formData.step_3);
                 const last_element = state.formData.step_3.list_collegial_executive_body[length - 1];
                 last_element[key] = value;
-                console.log(last_element);
             }
             const contact_number = state.formData.step_1.contact_number;
             const response_data = Object.assign({ last_step: `${key}*collegial` }, state.formData.step_3);

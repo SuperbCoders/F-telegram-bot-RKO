@@ -153,10 +153,12 @@ export default {
     async createSupervisoryBoard() {
       await this.$store.commit('addSupervisoryBoardPersone')
       this.currentData.list_supervisoty_board_persone = this.$store.state.formData.step_3.list_supervisoty_board_persone;
+      this.currentData.list_collegial_executive_body = this.$store.state.formData.step_3.list_collegial_executive_body;
       await this.$store.dispatch('addObjectFormData', {
         object: 'step_3',
-        value: this.currentData
+        value: this.currentData,
       })
+
       this.$router.push({
         path: "/individual-info",
         query: {
@@ -166,6 +168,7 @@ export default {
     },
     async createCollegialExecutive() {
       await this.$store.commit('addCollegialExecutiveBody')
+      this.currentData.list_supervisoty_board_persone = this.$store.state.formData.step_3.list_supervisoty_board_persone;
       this.currentData.list_collegial_executive_body = this.$store.state.formData.step_3.list_collegial_executive_body;
       this.$store.dispatch('addObjectFormData', {
         object: 'step_3',

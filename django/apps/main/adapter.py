@@ -359,8 +359,22 @@ class Adapter_LoanRequest:
         )
         companyFoundersUl = self.getCompanyFoundersUl([])
         
-        companyPersons = self.parserCompanyPersons()
-        
+        lr_list_companyPersons = self.parserCompanyPersons()
+        companyPersons = []
+        for lr_persons in lr_list_companyPersons:
+            companyPersonsBase = self.getCompanyPersonsBase(
+                inn=lr_persons['account_onw_inn'],
+                lastName=lr_persons['account_own_name'],
+                firstName=lr_persons['account_own_lastname'],
+                middleName=lr_persons['account_own_surname'],
+                gender=lr_persons['account_own_gender'],
+                birthDate=lr_persons['account_datebirth'],
+                birthPlace=lr_persons['account_birth_place'],
+                citizenship="",
+                countryOfResidence="",
+                registrationAddress="",
+                actualAddress="",
+            )
         
         print(companyPersons)
         return self.json_api
