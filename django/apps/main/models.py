@@ -7,6 +7,7 @@ from django.db import models
 from django.utils import timezone
 
 from .tasks import send_telegram_bot_message
+from .utils import format_phone
 
 INN_MAX_LENGTH = 12
 MAX_CITY_NAME_STRING = 30
@@ -63,7 +64,6 @@ class LoanRequest(models.Model):
     contact_number = models.CharField(max_length=20)
     
     addresses = models.JSONField(blank=True, null=True)
-    # basis = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     
     supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -116,7 +116,7 @@ class LoanRequest(models.Model):
             "Информация с результатами рассмотрения будет отправлена " +
             "вам по телефону и электронной почте."
         )
-        normal_pn = self.contact_number.replace("(", '').replace(")", '').replace(" ", '')
+        normal_pn = format_phone(self.contact_number)
         user = User.objects.filter(phone_number=normal_pn).first()
         
         send_telegram_bot_message.delay(user.telegram_chat_id, text)
@@ -130,7 +130,7 @@ class LoanRequest(models.Model):
         button_text = "Загрузить документы"
         button_url = "https://www.zenit.ru/"
         
-        normal_pn = self.contact_number.replace("(", '').replace(")", '').replace(" ", '')
+        normal_pn = format_phone(self.contact_number)
         user = User.objects.filter(phone_number=normal_pn).first()
         
         send_telegram_bot_message.delay(
@@ -142,7 +142,7 @@ class LoanRequest(models.Model):
         )
 
     def _send_change_status_message_to_telegram(self):
-        normal_pn = self.contact_number.replace("(", '').replace(")", '').replace(" ", '')
+        normal_pn = format_phone(self.contact_number)
         user = User.objects.filter(phone_number=normal_pn).first()
         if self.status == "update": 
             print(self.status)

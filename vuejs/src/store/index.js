@@ -249,16 +249,19 @@ export default new Vuex.Store({
         async addObjectFormData(context, payolad) {
             const object = payolad.object
             const value = payolad.value;
-            
 
-            const contact_number = context.state.formData.step_1.contact_number;
-            let response_data = null
+            let response_data = null;
+            
             if (isEmptyObject(value)) {
                 response_data = { last_step: object };
             } else {
                 response_data = Object.assign({ last_step: object }, value);
                 context.commit("addItemFormDataObject", { object, value });
             }
+
+            const contact_number = context.state.formData.step_1.contact_number;
+            
+            
              
 
             await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {

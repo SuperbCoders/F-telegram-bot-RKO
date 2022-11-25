@@ -185,8 +185,9 @@ class Adapter_LoanRequest:
             "phoneNumber": phoneNumber, # Номер телефона
         }
 
-    def setInitiator(self, data) -> None:
-        self.json_api['initiator'] = data
+    def setInitiator(self, initiator) -> None:
+        self.json_api['initiator'] = initiator
+
 
     def getCompanyBase(self, inn, ogrn, shortNameEn, legalAddress, postalAddress) -> dict:
         return {
@@ -211,12 +212,87 @@ class Adapter_LoanRequest:
         return {
             "companyFoundersUl": companyFoundersUl,
         }
-        
-    def getCompanyPersons(self):
+
+
+    def getCompanyPersonsBase(self, inn, lastName, firstName, middleName, gender, birthDate, birthPlace, citizenship, countryOfResidence, registrationAddress, actualAddress):
         return {
-            "companyPersons": {
-                
+            "inn": inn, # ИНН
+            "lastName": lastName, # Фамилия
+            "firstName": firstName, # Имя
+            "middleName": middleName, # Отчество
+            "gender": gender, # Пол
+            "birthDate": birthDate, # Дата рождения
+            "birthPlace": birthPlace, # Место рождения
+            "citizenship": citizenship, # Гражданство (выбор из справочника)
+            "countryOfResidence": countryOfResidence, # Страна проживания (выбор из справочника)
+            "registrationAddress": registrationAddress, # Адрес регистрации
+            "actualAddress": actualAddress, # Адрес местонахождения
+        }
+
+    def getContacts(self, phone, email):
+        return {
+            "contacts": { # Контактные данные
+                "phone": phone, # Телефон
+                "email": email # Электронная почта
+            },
+        }
+
+    def getIdentityDocument(self, type, series, number, issuedDate, issuingAuthority, issuingAuthorityCode):
+        return {
+            "identityDocument": { # Документ, удостверяющий личность
+                "type": type, # Тип документа (выбор из справочника)
+                "series": series, # Серия
+                "number": number, # Номер
+                "issuedDate": issuedDate, # Дата выдачи
+                "issuingAuthority": issuingAuthority, # Кем выдан
+                "issuingAuthorityCode": issuingAuthorityCode, # Код подразделения
+            },
+        }
+
+    def getRoles(self, companyHeadEnabled, companyHeadPosition, founderEnabled, founderShare, beneficiaryEnabled, beneficiaryShare, signerEnabled, signerPosition):
+        return {
+            "roles": { # Роли физического лица в организации
+                "companyHead": { # ЕИО
+                    "enabled": companyHeadEnabled,
+                    "position": companyHeadPosition # Должность
+                },
+                "founder": { # Акционер/Учредитель
+                    "enabled": founderEnabled,
+                    "share": founderShare # Доля
+                },
+                "beneficiary": { # Бенифициар
+                    "enabled": beneficiaryEnabled,
+                    "share": beneficiaryShare # Доля
+                },
+                "signer": { # Подписант
+                    "enabled": signerEnabled,
+                    "position": signerPosition # Должность
+                    # Действует по доверенности
+                    # Информация о доверенности подписанта
+                    #   Наименование документа
+                    #   Номер документа
+                    #   Дата доверенности
+                    #   Дата окончания действия
+                }
+            },
+        }
+
+    def getPdl(self, ipdl, mpdl, rpdl):
+        return {
+            "pdl": { # Отношение к публичным должностным лицам
+                "ipdl": ipdl, # Является ИПДЛ
+                "mpdl": mpdl, # Является МПДЛ
+                "rpdl": rpdl # Является РПДЛ
             }
+        }
+
+    def getCompanyPersons(self, companyPersonsBase, identityDocument, сontacts, roles, pdl):
+        return {
+            **companyPersonsBase,
+            **identityDocument,
+            **сontacts,
+            **roles,
+            **pdl,
         }
     
     def getCompanyManagement(self, supremeGoverningBody):
@@ -225,7 +301,66 @@ class Adapter_LoanRequest:
                 "supremeGoverningBody": supremeGoverningBody # Высший орган управления (выбор из справочника)
             }
         }
-    
 
 
+    def getLoadRequest_legalAddress(self):
+        lr = self.loan_request
+        addresses = lr.addresses
+        for address in addresses:
+            if "Юридический" in address['type_adress']:
+                return address['address']
+        return ""
 
+    def getLoadRequest_postalAddress(self):
+        lr = self.loan_request
+        addresses = lr.addresses
+        for address in addresses:
+            if "Почтовый" in address['type_adress']:
+                return address['address']
+        return ""
+
+
+    def parserCompanyPersons(self):
+        companyPersons = []
+        for persons in self.loan_request.list_supervisoty_board_persone:
+            companyPersonsData = {}
+            for key in persons:
+                page = persons[key]
+                companyPersonsData = {**companyPersonsData,  **page}
+            companyPersons.append(companyPersonsData)
+        for persons in self.loan_request.list_collegial_executive_body:
+            companyPersonsData = {}
+            for key in persons:
+                page = persons[key]
+                companyPersonsData = {**companyPersonsData,  **page}
+            companyPersons.append(companyPersonsData)
+        return companyPersons
+
+    def getResult(self):
+        lr = self.loan_request
+        initiatorData = self.getInitiatorData(phoneNumber=lr.contact_number)
+        self.setInitiator(initiator=initiatorData)
+        
+        legalAddress = self.getLoadRequest_legalAddress()
+        postalAddress = self.getLoadRequest_postalAddress()
+
+        companyBase = self.getCompanyBase(
+            inn=lr.inn,
+            ogrn="",
+            shortNameEn="",
+            legalAddress=legalAddress,
+            postalAddress=postalAddress,
+        )
+        сompanyContacts = self.getCompanyContacts(
+            email="",
+            phone=lr.contact_number,
+            webSite="",
+            fax="",
+        )
+        companyFoundersUl = self.getCompanyFoundersUl([])
+        
+        companyPersons = self.parserCompanyPersons()
+        
+        
+        print(companyPersons)
+        return self.json_api

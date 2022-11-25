@@ -77,8 +77,8 @@ class LoanRequestCurrentAPIView(APIView):
             loan_request.save()
 
         if loan_request.is_finished:
-            Adapter_LoanRequest(loan_request)
-
+            adapter = Adapter_LoanRequest(loan_request)
+            adapter.getResult()
         return Response({}, status=status.HTTP_200_OK)
 
 
