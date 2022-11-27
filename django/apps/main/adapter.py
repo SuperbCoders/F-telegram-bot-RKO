@@ -1,5 +1,8 @@
 from typing import TypedDict, List
+import base64
+import requests
 
+session = requests.Session()
 
 # УЧРЕДИТЕЛИ-ЮЛ
 class CompanyFoundersUl(TypedDict): 
@@ -249,7 +252,24 @@ class Adapter_LoanRequest:
             },
         }
 
-    def getRoles(self, companyHeadEnabled, companyHeadPosition, founderEnabled, founderShare, beneficiaryEnabled, beneficiaryShare, signerEnabled, signerPosition):
+    def getRoles(self, roles, companyHeadPosition, founderShare, beneficiaryShare, signerPosition):
+        companyHeadEnabled = False
+        founderEnabled = False
+        beneficiaryEnabled = False
+        signerEnabled = False
+        
+        if 'Учредитель' in roles:
+            founderEnabled = True
+        
+        if 'Бенефициарный владелец' in roles:
+            beneficiaryEnabled = True
+        
+        if 'Подписант' in roles:
+            signerEnabled = True
+        
+        if 'Руководитель' in roles:
+            companyHeadEnabled = True
+
         return {
             "roles": { # Роли физического лица в организации
                 "companyHead": { # ЕИО
@@ -302,6 +322,8 @@ class Adapter_LoanRequest:
             }
         }
 
+    def setTariff(self, tariff):
+        self.json_api['selectedTariff'] = tariff
 
     def getLoadRequest_legalAddress(self):
         lr = self.loan_request
@@ -336,6 +358,26 @@ class Adapter_LoanRequest:
             companyPersons.append(companyPersonsData)
         return companyPersons
 
+    def setCompany(self, company):
+        self.json_api['company'] = company
+    
+    def setDocument(self, listObj):
+        self.json_api['documents'] = listObj
+    
+    def getDocument(self, url):
+        image = session.get(url, stream=True)
+        encoded_string = base64.b64encode(image.raw)
+        return {
+                "docType": "", # Тип документа (справочник)
+                "files": [
+                    {
+                        "fileName": "pasport.pdf",
+                        "content": encoded_string
+                    }
+                ]
+            }
+        
+
     def getResult(self):
         lr = self.loan_request
         initiatorData = self.getInitiatorData(phoneNumber=lr.contact_number)
@@ -351,7 +393,7 @@ class Adapter_LoanRequest:
             legalAddress=legalAddress,
             postalAddress=postalAddress,
         )
-        сompanyContacts = self.getCompanyContacts(
+        companyContacts = self.getCompanyContacts(
             email="",
             phone=lr.contact_number,
             webSite="",
@@ -360,7 +402,8 @@ class Adapter_LoanRequest:
         companyFoundersUl = self.getCompanyFoundersUl([])
         
         lr_list_companyPersons = self.parserCompanyPersons()
-        companyPersons = []
+        companyPersonsList = []
+        documentList = []
         for lr_persons in lr_list_companyPersons:
             companyPersonsBase = self.getCompanyPersonsBase(
                 inn=lr_persons['account_onw_inn'],
@@ -375,6 +418,64 @@ class Adapter_LoanRequest:
                 registrationAddress="",
                 actualAddress="",
             )
+
+            companyContact = self.getContacts(
+                phone="",
+                email="",
+            )
+
+            identityDocument = self.getIdentityDocument(
+                type=lr_persons['doc_type'],
+                series=lr_persons['doc_serial'],
+                number=lr_persons['doc_number'],
+                issuedDate=lr_persons['date_issue'],
+                issuingAuthority=lr_persons['issued_by'],
+                issuingAuthorityCode=lr_persons['division_code'],
+            )
+
+            roles = self.getRoles(
+                roles=lr_persons['account_onw_role'],
+                companyHeadPosition="",
+                founderShare=0,
+                beneficiaryShare=0,
+                signerPosition="",
+            )
+
+            pdl = self.getPdl(
+                ipdl="",
+                mpdl="",
+                rpdl="",
+            )
+
+            companyPersons = self.getCompanyPersons(
+                companyPersonsBase=companyPersonsBase,
+                identityDocument=identityDocument,
+                contacts=companyContact,
+                roles=roles,
+                pdl=pdl,
+            )
+            
+            document = self.getDocument(url=lr_persons['first_passport_page_url'])
+            documentList.append(document)
+
+            companyPersonsList.append(companyPersons)
         
-        print(companyPersons)
+        companyManagement = self.getCompanyManagement(
+            supreme_management_body=lr.supreme_management_body
+        )
+        self.setCompany(
+            {
+                "companyPersons": companyPersonsList,
+                **companyBase,
+                **companyContacts,
+                **companyFoundersUl,
+                **companyManagement,
+            }
+        )
+        self.setTariff(
+            lr.tariff
+        )
+
+        self.setDocument(documentList)
+
         return self.json_api

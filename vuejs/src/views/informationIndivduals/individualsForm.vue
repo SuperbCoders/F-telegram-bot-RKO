@@ -5,7 +5,7 @@
       <div class="checkboxs">
         <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
         </v-checkbox>
-        <v-checkbox v-model="currentData.account_onw_founder" label="Учредитель" value="Учредитель" hide-details>
+        <v-checkbox v-model="currentData.account_onw_role" label="Учредитель" value="Учредитель" hide-details>
         </v-checkbox>
         <v-checkbox v-model="currentData.account_onw_role" label="Бенефициарный владелец" value="Бенефициарный владелец"
           hide-details>
