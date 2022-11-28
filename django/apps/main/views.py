@@ -12,6 +12,7 @@ from djangorestframework_camel_case.parser import (
     CamelCaseMultiPartParser,
     CamelCaseJSONParser,
 )
+import requests
 
 from .utils import format_phone
 
@@ -29,6 +30,7 @@ from .serializers import (
     # LoanApplicationSerializer,
     LoanRequestSerializer,
 )
+import os
 
 
 class LoanRequestCurrentAPIView(APIView):
@@ -78,7 +80,9 @@ class LoanRequestCurrentAPIView(APIView):
 
         if loan_request.is_finished:
             adapter = Adapter_LoanRequest(loan_request)
-            adapter.getResult()
+            result = adapter.getResult()
+            print(result)
+            requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
         return Response({}, status=status.HTTP_200_OK)
 
 
