@@ -77,13 +77,13 @@ class LoanRequestCurrentAPIView(APIView):
         else:
             loan_request = LoanRequest(**data)
             loan_request.save()
-
-        if loan_request.is_finished:
-            adapter = Adapter_LoanRequest(loan_request)
-            result = adapter.getResult()
-            print(result)
-            answer = requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
-            print(answer)
+        if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'enable':
+            if loan_request.is_finished:
+                adapter = Adapter_LoanRequest(loan_request)
+                result = adapter.getResult()
+                print(result)
+                answer = requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
+                print(answer)
         return Response({}, status=status.HTTP_200_OK)
 
 
