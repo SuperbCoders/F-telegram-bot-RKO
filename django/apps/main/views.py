@@ -82,7 +82,8 @@ class LoanRequestCurrentAPIView(APIView):
             adapter = Adapter_LoanRequest(loan_request)
             result = adapter.getResult()
             print(result)
-            requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
+            answer = requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
+            print(answer)
         return Response({}, status=status.HTTP_200_OK)
 
 
