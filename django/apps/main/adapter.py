@@ -1,6 +1,7 @@
 from typing import TypedDict, List
 import base64
 import requests
+import os
 
 session = requests.Session()
 
@@ -13,7 +14,13 @@ class CompanyFoundersUl(TypedDict):
 
 class Adapter_LoanRequest:
     
-    json_api = {
+    json_api = {}
+    
+    loan_request = None
+    
+    def __init__(self, loan_request) -> None:
+        self.loan_request = loan_request
+        self.json_api = {
         "initiator": { # Инициатор заявки
             "phoneNumber": "" # Номер телефона
         },
@@ -178,11 +185,6 @@ class Adapter_LoanRequest:
         ]
     }
     
-    loan_request = None
-    
-    def __init__(self, loan_request) -> None:
-        self.loan_request = loan_request
-    
     def getInitiatorData(self, phoneNumber) -> dict:
         return {
             "phoneNumber": phoneNumber, # Номер телефона
@@ -306,11 +308,11 @@ class Adapter_LoanRequest:
             }
         }
 
-    def getCompanyPersons(self, companyPersonsBase, identityDocument, сontacts, roles, pdl):
+    def getCompanyPersons(self, companyPersonsBase, identityDocument, contacts, roles, pdl):
         return {
             **companyPersonsBase,
             **identityDocument,
-            **сontacts,
+            **contacts,
             **roles,
             **pdl,
         }
@@ -365,14 +367,16 @@ class Adapter_LoanRequest:
         self.json_api['documents'] = listObj
     
     def getDocument(self, url):
-        image = session.get(url, stream=True)
-        encoded_string = base64.b64encode(image.raw)
+        response = session.get(os.getenv("DJANGO_APP_DOMAIN_STORAGE") + url)
+        uri = ("data:" + response.headers['Content-Type'] + ";" + "base64," + base64.b64encode(response.content).decode("utf-8"))
+        nameFile = url.split('/')[-1]
+
         return {
-                "docType": "", # Тип документа (справочник)
+                "docType": response.headers['Content-Type'], # Тип документа (справочник)
                 "files": [
                     {
-                        "fileName": "pasport.pdf",
-                        "content": encoded_string
+                        "fileName": nameFile,
+                        "content": uri
                     }
                 ]
             }
@@ -405,6 +409,7 @@ class Adapter_LoanRequest:
         companyPersonsList = []
         documentList = []
         for lr_persons in lr_list_companyPersons:
+            print(lr_persons)
             companyPersonsBase = self.getCompanyPersonsBase(
                 inn=lr_persons['account_onw_inn'],
                 lastName=lr_persons['account_own_name'],
@@ -461,7 +466,7 @@ class Adapter_LoanRequest:
             companyPersonsList.append(companyPersons)
         
         companyManagement = self.getCompanyManagement(
-            supreme_management_body=lr.supreme_management_body
+            supremeGoverningBody=lr.supreme_management_body
         )
         self.setCompany(
             {
