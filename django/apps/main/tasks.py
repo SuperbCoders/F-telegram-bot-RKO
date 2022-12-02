@@ -3,9 +3,11 @@ import asyncio
 import time
 
 from celery import shared_task
+from celery.utils.log import get_task_logger
 from telegram.ext import ApplicationBuilder
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup)
 
+logger = get_task_logger(__name__)
 
 async def _send_plain_message(chat_id, text):
     api_token = os.getenv('TELEGRAM_BOT_API_TOKEN')
@@ -46,3 +48,9 @@ def send_telegram_bot_message(chat_id, text, button_url=None,
     else:
         coroutine = _send_plain_message(chat_id, text)
     loop.run_until_complete(coroutine)
+
+
+@shared_task
+def sample_task():
+    logger.info("The sample task just ran.")
+

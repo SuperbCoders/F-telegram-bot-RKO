@@ -12,6 +12,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
         fields = [
                 'id',
                 'status',
+                'status_description',
                 'inn',
                 'company_name',
                 'contact_number',

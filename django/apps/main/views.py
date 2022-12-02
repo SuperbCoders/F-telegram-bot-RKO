@@ -81,9 +81,19 @@ class LoanRequestCurrentAPIView(APIView):
             if loan_request.is_finished:
                 adapter = Adapter_LoanRequest(loan_request)
                 result = adapter.getResult()
-                print(result)
+                print("DJANGO_APP_API_BANK result", result)
                 answer = requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
-                print(answer)
+                print("DJANGO_APP_API_BANK answer", answer.status_code, answer.text)
+                
+                orderId = answer['orderId']
+                loan_request.order_id = orderId
+                response_status = requests.get(os.getenv("DJANGO_APP_API_BANK") + f'/order/{orderId}')
+                data_status = response_status.json()
+                loan_request.status = data_status['statusCode']
+                loan_request.last_status = data_status['statusCode']
+                loan_request.status_description = data_status['statusDescription']
+                
+                loan_request.save()
         return Response({}, status=status.HTTP_200_OK)
 
 
@@ -149,20 +159,6 @@ class PhoneApiView(APIView):
                 'phone': list_user[0].phone_number
             }, status=status.HTTP_200_OK)
         return Response({}, status=status.HTTP_404_NOT_FOUND)
-
-
-class LicensionApiView(APIView):
-    permission_classes = [permissions.AllowAny]
-
-    def get(self, request, format=None, *args, **kwargs):
-        return Response({
-            "view": "Вид",
-            "number": 25432634,
-            "Issued_by": "Выдан Московским департаментом",
-            "License_issue_date": date.today(),
-            "Validity": date.today(),
-            "List_types_licensed_activities": "Перечни",
-        }, status=status.HTTP_200_OK)
 
 
 class PassportLoad(APIView):

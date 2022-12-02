@@ -1,9 +1,12 @@
 import os
 
+from apps.main import tasks
+from celery.schedules import crontab
 
 SETTINGS_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SETTINGS_DIR)
 BASE_DIR = os.path.dirname(PROJECT_DIR)
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -120,7 +123,15 @@ RABBITMQ_PASSWORD = os.getenv('RABBITMQ_DEFAULT_PASS', 'guest')
 CELERY_BROKER_URL = (
     f'amqp://{RABBITMQ_USER}:{RABBITMQ_PASSWORD}@rabbitmq:5672//'
 )
+
 CELERY_ACCEPT_CONTENT = ['json', 'pickle']
+
+CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "tasks.sample_task",
+        "schedule": crontab(minute="*/1"),
+    },
+}
 
 # User model
 AUTH_USER_MODEL = "main.User"

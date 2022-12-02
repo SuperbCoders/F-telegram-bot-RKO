@@ -48,7 +48,6 @@
 
 <script>
 import LineStep from '../../components/line_step/line_step.vue';
-import { getLicense } from '../../api/getLicense';
 
 export default {
   data() {
@@ -70,21 +69,6 @@ export default {
         this.$store.dispatch('addObjectFormData', {
           object: 'step_5',
           value: this.currentData
-        })
-        const data = await getLicense();
-        
-        const store = {};
-        
-        store.licence_type = data.view;
-        store.licence_number = data.number;
-        store.licence_issued_by = data.Issued_by;
-        store.licence_date_issue = data.License_issue_date;
-        store.licence_validity = data.Validity;
-        store.licenced_activity = data.List_types_licensed_activities;
-
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_6',
-          value: store
         })
         this.$router.push("/planning");
       }
