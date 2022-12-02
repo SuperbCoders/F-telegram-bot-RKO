@@ -23,6 +23,7 @@ export default new Vuex.Store({
                 inn: "",
                 company_name: "",
                 contact_number: "",
+                ogrn: "",
             },
             step_2: {
                 addresses: [

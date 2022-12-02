@@ -13,6 +13,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'id',
                 'status',
                 'status_description',
+                'ogrn',
                 'inn',
                 'company_name',
                 'contact_number',

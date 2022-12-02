@@ -63,6 +63,7 @@ class LoanRequest(models.Model):
     status_description = models.CharField(max_length=255, null=True)
     order_id = models.CharField(max_length=255, null=True, blank=True)
     inn = models.CharField(max_length=20, blank=True, null=True)
+    ogrn = models.CharField(max_length=30, blank=True, null=True)
     company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     contact_number = models.CharField(max_length=20)
     

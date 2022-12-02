@@ -56,6 +56,7 @@ export default {
       inn: null,
       company_name: null,
       contact_number: null,
+      ogrn: null,
     },
     inn_or_name: '',
     listCompany: [],
@@ -221,12 +222,14 @@ export default {
         this.currentData.inn = input;
         if (data.suggestions.length > 0) {
           this.currentData.company_name = data.suggestions[0].value;
+          this.currentData.ogrn = data.suggestions[0].data.ogrn;
         }
       } else {
         const data = await getCompanyInn(input.split(',')[0]);
         this.currentData.company_name = input;
         if (data.suggestions.length > 0) {
           this.currentData.inn = data.suggestions[0].data.inn;
+          this.currentData.ogrn = data.suggestions[0].data.ogrn;
         }
       }
     }

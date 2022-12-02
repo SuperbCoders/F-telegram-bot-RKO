@@ -24,12 +24,14 @@ export default {
             list: [],
             inn: "",
             name: "",
+            ogrn: "",
         }
     },
     methods: {
         async getListCompanyFromName(e) {
             const value = e.target.value;
             const data = await getCompanyName(value);
+            console.log(data);
             if (value.match(/^\d+/)) {
                 this.list = data.suggestions.map((elem) => elem.data.inn);
             } else {

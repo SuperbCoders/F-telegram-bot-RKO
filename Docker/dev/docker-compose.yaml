@@ -48,37 +48,37 @@ services:
     depends_on:
       - db
       - rabbitmq
-  # telegram:
-  #   build:
-  #     context: ../../
-  #     dockerfile: ./Docker/dev/python/Dockerfile
-  #     target: telegram
-  #   command: python telegram-bot/bot.py
-  #   volumes:
-  #     - ../../django:/usr/src/app/
-  #   env_file:
-  #     - .env
-  #     - .env.secret
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - django
-  #     - celery
-  # vuejs:
-  #   build:
-  #     context: ../../
-  #     dockerfile: ./Docker/dev/vuejs/Dockerfile
-  #   command: yarn serve
-  #   volumes:
-  #     - ../../vuejs/:/usr/src/app/
-  #     - /usr/src/app/node_modules
-  #   ports:
-  #     - 8080:8080
-  #   env_file:
-  #     - .env
-  #     - .env.secret
-  #   stdin_open: true
-  #   tty: true
+  telegram:
+    build:
+      context: ../../
+      dockerfile: ./Docker/dev/python/Dockerfile
+      target: telegram
+    command: python telegram-bot/bot.py
+    volumes:
+      - ../../django:/usr/src/app/
+    env_file:
+      - .env
+      - .env.secret
+    stdin_open: true
+    tty: true
+    depends_on:
+      - django
+      - celery
+  vuejs:
+    build:
+      context: ../../
+      dockerfile: ./Docker/dev/vuejs/Dockerfile
+    command: yarn serve
+    volumes:
+      - ../../vuejs/:/usr/src/app/
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+      - .env.secret
+    stdin_open: true
+    tty: true
 
 volumes:
   postgres_data:

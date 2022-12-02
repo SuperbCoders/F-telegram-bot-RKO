@@ -53,4 +53,5 @@ def send_telegram_bot_message(chat_id, text, button_url=None,
 @shared_task
 def sample_task():
     logger.info("The sample task just ran.")
+    print("hello celery")
 
