@@ -392,7 +392,7 @@ class Adapter_LoanRequest:
 
         companyBase = self.getCompanyBase(
             inn=lr.inn,
-            ogrn="",
+            ogrn=lr.ogrn,
             shortNameEn="",
             legalAddress=legalAddress,
             postalAddress=postalAddress,
