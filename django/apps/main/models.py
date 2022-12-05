@@ -228,10 +228,7 @@ class LoanRequest(models.Model):
 
     def save(self, *args, **kwargs):
         if self.is_finished:
-            if not self.pk and self.status == self.last_status:
-                self._send_success_message_to_telegram()
-                # self._send_upload_message_to_telegram()
-            elif self.status != self.last_status:
+            if self.status != self.last_status:
                 self._send_change_status_message_to_telegram()
         super().save(*args, **kwargs)
 

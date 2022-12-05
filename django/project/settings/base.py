@@ -126,12 +126,5 @@ CELERY_BROKER_URL = (
 
 CELERY_ACCEPT_CONTENT = ['json', 'pickle']
 
-CELERY_BEAT_SCHEDULE = {
-    "sample_task": {
-        "task": "tasks.sample_task",
-        "schedule": crontab(minute="*/1"),
-    },
-}
-
 # User model
 AUTH_USER_MODEL = "main.User"

@@ -172,3 +172,18 @@ class PassportLoad(APIView):
         return Response({
             "path": passport_model.passport.url
         }, status=status.HTTP_200_OK)
+
+class StatusCheck(APIView):
+    permission_classes = [permissions.AllowAny]
+    
+    def get(self, request, format=None, *args, **kwargs):
+        loan_request = LoanRequest.objects.filter(is_finished=True)
+        for lr in loan_request:
+            order_id = lr.order_id
+            if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'enable':
+                response = requests.get( os.getenv("DJANGO_APP_API_BANK") + f"/order/{order_id}" )
+                responseData = response.json()
+                lr.status = responseData['statusCode']
+                lr.status_description = responseData['statusDescription']
+                lr.save()
+        return Response({}, status=status.HTTP_200_OK)

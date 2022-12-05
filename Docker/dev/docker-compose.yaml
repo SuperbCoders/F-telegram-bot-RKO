@@ -37,7 +37,7 @@ services:
       context: ../../
       dockerfile: ./Docker/dev/python/Dockerfile
       target: celery
-    command: celery -A project worker -l info --concurrency=1
+    command: celery -A project worker -B -l info --concurrency=1
     volumes:
       - ../../django:/usr/src/app/
     env_file:
