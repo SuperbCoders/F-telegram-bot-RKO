@@ -106,6 +106,7 @@ class LoanRequest(models.Model):
     cash_source = models.JSONField(null=True, blank=True)
     outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     state_employers = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    information_goals = models.JSONField(null=True, blank=True)
 
     # rate = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     tariff = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)

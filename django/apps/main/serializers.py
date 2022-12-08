@@ -56,6 +56,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
                 'cash_source',
                 'outside_contracts_volume',
                 'state_employers',
+                'information_goals',
 
                 'tariff',
                 'is_finished',

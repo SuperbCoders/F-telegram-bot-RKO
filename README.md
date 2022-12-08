@@ -299,6 +299,8 @@ cash_source: JSONField # Источники происхождения дене�
 outside_contracts_volume: CharField # Количество операций по внешнеторговым контрактам в месяц
 state_employers: CharField # Штатная численность сотрудников
 
+information_goals: JSONField # Отметьте все верные утверждения
+
 tariff: CharField # Тариф
 is_finished: BooleanField
 last_step: CharField
