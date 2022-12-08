@@ -262,51 +262,44 @@ Alex Barabash (alex@baraba.sh)
 
 ### Structure Data
 ```
-inn: CharField
-company_name: CharField
-contact_number: CharField
+inn: CharField # Инн
+company_name: CharField # Название компании
+contact_number: CharField # Номер телефона
 
-addresses: JSONField
+addresses: JSONField # Объект 
 
-supreme_management_body: CharField
-supreme_management_person: CharField
-supreme_management_inn: CharField
+supreme_management_body: CharField # Высший орган управления
+supreme_management_person: CharField # Руководитель
+supreme_management_inn: CharField # Руководитель ИНН
 
-is_supervisoty: BooleanField
-supervisoty_board_persone_name: CharField
-list_supervisoty_board_persone: JSONField
+is_supervisoty: BooleanField # Наличие коллегиального исполнительного органа
+supervisoty_board_persone_name: CharField # Наименование коллегиального исполнительного органа
+list_supervisoty_board_persone: JSONField # Члены наблюдательного совета
 
-is_collegiate_body: BooleanField
-collegiate_person: CharField
-list_collegial_executive_body: JSONField
+is_collegiate_body: BooleanField # Наличие наблюдательного совета
+collegiate_person: CharField # Наименование наблюдательного совета
+list_collegial_executive_body: JSONField # Члены коллегиального исполнительного органа
 
-licence_type: CharField
-licence_number: CharField
-licence_issued_by: CharField
-licence_date_issue: DateField
-licence_validity: DateField
-licenced_activity: CharField
+employers_volume: CharField # Численность персонала
+salary_debt: BigIntegerField # Задолженность по з/п
 
-employers_volume: CharField
-salary_debt: BigIntegerField
+company_group_name: CharField # Название группы компаний
+start_date: DateField # Дата начала действия
+end_date: DateField # Дата окончания действия
+group_members: JSONField # Состав группы компаний
 
-company_group_name: CharField
-start_date: DateField
-end_date: DateField
-group_members: JSONField
+beneficiaries: CharField # Выгодоприобретатели
 
-beneficiaries: CharField
+planned_operations: JSONField # Сведения о планируемых операциях по счету
 
-planned_operations: JSONField
+account_operations: JSONField # Сведения о целях установления деловых отношений с банком
+operation_volume: CharField # Количество операций по безналичным платежам в месяц
+sum_per_month: CharField # Сумма операций по снятию наличности в месяц
+cash_source: JSONField # Источники происхождения денежных средств
+outside_contracts_volume: CharField # Количество операций по внешнеторговым контрактам в месяц
+state_employers: CharField # Штатная численность сотрудников
 
-account_operations: JSONField
-operation_volume: CharField
-sum_per_month: CharField
-cash_source: JSONField
-outside_contracts_volume: CharField
-state_employers: CharField
-
-tariff: CharField
+tariff: CharField # Тариф
 is_finished: BooleanField
 last_step: CharField
 ```
@@ -316,11 +309,11 @@ last_step: CharField
   addresses: [
     {
       typeAdress: enum('Юридический', 'Фактический', 'Почтовый'),
-      legal_address: str,
-      physic_address: str,
-      mail_address: str,
-      basis: str,
-      address: str,
+      legal_address: str, # Юридический адрес
+      physic_address: str, # Фактический адрес
+      mail_address: str, # Почтовый адрес
+      basis: str, # Основание
+      address: str, # Адрес
     }
   ]
 }
@@ -330,38 +323,39 @@ last_step: CharField
 ```
 {
   account_onw_role: enum('Учредитель', 'Бенефициарный владелец', 'Подписант'),
-  account_own_gender: str
-  account_own_lastname: str
-  account_own_name: str
-  account_own_surname: str
+  account_own_gender: str # Пол
+  account_own_lastname: str # Фамилия
+  account_own_name: str # Имя
+  account_own_surname: str # Отчество
 
-  account_onw_inn: str
-  account_own_citizenship: str
-  account_own_phone: str
-  account_own_piece: str
-  account_own_snils: str
+  account_onw_inn: str # Инн
+  account_own_citizenship: str # Гражданство
+  account_own_phone: str # Номер телефона
+  account_own_piece: str # Доля владения
+  account_own_snils: str # СНИЛС (при наличии)
 
-  is_person_a_foreign_public: enum('Да', 'Нет')
+  is_person_a_foreign_public: enum('Да', 'Нет') # Является ли лицо иностранным публичным должностным лицом либо лицом, связанным с таковым родственными,
+            партнерскими или иными отношениями?
 
-  account_own_registration: str
-  assigned_publ_pers_registraion: str
-  assigned_publ_pers_relation: enum('Супруг', 'Супруга')
+  account_own_registration: str # Адрес регистрации
+  assigned_publ_pers_registraion: str # Адрес регистрации
+  assigned_publ_pers_relation: enum('Супруг', 'Супруга') # Степень родства
 
-  accownt_own_living: str | enum('Совпадает')
+  accownt_own_living: str | enum('Совпадает') # Адрес фактического проживания
 
-  account_own_mail: str
+  account_own_mail: str #  Почтовый адрес
 
-  first_passport_page_url: str
+  first_passport_page_url: str # URL на паспорт
 
-  account_birth_place: str
-  account_datebirth: date
-  date_issue: date
-  division_code: str
-  doc_number: str
-  doc_serial: str
-  doc_type: enum('Паспорт')
-  issued_by: str
-  validity: date
+  account_birth_place: str # Место рождения
+  account_datebirth: date # Дата рождения
+  date_issue: date # Дата выдачи
+  division_code: str # Код подразделения (при наличии)
+  doc_number: str # Номер документа удостоверяющего личность
+  doc_serial: str # Серия документа удостоверяющего личность
+  doc_type: enum('Паспорт') # Тип документа
+  issued_by: str # Кем выдан
+  validity: date # Срок действия
 
 }
 ```
@@ -452,13 +446,6 @@ GET method
 'collegiate_person',
 'list_collegial_executive_body',
 
-'licence_type',
-'licence_number',
-'licence_issued_by',
-'licence_date_issue',
-'licence_validity',
-'licenced_activity',
-
 'employers_volume',
 'salary_debt',
 
@@ -506,13 +493,6 @@ then update data, and if is_finished = True then create data
 'is_collegiate_body',
 'collegiate_person',
 'list_collegial_executive_body',
-
-'licence_type',
-'licence_number',
-'licence_issued_by',
-'licence_date_issue',
-'licence_validity',
-'licenced_activity',
 
 'employers_volume',
 'salary_debt',
