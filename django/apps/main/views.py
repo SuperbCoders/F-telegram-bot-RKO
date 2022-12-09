@@ -180,9 +180,15 @@ class StatusCheck(APIView):
         loan_request = LoanRequest.objects.filter(is_finished=True)
         for lr in loan_request:
             order_id = lr.order_id
-            if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'enable':
-                response = requests.get( os.getenv("DJANGO_APP_API_BANK") + f"/order/{order_id}" )
-                responseData = response.json()
+            if os.getenv("DJANGO_APP_API_BANK_ENABLE") in ['enable', 'test']:
+                if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'test':
+                    responseData = {
+                        "statusCode": 'under_review',
+                        "statusDescription": 'На рассмотрении',
+                    }
+                else:
+                    response = requests.get( os.getenv("DJANGO_APP_API_BANK") + f"/order/{order_id}" )
+                    responseData = response.json()
                 lr.status = responseData['statusCode']
                 lr.status_description = responseData['statusDescription']
                 lr.save()
