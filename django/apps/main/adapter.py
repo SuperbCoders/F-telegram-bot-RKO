@@ -182,7 +182,13 @@ class Adapter_LoanRequest:
                     }
                 ]
             }
-        ]
+        ],
+        "infoOnPurposesOfFinancialAndEconomicActivities":{
+            "hasConstantPayers": True,
+            "hasConstantPayersDetails": "hasConstantPayersDetails",
+            "hasConstantRecipient": True,
+            "hasConstantRecipientDetails": "hasConstantRecipientDetails"
+        },
     }
     
     def getInitiatorData(self, phoneNumber) -> dict:
