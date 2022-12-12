@@ -96,7 +96,6 @@ export default {
           ogrn: null,
         },
       ],
-
     },
     activePickerEndDate: null,
     activePickerStartDate: null,

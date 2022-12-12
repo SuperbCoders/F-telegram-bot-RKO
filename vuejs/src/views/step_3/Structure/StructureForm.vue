@@ -127,7 +127,6 @@ export default {
         this.currentData.list_collegial_executive_body = this.list_collegial_executive_body;
         this.currentData.list_supervisoty_board_persone = this.list_supervisoty_board_persone;
 
-
         this.$store.dispatch("addObjectFormData", {
           object: "step_3",
           value: this.currentData,

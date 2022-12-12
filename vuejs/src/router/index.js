@@ -31,12 +31,12 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "auth-form",
+    name: "step_1",
     component: AuthView
   },
   {
     path: "/address",
-    name: "address",
+    name: "step_2",
     component: Address
   },
   {
@@ -46,37 +46,37 @@ const routes = [
   },
   {
     path: "/sctructure",
-    name: "sctructure",
+    name: "step_3",
     component: Structure
   },
   {
     path: "/information-staff",
-    name: "information-staff",
+    name: "step_4",
     component: informationStaff
   },
   {
     path: "/planning",
-    name: "planning",
+    name: "step_6",
     component: PlanningOperation
   },
   {
     path: "/beneficiaries",
-    name: "beneficiaries",
+    name: "step_7",
     component: Beneficiaries
   },
   {
     path: "/purposes",
-    name: "purposes",
+    name: "step_8",
     component: Purposes
   },
   {
     path: "/approvals",
-    name: "approvals",
+    name: "step_9",
     component: Approvals
   },
   {
     path: "/intelligence",
-    name: "intelligence-form",
+    name: "step_5",
     component: Intelligence
   },
   {
@@ -146,7 +146,7 @@ const routes = [
   },
   {
     path: "/rate",
-    name: "rate",
+    name: "step_10",
     component: Rate
   },
   {
