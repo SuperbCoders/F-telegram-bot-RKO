@@ -70,9 +70,12 @@ export default {
           object: 'step_5',
           value: this.currentData
         })
-        this.$router.push("/planning");
+        this.next();
       }
     },
+    next(){
+      this.$router.push({name: "step_6"});
+    }
   },
   components: {
     LineStep

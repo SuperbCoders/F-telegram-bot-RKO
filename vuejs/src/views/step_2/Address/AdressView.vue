@@ -150,8 +150,11 @@ export default {
           object: "step_2",
           value: this.currentData,
         });
-        this.$router.push("/sctructure");
+        this.next();
       }
+    },
+    next(){
+      this.$router.push({name: "step_3"});
     },
     isTypeAdress(object) {
       if (object.typeAdress.includes("Фактический")) {

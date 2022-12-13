@@ -113,11 +113,14 @@ export default {
           object: 'step_9',
           value: this.currentData
         })
-        this.$router.push('/approvals')
+        this.next();
       }
       else {
         this.valid = false
       }
+    },
+    next(){
+      this.$router.push({name: 'step_9'})
     },
   },
   computed: {

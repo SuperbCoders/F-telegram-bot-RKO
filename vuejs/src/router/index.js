@@ -23,7 +23,6 @@ import Rate from '../views/Rate/RateForm.vue'
 import Purposes from '../views/Purposes/PurposesForm.vue'
 import Approvals from '../views/Approvals/ApprovalsForm.vue'
 import AllData from '../views/AllData/AllData.vue'
-import Already from '../views/Already/Already.vue'
 import AllDataPersone from '../views/allDataPersone/AllDataPersone.vue'
 
 Vue.use(VueRouter);
@@ -55,6 +54,11 @@ const routes = [
     component: informationStaff
   },
   {
+    path: "/intelligence",
+    name: "step_5",
+    component: Intelligence
+  },
+  {
     path: "/planning",
     name: "step_6",
     component: PlanningOperation
@@ -75,10 +79,10 @@ const routes = [
     component: Approvals
   },
   {
-    path: "/intelligence",
-    name: "step_5",
-    component: Intelligence
-  },
+    path: "/rate",
+    name: "step_10",
+    component: Rate
+  },  
   {
     path: "/email-form",
     name: "email-form",
@@ -138,17 +142,7 @@ const routes = [
     path: "/all-data",
     name: "all-data",
     component: AllData
-  },
-  {
-    path: "/already",
-    name: "already",
-    component: Already
-  },
-  {
-    path: "/rate",
-    name: "step_10",
-    component: Rate
-  },
+  },  
   {
     path: "/all-data-persone",
     name: "all-data-persone",

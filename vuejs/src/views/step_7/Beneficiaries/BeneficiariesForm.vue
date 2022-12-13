@@ -8,14 +8,8 @@
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
     </div>
-    <line-step :step='6' class="mt-5"/>
-    <v-btn
-      block
-      large
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="redirect"
-      >Продолжить
+    <line-step :step='6' class="mt-5" />
+    <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
   </div>
 </template>
@@ -26,20 +20,23 @@ import LineStep from '../../components/line_step/line_step.vue';
 export default {
   data() {
     return {
-     isShow: false,
-     currentData: {
-      beneficiaries: null
-     }
+      isShow: false,
+      currentData: {
+        beneficiaries: null
+      }
     };
   },
   methods: {
-    redirect () {
+    redirect() {
       this.$store.dispatch('addObjectFormData', {
-          object: 'step_8',
-          value: this.currentData
-        })
-        this.$router.push('/purposes')
-    }
+        object: 'step_8',
+        value: this.currentData
+      })
+      this.next();
+    },
+    next() {
+      this.$router.push({ name: "step_8" })
+    },
   },
   components: {
     LineStep,
@@ -48,7 +45,7 @@ export default {
 </script>
 
 <style>
-.checkboxs label{
+.checkboxs label {
   color: #323E48 !important;
 }
 </style>

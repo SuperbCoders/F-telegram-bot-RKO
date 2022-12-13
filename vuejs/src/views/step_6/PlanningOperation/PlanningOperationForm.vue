@@ -70,9 +70,12 @@ export default {
           object: 'step_7',
           value: this.currentData
         })
-        this.$router.push("/beneficiaries");
+        this.next();
       }
     },
+    next() {
+      this.$router.push({name: "step_7"});
+    }
   },
   components: {
     LineStep

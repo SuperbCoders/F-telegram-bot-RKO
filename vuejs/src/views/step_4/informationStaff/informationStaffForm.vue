@@ -117,8 +117,11 @@ export default {
           object: 'step_4',
           value: this.currentData
         })
-        this.$router.push("/intelligence");
+        this.next();
       }
+    },
+    next(){
+      this.$router.push({name: "step_5"});
     },
     async inputName(itemForm) {
       const name = itemForm.name;

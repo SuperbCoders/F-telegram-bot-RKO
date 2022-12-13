@@ -180,8 +180,11 @@ export default {
           value: this.currentData
         });
         // this.$store.commit('addItemFormData', this.currentData)
-        this.$router.push("/address");
+        this.next();
       }
+    },
+    next(){
+      this.$router.push({name: "step_2"});
     },
 
     async getCompanyFromInn(inn) {

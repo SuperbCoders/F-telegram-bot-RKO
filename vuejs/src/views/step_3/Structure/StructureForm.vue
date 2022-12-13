@@ -131,8 +131,11 @@ export default {
           object: "step_3",
           value: this.currentData,
         });
-        this.$router.push("/information-staff");
+        this.next()
       }
+    },
+    next(){
+      this.$router.push({name: 'step_4'});
     },
     addObjectList(object) {
       const result = {
