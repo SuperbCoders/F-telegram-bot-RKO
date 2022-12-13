@@ -25,6 +25,7 @@ export default new Vuex.Store({
                 contact_number: "",
                 ogrn: "",
             },
+            
             step_2: {
                 addresses: [
                     {
