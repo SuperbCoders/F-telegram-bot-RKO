@@ -95,40 +95,40 @@ export default {
         let next_push = "/";
         switch (sub_last_step) {
           case 'page-0':
-            next_push = '/individual-info';
+            next_push = 'substep_1';
             break;
           case 'page-1':
-            next_push = '/documents-forms';
+            next_push = 'substep_2';
             break;
           case 'page-2':
-            next_push = '/foreign-person';
+            next_push = 'substep_3';
             break
           case 'page-3':
-            next_push = '/kinship-status-forms';
+            next_push = 'substep_4';
             break
           case 'page-4':
-            next_push = '/address-form';
+            next_push = 'substep_5';
             break
           case 'page-5':
-            next_push = '/email-form';
+            next_push = 'substep_6';
             break
           case 'page-6':
-            next_push = '/document';
+            next_push = 'substep_7';
             break
           case 'page-7':
-            next_push = '/client-info';
+            next_push = 'substep_8';
             break
           case 'page-8':
-            next_push = '/document-fogeiner';
+            next_push = 'substep_9';
             break
           case 'page-9':
-            next_push = '/all-data-persone';
+            next_push = 'substep_10';
             break
         }
         if (type === 'supervisory') {
-          this.$router.push({ 'path': next_push, query: { "type": "SupervisoryBoard" } });
+          this.$router.push({ 'name': next_push, query: { "type": "SupervisoryBoard" } });
         } else if (type === 'collegial') {
-          this.$router.push({ 'path': next_push, query: { "type": "CollegialExecutive" } });
+          this.$router.push({ 'name': next_push, query: { "type": "CollegialExecutive" } });
         }
       } else {
         let next_push = "/";

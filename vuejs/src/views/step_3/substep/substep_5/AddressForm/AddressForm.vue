@@ -52,7 +52,7 @@ export default {
         } else if (this.$route.query?.type === 'CollegialExecutive') {
           this.$store.commit("setCollegialExecutiveBody", { key: "page-5", value: this.currentData });
         }
-        this.$router.push({ path: "/email-form", query: this.$route.query });
+        this.$router.push({ name: "substep_6", query: this.$route.query });
       }
     },
   },

@@ -26,7 +26,6 @@
       </div>
       <div class="form_block mb-5">
         <p class="text-left form_block_title">Дата окончания действия</p>
-
         <v-menu :close-on-content-click="isActiveEndDate()" transition="scale-transition" offset-y min-width="auto">
           <template v-slot:activator="{ on, attrs }">
             <v-text-field placeholder="xx.xx.xxxx" id="passportIssueDate" name="passportIssueDate"
@@ -36,7 +35,6 @@
           <v-date-picker v-model="currentData.end_date" :min="currentData.start_date"
             :active-picker.sync="activePickerEndDate" @input="passportIssueDateMenu = false"></v-date-picker>
         </v-menu>
-
       </div>
       <h3 class="text-left structure_group_label mb-10">
         Состав группы компаний

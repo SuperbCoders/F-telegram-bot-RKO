@@ -68,11 +68,14 @@ export default {
         object: 'step_10',
         value: this.currentData
       })
-      this.$router.push("/rate");
+      this.next();
     },
     toggleText(e) {
       e.preventDefault();
     },
+    next() {
+      this.$router.push({name: "step_10"});
+    }
   },
   computed: {
     isList() {

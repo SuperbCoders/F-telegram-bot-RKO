@@ -151,7 +151,7 @@ export default {
           this.$store.commit("setCollegialExecutiveBody", {key: "page-9", value: this.currentData});
         }
       
-      this.$router.push({path:"/all-data-persone", query: this.$route.query});
+      this.$router.push({name: "substep_10", query: this.$route.query});
       }
     },
     foreigner_doc_validity_null() {

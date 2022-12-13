@@ -1,12 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+
 import AuthView from '../views/Auth/AuthView.vue'
 import Address from '../views/Address/AdressView.vue'
 import Structure from '../views/Structure/StructureForm.vue'
 import Intelligence from '../views/intelligence/intelligenceForm.vue'
-import StructureGroup from '../views/StructureGroup/StructureGroupForm.vue'
 import informationStaff from '../views/informationStaff/informationStaffForm.vue'
-import CreditForm from '../views/credit/creditForm.vue'
 import DocumentPage from '../views/Documents/documentForm.vue'
 import individualsForm from '../views/informationIndivduals/individualsForm.vue'
 import DocumentsForms from '../views/DocumentsForm/DocumentForm.vue'
@@ -16,7 +15,6 @@ import ForeignPerson from '../views/isAForeignPerson/ForeignPerson.vue'
 import EmailForm from '../views/EmailForm/EmailForm.vue'
 import ClientInfo from '../views/ClientInfo/ClientInfoForm.vue'
 import DocumentFogeiner from '../views/DocumentFogeiner/DocumentFogeinerForm.vue'
-import LicenseInfo from '../views/LicenseInformation/LicenseInformationForm.vue'
 import PlanningOperation from '../views/PlanningOperation/PlanningOperationForm.vue'
 import Beneficiaries from '../views/Beneficiaries/BeneficiariesForm.vue'
 import Rate from '../views/Rate/RateForm.vue'
@@ -37,11 +35,6 @@ const routes = [
     path: "/address",
     name: "step_2",
     component: Address
-  },
-  {
-    path: "/sctructure-group",
-    name: "sctructure-group",
-    component: StructureGroup
   },
   {
     path: "/sctructure",
@@ -82,70 +75,61 @@ const routes = [
     path: "/rate",
     name: "step_10",
     component: Rate
-  },  
+  },    
   {
-    path: "/email-form",
-    name: "email-form",
-    component: EmailForm
+    path: "/all-data",
+    name: "step_11",
+    component: AllData
   },
-  {
-    path: "/client-info",
-    name: "client-info",
-    component: ClientInfo
-  },
-  {
-    path: "/credit-page",
-    name: "credit-page",
-    component: CreditForm
-  },
-  {
-    path: "/document",
-    name: "document",
-    component: DocumentPage
-  },
+
   {
     path: "/individual-info",
-    name: "individual-info",
+    name: "substep_1",
     component: individualsForm
   },
   {
-    path: "/license-info",
-    name: "license-info",
-    component: LicenseInfo
-  },
-  {
     path: "/documents-forms",
-    name: "documents-forms",
+    name: "substep_2",
     component: DocumentsForms
   },
   {
+    path: "/foreign-person",
+    name: "substep_3",
+    component: ForeignPerson
+  },
+  {
     path: "/kinship-status-forms",
-    name: "kinship-status-forms",
+    name: "substep_4",
     component: KinshipStatus
   },
   {
     path: "/address-form",
-    name: "address-form2",
+    name: "substep_5",
     component: AddressForm
   },
   {
+    path: "/email-form",
+    name: "substep_6",
+    component: EmailForm
+  },
+  {
+    path: "/document",
+    name: "substep_7",
+    component: DocumentPage
+  },
+  {
+    path: "/client-info",
+    name: "substep_8",
+    component: ClientInfo
+  },
+  {
     path: "/document-fogeiner",
-    name: "document-fogeiner",
+    name: "substep_9",
     component: DocumentFogeiner
-  },
-  {
-    path: "/foreign-person",
-    name: "foreign-person",
-    component: ForeignPerson
-  },
-  {
-    path: "/all-data",
-    name: "all-data",
-    component: AllData
-  },  
+  },   
   {
     path: "/all-data-persone",
-    name: "all-data-persone",
+    name: "substep_10",
     component: AllDataPersone
   },
 ];

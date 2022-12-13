@@ -153,7 +153,6 @@ export default {
   methods: {
     setTarif(tarif) {
       this.currentData.tariff = tarif;
-      // const data = this.$store.state.formData
     },
     unsetTarif() {
       this.currentData.tariff = null;
@@ -163,8 +162,11 @@ export default {
           object: 'step_11',
           value: this.currentData
         })
-      this.$router.push("/all-data");
+      this.next();
     },
+    next(){
+      this.$router.push({name: "step_11"});
+    }
   },
 };
 </script>

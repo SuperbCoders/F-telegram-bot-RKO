@@ -82,7 +82,7 @@ export default {
           this.$store.commit("setCollegialExecutiveBody", {key: "page-2", value: this.currentData});
         }
         
-        this.$router.push({path:"/foreign-person", query: this.$route.query});
+        this.$router.push({name: "substep_3", query: this.$route.query});
       }
     },
   },

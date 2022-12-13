@@ -55,7 +55,7 @@ export default {
           this.$store.commit("setCollegialExecutiveBody", { key: "page-6", value: this.currentData });
         }
 
-        this.$router.push({ path: "/document", query: this.$route.query });
+        this.$router.push({ name: "substep_7", query: this.$route.query });
       }
     },
   },

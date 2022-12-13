@@ -232,9 +232,9 @@ export default {
         }
 
         if (isStatusFogeiner === 'Да') {
-          this.$router.push({path:"/document-fogeiner", query: this.$route.query});
+          this.$router.push({name: "substep_9", query: this.$route.query});
         } else {
-          this.$router.push({path:"/all-data-persone", query: this.$route.query});
+          this.$router.push({name: "substep_10", query: this.$route.query});
         }
       }
     },
