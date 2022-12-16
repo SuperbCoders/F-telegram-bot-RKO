@@ -16,7 +16,7 @@
       </div>
       <div v-if="isManagementCompany" class="form_block">
         <p class="text-left form_block_title">ИНН</p>
-        <InnAndNameInput v-model="currentData.supreme_management_inn" />
+        <InnAndNameInput @input="getCompanyData" />
       </div>
       <div class="form_group mb-10">
         <p class="text-left form_block_label mt-5">
@@ -133,6 +133,9 @@ export default {
         });
         this.next()
       }
+    },
+    getCompanyData({name, inn, ogrn}) {
+      currentData.supreme_management_inn = inn;
     },
     next(){
       this.$router.push({name: 'step_4'});

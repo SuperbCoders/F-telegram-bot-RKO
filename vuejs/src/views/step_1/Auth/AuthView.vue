@@ -10,7 +10,7 @@
     </div>
     <div class="auth_form mt-12">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <InnAndNameInput :value="inn_or_name" @input="getInnAndNameComnany" />
+        <InnAndNameInput @input="getInnAndNameComnany" />
         <v-text-field label="Контактный номер телефона" outlined v-model="currentData.contact_number"
           :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
         </v-text-field>
@@ -209,23 +209,10 @@ export default {
         this.currentData.inn = data.suggestions[0].data.inn
       }
     },
-    async getInnAndNameComnany(input) {
-      this.inn_or_name = input;
-      if (input.match(/^\d+/)) {
-        const data = await getCompanyInn(input);
-        this.currentData.inn = input;
-        if (data.suggestions.length > 0) {
-          this.currentData.company_name = data.suggestions[0].value;
-          this.currentData.ogrn = data.suggestions[0].data.ogrn;
-        }
-      } else {
-        const data = await getCompanyInn(input.split(',')[0]);
-        this.currentData.company_name = input;
-        if (data.suggestions.length > 0) {
-          this.currentData.inn = data.suggestions[0].data.inn;
-          this.currentData.ogrn = data.suggestions[0].data.ogrn;
-        }
-      }
+    async getInnAndNameComnany({name, inn, ogrn}) {
+      this.currentData.company_name = name;
+      this.currentData.inn = inn;
+      this.currentData.ogrn = ogrn;
     }
   },
   computed: {},

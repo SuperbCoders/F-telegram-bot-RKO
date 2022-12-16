@@ -42,8 +42,8 @@
       <div v-for="(itemForm, index) in currentData.group_members" :key="index" class="form_input_block">
         <div class="form_block">
           <p class="text-left form_block_title">Наименование компании или ИНН</p>
-          <InnAndNameInput :value="itemForm.name" @input="(e) => {
-            itemForm.name = e;
+          <InnAndNameInput @input="({name, inn, ogrn}) => {
+            itemForm.name = name;
             inputName(itemForm);
           }
           " />
