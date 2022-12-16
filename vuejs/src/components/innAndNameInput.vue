@@ -8,7 +8,7 @@
         :items="list"
         >
     </v-combobox> -->
-    <input type="text" class="input">
+    <input type="text" class="input" placeholder="Введите ИНН или наименование компании">
 </template>
 <script>
 import { getCompanyName } from "@/api/getInfoCompany";
@@ -54,7 +54,21 @@ export default {
 <style scoped>
 .input {
     width: 100%;
-    height: 40px;
-    border: 1px solid #000;
+    border: 1px solid #d6d6d6;
+    border-radius: 8px;
+    padding: 16px 10px;
+}
+
+.input::-webkit-input-placeholder { /* WebKit browsers */
+   color: #b9b9b9;
+}
+.input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #b9b9b9;
+}
+.input::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #b9b9b9;
+}
+.input:-ms-input-placeholder { /* Internet Explorer 10+ */
+   color:    #b9b9b9;
 }
 </style>
