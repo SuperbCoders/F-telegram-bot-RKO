@@ -47,13 +47,13 @@
 
             <div class="form_block d-flex align-center justify-center mt-4">
                 <a @click="del()" class="form_block_delete_link text-decoration-none" href="#">
-                    <img src="../../../../../assets/trash.svg" alt="">
+                    <img src="@/assets/trash.svg" alt="">
                     <span class="pl-2">Удалить</span>
 
                 </a>
                 <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="add()">
                     <span class="pr-2">Добавить</span>
-                    <img src="../../../../../assets/plus-circle.svg" alt="">
+                    <img src="@/assets/plus-circle.svg" alt="">
                 </v-btn>
             </div>
             <v-btn elevation="2" class="card_content_button" large @click="next()">Продолжить</v-btn>
@@ -62,8 +62,8 @@
     </div>
 </template>
 <script>
-import { translateMixin } from '../../../../../mixin/translate'
-import { formOrderPersone } from '../../../../../mixin/formOrder'
+import { translateMixin } from '@/mixin/translate'
+import { formOrderPersone } from '@/mixin/formOrder'
 
 export default {
     mixins: [ translateMixin, formOrderPersone ],

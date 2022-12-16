@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import { getCompanyInn, getCompanyName } from "../../api/getInfoCompany";
+import { getCompanyInn, getCompanyName } from "@/api/getInfoCompany";
 import { mask } from "vue-the-mask";
-import InnAndNameInput from '../../components/innAndNameInput.vue';
+import InnAndNameInput from '@/components/innAndNameInput.vue';
 
 export default {
   directives: { mask },

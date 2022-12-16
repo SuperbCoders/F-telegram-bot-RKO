@@ -57,12 +57,12 @@
       </div>
       <div class="form_block d-flex align-center justify-center">
         <a @click="deleteGroupList" class="form_block_delete_link text-decoration-none" href="#">
-          <img src="../../assets/trash.svg" alt="">
+          <img src="@/assets/trash.svg" alt="">
           <span class="pl-2">Удалить</span>
         </a>
         <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="addGroupList()">
           <span class="pr-2">Добавить</span>
-          <img src="../../assets/plus-circle.svg" alt="">
+          <img src="@/assets/plus-circle.svg" alt="">
         </v-btn>
       </div>
     </v-form>
@@ -73,10 +73,10 @@
 </template>
 
 <script>
-import LineStep from "../../components/line_step/line_step.vue";
+import LineStep from "@/components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
-import InnAndNameInput from '../../components/innAndNameInput.vue';
-import { getCompanyInn } from '../../api/getInfoCompany';
+import InnAndNameInput from '@/components/innAndNameInput.vue';
+import { getCompanyInn } from '@/api/getInfoCompany';
 
 export default {
   directives: { mask },

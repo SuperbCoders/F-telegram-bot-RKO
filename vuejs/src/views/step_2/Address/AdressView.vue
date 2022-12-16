@@ -64,7 +64,7 @@
           class="form_block_delete_link text-decoration-none"
           href="#"
         >
-        <img src="../../assets/trash.svg" alt="">
+        <img src="@/assets/trash.svg" alt="">
         <span class="pl-2 ">Удалить</span>
         </a>
         <v-btn
@@ -72,7 +72,7 @@
           @click="addGroupList()"
         >
           <span class="pr-2">Добавить</span>
-          <img src="../../assets/plus-circle.svg" alt="">
+          <img src="@/assets/plus-circle.svg" alt="">
         </v-btn>
       </div>
       <line-step :step="1" />
@@ -90,8 +90,8 @@
 </template>
 
 <script>
-import LineStep from "../../components/line_step/line_step.vue";
-import AddressInput from '../../components/addressInput.vue';
+import LineStep from "@/components/line_step/line_step.vue";
+import AddressInput from '@/components/addressInput.vue';
 
 export default {
   data() {

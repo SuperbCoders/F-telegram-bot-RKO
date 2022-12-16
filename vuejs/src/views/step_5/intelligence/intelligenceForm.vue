@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import LineStep from '../../components/line_step/line_step.vue';
+import LineStep from '@/components/line_step/line_step.vue';
 
 export default {
   data() {

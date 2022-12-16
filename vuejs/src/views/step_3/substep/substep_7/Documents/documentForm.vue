@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import AttachButton from '../../components/button/attachButton.vue';
+import AttachButton from '@/components/button/attachButton.vue';
 
 
 export default {

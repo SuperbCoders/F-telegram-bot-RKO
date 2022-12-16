@@ -1,5 +1,5 @@
 <template>
-    <v-combobox label="Введите ИНН или наименование компании" outlined
+    <!-- <v-combobox label="Введите ИНН или наименование компании" outlined
        required 
         class="mt-1 auth_form combobox"
         :value="value"
@@ -7,10 +7,11 @@
         @keyup="getListCompanyFromName" 
         :items="list"
         >
-    </v-combobox>
+    </v-combobox> -->
+    <input type="text" class="input">
 </template>
 <script>
-import { getCompanyName } from "../api/getInfoCompany";
+import { getCompanyName } from "@/api/getInfoCompany";
 
 export default {
     name: "innAndNameInput",
@@ -50,6 +51,10 @@ export default {
     }
 }
 </script>
-<style>
-
+<style scoped>
+.input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #000;
+}
 </style>

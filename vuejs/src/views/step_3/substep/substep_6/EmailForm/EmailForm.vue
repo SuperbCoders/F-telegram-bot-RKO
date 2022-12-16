@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import AddressInput from '../../components/addressInput.vue';
+import AddressInput from '@/components/addressInput.vue';
 
 export default {
   data() {

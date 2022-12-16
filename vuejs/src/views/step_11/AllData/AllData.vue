@@ -148,8 +148,8 @@
   </div>
 </template>
 <script>
-import LineStep from "../../components/line_step/line_step.vue"
-import { translateMixin } from '../../../mixin/translate'
+import LineStep from "@/components/line_step/line_step.vue"
+import { translateMixin } from '@/mixin/translate'
 export default {
   mixins: [translateMixin],
   data() {
