@@ -15,6 +15,7 @@ htmlcov/*
 .DS_Store
 node_modules
 /vuejs/dist
+celerybeat-schedule
 
 # local env files
 .env.local
