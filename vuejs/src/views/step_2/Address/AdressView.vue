@@ -1,6 +1,6 @@
 <template>
   <div class="structure_group_section">
-    <h2 class="text-left structure_group_title mb-10">Адрес</h2>
+    <h2 class="text-left structure_group_title mb-10">Адреса компании</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div
         v-for="(itemForm, index) in currentData.addresses"
@@ -14,15 +14,6 @@
             v-model="itemForm.typeAdress"
             label="Юридический"
             value="Юридический"
-            hide-details
-          >
-          </v-checkbox>
-          <v-checkbox
-            @click="isTypeAdress(itemForm)"
-            :rules="[(v) => v.length > 0 || 'You must agree to continue!']"
-            v-model="itemForm.typeAdress"
-            label="Фактический"
-            value="Фактический"
             hide-details
           >
           </v-checkbox>
@@ -44,17 +35,6 @@
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
           <AddressInput label="Введите адрес" v-model="itemForm.address"  />
-        </div>
-        <div class="form_block">
-          <p class="text-left form_block_title">Основание</p>
-          <v-select
-            filled
-            outlined
-            v-model="itemForm.basis"
-            :rules="requiredRules"
-            placeholder="Выберите основание"
-            :items="base"
-          ></v-select>
         </div>
       </div>
       <div class="form_block d-flex align-center justify-center">
@@ -96,7 +76,6 @@ import AddressInput from '@/components/addressInput.vue';
 export default {
   data() {
     return {
-      base: ["Аренда"],
       groupList: [
         {
           name: null,
@@ -114,9 +93,7 @@ export default {
           {
             typeAdress: [],
             legal_address: "",
-            physic_address: "",
             mail_address: "",
-            basis: null,
             address: "",
           },
         ],

@@ -4,14 +4,18 @@ import VueRouter from "vue-router";
 import AuthView from '@/views/step_1/Auth/AuthView.vue'
 import Address from '@/views/step_2/Address/AdressView.vue'
 import Structure from '@/views/step_3/Structure/StructureForm.vue'
-import informationStaff from '@/views/step_4/informationStaff/informationStaffForm.vue'
-import Intelligence from '@/views/step_5/intelligence/intelligenceForm.vue'
+// DELETE step_4
+// DELETE step_5
 import PlanningOperation from '@/views/step_6/PlanningOperation/PlanningOperationForm.vue'
 import Beneficiaries from '@/views/step_7/Beneficiaries/BeneficiariesForm.vue'
 import Purposes from '@/views/step_8/Purposes/PurposesForm.vue'
 import Approvals from '@/views/step_9/Approvals/ApprovalsForm.vue'
 import Rate from '@/views/step_10/Rate/RateForm.vue'
 import AllData from '@/views/step_11/AllData/AllData.vue'
+
+import Contact from '@/views/Contact/Contact.vue'
+import AdditionalInformation from '@/views/AdditionalInformation/AdditionalInformation.vue'
+import Founders from '@/views/Founders/Founders.vue'
 
 
 import individualsForm from '@/views/step_3/substep/substep_1/informationIndivduals/individualsForm.vue'
@@ -43,16 +47,9 @@ const routes = [
     name: "step_3",
     component: Structure
   },
-  {
-    path: "/information-staff",
-    name: "step_4",
-    component: informationStaff
-  },
-  {
-    path: "/intelligence",
-    name: "step_5",
-    component: Intelligence
-  },
+  // STEP 4 is delete
+  // STEP 5 is delete
+  
   {
     path: "/planning",
     name: "step_6",
@@ -83,6 +80,24 @@ const routes = [
     name: "step_11",
     component: AllData
   },
+
+  // Неприкаяные
+  {
+    path: "/contact",
+    name: "contact",
+    component: Contact, 
+  },
+  {
+    path: "/additional_information",
+    name: "AdditionalInformation",
+    component: AdditionalInformation,
+  },
+  {
+    path: "/founders",
+    name: "Founders",
+    component: Founders,
+  },
+  //
 
   {
     path: "/individual-info",

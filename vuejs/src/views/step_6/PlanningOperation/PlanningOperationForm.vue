@@ -1,50 +1,40 @@
 <template>
   <div class="planning_operation_section">
-    <h3 class="form_block_label">Сведения о планируемых операциях по счету</h3>
+    <h3 class="form_block_label">Виды договоров (контрактов), расчеты по которым юридическое лицо собирается
+      осуществлять через банк</h3>
     <div class="form_block">
-      <v-checkbox
-        v-model="currentData.planned_operations"
-        label="Договор купли-продажи (товарный)"
-        value="Договор купли-продажи (товарный)"
-        hide-details
-      ></v-checkbox>
-      <v-checkbox
-        v-model="currentData.planned_operations"
-        label="Агентский договор"
-        value="Агентский договор"
-        hide-details
-      ></v-checkbox>
-      <v-checkbox
-        v-model="currentData.planned_operations"
-        label="Договор комиссии"
-        value="Договор комиссии"
-        hide-details
-      ></v-checkbox>
-      <v-checkbox
-        v-model="currentData.planned_operations"
-        label="Договор купли-продажи ценных бумаг"
-        value="Договор купли-продажи ценных бумаг"
-        hide-details
-      ></v-checkbox>
-      <v-checkbox
-        v-model="currentData.planned_operations"
-        label="Договор аренды"
-        value="Договор аренды"
-        hide-details
-      ></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор возмездного оказания услуг"
+        value="Договор возмездного оказания услуг" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор поставки" value="Договор поставки"
+        hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор подряда" value="Договор подряда"
+        hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор комиссии" value="Договор комиссии"
+        hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор купли-продажи" value="Договор купли-продажи"
+        hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор аренды движимого имущества"
+        value="Договор аренды движимого имущества" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор аренды недвижимого имущества"
+        value="Договор аренды недвижимого имущества" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор лизинга" value="Договор лизинга"
+        hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Договор факторинга" value="Договор факторинга"
+        hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.planned_operations" label="Иное (укажите)" value="Иное (укажите)"
+        hide-details></v-checkbox>
+
+      <v-text-field id="other" v-if="currentData.planned_operations.indexOf('Иное (укажите)')>= 0"
+        v-model="currentData.other" placeholder="Иное"
+        class="align-center border-none mt-5" outlined>
+      </v-text-field>
+
     </div>
     <p class="error_message" v-if="!valid && operationlist.length < 1">
       Выберите пункт
     </p>
-    <line-step :step='5' class="mt-5"/>
-    <v-btn
-      block
-      large
-      :disabled="!valid"
-      class="mt-10 auth_form_bth"
-      color="primary"
-      @click="validate"
-      >Продолжить
+    <line-step :step='5' class="mt-5" />
+    <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
 </template>
@@ -56,7 +46,8 @@ export default {
     return {
       valid: true,
       currentData: {
-        planned_operations: []
+        planned_operations: [],
+        other: null,
       },
     };
   },
@@ -74,7 +65,7 @@ export default {
       }
     },
     next() {
-      this.$router.push({name: "step_7"});
+      this.$router.push({ name: "step_7" });
     }
   },
   components: {

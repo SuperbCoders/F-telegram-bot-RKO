@@ -8,6 +8,14 @@
         <v-radio label="Имеются" value="Имеются"></v-radio>
       </v-radio-group>
     </div>
+    <div class="form_block" v-if="currentData.beneficiaries === 'Имеются'">
+      <p class="form_block_title">Укажите третьи лица, к выгоде которых действует компания</p>
+      <v-text-field v-model="currentData.third_parties"
+        placeholder="Укажите третьи лица, к выгоде которых действует компания" 
+        class="align-center border-none mt-5"
+        outlined>
+      </v-text-field>
+    </div>
     <line-step :step='6' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
@@ -22,7 +30,8 @@ export default {
     return {
       isShow: false,
       currentData: {
-        beneficiaries: null
+        beneficiaries: null,
+        third_parties: null,
       }
     };
   },

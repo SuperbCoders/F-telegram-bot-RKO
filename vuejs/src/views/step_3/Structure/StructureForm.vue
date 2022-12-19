@@ -1,23 +1,16 @@
 <template>
   <div class="structure_form">
-    <h2 class="text-left mb-10 font-bold form_block_label">
+    <h2 class="text-left mb-5 font-bold form_block_label">
       Структура органов управления
     </h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div class="form_block">
-        <p class="text-left form_block_title"><span class="star">*</span>Высший орган управления</p>
-        <v-combobox v-model="currentData.supreme_management_body" filled :rules="requiredRules" required
-          :items="isLeaderList" outlined placeholder="Выберите из списка"></v-combobox>
-      </div>
-      <div class="form_block">
-        <p class="text-left form_block_title"><span class="star">*</span>Руководитель</p>
-        <v-combobox filled v-model="currentData.supreme_management_person" :items="isLeaderType" outlined
-          :rules="requiredRules" placeholder="Тип"></v-combobox>
-      </div>
-      <div v-if="isManagementCompany" class="form_block">
-        <p class="text-left form_block_title">ИНН</p>
-        <InnAndNameInput @input="getCompanyData" />
-      </div>
+      <v-radio-group v-model="currentData.structure_value">
+        <v-radio label="Общее собрание участников" value="Общее собрание участников" />
+        <v-radio label="Единоличный исполнительный орган" value="Единоличный исполнительный орган" />
+        <v-radio label="Иное" value="Иное" />
+      </v-radio-group>
+
+      <h2>TODO Должен стать отдельный ЭКРАНОМ !!!</h2>
       <div class="form_group mb-10">
         <p class="text-left form_block_label mt-5">
           Наличие наблюдательного совета
@@ -35,7 +28,7 @@
           v-model="currentData.collegiate_person" outlined :rules="requiredRules" :required="true"></v-text-field>
         <div class="title_btn">Члены наблюдательного совета</div>
         <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_supervisoty_board_persone" :key="key">
-          {{  renderName(val['page-1']) }}
+          {{ renderName(val['page-1']) }}
         </v-card>
 
         <div class="contain_btn_add">
@@ -66,7 +59,7 @@
           v-model="currentData.supervisoty_board_persone_name" :rules="requiredRules" :required="true"></v-text-field>
         <div class="title_btn">Члены коллегиального исполнительного органа</div>
         <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_collegial_executive_body" :key="key">
-          {{  renderName(val['page-1']) }}
+          {{ renderName(val['page-1']) }}
         </v-card>
 
         <div class="contain_btn_add">
@@ -90,7 +83,6 @@
 <script>
 import RadioGroup from "@/components/radioButton/radioGroup/radioGroup.vue";
 import LineStep from "@/components/line_step/line_step.vue";
-import InnAndNameInput from '@/components/innAndNameInput.vue'
 import { mask } from "vue-the-mask";
 
 export default {
@@ -99,9 +91,7 @@ export default {
     valid: true,
     listCompany: [],
     currentData: {
-      supreme_management_body: "Единственный участник (один участник с долей 100%)",
-      supreme_management_person: "Руководитель",
-      supreme_management_inn: "",
+      structure_value: "",
 
       is_collegiate_body: false,
       supervisoty_board_persone_name: "",
@@ -134,11 +124,11 @@ export default {
         this.next()
       }
     },
-    getCompanyData({name, inn, ogrn}) {
-      currentData.supreme_management_inn = inn;
+    getCompanyData({ inn }) {
+      this.currentData.supreme_management_inn = inn;
     },
-    next(){
-      this.$router.push({name: 'step_4'});
+    next() {
+      this.$router.push({ name: 'step_4' });
     },
     addObjectList(object) {
       const result = {
@@ -186,7 +176,7 @@ export default {
         }
       })
     },
-    renderName(obj){
+    renderName(obj) {
       return `${obj?.account_own_lastname} ${obj?.account_own_name} ${obj?.account_own_surname}`
     }
 
@@ -213,7 +203,6 @@ export default {
   components: {
     RadioGroup,
     LineStep,
-    InnAndNameInput,
   },
   mounted() {
     const dataStep = this.$store.state.formData.step_3;

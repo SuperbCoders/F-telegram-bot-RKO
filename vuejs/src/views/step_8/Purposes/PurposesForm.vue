@@ -1,20 +1,29 @@
 <template>
   <div class="purposes_block">
-    <h4 class="form_block_label text-left">
-      Сведения о целях установления деловых отношений с банком
-    </h4>
-    <div @click="valid = true" class="form_block">
-      <v-checkbox label="Расчетно-кассовое обслуживание" value="Расчетно-кассовое обслуживание"
-        v-model="currentData.account_operations" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Дистанционное банковское обслуживание" value="Дистанционное банковское обслуживание" hide-details></v-checkbox>
-      <v-checkbox label="Внешнеэкономические операции" value="Внешнеэкономические операции" v-model="currentData.account_operations" hide-details>
-      </v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Интернет-эквайринг" value="Интернет-эквайринг" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Кредитование" value="Кредитование" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Торговый эквайринг" value="Торговый эквайринг" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.account_operations" label="Переводы СБП (c2b)"  value="Переводы СБП (c2b)" hide-details></v-checkbox>
+    <h2>Сведения о бизнесе</h2>
+    <div>
+      <h4 class="form_block_label text-left">
+        Сведения о целях установления деловых отношений с банком
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-checkbox label="Расчетно-кассовое обслуживание" value="Расчетно-кассовое обслуживание"
+          v-model="currentData.account_operations" hide-details></v-checkbox>
+        <v-checkbox v-model="currentData.account_operations" label="Дистанционное банковское обслуживание"
+          value="Дистанционное банковское обслуживание" hide-details></v-checkbox>
+        <v-checkbox label="Внешнеэкономические операции" value="Внешнеэкономические операции"
+          v-model="currentData.account_operations" hide-details>
+        </v-checkbox>
+        <v-checkbox v-model="currentData.account_operations" label="Интернет-эквайринг" value="Интернет-эквайринг"
+          hide-details></v-checkbox>
+        <v-checkbox v-model="currentData.account_operations" label="Кредитование" value="Кредитование"
+          hide-details></v-checkbox>
+        <v-checkbox v-model="currentData.account_operations" label="Торговый эквайринг" value="Торговый эквайринг"
+          hide-details></v-checkbox>
+        <v-checkbox v-model="currentData.account_operations" label="Переводы СБП (c2b)" value="Переводы СБП (c2b)"
+          hide-details></v-checkbox>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
-    <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     <div class="form_block mt-10">
       <p class="form_block_title">
         Количество операций по безналичным платежам в месяц
@@ -67,9 +76,11 @@
     </div>
     <div @click="valid = true" class="form_block mt-5">
       <p class="form_block_title">Источники происхождения денежных средств</p>
-      <v-checkbox v-model="currentData.cash_source" label="Средства, полученные в рамках осуществляемой хозяйственной деятельности"
+      <v-checkbox v-model="currentData.cash_source"
+        label="Средства, полученные в рамках осуществляемой хозяйственной деятельности"
         value="Средства, полученные в рамках осуществляемой хозяйственой деятельности" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.cash_source" label="Собственные средства" value="Сооственные средства" hide-details></v-checkbox>
+      <v-checkbox v-model="currentData.cash_source" label="Собственные средства" value="Сооственные средства"
+        hide-details></v-checkbox>
       <v-checkbox v-model="currentData.cash_source" label="Заемные средства (займы от третьих лиц, учредителей и т.д)"
         value="Заменные средства (займы от третьих лиц, учредителей и т.д)" hide-details></v-checkbox>
       <v-checkbox v-model="currentData.cash_source" label="Иные" value="Иные" hide-details></v-checkbox>
@@ -83,7 +94,7 @@
         <v-radio label="более 100" value="более 100"></v-radio>
       </v-radio-group>
     </div>
-    <line-step :step='7' class="mt-5"/>
+    <line-step :step='7' class="mt-5" />
     <v-btn block large :disabled="!valid" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>
   </div>
@@ -119,25 +130,25 @@ export default {
         this.valid = false
       }
     },
-    next(){
-      this.$router.push({name: 'step_9'})
+    next() {
+      this.$router.push({ name: 'step_9' })
     },
   },
   computed: {
-    isValidateInformationGoals () {
+    isValidateInformationGoals() {
       if (this.currentData.account_operations.length < 1) {
         return false
       }
       return true
     },
-    isValidatesourceOfOrigin () {
+    isValidatesourceOfOrigin() {
       if (this.currentData.cash_source.length < 1) {
         return false
       }
       return true
     },
-    isValidation () {
-      if (this.isValidateInformationGoals && this.isValidatesourceOfOrigin ) {
+    isValidation() {
+      if (this.isValidateInformationGoals && this.isValidatesourceOfOrigin) {
         return true
       }
       return false
