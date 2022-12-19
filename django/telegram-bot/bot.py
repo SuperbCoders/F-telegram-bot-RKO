@@ -23,18 +23,25 @@ from telegram import (
 )
 from telegram.constants import ParseMode
 
-
+def debug_print(*args):
+    if os.getenv("DEBUG"):
+        print(*args)
 
 def is_chat_id_confirmed(chat_id):
+    debug_print("is_chat_id_confirmed", chat_id, "start")
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
         f"api/user/{chat_id}/"
     )
+    debug_print("api_url", api_url)
     try:
         response = requests.get(api_url, timeout=10, verify=False)
+        debug_print("response text", response.text)
         if response.status_code == 200:
+            debug_print("return is_chat_id_confirmed", "true")
             return True
     except Exception as error:
+        debug_print("return is_chat_id_confirmed", "false")
         return False
 
 async def start(update, context):
@@ -53,10 +60,12 @@ async def start(update, context):
 
 
 async def chat(update, context):
+    debug_print("chat", "start")
     text = (
         "Контакт-центр Банка “Ренессанс Кредит”\n" +
         "8-800-200-0-981(круглосуточно, бесплатно по России)"
     )
+    debug_print("chat", "message", "text")
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=text,
@@ -64,6 +73,8 @@ async def chat(update, context):
 
 
 async def apply(update, context):
+    debug_print("apply", "start")
+    debug_print("apply","is_chat_id_confirmed(update.effective_chat.id)", is_chat_id_confirmed(update.effective_chat.id))
     if not is_chat_id_confirmed(update.effective_chat.id):
         keyboard = KeyboardButton(
             text="Подтвердить",
@@ -82,13 +93,16 @@ async def apply(update, context):
             reply_markup=reply_markup,
         )
     else:
+        
         res_phone = requests.get(
             os.getenv("DJANGO_APP_API_ROOT_URL") +
             f"api/get_phone/{update.effective_chat.id}/"
         )
+        debug_print("res_phone text", res_phone.text)
         phone = (res_phone.json()['phone'].replace('+', ''))
-
-        WEB_APP_URL = os.getenv("DOMAIN_APP_URL") + "/?phone={}".format(phone)
+        debug_print("phone", phone)
+        WEB_APP_URL = os.getenv("DOMAIN_APP_URL") + f"?phone={phone}"
+        debug_print("WEB_APP_URL", WEB_APP_URL)
         button = InlineKeyboardButton(
             text="Создать заявку",
             web_app=WebAppInfo(url=WEB_APP_URL)
@@ -106,18 +120,20 @@ async def apply(update, context):
     
 
 def save_user_chat_id(chat_id, phone_number):
+    debug_print("save_user_chat_id", "start")
     api_url = (
         os.getenv("DJANGO_APP_API_ROOT_URL") +
         f"api/user/{chat_id}/"
     )
+    debug_print("api_url", api_url)
     try:
         stripped_phone_number = "".join(
             char for char in phone_number if char in string.digits
         )
-        formatted_phone_number = f"+{stripped_phone_number}"
+        debug_print("stripped_phone_number", stripped_phone_number)
         response = requests.post(
             api_url,
-            {"phone_number": formatted_phone_number},
+            {"phone_number": stripped_phone_number},
             timeout=10,
         )
         if not response.status_code == 200:
@@ -161,14 +177,15 @@ def get_user_applications(chat_id):
         os.getenv("DJANGO_APP_API_ROOT_URL") +
         "api/loan-application?telegram_chat_id={}".format(chat_id)
     )
+    debug_print("api_url", api_url)
     user_applications = []
     try:   
         response = requests.get(api_url, timeout=10)
         if response.json():
             user_applications = response.json()
+            debug_print("user_applications", user_applications)
     except:
         pass
-    print(user_applications)
     return user_applications
 
 
