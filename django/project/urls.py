@@ -39,7 +39,7 @@ urlpatterns = [
         LoanRequestCurrentAPIView.as_view()
     ),
     path(
-        "api/loan-application/<int:telegram_chat_id>/",
+        "api/loan-application",
         LoanApplicationListAPIView.as_view()
     ),
     path(

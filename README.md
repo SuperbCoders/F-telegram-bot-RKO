@@ -600,7 +600,12 @@ api/get_license/
 ### Status list
 GET method
 ```
-api/loan-application/<int:telegram_chat_id>/
+api/loan-application
+```
+GET Parametr 
+```
+telegram_chat_id
+phone_number
 ```
 > return
 

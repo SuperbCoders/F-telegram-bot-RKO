@@ -105,13 +105,16 @@ class LoanApplicationListAPIView(ListAPIView):
     model = LoanRequest
     serializer_class = LoanRequestSerializer
 
-    def get_queryset(self):
-        telegram_chat_id = self.kwargs['telegram_chat_id']
-        user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
-        
+    def get_queryset(self, request, format=None, *args, **kwargs):
+        telegram_chat_id = request.GET.get('telegram_chat_id')
+        phone_number = request.GET.get('phone_number')
+        if telegram_chat_id:
+            user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
+            phone_number = user.phone_number
+
         return (
             LoanRequest.objects.filter(
-                contact_number=format_phone(user.phone_number),
+                contact_number=format_phone(phone_number),
                 is_finished=True,
             ).order_by("created_at")
         )

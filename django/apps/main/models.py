@@ -60,6 +60,19 @@ class LoanRequest(models.Model):
                               default="under_review",
                               blank=True)
 
+    # Desctop field
+    
+    short_name = models.CharField(max_length=255, null=True, blank=True)
+    full_name = models.CharField(max_length=255, null=True, blank=True)
+    registration_date = models.CharField(max_length=255, null=True, blank=True)
+    kpp = models.CharField(max_length=255, null=True, blank=True)
+    ogrn_date = models.CharField(max_length=255, null=True, blank=True)
+    registrator_name = models.CharField(max_length=255, null=True, blank=True)
+    okved = models.CharField(max_length=255, null=True, blank=True)
+    oktmo = models.CharField(max_length=255, null=True, blank=True)
+    
+    # Bot field
+
     status_description = models.CharField(max_length=255, null=True)
     order_id = models.CharField(max_length=255, null=True, blank=True)
     inn = models.CharField(max_length=20, blank=True, null=True)
