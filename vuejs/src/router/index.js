@@ -16,6 +16,7 @@ import AllData from '@/views/step_11/AllData/AllData.vue'
 import Contact from '@/views/Contact/Contact.vue'
 import AdditionalInformation from '@/views/AdditionalInformation/AdditionalInformation.vue'
 import Founders from '@/views/Founders/Founders.vue'
+import Codeword from '@/views/Codeword/Codeword.vue'
 
 
 import individualsForm from '@/views/step_3/substep/substep_1/informationIndivduals/individualsForm.vue'
@@ -96,6 +97,11 @@ const routes = [
     path: "/founders",
     name: "Founders",
     component: Founders,
+  },
+  {
+    path: "/codeword",
+    name: "Codeword",
+    component: Codeword,
   },
   //
 

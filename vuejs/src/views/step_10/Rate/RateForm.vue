@@ -5,131 +5,129 @@
     </h2>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Тариф 1</h2>
+        <h2 class="text-left mb-3 card_content_title">Первый</h2>
         <p class="text-left mb-3 card_content_text">
-          Для начинающих предпринимателей
+          Подойдёт тем, кто неавно зарегистрировал ИП или ООО и только начинает вести бизнес
         </p>
         <ul class="mb-3 rate_section_list">
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            Нет бесплатных платежей
           </li>
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            49 ₽ за платеж
           </li>
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            100 000 ₽ бесплатно для снятия наличных и переводов на ФЛ/Card 2 Card Далее 349 ₽ за каждые 50 000 ₽
+          </li>
+          <li class="text-left mb-3">
+            59 ₽ минимальная плата в день за использование овердрафта
+          </li>
+          <li class="text-left mb-3">
+            50 000 ₽ максимальный кэшбэк по бизнес-карте
+          </li>
+          <li class="text-left mb-3">
+            0 ₽ за SMS-уведомления
+          </li>
+          <li class="text-left mb-3">
+            0 ₽ за подключение эквайринга и сервисов для бизнеса
           </li>
         </ul>
-        <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn
-          class="rate_card_content_button-activate pink darken-1"
-          v-if="currentData.tariff === 'Тариф 1'"
-          @click="unsetTarif()"
-          large
-        >
+        <h2 class="text-left rate_content_price mb-3">0 ₽/мес</h2>
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 1'"
+          @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
           <v-icon large color="white" class="ml-2" style="font-size: 20px">
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn
-          class="rate_card_content_button"
-          v-else
-          @click="setTarif('Тариф 1')"
-          large
-          >Выбрать</v-btn
-        >
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Тариф 2</h2>
+        <h2 class="text-left mb-3 card_content_title">Второй</h2>
         <p class="text-left mb-3 card_content_text">
-          Для начинающих предпринимателей 
+          Оптимальный тариф для тех, чей бизнес начал приносить первую прибыль
         </p>
         <ul class="mb-3 rate_section_list">
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            5 платежей бесплатно
           </li>
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            29 ₽ за платеж сверх лимита
           </li>
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            200 000 ₽ бесплатно для снятия наличных и переводов на ФЛ/Card 2 Card Далее 349 ₽ за каждые 50 000 ₽
+          </li>
+          <li class="text-left mb-3">
+            59 ₽ минимальная плата в день за использование овердрафта
+          </li>
+          <li class="text-left mb-3">
+            50 000 ₽ максимальный кэшбэк по бизнес-карте
+          </li>
+          <li class="text-left mb-3">
+            0 ₽ за SMS-уведомления
+          </li>
+          <li class="text-left mb-3">
+            0 ₽ за подключение эквайринга и сервисов для бизнеса
           </li>
         </ul>
-        <h2 class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn
-          class="rate_card_content_button-activate pink darken-1"
-          v-if="currentData.tariff === 'Тариф 2'"
-          @click="unsetTarif()"
-          large
-        >
+        <h2 class="text-left rate_content_price mb-3">490 ₽/мес</h2>
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 2'"
+          @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
           <v-icon large color="white" class="ml-2" style="font-size: 20px">
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn
-          class="rate_card_content_button"
-          v-else
-          @click="setTarif('Тариф 2')"
-          large
-          >Выбрать</v-btn
-        >
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
       <div class="card_content p-10 text-left m-11">
-        <h2 class="text-left mb-3 card_content_title">Тариф 3</h2>
+        <h2 class="text-left mb-3 card_content_title">Третий</h2>
         <p class="text-left mb-3 card_content_text">
-          Для начинающих предпринимателей
+          Для активно растущего бизнеса, который выходит на новые рынки
         </p>
         <ul class="mb-3 rate_section_list">
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            50 платежей бесплатно
           </li>
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            19 ₽ за платеж сверх лимита 300 000 ₽ бесплатно для снятия наличных и переводов на ФЛ и Card/Card Далее 349
+            ₽ за каждые 50 000 ₽
           </li>
           <li class="text-left mb-3">
-            До 400 000 ₽ себе на счет для ИП бесплатно
+            59 ₽ минимальная плата в день за использование овердрафта
+          </li>
+          <li class="text-left mb-3">
+            50 000 ₽ максимальный кэшбэк по бизнес-карте
+          </li>
+          <li class="text-left mb-3">
+            0 ₽ за SMS-уведомления
+          </li>
+          <li class="text-left mb-3">
+            0 ₽ за подключение эквайринга и сервисов для бизнеса
           </li>
         </ul>
-        <h2 gray class="text-left rate_content_price mb-3">490 руб/мес</h2>
-        <v-btn
-          class="rate_card_content_button-activate pink darken-1"
-          v-if="currentData.tariff === 'Тариф 3'"
-          @click="unsetTarif()"
-          large
-        >
+        <h2 gray class="text-left rate_content_price mb-3">1 490 ₽/мес</h2>
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 3'"
+          @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
           <v-icon large color="white" class="ml-2" style="font-size: 20px">
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn
-          class="rate_card_content_button"
-          v-else
-          @click="setTarif('Тариф 3')"
-          large
-          >Выбрать</v-btn
-        >
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <LineStep :step="9" />
-    <v-btn
-      block
-      large
-      :disabled="!currentData.tariff"
-      @click="redirect()"
-      class="mt-10 auth_form_bth"
-      color="primary"
-    >
-      Продолжить
+    <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
+      <span v-if="currentData.tariff">Продолжить</span>
+      <span v-else>Пропустить</span>
     </v-btn>
   </div>
 </template>
@@ -147,7 +145,7 @@ export default {
       },
     };
   },
-  mounted(){
+  mounted() {
     scroll(0, 0);
   },
   methods: {
@@ -159,13 +157,13 @@ export default {
     },
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-          object: 'step_11',
-          value: this.currentData
-        })
+        object: 'step_11',
+        value: this.currentData
+      })
       this.next();
     },
-    next(){
-      this.$router.push({name: "step_11"});
+    next() {
+      this.$router.push({ name: "step_11" });
     }
   },
 };
@@ -202,6 +200,7 @@ export default {
   padding: 16px 30px !important;
   text-transform: none;
 }
+
 .rate_card_content_button-activate {
   width: 150px !important;
   cursor: pointer;
@@ -216,7 +215,7 @@ export default {
   text-transform: none;
 }
 
-.rate_section_list > li {
+.rate_section_list>li {
   font-size: 14px;
   color: #757f86 !important;
 }
