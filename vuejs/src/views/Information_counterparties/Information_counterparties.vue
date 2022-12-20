@@ -1,13 +1,14 @@
 <template>
     <v-form v-model="valid" ref="form" lazy-validation>
+        <h2>Сведения о контрагентах</h2>
         <div class="form_block">
             <p class="text-left form_block_title">
                 Имеются постоянные или предполагаемые плательщики по операциям с
                 денежными средствами на счете
             </p>
-            <v-radio-group v-model="currentData.information_counterparties">
+            <v-radio-group v-model="currentData.information_counterparties" class="checkboxs">
                 <v-radio label="Имеются" value="Имеются" />
-                <v-radio label="Не имеются" value="Имеются" />
+                <v-radio label="Не имеются" value="Не имеются" />
             </v-radio-group>
         </div>
 
@@ -21,9 +22,9 @@
         <div class="form_block">
             <p class="text-left form_block_title">Имеются постоянные или предполагаемые получатели по операциям с
                 денежными средствами на счете </p>
-            <v-radio-group v-model="currentData.information_counterparties2">
+            <v-radio-group v-model="currentData.information_counterparties2" class="checkboxs">
                 <v-radio label="Имеются" value="Имеются" />
-                <v-radio label="Не имеются" value="Имеются" />
+                <v-radio label="Не имеются" value="Не имеются" />
             </v-radio-group>
         </div>
 
@@ -34,12 +35,12 @@
             </v-text-field>
         </div>
 
-        <v-btn :disabled="!valid" @click="validate">Отправить</v-btn>
+        <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+    </v-btn>
     </v-form>
 </template>
 <script>
 import { VueMaskDirective } from "vue-the-mask";
-import InnAndNameInput from '@/components/innAndNameInput.vue'
 
 export default {
     directives: { mask: VueMaskDirective },
@@ -96,9 +97,6 @@ export default {
 
     },
     computed: {},
-    components: {
-        InnAndNameInput,
-    }
 };
 </script>
 <style scoped>

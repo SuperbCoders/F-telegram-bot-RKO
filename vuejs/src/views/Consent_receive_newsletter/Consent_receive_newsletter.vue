@@ -5,18 +5,17 @@
             <p class="form_block_title">Заявитель дает согласие на получение им предложений, информации о продуктах/
                 услугах, рекламы и иной информации от Банка, Партнеров Банка по почте, по сетям электросвязи, в том
                 числе путем контактов по телефону, электронной почте, с помощью СМС - сообщений и иными способами.</p>
-            <v-radio-group v-model="currentData.is_newsletter">
+            <v-radio-group v-model="currentData.is_newsletter" class="checkboxs">
                 <v-radio label="Да" value="Да" />
                 <v-radio label="Нет" value="Нет" />
             </v-radio-group>
         </div>
 
-        <v-btn :disabled="!valid" @click="validate">Отправить</v-btn>
+        <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+    </v-btn>
     </v-form>
 </template>
 <script>
-import InnAndNameInput from '@/components/innAndNameInput.vue'
-
 export default {
     data: () => ({
         currentData: {
@@ -49,7 +48,6 @@ export default {
     },
     computed: {},
     components: {
-        InnAndNameInput,
     }
 };
 </script>

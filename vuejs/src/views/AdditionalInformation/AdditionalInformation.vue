@@ -1,7 +1,7 @@
 <template>
     <v-form v-model="valid" ref="form" lazy-validation>
         <p class="text-left form_block_title"><span class="star">*</span>Дополнительная информация о ЕИО</p>
-        <v-radio-group v-model="eioType">
+        <v-radio-group v-model="currentData.additional_inforamtion" class="checkboxs">
             <v-radio
                 label="ЕИО является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)"
                 value="ЕИО является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)" />
@@ -9,17 +9,16 @@
                 label="ЕИО не является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)"
                 value="ЕИО не является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)" />
         </v-radio-group>
-        <v-btn :disabled="!valid" @click="validate">Отправить</v-btn>
+        <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+    </v-btn>
     </v-form>
 </template>
 <script>
-import { VueMaskDirective } from "vue-the-mask";
 
 export default {
-    directives: { mask: VueMaskDirective },
     data: () => ({
         currentData: {
-            eioType: ""
+            additional_inforamtion: ""
         },
         valid: true,
 
@@ -76,7 +75,10 @@ export default {
     font-size: 14px;
 }
 
-.combobox .v-icon {
-    display: none;
+.purposes_block .v-label {
+    color: #323E48 !important;
+}
+.checkboxs label {
+  color: #323E48 !important;
 }
 </style>

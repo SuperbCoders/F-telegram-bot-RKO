@@ -17,6 +17,9 @@ import Contact from '@/views/Contact/Contact.vue'
 import AdditionalInformation from '@/views/AdditionalInformation/AdditionalInformation.vue'
 import Founders from '@/views/Founders/Founders.vue'
 import Codeword from '@/views/Codeword/Codeword.vue'
+import Information_counterparties from '@/views/Information_counterparties/Information_counterparties.vue'
+import Select_additional_products from '@/views/Select_additional_products/Select_additional_products.vue'
+import Consent_receive_newsletter from '@/views/Consent_receive_newsletter/Consent_receive_newsletter.vue'
 
 
 import individualsForm from '@/views/step_3/substep/substep_1/informationIndivduals/individualsForm.vue'
@@ -82,11 +85,16 @@ const routes = [
     component: AllData
   },
 
-  // Неприкаяные
+  // Неприкаяные Consent_receive_newsletter
   {
     path: "/contact",
     name: "contact",
     component: Contact, 
+  },
+  {
+    path: "/consent_receive_newsletter",
+    name: "Consent_receive_newsletter",
+    component: Consent_receive_newsletter,
   },
   {
     path: "/additional_information",
@@ -99,9 +107,19 @@ const routes = [
     component: Founders,
   },
   {
+    path: "/information_counterparties",
+    name: "Information_counterparties",
+    component: Information_counterparties,
+  },
+  {
     path: "/codeword",
     name: "Codeword",
     component: Codeword,
+  },
+  {
+    path: "/select_additional_products",
+    name: "Select_additional_products",
+    component: Select_additional_products,
   },
   //
 

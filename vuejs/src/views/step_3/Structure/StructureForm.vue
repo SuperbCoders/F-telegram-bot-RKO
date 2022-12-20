@@ -4,7 +4,7 @@
       Структура органов управления
     </h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <v-radio-group v-model="currentData.structure_value">
+      <v-radio-group v-model="currentData.structure_value" class="checkboxs">
         <v-radio label="Общее собрание участников" value="Общее собрание участников" />
         <v-radio label="Единоличный исполнительный орган" value="Единоличный исполнительный орган" />
         <v-radio label="Иное" value="Иное" />
