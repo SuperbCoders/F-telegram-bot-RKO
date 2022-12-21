@@ -20,18 +20,18 @@ import Codeword from '@/views/Codeword/Codeword.vue'
 import Information_counterparties from '@/views/Information_counterparties/Information_counterparties.vue'
 import Select_additional_products from '@/views/Select_additional_products/Select_additional_products.vue'
 import Consent_receive_newsletter from '@/views/Consent_receive_newsletter/Consent_receive_newsletter.vue'
+import Information_individuals_organization from '@/views/Information_individuals_organization/Information_individuals_organization.vue'
 
-
-import individualsForm from '@/views/step_3/substep/substep_1/informationIndivduals/individualsForm.vue'
-import DocumentsForms from '@/views/step_3/substep/substep_2/DocumentsForm/DocumentForm.vue'
-import ForeignPerson from '@/views/step_3/substep/substep_3/isAForeignPerson/ForeignPerson.vue'
-import KinshipStatus from '@/views/step_3/substep/substep_4/KinshipStatus/KinshipStatusForm.vue'
-import AddressForm from '@/views/step_3/substep/substep_5/AddressForm/AddressForm.vue'
-import EmailForm from '@/views/step_3/substep/substep_6/EmailForm/EmailForm.vue'
-import DocumentPage from '@/views/step_3/substep/substep_7/Documents/documentForm.vue'
-import ClientInfo from '@/views/step_3/substep/substep_8/ClientInfo/ClientInfoForm.vue'
-import DocumentFogeiner from '@/views/step_3/substep/substep_9/DocumentFogeiner/DocumentFogeinerForm.vue'
-import AllDataPersone from '@/views/step_3/substep/substep_10/allDataPersone/AllDataPersone.vue'
+import individualsForm from '@/views/substep/substep_1/informationIndivduals/individualsForm.vue'
+import DocumentsForms from '@/views/substep/substep_2/DocumentsForm/DocumentForm.vue'
+import ForeignPerson from '@/views/substep/substep_3/isAForeignPerson/ForeignPerson.vue'
+import KinshipStatus from '@/views/substep/substep_4/KinshipStatus/KinshipStatusForm.vue'
+import AddressForm from '@/views/substep/substep_5/AddressForm/AddressForm.vue'
+import EmailForm from '@/views/substep/substep_6/EmailForm/EmailForm.vue'
+import DocumentPage from '@/views/substep/substep_7/Documents/documentForm.vue'
+import ClientInfo from '@/views/substep/substep_8/ClientInfo/ClientInfoForm.vue'
+import DocumentFogeiner from '@/views/substep/substep_9/DocumentFogeiner/DocumentFogeinerForm.vue'
+import AllDataPersone from '@/views/substep/substep_10/allDataPersone/AllDataPersone.vue'
 
 Vue.use(VueRouter);
 
@@ -53,7 +53,7 @@ const routes = [
   },
   // STEP 4 is delete
   // STEP 5 is delete
-  
+
   {
     path: "/planning",
     name: "step_6",
@@ -78,18 +78,18 @@ const routes = [
     path: "/rate",
     name: "step_10",
     component: Rate
-  },    
+  },
   {
     path: "/all-data",
     name: "step_11",
     component: AllData
   },
 
-  // Неприкаяные Consent_receive_newsletter
+  // Неприкаяные
   {
     path: "/contact",
     name: "contact",
-    component: Contact, 
+    component: Contact,
   },
   {
     path: "/consent_receive_newsletter",
@@ -105,6 +105,11 @@ const routes = [
     path: "/founders",
     name: "Founders",
     component: Founders,
+  },
+  {
+    path: "/information_individuals_organization",
+    name: "Information_individuals_organization",
+    component: Information_individuals_organization,
   },
   {
     path: "/information_counterparties",
@@ -123,6 +128,8 @@ const routes = [
   },
   //
 
+
+  
   {
     path: "/individual-info",
     name: "substep_1",
@@ -167,12 +174,13 @@ const routes = [
     path: "/document-fogeiner",
     name: "substep_9",
     component: DocumentFogeiner
-  },   
+  },
   {
     path: "/all-data-persone",
     name: "substep_10",
     component: AllDataPersone
   },
+
 ];
 
 const router = new VueRouter({

@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 function isEmptyObject(value) {
     return Object.keys(value).length === 0 && value.constructor === Object;
-  }
+}
 
 export default new Vuex.Store({
     state: {
@@ -13,7 +13,6 @@ export default new Vuex.Store({
         authToken: localStorage.getItem("authToken") || null,
         user: null,
         data: null,
-        isForegin: false,
         assigned_publ_pers_relation: false,
         accownt_own_living: false,
         assigned_publ_pers_registraion: false,
@@ -25,7 +24,7 @@ export default new Vuex.Store({
                 contact_number: "",
                 ogrn: "",
             },
-            
+
             step_2: {
                 addresses: [
                     {
@@ -39,17 +38,7 @@ export default new Vuex.Store({
                 ]
             },
             step_3: {
-                supreme_management_body: "Единственный участник (один участник с долей 100%)",
-                supreme_management_person: "Руководитель",
-                supreme_management_inn: "",
-
-                is_supervisoty: false,
-                collegiate_person: "",
-                list_supervisoty_board_persone: [],
-
-                is_collegiate_body: false,
-                supervisoty_board_persone_name: "",
-                list_collegial_executive_body: [],
+                list_persone: [],
             },
             step_4: {
                 company_group_name: null,
@@ -93,12 +82,6 @@ export default new Vuex.Store({
 
             }
         },
-
-        list_supervisoty_board_persone: [],
-        supervisoryBoardPersone: {},
-
-        list_collegial_executive_body: [],
-        collegialExecutiveBody: {},
 
         leaderList: [
             {
@@ -157,9 +140,6 @@ export default new Vuex.Store({
         setDataCompany(state, value) {
             state.dataCompany = value;
         },
-        isForeginStatus(state, status) {
-            state.isForegin = status;
-        },
         addItemFormData(state, item) {
             state.formData.push(item);
             scroll(0, 0);
@@ -184,23 +164,26 @@ export default new Vuex.Store({
 
 
 
-        addSupervisoryBoardPersone(state) {
-            state.formData.step_3.list_supervisoty_board_persone.push({});
+        addPersone(state) {
+            state.formData.step_3.list_persone.push({});
         },
-        delSupervisoryBoardPersone(state) {
-            state.formData.step_3.list_supervisoty_board_persone.pop();
+        delPersoneLast(state) {
+            state.formData.step_3.list_persone.pop();
         },
-        async setSupervisoryBoardPersone(state, { key, value }) {
-            const length = state.formData.step_3.list_supervisoty_board_persone.length;
+        delPersoneIndex(state, {index}) {
+            state.formData.step_3.list_persone = state.formData.step_3.list_persone.slice(index, 1);
+        },
+        async setPersone(state, { key, value }) {
+            const length = state.formData.step_3.list_persone.length;
             const is_element = length > 0;
             if (is_element) {
-                const last_element = state.formData.step_3.list_supervisoty_board_persone[length - 1];
+                const last_element = state.formData.step_3.list_persone[length - 1];
                 last_element[key] = value;
             }
             const contact_number = state.formData.step_1.contact_number;
-            const response_data = Object.assign({ last_step: `${key}*supervisory` }, state.formData.step_3);
+            const response_data = Object.assign({ last_step: `${key}` }, state.formData.step_3);
 
-            await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
+            await fetch(process.env.VUE_APP_HOST_API + `/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -210,57 +193,21 @@ export default new Vuex.Store({
             scroll(0, 0);
         },
 
-
-
-
-        addCollegialExecutiveBody(state) {
-            state.formData.step_3.list_collegial_executive_body.push({});
-        },
-
-        delCollegialExecutiveBody(state) {
-            state.formData.step_3.list_collegial_executive_body.pop();
-        },
-
-        async setCollegialExecutiveBody(state, { key, value }) {
-            const length = state.formData.step_3.list_collegial_executive_body.length;
-            const is_element = length > 0;
-            if (is_element) {
-                const last_element = state.formData.step_3.list_collegial_executive_body[length - 1];
-                last_element[key] = value;
-            }
-            const contact_number = state.formData.step_1.contact_number;
-            const response_data = Object.assign({ last_step: `${key}*collegial` }, state.formData.step_3);
-
-            await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8',
-                },
-                body: JSON.stringify(response_data)
-            })
-            scroll(0, 0);
-        },
     },
     actions: {
-        async addObjectFormData(context, payolad) {
-            const object = payolad.object
-            const value = payolad.value;
+        async addObjectFormData(context, {object, value}) {
 
             let response_data = null;
-            
+
             if (isEmptyObject(value)) {
                 response_data = { last_step: object };
             } else {
                 response_data = Object.assign({ last_step: object }, value);
                 context.commit("addItemFormDataObject", { object, value });
             }
-
             const contact_number = context.state.formData.step_1.contact_number;
-            
-            
-             
 
-            await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${contact_number}/`, {
+            await fetch(process.env.VUE_APP_HOST_API + `/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8',
@@ -268,6 +215,7 @@ export default new Vuex.Store({
                 body: JSON.stringify(response_data)
             })
         },
+
         async loadObjectFormData(context, payolad) {
             const formData = payolad;
             console.log(formData);
