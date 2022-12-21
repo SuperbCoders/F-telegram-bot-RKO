@@ -13,15 +13,7 @@
 
         </v-text-field>
       </div>
-      <div class="form_block">
-        <p class="text-left form_block_title">СНИЛС (при наличии)</p>
-        <v-text-field id="oldName" 
-        v-mask="'### ### ### ##'"
-        masked="true"
-        v-model="currentData.account_own_snils" placeholder="СНИЛС" class="align-center border-none" outlined
-        >
-        </v-text-field>
-      </div>
+
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Гражданство</p>
 

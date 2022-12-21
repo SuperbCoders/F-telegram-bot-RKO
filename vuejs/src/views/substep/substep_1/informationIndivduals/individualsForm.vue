@@ -3,14 +3,12 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <p class="text-left form_block_title"><span class="star">*</span>Роль лица</p>
       <div class="checkboxs">
-        <v-checkbox label="Руководитель" v-model="currentData.account_onw_role" value="Руководитель" hide-details>
-        </v-checkbox>
-        <v-checkbox v-model="currentData.account_onw_role" label="Учредитель" value="Учредитель" hide-details>
-        </v-checkbox>
-        <v-checkbox v-model="currentData.account_onw_role" label="Бенефициарный владелец" value="Бенефициарный владелец"
+        <v-checkbox v-model="currentData.account_onw_role" label="Акционер/учредитель" value="Акционер/учредитель"
           hide-details>
         </v-checkbox>
-        <v-checkbox v-model="currentData.account_onw_role" label="Подписант" value="Подписант" hide-details>
+        <v-checkbox v-model="currentData.account_onw_role" label="ЕИО" value="ЕИО" hide-details>
+        </v-checkbox>
+        <v-checkbox v-model="currentData.account_onw_role" label="Бенифициар" value="Бенифициар" hide-details>
         </v-checkbox>
       </div>
 
@@ -29,7 +27,7 @@
           class="align-center border-none" outlined :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
-        <p class="text-left form_block_title">Отчество (при наличии)</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Отчество</p>
         <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Введите Отчество"
           class="align-center border-none" outlined></v-text-field>
       </div>
