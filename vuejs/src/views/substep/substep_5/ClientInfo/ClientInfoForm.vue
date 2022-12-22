@@ -66,19 +66,6 @@
             :active-picker.sync="activePickerIssue"></v-date-picker>
         </v-menu>
       </div>
-      <div class="form_block">
-        <p class="text-left form_block_title"><span class="star">*</span>Срок действия</p>
-        <v-menu :close-on-content-click="isActivePickerValidity()" transition="scale-transition" offset-y
-          min-width="auto">
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field placeholder="Дата" id="passportIssueDate" name="passportIssueDate" outlined
-              append-icon="mdi-calendar-blank" readonly v-model="currentData.validity" :rules="requiredRules"
-              :required="true" v-bind="attrs" v-on="on"></v-text-field>
-          </template>
-          <v-date-picker v-model="currentData.validity" :min="currentData.date_issue"
-            @input="passportIssueDateMenu = false" :active-picker.sync="activePickerValidity"></v-date-picker>
-        </v-menu>
-      </div>
     </v-form>
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
@@ -120,17 +107,11 @@ export default {
   },
   methods: {
     validate() {
-      const substep_3 = this.$store.state?.supervisoryBoardPersone?.['substep_3'];
-      const isStatusFogeiner = substep_3?.assigned_publ_pers_relation;
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit("setPersone", { key: "substep_8", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_5", value: this.currentData });
 
-        if (isStatusFogeiner === 'Да') {
-          this.$router.push({ name: "substep_9" });
-        } else {
-          this.$router.push({ name: "substep_10" });
-        }
+        this.$router.push({ name: "substep_6" });
       }
     },
     // validityNull () {

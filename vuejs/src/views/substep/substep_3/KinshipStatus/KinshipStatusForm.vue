@@ -2,20 +2,10 @@
   <div class="status_kinship_block">
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
-        <p class="text-left form_block_label">
-          Степень родства либо статус (супруг или супруга) по отношению к
-          публичному должностному лицу
-        </p>
-        <p class="text-left form_block_title">Степень родства</p>
-        <v-combobox :items="relationDegree" v-model="currentData.assigned_publ_pers_relation" :rules="requiredRules"
-          required outlined placeholder="Степень родства"></v-combobox>
+
         <div class="form_block">
           <p class="text-left form_block_title">Адрес регистрации</p>
           <AddressInput label="Введите адрес" v-model="currentData.assigned_publ_pers_registraion" />
-        </div>
-        <div class="form_block">
-          <p class="text-left form_block_title">Адрес регистрации</p>
-          <AddressInput label="Введите адрес" v-model="currentData.account_own_registration" />
         </div>
       </div>
     </v-form>
@@ -42,9 +32,9 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit("setPersone", { key: "substep_4", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_3", value: this.currentData });
 
-        this.$router.push({ name: "substep_5" });
+        this.$router.push({ name: "substep_4" });
 
 
       }

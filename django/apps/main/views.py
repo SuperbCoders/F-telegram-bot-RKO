@@ -24,7 +24,7 @@ from datetime import date
 from .models import (
     LoanRequest,
     User,
-    PassportFile,
+    DocumentFile,
 )
 from .serializers import (
     # LoanApplicationSerializer,
@@ -164,17 +164,18 @@ class PhoneApiView(APIView):
         return Response({}, status=status.HTTP_404_NOT_FOUND)
 
 
-class PassportLoad(APIView):
+class DocumentLoad(APIView):
     permission_classes = [permissions.AllowAny]
     
     def post(self, request, format=None, *args, **kwargs):
-        passport = request.FILES.get("passport")
-        passport_model = PassportFile(passport=passport)
-        passport_model.save()
+        document = request.FILES.get("document")
+        document_model = DocumentFile(document=document)
+        document_model.save()
 
         return Response({
-            "path": passport_model.passport.url
+            "path": document_model.document.url
         }, status=status.HTTP_200_OK)
+
 
 class StatusCheck(APIView):
     permission_classes = [permissions.AllowAny]

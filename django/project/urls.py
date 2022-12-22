@@ -25,7 +25,7 @@ from apps.main.views import (
     PhoneApiView,
     LoanRequestCurrentAPIView,
     LoanApplicationListAPIView,
-    PassportLoad,
+    DocumentLoad,
     StatusCheck,
 )
 
@@ -47,7 +47,7 @@ urlpatterns = [
         UserAPIView.as_view(),
     ),
     path('api/adminpage/', admin.site.urls),
-    path('api/passport-load/', PassportLoad.as_view()),
+    path('api/document-load/', DocumentLoad.as_view()),
     path('api/get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view()),
     path('api/status/', StatusCheck.as_view()),
 ]

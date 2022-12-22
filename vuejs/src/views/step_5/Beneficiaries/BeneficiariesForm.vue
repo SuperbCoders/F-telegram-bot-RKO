@@ -38,13 +38,13 @@ export default {
   methods: {
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_8',
+        object: 'step_5',
         value: this.currentData
       })
       this.next();
     },
     next() {
-      this.$router.push({ name: "step_8" })
+      this.$router.push({ name: "step_6" })
     },
   },
   components: {

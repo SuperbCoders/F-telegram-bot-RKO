@@ -157,9 +157,6 @@ export const translateMixin = {
                     return "Члены наблюдательного совета";
                 case "informationGoals":
                     return "Юридические лица компании";
-                case "licence_validity":
-                    return "Срок действия";
-
                 default: return name
             }
         },

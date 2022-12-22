@@ -4,11 +4,9 @@ import VueRouter from "vue-router";
 import AuthView from '@/views/step_1/Auth/AuthView.vue'
 import Address from '@/views/step_2/Address/AdressView.vue'
 import Structure from '@/views/step_3/Structure/StructureForm.vue'
-// DELETE step_4
-// DELETE step_5
-import PlanningOperation from '@/views/step_6/PlanningOperation/PlanningOperationForm.vue'
-import Beneficiaries from '@/views/step_7/Beneficiaries/BeneficiariesForm.vue'
-import Purposes from '@/views/step_8/Purposes/PurposesForm.vue'
+import PlanningOperation from '@/views/step_4/PlanningOperation/PlanningOperationForm.vue'
+import Beneficiaries from '@/views/step_5/Beneficiaries/BeneficiariesForm.vue'
+import Purposes from '@/views/step_6/Purposes/PurposesForm.vue'
 import Approvals from '@/views/step_9/Approvals/ApprovalsForm.vue'
 import Rate from '@/views/step_10/Rate/RateForm.vue'
 import AllData from '@/views/step_11/AllData/AllData.vue'
@@ -24,14 +22,10 @@ import Information_individuals_organization from '@/views/Information_individual
 
 import individualsForm from '@/views/substep/substep_1/informationIndivduals/individualsForm.vue'
 import DocumentsForms from '@/views/substep/substep_2/DocumentsForm/DocumentForm.vue'
-import ForeignPerson from '@/views/substep/substep_3/isAForeignPerson/ForeignPerson.vue'
-import KinshipStatus from '@/views/substep/substep_4/KinshipStatus/KinshipStatusForm.vue'
-import AddressForm from '@/views/substep/substep_5/AddressForm/AddressForm.vue'
-import EmailForm from '@/views/substep/substep_6/EmailForm/EmailForm.vue'
-import DocumentPage from '@/views/substep/substep_7/Documents/documentForm.vue'
-import ClientInfo from '@/views/substep/substep_8/ClientInfo/ClientInfoForm.vue'
-import DocumentFogeiner from '@/views/substep/substep_9/DocumentFogeiner/DocumentFogeinerForm.vue'
-import AllDataPersone from '@/views/substep/substep_10/allDataPersone/AllDataPersone.vue'
+import KinshipStatus from '@/views/substep/substep_3/KinshipStatus/KinshipStatusForm.vue'
+import AddressForm from '@/views/substep/substep_4/AddressForm/AddressForm.vue'
+import ClientInfo from '@/views/substep/substep_5/ClientInfo/ClientInfoForm.vue'
+import AllDataPersone from '@/views/substep/substep_6/allDataPersone/AllDataPersone.vue'
 
 Vue.use(VueRouter);
 
@@ -51,6 +45,7 @@ const routes = [
     name: "step_3",
     component: Structure
   },
+
   // STEP 4 is delete
   // STEP 5 is delete
 
@@ -141,43 +136,23 @@ const routes = [
     component: DocumentsForms
   },
   {
-    path: "/foreign-person",
-    name: "substep_3",
-    component: ForeignPerson
-  },
-  {
     path: "/kinship-status-forms",
-    name: "substep_4",
+    name: "substep_3",
     component: KinshipStatus
   },
   {
     path: "/address-form",
-    name: "substep_5",
+    name: "substep_4",
     component: AddressForm
   },
   {
-    path: "/email-form",
-    name: "substep_6",
-    component: EmailForm
-  },
-  {
-    path: "/document",
-    name: "substep_7",
-    component: DocumentPage
-  },
-  {
     path: "/client-info",
-    name: "substep_8",
+    name: "substep_5",
     component: ClientInfo
   },
   {
-    path: "/document-fogeiner",
-    name: "substep_9",
-    component: DocumentFogeiner
-  },
-  {
     path: "/all-data-persone",
-    name: "substep_10",
+    name: "substep_7",
     component: AllDataPersone
   },
 

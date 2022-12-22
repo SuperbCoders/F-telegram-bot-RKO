@@ -58,14 +58,14 @@ export default {
       } else {
         this.valid = true;
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_7',
+          object: 'step_4',
           value: this.currentData
         })
         this.next();
       }
     },
     next() {
-      this.$router.push({ name: "step_7" });
+      this.$router.push({ name: "step_5" });
     }
   },
   components: {

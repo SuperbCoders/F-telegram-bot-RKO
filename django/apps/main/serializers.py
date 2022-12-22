@@ -20,6 +20,10 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             'okved',
             'oktmo',
 
+            'email',
+            'donainname',
+            'fax',
+
 
             'id',
             'status',

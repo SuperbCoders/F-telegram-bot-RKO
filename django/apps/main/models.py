@@ -73,6 +73,19 @@ class LoanRequest(models.Model):
     
     # Bot field
 
+    email = models.CharField(max_length=255, null=True, blank=True)
+    donainname = models.CharField(max_length=255, null=True, blank=True)
+    fax = models.CharField(max_length=255, null=True, blank=True)
+    founders = models.JSONField(blank=True, null=True)
+    planning = models.JSONField(blank=True, null=True)
+    information_counterparties = models.CharField(max_length=255, null=True, blank=True)
+    name_organization = models.CharField(max_length=255, null=True, blank=True)
+    information_counterparties2 = models.CharField(max_length=255, null=True, blank=True)
+    name_organization2 = models.CharField(max_length=255, null=True, blank=True)
+    sms_sending = models.BooleanField(null=True, blank=True)
+    additional_products = models.JSONField(blank=True, null=True)
+
+
     status_description = models.CharField(max_length=255, null=True)
     order_id = models.CharField(max_length=255, null=True, blank=True)
     inn = models.CharField(max_length=20, blank=True, null=True)
@@ -380,5 +393,5 @@ class User(AbstractUser):
     )
 
 
-class PassportFile(models.Model):
-    passport = models.FileField(upload_to="documents")
+class DocumentFile(models.Model):
+    document = models.FileField(upload_to="documents")

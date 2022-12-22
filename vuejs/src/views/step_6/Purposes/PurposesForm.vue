@@ -454,7 +454,7 @@ export default {
     validate() {
       if (this.isValidation) {
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_9',
+          object: 'step_6',
           value: this.currentData
         })
         this.next();

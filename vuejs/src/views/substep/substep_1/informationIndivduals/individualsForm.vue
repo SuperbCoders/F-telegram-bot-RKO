@@ -29,9 +29,9 @@
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Отчество</p>
         <v-text-field id="oldName" v-model="currentData.account_own_surname" placeholder="Введите Отчество"
-          class="align-center border-none" outlined></v-text-field>
+          class="align-center border-none" outlined :rules="requiredRules" :required="true"></v-text-field>
       </div>
-      <v-radio-group v-model="currentData.account_own_gender" mandatory class="checkboxs">
+      <v-radio-group v-model="currentData.account_own_gender" mandatory :required="true" class="checkboxs">
         <p class="text-left form_block_title"><span class="star">*</span>Пол</p>
         <v-radio label="Мужской" value="Мужской"></v-radio>
         <v-radio label="Женский" value="Женский"> </v-radio>

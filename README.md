@@ -357,7 +357,6 @@ last_step: CharField
   doc_serial: str # Серия документа удостоверяющего личность
   doc_type: enum('Паспорт') # Тип документа
   issued_by: str # Кем выдан
-  validity: date # Срок действия
 
 }
 ```

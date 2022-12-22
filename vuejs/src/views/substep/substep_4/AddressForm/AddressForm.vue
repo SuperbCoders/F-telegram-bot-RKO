@@ -47,9 +47,9 @@ export default {
         } else {
           this.currentData.accownt_own_living = 'Совпадает'  // Тут должен быть адрес
         }
-        this.$store.commit("setPersone", { key: "substep_5", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_4", value: this.currentData });
         
-        this.$router.push({ name: "substep_6" });
+        this.$router.push({ name: "substep_5" });
       }
     },
   },
