@@ -77,11 +77,11 @@ class LoanRequest(models.Model):
     donainname = models.CharField(max_length=255, null=True, blank=True)
     fax = models.CharField(max_length=255, null=True, blank=True)
     founders = models.JSONField(blank=True, null=True)
-    planning = models.JSONField(blank=True, null=True)
     information_counterparties = models.CharField(max_length=255, null=True, blank=True)
     name_organization = models.CharField(max_length=255, null=True, blank=True)
     information_counterparties2 = models.CharField(max_length=255, null=True, blank=True)
     name_organization2 = models.CharField(max_length=255, null=True, blank=True)
+    codeword = models.CharField(max_length=255, null=True, blank=True)
     sms_sending = models.BooleanField(null=True, blank=True)
     additional_products = models.JSONField(blank=True, null=True)
 

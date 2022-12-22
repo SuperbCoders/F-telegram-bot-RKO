@@ -1,7 +1,7 @@
 <template>
     <v-form ref="form" v-model="valid" lazy-validation>
         <p class="text-left form_block_title">Учредители - юридические лица</p>
-        <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block checkboxs">
+        <div v-for="(itemForm, index) in currentData.founders" :key="index" class="form_input_block checkboxs">
 
             <div class="form_block">
                 <p class="text-left form_block_title">Учередитель</p>
