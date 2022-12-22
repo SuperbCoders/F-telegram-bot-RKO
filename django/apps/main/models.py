@@ -92,6 +92,7 @@ class LoanRequest(models.Model):
     ogrn = models.CharField(max_length=30, blank=True, null=True)
     company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     contact_number = models.CharField(max_length=20)
+    contact_phone_number = models.CharField(max_length=20, blank=True, null=True)
     
     addresses = models.JSONField(blank=True, null=True)
     
