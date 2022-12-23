@@ -3,13 +3,13 @@
         <h2 class="text-left mb-5 font-bold form_block_label">
             Сведения о физических лицах организации
         </h2>
-        <v-form ref="form" v-model="valid" lazy-validation>
-
-            <div class="form_block mt-2">
-                <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_persone" :key="key">
-                    {{ renderName(val['page-1']) }}
+        <v-card elevation="2" class="pa-4 mb-2 d-flex" v-for="(val, key) in list_persone" :key="key">
+                    <div>{{ renderName(val['substep_1']) }}</div>
+                    <button style="margin-left: auto;" @click="editPersone(key)">Изменить</button>
+                    <button class="ml-5" @click="deletePersone(key)">Удалить</button>
                 </v-card>
-
+        <v-form ref="form" v-model="valid" lazy-validation>
+            <div class="form_block mt-2">
                 <div class="contain_btn_add">
                     <v-btn large style="width: 50%; background: #F3F4F4 !important; color: #5B656D !important" class="text-center
                   d-flex
@@ -20,11 +20,10 @@
                         <v-icon>mdi-plus-circle-outline</v-icon>
                     </v-btn>
                 </div>
-
             </div>
 
         </v-form>
-        <line-step :step="2" class="mt-4" />
+        <line-step :step="4" class="mt-4" />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
             Продолжить
         </v-btn>
@@ -50,25 +49,38 @@ export default {
 
             if (this.$refs.form.validate()) {
                 this.$store.dispatch("addObjectFormData", {
-                    object: "step_3",
-                    value: {list_persone: this.list_persone},
+                    object: "step_4",
+                    value: { list_persone: this.list_persone },
                 });
                 this.next();
             }
         },
         next() {
-            this.$router.push({ name: 'step_4' });
+            this.$router.push({ name: 'step_5' });
         },
-
+        editPersone(key) {
+            this.$router.push({
+                name: "substep_1",
+                params: {
+                    id: key
+                }
+            })
+        },
+        deletePersone(key) {
+            this.$store.commit("delPersoneIndex", {index: key});
+        },
         async createPersone() {
             this.$store.commit("addPersone");
             await this.$store.dispatch('addObjectFormData', {
-                object: 'step_3',
-                value: {list_persone: this.list_persone},
+                object: 'step_4',
+                value: { list_persone: this.list_persone },
             })
 
             this.$router.push({
                 name: "substep_1",
+                params: {
+                    id: this.getLastIndexPerson
+                }
             })
         },
         renderName(obj) {
@@ -79,10 +91,14 @@ export default {
         }
 
     },
-    computed: {       
+    computed: {
         list_persone() {
-            return this.$store.state.formData.step_3.list_persone
+            return this.$store.state.formData.step_4.list_persone
         },
+        getLastIndexPerson() {
+            console.log(this.$store.getters.indexLastListPerson);
+            return this.$store.getters.indexLastListPerson
+        }
     },
     components: {
         LineStep,

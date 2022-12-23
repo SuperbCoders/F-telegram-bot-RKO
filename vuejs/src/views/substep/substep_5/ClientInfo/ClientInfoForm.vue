@@ -3,21 +3,13 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Место рождения</p>
-        <AddressInput label="Введите адрес" v-model="currentData.account_birth_place" />
+        <v-text-field placeholder="Введите адрес" outlined v-model="currentData.account_birth_place"
+          :rules="requiredRules" :required="true"></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Дата рождения</p>
-        <v-menu ref="menu" v-model="menu" :close-on-content-click="isActivePicker()" transition="scale-transition"
-          offset-y min-width="auto">
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field placeholder="Дата" id="passportIssueDate" name="passportIssueDate" outlined
-              @click="currentData.account_datebirth = ''" append-icon="mdi-calendar-blank" readonly
-              v-model="currentData.account_datebirth" :rules="requiredRules" :required="true" v-bind="attrs"
-              v-on="on"></v-text-field>
-          </template>
-          <v-date-picker v-model="currentData.account_datebirth" :active-picker.sync="activePicker" :max="isDate()"
-            min="1950-01-01"></v-date-picker>
-        </v-menu>
+        <v-text-field placeholder="Дата рождения" outlined v-model="currentData.account_datebirth"
+          :rules="requiredRules" :required="true" v-mask="'##.##.####'"></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
@@ -48,23 +40,16 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title">
-          Код подразделения (при наличии)
+          <span class="star">*</span>Код подразделения
         </p>
         <v-text-field id="oldName" placeholder="Введите код" v-model="currentData.division_code"
-          class="align-center border-none" v-mask="'###-###'" masked="true" outlined></v-text-field>
+          class="align-center border-none" v-mask="'###-###'" masked="true" outlined :rules="requiredRules"
+          :required="true"></v-text-field>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Дата выдачи</p>
-        <v-menu :close-on-content-click="isActivePickerIssue()" transition="scale-transition" offset-y min-width="auto">
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field placeholder="Дата" id="passportIssueDate" name="passportIssueDate" outlined
-              append-icon="mdi-calendar-blank" readonly @click="currentData.validity = ''"
-              v-model="currentData.date_issue" :rules="requiredRules" :required="true" v-bind="attrs"
-              v-on="on"></v-text-field>
-          </template>
-          <v-date-picker v-model="currentData.date_issue" @input="passportIssueDateMenu = false"
-            :active-picker.sync="activePickerIssue"></v-date-picker>
-        </v-menu>
+        <v-text-field placeholder="Дата рождения" outlined v-model="currentData.date_issue"
+          :rules="requiredRules" :required="true" v-mask="'##.##.####'"></v-text-field>
       </div>
     </v-form>
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
@@ -74,7 +59,6 @@
 
 <script>
 import { mask } from "vue-the-mask";
-import AddressInput from '@/components/addressInput.vue';
 
 export default {
   directives: { mask },
@@ -98,7 +82,13 @@ export default {
     date: null,
     menu: false,
     requiredRules: [(v) => !!v || "Это поле обязательно"],
-    type_document: ["Паспорт"],
+    type_document: [
+      "Паспорт гражданина Российской Федерации",
+      "Дипломатический паспорт, служебный паспорт, удостоверяющие личность гражданина РФ за пределами РФ",
+      "Временное удостоверение личности гражданина РФ, выдаваемое на период оформления паспорта гражданина РФ",
+      "Свидетельство о рождении гражданина РФ (для граждан РФ в возрасте до 14 лет)",
+      "Иные документы, признаваемые документами, удостоверяющими личность гражданина РФ в соответствии с законодательством РФ",
+    ],
   }),
   watch: {
     menu(val) {
@@ -109,9 +99,9 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit("setPersone", { key: "substep_5", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_5", value: this.currentData, index: this.$route.params?.id });
 
-        this.$router.push({ name: "substep_6" });
+        this.$router.push({ name: "substep_6", params: { id: this.$route.params.id } });
       }
     },
     // validityNull () {
@@ -147,7 +137,6 @@ export default {
   computed: {
   },
   components: {
-    AddressInput
   },
 };
 </script>

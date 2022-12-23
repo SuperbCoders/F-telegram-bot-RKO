@@ -55,7 +55,7 @@
           <img src="@/assets/plus-circle.svg" alt="">
         </v-btn>
       </div>
-      <line-step :step="1" />
+      <line-step :step="3" />
       <v-btn
         block
         large
@@ -124,14 +124,14 @@ export default {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         this.$store.dispatch("addObjectFormData", {
-          object: "step_2",
+          object: "step_3",
           value: this.currentData,
         });
         this.next();
       }
     },
     next(){
-      this.$router.push({name: "step_3"});
+      this.$router.push({name: "step_4"});
     },
     isTypeAdress(object) {
       if (object.typeAdress.includes("Фактический")) {

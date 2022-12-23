@@ -89,7 +89,7 @@ export default {
 
         del() {
             this.$store.dispatch('addObjectFormData', {
-                object: 'step_2',
+                object: 'step_3',
                 value: {}
             });
             this.$store.commit('delPersone')
@@ -99,19 +99,19 @@ export default {
         add() {
             this.$store.commit('addPersone')
 
-            this.$router.push({ name: "substep_1" })
+            this.$router.push({ name: "substep_1", params: {id: this.$route.params.id+1} })
         },
         next() {
             this.$store.dispatch('addObjectFormData', {
-                object: 'step_2',
+                object: 'step_3',
                 value: {}
             });
-            this.$router.push({ name: "step_3" });
+            this.$router.push({ name: "step_4" });
         },
     },
     computed: {
         isList() {
-            return this.$store.state.formData.step_3.list_persone;
+            return this.$store.state.formData.step_4.list_persone;
 
         }
 

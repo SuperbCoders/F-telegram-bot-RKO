@@ -25,16 +25,15 @@ export default {
       assigned_publ_pers_registraion: null,
       account_own_registration: null,
     },
-    relationDegree: ["Супруг", "Супруга"],
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
   methods: {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit("setPersone", { key: "substep_3", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_3", value: this.currentData, index: this.$route.params?.id });
 
-        this.$router.push({ name: "substep_4" });
+        this.$router.push({ name: "substep_4", params: {id: this.$route.params.id} });
 
 
       }

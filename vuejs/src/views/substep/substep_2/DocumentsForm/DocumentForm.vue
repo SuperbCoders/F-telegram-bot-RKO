@@ -1,39 +1,56 @@
 <template>
   <div class="document_form_block">
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div class="form_block mt-5">
-        <p class="text-left form_block_title">ИНН</p>
 
-        <v-text-field id="oldName" 
-          v-model="currentData.account_onw_inn"
-          v-mask="'### ### ### ###'"
-          masked="true"
-          placeholder="Введите ИНН" class="align-center border-none" outlined
-          :rules="innRules">
+      <div class="form_block" v-if="is_eio">
+        <p class="text-left form_block_title"><span class="star">*</span>Должность</p>
+
+        <v-text-field id="oldName" placeholder="Должность"
+          class="align-center border-none" outlined :rules="requiredRules" v-model="currentData.account_own_job_title"
+          :required="true">
+
+        </v-text-field>
+      </div>
+
+      <div class="form_block mt-5">
+        <p class="text-left form_block_title"><span class="star">*</span>ИНН</p>
+
+        <v-text-field id="oldName" v-model="currentData.account_onw_inn" v-mask="'### ### ### ###'" masked="true"
+          placeholder="Введите ИНН" class="align-center border-none" outlined :rules="innRules">
 
         </v-text-field>
       </div>
 
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Гражданство</p>
-
-        <v-text-field id="oldName" placeholder="Гражданство" class="align-center border-none" outlined
-          :rules="requiredRules" v-model="currentData.account_own_citizenship" :required="true">
-
-        </v-text-field>
+        <v-combobox label="Гражданство" outlined required class="mt-1 auth_form combobox" @keyup="inputCountry"
+          v-model="currentData.account_own_citizenship"
+          :items="itemsCountry">
+        </v-combobox>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Телефон</p>
 
-        <v-text-field id="oldName" placeholder="Телефон" v-mask="'+# (###) ### ## ##'"
-          masked="true" class="align-center border-none" outlined
-          :rules="requiredRules" v-model="currentData.account_own_phone" :required="true">
+        <v-text-field id="oldName" placeholder="Телефон" v-mask="'+# (###) ### ## ##'" masked="true"
+          class="align-center border-none" outlined :rules="requiredRules" v-model="currentData.account_own_phone"
+          :required="true">
 
         </v-text-field>
       </div>
+
       <div class="form_block">
-        <p class="text-left form_block_title"><span class="star">*</span>Доля владения</p>
-        <v-text-field id="oldName" placeholder="Доля владения" class="align-center border-none" outlined
+        <p class="text-left form_block_title"><span class="star">*</span>Эл. почта</p>
+
+        <v-text-field id="oldName" placeholder="Эл. почта"
+          class="align-center border-none" outlined :rules="emailRules" v-model="currentData.account_own_email"
+          :required="true">
+
+        </v-text-field>
+      </div>
+
+      <div class="form_block" v-if="is_auctioner">
+        <p class="text-left form_block_title"><span class="star">*</span>Доля</p>
+        <v-text-field id="oldName" placeholder="Доля" class="align-center border-none" outlined
           :rules="requiredRules" v-model="currentData.account_own_piece" :required="true">
         </v-text-field>
       </div>
@@ -45,6 +62,7 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import { getCountry } from '../../../../api/getCountry'
 export default {
   directives: { mask },
   data() {
@@ -53,28 +71,54 @@ export default {
       currentData: {
         account_onw_inn: null,
         account_own_snils: null,
-        account_own_citizenship: null,
+        account_own_citizenship: "Россия",
         account_own_phone: null,
         account_own_piece: null
       },
+      itemsCountry: [
+        "Россия"
+      ],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
       innRules: [
-      (v) =>
-        ((v && v.length >= 13) || !v || v.length == 0) || "ИНН не может содержать меньше 10 симоволов",
-    ],
+        (v) =>
+          ((v && v.length >= 15) || !v || v.length == 0) || "ИНН не может содержать меньше 12 симоволов",
+      ],
+      emailRules: [(v) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.exec(v) !== null || "В это поле нужно написать Email"],
     }
   },
   methods: {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-          this.$store.commit("setPersone", {key: "substep_2", value: this.currentData});
-        
-        this.$router.push({name: "substep_3", query: this.$route.query});
+        this.$store.commit("setPersone", { key: "substep_2", value: this.currentData, index: this.$route.params?.id });
+
+        this.$router.push({ name: "substep_3", params: {id: this.$route.params.id} });
       }
     },
+    async inputCountry(event) {
+      console.log(event);
+      console.log(event.target.value);
+      const countryes = await getCountry(event.target.value);
+      console.log(countryes);
+      console.log(countryes?.suggestions?.map((val) => {
+        return val.value;
+      }));
+      this.itemsCountry = countryes?.suggestions?.map((val) => {
+        return val.value;
+      });
+    }
   },
-  components: {
+  async mounted() {
+  },
+  computed: {
+    is_auctioner() {
+      const index = this.$route.params.id;
+      return this.$store.state.formData.step_4.list_persone[index].substep_1.account_onw_role.indexOf("Акционер/учредитель") >= 0;
+    },
+    is_eio() {
+      const index = this.$route.params.id;
+      return this.$store.state.formData.step_4.list_persone[index].substep_1.account_onw_role.indexOf("ЕИО") >= 0;
+    }
   },
 }
 </script>

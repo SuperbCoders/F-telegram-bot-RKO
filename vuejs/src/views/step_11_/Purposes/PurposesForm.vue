@@ -99,6 +99,21 @@
 
     <div>
       <h4 class="form_block_label text-left">
+        Общая сумма операций в неделю
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.sum_transactions_week" column>
+          <v-radio label="До 1 000 000" value="До 1 000 000"></v-radio>
+          <v-radio label="До 10 000 000" value="До 10 000 000"></v-radio>
+          <v-radio label="До 100 000 000" value="До 100 000 000"></v-radio>
+          <v-radio label="Свыше 100 000 000" value="Свыше 100 000 000"></v-radio>
+        </v-radio-group>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div>
+      <h4 class="form_block_label text-left">
         Общая сумма операций в квартал
       </h4>
       <div @click="valid = true" class="form_block">
@@ -143,7 +158,7 @@
 
     <div>
       <h4 class="form_block_label text-left">
-        Сумма операций по снятию денежных средств в наличной форме в неделю
+        Количество операций по снятию наличности в неделю
       </h4>
       <div @click="valid = true" class="form_block">
         <v-radio-group v-model="currentData.week_cash_withdrawal" column>
@@ -157,7 +172,7 @@
 
     <div>
       <h4 class="form_block_label text-left">
-        Сумма операций по снятию денежных средств в наличной форме в квартал
+        Количество операций по снятию наличности в квартал
       </h4>
       <div @click="valid = true" class="form_block">
         <v-radio-group v-model="currentData.quarter_cash_withdrawal" column>
@@ -171,7 +186,7 @@
 
     <div>
       <h4 class="form_block_label text-left">
-        Сумма операций по снятию денежных средств в наличной форме в год
+        Количество операций по снятию наличности в год
       </h4>
       <div @click="valid = true" class="form_block">
         <v-radio-group v-model="currentData.age_cash_withdrawal" column>
@@ -183,6 +198,69 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
+
+
+    <div>
+      <h4 class="form_block_label text-left">
+        Сумма операций по снятию наличности в месяц
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.sum_mouth_cash_withdrawal" column>
+          <v-radio label="До 1 000 000" value="До 1 000 000"></v-radio>
+          <v-radio label="До 10 000 000" value="До 10 000 000"></v-radio>
+          <v-radio label="До 100 000 000" value="До 100 000 000"></v-radio>
+          <v-radio label="Свыше 100 000 000" value="Свыше 100 000 000"></v-radio>
+        </v-radio-group>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div>
+      <h4 class="form_block_label text-left">
+        Сумма операций по снятию денежных средств в наличной форме в неделю
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.sum_week_cash_withdrawal" column>
+          <v-radio label="До 1 000 000" value="До 1 000 000"></v-radio>
+          <v-radio label="До 10 000 000" value="До 10 000 000"></v-radio>
+          <v-radio label="До 100 000 000" value="До 100 000 000"></v-radio>
+          <v-radio label="Свыше 100 000 000" value="Свыше 100 000 000"></v-radio>
+        </v-radio-group>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div>
+      <h4 class="form_block_label text-left">
+        Сумма операций по снятию денежных средств в наличной форме в квартал
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.sum_quarter_cash_withdrawal" column>
+          <v-radio label="До 1 000 000" value="До 1 000 000"></v-radio>
+          <v-radio label="До 10 000 000" value="До 10 000 000"></v-radio>
+          <v-radio label="До 100 000 000" value="До 100 000 000"></v-radio>
+          <v-radio label="Свыше 100 000 000" value="Свыше 100 000 000"></v-radio>
+        </v-radio-group>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div>
+      <h4 class="form_block_label text-left">
+        Сумма операций по снятию денежных средств в наличной форме в год
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.sum_age_cash_withdrawal" column>
+          <v-radio label="До 1 000 000" value="До 1 000 000"></v-radio>
+          <v-radio label="До 10 000 000" value="До 10 000 000"></v-radio>
+          <v-radio label="До 100 000 000" value="До 100 000 000"></v-radio>
+          <v-radio label="Свыше 100 000 000" value="Свыше 100 000 000"></v-radio>
+        </v-radio-group>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    
     <div>
       <h4 class="form_block_label text-left">
         Количество операций по внешнеторговым контрактам в месяц
@@ -196,6 +274,7 @@
       </div>
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
+
 
     <div>
       <h4 class="form_block_label text-left">
@@ -334,99 +413,6 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
-    <div>
-      <h4 class="form_block_label text-left">
-        Сведения о целях установления деловых отношений с банком
-      </h4>
-      <div @click="valid = true" class="form_block">
-        <v-checkbox label="Расчетно-кассовое обслуживание" value="Расчетно-кассовое обслуживание"
-          v-model="currentData.account_operations" hide-details></v-checkbox>
-        <v-checkbox v-model="currentData.account_operations" label="Дистанционное банковское обслуживание"
-          value="Дистанционное банковское обслуживание" hide-details></v-checkbox>
-        <v-checkbox label="Внешнеэкономические операции" value="Внешнеэкономические операции"
-          v-model="currentData.account_operations" hide-details>
-        </v-checkbox>
-        <v-checkbox v-model="currentData.account_operations" label="Интернет-эквайринг" value="Интернет-эквайринг"
-          hide-details></v-checkbox>
-        <v-checkbox v-model="currentData.account_operations" label="Кредитование" value="Кредитование"
-          hide-details></v-checkbox>
-        <v-checkbox v-model="currentData.account_operations" label="Торговый эквайринг" value="Торговый эквайринг"
-          hide-details></v-checkbox>
-        <v-checkbox v-model="currentData.account_operations" label="Переводы СБП (c2b)" value="Переводы СБП (c2b)"
-          hide-details></v-checkbox>
-      </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
-    </div>
-    <div class="form_block mt-10">
-      <p class="form_block_title">
-        Количество операций по безналичным платежам в месяц
-      </p>
-      <v-radio-group v-model="currentData.operation_volume" column>
-        <v-radio label="0-29" value="0-29"></v-radio>
-        <v-radio label="30-100" value="30-100"></v-radio>
-        <v-radio label="более 100" value="более 100"></v-radio>
-      </v-radio-group>
-    </div>
-    <div class="form_block mt-10">
-      <p class="form_block_title">
-        Сумма операций по безналичным платежам в месяц
-      </p>
-      <v-radio-group v-model="currentData.operation_sum" column>
-        <v-radio label="0-29" value="0-29"></v-radio>
-        <v-radio label="30-100" value="30-100"></v-radio>
-        <v-radio label="более 100" value="более 100"></v-radio>
-      </v-radio-group>
-    </div>
-    <div class="form_block mt-10">
-      <p class="form_block_title">
-        Количество операций по снятию наличности в месяц
-      </p>
-      <v-radio-group v-model="currentData.operation_nalition" column>
-        <v-radio label="0-29 000 руб" value="0-29 000 руб"></v-radio>
-        <v-radio label="100 000-1 000 000 руб" value="100 000-1 000 000 руб"></v-radio>
-        <v-radio label="более 1 000 000 руб" value="более 1 000 000 руб"></v-radio>
-      </v-radio-group>
-    </div>
-    <div class="form_block mt-10">
-      <p class="form_block_title">
-        Сумма операций по снятию наличности в месяц
-      </p>
-      <v-radio-group v-model="currentData.sum_per_month" column>
-        <v-radio label="0 - 99 000 руб" value="0-99 000 руб"></v-radio>
-        <v-radio label="100 000 - 1 000 000 руб" value="100 000 - 1 000 000 руб"></v-radio>
-        <v-radio label="более 1 000 000 руб" value="более 1 000 000 руб"></v-radio>
-      </v-radio-group>
-    </div>
-    <div class="form_block mt-5">
-      <p class="form_block_title">
-        Количество операций по внешнеторговым контрактам в месяц
-      </p>
-      <v-radio-group v-model="currentData.outside_contracts_volume" column>
-        <v-radio label="0-29" value="0-29"></v-radio>
-        <v-radio label="30-100" value="30-100"></v-radio>
-        <v-radio label="более 100" value="более 100"></v-radio>
-      </v-radio-group>
-    </div>
-    <div @click="valid = true" class="form_block mt-5">
-      <p class="form_block_title">Источники происхождения денежных средств</p>
-      <v-checkbox v-model="currentData.cash_source"
-        label="Средства, полученные в рамках осуществляемой хозяйственной деятельности"
-        value="Средства, полученные в рамках осуществляемой хозяйственой деятельности" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.cash_source" label="Собственные средства" value="Сооственные средства"
-        hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.cash_source" label="Заемные средства (займы от третьих лиц, учредителей и т.д)"
-        value="Заменные средства (займы от третьих лиц, учредителей и т.д)" hide-details></v-checkbox>
-      <v-checkbox v-model="currentData.cash_source" label="Иные" value="Иные" hide-details></v-checkbox>
-    </div>
-    <p v-if="!valid && !isValidatesourceOfOrigin" class="error_message">Выберите поле</p>
-    <div class="form_block mt-10">
-      <p class="form_block_title">Штатная численность сотрудников</p>
-      <v-radio-group v-model="currentData.state_employers" column>
-        <v-radio label="0-29" value="0-29"></v-radio>
-        <v-radio label="30-100" value="30-100"></v-radio>
-        <v-radio label="более 100" value="более 100"></v-radio>
-      </v-radio-group>
-    </div>
     <line-step :step='7' class="mt-5" />
     <v-btn block large :disabled="!valid" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>

@@ -61,15 +61,16 @@ export default {
     validate() {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
-        this.$store.commit("setPersone", { key: "substep_1", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_1", value: this.currentData, index: this.$route.params?.id });
 
-        this.$router.push({ name: "substep_2" });
+        this.$router.push({ name: "substep_2", params: {
+          id: this.$route.params.id
+        } });
       }
     },
   },
   mounted() {
-    this.$store.commit("setPersone", { key: "substep_0", value: {} });
-
+    this.$store.commit("setPersone", { key: "substep_0", value: {}, index: this.$route.params?.id });
   },
   components: {
   },

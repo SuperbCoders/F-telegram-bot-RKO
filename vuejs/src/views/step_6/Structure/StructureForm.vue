@@ -10,69 +10,6 @@
         <v-radio label="Иное" value="Иное" />
       </v-radio-group>
 
-      <h2>TODO Должен стать отдельный ЭКРАНОМ !!!</h2>
-      <div class="form_group mb-10">
-        <p class="text-left form_block_label mt-5">
-          Наличие наблюдательного совета
-        </p>
-        <RadioGroup @isStatus="(status) => (currentData.is_collegiate_body = status)"
-          :status="currentData.is_collegiate_body" name="Existence of a supervisory board" />
-      </div>
-      <div v-if="currentData.is_collegiate_body" class="form_block mt-2">
-        <p class="text-left form_block_title">
-          <span class="star">*</span>
-          Наименование наблюдательного совета
-        </p>
-
-        <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName"
-          v-model="currentData.collegiate_person" outlined :rules="requiredRules" :required="true"></v-text-field>
-        <div class="title_btn">Члены наблюдательного совета</div>
-        <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_supervisoty_board_persone" :key="key">
-          {{ renderName(val['page-1']) }}
-        </v-card>
-
-        <div class="contain_btn_add">
-          <v-btn large style="width: 50%; background: #F3F4F4 !important; color: #5B656D !important" class="text-center
-                d-flex
-                align-center
-                justify-center
-                add_form" @click="createSupervisoryBoard">
-            <span class="pr-3">Добавить</span>
-            <v-icon>mdi-plus-circle-outline</v-icon>
-          </v-btn>
-        </div>
-
-      </div>
-      <div class="form_group mt-5">
-        <p class="text-left form_block_label mb-2">
-          Наличие коллегиального исполнительного органа
-        </p>
-        <RadioGroup @isStatus="(status) => (currentData.is_supervisoty = status)" :status="currentData.is_supervisoty"
-          name="The presence of a collegial executive body" />
-      </div>
-      <div v-if="currentData.is_supervisoty" class="form_block mt-5">
-        <p class="text-left form_block_title">
-          <span class="star">*</span>
-          Наименование коллегиального исполнительного органа
-        </p>
-        <v-text-field id="oldName" placeholder="Наименование" class="align-center border-none" name="oldName" outlined
-          v-model="currentData.supervisoty_board_persone_name" :rules="requiredRules" :required="true"></v-text-field>
-        <div class="title_btn">Члены коллегиального исполнительного органа</div>
-        <v-card elevation="2" class="pa-4 mb-2" v-for="(val, key) in list_collegial_executive_body" :key="key">
-          {{ renderName(val['page-1']) }}
-        </v-card>
-
-        <div class="contain_btn_add">
-          <v-btn large class="d-flex
-                align-center
-                justify-center
-                add_form" style="width: 50%; background: #F3F4F4 !important; color: #5B656D !important"
-            @click="createCollegialExecutive">
-            <span class="pr-3">Добавить</span>
-            <v-icon>mdi-plus-circle-outline</v-icon>
-          </v-btn>
-        </div>
-      </div>
     </v-form>
     <line-step :step="2" class="mt-4" />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
@@ -118,7 +55,7 @@ export default {
         this.currentData.list_supervisoty_board_persone = this.list_supervisoty_board_persone;
 
         this.$store.dispatch("addObjectFormData", {
-          object: "step_3",
+          object: "step_6",
           value: this.currentData,
         });
         this.next()
@@ -128,7 +65,7 @@ export default {
       this.currentData.supreme_management_inn = inn;
     },
     next() {
-      this.$router.push({ name: 'step_4' });
+      this.$router.push({ name: 'step_7' });
     },
     addObjectList(object) {
       const result = {

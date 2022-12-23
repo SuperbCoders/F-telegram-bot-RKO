@@ -59,15 +59,14 @@ export default {
 
             if (this.$refs.form.validate()) {
                 this.$store.dispatch('addObjectFormData', {
-                    object: 'step_1',
+                    object: 'step_7',
                     value: this.currentData
                 });
-                // this.$store.commit('addItemFormData', this.currentData)
                 this.next();
             }
         },
         next() {
-            this.$router.push({ name: "step_2" });
+            this.$router.push({ name: "step_8" });
         },
 
         addGroupList() {

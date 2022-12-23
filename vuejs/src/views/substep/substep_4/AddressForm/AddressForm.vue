@@ -45,11 +45,13 @@ export default {
         if (this.data === 'Нет') {
           this.currentData.accownt_own_living = this.isAdress
         } else {
-          this.currentData.accownt_own_living = 'Совпадает'  // Тут должен быть адрес
+          const indexPage = this.$route.params.id;
+          const address = this.$store.state.formData.step_4.list_persone[indexPage].substep_3.assigned_publ_pers_registraion;
+          this.currentData.accownt_own_living = address  // Тут должен быть адрес
         }
-        this.$store.commit("setPersone", { key: "substep_4", value: this.currentData });
+        this.$store.commit("setPersone", { key: "substep_4", value: this.currentData, index: this.$route.params?.id });
         
-        this.$router.push({ name: "substep_5" });
+        this.$router.push({ name: "substep_5", params: {id: this.$route.params.id} });
       }
     },
   },

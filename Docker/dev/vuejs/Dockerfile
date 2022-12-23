@@ -8,15 +8,15 @@ RUN mkdir -p /usr/src/app/node_modules
 
 RUN chown -R node:node /usr/src/app
 
-# RUN npm install -g @vue/cli
+RUN npm install -g @vue/cli
 
 COPY --chown=node:node ./vuejs/ /usr/src/app/
 
 RUN npm install --check-files
 
-# RUN npm install vue-the-mask
+RUN npm install vue-the-mask
 
-# RUN npm install vuetify@2.6.12
+RUN npm install vuetify@2.6.12
 
 
 

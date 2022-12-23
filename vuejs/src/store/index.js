@@ -26,6 +26,11 @@ export default new Vuex.Store({
             },
 
             step_2: {
+                email: "",
+                phoneNumber: "",
+                domainName: "",
+            },
+            step_3: {
                 addresses: [
                     {
                         typeAdress: [],
@@ -37,20 +42,8 @@ export default new Vuex.Store({
                     },
                 ]
             },
-            step_3: {
-                list_persone: [],
-            },
             step_4: {
-                company_group_name: null,
-                start_date: null,
-                end_date: null,
-                group_members: [
-                    {
-                        name: null,
-                        inn: null,
-                        ogrn: null,
-                    },
-                ],
+                list_persone: [],
             },
             step_5: {
                 employers_volume: 0,
@@ -131,6 +124,9 @@ export default new Vuex.Store({
                 result.push(item.title);
             });
             return result;
+        },
+        indexLastListPerson(state){
+            return state.formData.step_4.list_persone.length - 1;
         }
     },
     mutations: {
@@ -162,26 +158,21 @@ export default new Vuex.Store({
             scroll(0, 0);
         },
 
-
-
         addPersone(state) {
-            state.formData.step_3.list_persone.push({});
+            state.formData.step_4.list_persone.push({});
         },
         delPersoneLast(state) {
-            state.formData.step_3.list_persone.pop();
+            state.formData.step_4.list_persone.pop();
         },
-        delPersoneIndex(state, {index}) {
-            state.formData.step_3.list_persone = state.formData.step_3.list_persone.slice(index, 1);
+        delPersoneIndex(state, { index }) {
+            state.formData.step_4.list_persone = state.formData.step_4.list_persone.slice(index, 1);
         },
-        async setPersone(state, { key, value }) {
-            const length = state.formData.step_3.list_persone.length;
-            const is_element = length > 0;
-            if (is_element) {
-                const last_element = state.formData.step_3.list_persone[length - 1];
-                last_element[key] = value;
-            }
+        async setPersone(state, { key, value, index }) {
+            const last_element = state.formData.step_4.list_persone[index];
+            last_element[key] = value;
+            
             const contact_number = state.formData.step_1.contact_number;
-            const response_data = Object.assign({ last_step: `${key}` }, state.formData.step_3);
+            const response_data = Object.assign({ last_step: `${key}` }, state.formData.step_4);
 
             await fetch(process.env.VUE_APP_HOST_API + `/api/loan-application/current/${contact_number}/`, {
                 method: 'POST',
@@ -195,7 +186,7 @@ export default new Vuex.Store({
 
     },
     actions: {
-        async addObjectFormData(context, {object, value}) {
+        async addObjectFormData(context, { object, value }) {
 
             let response_data = null;
 

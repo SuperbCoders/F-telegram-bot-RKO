@@ -11,8 +11,7 @@
     <div class="form_block" v-if="currentData.beneficiaries === 'Имеются'">
       <p class="form_block_title">Укажите третьи лица, к выгоде которых действует компания</p>
       <v-text-field v-model="currentData.third_parties"
-        placeholder="Укажите третьи лица, к выгоде которых действует компания" 
-        class="align-center border-none mt-5"
+        placeholder="Укажите третьи лица, к выгоде которых действует компания" class="align-center border-none mt-5"
         outlined>
       </v-text-field>
     </div>
@@ -38,13 +37,13 @@ export default {
   methods: {
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_5',
+        object: 'step_8',
         value: this.currentData
       })
       this.next();
     },
     next() {
-      this.$router.push({ name: "step_6" })
+      this.$router.push({ name: "step_9" })
     },
   },
   components: {
