@@ -90,13 +90,23 @@ class LoanRequest(models.Model):
     num_transactions_month = models.CharField(max_length=255, null=True, blank=True)
     num_transactions_week = models.CharField(max_length=255, null=True, blank=True)
     num_transactions_quarter = models.CharField(max_length=255, null=True, blank=True)
+    num_transactions_age = models.CharField(max_length=255, null=True, blank=True)
     sum_transactions_month = models.CharField(max_length=255, null=True, blank=True)
+    sum_transactions_week = models.CharField(max_length=255, null=True, blank=True)
     sum_transactions_quarter = models.CharField(max_length=255, null=True, blank=True)
     sum_transactions_age = models.CharField(max_length=255, null=True, blank=True)
+    
     monthly_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
     week_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+    
     quarter_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
     age_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+    
+    sum_mouth_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+    sum_week_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+    sum_quarter_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+    sum_age_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+
     foreign_trade_contracts_month = models.CharField(max_length=255, null=True, blank=True)
     foreign_trade_contracts_week = models.CharField(max_length=255, null=True, blank=True)
     foreign_trade_contracts_quarter = models.CharField(max_length=255, null=True, blank=True)
