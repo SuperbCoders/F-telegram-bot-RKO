@@ -118,6 +118,10 @@ class LoanRequest(models.Model):
     sources_cash_receipts = models.JSONField(blank=True, null=True)
     headcount = models.CharField(max_length=255, null=True, blank=True)
 
+    document_certifying_identity_executive = models.CharField(max_length=255, null=True, blank=True)
+    document_confirming_real_activity = models.CharField(max_length=255, null=True, blank=True)
+    document_licenses = models.CharField(max_length=255, null=True, blank=True)
+
 
     status_description = models.CharField(max_length=255, null=True)
     order_id = models.CharField(max_length=255, null=True, blank=True)
