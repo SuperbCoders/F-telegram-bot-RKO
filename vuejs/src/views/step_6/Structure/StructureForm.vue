@@ -18,7 +18,6 @@
   </div>
 </template>
 <script>
-import RadioGroup from "@/components/radioButton/radioGroup/radioGroup.vue";
 import LineStep from "@/components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
 
@@ -138,7 +137,6 @@ export default {
     }
   },
   components: {
-    RadioGroup,
     LineStep,
   },
   mounted() {

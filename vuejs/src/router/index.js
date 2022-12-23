@@ -5,18 +5,22 @@ import AuthView from '@/views/step_1/Auth/AuthView.vue'
 import Contact from '@/views/step_2/Contact/Contact.vue'
 import Address from '@/views/step_3/Address/AdressView.vue'
 import Information_individuals_organization from '@/views/step_4/Information_individuals_organization/Information_individuals_organization.vue'
-// import Structure from '@/views/step_3/Structure/StructureForm.vue'
-// import PlanningOperation from '@/views/step_4/PlanningOperation/PlanningOperationForm.vue'
-// import Beneficiaries from '@/views/step_5/Beneficiaries/BeneficiariesForm.vue'
+import Documents from '../views//step_5/Documents/Documents.vue'
+import Structure from '@/views/step_6/Structure/StructureForm.vue'
+import Founders from '@/views/step_7/Founders/Founders.vue'
+import Beneficiaries from '@/views/step_8/Beneficiaries/BeneficiariesForm.vue'
+import intelligenceForm from '../views/step_9/intelligence/intelligenceForm.vue'
+import PlanningOperation from '@/views/step_10/PlanningOperation/PlanningOperationForm.vue'
+import Approvals from '@/views/step_11/Approvals/ApprovalsForm.vue'
+import Codeword from '@/views/step_12/Codeword/Codeword.vue'
+import Rate from '@/views/step_13/Rate/RateForm.vue'
+import AllData from '@/views/step_14/AllData/AllData.vue'
+
 // import Purposes from '@/views/step_6/Purposes/PurposesForm.vue'
-// import Approvals from '@/views/step_9/Approvals/ApprovalsForm.vue'
-// import Rate from '@/views/step_10/Rate/RateForm.vue'
-// import AllData from '@/views/step_11/AllData/AllData.vue'
 
 
 // import AdditionalInformation from '@/views/AdditionalInformation/AdditionalInformation.vue'
-// import Founders from '@/views/Founders/Founders.vue'
-// import Codeword from '@/views/Codeword/Codeword.vue'
+
 // import Information_counterparties from '@/views/Information_counterparties/Information_counterparties.vue'
 // import Select_additional_products from '@/views/Select_additional_products/Select_additional_products.vue'
 // import Consent_receive_newsletter from '@/views/Consent_receive_newsletter/Consent_receive_newsletter.vue'
@@ -52,48 +56,68 @@ const routes = [
     name: "step_4",
     component: Information_individuals_organization,
   },
-  // {
-  //   path: "/sctructure",
-  //   name: "step_3",
-  //   component: Structure
-  // },
+  {
+    path: "/documents",
+    name: "step_5",
+    component: Documents,
+  },
+  {
+    path: "/sctructure",
+    name: "step_6",
+    component: Structure
+  },
+  {
+    path: "/founders",
+    name: "step_7",
+    component: Founders,
+  },
+  {
+    path: "/beneficiaries",
+    name: "step_8",
+    component: Beneficiaries
+  },
+  {
+    path: "/intelligence",
+    name: "step_9",
+    component: intelligenceForm
+  },
+  {
+    path: "/planning",
+    name: "step_10",
+    component: PlanningOperation
+  },
+  {
+    path: "/approvals",
+    name: "step_11",
+    component: Approvals
+  },
+  {
+    path: "/codeword",
+    name: "step_12",
+    component: Codeword,
+  },
+  {
+    path: "/rate",
+    name: "step_13",
+    component: Rate
+  },
+    {
+    path: "/all-data",
+    name: "step_14",
+    component: AllData
+  },
 
-  // STEP 4 is delete
-  // STEP 5 is delete
-
-  // {
-  //   path: "/planning",
-  //   name: "step_6",
-  //   component: PlanningOperation
-  // },
-  // {
-  //   path: "/beneficiaries",
-  //   name: "step_7",
-  //   component: Beneficiaries
-  // },
   // {
   //   path: "/purposes",
   //   name: "step_8",
   //   component: Purposes
   // },
-  // {
-  //   path: "/approvals",
-  //   name: "step_9",
-  //   component: Approvals
-  // },
-  // {
-  //   path: "/rate",
-  //   name: "step_10",
-  //   component: Rate
-  // },
-  // {
-  //   path: "/all-data",
-  //   name: "step_11",
-  //   component: AllData
-  // },
+
+
+
 
   // Неприкаяные
- 
+
   // {
   //   path: "/consent_receive_newsletter",
   //   name: "Consent_receive_newsletter",
@@ -104,22 +128,14 @@ const routes = [
   //   name: "AdditionalInformation",
   //   component: AdditionalInformation,
   // },
-  // {
-  //   path: "/founders",
-  //   name: "Founders",
-  //   component: Founders,
-  // },
-  
+
+
   // {
   //   path: "/information_counterparties",
   //   name: "Information_counterparties",
   //   component: Information_counterparties,
   // },
-  // {
-  //   path: "/codeword",
-  //   name: "Codeword",
-  //   component: Codeword,
-  // },
+
   // {
   //   path: "/select_additional_products",
   //   name: "Select_additional_products",
@@ -128,7 +144,7 @@ const routes = [
   //
 
 
-  
+
   {
     path: "/individual-info/:id",
     name: "substep_1",

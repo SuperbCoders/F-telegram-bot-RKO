@@ -29,7 +29,7 @@ export default {
     methods: {
         redirect() {
             this.$store.dispatch('addObjectFormData', {
-                object: 'step_10',
+                object: 'step_12',
                 value: this.currentData
             })
             this.next();
@@ -44,7 +44,7 @@ export default {
             e.preventDefault();
         },
         next() {
-            this.$router.push({ name: "step_10" });
+            this.$router.push({ name: "step_13" });
         }
     },
     computed: {

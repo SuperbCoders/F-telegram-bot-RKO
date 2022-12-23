@@ -157,13 +157,13 @@ export default {
     },
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_11',
+        object: 'step_13',
         value: this.currentData
       })
       this.next();
     },
     next() {
-      this.$router.push({ name: "step_11" });
+      this.$router.push({ name: "step_14" });
     }
   },
 };

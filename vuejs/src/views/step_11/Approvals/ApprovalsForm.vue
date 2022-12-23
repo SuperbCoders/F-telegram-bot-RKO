@@ -80,7 +80,7 @@ export default {
   methods: {
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_10',
+        object: 'step_11',
         value: this.currentData
       })
       this.next();
@@ -89,7 +89,7 @@ export default {
       e.preventDefault();
     },
     next() {
-      this.$router.push({name: "step_10"});
+      this.$router.push({name: "step_12"});
     }
   },
   computed: {
