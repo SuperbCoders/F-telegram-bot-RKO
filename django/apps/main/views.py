@@ -166,14 +166,18 @@ class PhoneApiView(APIView):
 
 class DocumentLoad(APIView):
     permission_classes = [permissions.AllowAny]
-    
-    def post(self, request, format=None, *args, **kwargs):
-        document = request.FILES.get("document")
-        document_model = DocumentFile(document=document)
-        document_model.save()
 
+    def post(self, request, format=None, *args, **kwargs):
+        documents = request.FILES.getlist("documents")
+        paths = []
+        for file in documents:
+            document_model = DocumentFile(document=file)
+            document_model.save()
+            paths.append({
+                "path": document_model.document.url
+            })
         return Response({
-            "path": document_model.document.url
+            "images": paths,
         }, status=status.HTTP_200_OK)
 
 
