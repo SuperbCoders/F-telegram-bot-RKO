@@ -12,7 +12,8 @@
       <v-form ref="form" v-model="valid" lazy-validation>
         <InnAndNameInput @input="getInnAndNameComnany" />
         <v-text-field label="Контактный номер телефона" outlined v-model="currentData.contact_number"
-          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
+          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form"
+          >
         </v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
           <v-checkbox :rules="requiredRules">
@@ -78,7 +79,7 @@ export default {
     if (phone) {
       this.currentData.contact_number = phone;
 
-      const response = await fetch(process.env.VUE_APP_HOST_API+`/api/loan-application/current/${phone}/`)
+      const response = await fetch(process.env.VUE_APP_HOST_API + `/api/loan-application/current/${phone}/`)
       const formData = await response.json();
       console.log('formData', formData);
       this.$store.dispatch("loadObjectFormData", formData);
@@ -183,10 +184,12 @@ export default {
         this.next();
       }
     },
-    next(){
-      this.$router.push({name: "step_2"});
+    next() {
+      this.$router.push({ name: "step_2" });
     },
-
+    onClose(){
+      this.$refs.contact_number.blur()
+    },
     async getCompanyFromInn(inn) {
       if ((inn.length >= 10)) {
         const company = await getCompanyInn(inn);
@@ -209,7 +212,7 @@ export default {
         this.currentData.inn = data.suggestions[0].data.inn
       }
     },
-    async getInnAndNameComnany({name, inn, ogrn}) {
+    async getInnAndNameComnany({ name, inn, ogrn }) {
       this.currentData.company_name = name;
       this.currentData.inn = inn;
       this.currentData.ogrn = ogrn;

@@ -1,5 +1,7 @@
 <template>
   <div class="structure_form">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <h2 class="text-left mb-5 font-bold form_block_label">
       Структура органов управления
     </h2>
@@ -11,7 +13,7 @@
       </v-radio-group>
 
     </v-form>
-    <line-step :step="2" class="mt-4" />
+    <line-step :step="6" class="mt-4" />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
       Продолжить
     </v-btn>
@@ -66,6 +68,9 @@ export default {
     next() {
       this.$router.push({ name: 'step_7' });
     },
+    back() {
+            this.$router.push({ name: "step_5" });
+        },
     addObjectList(object) {
       const result = {
         account_onw_role: [],

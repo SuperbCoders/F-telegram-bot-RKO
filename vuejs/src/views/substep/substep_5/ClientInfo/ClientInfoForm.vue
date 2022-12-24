@@ -1,5 +1,7 @@
 <template>
   <div class="client_info_section">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Место рождения</p>
@@ -104,6 +106,9 @@ export default {
         this.$router.push({ name: "substep_6", params: { id: this.$route.params.id } });
       }
     },
+    back() {
+            this.$router.push({ name: "substep_4",params: {id: this.$route.params.id} });
+        },
     // validityNull () {
     //   currentData.validity = ''
     // },

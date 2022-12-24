@@ -1,5 +1,7 @@
 <template>
   <div class="structure_group_section">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <h2 class="text-left structure_group_title mb-10">Адреса компании</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div
@@ -34,7 +36,7 @@
         </p>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
-          <AddressInput label="Введите адрес" v-model="itemForm.address"  />
+          <AddressInput label="Введите адрес" :index="index" v-model="itemForm.address"  />
         </div>
       </div>
       <div class="form_block d-flex align-center justify-center">
@@ -133,6 +135,9 @@ export default {
     next(){
       this.$router.push({name: "step_4"});
     },
+    back() {
+            this.$router.push({ name: "step_2" });
+        },
     isTypeAdress(object) {
       if (object.typeAdress.includes("Фактический")) {
         object.physic_address = object.address;

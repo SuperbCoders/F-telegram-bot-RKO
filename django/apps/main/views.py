@@ -168,9 +168,10 @@ class DocumentLoad(APIView):
     permission_classes = [permissions.AllowAny]
 
     def post(self, request, format=None, *args, **kwargs):
-        documents = request.FILES.getlist("documents")
+        documents = request.FILES
         paths = []
-        for file in documents:
+        for file_name in documents:
+            file = request.FILES.get(file_name)
             document_model = DocumentFile(document=file)
             document_model.save()
             paths.append({

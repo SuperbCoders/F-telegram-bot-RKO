@@ -1,27 +1,10 @@
 <template>
-    <!-- <v-combobox label="Введите ИНН или наименование компании" outlined
-       required 
-        class="mt-1 auth_form combobox"
-        :value="value"
-        @input="emitData"
-        @keyup="getListCompanyFromName" 
-        :items="list"
-        >
-    </v-combobox> -->
     <div class="container_field">
-        <input 
-            type="text" 
-            class="input" 
-            placeholder="Введите ИНН или наименование компании"
-            :value="valueField"
-            @input="emitData"
-        />
+        <input type="text" class="input" placeholder="Введите ИНН или наименование компании" :value="valueField"
+            @input="emitData" />
         <div class="dropdown_modal" v-if="list.length > 0">
-            <div class="field" 
-                v-for="(company, key) in list_company" 
-                :key="key" 
-                @click="selectCompany(company.value, company.data.inn, company.data.ogrn)"
-            >
+            <div class="field" v-for="(company, key) in list_company" :key="key"
+                @click="selectCompany(company.value, company.data.inn, company.data.ogrn)">
                 <div class="name">{{ company.value }}</div>
                 <div class="sub_info" v-html="sub_info(company.data.inn, company.data.ogrn)"></div>
             </div>
@@ -63,10 +46,10 @@ export default {
 
         },
         findValueAndFormat(number) {
-            
+
             const start_index = `${number}`.indexOf(`${this.valueField}`);
             const end_index = this.valueField.length;
-            
+
             if (start_index >= 0 && end_index >= 0) {
                 const start_chars = this.valueField;
                 const end_chars = `${number}`.slice(end_index);
@@ -94,23 +77,28 @@ export default {
     position: relative;
     margin-bottom: 8px;
 }
+
 .field {
     padding: 10px 14px;
     cursor: pointer;
 }
+
 .field:hover {
     background: rgba(0, 0, 0, 0.02);
 }
+
 .sub_info {
     text-transform: uppercase;
     font-size: 13px;
     color: #706f6f;
 }
+
 .name {
     font-weight: bold;
     text-transform: uppercase;
     color: #424242;
 }
+
 .dropdown_modal {
     position: absolute;
     top: calc(100% + 2px);

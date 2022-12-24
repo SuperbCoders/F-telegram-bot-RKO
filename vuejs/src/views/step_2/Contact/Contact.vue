@@ -1,24 +1,27 @@
 <template>
     <div class="auth_section">
+        <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
+        <h2 class="mb-4">Контакты</h2>
         <v-form ref="form" v-model="valid" lazy-validation>
 
             <div class="form_block">
                 <p class="text-left form_block_title"><span class="star">*</span>Email</p>
                 <v-text-field type="email" id="oldName" label="Email" class="align-center border-none" name="oldName"
-                    v-model="currentData.email" outlined :rules="emailRules" :required="true"></v-text-field>
+                    v-model="currentData.email" outlined :rules="emailRules"></v-text-field>
             </div>
 
             <div class="form_block">
                 <p class="text-left form_block_title"><span class="star">*</span>Телефон</p>
                 <v-text-field label="Телефон" outlined v-model="currentData.contact_phone_number" :rules="requiredRules"
-                    :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
+                    :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form"
+                    >
                 </v-text-field>
             </div>
 
             <div class="form_block">
                 <p class="text-left form_block_title">Сайт компании</p>
-                <v-text-field label="Доменное имя" outlined v-model="currentData.donainname" class="mt-1 auth_form"
-                >
+                <v-text-field label="Доменное имя" outlined v-model="currentData.donainname" class="mt-1 auth_form">
                 </v-text-field>
             </div>
 
@@ -55,7 +58,10 @@ export default {
     }),
 
     async mounted() {
-
+        const step_data = this.$store.state.formData.step_1;
+        const phone_number = step_data.contact_number;
+        this.currentData.contact_phone_number = phone_number;
+        console.log(phone_number);
 
     },
 
@@ -74,6 +80,17 @@ export default {
         },
         next() {
             this.$router.push({ name: "step_3" });
+        },
+
+        back() {
+            this.$router.push({ name: "step_1" });
+        },
+
+        onClose() {
+            // this.$refs.email.blur();
+            // this.$refs.contact_phone_number.blur();
+            // this.$refs.donainname.blur();
+            // this.$refs.fax.blur();
         },
 
     },

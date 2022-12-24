@@ -1,5 +1,7 @@
 <template>
   <div class="beneficiaries_section">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <h3 class="form_block_label">Выгодоприобретатели</h3>
     <div class="form_block mt-5 ">
       <p class="form_block_title">Имеются ли Выгодоприобретатели</p>
@@ -15,7 +17,7 @@
         outlined>
       </v-text-field>
     </div>
-    <line-step :step='6' class="mt-5" />
+    <line-step :step='8' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
   </div>
@@ -45,6 +47,9 @@ export default {
     next() {
       this.$router.push({ name: "step_9" })
     },
+    back() {
+            this.$router.push({ name: "step_7" });
+        },
   },
   components: {
     LineStep,

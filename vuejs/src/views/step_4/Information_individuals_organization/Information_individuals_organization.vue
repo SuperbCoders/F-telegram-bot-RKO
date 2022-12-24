@@ -1,5 +1,7 @@
 <template>
     <div class="structure_form">
+        <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
         <h2 class="text-left mb-5 font-bold form_block_label">
             Сведения о физических лицах организации
         </h2>
@@ -57,6 +59,9 @@ export default {
         },
         next() {
             this.$router.push({ name: 'step_5' });
+        },
+        back() {
+            this.$router.push({ name: "step_3" });
         },
         editPersone(key) {
             this.$router.push({

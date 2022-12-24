@@ -1,7 +1,9 @@
 <template>
   <div class="approvals_section">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <div class="form_block">
-      <p class="form_block_title">Сведения о соответствии FATCA и и стратегическом значении компании (выберите все верные утверждения)</p>
+      <h2 class="">Сведения о соответствии FATCA и и стратегическом значении компании (выберите все верные утверждения)</h2>
       <div class="form_block checkboxs">
         <v-checkbox v-for="(item, index) in list" :key="index" class="d-flex align-items-start"
           v-model="currentData.informationGoals" :value="item.value" hide-details>
@@ -15,7 +17,7 @@
         </v-checkbox>
       </div>
     </div>
-    <LineStep :step="8" class="mt-5" />
+    <LineStep :step="11" class="mt-5" />
     <v-btn block large :disabled="!isList" @click="redirect()" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>
   </div>
@@ -90,7 +92,10 @@ export default {
     },
     next() {
       this.$router.push({name: "step_12"});
-    }
+    },
+    back() {
+            this.$router.push({ name: "step_10" });
+        },
   },
   computed: {
     isList() {

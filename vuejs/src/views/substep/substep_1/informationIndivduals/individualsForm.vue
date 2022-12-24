@@ -1,5 +1,7 @@
 <template>
   <div class="individuals_form">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <p class="text-left form_block_title"><span class="star">*</span>Роль лица</p>
       <div class="checkboxs">
@@ -63,10 +65,15 @@ export default {
       if (this.$refs.form.validate()) {
         this.$store.commit("setPersone", { key: "substep_1", value: this.currentData, index: this.$route.params?.id });
 
-        this.$router.push({ name: "substep_2", params: {
-          id: this.$route.params.id
-        } });
+        this.$router.push({
+          name: "substep_2", params: {
+            id: this.$route.params.id
+          }
+        });
       }
+    },
+    back() {
+      this.$router.push({ name: "step_4" });
     },
   },
   mounted() {

@@ -1,5 +1,7 @@
 <template>
   <div class="status_kinship_block">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
 
@@ -22,7 +24,7 @@ export default {
     valid: true,
     currentData: {
       assigned_publ_pers_relation: null,
-      assigned_publ_pers_registraion: null,
+      assigned_publ_pers_registraion: "",
       account_own_registration: null,
     },
     requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -32,12 +34,12 @@ export default {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         this.$store.commit("setPersone", { key: "substep_3", value: this.currentData, index: this.$route.params?.id });
-
-        this.$router.push({ name: "substep_4", params: {id: this.$route.params.id} });
-
-
+        this.$router.push({ name: "substep_4", params: { id: this.$route.params.id } });
       }
     },
+    back() {
+            this.$router.push({ name: "substep_2",params: {id: this.$route.params.id} });
+        },
   },
   components: {
     AddressInput,

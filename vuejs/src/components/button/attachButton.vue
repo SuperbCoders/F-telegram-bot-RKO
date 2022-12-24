@@ -8,7 +8,7 @@
         {{ text }}
       </span>
     </v-btn>
-    <input class="attach_upload_input" ref="input_file" @change="uploadFile" type="file" style="display: none">
+    <input class="attach_upload_input" ref="input_file" multiple @change="uploadFile" type="file" style="display: none">
   </div>
 </template>
 

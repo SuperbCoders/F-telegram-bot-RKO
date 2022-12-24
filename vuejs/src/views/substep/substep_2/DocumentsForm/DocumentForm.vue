@@ -1,5 +1,7 @@
 <template>
   <div class="document_form_block">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
 
       <div class="form_block" v-if="is_eio">
@@ -95,14 +97,12 @@ export default {
         this.$router.push({ name: "substep_3", params: {id: this.$route.params.id} });
       }
     },
+    back() {
+            this.$router.push({ name: "substep_1",params: {id: this.$route.params.id} });
+        },
     async inputCountry(event) {
-      console.log(event);
-      console.log(event.target.value);
       const countryes = await getCountry(event.target.value);
-      console.log(countryes);
-      console.log(countryes?.suggestions?.map((val) => {
-        return val.value;
-      }));
+
       this.itemsCountry = countryes?.suggestions?.map((val) => {
         return val.value;
       });

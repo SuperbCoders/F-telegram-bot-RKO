@@ -1,5 +1,8 @@
 <template>
   <div>
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">
+      Назад
+    </v-btn>
     <v-dialog v-model="dialog" width="700">
       <v-card>
         <v-card-text class="pa-5">
@@ -187,7 +190,7 @@
 
       </div>
     </div>
-    <line-step :step="10" class="mt-10" />
+    <line-step :step="14" class="mt-10" />
     <p @click="dialogAgreement = true" class="mt-8 text-center" style="cursor: pointer;">
       Нажимая на кнопку «Отправить», вы соглашаетесь с
       условиями подачи заявки и обработки персональных данных</p>
@@ -270,6 +273,9 @@ export default {
     },
     getStepFromFormData(index) {
       return this.$store.state.formData?.['step_' + index]
+    },
+    back() {
+      this.$router.push({ name: "step_13" });
     },
   },
   computed: {

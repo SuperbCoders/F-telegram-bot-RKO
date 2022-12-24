@@ -1,5 +1,7 @@
 <template>
   <div class="planning_operation_section">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+    </v-btn>
     <h3 class="form_block_label">Виды договоров (контрактов), расчеты по которым юридическое лицо собирается
       осуществлять через банк</h3>
     <div class="form_block">
@@ -24,16 +26,15 @@
       <v-checkbox v-model="currentData.planned_operations" label="Иное (укажите)" value="Иное (укажите)"
         hide-details></v-checkbox>
 
-      <v-text-field id="other" v-if="currentData.planned_operations.indexOf('Иное (укажите)')>= 0"
-        v-model="currentData.other" placeholder="Иное"
-        class="align-center border-none mt-5" outlined>
+      <v-text-field id="other" v-if="currentData.planned_operations.indexOf('Иное (укажите)') >= 0"
+        v-model="currentData.other" placeholder="Иное" class="align-center border-none mt-5" outlined>
       </v-text-field>
 
     </div>
     <p class="error_message" v-if="!valid && operationlist.length < 1">
       Выберите пункт
     </p>
-    <line-step :step='5' class="mt-5" />
+    <line-step :step='10' class="mt-5" />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
@@ -66,7 +67,10 @@ export default {
     },
     next() {
       this.$router.push({ name: "step_11" });
-    }
+    },
+    back() {
+      this.$router.push({ name: "step_9" });
+    },
   },
   components: {
     LineStep

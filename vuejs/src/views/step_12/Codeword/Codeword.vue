@@ -1,11 +1,13 @@
 <template>
     <div class="approvals_section">
+        <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
         <div class="form_block">
             <v-text-field label="Кодовое слово" @input="inputCodeword" outlined :value="formatCodeword" :required="true"
                 class="mt-1 auth_form">
             </v-text-field>
         </div>
-        <LineStep :step="8" class="mt-5" />
+        <LineStep :step="12" class="mt-5" />
         <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
             Продолжить
         </v-btn>
@@ -34,7 +36,10 @@ export default {
             })
             this.next();
         },
-        inputCodeword(event){
+        onClose() {
+            this.$refs.codeword.blur()
+        },
+        inputCodeword(event) {
             const val = event.target.value;
             const replace_text = val.replaceAll(/[^АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя]/g, "");
             console.log(replace_text);
@@ -45,7 +50,10 @@ export default {
         },
         next() {
             this.$router.push({ name: "step_13" });
-        }
+        },
+        back() {
+            this.$router.push({ name: "step_11" });
+        },
     },
     computed: {
         isList() {
@@ -54,7 +62,7 @@ export default {
             }
             return false;
         },
-        formatCodeword(){
+        formatCodeword() {
             const replace_text = this.currentData.codeword.replaceAll(/[^АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя]/g, "");
             console.log(replace_text);
             return replace_text

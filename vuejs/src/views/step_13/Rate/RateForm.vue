@@ -1,5 +1,7 @@
 <template>
   <div class="rate_section">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+    </v-btn>
     <h2 class="text-left rate_section_title mb-10 w-60">
       Тарифы на расчетно-кассовое обслуживание
     </h2>
@@ -33,7 +35,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">0 ₽/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 1'"
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Первый'"
           @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
@@ -41,7 +43,7 @@
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 1')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('Первый')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -74,7 +76,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 ₽/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 2'"
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Второй'"
           @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
@@ -82,7 +84,7 @@
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 2')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('Второй')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -113,7 +115,7 @@
           </li>
         </ul>
         <h2 gray class="text-left rate_content_price mb-3">1 490 ₽/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Тариф 3'"
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Третий'"
           @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
@@ -121,10 +123,10 @@
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Тариф 3')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('Третий')" large>Выбрать</v-btn>
       </div>
     </v-card>
-    <LineStep :step="9" />
+    <LineStep :step="13" />
     <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
       <span v-if="currentData.tariff">Продолжить</span>
       <span v-else>Пропустить</span>
@@ -164,7 +166,10 @@ export default {
     },
     next() {
       this.$router.push({ name: "step_14" });
-    }
+    },
+    back() {
+      this.$router.push({ name: "step_12" });
+    },
   },
 };
 </script>

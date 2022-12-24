@@ -1,22 +1,24 @@
 <template>
     <v-form ref="form" v-model="valid" lazy-validation>
-        <p class="text-left form_block_title">Учредители - юридические лица</p>
+        <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
+        <h2 class="text-left mb-4">Учредители - юридические лица</h2>
         <div v-for="(itemForm, index) in currentData.founders" :key="index" class="form_input_block checkboxs">
 
             <div class="form_block">
                 <p class="text-left form_block_title">Учередитель</p>
-                <InnAndNameInput @input="({inn})=>{currentData.founder_inn = inn}" />
+                <InnAndNameInput @input="({ inn }) => { itemForm.founder_inn = inn }" />
             </div>
 
-            <div class="form_block">
+            <div class="form_block mt-6">
                 <p class="text-left form_block_title">Доля в уставном капитале</p>
-                <v-text-field outlined v-model="currentData.capital"
-                    class="mt-1 auth_form">
+                <v-text-field outlined v-model="itemForm.capital" placeholder="Доля в уставном капитале"
+                    class="mt-1 auth_form" v-mask="'###'">
                 </v-text-field>
             </div>
         </div>
         <div class="form_block d-flex align-center justify-center">
-            <a @click="deleteGroupList" :class="{ form_block_delete_link_delete: currentData.addresses.length <= 1 }"
+            <a @click="deleteGroupList" :class="{ form_block_delete_link_delete: currentData.founders.length <= 1 }"
                 class="form_block_delete_link text-decoration-none" href="#">
                 <img src="@/assets/trash.svg" alt="">
                 <span class="pl-2 ">Удалить</span>
@@ -26,21 +28,21 @@
                 <img src="@/assets/plus-circle.svg" alt="">
             </v-btn>
         </div>
-        <line-step :step="1" />
+        <line-step :step="7" />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
         </v-btn>
     </v-form>
 </template>
 <script>
-import { VueMaskDirective } from "vue-the-mask";
+import { mask } from "vue-the-mask";
 import InnAndNameInput from '@/components/innAndNameInput.vue'
+import LineStep from "@/components/line_step/line_step.vue";
 
 export default {
-    directives: { mask: VueMaskDirective },
+    directives: { mask },
     data: () => ({
         currentData: {
-            addresses: [
-            ],
+            founders: [],
         },
         valid: true,
 
@@ -68,17 +70,20 @@ export default {
         next() {
             this.$router.push({ name: "step_8" });
         },
+        back() {
+            this.$router.push({ name: "step_6" });
+        },
 
         addGroupList() {
             const defaultGroupItem = {
                 founder_inn: null,
                 capital: null,
             };
-            this.currentData.addresses.push(defaultGroupItem);
+            this.currentData.founders.push(defaultGroupItem);
         },
         deleteGroupList() {
-            if (this.currentData.addresses.length > 1) {
-                this.currentData.addresses.pop();
+            if (this.currentData.founders.length > 1) {
+                this.currentData.founders.pop();
             }
         },
 
@@ -86,6 +91,7 @@ export default {
     computed: {},
     components: {
         InnAndNameInput,
+        LineStep,
     }
 };
 </script>

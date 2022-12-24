@@ -1,5 +1,7 @@
 <template>
     <div>
+        <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+        </v-btn>
         <div class="all_data_table">
             <h2 class="form_block_label mb-10">
                 Сведения о связанных физических лицах
@@ -86,10 +88,12 @@ export default {
                 return false
             }
         },
-
+        back() {
+            this.$router.push({ name: "substep_5",params: {id: this.$route.params.id} });
+        },
         del() {
             this.$store.dispatch('addObjectFormData', {
-                object: 'step_3',
+                object: 'step_4',
                 value: {}
             });
             this.$store.commit('delPersone')
