@@ -126,6 +126,34 @@
         <v-btn class="rate_card_content_button" v-else @click="setTarif('Третий')" large>Выбрать</v-btn>
       </div>
     </v-card>
+
+    <div class="form_block">
+      <h2 class="text-left">
+        Выберите дополнительные продукты к подключению
+      </h2>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="СМС-оповещение"
+        value="СМС-оповещение" hide-details>
+      </v-checkbox>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Интернет-эквайринг"
+        value="Интернет-эквайринг" hide-details>
+      </v-checkbox>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Торговый-эквайринг"
+        value="Торговый-эквайринг" hide-details>
+      </v-checkbox>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Комьюнити" value="Комьюнити"
+        hide-details>
+      </v-checkbox>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Бухгалтерия" value="Бухгалтерия"
+        hide-details>
+      </v-checkbox>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Юридическая поддержка"
+        value="Юридическая поддержка" hide-details>
+      </v-checkbox>
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Продвижение" value="Продвижение"
+        hide-details>
+      </v-checkbox>
+    </div>
+
     <LineStep :step="13" />
     <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
       <span v-if="currentData.tariff">Продолжить</span>
@@ -146,6 +174,7 @@ export default {
     return {
       currentData: {
         tariff: null,
+        additional_products: [],
       },
     };
   },

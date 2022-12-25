@@ -85,6 +85,7 @@ export default new Vuex.Store({
             },
             step_13: {
                 tariff: null,
+                additional_products: [],
             },
         },
 

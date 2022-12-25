@@ -10,7 +10,7 @@
                 value="ЕИО не является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)" />
         </v-radio-group>
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
-    </v-btn>
+        </v-btn>
     </v-form>
 </template>
 <script>
@@ -78,7 +78,8 @@ export default {
 .purposes_block .v-label {
     color: #323E48 !important;
 }
+
 .checkboxs label {
-  color: #323E48 !important;
+    color: #323E48 !important;
 }
 </style>
