@@ -1,15 +1,15 @@
 <template>
   <div class="address_form_block">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title">Адрес фактического проживания</p>
-        <v-radio-group v-model="data" mandatory class="checkboxs">
+        <v-radio-group v-model="currentData.is_accownt_own_living" mandatory class="checkboxs">
           <v-radio label="Совпадает с адресом регистрации" value="Да"></v-radio>
           <v-radio label="Не совпадает с адресом регистрации" value="Нет"></v-radio>
         </v-radio-group>
-        <div v-if="data === 'Нет'">
+        <div v-if="currentData.is_accownt_own_living === 'Нет'">
           <p class="form_block_title">
             <span class="star">*</span>
             Адрес фактического проживания
@@ -25,6 +25,7 @@
 
 <script>
 import AddressInput from '@/components/addressInput.vue';
+import { loadSubCurrentData } from '@/utils/loadStore'
 
 export default {
   data() {
@@ -33,11 +34,20 @@ export default {
       data: 'Да',
       isAdress: null,
       currentData: {
+        is_accownt_own_living: 'Да',
         accownt_own_living: null
       },
       listAddres: [],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     }
+  },
+  mounted() {
+    loadSubCurrentData({
+      currentData: this.currentData,
+      substep: "substep_4",
+      vue: this,
+      index: this.$route.params.id
+    })
   },
   methods: {
     validate() {
@@ -52,13 +62,13 @@ export default {
           this.currentData.accownt_own_living = address  // Тут должен быть адрес
         }
         this.$store.commit("setPersone", { key: "substep_4", value: this.currentData, index: this.$route.params?.id });
-        
-        this.$router.push({ name: "substep_5", params: {id: this.$route.params.id} });
+
+        this.$router.push({ name: "substep_5", params: { id: this.$route.params.id } });
       }
     },
     back() {
-            this.$router.push({ name: "substep_3",params: {id: this.$route.params.id} });
-        },
+      this.$router.push({ name: "substep_3", params: { id: this.$route.params.id } });
+    },
   },
   computed: {
     isFormdata() {

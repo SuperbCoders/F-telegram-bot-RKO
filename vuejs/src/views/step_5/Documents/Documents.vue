@@ -72,6 +72,7 @@
 <script>
 import AttachButton from '@/components/button/attachButton.vue';
 import LineStep from "@/components/line_step/line_step.vue";
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
     data() {
@@ -86,6 +87,13 @@ export default {
                 document_licenses: [],
             },
         };
+    },
+    mounted() {
+        loadCurrentData({
+            currentData: this.currentData,
+            step: 'step_5',
+            vue: this,
+        });
     },
     methods: {
         async onfile_certifying_identity_executive(files) {

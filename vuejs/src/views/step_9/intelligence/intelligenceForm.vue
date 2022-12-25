@@ -26,6 +26,7 @@
 
 <script>
 import LineStep from '@/components/line_step/line_step.vue';
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   data() {
@@ -61,6 +62,13 @@ export default {
       this.$refs.employers_volume.blur()
       this.$refs.salary_debt.blur()
     },
+  },
+  mounted() {
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_9',
+      vue: this,
+    });
   },
   components: {
     LineStep

@@ -74,6 +74,7 @@
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
 import AddressInput from '@/components/addressInput.vue';
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   data() {
@@ -113,6 +114,13 @@ export default {
       ],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };
+  },
+  mounted(){
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_3',
+      vue: this,
+    });
   },
   methods: {
     validate() {

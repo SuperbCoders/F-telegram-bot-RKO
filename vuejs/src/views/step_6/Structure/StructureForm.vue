@@ -22,6 +22,7 @@
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   directives: { mask },
@@ -30,14 +31,6 @@ export default {
     listCompany: [],
     currentData: {
       structure_value: "",
-
-      is_collegiate_body: false,
-      supervisoty_board_persone_name: "",
-      list_collegial_executive_body: [],
-
-      is_supervisoty: false,
-      collegiate_person: "",
-      list_supervisoty_board_persone: [],
     },
     innRules: [
       (v) => !!v || "Это поле обязательно",
@@ -145,18 +138,12 @@ export default {
     LineStep,
   },
   mounted() {
-    const dataStep = this.$store.state.formData.step_3;
-    if (dataStep) {
-      this.currentData.supreme_management_body =
-        dataStep.supreme_management_body;
-      this.currentData.supreme_management_inn = dataStep.supreme_management_inn;
 
-      this.currentData.supreme_management_person = dataStep.supreme_management_person;
-      this.currentData.supervisoty_board_persone_name = dataStep.supervisoty_board_persone_name;
-      this.currentData.collegiate_person = dataStep.collegiate_person;
-      this.currentData.is_supervisoty = dataStep.is_supervisoty;
-      this.currentData.is_collegiate_body = dataStep.is_collegiate_body;
-    }
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_6',
+      vue: this,
+    });
   },
 };
 </script>

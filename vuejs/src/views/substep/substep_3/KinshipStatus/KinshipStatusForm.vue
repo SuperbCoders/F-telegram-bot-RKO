@@ -1,7 +1,7 @@
 <template>
   <div class="status_kinship_block">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
 
@@ -18,17 +18,24 @@
 
 <script>
 import AddressInput from '@/components/addressInput.vue';
+import { loadSubCurrentData } from '@/utils/loadStore'
 
 export default {
   data: () => ({
     valid: true,
     currentData: {
-      assigned_publ_pers_relation: null,
       assigned_publ_pers_registraion: "",
-      account_own_registration: null,
     },
     requiredRules: [(v) => !!v || "Это поле обязательно"],
   }),
+  mounted() {
+    loadSubCurrentData({
+      currentData: this.currentData,
+      substep: "substep_3",
+      vue: this,
+      index: this.$route.params.id
+    })
+  },
   methods: {
     validate() {
       this.$refs.form.validate();
@@ -38,8 +45,8 @@ export default {
       }
     },
     back() {
-            this.$router.push({ name: "substep_2",params: {id: this.$route.params.id} });
-        },
+      this.$router.push({ name: "substep_2", params: { id: this.$route.params.id } });
+    },
   },
   components: {
     AddressInput,

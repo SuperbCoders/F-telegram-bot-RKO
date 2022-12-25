@@ -42,13 +42,15 @@
 
 <script>
 import LineStep from '@/components/line_step/line_step.vue';
+import { loadCurrentData } from '@/utils/loadStore'
+
 export default {
   data() {
     return {
       valid: true,
       currentData: {
         planned_operations: [],
-        other: null,
+        other: "",
       },
     };
   },
@@ -71,6 +73,13 @@ export default {
     back() {
       this.$router.push({ name: "step_9" });
     },
+  },
+  mounted(){
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_10',
+      vue: this,
+    });
   },
   components: {
     LineStep

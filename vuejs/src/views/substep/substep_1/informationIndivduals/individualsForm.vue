@@ -1,7 +1,7 @@
 <template>
   <div class="individuals_form">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <p class="text-left form_block_title"><span class="star">*</span>Роль лица</p>
       <div class="checkboxs">
@@ -46,6 +46,8 @@
 </template>
 
 <script>
+import { loadSubCurrentData } from '@/utils/loadStore'
+
 export default {
   data: () => ({
     valid: true,
@@ -78,6 +80,12 @@ export default {
   },
   mounted() {
     this.$store.commit("setPersone", { key: "substep_0", value: {}, index: this.$route.params?.id });
+    loadSubCurrentData({
+      currentData: this.currentData,
+      substep: "substep_1",
+      vue: this,
+      index: this.$route.params.id
+    })
   },
   components: {
   },

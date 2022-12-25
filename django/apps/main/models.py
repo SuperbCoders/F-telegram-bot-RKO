@@ -83,7 +83,9 @@ class LoanRequest(models.Model):
     name_organization2 = models.CharField(max_length=255, null=True, blank=True)
     codeword = models.CharField(max_length=255, null=True, blank=True)
     sms_sending = models.BooleanField(null=True, blank=True)
+    is_conditions = models.BooleanField(null=True, blank=True)
     additional_products = models.JSONField(blank=True, null=True)
+    opf = models.JSONField(blank=True, null=True)
 
     subject_licensing = models.CharField(max_length=255, null=True, blank=True)
     history_reputation = models.CharField(max_length=255, null=True, blank=True)

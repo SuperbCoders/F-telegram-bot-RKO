@@ -23,22 +23,23 @@ export default new Vuex.Store({
                 company_name: "",
                 contact_number: "",
                 ogrn: "",
+                opf: {},
+                is_conditions: false,
             },
 
             step_2: {
                 email: "",
-                phoneNumber: "",
-                domainName: "",
+                contact_phone_number: "",
+                donainname: "",
+                fax: "",
             },
             step_3: {
                 addresses: [
                     {
                         typeAdress: [],
                         legal_address: "",
-                        physic_address: "",
                         mail_address: "",
                         address: "",
-                        basis: "",
                     },
                 ]
             },
@@ -46,34 +47,45 @@ export default new Vuex.Store({
                 list_persone: [],
             },
             step_5: {
-                employers_volume: 0,
-                salary_debt: 0,
+                document_certifying_identity_executive_file: null,
+                document_confirming_real_activity_file: null,
+                document_licenses_file: null,
+
+                document_certifying_identity_executive: [],
+                document_confirming_real_activity: [],
+                document_licenses: [],
             },
             step_6: {
-                licence_type: null,
-                licence_number: null,
-                licence_issued_by: null,
-                licence_date_issue: null,
-                licenced_validity: null,
-                licenced_activity: null,
+                structure_value: "",
             },
             step_7: {
-                planned_operations: [],
+                founders: [{
+                    founder_inn: "",
+                    capital: "",
+                    founder_name: "",
+                }],
             },
             step_8: {
-                beneficiaries: null,
+                beneficiaries: "",
+                third_parties: "",
             },
             step_9: {
-                account_operations: [],
-                operation_volume: null,
-                operation_sum: null,
-                operation_nalition: null,
-                sum_per_month: null,
-                outside_contracts_volume: null,
-                cash_source: [],
-                state_employers: null,
-
-            }
+                employers_volume: "",
+                salary_debt: 0,
+            },
+            step_10: {
+                planned_operations: [],
+                other: "",
+            },
+            step_11: {
+                informationGoals: [],
+            },
+            step_12: {
+                codeword: "",
+            },
+            step_13: {
+                tariff: null,
+            },
         },
 
         leaderList: [
@@ -125,7 +137,7 @@ export default new Vuex.Store({
             });
             return result;
         },
-        indexLastListPerson(state){
+        indexLastListPerson(state) {
             return state.formData.step_4.list_persone.length - 1;
         }
     },
@@ -170,7 +182,7 @@ export default new Vuex.Store({
         async setPersone(state, { key, value, index }) {
             const last_element = state.formData.step_4.list_persone[index];
             last_element[key] = value;
-            
+
             const contact_number = state.formData.step_1.contact_number;
             const response_data = Object.assign({ last_step: `${key}` }, state.formData.step_4);
 

@@ -1,7 +1,7 @@
 <template>
   <div class="beneficiaries_section">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <h3 class="form_block_label">Выгодоприобретатели</h3>
     <div class="form_block mt-5 ">
       <p class="form_block_title">Имеются ли Выгодоприобретатели</p>
@@ -25,16 +25,24 @@
 
 <script>
 import LineStep from '@/components/line_step/line_step.vue';
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   data() {
     return {
       isShow: false,
       currentData: {
-        beneficiaries: null,
-        third_parties: null,
+        beneficiaries: "",
+        third_parties: "",
       }
     };
+  },
+  mounted() {
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_8',
+      vue: this,
+    });
   },
   methods: {
     redirect() {
@@ -48,8 +56,8 @@ export default {
       this.$router.push({ name: "step_9" })
     },
     back() {
-            this.$router.push({ name: "step_7" });
-        },
+      this.$router.push({ name: "step_7" });
+    },
   },
   components: {
     LineStep,

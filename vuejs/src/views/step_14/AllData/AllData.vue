@@ -200,6 +200,7 @@
 <script>
 import LineStep from "@/components/line_step/line_step.vue"
 import { translateMixin } from '@/mixin/translate'
+
 export default {
   mixins: [translateMixin],
   data() {
@@ -284,15 +285,17 @@ export default {
       for (const stepName in formData) {
         let step = formData[stepName]
         for (let keyStep in step) {
+          // SKIP
+          if(keyStep === 'opf') continue; 
           let valueStep = step[keyStep]
           if (this.isArray(valueStep)) {
             let isTypeArray = null;
 
-            if (keyStep === 'list_collegial_executive_body' || keyStep === 'list_supervisoty_board_persone') {
+            if (keyStep === 'list_persone' ) {
               const arr_fio = valueStep.map((val) => {
-                const account_own_lastname = val?.['page-1']?.account_own_lastname;
-                const account_own_name = val?.['page-1']?.account_own_name;
-                const account_own_surname = val?.['page-1']?.account_own_surname;
+                const account_own_lastname = val?.['substep_1']?.account_own_lastname;
+                const account_own_name = val?.['substep_1']?.account_own_name;
+                const account_own_surname = val?.['substep_1']?.account_own_surname;
                 return {
                   type: 'Variable',
                   body: `${account_own_lastname} ${account_own_name} ${account_own_surname}`,
@@ -371,6 +374,7 @@ export default {
 
   },
   mounted() {
+
   },
   components: { LineStep },
 };

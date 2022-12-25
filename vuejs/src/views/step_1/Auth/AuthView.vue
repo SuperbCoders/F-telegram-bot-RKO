@@ -10,13 +10,12 @@
     </div>
     <div class="auth_form mt-12">
       <v-form ref="form" v-model="valid" lazy-validation>
-        <InnAndNameInput @input="getInnAndNameComnany" />
+        <InnAndNameInput @input="getInnAndNameComnany" :value="currentData.company_name" />
         <v-text-field label="Контактный номер телефона" outlined v-model="currentData.contact_number"
-          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form"
-          >
+          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
         </v-text-field>
         <div class="auth_form_cheked_block d-flex w-100">
-          <v-checkbox :rules="requiredRules">
+          <v-checkbox :rules="requiredRules" v-model="currentData.is_conditions">
             <template v-slot:label>
               <div class="text-left auth_form_link_container">
                 <span class="black--text">Я ознакомился и согласен с условиями </span>
@@ -49,15 +48,18 @@
 import { getCompanyInn, getCompanyName } from "@/api/getInfoCompany";
 import { mask } from "vue-the-mask";
 import InnAndNameInput from '@/components/innAndNameInput.vue';
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   directives: { mask },
   data: () => ({
     currentData: {
-      inn: null,
-      company_name: null,
-      contact_number: null,
-      ogrn: null,
+      inn: "",
+      company_name: "",
+      contact_number: "",
+      ogrn: "",
+      opf: "",
+      is_conditions: false,
     },
     inn_or_name: '',
     listCompany: [],
@@ -169,6 +171,13 @@ export default {
       }
     }
 
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_1',
+      vue: this,
+    });
+
+
   },
 
   methods: {
@@ -187,7 +196,7 @@ export default {
     next() {
       this.$router.push({ name: "step_2" });
     },
-    onClose(){
+    onClose() {
       this.$refs.contact_number.blur()
     },
     async getCompanyFromInn(inn) {
@@ -212,10 +221,11 @@ export default {
         this.currentData.inn = data.suggestions[0].data.inn
       }
     },
-    async getInnAndNameComnany({ name, inn, ogrn }) {
+    async getInnAndNameComnany({ name, inn, ogrn, opf }) {
       this.currentData.company_name = name;
       this.currentData.inn = inn;
       this.currentData.ogrn = ogrn;
+      this.currentData.opf = opf;
     }
   },
   computed: {},

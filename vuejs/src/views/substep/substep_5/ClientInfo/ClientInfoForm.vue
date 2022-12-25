@@ -1,7 +1,7 @@
 <template>
   <div class="client_info_section">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <v-form ref="form" v-model="valid" lazy-validation>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Место рождения</p>
@@ -50,8 +50,8 @@
       </div>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Дата выдачи</p>
-        <v-text-field placeholder="Дата рождения" outlined v-model="currentData.date_issue"
-          :rules="requiredRules" :required="true" v-mask="'##.##.####'"></v-text-field>
+        <v-text-field placeholder="Дата рождения" outlined v-model="currentData.date_issue" :rules="requiredRules"
+          :required="true" v-mask="'##.##.####'"></v-text-field>
       </div>
     </v-form>
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
@@ -61,6 +61,7 @@
 
 <script>
 import { mask } from "vue-the-mask";
+import { loadSubCurrentData } from '@/utils/loadStore'
 
 export default {
   directives: { mask },
@@ -68,11 +69,14 @@ export default {
     valid: true,
     listRole: [],
     currentData: {
-      placeOfBirth: null,
-      typeDocumnet: null,
-      account_datebirth: null,
-      date_issue: '',
-      validity: '',
+      account_birth_place: "",
+      account_datebirth: "",
+      doc_type: "",
+      doc_serial: "",
+      doc_number: "",
+      issued_by: "",
+      division_code: "",
+      date_issue: "",
     },
     account_datebirth: null,
     dateStarting: null,
@@ -107,8 +111,8 @@ export default {
       }
     },
     back() {
-            this.$router.push({ name: "substep_4",params: {id: this.$route.params.id} });
-        },
+      this.$router.push({ name: "substep_4", params: { id: this.$route.params.id } });
+    },
     // validityNull () {
     //   currentData.validity = ''
     // },
@@ -138,6 +142,14 @@ export default {
       const local = new Date(date);
       return local.toJSON().slice(0, 10);
     },
+  },
+  mounted() {
+    loadSubCurrentData({
+      currentData: this.currentData,
+      substep: "substep_5",
+      vue: this,
+      index: this.$route.params.id
+    })
   },
   computed: {
   },

@@ -25,6 +25,8 @@
 
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
+import { loadCurrentData } from '@/utils/loadStore'
+
 export default {
   components: {
     LineStep,
@@ -104,6 +106,13 @@ export default {
       }
       return false;
     },
+  },
+  mounted(){
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_11',
+      vue: this,
+    });
   },
 };
 </script>

@@ -7,7 +7,10 @@
 
             <div class="form_block">
                 <p class="text-left form_block_title">Учередитель</p>
-                <InnAndNameInput @input="({ inn }) => { itemForm.founder_inn = inn }" />
+                <InnAndNameInput @input="({ inn, name }) => {
+                    itemForm.founder_inn = inn;
+                    itemForm.founder_name = name;
+                }" :value="itemForm.founder_name" />
             </div>
 
             <div class="form_block mt-6">
@@ -37,12 +40,17 @@
 import { mask } from "vue-the-mask";
 import InnAndNameInput from '@/components/innAndNameInput.vue'
 import LineStep from "@/components/line_step/line_step.vue";
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
     directives: { mask },
     data: () => ({
         currentData: {
-            founders: [],
+            founders: [{
+                founder_inn: "",
+                capital: "",
+                founder_name: "",
+            }],
         },
         valid: true,
 
@@ -51,7 +59,11 @@ export default {
     }),
 
     async mounted() {
-
+        loadCurrentData({
+            currentData: this.currentData,
+            step: 'step_7',
+            vue: this,
+        });
 
     },
 
@@ -76,8 +88,9 @@ export default {
 
         addGroupList() {
             const defaultGroupItem = {
-                founder_inn: null,
-                capital: null,
+                founder_inn: "",
+                capital: "",
+                founder_name: ""
             };
             this.currentData.founders.push(defaultGroupItem);
         },

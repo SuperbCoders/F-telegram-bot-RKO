@@ -1,10 +1,10 @@
 <template>
     <div class="container_field">
-        <input type="text" class="input" placeholder="Введите ИНН или наименование компании" :value="valueField"
+        <input type="text" class="input" placeholder="Введите ИНН или наименование компании" :value="value"
             @input="emitData" />
         <div class="dropdown_modal" v-if="list.length > 0">
             <div class="field" v-for="(company, key) in list_company" :key="key"
-                @click="selectCompany(company.value, company.data.inn, company.data.ogrn)">
+                @click="selectCompany(company)">
                 <div class="name">{{ company.value }}</div>
                 <div class="sub_info" v-html="sub_info(company.data.inn, company.data.ogrn)"></div>
             </div>
@@ -17,41 +17,46 @@ import { getCompanyName } from "@/api/getInfoCompany";
 
 export default {
     name: "innAndNameInput",
-    props: {},
+    props: {
+        value: {
+            type: String,
+        }
+    },
     data() {
         return {
             list: [],
             name: "",
-            valueField: "",
         }
     },
     methods: {
-        async selectCompany(name, inn, ogrn) {
-            this.valueField = name;
+        async selectCompany(company) {
+            const {value, data: {inn, ogrn, opf} } = company;
             this.list = [];
             this.$emit('input', {
-                name,
+                name: value,
                 inn,
                 ogrn,
+                opf,
             })
         },
 
         async emitData(e) {
             const value = e.target.value;
-
-            this.valueField = value;
             const data = await getCompanyName(value);
             console.log(data);
             this.list = data.suggestions;
+            this.$emit('input', {
+                name: value,
+            })
 
         },
         findValueAndFormat(number) {
 
-            const start_index = `${number}`.indexOf(`${this.valueField}`);
-            const end_index = this.valueField.length;
+            const start_index = `${number}`.indexOf(`${this.value}`);
+            const end_index = this.value.length;
 
             if (start_index >= 0 && end_index >= 0) {
-                const start_chars = this.valueField;
+                const start_chars = this.value;
                 const end_chars = `${number}`.slice(end_index);
                 return `<span style="color: #b36b24">${start_chars}</span>${end_chars}`;
             }

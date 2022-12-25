@@ -15,8 +15,6 @@ export const translateMixin = {
                     return "ИНН";
                 case "account_onw_role":
                     return "Роль";
-                case "account_own_citizenship":
-                    return "Гражданство";
                 case "account_own_firstname":
                     return "Имя";
                 case "account_own_lastname":
@@ -157,6 +155,34 @@ export const translateMixin = {
                     return "Члены наблюдательного совета";
                 case "informationGoals":
                     return "Юридические лица компании";
+                case "account_own_citizenship":
+                    return "Гражданство";
+                case "account_own_email":
+                    return "Эл. почта";
+                case "account_own_job_title":
+                    return "Должность";
+                case "is_accownt_own_living":
+                    return "Адрес фактического проживания совпадает";
+                case "codeword":
+                    return "Кодовое слово";
+                case "founders":
+                    return "Учредители - юридические лица";
+                case "founder_inn":
+                    return "Учередитель ИНН";
+                case "founder_name":
+                    return "Учередитель наименование";
+                case "capital":
+                    return "Доля в уставном капитале";
+                case "structure_value":
+                    return "Доля в уставном капитале";
+                case "is_conditions":
+                    return "Согласен с условиями";
+                case "contact_phone_number":
+                    return "Номер телефона";
+                case "donainname":
+                    return "Доменное имя";
+                case "fax":
+                    return "Факс";
                 default: return name
             }
         },

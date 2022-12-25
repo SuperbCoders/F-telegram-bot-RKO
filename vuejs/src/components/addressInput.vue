@@ -7,7 +7,7 @@
             
             ></v-combobox> -->
     <div class="container_field">
-        <input type="text" :list="'address_list'+index" class="input" :placeholder="label" @input="emitData" :value="address_field">
+        <input type="text" :list="'address_list'+index" class="input" :placeholder="label" @input="emitData" :value="value">
         <datalist :id="'address_list'+index">
             <option :value="address" v-for="(address, key) in list_address" :key="key" />
         </datalist>
@@ -22,6 +22,10 @@ export default {
         index: {
             type: Number,
             default: 0,
+        },
+        value: {
+            type: String,
+            default: "",
         },
         label: {
             type: String,
@@ -40,12 +44,10 @@ export default {
         },
         selectAddress(address) {
             this.getAddressFromName(address);
-            this.address_field = address;
             this.$emit('input', address)
         },
         emitData(e) {
             const val = e.target.value;
-            this.address_field = val;
             this.getAddressFromName(val);
             this.$emit('input', val)
         },

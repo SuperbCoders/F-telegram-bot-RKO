@@ -136,6 +136,8 @@
 
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
+import { loadCurrentData } from '@/utils/loadStore'
+
 export default {
   components: {
     LineStep,
@@ -149,6 +151,11 @@ export default {
   },
   mounted() {
     scroll(0, 0);
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_13',
+      vue: this,
+    });
   },
   methods: {
     setTarif(tarif) {

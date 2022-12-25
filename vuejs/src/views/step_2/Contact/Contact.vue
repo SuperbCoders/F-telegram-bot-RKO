@@ -14,8 +14,7 @@
             <div class="form_block">
                 <p class="text-left form_block_title"><span class="star">*</span>Телефон</p>
                 <v-text-field label="Телефон" outlined v-model="currentData.contact_phone_number" :rules="requiredRules"
-                    :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form"
-                    >
+                    :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
                 </v-text-field>
             </div>
 
@@ -40,6 +39,7 @@
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
     directives: { mask },
@@ -50,6 +50,7 @@ export default {
             donainname: null,
             fax: null
         },
+
         valid: true,
 
         requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -62,6 +63,12 @@ export default {
         const phone_number = step_data.contact_number;
         this.currentData.contact_phone_number = phone_number;
         console.log(phone_number);
+
+        loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_2',
+      vue: this,
+    });
 
     },
 

@@ -33,6 +33,7 @@
 </template>
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
+import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
     data: () => ({
@@ -44,7 +45,13 @@ export default {
         ],
         requiredRules: [(v) => !!v || "Это поле обязательно"],
     }),
-
+mounted(){
+    loadCurrentData({
+      currentData: this.currentData,
+      step: 'step_4',
+      vue: this,
+    });
+},
     methods: {
         validate() {
             this.$refs.form.validate();
