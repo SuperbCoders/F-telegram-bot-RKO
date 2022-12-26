@@ -16,8 +16,6 @@ RUN npm install --check-files
 
 RUN npm install vue-the-mask
 
-RUN npm install vue-closable
-
 RUN npm install vuetify@2.6.12
 
 EXPOSE 8080
