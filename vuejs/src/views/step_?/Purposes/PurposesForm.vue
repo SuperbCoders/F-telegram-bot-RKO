@@ -431,7 +431,7 @@ export default {
         sum_per_month: null,
         outside_contracts_volume: null,
         state_employers: null,
-        cash_source: []
+        sources_cash_receipts: []
       }
 
     }
@@ -461,7 +461,7 @@ export default {
       return true
     },
     isValidatesourceOfOrigin() {
-      if (this.currentData.cash_source.length < 1) {
+      if (this.currentData.sources_cash_receipts.length < 1) {
         return false
       }
       return true

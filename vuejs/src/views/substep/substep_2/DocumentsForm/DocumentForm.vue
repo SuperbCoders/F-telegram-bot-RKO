@@ -29,6 +29,12 @@
         </v-combobox>
       </div>
       <div class="form_block">
+        <p class="text-left form_block_title"><span class="star">*</span>Страна проживания</p>
+        <v-combobox label="Страна проживания" outlined required class="mt-1 auth_form combobox" @keyup="inputCountry2"
+          v-model="currentData.account_country_residence" :items="itemsCountry2">
+        </v-combobox>
+      </div>
+      <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Телефон</p>
 
         <v-text-field id="oldName" placeholder="Телефон" v-mask="'+# (###) ### ## ##'" masked="true"
@@ -76,8 +82,12 @@ export default {
         account_own_phone: "",
         account_own_piece: "",
         account_own_email: "",
+        account_country_residence: "",
       },
       itemsCountry: [
+        "Россия",
+      ],
+      itemsCountry2: [
         "Россия",
       ],
       requiredRules: [(v) => !!v || "Это поле обязательно"],
@@ -106,7 +116,14 @@ export default {
       this.itemsCountry = countryes?.suggestions?.map((val) => {
         return val.value;
       });
-    }
+    },
+    async inputCountry2(event) {
+      const countryes = await getCountry(event.target.value);
+
+      this.itemsCountry2 = countryes?.suggestions?.map((val) => {
+        return val.value;
+      });
+    },
   },
   async mounted() {
     loadSubCurrentData({

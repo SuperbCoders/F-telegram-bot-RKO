@@ -23,9 +23,11 @@ from telegram import (
 )
 from telegram.constants import ParseMode
 
+
 def debug_print(*args):
     if os.getenv("DEBUG"):
         print(*args)
+
 
 def is_chat_id_confirmed(chat_id):
     debug_print("is_chat_id_confirmed", chat_id, "start")
@@ -44,6 +46,7 @@ def is_chat_id_confirmed(chat_id):
         debug_print("return is_chat_id_confirmed", "false")
         return False
 
+
 async def start(update, context):
     text = (
         "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
@@ -53,9 +56,26 @@ async def start(update, context):
         "/status узнать статус заявок\n" +
         "/chat связаться с поддержкой банка"
     )
+    button_start = KeyboardButton(
+        text="/start",
+    )
+    button_apply = KeyboardButton(
+        text="/apply",
+    )
+    button_status = KeyboardButton(
+        text="/status",
+    )
+    button_chat = KeyboardButton(
+        text="/chat",
+    )
+    reply_markup = ReplyKeyboardMarkup(
+        [[button_start, button_apply], [button_status, button_chat]],
+        one_time_keyboard=True,
+    )
     await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=text,
+        reply_markup=reply_markup,
     )
 
 
@@ -74,7 +94,8 @@ async def chat(update, context):
 
 async def apply(update, context):
     debug_print("apply", "start")
-    debug_print("apply","is_chat_id_confirmed(update.effective_chat.id)", is_chat_id_confirmed(update.effective_chat.id))
+    debug_print("apply", "is_chat_id_confirmed(update.effective_chat.id)",
+                is_chat_id_confirmed(update.effective_chat.id))
     if not is_chat_id_confirmed(update.effective_chat.id):
         keyboard = KeyboardButton(
             text="Подтвердить",
@@ -85,7 +106,7 @@ async def apply(update, context):
             one_time_keyboard=True,
         )
         text = (
-                "Пройдите авторизацию. Для этого необходимо разрешить использование вашего номера телефона."
+            "Пройдите авторизацию. Для этого необходимо разрешить использование вашего номера телефона."
         )
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
@@ -93,7 +114,7 @@ async def apply(update, context):
             reply_markup=reply_markup,
         )
     else:
-        
+
         res_phone = requests.get(
             os.getenv("DJANGO_APP_API_ROOT_URL") +
             f"api/get_phone/{update.effective_chat.id}/"
@@ -109,15 +130,15 @@ async def apply(update, context):
         )
         keyboard = InlineKeyboardMarkup.from_button(button)
         text = (
-                "Номер успешно подтверждён!\n" +
-                "Перейдите на форму создания заявки"
+            "Номер успешно подтверждён!\n" +
+            "Перейдите на форму создания заявки"
         )
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
             reply_markup=keyboard,
         )
-    
+
 
 def save_user_chat_id(chat_id, phone_number):
     debug_print("save_user_chat_id", "start")
@@ -149,7 +170,8 @@ async def handle_phone_number(update, context):
                 update.effective_chat.id,
                 update.message.contact.phone_number,
             )
-            WEB_APP_URL = os.getenv("DOMAIN_APP_URL") + "/?phone={}".format(update.message.contact.phone_number)
+            WEB_APP_URL = os.getenv(
+                "DOMAIN_APP_URL") + "/?phone={}".format(update.message.contact.phone_number)
 
             button = InlineKeyboardButton(
                 text="Создать заявку",
@@ -157,8 +179,8 @@ async def handle_phone_number(update, context):
             )
             keyboard = InlineKeyboardMarkup.from_button(button)
             text = (
-                    "Номер успешно подтверждён!\n" +
-                    "Перейдите на форму создания заявки"
+                "Номер успешно подтверждён!\n" +
+                "Перейдите на форму создания заявки"
             )
             await context.bot.send_message(
                 chat_id=update.effective_chat.id,
@@ -179,7 +201,7 @@ def get_user_applications(chat_id):
     )
     debug_print("api_url", api_url)
     user_applications = []
-    try:   
+    try:
         response = requests.get(api_url, timeout=10)
         if response.json():
             user_applications = response.json()
@@ -213,12 +235,16 @@ async def status(update, context):
                 mess += f"Cтатус заявки - Одобрена\n"
             elif status['status'] == 'update':
                 mess += f"Cтатус заявки - Доработка заявки\n"
-            mess += (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
-            mess += (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
-            mess += (f"Дата открытия {date.today().strftime('%Y-%m-%d')}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
-            mess += (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+            mess += (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' ==
+                     status["status"] or "Доработка заявки" else '\n')
+            mess += (f"Валюта счета: RUB\n " if 'На рассмотрении' ==
+                     status["status"] or "Доработка заявки" else '\n')
+            mess += (f"Дата открытия {date.today().strftime('%Y-%m-%d')}\n" if 'На рассмотрении' ==
+                     status["status"] or "Доработка заявки" else '\n')
+            mess += (f"Статус: Зарезервирован\n" if 'На рассмотрении' ==
+                     status["status"] or "Доработка заявки" else '\n')
             status_list.append(mess)
-            
+
         text = "\n\n".join(status_list)
     else:
         text = "Заявок не найдено."
@@ -227,19 +253,20 @@ async def status(update, context):
         text=text,
     )
 
+
 async def handle_custom_start(update, context):
     print(update.message.text)
     print("Отлавливаем кастом старт")
     print(update.effective_chat.id)
     if (update.message.text).lower() == 'старт' or (update.message.text).lower() == 'start':
         text = (
-        "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
-        "\n\n" +
-        "/start начать работу с ботом\n" +
-        "/apply подать заявку на РКО\n" +
-        "/status узнать статус заявок\n" +
-        "/chat связаться с поддержкой банка"
-    )
+            "Официальный бот Банка «Ренессанс Кредит» для открытия расчетного счета" +
+            "\n\n" +
+            "/start начать работу с ботом\n" +
+            "/apply подать заявку на РКО\n" +
+            "/status узнать статус заявок\n" +
+            "/chat связаться с поддержкой банка"
+        )
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=text,
@@ -256,15 +283,16 @@ async def handle_custom_start(update, context):
                     f"Номер заявки: {status['id']}\n" +
                     f"Дата заявки {status['createdAt']}\n" +
                     f"Тип - открытие счета\n" +
-                    f"Компания:\n"+
+                    f"Компания:\n" +
                     f"    - Имя: {status['companyName']}\n" +
                     f"    - ИНН: {status['inn']}\n" +
                     f"    - ОГРН: {random.randint(100000, 999999)}\n" +
                     f"Cтатус заявки - {status['status']}\n" +
-                    (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n') + 
-                    (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
-                    (f"Дата открытия {datetime.now()}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')+
-                    (f"Статус: Зарезервирован\n" if 'На рассмотрении' == status["status"] or "Доработка заявки"  else '\n')
+                    (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' == status["status"] or "Доработка заявки" else '\n') +
+                    (f"Валюта счета: RUB\n " if 'На рассмотрении' == status["status"] or "Доработка заявки" else '\n') +
+                    (f"Дата открытия {datetime.now()}\n" if 'На рассмотрении' == status["status"] or "Доработка заявки" else '\n') +
+                    (f"Статус: Зарезервирован\n" if 'На рассмотрении' ==
+                     status["status"] or "Доработка заявки" else '\n')
                 )
                 for i, status in enumerate(user_applications, start=1)
             ]
@@ -277,19 +305,19 @@ async def handle_custom_start(update, context):
         )
 
 
-
 def run_bot():
     api_token = os.getenv('TELEGRAM_BOT_API_TOKEN')
     application = ApplicationBuilder().token(api_token).build()
 
-    custom_start_handler = MessageHandler(filters.TEXT & (~filters.COMMAND),handle_custom_start)
+    custom_start_handler = MessageHandler(
+        filters.TEXT & (~filters.COMMAND), handle_custom_start)
 
     start_handler = CommandHandler('start', start)
     apply_handler = CommandHandler('apply', apply)
     status_handler = CommandHandler('status', status)
     chat_handler = CommandHandler('chat', chat)
     phone_number_handler = TypeHandler(Update, handle_phone_number)
-    
+
     application.add_handler(custom_start_handler)
 
     application.add_handler(start_handler)
