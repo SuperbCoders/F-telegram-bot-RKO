@@ -27,7 +27,7 @@
         hide-details></v-checkbox>
 
       <v-text-field id="other" v-if="currentData.planned_operations.indexOf('Иное (укажите)') >= 0"
-        v-model="currentData.other" placeholder="Иное" class="align-center border-none mt-5" outlined>
+        v-model="currentData.planned_other" placeholder="Иное" class="align-center border-none mt-5" outlined>
       </v-text-field>
 
     </div>
@@ -50,7 +50,7 @@ export default {
       valid: true,
       currentData: {
         planned_operations: [],
-        other: "",
+        planned_other: "",
       },
     };
   },

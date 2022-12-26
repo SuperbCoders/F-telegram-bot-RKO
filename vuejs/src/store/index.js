@@ -75,7 +75,7 @@ export default new Vuex.Store({
             },
             step_10: {
                 planned_operations: [],
-                other: "",
+                planned_other: "",
             },
             step_11: {
                 informationGoals: [],

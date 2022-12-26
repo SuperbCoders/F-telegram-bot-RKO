@@ -120,10 +120,12 @@ class LoanRequest(models.Model):
     sources_cash_receipts = models.JSONField(blank=True, null=True)
     headcount = models.CharField(max_length=255, null=True, blank=True)
 
-    document_certifying_identity_executive = models.CharField(max_length=255, null=True, blank=True)
-    document_confirming_real_activity = models.CharField(max_length=255, null=True, blank=True)
-    document_licenses = models.CharField(max_length=255, null=True, blank=True)
+    document_certifying_identity_executive = models.JSONField(null=True, blank=True)
+    document_confirming_real_activity = models.JSONField(null=True, blank=True)
+    document_licenses = models.JSONField(null=True, blank=True)
 
+
+    structure_value = models.CharField(max_length=255, null=True)
 
     status_description = models.CharField(max_length=255, null=True)
     order_id = models.CharField(max_length=255, null=True, blank=True)
@@ -139,13 +141,7 @@ class LoanRequest(models.Model):
     supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
     
-    is_collegiate_body = models.BooleanField(default=False)
-    collegiate_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    list_supervisoty_board_persone = models.JSONField(blank=True, null=True)
-
-    is_supervisoty = models.BooleanField(default=False)
-    supervisoty_board_persone_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    list_collegial_executive_body = models.JSONField(blank=True, null=True)
+    list_persone = models.JSONField(blank=True, null=True)
 
     licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
@@ -163,8 +159,12 @@ class LoanRequest(models.Model):
     group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
     
     beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    third_parties = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    
+    informationGoals = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
     planned_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    planned_other = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
     account_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     operation_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)

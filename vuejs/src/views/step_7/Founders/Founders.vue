@@ -65,6 +65,10 @@ export default {
             vue: this,
         });
 
+        if(this.$store.state.formData.step_1.opf.short === "ИП"){
+            this.next();
+        }
+
     },
 
     methods: {

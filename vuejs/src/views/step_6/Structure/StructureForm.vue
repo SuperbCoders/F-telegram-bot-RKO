@@ -1,7 +1,7 @@
 <template>
   <div class="structure_form">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <h2 class="text-left mb-5 font-bold form_block_label">
       Структура органов управления
     </h2>
@@ -62,8 +62,8 @@ export default {
       this.$router.push({ name: 'step_7' });
     },
     back() {
-            this.$router.push({ name: "step_5" });
-        },
+      this.$router.push({ name: "step_5" });
+    },
     addObjectList(object) {
       const result = {
         account_onw_role: [],
@@ -144,6 +144,12 @@ export default {
       step: 'step_6',
       vue: this,
     });
+
+    if (this.$store.state.formData.step_1.opf.short === "ИП") {
+      this.next();
+    }
+
+
   },
 };
 </script>
