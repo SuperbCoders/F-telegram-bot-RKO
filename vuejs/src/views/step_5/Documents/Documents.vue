@@ -44,7 +44,6 @@
 
         <div>
             <p class="subtitle text-left document_section_text mb-5">
-                <span class="star">*</span>
                 Лицензии
             </p>
 

@@ -22,15 +22,15 @@
         <div class="form_block">
             <p class="text-left form_block_title">Имеются постоянные или предполагаемые получатели по операциям с
                 денежными средствами на счете </p>
-            <v-radio-group v-model="currentData.information_counterparties2" class="checkboxs">
+            <v-radio-group v-model="currentData.information_counterparties_two" class="checkboxs">
                 <v-radio label="Имеются" value="Имеются" />
                 <v-radio label="Не имеются" value="Не имеются" />
             </v-radio-group>
         </div>
 
-        <div class="form_block" v-if="currentData.information_counterparties2 == 'Имеются'">
+        <div class="form_block" v-if="currentData.information_counterparties_two == 'Имеются'">
             <p class="text-left form_block_title">Наименование организации</p>
-            <v-text-field label="Наименование организации" outlined v-model="currentData.name_organization2"
+            <v-text-field label="Наименование организации" outlined v-model="currentData.name_organization_two"
                 class="mt-1 auth_form">
             </v-text-field>
         </div>
@@ -50,10 +50,10 @@ export default {
             ],
 
             information_counterparties: null,
-            information_counterparties2: null,
+            information_counterparties_two: null,
 
             name_organization: null,
-            name_organization2: null,
+            name_organization_two: null,
         },
         valid: true,
 
