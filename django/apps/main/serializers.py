@@ -23,11 +23,67 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             'email',
             'donainname',
             'fax',
+            'founders',
+            'information_counterparties',
+            'name_organization',
+            'information_counterparties_two',
+            'name_organization_two',
+            'codeword',
+            'sms_sending',
+            'is_conditions',
+            'additional_products',
+            'opf',
+
+
+            'subject_licensing',
+            'history_reputation',
+            'num_transactions_month',
+            'num_transactions_week',
+            'num_transactions_quarter',
+            'num_transactions_age',
+            'sum_transactions_month',
+            'sum_transactions_week',
+            'sum_transactions_quarter',
+            'sum_transactions_age',
+
+
+            'monthly_cash_withdrawal',
+            'week_cash_withdrawal',
+
+
+            'quarter_cash_withdrawal',
+            'age_cash_withdrawal',
+
+
+            'sum_mouth_cash_withdrawal',
+            'sum_week_cash_withdrawal',
+            'sum_quarter_cash_withdrawal',
+            'sum_age_cash_withdrawal',
+
+            'foreign_trade_contracts_month',
+            'foreign_trade_contracts_week',
+            'foreign_trade_contracts_quarter',
+            'foreign_trade_contracts_age',
+            'foreign_sum_contracts_month',
+            'foreign_sum_contracts_week',
+            'foreign_sum_contracts_quarter',
+            'foreign_sum_contracts_age',
+            'sources_cash_receipts',
+            'headcount',
+
+
+            'document_certifying_identity_executive',
+            'document_confirming_real_activity',
+            'document_licenses',
+
+
+            'structure_value',
 
 
             'id',
             'status',
             'status_description',
+            'order_id',
             'ogrn',
             'inn',
             'company_name',
@@ -39,13 +95,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
             'supreme_management_person',
             'supreme_management_inn',
 
-            'is_collegiate_body',
-            'collegiate_person',
-            'list_supervisoty_board_persone',
-
-            'is_supervisoty',
-            'supervisoty_board_persone_name',
-            'list_collegial_executive_body',
+            'list_persone',
 
             'licence_type',
             'licence_number',
