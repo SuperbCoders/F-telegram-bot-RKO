@@ -34,7 +34,7 @@ COPY ./django /usr/src/app/
 # Django image
 FROM python_base AS django
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+# ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
 # Celery image
 FROM python_base as celery

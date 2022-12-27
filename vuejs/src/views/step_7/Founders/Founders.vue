@@ -7,15 +7,16 @@
 
             <div class="form_block">
                 <p class="text-left form_block_title">Учередитель</p>
-                <InnAndNameInput @input="({ inn, name }) => {
-                    itemForm.founder_inn = inn;
-                    itemForm.founder_name = name;
-                }" :value="itemForm.founder_name" />
+                <InnAndNameInput @input="({ inn, name, ogrn }) => {
+                    itemForm.inn = inn;
+                    itemForm.name = name;
+                    itemForm.ogrn = ogrn;
+                }" :value="itemForm.name" />
             </div>
 
             <div class="form_block mt-6">
                 <p class="text-left form_block_title">Доля в уставном капитале</p>
-                <v-text-field outlined v-model="itemForm.capital" placeholder="Доля в уставном капитале"
+                <v-text-field outlined v-model="itemForm.share" placeholder="Доля в уставном капитале"
                     class="mt-1 auth_form" v-mask="'###'">
                 </v-text-field>
             </div>
@@ -47,9 +48,10 @@ export default {
     data: () => ({
         currentData: {
             founders: [{
-                founder_inn: "",
-                capital: "",
-                founder_name: "",
+                inn: "",
+                share: "",
+                name: "",
+                ogrn: "",
             }],
         },
         valid: true,
@@ -92,9 +94,10 @@ export default {
 
         addGroupList() {
             const defaultGroupItem = {
-                founder_inn: "",
-                capital: "",
-                founder_name: ""
+                inn: "",
+                share: "",
+                name: "",
+                ogrn: "",
             };
             this.currentData.founders.push(defaultGroupItem);
         },

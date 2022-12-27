@@ -60,9 +60,10 @@ export default new Vuex.Store({
             },
             step_7: {
                 founders: [{
-                    founder_inn: "",
-                    capital: "",
-                    founder_name: "",
+                    inn: "",
+                    share: "",
+                    name: "",
+                    ogrn: "",
                 }],
             },
             step_8: {

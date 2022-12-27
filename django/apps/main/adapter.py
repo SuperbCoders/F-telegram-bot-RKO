@@ -81,16 +81,6 @@ class Adapter_LoanRequest:
                             "enabled": True,
                             "share": 0 # Доля
                         },
-                        "signer": { # Подписант
-                            "enabled": True,
-                            "position": "" # Должность
-                            # Действует по доверенности
-                            # Информация о доверенности подписанта
-                            #   Наименование документа
-                            #   Номер документа
-                            #   Дата доверенности
-                            #   Дата окончания действия
-                        }
                     },
                     "pdl": { # Отношение к публичным должностным лицам
                         "ipdl": True, # Является ИПДЛ
@@ -170,6 +160,12 @@ class Adapter_LoanRequest:
             "confirmationAccessionToTermsOfPEPFL": True, # Подтверждение присоединения к Соглашению ПЭП ФЛ
             "confirmationAccessionToTermsOfGuarantor": True # Подтверждение присоединения к Условиям поручительства
         },
+        "infoOnPurposesOfFinancialAndEconomicActivities": {
+            "hasConstantPayers": True,
+            "hasConstantPayersDetails": "hasConstantPayersDetails",
+            "hasConstantRecipient": True,
+            "hasConstantRecipientDetails": "hasConstantRecipientDetails"
+    },
         "selectedTariff": "", # Выбранный ТАРИФ НА РАСЧЕТНО-КАССОВОЕ ОБСЛУЖИВАНИЕ 
         "codeword": "", # Кодовое слово
         "documents": [
@@ -254,23 +250,20 @@ class Adapter_LoanRequest:
             },
         }
 
-    def getRoles(self, roles, companyHeadPosition, founderShare, beneficiaryShare, signerPosition):
+    def getRoles(self, roles, companyHeadPosition="", founderShare=0, beneficiaryShare=0):
         companyHeadEnabled = False
         founderEnabled = False
         beneficiaryEnabled = False
-        signerEnabled = False
-        
-        if 'Учредитель' in roles:
-            founderEnabled = True
-        
-        if 'Бенефициарный владелец' in roles:
-            beneficiaryEnabled = True
-        
-        if 'Подписант' in roles:
-            signerEnabled = True
-        
-        if 'Руководитель' in roles:
+
+        if 'ЕИО' in roles:
             companyHeadEnabled = True
+
+        if 'Акционер/учредитель' in roles:
+            founderEnabled = True
+
+        if 'Бенифициар' in roles:
+            beneficiaryEnabled = True
+
 
         return {
             "roles": { # Роли физического лица в организации
@@ -286,16 +279,6 @@ class Adapter_LoanRequest:
                     "enabled": beneficiaryEnabled,
                     "share": beneficiaryShare # Доля
                 },
-                "signer": { # Подписант
-                    "enabled": signerEnabled,
-                    "position": signerPosition # Должность
-                    # Действует по доверенности
-                    # Информация о доверенности подписанта
-                    #   Наименование документа
-                    #   Номер документа
-                    #   Дата доверенности
-                    #   Дата окончания действия
-                }
             },
         }
 
@@ -346,13 +329,7 @@ class Adapter_LoanRequest:
 
     def parserCompanyPersons(self):
         companyPersons = []
-        for persons in self.loan_request.list_supervisoty_board_persone:
-            companyPersonsData = {}
-            for key in persons:
-                page = persons[key]
-                companyPersonsData = {**companyPersonsData,  **page}
-            companyPersons.append(companyPersonsData)
-        for persons in self.loan_request.list_collegial_executive_body:
+        for persons in self.loan_request.list_persone:
             companyPersonsData = {}
             for key in persons:
                 page = persons[key]
@@ -380,7 +357,107 @@ class Adapter_LoanRequest:
                     }
                 ]
             }
-        
+    def getCompanyBusinessInfo(self, 
+        hasBeneficiariesInfo, 
+        beneficiariesInfo, 
+        companyCarriesOutActivitiesSubjectToLicensing,
+        historyReputationMarketSectorCompetition,
+        totalNumberOfTransactionsPerMonth,
+        totalNumberOfTransactionsPerWeek,
+        totalNumberOfTransactionsPerQuarter,
+        totalNumberOfTransactionsPerYear,
+        totalSumTransactionsPerMonth,
+        totalSumTransactionsPerWeek,
+        totalSumTransactionsPerQuarter,
+        totalSumTransactionsPerYear,
+        numberOfCashWithdrawalsPerMonth,
+        numberOfCashWithdrawalsPerWeek,
+        numberOfCashWithdrawalsPerQuarter,
+        numberOfCashWithdrawalsPerYear,
+        amountOfCashWithdrawalsPerMonth,
+        amountOfCashWithdrawalsPerWeek,
+        amountOfCashWithdrawalsPerQuarter,
+        amountOfCashWithdrawalsPerYear,
+        numberTransactionsOnForeignTradeContractsPerMonth,
+        numberTransactionsOnForeignTradeContractsPerWeek,
+        numberTransactionsOnForeignTradeContractsPerQuarter,
+        numberTransactionsOnForeignTradeContractsPerYear,
+        amountOfTransactionsUnderForeignTradeContractsPerMonth,
+        amountOfTransactionsUnderForeignTradeContractsPerWeek,
+        amountOfTransactionsUnderForeignTradeContractsPerQuarter,
+        amountOfTransactionsUnderForeignTradeContractsPerYear,
+        moneySources,
+        numberOfEmployees,
+        selectAllTrueStatements,
+    ):
+        return {
+            "hasBeneficiariesInfo": hasBeneficiariesInfo, # Сведения о выгодоприобретателях
+            "beneficiariesInfo": beneficiariesInfo, # Укажите третьи лица, к выгоде которых действует компания
+            "companyCarriesOutActivitiesSubjectToLicensing": companyCarriesOutActivitiesSubjectToLicensing, # Компания осуществляет деятельность, подлежащую лицензированию (выбор из справочника)
+            "historyReputationMarketSectorCompetition": historyReputationMarketSectorCompetition, # История, репутация, сектор рынка и конкуренция (выбор из справочника)
+            "totalNumberOfTransactionsPerMonth": totalNumberOfTransactionsPerMonth, # Общее количество операций в месяц (выбор из справочника)
+            "totalNumberOfTransactionsPerWeek": totalNumberOfTransactionsPerWeek, # Общее количество операций в неделю
+            "totalNumberOfTransactionsPerQuarter": totalNumberOfTransactionsPerQuarter, # Общее количество операций в квартал
+            "totalNumberOfTransactionsPerYear": totalNumberOfTransactionsPerYear, # Общее количество операций в год
+            "totalSumTransactionsPerMonth": totalSumTransactionsPerMonth, # Общая сумма операций в месяц (выбор из справочника)
+            "totalSumTransactionsPerWeek": totalSumTransactionsPerWeek, # Общая сумма операций в неделю
+            "totalSumTransactionsPerQuarter": totalSumTransactionsPerQuarter, # Общая сумма операций в квартал
+            "totalSumTransactionsPerYear": totalSumTransactionsPerYear, # Общая сумма операций в год
+            "numberOfCashWithdrawalsPerMonth": numberOfCashWithdrawalsPerMonth, # Количество операций по снятию наличности в месяц (выбор из справочника)
+            "numberOfCashWithdrawalsPerWeek": numberOfCashWithdrawalsPerWeek, # Количество операций по снятию наличности в неделю
+            "numberOfCashWithdrawalsPerQuarter": numberOfCashWithdrawalsPerQuarter, # Количество операций по снятию наличности в квартал
+            "numberOfCashWithdrawalsPerYear": numberOfCashWithdrawalsPerYear, # Количество операций по снятию наличности в год
+            "amountOfCashWithdrawalsPerMonth": amountOfCashWithdrawalsPerMonth, # Сумма операций по снятию наличности в месяц (руб.) (выбор из справочника)
+            "amountOfCashWithdrawalsPerWeek": amountOfCashWithdrawalsPerWeek, # Сумма операций по снятию денежных средств в наличной форме в неделю
+            "amountOfCashWithdrawalsPerQuarter": amountOfCashWithdrawalsPerQuarter, # Сумма операций по снятию денежных средств в наличной форме в квартал
+            "amountOfCashWithdrawalsPerYear": amountOfCashWithdrawalsPerYear, # Сумма операций по снятию денежных средств в наличной форме в год
+            "numberTransactionsOnForeignTradeContractsPerMonth": numberTransactionsOnForeignTradeContractsPerMonth, # Количество операций по внешнеторговым контрактам в месяц (выбор из справочника)
+            "numberTransactionsOnForeignTradeContractsPerWeek": numberTransactionsOnForeignTradeContractsPerWeek, # Количество операций по внешнеторговым контрактам в неделю
+            "numberTransactionsOnForeignTradeContractsPerQuarter": numberTransactionsOnForeignTradeContractsPerQuarter, # Количество операций по внешнеторговым контрактам в квартал
+            "numberTransactionsOnForeignTradeContractsPerYear": numberTransactionsOnForeignTradeContractsPerYear, # Количество операций по внешнеторговым контрактам в год
+            "amountOfTransactionsUnderForeignTradeContractsPerMonth": amountOfTransactionsUnderForeignTradeContractsPerMonth, # Сумма операций по внешнеторговым контрактам в месяц (руб.) (выбор из справочника)
+            "amountOfTransactionsUnderForeignTradeContractsPerWeek": amountOfTransactionsUnderForeignTradeContractsPerWeek, # Сумма операций по внешнеторговым контрактам в неделю
+            "amountOfTransactionsUnderForeignTradeContractsPerQuarter": amountOfTransactionsUnderForeignTradeContractsPerQuarter, # Сумма операций по внешнеторговым контрактам в квартал
+            "amountOfTransactionsUnderForeignTradeContractsPerYear": amountOfTransactionsUnderForeignTradeContractsPerYear, # Сумма операций по внешнеторговым контрактам в год
+            "moneySources": moneySources, # Источники происхождения денежных средств (выбор из справочника)
+            "numberOfEmployees": numberOfEmployees, # Штатная численность сотрудников (выбор из справочника)
+            "selectAllTrueStatements": selectAllTrueStatements # Отметьте все верные утверждения (множественный выбор из справочника)
+            
+        }
+
+    def setCompanyBusinessInfo(self, obj):
+        self.json_api['companyBusinessInfo'] = obj
+
+
+    def setAdditionalProducts(
+        self, 
+        sms, 
+        overdraft, 
+        internetAcquiring, 
+        merchantAcquiring, 
+        fastPaymentSystem, 
+        loyaltyProgram, 
+        loyaltyProgramInfo, 
+        community, 
+        accounting,
+        legalSupport,
+        promotion,
+    ):
+        self.json_api['additionalProducts'] = {
+            "sms": sms, # СМС-оповещение
+            "overdraft": overdraft, # Овердрафт
+            "internetAcquiring": internetAcquiring, # Интернет-эквайринг
+            "merchantAcquiring": merchantAcquiring, # Торговый эквайринг
+            "fastPaymentSystem": fastPaymentSystem, # Расчеты по Системе быстрых платежей
+            "loyaltyProgram": loyaltyProgram, # Подключить к Программе лояльности
+            "loyaltyProgramInfo": loyaltyProgramInfo, # Программа лояльности (выбор из справочника)
+            "community": community, # Комьюнити
+            "accounting": accounting, # Бухгалтерия
+            "legalSupport": legalSupport, # Юридическая поддержка
+            "promotion": promotion # Продвижение
+        }
+    def setCodeword(self, codeword=""):
+        self.json_api['codeword'] = codeword
 
     def getResult(self):
         lr = self.loan_request
@@ -398,16 +475,24 @@ class Adapter_LoanRequest:
             postalAddress=postalAddress,
         )
         companyContacts = self.getCompanyContacts(
-            email="",
+            email=lr.email,
             phone=lr.contact_number,
-            webSite="",
-            fax="",
+            webSite=lr.donainname,
+            fax=lr.fax,
         )
-        companyFoundersUl = self.getCompanyFoundersUl([])
+        arrayCompanyFoundersUl = []
+        for item in lr.founders:
+            arrayCompanyFoundersUl.append(CompanyFoundersUl(
+                inn=item['inn'],
+                share=item['share'],
+                orgn=item['ogrn'],
+            ))
+            
+        companyFoundersUl = self.getCompanyFoundersUl(arrayCompanyFoundersUl)
         
         lr_list_companyPersons = self.parserCompanyPersons()
         companyPersonsList = []
-        documentList = []
+        
         for lr_persons in lr_list_companyPersons:
             print(lr_persons)
             companyPersonsBase = self.getCompanyPersonsBase(
@@ -418,15 +503,15 @@ class Adapter_LoanRequest:
                 gender=lr_persons['account_own_gender'],
                 birthDate=lr_persons['account_datebirth'],
                 birthPlace=lr_persons['account_birth_place'],
-                citizenship="",
-                countryOfResidence="",
-                registrationAddress="",
-                actualAddress="",
+                citizenship=lr_persons['account_own_citizenship'],
+                countryOfResidence=lr_persons['account_country_residence'],
+                registrationAddress=lr_persons['assigned_publ_pers_registraion'],
+                actualAddress=lr_persons['accownt_own_living'],
             )
 
             companyContact = self.getContacts(
-                phone="",
-                email="",
+                phone=lr_persons['account_own_phone'],
+                email=lr_persons['account_own_email'],
             )
 
             identityDocument = self.getIdentityDocument(
@@ -440,16 +525,15 @@ class Adapter_LoanRequest:
 
             roles = self.getRoles(
                 roles=lr_persons['account_onw_role'],
-                companyHeadPosition="",
-                founderShare=0,
-                beneficiaryShare=0,
-                signerPosition="",
+                companyHeadPosition=lr_persons['account_own_job_title'],
+                founderShare=lr_persons['account_own_piece'] if lr_persons['account_own_piece'] else 0,
+                beneficiaryShare=lr_persons['account_own_piece'] if lr_persons['account_own_piece'] else 0,
             )
 
             pdl = self.getPdl(
-                ipdl="",
-                mpdl="",
-                rpdl="",
+                ipdl=True,
+                mpdl=True,
+                rpdl=True,
             )
 
             companyPersons = self.getCompanyPersons(
@@ -460,8 +544,7 @@ class Adapter_LoanRequest:
                 pdl=pdl,
             )
             
-            document = self.getDocument(url=lr_persons['first_passport_page_url'])
-            documentList.append(document)
+            
 
             companyPersonsList.append(companyPersons)
         
@@ -477,9 +560,78 @@ class Adapter_LoanRequest:
                 **companyManagement,
             }
         )
+        self.setCompanyBusinessInfo(
+            self.getCompanyBusinessInfo(
+                hasBeneficiariesInfo=lr.beneficiaries == 'Имеются',
+                beneficiariesInfo=lr.third_parties,
+                companyCarriesOutActivitiesSubjectToLicensing=lr.subject_licensing,
+                historyReputationMarketSectorCompetition=lr.history_reputation,
+                totalNumberOfTransactionsPerMonth=lr.num_transactions_month,
+                totalNumberOfTransactionsPerWeek=lr.num_transactions_week,
+                totalNumberOfTransactionsPerQuarter=lr.num_transactions_quarter,
+                totalNumberOfTransactionsPerYear=lr.num_transactions_age,
+                totalSumTransactionsPerMonth=lr.sum_transactions_month,
+                totalSumTransactionsPerWeek=lr.sum_transactions_week,
+                totalSumTransactionsPerQuarter=lr.sum_transactions_quarter,
+                totalSumTransactionsPerYear=lr.sum_transactions_age,
+
+                numberOfCashWithdrawalsPerMonth=lr.monthly_cash_withdrawal,
+                numberOfCashWithdrawalsPerWeek=lr.week_cash_withdrawal,
+                numberOfCashWithdrawalsPerQuarter=lr.quarter_cash_withdrawal,
+                numberOfCashWithdrawalsPerYear=lr.age_cash_withdrawal,
+
+                amountOfCashWithdrawalsPerMonth=lr.sum_mouth_cash_withdrawal,
+                amountOfCashWithdrawalsPerWeek=lr.sum_week_cash_withdrawal,
+                amountOfCashWithdrawalsPerQuarter=lr.sum_quarter_cash_withdrawal,
+                amountOfCashWithdrawalsPerYear=lr.sum_age_cash_withdrawal,
+
+                numberTransactionsOnForeignTradeContractsPerMonth=lr.foreign_trade_contracts_month,
+                numberTransactionsOnForeignTradeContractsPerWeek=lr.foreign_trade_contracts_week,
+                numberTransactionsOnForeignTradeContractsPerQuarter=lr.foreign_trade_contracts_quarter,
+                numberTransactionsOnForeignTradeContractsPerYear=lr.foreign_trade_contracts_age,
+
+                amountOfTransactionsUnderForeignTradeContractsPerMonth=lr.foreign_sum_contracts_month,
+                amountOfTransactionsUnderForeignTradeContractsPerWeek=lr.foreign_sum_contracts_week,
+                amountOfTransactionsUnderForeignTradeContractsPerQuarter=lr.foreign_sum_contracts_quarter,
+                amountOfTransactionsUnderForeignTradeContractsPerYear=lr.foreign_sum_contracts_age,
+
+                moneySources=lr.sources_cash_receipts,
+                numberOfEmployees=lr.headcount,
+                selectAllTrueStatements="",
+            )
+        )
+        
+        self.setAdditionalProducts(
+            sms='СМС-оповещение' in lr.additional_products,
+            overdraft=False,
+            internetAcquiring=False,
+            merchantAcquiring=False,
+            fastPaymentSystem=False,
+            loyaltyProgram=False,
+            loyaltyProgramInfo=False,
+            community='Комьюнити' in lr.additional_products,
+            accounting='Бухгалтерия' in lr.additional_products,
+            legalSupport='Юридическая поддержка' in lr.additional_products,
+            promotion='Продвижение' in lr.additional_products,
+        )
+        self.setCodeword(lr.codeword)
         self.setTariff(
             lr.tariff
         )
+        documentList = []
+        
+        for image in lr.document_certifying_identity_executive:
+            im = self.getDocument(url=image['path'])
+            documentList.append(im)
+
+        for image in lr.document_confirming_real_activity:
+            im = self.getDocument(url=image['path'])
+            documentList.append(im)
+
+        for image in lr.document_licenses:
+            im = self.getDocument(url=image['path'])
+            documentList.append(im)
+
 
         self.setDocument(documentList)
 

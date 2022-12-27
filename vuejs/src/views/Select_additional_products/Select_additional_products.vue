@@ -4,25 +4,25 @@
             <h2 class="text-left">
                 Выберите дополнительные продукты к подключению
             </h2>
-            <v-checkbox v-model="currentData.additional_products.sms" class="checkboxs" label="СМС-оповещение" value="СМС-оповещение"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="СМС-оповещение" value="СМС-оповещение"
                 hide-details>
             </v-checkbox>
-            <v-checkbox v-model="currentData.additional_products.internet_acquiring" class="checkboxs" label="Интернет-эквайринг" value="Интернет-эквайринг"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Интернет-эквайринг" value="Интернет-эквайринг"
                 hide-details>
             </v-checkbox>
-            <v-checkbox v-model="currentData.additional_products.merchant_acquiring" class="checkboxs" label="Торговый-эквайринг" value="Торговый-эквайринг"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Торговый-эквайринг" value="Торговый-эквайринг"
                 hide-details>
             </v-checkbox>
-            <v-checkbox v-model="currentData.additional_products.community" class="checkboxs" label="Комьюнити" value="Комьюнити"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Комьюнити" value="Комьюнити"
                 hide-details>
             </v-checkbox>
-            <v-checkbox v-model="currentData.additional_products.Accounting" class="checkboxs" label="Бухгалтерия" value="Бухгалтерия"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Бухгалтерия" value="Бухгалтерия"
                 hide-details>
             </v-checkbox>
-            <v-checkbox v-model="currentData.additional_products.legal_support" class="checkboxs" label="Юридическая поддержка" value="Юридическая поддержка"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Юридическая поддержка" value="Юридическая поддержка"
                 hide-details>
             </v-checkbox>
-            <v-checkbox v-model="currentData.additional_products.promotion" class="checkboxs" label="Продвижение" value="Продвижение"
+            <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Продвижение" value="Продвижение"
                 hide-details>
             </v-checkbox>
         </div>
