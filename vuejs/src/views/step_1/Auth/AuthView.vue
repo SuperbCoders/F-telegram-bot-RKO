@@ -95,43 +95,37 @@ export default {
         const type = arr_last_step[1];
         const sub_last_step = arr_last_step[0];
         console.log(sub_last_step, type);
-        let next_push = "/";
+        let next_push = "step_1";
         switch (sub_last_step) {
-          case 'page-0':
+          case 'substep_0':
             next_push = 'substep_1';
             break;
-          case 'page-1':
+          case 'substep_1':
             next_push = 'substep_2';
             break;
-          case 'page-2':
+          case 'substep_2':
             next_push = 'substep_3';
             break
-          case 'page-3':
+          case 'substep_3':
             next_push = 'substep_4';
             break
-          case 'page-4':
+          case 'substep_4':
             next_push = 'substep_5';
             break
-          case 'page-5':
+          case 'substep_5':
             next_push = 'substep_6';
             break
-          case 'page-6':
+          case 'substep_6':
             next_push = 'substep_7';
             break
-          case 'page-7':
+          case 'substep_7':
             next_push = 'substep_8';
-            break
-          case 'page-8':
-            next_push = 'substep_9';
-            break
-          case 'page-9':
-            next_push = 'substep_10';
             break
         }
         if (type === 'supervisory') {
-          this.$router.push({ 'name': next_push, query: { "type": "SupervisoryBoard" } });
+          this.$router.push({ 'name': next_push });
         } else if (type === 'collegial') {
-          this.$router.push({ 'name': next_push, query: { "type": "CollegialExecutive" } });
+          this.$router.push({ 'name': next_push });
         }
       } else {
         let next_push = "/";
