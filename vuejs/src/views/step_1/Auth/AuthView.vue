@@ -137,37 +137,46 @@ export default {
         let next_push = "/";
         switch (last_step) {
           case 'step_1':
-            next_push = '/address';
+            next_push = 'step_2';
             break;
           case 'step_2':
-            next_push = '/sctructure';
+            next_push = 'step_3';
             break
           case 'step_3':
-            next_push = '/information-staff';
+            next_push = 'step_4';
             break
           case 'step_4':
-            next_push = '/intelligence';
+            next_push = 'step_5';
+            break
+          case 'step_5':
+            next_push = 'step_6';
             break
           case 'step_6':
-            next_push = '/planning';
+            next_push = 'step_7';
             break
           case 'step_7':
-            next_push = '/beneficiaries';
+            next_push = 'step_8';
             break
           case 'step_8':
-            next_push = '/purposes';
+            next_push = 'step_9';
             break
           case 'step_9':
-            next_push = '/approvals';
+            next_push = 'step_10';
             break
           case 'step_10':
-            next_push = '/rate';
+            next_push = 'step_11';
             break
           case 'step_11':
-            next_push = '/all-data';
+            next_push = 'step_12';
+            break
+          case 'step_12':
+            next_push = 'step_13';
+            break
+          case 'step_13':
+            next_push = 'step_14';
             break
         }
-        this.$router.push(next_push);
+        this.$router.push({ name: next_push });
       }
     }
 
