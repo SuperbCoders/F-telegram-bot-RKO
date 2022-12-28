@@ -97,15 +97,17 @@ class LoanRequestCurrentAPIView(APIView):
         return Response({}, status=status.HTTP_200_OK)
 
 
-class LoanApplicationListAPIView(APIView):
+class LoanApplicationListAPIView(ListAPIView):
     permission_classes = [permissions.AllowAny]
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]
     renderer_classes = [CamelCaseJSONRenderer]
+    model = LoanRequest
+    serializer_class = LoanRequestSerializer
 
-    def get(self, request, format=None, *args, **kwargs):
-        telegram_chat_id = request.GET.get('telegram_chat_id')
-        phone_number = request.GET.get('phone_number')
+    def get_queryset(self):
+        telegram_chat_id = self.request.GET.get('telegram_chat_id')
+        phone_number = self.request.GET.get('phone_number')
         if telegram_chat_id:
             user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
             phone_number = user.phone_number
