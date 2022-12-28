@@ -1,5 +1,8 @@
 <template>
   <div class="purposes_block">
+    <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
+    </v-btn>
+    
     <h2>Сведения о бизнесе</h2>
     <div>
       <h4 class="form_block_label text-left">
@@ -260,7 +263,7 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
-    
+
     <div>
       <h4 class="form_block_label text-left">
         Количество операций по внешнеторговым контрактам в месяц
@@ -404,7 +407,8 @@
       </h4>
       <div @click="valid = true" class="form_block">
         <v-radio-group v-model="currentData.headcount" column>
-          <v-radio label="Единственным работником является единоличный исполнительный орган" value="Единственным работником является единоличный исполнительный орган"></v-radio>
+          <v-radio label="Единственным работником является единоличный исполнительный орган"
+            value="Единственным работником является единоличный исполнительный орган"></v-radio>
           <v-radio label="2-5" value="2-5"></v-radio>
           <v-radio label="6-20" value="6-20"></v-radio>
           <v-radio label="Более 20" value="Более 20"></v-radio>
@@ -460,19 +464,17 @@ export default {
   },
   methods: {
     validate() {
-      if (this.isValidation) {
-        this.$store.dispatch('addObjectFormData', {
-          object: 'step_6',
-          value: this.currentData
-        })
-        this.next();
-      }
-      else {
-        this.valid = false
-      }
+      this.$store.dispatch('addObjectFormData', {
+        object: 'step_13',
+        value: this.currentData
+      })
+      this.next();
     },
     next() {
-      this.$router.push({ name: 'step_9' })
+      this.$router.push({ name: 'step_14' })
+    },
+    back() {
+      this.$router.push({ name: 'step_12' })
     },
   },
   computed: {

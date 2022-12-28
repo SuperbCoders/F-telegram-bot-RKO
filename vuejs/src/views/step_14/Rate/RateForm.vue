@@ -182,7 +182,7 @@ export default {
     scroll(0, 0);
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_13',
+      step: 'step_14',
       vue: this,
     });
   },
@@ -195,16 +195,16 @@ export default {
     },
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_13',
+        object: 'step_14',
         value: this.currentData
       })
       this.next();
     },
     next() {
-      this.$router.push({ name: "step_14" });
+      this.$router.push({ name: "step_15" });
     },
     back() {
-      this.$router.push({ name: "step_12" });
+      this.$router.push({ name: "step_13" });
     },
   },
 };
