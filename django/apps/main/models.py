@@ -123,8 +123,7 @@ class LoanRequest(models.Model):
     document_certifying_identity_executive = models.JSONField(null=True, blank=True)
     document_confirming_real_activity = models.JSONField(null=True, blank=True)
     document_licenses = models.JSONField(null=True, blank=True)
-    document_certifying_identity_ceo_file = models.JSONField(null=True, blank=True)
-    certifying_identity_ceo = models.JSONField(null=True, blank=True)
+    document_certifying_identity_ceo = models.JSONField(null=True, blank=True)
 
 
     structure_value = models.CharField(max_length=255, null=True)

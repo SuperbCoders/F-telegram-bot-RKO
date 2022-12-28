@@ -127,7 +127,7 @@
       </div>
     </v-card>
 
-    <div class="form_block">
+    <div class="form_block mb-5">
       <h2 class="text-left">
         Выберите дополнительные продукты к подключению
       </h2>

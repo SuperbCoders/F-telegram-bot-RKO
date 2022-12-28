@@ -57,8 +57,9 @@ export default {
     },
     back() {
       console.log(this.$store.state.formData.step_1.opf);
-      if (this.$store.state.formData.step_1.opf.short === "ИП") {
-        this.$router.push({ name: "step_6" });
+      console.log(this.$store.state.formData.step_1.opf.short == "ИП");
+      if (this.$store.state.formData.step_1.opf.short == "ИП") {
+        this.$router.push({ name: "step_5" })
       } else {
         this.$router.push({ name: "step_7" });
       }

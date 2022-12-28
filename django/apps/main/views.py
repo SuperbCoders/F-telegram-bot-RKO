@@ -97,7 +97,7 @@ class LoanRequestCurrentAPIView(APIView):
         return Response({}, status=status.HTTP_200_OK)
 
 
-class LoanApplicationListAPIView(ListAPIView):
+class LoanApplicationListAPIView(APIView):
     permission_classes = [permissions.AllowAny]
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]

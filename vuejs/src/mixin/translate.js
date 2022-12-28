@@ -153,8 +153,8 @@ export const translateMixin = {
                     return "Члены коллегиального исполнительного органа";
                 case "list_supervisoty_board_persone":
                     return "Члены наблюдательного совета";
-                case "informationGoals":
-                    return "Юридические лица компании";
+                case "information_goals":
+                    return "Сведения о бизнесе";
                 case "account_own_citizenship":
                     return "Гражданство";
                 case "account_own_email":
