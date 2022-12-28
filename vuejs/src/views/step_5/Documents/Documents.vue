@@ -78,7 +78,7 @@
         </div>
 
 
-        <AttachButton class="mb-5" text="Загрузить документ" @file="onfile_licenses" />
+        <AttachButton class="mb-5" text="Загрузить документ" @file="onfile_certifying_identity_ceo" />
 
         <line-step :step="5" class="mt-6" />
 
@@ -133,7 +133,7 @@ export default {
             this.currentData.document_licenses = images;
         },
         async onfile_certifying_identity_ceo(files) {
-            this.currentData.document_certifying_identity_ceo = files;
+            this.currentData.document_certifying_identity_ceo_file = files;
             const { images } = await this.getURLfile(files);
             this.currentData.document_certifying_identity_ceo = images;
         },
@@ -207,7 +207,7 @@ export default {
     background: #f3f4f4;
     padding: 10px 14px;
     border-radius: 6px;
-    max-width: 200px;
+    max-width: 150px;
 }
 
 .size_file {
@@ -221,6 +221,9 @@ export default {
     color: #d41367;
     text-align: center;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .name_file {

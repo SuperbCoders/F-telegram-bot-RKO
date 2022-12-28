@@ -674,7 +674,7 @@ class Adapter_LoanRequest:
             im = self.getDocument(url=image['path'],docType="license")
             documentList.append(im)
             
-        for image in lr.document_certifying_identity_ceo_file:
+        for image in lr.document_certifying_identity_ceo:
             im = self.getDocument(url=image['path'],docType="dulHead")
             documentList.append(im)
 
