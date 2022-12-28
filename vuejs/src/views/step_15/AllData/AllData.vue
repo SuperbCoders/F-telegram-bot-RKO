@@ -341,7 +341,7 @@ export default {
       return this.$store.state.formData?.['step_' + index]
     },
     back() {
-      this.$router.push({ name: "step_13" });
+      this.$router.push({ name: "step_14" });
     },
   },
   computed: {

@@ -633,7 +633,7 @@ class Adapter_LoanRequest:
             merchantAcquiring=False,
             fastPaymentSystem=False,
             loyaltyProgram=False,
-            loyaltyProgramInfo={"key": "first", "value": "Программа-1"},
+            loyaltyProgramInfo="first",
             community='Комьюнити' in lr.additional_products,
             accounting='Бухгалтерия' in lr.additional_products,
             legalSupport='Юридическая поддержка' in lr.additional_products,

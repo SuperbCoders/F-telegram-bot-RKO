@@ -425,6 +425,8 @@
 
 <script>
 import LineStep from '@/components/line_step/line_step.vue';
+import { loadCurrentData } from '@/utils/loadStore'
+
 export default {
   data() {
     return {
@@ -477,6 +479,13 @@ export default {
       this.$router.push({ name: 'step_12' })
     },
   },
+  mounted() {
+        loadCurrentData({
+            currentData: this.currentData,
+            step: 'step_12',
+            vue: this,
+        });
+    },
   computed: {
     isValidateInformationGoals() {
       if (this.currentData.account_operations.length < 1) {
