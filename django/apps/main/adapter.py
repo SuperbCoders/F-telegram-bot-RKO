@@ -511,7 +511,7 @@ class Adapter_LoanRequest:
                     share=item['share'],
                     ogrn=item['ogrn'],
                 ))
-            
+
         companyFoundersUl = self.getCompanyFoundersUl(arrayCompanyFoundersUl)
         
         lr_list_companyPersons = self.parserCompanyPersons()

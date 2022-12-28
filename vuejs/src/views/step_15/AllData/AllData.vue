@@ -143,7 +143,6 @@
         <div v-if="step_index === 'step_3'">
           Адреса компании
         </div>
-
         <div v-if="step_index === 'step_4'">
           Сведения о физических лицах организации
         </div>
@@ -179,7 +178,7 @@
                 {{ isTitle(question) }}
               </div>
               <div class="form_block_title w-50 pb-2 pt-2">
-                {{ objectAnswer.body }}
+                {{ translateValue(objectAnswer.body) }}
               </div>
             </div>
 
@@ -191,7 +190,7 @@
               </div>
               <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
                 <div v-for="(subAnswer, subKey) in objectAnswer.body" :key="subKey">
-                  - {{ subAnswer.body }}
+                  - {{ translateValue(subAnswer.body) }}
                 </div>
               </div>
             </div>
@@ -214,7 +213,7 @@
                         </div>
                       </div>
                       <div v-else>
-                        {{ subAnswer }}
+                        {{ translateValue(subAnswer) }}
                       </div>
                     </div>
                   </div>
@@ -246,13 +245,11 @@
                 {{ isTitle(question) }}
               </div>
               <div class="form_block_title w-50 pb-2 pt-2">
-                {{ objectAnswer.body }}
+                {{ translateValue(objectAnswer.body) }}
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
     <line-step :step="15" class="mt-10" />
