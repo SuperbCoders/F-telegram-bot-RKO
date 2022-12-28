@@ -102,10 +102,8 @@ class LoanApplicationListAPIView(ListAPIView):
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]
     renderer_classes = [CamelCaseJSONRenderer]
-    model = LoanRequest
-    serializer_class = LoanRequestSerializer
 
-    def get_queryset(self, request, format=None, *args, **kwargs):
+    def get(self, request, format=None, *args, **kwargs):
         telegram_chat_id = request.GET.get('telegram_chat_id')
         phone_number = request.GET.get('phone_number')
         if telegram_chat_id:

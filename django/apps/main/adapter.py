@@ -655,7 +655,7 @@ class Adapter_LoanRequest:
             leasingAgreement='Договор лизинга' in lr.planned_operations,
             factoringAgreement='Договор факторинга' in lr.planned_operations,
             other='Иное (укажите)' in lr.planned_operations,
-            contractsInfo='Договор купли-продажи' in lr.planned_other,
+            contractsInfo=lr.planned_other,
         )
 
         documentList = []
@@ -670,6 +670,10 @@ class Adapter_LoanRequest:
 
         for image in lr.document_licenses:
             im = self.getDocument(url=image['path'],docType="license")
+            documentList.append(im)
+            
+        for image in lr.document_certifying_identity_ceo_file:
+            im = self.getDocument(url=image['path'],docType="dulHead")
             documentList.append(im)
 
 

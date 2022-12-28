@@ -61,6 +61,25 @@
 
         <AttachButton class="mb-5" text="Загрузить документ" @file="onfile_licenses" />
 
+        <div>
+            <p class="subtitle text-left document_section_text mb-5">
+                Документ, удостоверяющий личность ЕИО 
+            </p>
+
+            <div v-if="this.currentData.document_certifying_identity_ceo_file" class="list_file">
+                <div v-for="(file, index) in this.currentData.document_certifying_identity_ceo_file" :key="index" class="block_file">
+                    <div class="card_file">
+                        <div class="type_file">{{ getType(file.type) }}</div>
+                        <div class="size_file">{{ getSize(file.size) }} Мб</div>
+                    </div>
+                    <div class="name_file">{{ file.name }}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <AttachButton class="mb-5" text="Загрузить документ" @file="onfile_licenses" />
+
         <line-step :step="5" class="mt-6" />
 
         <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect()">Продолжить
@@ -80,10 +99,13 @@ export default {
                 document_certifying_identity_executive_file: null,
                 document_confirming_real_activity_file: null,
                 document_licenses_file: null,
+                document_certifying_identity_ceo_file: null,
 
                 document_certifying_identity_executive: [],
                 document_confirming_real_activity: [],
                 document_licenses: [],
+                document_certifying_identity_ceo: [],
+                
             },
         };
     },
@@ -109,6 +131,11 @@ export default {
             this.currentData.document_licenses_file = files;
             const { images } = await this.getURLfile(files);
             this.currentData.document_licenses = images;
+        },
+        async onfile_certifying_identity_ceo(files) {
+            this.currentData.document_certifying_identity_ceo = files;
+            const { images } = await this.getURLfile(files);
+            this.currentData.document_certifying_identity_ceo = images;
         },
         getType(type) {
             type = type.split("/")[1];
@@ -180,6 +207,7 @@ export default {
     background: #f3f4f4;
     padding: 10px 14px;
     border-radius: 6px;
+    max-width: 200px;
 }
 
 .size_file {
