@@ -6,10 +6,10 @@
       <h2 class="">Сведения о соответствии FATCA и и стратегическом значении компании (выберите все верные утверждения)</h2>
       <div class="form_block checkboxs">
         <v-checkbox v-for="(item, index) in list" :key="index" class="d-flex align-items-start"
-          v-model="currentData.informationGoals" :value="item.key" hide-details>
+          v-model="currentData.information_goals" :value="item.key" hide-details>
           <template v-slot:label>
             <div :class="{
-              toggleText: !currentData.informationGoals.includes(item.value),
+              toggleText: !currentData.information_goals.includes(item.value),
             }">
               {{ item.value }}
             </div>
@@ -103,7 +103,7 @@ export default {
   },
   computed: {
     isList() {
-      if (this.currentData.informationGoals.length >= 1) {
+      if (this.currentData.information_goals.length >= 1) {
         return true;
       }
       return false;
