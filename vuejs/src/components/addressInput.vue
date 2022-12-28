@@ -1,15 +1,10 @@
 <template>
-    <!-- <v-combobox :label="label" outlined required class="mt-1 combobox" 
-            @keyup="getAddressFromName"
-            @input="emitData"
-            :value="value"
-            :items="list_item"
-            
-            ></v-combobox> -->
     <div class="container_field">
         <input type="text" :list="'address_list'+index" class="input" :placeholder="label" @input="emitData" :value="value">
         <datalist :id="'address_list'+index">
-            <option :value="address" v-for="(address, key) in list_address" :key="key" />
+            <option :value="address" v-for="(address, key) in list_address" :key="key">
+                {{ address }}
+            </option>
         </datalist>
     </div>
 </template>

@@ -42,12 +42,13 @@ export default {
 
         async emitData(e) {
             const value = e.target.value;
-            const data = await getCompanyName(value);
-            console.log(data);
-            this.list = data.suggestions;
             this.$emit('input', {
                 name: value,
             })
+            const data = await getCompanyName(value);
+            console.log(data);
+            this.list = data.suggestions;
+            
 
         },
         findValueAndFormat(number) {

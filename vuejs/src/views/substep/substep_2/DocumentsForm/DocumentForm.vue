@@ -47,7 +47,7 @@
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Эл. почта</p>
 
-        <v-text-field id="oldName" placeholder="Эл. почта" class="align-center border-none" outlined :rules="emailRules"
+        <v-text-field id="oldName" type="email" placeholder="Эл. почта" class="align-center border-none" outlined :rules="emailRules"
           v-model="currentData.account_own_email" :required="true">
 
         </v-text-field>

@@ -7,7 +7,7 @@
 
         <div class="form_block">
           <p class="text-left form_block_title">Адрес регистрации</p>
-          <AddressInput label="Введите адрес" v-model="currentData.assigned_publ_pers_registraion" />
+          <AddressInput label="Введите адрес" :index="5" v-model="currentData.assigned_publ_pers_registraion" />
         </div>
       </div>
     </v-form>

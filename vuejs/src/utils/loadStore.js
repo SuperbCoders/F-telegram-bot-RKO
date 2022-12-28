@@ -11,7 +11,7 @@ export const loadCurrentData = function({currentData, step, vue}) {
 export const loadSubCurrentData = function({currentData, substep, vue, index}) {
     const formData = vue.$store.state.formData;
     for(const field in currentData){
-        if(formData['step_4']['list_persone'][index][substep][field]){
+        if(formData['step_4']['list_persone'][index]?.[substep]?.[field]){
             currentData[field] = formData['step_4']['list_persone'][index][substep][field]
         }
         

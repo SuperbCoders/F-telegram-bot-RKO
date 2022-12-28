@@ -161,10 +161,8 @@ class LoanRequest(models.Model):
     beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     third_parties = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
-    informationGoals = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    
-    planned_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    planned_other = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    planned_operations = models.JSONField(null=True, blank=True)
+    planned_other = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     
     account_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
     operation_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)

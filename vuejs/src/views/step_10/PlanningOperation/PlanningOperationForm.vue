@@ -74,7 +74,7 @@ export default {
       this.$router.push({ name: "step_9" });
     },
   },
-  mounted(){
+  mounted() {
     loadCurrentData({
       currentData: this.currentData,
       step: 'step_10',

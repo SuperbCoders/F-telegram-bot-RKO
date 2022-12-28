@@ -35,7 +35,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">0 ₽/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Первый'"
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'first'"
           @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
@@ -43,7 +43,7 @@
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Первый')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('first')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -76,7 +76,7 @@
           </li>
         </ul>
         <h2 class="text-left rate_content_price mb-3">490 ₽/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Второй'"
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'second'"
           @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
@@ -84,7 +84,7 @@
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Второй')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('second')" large>Выбрать</v-btn>
       </div>
     </v-card>
     <v-card class="mb-10 rate_card rounded-xl shadow-light-100">
@@ -115,7 +115,7 @@
           </li>
         </ul>
         <h2 gray class="text-left rate_content_price mb-3">1 490 ₽/мес</h2>
-        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'Третий'"
+        <v-btn class="rate_card_content_button-activate pink darken-1" v-if="currentData.tariff === 'third'"
           @click="unsetTarif()" large>
           <span class="white--text"> Выбрано </span>
 
@@ -123,7 +123,7 @@
             mdi-check
           </v-icon>
         </v-btn>
-        <v-btn class="rate_card_content_button" v-else @click="setTarif('Третий')" large>Выбрать</v-btn>
+        <v-btn class="rate_card_content_button" v-else @click="setTarif('third')" large>Выбрать</v-btn>
       </div>
     </v-card>
 
@@ -154,7 +154,7 @@
       </v-checkbox>
     </div>
 
-    <LineStep :step="13" />
+    <LineStep :step="14" />
     <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
       <span v-if="currentData.tariff">Продолжить</span>
       <span v-else>Пропустить</span>

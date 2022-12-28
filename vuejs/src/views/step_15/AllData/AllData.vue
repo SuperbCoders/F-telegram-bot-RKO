@@ -255,7 +255,7 @@
 
       </div>
     </div>
-    <line-step :step="14" class="mt-10" />
+    <line-step :step="15" class="mt-10" />
     <p @click="dialogAgreement = true" class="mt-8 text-center" style="cursor: pointer;">
       Нажимая на кнопку «Отправить», вы соглашаетесь с
       условиями подачи заявки и обработки персональных данных</p>

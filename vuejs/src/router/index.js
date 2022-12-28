@@ -13,10 +13,11 @@ import intelligenceForm from '../views/step_9/intelligence/intelligenceForm.vue'
 import PlanningOperation from '@/views/step_10/PlanningOperation/PlanningOperationForm.vue'
 import Approvals from '@/views/step_11/Approvals/ApprovalsForm.vue'
 import Codeword from '@/views/step_12/Codeword/Codeword.vue'
-import Rate from '@/views/step_13/Rate/RateForm.vue'
-import AllData from '@/views/step_14/AllData/AllData.vue'
+import Purposes from '@/views/step_13/Purposes/PurposesForm.vue'
+import Rate from '@/views/step_14/Rate/RateForm.vue'
+import AllData from '@/views/step_15/AllData/AllData.vue'
 
-// import Purposes from '@/views/step_6/Purposes/PurposesForm.vue'
+
 
 
 // import AdditionalInformation from '@/views/AdditionalInformation/AdditionalInformation.vue'
@@ -97,21 +98,22 @@ const routes = [
     component: Codeword,
   },
   {
-    path: "/rate",
+    path: "/purposes",
     name: "step_13",
+    component: Purposes
+  },
+  {
+    path: "/rate",
+    name: "step_14",
     component: Rate
   },
     {
     path: "/all-data",
-    name: "step_14",
+    name: "step_15",
     component: AllData
   },
 
-  // {
-  //   path: "/purposes",
-  //   name: "step_8",
-  //   component: Purposes
-  // },
+
 
 
 

@@ -1,4 +1,5 @@
 from typing import TypedDict, List
+from .utils import format_date, format_string
 import base64
 import requests
 import os
@@ -24,6 +25,7 @@ class Adapter_LoanRequest:
         "initiator": { # Инициатор заявки
             "phoneNumber": "" # Номер телефона
         },
+        "isEioPDL": True,
         "company": { # Клиент
             "inn": "", # ИНН
             "ogrn": "", # ОГРН
@@ -124,7 +126,7 @@ class Adapter_LoanRequest:
             "amountOfTransactionsUnderForeignTradeContractsPerYear": "", # Сумма операций по внешнеторговым контрактам в год
             "moneySources": "", # Источники происхождения денежных средств (выбор из справочника)
             "numberOfEmployees": "", # Штатная численность сотрудников (выбор из справочника)
-            "selectAllTrueStatements": "" # Отметьте все верные утверждения (множественный выбор из справочника)
+            "fatcaAndStrategicStatus": ""
         },
         "typesOfContracts": { # ВИДЫ ДОГОВОРОВ (КОНТРАКТОВ), РАСЧЕТЫ ПО КОТОРЫМ ЮРИДИЧЕСКОЕ ЛИЦО СОБИРАЕТСЯ ОСУЩЕСТВЛЯТЬ ЧЕРЕЗ БАНК
             "contractProvisionServices": True, # Договор возмездного оказания услуг
@@ -168,18 +170,37 @@ class Adapter_LoanRequest:
     },
         "selectedTariff": "", # Выбранный ТАРИФ НА РАСЧЕТНО-КАССОВОЕ ОБСЛУЖИВАНИЕ 
         "codeword": "", # Кодовое слово
-        "documents": [
-            {
-                "docType": "", # Тип документа (справочник)
-                "files": [
-                    {
-                        "fileName": "",
-                        "content": ""
-                    }
-                ]
-            }
-        ],
+        "documents": [],
     }
+
+    # ВИДЫ ДОГОВОРОВ (КОНТРАКТОВ), РАСЧЕТЫ ПО КОТОРЫМ ЮРИДИЧЕСКОЕ ЛИЦО СОБИРАЕТСЯ ОСУЩЕСТВЛЯТЬ ЧЕРЕЗ БАНК
+    def setTypesOfContracts(
+            self, 
+            contractProvisionServices, 
+            supplyContract, 
+            workAgreement, 
+            commissionAgreement,
+            contractOfSale,
+            leaseAgreementForMovableProperty,
+            realEstateLeaseAgreement,
+            leasingAgreement,
+            factoringAgreement,
+            other,
+            contractsInfo,
+        ):
+        self.json_api["typesOfContracts"] = {
+            "contractProvisionServices": contractProvisionServices, # Договор возмездного оказания услуг
+            "supplyContract": supplyContract, # Договор поставки
+            "workAgreement": workAgreement, # Договор подряда
+            "commissionAgreement": commissionAgreement, # Договор комиссии
+            "contractOfSale": contractOfSale, # Договор купли-продажи
+            "leaseAgreementForMovableProperty": leaseAgreementForMovableProperty, # Договор аренды движимого имущества
+            "realEstateLeaseAgreement": realEstateLeaseAgreement, # Договор аренды недвижимого имущества
+            "leasingAgreement": leasingAgreement, # Договор лизинга
+            "factoringAgreement": factoringAgreement, # Договор факторинга
+            "other": other, # Иное
+            "contractsInfo": contractsInfo # Иные виды договоров
+        }
     
     def getInitiatorData(self, phoneNumber) -> dict:
         return {
@@ -192,8 +213,8 @@ class Adapter_LoanRequest:
 
     def getCompanyBase(self, inn, ogrn, shortNameEn, legalAddress, postalAddress) -> dict:
         return {
-            "inn": inn, # ИНН
-            "ogrn": ogrn, # ОГРН
+            "inn": format_string(inn), # ИНН
+            "ogrn": format_string(ogrn), # ОГРН
             "shortNameEn": shortNameEn, # Наименование на иностранном языке (если имеется)
             "legalAddress": legalAddress, # Юридический адрес компании
             "postalAddress": postalAddress, # Почтовый адрес компании
@@ -217,12 +238,12 @@ class Adapter_LoanRequest:
 
     def getCompanyPersonsBase(self, inn, lastName, firstName, middleName, gender, birthDate, birthPlace, citizenship, countryOfResidence, registrationAddress, actualAddress):
         return {
-            "inn": inn, # ИНН
+            "inn": format_string(inn), # ИНН
             "lastName": lastName, # Фамилия
             "firstName": firstName, # Имя
             "middleName": middleName, # Отчество
             "gender": gender, # Пол
-            "birthDate": birthDate, # Дата рождения
+            "birthDate": format_date(birthDate), # Дата рождения
             "birthPlace": birthPlace, # Место рождения
             "citizenship": citizenship, # Гражданство (выбор из справочника)
             "countryOfResidence": countryOfResidence, # Страна проживания (выбор из справочника)
@@ -242,9 +263,9 @@ class Adapter_LoanRequest:
         return {
             "identityDocument": { # Документ, удостверяющий личность
                 "type": type, # Тип документа (выбор из справочника)
-                "series": series, # Серия
-                "number": number, # Номер
-                "issuedDate": issuedDate, # Дата выдачи
+                "series": format_string(series), # Серия
+                "number": format_string(number), # Номер
+                "issuedDate": format_date(issuedDate), # Дата выдачи
                 "issuingAuthority": issuingAuthority, # Кем выдан
                 "issuingAuthorityCode": issuingAuthorityCode, # Код подразделения
             },
@@ -343,13 +364,13 @@ class Adapter_LoanRequest:
     def setDocument(self, listObj):
         self.json_api['documents'] = listObj
     
-    def getDocument(self, url):
+    def getDocument(self, url, docType):
         response = session.get(os.getenv("DJANGO_APP_DOMAIN_STORAGE") + url)
-        uri = ("data:" + response.headers['Content-Type'] + ";" + "base64," + base64.b64encode(response.content).decode("utf-8"))
+        uri = (base64.b64encode(response.content).decode("utf-8"))
         nameFile = url.split('/')[-1]
 
         return {
-                "docType": response.headers['Content-Type'], # Тип документа (справочник)
+                "docType": docType, # Тип документа (справочник)
                 "files": [
                     {
                         "fileName": nameFile,
@@ -357,6 +378,7 @@ class Adapter_LoanRequest:
                     }
                 ]
             }
+
     def getCompanyBusinessInfo(self, 
         hasBeneficiariesInfo, 
         beneficiariesInfo, 
@@ -388,7 +410,7 @@ class Adapter_LoanRequest:
         amountOfTransactionsUnderForeignTradeContractsPerYear,
         moneySources,
         numberOfEmployees,
-        selectAllTrueStatements,
+        fatcaAndStrategicStatus,
     ):
         return {
             "hasBeneficiariesInfo": hasBeneficiariesInfo, # Сведения о выгодоприобретателях
@@ -421,13 +443,12 @@ class Adapter_LoanRequest:
             "amountOfTransactionsUnderForeignTradeContractsPerYear": amountOfTransactionsUnderForeignTradeContractsPerYear, # Сумма операций по внешнеторговым контрактам в год
             "moneySources": moneySources, # Источники происхождения денежных средств (выбор из справочника)
             "numberOfEmployees": numberOfEmployees, # Штатная численность сотрудников (выбор из справочника)
-            "selectAllTrueStatements": selectAllTrueStatements # Отметьте все верные утверждения (множественный выбор из справочника)
+            "fatcaAndStrategicStatus": fatcaAndStrategicStatus # Отметьте все верные утверждения (множественный выбор из справочника)
             
         }
 
     def setCompanyBusinessInfo(self, obj):
         self.json_api['companyBusinessInfo'] = obj
-
 
     def setAdditionalProducts(
         self, 
@@ -456,6 +477,7 @@ class Adapter_LoanRequest:
             "legalSupport": legalSupport, # Юридическая поддержка
             "promotion": promotion # Продвижение
         }
+
     def setCodeword(self, codeword=""):
         self.json_api['codeword'] = codeword
 
@@ -514,6 +536,8 @@ class Adapter_LoanRequest:
                 email=lr_persons['account_own_email'],
             )
 
+            
+
             identityDocument = self.getIdentityDocument(
                 type=lr_persons['doc_type'],
                 series=lr_persons['doc_serial'],
@@ -544,12 +568,11 @@ class Adapter_LoanRequest:
                 pdl=pdl,
             )
             
-            
 
             companyPersonsList.append(companyPersons)
         
         companyManagement = self.getCompanyManagement(
-            supremeGoverningBody=lr.supreme_management_body
+            supremeGoverningBody=lr.structure_value
         )
         self.setCompany(
             {
@@ -595,12 +618,12 @@ class Adapter_LoanRequest:
                 amountOfTransactionsUnderForeignTradeContractsPerQuarter=lr.foreign_sum_contracts_quarter,
                 amountOfTransactionsUnderForeignTradeContractsPerYear=lr.foreign_sum_contracts_age,
 
-                moneySources=lr.sources_cash_receipts,
+                moneySources=",".join(lr.sources_cash_receipts),
                 numberOfEmployees=lr.headcount,
-                selectAllTrueStatements="",
+                fatcaAndStrategicStatus=",".join(lr.information_goals),
             )
         )
-        
+
         self.setAdditionalProducts(
             sms='СМС-оповещение' in lr.additional_products,
             overdraft=False,
@@ -608,28 +631,45 @@ class Adapter_LoanRequest:
             merchantAcquiring=False,
             fastPaymentSystem=False,
             loyaltyProgram=False,
-            loyaltyProgramInfo=False,
+            loyaltyProgramInfo={"key": "first", "value": "Программа-1"},
             community='Комьюнити' in lr.additional_products,
             accounting='Бухгалтерия' in lr.additional_products,
             legalSupport='Юридическая поддержка' in lr.additional_products,
             promotion='Продвижение' in lr.additional_products,
         )
+
         self.setCodeword(lr.codeword)
+
         self.setTariff(
             lr.tariff
         )
+
+        self.setTypesOfContracts(
+            contractProvisionServices='Договор возмездного оказания услуг' in lr.planned_operations,
+            supplyContract='Договор поставки' in lr.planned_operations,
+            workAgreement='Договор подряда' in lr.planned_operations,
+            commissionAgreement='Договор комиссии' in lr.planned_operations,
+            contractOfSale='Договор купли-продажи' in lr.planned_operations,
+            leaseAgreementForMovableProperty='Договор аренды движимого имущества' in lr.planned_operations,
+            realEstateLeaseAgreement='Договор аренды недвижимого имущества' in lr.planned_operations,
+            leasingAgreement='Договор лизинга' in lr.planned_operations,
+            factoringAgreement='Договор факторинга' in lr.planned_operations,
+            other='Иное (укажите)' in lr.planned_operations,
+            contractsInfo='Договор купли-продажи' in lr.planned_other,
+        )
+
         documentList = []
         
         for image in lr.document_certifying_identity_executive:
-            im = self.getDocument(url=image['path'])
+            im = self.getDocument(url=image['path'],docType="executiveBody")
             documentList.append(im)
 
         for image in lr.document_confirming_real_activity:
-            im = self.getDocument(url=image['path'])
+            im = self.getDocument(url=image['path'], docType="additionalClientDocs")
             documentList.append(im)
 
         for image in lr.document_licenses:
-            im = self.getDocument(url=image['path'])
+            im = self.getDocument(url=image['path'],docType="license")
             documentList.append(im)
 
 

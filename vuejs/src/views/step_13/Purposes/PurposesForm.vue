@@ -413,7 +413,7 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
-    <line-step :step='7' class="mt-5" />
+    <line-step :step='13' class="mt-5" />
     <v-btn block large :disabled="!valid" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>
   </div>
@@ -426,12 +426,34 @@ export default {
     return {
       valid: true,
       currentData: {
-        account_operations: [],
-        operation_volume: null,
-        sum_per_month: null,
-        outside_contracts_volume: null,
-        state_employers: null,
-        sources_cash_receipts: []
+        subject_licensing: "",
+        history_reputation: "",
+        num_transactions_month: "",
+        num_transactions_week: "",
+        num_transactions_quarter: "",
+        num_transactions_age: "",
+        sum_transactions_month: "",
+        sum_transactions_week: "",
+        sum_transactions_quarter: "",
+        sum_transactions_age: "",
+        monthly_cash_withdrawal: "",
+        week_cash_withdrawal: "",
+        quarter_cash_withdrawal: "",
+        age_cash_withdrawal: "",
+        sum_mouth_cash_withdrawal: "",
+        sum_week_cash_withdrawal: "",
+        sum_quarter_cash_withdrawal: "",
+        sum_age_cash_withdrawal: "",
+        foreign_trade_contracts_month: "",
+        foreign_trade_contracts_week: "",
+        foreign_trade_contracts_quarter: "",
+        foreign_trade_contracts_age: "",
+        foreign_sum_contracts_month: "",
+        foreign_sum_contracts_week: "",
+        foreign_sum_contracts_quarter: "",
+        foreign_sum_contracts_age: "",
+        sources_cash_receipts: [],
+        headcount: "",
       }
 
     }

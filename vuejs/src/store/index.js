@@ -85,6 +85,9 @@ export default new Vuex.Store({
                 codeword: "",
             },
             step_13: {
+                
+            },
+            step_14: {
                 tariff: null,
                 additional_products: [],
             },

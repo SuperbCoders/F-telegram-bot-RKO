@@ -14,7 +14,7 @@
             <span class="star">*</span>
             Адрес фактического проживания
           </p>
-          <AddressInput label="Введите адрес" v-model="currentData.accownt_own_living" />
+          <AddressInput label="Введите адрес" :index="0" v-model="currentData.accownt_own_living" />
         </div>
       </div>
     </v-form>

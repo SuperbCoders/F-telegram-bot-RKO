@@ -169,6 +169,9 @@ export default {
           case 'step_13':
             next_push = 'step_14';
             break
+          case 'step_14':
+            next_push = 'step_15';
+            break
         }
         this.$router.push({ name: next_push });
       }
