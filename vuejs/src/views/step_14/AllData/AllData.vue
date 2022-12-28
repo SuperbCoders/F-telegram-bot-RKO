@@ -361,10 +361,10 @@ export default {
 
             'document_confirming_real_activity',
             'document_licenses',
-          ].indexOf(keyStep) >= 0
+          ].indexOf(keyStep) >= 0;
           if (is_skip) { 
             continue 
-          };
+          }
       
           let valueStep = step[keyStep]
           if (this.isArray(valueStep)) {
