@@ -56,6 +56,9 @@ export default {
       this.$router.push({ name: "step_9" })
     },
     back() {
+      if(this.$store.state.formData.step_1.opf.short === "ИП"){
+        this.$router.push({ name: "step_6" });
+        }
       this.$router.push({ name: "step_7" });
     },
   },
