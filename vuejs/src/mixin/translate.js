@@ -189,6 +189,64 @@ export const translateMixin = {
                     return "Дополнительные продукты";
                 case "email":
                     return "Электронная почта";
+                case "subject_licensing":
+                    return "Компания осуществляет деятельность, подлежащую лицензированию";
+                case "history_reputation":
+                    return "История, репутация, сектор рынка и конкуренция";
+                case "num_transactions_month":
+                    return "Общее количество операций в месяц";
+                case "num_transactions_week":
+                    return "Общее количество операций в неделю";
+                case "num_transactions_quarter":
+                    return "Общее количество операций в квартал";
+                case "num_transactions_age":
+                    return "Общее количество операций в год";
+                case "sum_transactions_month":
+                    return "Общая сумма операций в месяц";
+                case "sum_transactions_week":
+                    return "Общая сумма операций в неделю";
+                case "sum_transactions_quarter":
+                    return "Общая сумма операций в квартал";
+                case "sum_transactions_age":
+                    return "Общая сумма операций в год";
+                case "monthly_cash_withdrawal":
+                    return "Количество операций по снятию наличности в месяц";
+                case "week_cash_withdrawal":
+                    return "Количество операций по снятию наличности в неделю";
+                case "quarter_cash_withdrawal":
+                    return "Количество операций по снятию наличности в квартал";
+                case "age_cash_withdrawal":
+                    return "Количество операций по снятию наличности в год";
+                case "sum_mouth_cash_withdrawal":
+                    return "Сумма операций по снятию наличности в месяц";
+                case "sum_week_cash_withdrawal":
+                    return "Сумма операций по снятию денежных средств в наличной форме в неделю";
+                case "sum_quarter_cash_withdrawal":
+                    return "Сумма операций по снятию денежных средств в наличной форме в квартал";
+                case "sum_age_cash_withdrawal":
+                    return "Сумма операций по снятию денежных средств в наличной форме в год";
+                case "foreign_trade_contracts_month":
+                    return "Количество операций по внешнеторговым контрактам в месяц";
+                case "foreign_trade_contracts_week":
+                    return "Количество операций по внешнеторговым контрактам в неделю";
+                case "foreign_trade_contracts_quarter":
+                    return "Количество операций по внешнеторговым контрактам в квартал";
+                case "foreign_trade_contracts_age":
+                    return "Количество операций по внешнеторговым контрактам в год";
+                case "foreign_sum_contracts_month":
+                    return "Сумма операций по внешнеторговым контрактам в месяц";
+                case "foreign_sum_contracts_week":
+                    return "Сумма операций по внешнеторговым контрактам в неделю";
+                case "foreign_sum_contracts_quarter":
+                    return "Сумма операций по внешнеторговым контрактам в квартал";
+                case "foreign_sum_contracts_age":
+                    return "Сумма операций по внешнеторговым контрактам в год";
+                case "sources_cash_receipts":
+                    return "Источники поступления денежных средств";
+                case "headcount":
+                    return "Штатная численность сотрудников";
+
+
                 default: return name
             }
         },

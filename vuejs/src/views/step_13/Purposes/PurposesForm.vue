@@ -401,7 +401,7 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
-    <div>
+    <div class="mt-4">
       <h4 class="form_block_label text-left">
         Штатная численность сотрудников
       </h4>
