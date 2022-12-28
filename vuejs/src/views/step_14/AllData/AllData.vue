@@ -164,7 +164,7 @@
         </div>
         <div v-if="step_index === 'step_10'">
           Виды договоров (контрактов), расчеты по которым юридическое лицо собирается
-      осуществлять через банк
+          осуществлять через банк
         </div>
         <div v-if="step_index === 'step_11'">
           Сведения о соответствии FATCA и и стратегическом значении компании (выберите все верные утверждения)
@@ -351,7 +351,21 @@ export default {
         let step = formData[stepName]
         for (let keyStep in step) {
           // SKIP
-          if (keyStep === 'opf') continue;
+          const is_skip = [
+            'opf',
+            'document_certifying_identity_executive_file',
+            'document_certifying_identity_executive',
+
+            'document_confirming_real_activity_file',
+            'document_licenses_file',
+
+            'document_confirming_real_activity',
+            'document_licenses',
+          ].indexOf(keyStep) >= 0
+          if (is_skip) { 
+            continue 
+          };
+      
           let valueStep = step[keyStep]
           if (this.isArray(valueStep)) {
             let isTypeArray = null;

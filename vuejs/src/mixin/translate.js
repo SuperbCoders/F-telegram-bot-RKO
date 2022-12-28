@@ -183,6 +183,12 @@ export const translateMixin = {
                     return "Доменное имя";
                 case "fax":
                     return "Факс";
+                case "list_persone":
+                    return "Физические лица";
+                case "additional_products":
+                    return "Дополнительные продукты";
+                case "email":
+                    return "Электронная почта";
                 default: return name
             }
         },

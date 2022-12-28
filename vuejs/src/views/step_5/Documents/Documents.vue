@@ -98,7 +98,7 @@ export default {
         async onfile_certifying_identity_executive(files) {
             this.currentData.document_certifying_identity_executive_file = files;
             const { images } = await this.getURLfile(files);
-            this.currentData.document_certifying_identity_executive_url = images;
+            this.currentData.document_certifying_identity_executive = images;
         },
         async onfile_confirming_real_activity(files) {
             this.currentData.document_confirming_real_activity_file = files;
