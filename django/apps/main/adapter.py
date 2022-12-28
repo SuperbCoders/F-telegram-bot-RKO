@@ -254,7 +254,7 @@ class Adapter_LoanRequest:
     def getContacts(self, phone, email):
         return {
             "contacts": { # Контактные данные
-                "phone": phone, # Телефон
+                "phone": format_string(phone), # Телефон
                 "email": email # Электронная почта
             },
         }
