@@ -503,12 +503,14 @@ class Adapter_LoanRequest:
             fax=lr.fax,
         )
         arrayCompanyFoundersUl = []
-        for item in lr.founders:
-            arrayCompanyFoundersUl.append(CompanyFoundersUl(
-                inn=item['inn'],
-                share=item['share'],
-                orgn=item['ogrn'],
-            ))
+
+        if lr.founders:
+            for item in lr.founders:
+                arrayCompanyFoundersUl.append(CompanyFoundersUl(
+                    inn=item['inn'],
+                    share=item['share'],
+                    orgn=item['ogrn'],
+                ))
             
         companyFoundersUl = self.getCompanyFoundersUl(arrayCompanyFoundersUl)
         
