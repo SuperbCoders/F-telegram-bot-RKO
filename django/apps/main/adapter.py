@@ -509,7 +509,7 @@ class Adapter_LoanRequest:
                 arrayCompanyFoundersUl.append(CompanyFoundersUl(
                     inn=item['inn'],
                     share=item['share'],
-                    orgn=item['ogrn'],
+                    ogrn=item['ogrn'],
                 ))
             
         companyFoundersUl = self.getCompanyFoundersUl(arrayCompanyFoundersUl)
