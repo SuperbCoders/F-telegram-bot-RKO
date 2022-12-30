@@ -26,6 +26,11 @@ import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   directives: { mask },
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data: () => ({
     valid: true,
     listCompany: [],
@@ -59,10 +64,10 @@ export default {
       this.currentData.supreme_management_inn = inn;
     },
     next() {
-      this.$router.push({ name: 'step_7' });
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-      this.$router.push({ name: "step_5" });
+      this.$router.push({ name: `step_${this.number_step - 1}` });
     },
     addObjectList(object) {
       const result = {
@@ -141,11 +146,11 @@ export default {
 
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_6',
+      step: `step_${this.number_step}`,
       vue: this,
     });
 
-    if (this.$store.state.formData.step_1.opf.short === "ИП") {
+    if (this.$store.state.formData.step_1.opf.short !== "ИП") {
       this.next();
     }
 

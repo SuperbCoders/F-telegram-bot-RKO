@@ -45,6 +45,11 @@ import LineStep from '@/components/line_step/line_step.vue';
 import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       valid: true,
@@ -68,16 +73,16 @@ export default {
       }
     },
     next() {
-      this.$router.push({ name: "step_11" });
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-      this.$router.push({ name: "step_9" });
+      this.$router.push({ name: `step_${this.number_step - 1}` });
     },
   },
   mounted() {
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_10',
+      step: `step_${this.number_step}`,
       vue: this,
     });
   },

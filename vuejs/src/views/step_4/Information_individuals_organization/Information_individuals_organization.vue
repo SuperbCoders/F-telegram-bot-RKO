@@ -6,10 +6,10 @@
             Сведения о физических лицах организации
         </h2>
         <v-card elevation="2" class="pa-4 mb-2 d-flex" v-for="(val, key) in list_persone" :key="key">
-                    <div>{{ renderName(val['substep_1']) }}</div>
-                    <button style="margin-left: auto;" @click="editPersone(key)">Изменить</button>
-                    <button class="ml-5" @click="deletePersone(key)">Удалить</button>
-                </v-card>
+            <div>{{ renderName(val['substep_1']) }}</div>
+            <button style="margin-left: auto;" @click="editPersone(key)">Изменить</button>
+            <button class="ml-5" @click="deletePersone(key)">Удалить</button>
+        </v-card>
         <v-form ref="form" v-model="valid" lazy-validation>
             <div class="form_block mt-2">
                 <div class="contain_btn_add">
@@ -36,6 +36,11 @@ import LineStep from "@/components/line_step/line_step.vue";
 import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
+    props: {
+        number_step: {
+            type: Number,
+        }
+    },
     data: () => ({
         valid: true,
         innRules: [
@@ -45,13 +50,13 @@ export default {
         ],
         requiredRules: [(v) => !!v || "Это поле обязательно"],
     }),
-mounted(){
-    loadCurrentData({
-      currentData: this.currentData,
-      step: 'step_4',
-      vue: this,
-    });
-},
+    mounted() {
+        loadCurrentData({
+            currentData: this.currentData,
+            step: `step_${this.number_step}`,
+            vue: this,
+        });
+    },
     methods: {
         validate() {
             this.$refs.form.validate();
@@ -65,10 +70,10 @@ mounted(){
             }
         },
         next() {
-            this.$router.push({ name: 'step_5' });
+            this.$router.push({ name: `step_${this.number_step + 1}` });
         },
         back() {
-            this.$router.push({ name: "step_3" });
+            this.$router.push({ name: `step_${this.number_step - 1}` });
         },
         editPersone(key) {
             this.$router.push({
@@ -79,7 +84,7 @@ mounted(){
             })
         },
         deletePersone(key) {
-            this.$store.commit("delPersoneIndex", {index: key});
+            this.$store.commit("delPersoneIndex", { index: key });
         },
         async createPersone() {
             this.$store.commit("addPersone");

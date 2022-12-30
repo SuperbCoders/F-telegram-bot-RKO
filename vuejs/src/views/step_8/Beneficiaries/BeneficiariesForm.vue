@@ -28,6 +28,11 @@ import LineStep from '@/components/line_step/line_step.vue';
 import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       isShow: false,
@@ -40,7 +45,7 @@ export default {
   mounted() {
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_8',
+      step: `step_${this.number_step}`,
       vue: this,
     });
   },
@@ -53,15 +58,14 @@ export default {
       this.next();
     },
     next() {
-      this.$router.push({ name: "step_9" })
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-      console.log(this.$store.state.formData.step_1.opf);
-      console.log(this.$store.state.formData.step_1.opf.short == "ИП");
-      if (this.$store.state.formData.step_1.opf.short == "ИП") {
-        this.$router.push({ name: "step_5" })
+
+      if (this.$store.state.formData.step_1.opf.short !== "ИП") {
+        this.$router.push({ name: `step_${this.number_step - 3}` });
       } else {
-        this.$router.push({ name: "step_7" });
+        this.$router.push({ name: `step_${this.number_step - 1}` });
       }
     },
   },

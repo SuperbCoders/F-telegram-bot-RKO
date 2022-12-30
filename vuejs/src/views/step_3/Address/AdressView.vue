@@ -1,71 +1,38 @@
 <template>
   <div class="structure_group_section">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
-        </v-btn>
+    </v-btn>
     <h2 class="text-left structure_group_title mb-10">Адреса компании</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
-      <div
-        v-for="(itemForm, index) in currentData.addresses"
-        :key="index"
-        class="form_input_block checkboxs"
-      >
+      <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block checkboxs">
         <div class="form_block mb-5">
-          <v-checkbox
-            @click="isTypeAdress(itemForm)"
-            :rules="[(v) => v.length > 0 || 'You must agree to continue!']"
-            v-model="itemForm.typeAdress"
-            label="Юридический"
-            value="Юридический"
-            hide-details
-          >
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[(v) => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
           </v-checkbox>
-          <v-checkbox
-            @click="isTypeAdress(itemForm)"
-            :rules="[(v) => v.length > 0 || 'You must agree to continue!']"
-            v-model="itemForm.typeAdress"
-            label="Почтовый"
-            value="Почтовый"
-            hide-details
-          ></v-checkbox>
+          <v-checkbox @click="isTypeAdress(itemForm)" :rules="[(v) => v.length > 0 || 'You must agree to continue!']"
+            v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый" hide-details></v-checkbox>
         </div>
-        <p
-          class="error_message"
-          v-if="!valid && currentData.typeAdress > 0"
-        >
+        <p class="error_message" v-if="!valid && currentData.typeAdress > 0">
           Выберите пункт
         </p>
         <div class="form_block">
           <p class="text-left form_block_title">Адрес</p>
-          <AddressInput label="Введите адрес" :index="index" v-model="itemForm.address"  />
+          <AddressInput label="Введите адрес" :index="index" v-model="itemForm.address" />
         </div>
       </div>
       <div class="form_block d-flex align-center justify-center">
-        <a
-          @click="deleteGroupList"
-          :class="{form_block_delete_link_delete: currentData.addresses.length <= 1 }"
-          class="form_block_delete_link text-decoration-none"
-          href="#"
-        >
-        <img src="@/assets/trash.svg" alt="">
-        <span class="pl-2 ">Удалить</span>
+        <a @click="deleteGroupList" :class="{ form_block_delete_link_delete: currentData.addresses.length <= 1 }"
+          class="form_block_delete_link text-decoration-none" href="#">
+          <img src="@/assets/trash.svg" alt="">
+          <span class="pl-2 ">Удалить</span>
         </a>
-        <v-btn
-          class="text-center d-flex align-center justify-center ml-10 add_form"
-          @click="addGroupList()"
-        >
+        <v-btn class="text-center d-flex align-center justify-center ml-10 add_form" @click="addGroupList()">
           <span class="pr-2">Добавить</span>
           <img src="@/assets/plus-circle.svg" alt="">
         </v-btn>
       </div>
       <line-step :step="3" />
-      <v-btn
-        block
-        large
-        :disabled="!valid"
-        class="mt-10 auth_form_bth"
-        color="primary"
-        @click="validate"
-        >Продолжить
+      <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
       </v-btn>
     </v-form>
   </div>
@@ -77,6 +44,11 @@ import AddressInput from '@/components/addressInput.vue';
 import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       groupList: [
@@ -115,10 +87,10 @@ export default {
       requiredRules: [(v) => !!v || "Это поле обязательно"],
     };
   },
-  mounted(){
+  mounted() {
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_3',
+      step: `step_${this.number_step}`,
       vue: this,
     });
   },
@@ -140,12 +112,12 @@ export default {
         this.next();
       }
     },
-    next(){
-      this.$router.push({name: "step_4"});
+    next() {
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-            this.$router.push({ name: "step_2" });
-        },
+      this.$router.push({ name: `step_${this.number_step - 1}` });
+    },
     isTypeAdress(object) {
       if (object.typeAdress.includes("Фактический")) {
         object.physic_address = object.address;
@@ -182,20 +154,24 @@ export default {
   font-size: 14px;
   border-radius: 8px;
 }
+
 .checkboxs label {
   color: #323E48 !important;
 }
-.form_block {
-}
+
+.form_block {}
+
 .form_block_delete_link_delete {
   opacity: 0;
   cursor: default !important;
 }
+
 div[role="combobox"] .v-label {
 
   color: #b6b4b4 !important;
 
 }
+
 .error_message {
   color: red;
   font-family: Roboto;
@@ -219,9 +195,11 @@ div[role="combobox"] .v-label {
   font-weight: 500;
   color: #8e909b !important;
 }
+
 .form_block_delete_link:active {
   filter: invert(16%) sepia(98%) saturate(3234%) hue-rotate(321deg) brightness(82%) contrast(102%);
 }
+
 .form_block_delete_link_active {
   /* filter: invert(16%) sepia(98%) saturate(3234%) hue-rotate(321deg) brightness(82%) contrast(102%); */
 }

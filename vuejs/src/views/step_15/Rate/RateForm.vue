@@ -170,6 +170,11 @@ export default {
   components: {
     LineStep,
   },
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       currentData: {
@@ -179,10 +184,9 @@ export default {
     };
   },
   mounted() {
-    scroll(0, 0);
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_14',
+      step: `step_${this.number_step}`,
       vue: this,
     });
   },
@@ -201,10 +205,10 @@ export default {
       this.next();
     },
     next() {
-      this.$router.push({ name: "step_15" });
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-      this.$router.push({ name: "step_13" });
+      this.$router.push({ name: `step_${this.number_step - 1}` });
     },
   },
 };

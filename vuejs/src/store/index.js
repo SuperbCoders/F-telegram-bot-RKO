@@ -75,16 +75,19 @@ export default new Vuex.Store({
                 salary_debt: 0,
             },
             step_10: {
+                additional_inforamtion: "",
+            },
+            step_11: {
                 planned_operations: [],
                 planned_other: "",
             },
-            step_11: {
+            step_12: {
                 information_goals: [],
             },
-            step_12: {
+            step_13: {
                 codeword: "",
             },
-            step_13: {
+            step_14: {
                 subject_licensing: "",
                 history_reputation: "",
                 num_transactions_month: "",
@@ -114,7 +117,7 @@ export default new Vuex.Store({
                 sources_cash_receipts: [],
                 headcount: "",
             },
-            step_14: {
+            step_15: {
                 tariff: null,
                 additional_products: [],
             },

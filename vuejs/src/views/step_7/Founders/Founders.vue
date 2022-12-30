@@ -8,10 +8,10 @@
             <div class="form_block">
                 <p class="text-left form_block_title">Учередитель</p>
                 <InnAndNameInput @input="({ inn, name, ogrn }) => {
-                    itemForm.inn = inn;
-                    itemForm.name = name;
-                    itemForm.ogrn = ogrn;
-                }" :value="itemForm.name" />
+    itemForm.inn = inn;
+    itemForm.name = name;
+    itemForm.ogrn = ogrn;
+}" :value="itemForm.name" />
             </div>
 
             <div class="form_block mt-6">
@@ -45,6 +45,11 @@ import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
     directives: { mask },
+    props: {
+        number_step: {
+            type: Number,
+        }
+    },
     data: () => ({
         currentData: {
             founders: [{
@@ -63,11 +68,11 @@ export default {
     async mounted() {
         loadCurrentData({
             currentData: this.currentData,
-            step: 'step_7',
+            step: `step_${this.number_step}`,
             vue: this,
         });
 
-        if(this.$store.state.formData.step_1.opf.short === "ИП"){
+        if (this.$store.state.formData.step_1.opf.short !== "ИП") {
             this.next();
         }
 
@@ -86,10 +91,10 @@ export default {
             }
         },
         next() {
-            this.$router.push({ name: "step_8" });
+            this.$router.push({ name: `step_${this.number_step + 1}` });
         },
         back() {
-            this.$router.push({ name: "step_6" });
+            this.$router.push({ name: `step_${this.number_step - 1}` });
         },
 
         addGroupList() {

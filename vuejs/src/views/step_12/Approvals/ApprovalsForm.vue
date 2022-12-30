@@ -31,6 +31,11 @@ export default {
   components: {
     LineStep,
   },
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       currentData: {
@@ -86,7 +91,7 @@ export default {
   methods: {
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_11',
+        object: 'step_12',
         value: this.currentData
       })
       this.next();
@@ -95,10 +100,10 @@ export default {
       e.preventDefault();
     },
     next() {
-      this.$router.push({name: "step_12"});
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-            this.$router.push({ name: "step_10" });
+      this.$router.push({ name: `step_${this.number_step - 1}` });
         },
   },
   computed: {
@@ -112,7 +117,7 @@ export default {
   mounted(){
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_11',
+      step: `step_${this.number_step}`,
       vue: this,
     });
   },

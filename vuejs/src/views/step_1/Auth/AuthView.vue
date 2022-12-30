@@ -52,6 +52,11 @@ import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
   directives: { mask },
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data: () => ({
     currentData: {
       inn: "",
@@ -179,7 +184,7 @@ export default {
 
     loadCurrentData({
       currentData: this.currentData,
-      step: 'step_1',
+      step: `step_${this.number_step}`,
       vue: this,
     });
 
@@ -192,7 +197,7 @@ export default {
 
       if (this.$refs.form.validate()) {
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_1',
+          object: `step_${this.number_step}`,
           value: this.currentData
         });
         // this.$store.commit('addItemFormData', this.currentData)
@@ -200,7 +205,7 @@ export default {
       }
     },
     next() {
-      this.$router.push({ name: "step_2" });
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     onClose() {
       this.$refs.contact_number.blur()

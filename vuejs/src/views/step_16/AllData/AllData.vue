@@ -265,6 +265,11 @@ import { translateMixin } from '@/mixin/translate'
 
 export default {
   mixins: [translateMixin],
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       dialog: false,
@@ -338,7 +343,7 @@ export default {
       return this.$store.state.formData?.['step_' + index]
     },
     back() {
-      this.$router.push({ name: "step_14" });
+      this.$router.push({ name: `step_${this.number_step - 1}` });
     },
   },
   computed: {
@@ -359,10 +364,10 @@ export default {
             'document_confirming_real_activity',
             'document_licenses',
           ];
-          if (list_skip.indexOf(keyStep) >= 0) { 
-            continue 
+          if (list_skip.indexOf(keyStep) >= 0) {
+            continue
           }
-      
+
           let valueStep = step[keyStep]
           if (this.isArray(valueStep)) {
             let isTypeArray = null;

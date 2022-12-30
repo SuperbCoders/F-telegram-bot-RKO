@@ -63,11 +63,12 @@
 
         <div>
             <p class="subtitle text-left document_section_text mb-5">
-                Документ, удостоверяющий личность ЕИО 
+                Документ, удостоверяющий личность ЕИО
             </p>
 
             <div v-if="this.currentData.document_certifying_identity_ceo_file" class="list_file">
-                <div v-for="(file, index) in this.currentData.document_certifying_identity_ceo_file" :key="index" class="block_file">
+                <div v-for="(file, index) in this.currentData.document_certifying_identity_ceo_file" :key="index"
+                    class="block_file">
                     <div class="card_file">
                         <div class="type_file">{{ getType(file.type) }}</div>
                         <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -93,6 +94,11 @@ import LineStep from "@/components/line_step/line_step.vue";
 import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
+    props: {
+        number_step: {
+            type: Number,
+        }
+    },
     data() {
         return {
             currentData: {
@@ -105,14 +111,14 @@ export default {
                 document_confirming_real_activity: [],
                 document_licenses: [],
                 document_certifying_identity_ceo: [],
-                
+
             },
         };
     },
     mounted() {
         loadCurrentData({
             currentData: this.currentData,
-            step: 'step_5',
+            step: `step_${this.number_step}`,
             vue: this,
         });
     },
@@ -149,7 +155,7 @@ export default {
             return name;
         },
         back() {
-            this.$router.push({ name: "step_4" });
+            this.$router.push({ name: `step_${this.number_step - 1}` });
         },
         async redirect() {
             const formData = new FormData();
@@ -172,7 +178,7 @@ export default {
             this.next();
         },
         next() {
-            this.$router.push({ name: 'step_6' });
+            this.$router.push({ name: `step_${this.number_step + 1}` });
         },
 
         async getURLfile(files) {

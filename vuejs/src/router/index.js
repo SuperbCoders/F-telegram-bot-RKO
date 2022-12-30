@@ -9,18 +9,19 @@ import Documents from '../views//step_5/Documents/Documents.vue'
 import Structure from '@/views/step_6/Structure/StructureForm.vue'
 import Founders from '@/views/step_7/Founders/Founders.vue'
 import Beneficiaries from '@/views/step_8/Beneficiaries/BeneficiariesForm.vue'
-import intelligenceForm from '../views/step_9/intelligence/intelligenceForm.vue'
-import PlanningOperation from '@/views/step_10/PlanningOperation/PlanningOperationForm.vue'
-import Approvals from '@/views/step_11/Approvals/ApprovalsForm.vue'
-import Codeword from '@/views/step_12/Codeword/Codeword.vue'
-import Purposes from '@/views/step_13/Purposes/PurposesForm.vue'
-import Rate from '@/views/step_14/Rate/RateForm.vue'
-import AllData from '@/views/step_15/AllData/AllData.vue'
+import intelligenceForm from '@/views/step_9/intelligence/intelligenceForm.vue'
+import AdditionalInformation from '@/views/step_10/AdditionalInformation/AdditionalInformation.vue'
+import PlanningOperation from '@/views/step_11/PlanningOperation/PlanningOperationForm.vue'
+import Approvals from '@/views/step_12/Approvals/ApprovalsForm.vue'
+import Codeword from '@/views/step_13/Codeword/Codeword.vue'
+import Purposes from '@/views/step_14/Purposes/PurposesForm.vue'
+import Rate from '@/views/step_15/Rate/RateForm.vue'
+import AllData from '@/views/step_16/AllData/AllData.vue'
 
 
 
 
-// import AdditionalInformation from '@/views/AdditionalInformation/AdditionalInformation.vue'
+
 
 // import Information_counterparties from '@/views/Information_counterparties/Information_counterparties.vue'
 // import Select_additional_products from '@/views/Select_additional_products/Select_additional_products.vue'
@@ -40,77 +41,131 @@ const routes = [
   {
     path: "/",
     name: "step_1",
-    component: AuthView
+    component: AuthView,
+    props: {
+      number_step: 1,
+    }
   },
   {
     path: "/contact",
     name: "step_2",
     component: Contact,
+    props: {
+      number_step: 2,
+    }
   },
   {
     path: "/address",
     name: "step_3",
-    component: Address
+    component: Address,
+    props: {
+      number_step: 3,
+    }
   },
   {
     path: "/information_individuals_organization",
     name: "step_4",
     component: Information_individuals_organization,
+    props: {
+      number_step: 4,
+    }
   },
   {
     path: "/documents",
     name: "step_5",
     component: Documents,
+    props: {
+      number_step: 5,
+    }
   },
   {
     path: "/sctructure",
     name: "step_6",
-    component: Structure
+    component: Structure,
+    props: {
+      number_step: 6,
+    }
   },
   {
     path: "/founders",
     name: "step_7",
     component: Founders,
+    props: {
+      number_step: 7,
+    }
   },
   {
     path: "/beneficiaries",
     name: "step_8",
-    component: Beneficiaries
+    component: Beneficiaries,
+    props: {
+      number_step: 8,
+    }
   },
   {
     path: "/intelligence",
     name: "step_9",
-    component: intelligenceForm
+    component: intelligenceForm,
+    props: {
+      number_step: 9,
+    }
+  },
+  {
+    path: "/additional_information",
+    name: "step_10",
+    component: AdditionalInformation,
+    props: {
+      number_step: 10,
+    }
   },
   {
     path: "/planning",
-    name: "step_10",
-    component: PlanningOperation
+    name: "step_11",
+    component: PlanningOperation,
+    props: {
+      number_step: 11,
+    }
   },
   {
     path: "/approvals",
-    name: "step_11",
-    component: Approvals
+    name: "step_12",
+    component: Approvals,
+    props: {
+      number_step: 12,
+    }
   },
   {
     path: "/codeword",
-    name: "step_12",
+    name: "step_13",
     component: Codeword,
+    props: {
+      number_step: 13,
+    }
   },
   {
     path: "/purposes",
-    name: "step_13",
-    component: Purposes
+    name: "step_14",
+    component: Purposes,
+    props: {
+      number_step: 14,
+    }
   },
   {
     path: "/rate",
-    name: "step_14",
-    component: Rate
-  },
-    {
-    path: "/all-data",
     name: "step_15",
-    component: AllData
+    component: Rate,
+    props: {
+      number_step: 15,
+    }
+  },
+  {
+    path: "/all-data",
+    name: "step_16",
+    component: AllData,
+    props: {
+      number_step: 16,
+    }
+
   },
 
 
@@ -125,11 +180,7 @@ const routes = [
   //   name: "Consent_receive_newsletter",
   //   component: Consent_receive_newsletter,
   // },
-  // {
-  //   path: "/additional_information",
-  //   name: "AdditionalInformation",
-  //   component: AdditionalInformation,
-  // },
+
 
 
   // {

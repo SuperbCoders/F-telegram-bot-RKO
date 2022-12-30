@@ -43,7 +43,7 @@ export default {
             }
         },
         next() {
-            this.$router.push({ name: "step_2" });
+            this.$router.push({ name: `step_${this.number_step + 1}` });
         },
     },
     computed: {},

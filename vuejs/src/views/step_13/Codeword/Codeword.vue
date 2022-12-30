@@ -4,7 +4,8 @@
         </v-btn>
         <div class="form_block">
             <p class="text-left form_block_input"><span class="star">*</span>Кодовое слово</p>
-            <input type="text" @input="inputCodeword" class="mt-1 auth_form input" ref="codewords" placeholder="Кодовое слово" :required="true">
+            <input type="text" @input="inputCodeword" class="mt-1 auth_form input" ref="codewords"
+                placeholder="Кодовое слово" :required="true">
         </div>
         <LineStep :step="12" class="mt-5" />
         <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
@@ -20,6 +21,11 @@ import { mask } from "vue-the-mask";
 
 export default {
     directives: { mask },
+    props: {
+        number_step: {
+            type: Number,
+        }
+    },
     components: {
         LineStep,
     },
@@ -45,8 +51,8 @@ export default {
         inputCodeword(event) {
             const val = event.target.value;
             let replace_text = val.replaceAll(/[^АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя ]/g, "");
-            if(replace_text.length >= 35) {
-                replace_text = replace_text.slice(0,35);
+            if (replace_text.length >= 35) {
+                replace_text = replace_text.slice(0, 35);
             }
             this.currentData.codeword = replace_text;
             this.$refs.codewords.value = replace_text;
@@ -55,10 +61,10 @@ export default {
             e.preventDefault();
         },
         next() {
-            this.$router.push({ name: "step_13" });
+            this.$router.push({ name: `step_${this.number_step + 1}` });
         },
         back() {
-            this.$router.push({ name: "step_11" });
+            this.$router.push({ name: `step_${this.number_step - 1}` });
         },
     },
     computed: {
@@ -77,7 +83,7 @@ export default {
     mounted() {
         loadCurrentData({
             currentData: this.currentData,
-            step: 'step_12',
+            step: `step_${this.number_step}`,
             vue: this,
         });
     },
@@ -91,6 +97,7 @@ export default {
     border-radius: 8px;
     padding: 16px 12px;
 }
+
 .v-input__slot {
     display: flex;
     align-items: flex-start;

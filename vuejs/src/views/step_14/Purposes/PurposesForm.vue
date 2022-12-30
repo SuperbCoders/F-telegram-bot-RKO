@@ -2,7 +2,7 @@
   <div class="purposes_block">
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
     </v-btn>
-    
+
     <h2>Сведения о бизнесе</h2>
     <div>
       <h4 class="form_block_label text-left">
@@ -388,12 +388,10 @@
           v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
         <v-checkbox label="Доходы от основного вида деятельности" value="incomeFromMainActivity"
           v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-        <v-checkbox label="Доходы от дополнительных видов деятельности"
-          value="incomeFromAdditionalActivity" v-model="currentData.sources_cash_receipts"
-          hide-details></v-checkbox>
-        <v-checkbox label="Заемные (кредитные)/привлеченные денежные средства"
-          value="borrowed" v-model="currentData.sources_cash_receipts"
-          hide-details></v-checkbox>
+        <v-checkbox label="Доходы от дополнительных видов деятельности" value="incomeFromAdditionalActivity"
+          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
+        <v-checkbox label="Заемные (кредитные)/привлеченные денежные средства" value="borrowed"
+          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
         <v-checkbox label="Государственное финансирование" value="governmentFunding"
           v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
         <v-checkbox label="Иное" value="other" v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
@@ -428,6 +426,11 @@ import LineStep from '@/components/line_step/line_step.vue';
 import { loadCurrentData } from '@/utils/loadStore'
 
 export default {
+  props: {
+    number_step: {
+      type: Number,
+    }
+  },
   data() {
     return {
       valid: true,
@@ -473,19 +476,19 @@ export default {
       this.next();
     },
     next() {
-      this.$router.push({ name: 'step_14' })
+      this.$router.push({ name: `step_${this.number_step + 1}` });
     },
     back() {
-      this.$router.push({ name: 'step_12' })
+      this.$router.push({ name: `step_${this.number_step - 1}` });
     },
   },
   mounted() {
-        loadCurrentData({
-            currentData: this.currentData,
-            step: 'step_12',
-            vue: this,
-        });
-    },
+    loadCurrentData({
+      currentData: this.currentData,
+      step: `step_${this.number_step}`,
+      vue: this,
+    });
+  },
   computed: {
     isValidateInformationGoals() {
       if (this.currentData.account_operations.length < 1) {
