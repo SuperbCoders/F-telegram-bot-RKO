@@ -146,9 +146,7 @@
         <div v-if="step_index === 'step_4'">
           Сведения о физических лицах организации
         </div>
-        <div v-if="step_index === 'step_5'">
-          Документ,удостоверяющий личность единоличного исполнительного органа
-        </div>
+
         <div v-if="step_index === 'step_6'">
           Структура органов управления
         </div>
@@ -453,7 +451,7 @@ export default {
       return formData;
     },
     is_OOO() {
-      return this.$store.state.formData.step_1.opf.short === 'ООО';
+      return this.$store.state.formData.step_1?.opf?.short === 'ООО';
     },
 
   },

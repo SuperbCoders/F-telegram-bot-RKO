@@ -7,13 +7,13 @@
             <input type="text" @input="inputCodeword" class="mt-1 auth_form input" ref="codewords"
                 placeholder="Кодовое слово" :required="true">
         </div>
-        <LineStep :step="12" class="mt-5" />
+        <LineStep :step="number_step" class="mt-5" />
         <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
             Продолжить
         </v-btn>
     </div>
 </template>
-  
+
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
 import { loadCurrentData } from '@/utils/loadStore'
@@ -40,7 +40,7 @@ export default {
     methods: {
         redirect() {
             this.$store.dispatch('addObjectFormData', {
-                object: 'step_12',
+                object: `step_${this.number_step}`,
                 value: this.currentData
             })
             this.next();

@@ -15,7 +15,7 @@
         <v-text-field id="oldName" v-model="currentData.salary_debt" placeholder="Укажите сумму"
           class="align-center border-none" name="oldName" type="number" :rules="requiredRules"
           append-icon="mdi-currency-rub" outlined :required="true"></v-text-field>
-        <line-step :step='9' />
+        <line-step :step='number_step' />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
           Продолжить
         </v-btn>
@@ -51,7 +51,7 @@ export default {
 
       if (this.$refs.form.validate()) {
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_9',
+          object: `step_${this.number_step}`,
           value: this.currentData
         })
         this.next();

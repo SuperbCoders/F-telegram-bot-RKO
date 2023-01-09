@@ -47,42 +47,30 @@
       <h4 class="form_block_label text-left">
         Общее количество операций в неделю
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.num_transactions_week" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field type="number" outlined v-model="currentData.num_transactions_week" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Общее количество операций в квартал
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.num_transactions_quarter" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field type="number" outlined v-model="currentData.num_transactions_quarter" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Общее количество операций в год
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.num_transactions_age" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field type="number" outlined v-model="currentData.num_transactions_age" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
@@ -104,45 +92,30 @@
       <h4 class="form_block_label text-left">
         Общая сумма операций в неделю
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.sum_transactions_week" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field type="number" outlined v-model="currentData.sum_transactions_week" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Общая сумма операций в квартал
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.sum_transactions_quarter" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field type="number" outlined v-model="currentData.sum_transactions_quarter" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Общая сумма операций в год
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.sum_transactions_age" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field outlined v-model="currentData.sum_transactions_age" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
@@ -163,45 +136,31 @@
       <h4 class="form_block_label text-left">
         Количество операций по снятию наличности в неделю
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.week_cash_withdrawal" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field type="number" outlined v-model="currentData.week_cash_withdrawal" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Количество операций по снятию наличности в квартал
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.quarter_cash_withdrawal" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block">
+        <v-text-field outlined v-model="currentData.quarter_cash_withdrawal" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Количество операций по снятию наличности в год
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.age_cash_withdrawal" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.age_cash_withdrawal" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
-
-
 
     <div>
       <h4 class="form_block_label text-left">
@@ -222,45 +181,30 @@
       <h4 class="form_block_label text-left">
         Сумма операций по снятию денежных средств в наличной форме в неделю
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.sum_week_cash_withdrawal" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.sum_week_cash_withdrawal" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Сумма операций по снятию денежных средств в наличной форме в квартал
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.sum_quarter_cash_withdrawal" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.sum_quarter_cash_withdrawal" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Сумма операций по снятию денежных средств в наличной форме в год
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.sum_age_cash_withdrawal" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.sum_age_cash_withdrawal" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
 
@@ -283,42 +227,30 @@
       <h4 class="form_block_label text-left">
         Количество операций по внешнеторговым контрактам в неделю
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.foreign_trade_contracts_week" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.foreign_trade_contracts_week" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Количество операций по внешнеторговым контрактам в квартал
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.foreign_trade_contracts_quarter" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.foreign_trade_contracts_quarter" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Количество операций по внешнеторговым контрактам в год
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.foreign_trade_contracts_age" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.foreign_trade_contracts_age" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
@@ -340,43 +272,30 @@
       <h4 class="form_block_label text-left">
         Сумма операций по внешнеторговым контрактам в неделю
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.foreign_sum_contracts_week" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.foreign_sum_contracts_week" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Сумма операций по внешнеторговым контрактам в квартал
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.foreign_sum_contracts_quarter" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.foreign_sum_contracts_quarter" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
       <h4 class="form_block_label text-left">
         Сумма операций по внешнеторговым контрактам в год
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.foreign_sum_contracts_age" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
-        </v-radio-group>
+      <div class="form_block mt-2">
+        <v-text-field type="number" outlined v-model="currentData.foreign_sum_contracts_age" class="mt-1 auth_form">
+        </v-text-field>
       </div>
-      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
     <div>
@@ -415,7 +334,7 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
-    <line-step :step='13' class="mt-5" />
+    <line-step :step='number_step' class="mt-5" />
     <v-btn block large :disabled="!valid" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>
   </div>
@@ -470,7 +389,7 @@ export default {
   methods: {
     validate() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_13',
+        object: `step_${this.number_step}`,
         value: this.currentData
       })
       this.next();

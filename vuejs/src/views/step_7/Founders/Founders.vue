@@ -8,10 +8,10 @@
             <div class="form_block">
                 <p class="text-left form_block_title">Учередитель</p>
                 <InnAndNameInput @input="({ inn, name, ogrn }) => {
-    itemForm.inn = inn;
-    itemForm.name = name;
-    itemForm.ogrn = ogrn;
-}" :value="itemForm.name" />
+                    itemForm.inn = inn;
+                    itemForm.name = name;
+                    itemForm.ogrn = ogrn;
+                }" :value="itemForm.name" />
             </div>
 
             <div class="form_block mt-6">
@@ -32,7 +32,7 @@
                 <img src="@/assets/plus-circle.svg" alt="">
             </v-btn>
         </div>
-        <line-step :step="7" />
+        <line-step :step="number_step" />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
         </v-btn>
     </v-form>
@@ -84,7 +84,7 @@ export default {
 
             if (this.$refs.form.validate()) {
                 this.$store.dispatch('addObjectFormData', {
-                    object: 'step_7',
+                    object: `step_${this.number_step}`,
                     value: this.currentData
                 });
                 this.next();

@@ -12,7 +12,11 @@ export default {
 
   data: () => ({}),
 
-  mounted: function () {},
+  mounted(){
+    document.body.onclick = (event) => {
+      this.unfocus(event);
+    }
+  },
 
   watch: {},
 
@@ -22,7 +26,15 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+    unfocus(event){
+      if(event.target.tagName === 'INPUT') return
+      const inputs = document.querySelectorAll("input");
+      for(const input of inputs){
+        input.blur();
+      }
+    }
+  },
 };
 </script>
 

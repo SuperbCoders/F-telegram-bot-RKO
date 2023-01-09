@@ -31,7 +31,7 @@
           <img src="@/assets/plus-circle.svg" alt="">
         </v-btn>
       </div>
-      <line-step :step="3" />
+      <line-step :step="number_step" />
       <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
       </v-btn>
     </v-form>
@@ -106,7 +106,7 @@ export default {
       this.$refs.form.validate();
       if (this.$refs.form.validate()) {
         this.$store.dispatch("addObjectFormData", {
-          object: "step_3",
+          object: `step_${this.number_step}`,
           value: this.currentData,
         });
         this.next();

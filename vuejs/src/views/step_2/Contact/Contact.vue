@@ -30,7 +30,7 @@
                 </v-text-field>
             </div>
         </v-form>
-        <line-step :step="2" />
+        <line-step :step="number_step" />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
         </v-btn>
     </div>

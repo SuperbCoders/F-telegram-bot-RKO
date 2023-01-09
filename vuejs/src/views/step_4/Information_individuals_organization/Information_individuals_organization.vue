@@ -25,7 +25,7 @@
             </div>
 
         </v-form>
-        <line-step :step="4" class="mt-4" />
+        <line-step :step="number_step" class="mt-4" />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
             Продолжить
         </v-btn>
@@ -63,7 +63,7 @@ export default {
 
             if (this.$refs.form.validate()) {
                 this.$store.dispatch("addObjectFormData", {
-                    object: "step_4",
+                    object: `step_${this.number_step}`,
                     value: { list_persone: this.list_persone },
                 });
                 this.next();
@@ -89,7 +89,7 @@ export default {
         async createPersone() {
             this.$store.commit("addPersone");
             await this.$store.dispatch('addObjectFormData', {
-                object: 'step_4',
+                object: `step_${this.number_step}`,
                 value: { list_persone: this.list_persone },
             })
 

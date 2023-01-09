@@ -17,7 +17,7 @@
         outlined>
       </v-text-field>
     </div>
-    <line-step :step='8' class="mt-5" />
+    <line-step :step='number_step' class="mt-5" />
     <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect">Продолжить
     </v-btn>
   </div>
@@ -52,7 +52,7 @@ export default {
   methods: {
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_8',
+        object: `step_${this.number_step}`,
         value: this.currentData
       })
       this.next();

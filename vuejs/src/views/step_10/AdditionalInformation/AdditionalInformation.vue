@@ -9,8 +9,9 @@
                 label="ЕИО не является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)"
                 value="ЕИО не является публичным должностным лицом или лицом, связанным с публичным должностным лицом родственными, партнерскими или иными отношениями (Отец, Мать, Брат, Сестра, Супруг(а), Сын, Дочь, Бабушка, Дедушка, Внук\внучка, Усыновленный, Усыновитель)" />
         </v-radio-group>
-        <line-step :step='10' />
-        <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+        <line-step :step='number_step' />
+        <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
+            Продолжить
         </v-btn>
     </v-form>
 </template>
@@ -49,7 +50,7 @@ export default {
 
             if (this.$refs.form.validate()) {
                 this.$store.dispatch('addObjectFormData', {
-                    object: 'step_1',
+                    object: `step_${this.number_step}`,
                     value: this.currentData
                 });
                 // this.$store.commit('addItemFormData', this.currentData)

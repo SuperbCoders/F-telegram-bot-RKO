@@ -81,13 +81,13 @@
 
         <AttachButton class="mb-5" text="Загрузить документ" @file="onfile_certifying_identity_ceo" />
 
-        <line-step :step="5" class="mt-6" />
+        <line-step :step="number_step" class="mt-6" />
 
         <v-btn block large class="mt-10 auth_form_bth" color="primary" @click="redirect()">Продолжить
         </v-btn>
     </div>
 </template>
-  
+
 <script>
 import AttachButton from '@/components/button/attachButton.vue';
 import LineStep from "@/components/line_step/line_step.vue";
@@ -172,7 +172,7 @@ export default {
             this.currentData.first_passport_page_url = data.path;
 
             this.$store.dispatch("addObjectFormData", {
-                object: "step_5",
+                object: `step_${this.number_step}`,
                 value: this.currentData,
             });
             this.next();

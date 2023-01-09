@@ -13,7 +13,7 @@
       </v-radio-group>
 
     </v-form>
-    <line-step :step="6" class="mt-4" />
+    <line-step :step="number_step" class="mt-4" />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">
       Продолжить
     </v-btn>
@@ -54,7 +54,7 @@ export default {
         this.currentData.list_supervisoty_board_persone = this.list_supervisoty_board_persone;
 
         this.$store.dispatch("addObjectFormData", {
-          object: "step_6",
+          object: `step_${this.number_step}`,
           value: this.currentData,
         });
         this.next()
@@ -84,37 +84,7 @@ export default {
         object.pop();
       }
     },
-    async createSupervisoryBoard() {
-      await this.$store.commit('addSupervisoryBoardPersone')
-      this.currentData.list_supervisoty_board_persone = this.$store.state.formData.step_3.list_supervisoty_board_persone;
-      this.currentData.list_collegial_executive_body = this.$store.state.formData.step_3.list_collegial_executive_body;
-      await this.$store.dispatch('addObjectFormData', {
-        object: 'step_3',
-        value: this.currentData,
-      })
 
-      this.$router.push({
-        path: "/individual-info",
-        query: {
-          "type": "SupervisoryBoard"
-        }
-      })
-    },
-    async createCollegialExecutive() {
-      await this.$store.commit('addCollegialExecutiveBody')
-      this.currentData.list_supervisoty_board_persone = this.$store.state.formData.step_3.list_supervisoty_board_persone;
-      this.currentData.list_collegial_executive_body = this.$store.state.formData.step_3.list_collegial_executive_body;
-      this.$store.dispatch('addObjectFormData', {
-        object: 'step_3',
-        value: this.currentData
-      })
-      this.$router.push({
-        path: "/individual-info",
-        query: {
-          "type": "CollegialExecutive"
-        }
-      })
-    },
     renderName(obj) {
       return `${obj?.account_own_lastname} ${obj?.account_own_name} ${obj?.account_own_surname}`
     }

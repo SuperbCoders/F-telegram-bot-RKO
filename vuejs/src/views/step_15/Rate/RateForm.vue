@@ -154,7 +154,7 @@
       </v-checkbox>
     </div>
 
-    <LineStep :step="14" />
+    <LineStep :step="number_step" />
     <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
       <span v-if="currentData.tariff">Продолжить</span>
       <span v-else>Пропустить</span>
@@ -199,7 +199,7 @@ export default {
     },
     redirect() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_14',
+        object: `step_${this.number_step}`,
         value: this.currentData
       })
       this.next();

@@ -34,7 +34,7 @@
     <p class="error_message" v-if="!valid && operationlist.length < 1">
       Выберите пункт
     </p>
-    <line-step :step='10' class="mt-5" />
+    <line-step :step='number_step' class="mt-5" />
     <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
@@ -66,7 +66,7 @@ export default {
       } else {
         this.valid = true;
         this.$store.dispatch('addObjectFormData', {
-          object: 'step_10',
+          object: `step_${this.number_step}`,
           value: this.currentData
         })
         this.next();

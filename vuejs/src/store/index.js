@@ -50,10 +50,12 @@ export default new Vuex.Store({
                 document_certifying_identity_executive_file: null,
                 document_confirming_real_activity_file: null,
                 document_licenses_file: null,
+                document_certifying_identity_ceo_file: null,
 
                 document_certifying_identity_executive: [],
                 document_confirming_real_activity: [],
                 document_licenses: [],
+                document_certifying_identity_ceo: [],
             },
             step_6: {
                 structure_value: "",
