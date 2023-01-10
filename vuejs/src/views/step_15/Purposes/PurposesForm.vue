@@ -113,7 +113,7 @@
         Общая сумма операций в год
       </h4>
       <div class="form_block">
-        <v-text-field outlined v-model="currentData.sum_transactions_age" class="mt-1 auth_form">
+        <v-text-field type="number" outlined v-model="currentData.sum_transactions_age" class="mt-1 auth_form">
         </v-text-field>
       </div>
     </div>
@@ -147,7 +147,7 @@
         Количество операций по снятию наличности в квартал
       </h4>
       <div class="form_block">
-        <v-text-field outlined v-model="currentData.quarter_cash_withdrawal" class="mt-1 auth_form">
+        <v-text-field type="number" outlined v-model="currentData.quarter_cash_withdrawal" class="mt-1 auth_form">
         </v-text-field>
       </div>
     </div>
