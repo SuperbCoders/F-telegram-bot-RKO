@@ -15,6 +15,7 @@
             Ваша заявка успешно отправлена!
           </div>
 
+          
           <div class="mt-4 text-center" style="font-size: 12px">
             В ближайшее время с вами свяжутся
           </div>
