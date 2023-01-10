@@ -54,9 +54,15 @@
       </div>
 
       <div class="form_block" v-if="is_auctioner">
-        <p class="text-left form_block_title"><span class="star">*</span>Доля</p>
-        <v-text-field id="oldName" placeholder="Доля" class="align-center border-none" outlined :rules="requiredRules"
-          v-model="currentData.account_own_piece" :required="true">
+        <p class="text-left form_block_title"><span class="star">*</span>Доля владения Акционер/учредитель</p>
+        <v-text-field id="oldName" placeholder="Доля владения Акционер/учредитель" class="align-center border-none" outlined :rules="requiredRules"
+          v-model="currentData.account_own_piece_auctioner" :required="true">
+        </v-text-field>
+      </div>
+      <div class="form_block" v-if="is_beneficiary">
+        <p class="text-left form_block_title"><span class="star">*</span>Доля владения Бенифициар</p>
+        <v-text-field id="oldName" placeholder="Доля владения Бенифициар" class="align-center border-none" outlined :rules="requiredRules"
+          v-model="currentData.account_own_piece_beneficiary" :required="true">
         </v-text-field>
       </div>
       <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
@@ -80,7 +86,8 @@ export default {
         account_onw_inn: "",
         account_own_citizenship: "Россия",
         account_own_phone: "",
-        account_own_piece: "",
+        account_own_piece_auctioner: "",
+        account_own_piece_beneficiary: "",
         account_own_email: "",
         account_country_residence: "",
       },
@@ -141,6 +148,10 @@ export default {
     is_eio() {
       const index = this.$route.params.id;
       return this.$store.state.formData.step_4.list_persone[index].substep_1.account_onw_role.indexOf("ЕИО") >= 0;
+    },
+    is_beneficiary() {
+      const index = this.$route.params.id;
+      return this.$store.state.formData.step_4.list_persone[index].substep_1.account_onw_role.indexOf("Бенифициар") >= 0;
     }
   },
 }

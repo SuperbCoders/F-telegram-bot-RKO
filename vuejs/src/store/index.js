@@ -90,6 +90,12 @@ export default new Vuex.Store({
                 codeword: "",
             },
             step_14: {
+                information_counterparties: null,
+                information_counterparties_two: null,
+                name_organization: null,
+                name_organization_two: null,
+            },
+            step_15: {
                 subject_licensing: "",
                 history_reputation: "",
                 num_transactions_month: "",
@@ -119,7 +125,7 @@ export default new Vuex.Store({
                 sources_cash_receipts: [],
                 headcount: "",
             },
-            step_15: {
+            step_16: {
                 tariff: null,
                 additional_products: [],
             },

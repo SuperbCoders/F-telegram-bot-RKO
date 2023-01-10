@@ -245,7 +245,10 @@ export const translateMixin = {
                     return "Источники поступления денежных средств";
                 case "headcount":
                     return "Штатная численность сотрудников";
-
+                case "information_counterparties":
+                    return "Имеются постоянные или предполагаемые плательщики по операциям с денежными средствами на счете";
+                case "information_counterparties_two":
+                    return "Имеются постоянные или предполагаемые получатели по операциям с денежными средствами на счете";
 
                 default: return name
             }

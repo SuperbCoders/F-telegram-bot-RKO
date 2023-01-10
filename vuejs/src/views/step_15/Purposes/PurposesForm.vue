@@ -238,7 +238,8 @@
         Количество операций по внешнеторговым контрактам в квартал
       </h4>
       <div class="form_block mt-2">
-        <v-text-field type="number" outlined v-model="currentData.foreign_trade_contracts_quarter" class="mt-1 auth_form">
+        <v-text-field type="number" outlined v-model="currentData.foreign_trade_contracts_quarter"
+          class="mt-1 auth_form">
         </v-text-field>
       </div>
     </div>
@@ -323,13 +324,8 @@
         Штатная численность сотрудников
       </h4>
       <div @click="valid = true" class="form_block">
-        <v-radio-group v-model="currentData.headcount" column>
-          <v-radio label="Единственным работником является единоличный исполнительный орган"
-            value="Единственным работником является единоличный исполнительный орган"></v-radio>
-          <v-radio label="2-5" value="2-5"></v-radio>
-          <v-radio label="6-20" value="6-20"></v-radio>
-          <v-radio label="Более 20" value="Более 20"></v-radio>
-        </v-radio-group>
+        <v-text-field type="number" outlined v-model="currentData.headcount" class="mt-1 auth_form">
+        </v-text-field>
       </div>
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>

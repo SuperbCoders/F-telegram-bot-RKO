@@ -14,16 +14,17 @@ import AdditionalInformation from '@/views/step_10/AdditionalInformation/Additio
 import PlanningOperation from '@/views/step_11/PlanningOperation/PlanningOperationForm.vue'
 import Approvals from '@/views/step_12/Approvals/ApprovalsForm.vue'
 import Codeword from '@/views/step_13/Codeword/Codeword.vue'
-import Purposes from '@/views/step_14/Purposes/PurposesForm.vue'
-import Rate from '@/views/step_15/Rate/RateForm.vue'
-import AllData from '@/views/step_16/AllData/AllData.vue'
+import Information_counterparties from '@/views/step_14/Information_counterparties/Information_counterparties.vue'
+import Purposes from '@/views/step_15/Purposes/PurposesForm.vue'
+import Rate from '@/views/step_16/Rate/RateForm.vue'
+import AllData from '@/views/step_17/AllData/AllData.vue'
 
 
 
 
 
 
-// import Information_counterparties from '@/views/Information_counterparties/Information_counterparties.vue'
+
 // import Select_additional_products from '@/views/Select_additional_products/Select_additional_products.vue'
 // import Consent_receive_newsletter from '@/views/Consent_receive_newsletter/Consent_receive_newsletter.vue'
 
@@ -143,27 +144,35 @@ const routes = [
     }
   },
   {
-    path: "/purposes",
+    path: "/information_counterparties",
     name: "step_14",
-    component: Purposes,
+    component: Information_counterparties,
     props: {
       number_step: 14,
     }
   },
   {
-    path: "/rate",
+    path: "/purposes",
     name: "step_15",
-    component: Rate,
+    component: Purposes,
     props: {
       number_step: 15,
     }
   },
   {
-    path: "/all-data",
+    path: "/rate",
     name: "step_16",
-    component: AllData,
+    component: Rate,
     props: {
       number_step: 16,
+    }
+  },
+  {
+    path: "/all-data",
+    name: "step_17",
+    component: AllData,
+    props: {
+      number_step: 17,
     }
 
   },

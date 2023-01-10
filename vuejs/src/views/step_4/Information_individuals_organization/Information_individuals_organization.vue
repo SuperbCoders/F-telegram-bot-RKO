@@ -6,7 +6,10 @@
             Сведения о физических лицах организации
         </h2>
         <v-card elevation="2" class="pa-4 mb-2 d-flex" v-for="(val, key) in list_persone" :key="key">
-            <div>{{ renderName(val['substep_1']) }}</div>
+            <div>
+                <div>{{ renderName(val['substep_1']) }}</div>
+                <div>{{ renderRole(val['substep_1']) }}</div>
+            </div>
             <button style="margin-left: auto;" @click="editPersone(key)">Изменить</button>
             <button class="ml-5" @click="deletePersone(key)">Удалить</button>
         </v-card>
@@ -105,6 +108,10 @@ export default {
             const account_own_name = obj?.account_own_name ?? "";
             const account_own_surname = obj?.account_own_surname ?? "";
             return `${account_own_lastname} ${account_own_name} ${account_own_surname}`;
+        },
+        renderRole(obj) {
+            const account_onw_role = obj?.account_onw_role ?? "";
+            return account_onw_role.join(', ');
         }
 
     },
