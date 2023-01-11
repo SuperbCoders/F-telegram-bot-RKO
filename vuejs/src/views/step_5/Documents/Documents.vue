@@ -125,7 +125,9 @@ export default {
     methods: {
         async onfile_certifying_identity_executive(files) {
             console.log(files);
-            this.currentData.document_certifying_identity_executive_file = files;
+            const old_files = this.currentData.document_certifying_identity_executive_file;
+            const array_files = Array.from(files);
+            this.currentData.document_certifying_identity_executive_file = Object.assign(old_files, array_files);
             const { images } = await this.getURLfile(files);
             this.currentData.document_certifying_identity_executive = images;
         },
