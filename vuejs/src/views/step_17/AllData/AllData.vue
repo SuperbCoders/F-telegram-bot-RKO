@@ -137,62 +137,7 @@
         </div>
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
-        
-        <div v-if="step_index === 'step_2'">
-          <hr class="mt-2 mb-2">
-          Контакты
-        </div>
-        <div v-if="step_index === 'step_3'">
-          <hr class="mt-2 mb-2">
-          Адреса компании
-        </div>
-        <div v-if="step_index === 'step_4'">
-          <hr class="mt-2 mb-2">
-          Сведения о физических лицах организации
-        </div>
 
-        <div v-if="step_index === 'step_6'">
-          <hr class="mt-2 mb-2">
-          Структура органов управления
-        </div>
-        <div v-if="step_index === 'step_7'">
-          <hr class="mt-2 mb-2">
-          Учредители - юридические лица
-        </div>
-        <div v-if="step_index === 'step_8'">
-          <hr class="mt-2 mb-2">
-          Выгодоприобретатели
-        </div>
-        <div v-if="step_index === 'step_9'">
-          <hr class="mt-2 mb-2">
-          Сведения о персонале
-        </div>
-        <div v-if="step_index === 'step_10'">
-          <hr class="mt-2 mb-2">
-          Дополнительная информация о ЕИО
-        </div>
-        
-        <div v-if="step_index === 'step_11'">
-          <hr class="mt-2 mb-2">
-          Виды договоров (контрактов), расчеты по которым юридическое лицо собирается
-          осуществлять через банк
-        </div>
-        <div v-if="step_index === 'step_12'">
-          <hr class="mt-2 mb-2">
-          Сведения о соответствии FATCA и и стратегическом значении компании (выберите все верные утверждения)
-        </div>
-        <div v-if="step_index === 'step_13'">
-          <hr class="mt-2 mb-2">
-          Кодовое слово
-        </div>
-        <div v-if="step_index === 'step_14'">
-          <hr class="mt-2 mb-2">
-          Сведения о контрагентах
-        </div>
-        <div v-if="step_index === 'step_15'">
-          <hr class="mt-2 mb-2">
-          Сведения о бизнесе
-        </div>
         <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
           <div v-if="objectAnswer?.type === 'Object'">
             <div v-if="objectAnswer.body">
