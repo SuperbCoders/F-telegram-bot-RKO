@@ -84,7 +84,7 @@ export default {
   }),
 
   async mounted() {
-
+    this.auto_route();
 
     loadCurrentData({
       currentData: this.currentData,
