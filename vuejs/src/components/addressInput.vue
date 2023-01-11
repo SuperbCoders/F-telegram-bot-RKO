@@ -1,11 +1,12 @@
 <template>
     <div class="container_field">
-        <input type="text" :list="'address_list'+index" class="input" :placeholder="label" @input="emitData" :value="value">
-        <datalist :id="'address_list'+index">
-            <option :value="address" v-for="(address, key) in list_address" :key="key">
-                {{ address }}
-            </option>
-        </datalist>
+        <input type="text" class="input" @focus="focusInput" :placeholder="label"
+            @input="emitData" :value="value">
+        <div class="dropdown_modal" v-if="is_modal && list_address.length > 0">
+            <div class="field" v-for="(address, key) in list_address" :key="key" @click="selectAddress(address)">
+                <div class="name">{{ address }}</div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -29,23 +30,31 @@ export default {
     data() {
         return {
             list_address: [],
-            address_field: ""
+            address_field: "",
+            is_modal: false,
         }
     },
     methods: {
         async getAddressFromName(val) {
             const data = await getAddress(val);
-            this.list_address = data.suggestions.map((elem) => `${elem.value}`) || [];
+            this.list_address = data.suggestions.map((elem) => {
+                return `${elem.value}`
+            }) || [];
         },
         selectAddress(address) {
             this.getAddressFromName(address);
+            this.is_modal = false;
             this.$emit('input', address)
         },
         emitData(e) {
             const val = e.target.value;
+            console.log(123);
             this.getAddressFromName(val);
             this.$emit('input', val)
         },
+        focusInput() {
+            this.is_modal = true;
+        }
     }
 }
 </script>
@@ -85,6 +94,8 @@ export default {
     z-index: 100;
     border: 1px solid #d6d6d6;
     border-radius: 8px;
+    max-height: 200px;
+    overflow: auto;
 }
 
 .input {
