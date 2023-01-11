@@ -54,7 +54,7 @@
       </div>
 
       <div class="form_block" v-if="is_auctioner">
-        <p class="text-left form_block_title"><span class="star">*</span>Доля</p>
+        <p class="text-left form_block_title"><span class="star">*</span>Доля владения</p>
         <v-text-field id="oldName" placeholder="Доля" class="align-center border-none" outlined :rules="requiredRules"
           v-model="currentData.account_own_piece" :required="true">
         </v-text-field>
