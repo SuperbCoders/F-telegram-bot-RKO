@@ -38,7 +38,88 @@
           <p class="form_block_title  w-50">Ответ</p>
         </div>
       </div>
+      <div v-for="(step, step_index) in getFormData" :key="step_index">
 
+        <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
+          <div v-if="objectAnswer.type === 'Object'">
+            <div v-if="objectAnswer.body">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ translateValue(objectAnswer.body) }}
+              </div>
+            </div>
+
+          </div>
+          <div v-else-if="objectAnswer.type === 'Array'">
+            <div class="d-flex" v-if="objectAnswer.typeArray === 'Variable'">
+              <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+                <div v-for="(subAnswer, subKey) in objectAnswer.body" :key="subKey">
+                  - {{ translateValue(subAnswer.body) }}
+                </div>
+              </div>
+            </div>
+
+            <div class="" v-if="objectAnswer.typeArray === 'Object'">
+              <div class="form_block_title pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+                {{ isTitle(question) }}
+              </div>
+
+              <div v-for="(arrayAnswer, arrayKey) in objectAnswer.body" :key="arrayKey">
+                <div v-for="(subAnswer, subKey) in arrayAnswer.body" :key="subKey">
+                  <div v-if="subAnswer" class="d-flex">
+                    <div class="form_block_title w-50 pb-2 pt-2">
+                      {{ isTitle(subKey) }}
+                    </div>
+                    <div class="form_block_title w-50 pb-2 pt-2">
+                      <div v-if="isArray(subAnswer)">
+                        <div v-for="(arr, key) in subAnswer" :key="key">
+                          - {{ arr }}
+                        </div>
+                      </div>
+                      <div v-else>
+                        {{ translateValue(subAnswer) }}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+          <div v-else-if="objectAnswer?.type === 'Boolean'">
+            <div class="d-flex">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                <div>
+                  <span v-if="objectAnswer.body">Да</span>
+                  <span v-else>Нет</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div v-else-if="objectAnswer?.type === 'Variable'">
+            <div class="d-flex">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ translateValue(objectAnswer.body) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <line-step :step="number_step" class="mt-10" />
     <p @click="dialogAgreement = true" class="mt-8 text-center" style="cursor: pointer;">
