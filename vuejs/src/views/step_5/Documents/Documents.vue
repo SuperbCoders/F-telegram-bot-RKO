@@ -127,7 +127,7 @@ export default {
             console.log(files);
             const old_files = this.currentData.document_certifying_identity_executive_file;
             const array_files = Array.from(files);
-            this.currentData.document_certifying_identity_executive_file = Object.assign(old_files, array_files);
+            this.currentData.document_certifying_identity_executive_file = old_files.concat(array_files);
             const { images } = await this.getURLfile(files);
             this.currentData.document_certifying_identity_executive = images;
         },
