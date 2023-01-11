@@ -124,7 +124,6 @@ export default {
     },
     methods: {
         async onfile_certifying_identity_executive(files) {
-            console.log(files);
             const old_files = this.currentData.document_certifying_identity_executive_file;
             const array_files = Array.from(files);
             this.currentData.document_certifying_identity_executive_file = old_files.concat(array_files);
@@ -132,17 +131,23 @@ export default {
             this.currentData.document_certifying_identity_executive = images;
         },
         async onfile_confirming_real_activity(files) {
-            this.currentData.document_confirming_real_activity_file = files;
+            const old_files = this.currentData.document_confirming_real_activity_file;
+            const array_files = Array.from(files);
+            this.currentData.document_confirming_real_activity_file = old_files.concat(array_files);
             const { images } = await this.getURLfile(files);
             this.currentData.document_confirming_real_activity = images;
         },
         async onfile_licenses(files) {
-            this.currentData.document_licenses_file = files;
+            const old_files = this.currentData.document_licenses_file;
+            const array_files = Array.from(files);
+            this.currentData.document_licenses_file = old_files.concat(array_files);
             const { images } = await this.getURLfile(files);
             this.currentData.document_licenses = images;
         },
         async onfile_certifying_identity_ceo(files) {
-            this.currentData.document_certifying_identity_ceo_file = files;
+            const old_files = this.currentData.document_certifying_identity_ceo_file;
+            const array_files = Array.from(files);
+            this.currentData.document_certifying_identity_ceo_file = old_files.concat(array_files);
             const { images } = await this.getURLfile(files);
             this.currentData.document_certifying_identity_ceo = images;
         },
