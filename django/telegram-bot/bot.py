@@ -158,7 +158,13 @@ def save_user_chat_id(chat_id, phone_number):
             timeout=10,
         )
         if not response.status_code == 200:
-            raise Exception()
+            response = requests.get(
+                api_url,
+                {"phone_number": stripped_phone_number},
+                timeout=10,
+            )
+            if not response.status_code == 200:
+                raise Exception()
     except Exception:
         raise Exception()
 

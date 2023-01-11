@@ -129,7 +129,7 @@ class UserAPIView(APIView):
         if len(list_user) == 1:
             return Response({}, status=status.HTTP_200_OK)
         return Response({}, status=status.HTTP_404_NOT_FOUND)
-    
+
     def post(self, request, format=None, *args, **kwargs):
         telegram_chat_id = self.kwargs.get("telegram_chat_id")
         phone_number = self.request.data.get("phone_number")
@@ -137,7 +137,7 @@ class UserAPIView(APIView):
             user = User(
                 username=uuid.uuid4(),
                 password=uuid.uuid4(),
-                phone_number=phone_number, 
+                phone_number=phone_number,
                 telegram_chat_id=telegram_chat_id
             )
             user.save()
