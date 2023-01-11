@@ -39,8 +39,30 @@
         </div>
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
-          {{ step  }}
 
+        <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
+          <div v-if="objectAnswer.type === 'Object'">
+            <div v-if="objectAnswer.body">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ translateValue(objectAnswer.body) }}
+              </div>
+            </div>
+          </div>
+
+          <div v-else-if="objectAnswer.type === 'Variable'">
+            <div class="d-flex">
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ isTitle(question) }}
+              </div>
+              <div class="form_block_title w-50 pb-2 pt-2">
+                {{ translateValue(objectAnswer.body) }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <line-step :step="number_step" class="mt-10" />
