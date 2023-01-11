@@ -65,7 +65,6 @@ export const auto_route = {
                     break
 
 
-
                 case 'substep_0':
                     next_push = 'substep_1';
                     break
@@ -85,6 +84,7 @@ export const auto_route = {
                     next_push = 'substep_6';
                     break
             }
+
             this.$router.push({ name: next_push });
 
         }
