@@ -1,5 +1,5 @@
 <template>
-  <div>
+<div>
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">
       Назад
     </v-btn>
@@ -15,6 +15,7 @@
             Ваша заявка успешно отправлена!
           </div>
 
+          
           <div class="mt-4 text-center" style="font-size: 12px">
             В ближайшее время с вами свяжутся
           </div>
@@ -136,39 +137,7 @@
         </div>
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">
-        <hr class="mt-2 mb-2">
-        <div v-if="step_index === 'step_2'">
-          Контакты
-        </div>
-        <div v-if="step_index === 'step_3'">
-          Адреса компании
-        </div>
-        <div v-if="step_index === 'step_4'">
-          Сведения о физических лицах организации
-        </div>
 
-        <div v-if="step_index === 'step_6'">
-          Структура органов управления
-        </div>
-        <div v-if="step_index === 'step_7'">
-          Учредители - юридические лица
-        </div>
-        <div v-if="step_index === 'step_8'">
-          Выгодоприобретатели
-        </div>
-        <div v-if="step_index === 'step_9'">
-          Сведения о персонале
-        </div>
-        <div v-if="step_index === 'step_10'">
-          Виды договоров (контрактов), расчеты по которым юридическое лицо собирается
-          осуществлять через банк
-        </div>
-        <div v-if="step_index === 'step_11'">
-          Сведения о соответствии FATCA и и стратегическом значении компании (выберите все верные утверждения)
-        </div>
-        <div v-if="step_index === 'step_12'">
-          Кодовое слово
-        </div>
         <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
           <div v-if="objectAnswer?.type === 'Object'">
             <div v-if="objectAnswer.body">
@@ -250,7 +219,7 @@
         </div>
       </div>
     </div>
-    <line-step :step="15" class="mt-10" />
+    <line-step :step="number_step" class="mt-10" />
     <p @click="dialogAgreement = true" class="mt-8 text-center" style="cursor: pointer;">
       Нажимая на кнопку «Отправить», вы соглашаетесь с
       условиями подачи заявки и обработки персональных данных</p>
@@ -260,7 +229,6 @@
 <script>
 import LineStep from "@/components/line_step/line_step.vue"
 import { translateMixin } from '@/mixin/translate'
-
 export default {
   mixins: [translateMixin],
   props: {
@@ -462,56 +430,5 @@ export default {
 };
 </script>
 <style scoped>
-.card_content_button {
-  width: 100%;
-  box-shadow: 0 0 4px #00000030;
-  background: #d41367 !important;
-  border-radius: 6px;
-  margin-top: 20px;
-  font-family: Roboto;
-  font-size: 14px !important;
-  color: #fff !important;
-  font-weight: 500;
-  padding: 16px 30px !important;
-  text-transform: none;
-}
 
-.all_data_table {
-  width: 100%;
-}
-
-.data_table_block {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.form_block_title {
-  display: block !important;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding-right: 15px;
-  box-sizing: border-box;
-}
-
-.w-50 {
-  width: 50%;
-}
-
-.title-table {
-  font-size: 14px !important;
-  padding-top: 4px;
-}
-
-.block_right {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.block_right>* {
-  width: 50%;
-}
-
-.all_data_table-row {}
 </style>

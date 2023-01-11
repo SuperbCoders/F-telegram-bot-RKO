@@ -175,10 +175,10 @@ class Adapter_LoanRequest:
 
     # ВИДЫ ДОГОВОРОВ (КОНТРАКТОВ), РАСЧЕТЫ ПО КОТОРЫМ ЮРИДИЧЕСКОЕ ЛИЦО СОБИРАЕТСЯ ОСУЩЕСТВЛЯТЬ ЧЕРЕЗ БАНК
     def setTypesOfContracts(
-            self, 
-            contractProvisionServices, 
-            supplyContract, 
-            workAgreement, 
+            self,
+            contractProvisionServices,
+            supplyContract,
+            workAgreement,
             commissionAgreement,
             contractOfSale,
             leaseAgreementForMovableProperty,
@@ -201,7 +201,7 @@ class Adapter_LoanRequest:
             "other": other, # Иное
             "contractsInfo": contractsInfo # Иные виды договоров
         }
-    
+
     def getInitiatorData(self, phoneNumber) -> dict:
         return {
             "phoneNumber": phoneNumber, # Номер телефона

@@ -10,7 +10,7 @@
 
             <div v-if="this.currentData.document_certifying_identity_executive_file" class="list_file">
                 <div v-for="(file, index) in this.currentData.document_certifying_identity_executive_file" :key="index"
-                    class="block_file mr-4">
+                    @click="delete_file_certifying_identity_executive(index)" class="block_file mr-4">
                     <div class="card_file">
                         <div class="type_file">{{ getType(file.type) }}</div>
                         <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -30,7 +30,7 @@
 
             <div v-if="this.currentData.document_confirming_real_activity_file" class="list_file">
                 <div v-for="(file, index) in this.currentData.document_confirming_real_activity_file" :key="index"
-                    class="block_file">
+                    @click="delete_file_confirming_real_activity_file(index)" class="block_file mr-4">
                     <div class="card_file">
                         <div class="type_file">{{ getType(file.type) }}</div>
                         <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -48,7 +48,8 @@
             </p>
 
             <div v-if="this.currentData.document_licenses_file" class="list_file">
-                <div v-for="(file, index) in this.currentData.document_licenses_file" :key="index" class="block_file">
+                <div v-for="(file, index) in this.currentData.document_licenses_file" :key="index"
+                    @click="delete_file_licenses_file(index)" class="block_file mr-4">
                     <div class="card_file">
                         <div class="type_file">{{ getType(file.type) }}</div>
                         <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -57,7 +58,6 @@
                 </div>
             </div>
         </div>
-
 
         <AttachButton class="mb-5" text="Загрузить документ" @file="onfile_licenses" />
 
@@ -68,7 +68,7 @@
 
             <div v-if="this.currentData.document_certifying_identity_ceo_file" class="list_file">
                 <div v-for="(file, index) in this.currentData.document_certifying_identity_ceo_file" :key="index"
-                    class="block_file">
+                    @click="delete_file_certifying_identity_ceo_file(index)" class="block_file mr-4">
                     <div class="card_file">
                         <div class="type_file">{{ getType(file.type) }}</div>
                         <div class="size_file">{{ getSize(file.size) }} Мб</div>
@@ -102,10 +102,10 @@ export default {
     data() {
         return {
             currentData: {
-                document_certifying_identity_executive_file: null,
-                document_confirming_real_activity_file: null,
-                document_licenses_file: null,
-                document_certifying_identity_ceo_file: null,
+                document_certifying_identity_executive_file: [],
+                document_confirming_real_activity_file: [],
+                document_licenses_file: [],
+                document_certifying_identity_ceo_file: [],
 
                 document_certifying_identity_executive: [],
                 document_confirming_real_activity: [],
@@ -124,6 +124,7 @@ export default {
     },
     methods: {
         async onfile_certifying_identity_executive(files) {
+            console.log(files);
             this.currentData.document_certifying_identity_executive_file = files;
             const { images } = await this.getURLfile(files);
             this.currentData.document_certifying_identity_executive = images;
@@ -143,6 +144,32 @@ export default {
             const { images } = await this.getURLfile(files);
             this.currentData.document_certifying_identity_ceo = images;
         },
+
+        // DELETE FILES
+
+        delete_file_certifying_identity_executive(indexItem) {
+            let arrayFiles = Array.from(this.currentData.document_certifying_identity_executive_file);
+            arrayFiles.splice(indexItem, 1);
+            this.currentData.document_certifying_identity_executive_file = arrayFiles;
+        },
+
+        delete_file_confirming_real_activity_file(indexItem) {
+            let arrayFiles = Array.from(this.currentData.document_confirming_real_activity_file);
+            arrayFiles.splice(indexItem, 1);
+            this.currentData.document_confirming_real_activity_file = arrayFiles;
+        },
+        delete_file_licenses_file(indexItem) {
+            let arrayFiles = Array.from(this.currentData.document_licenses_file);
+            arrayFiles.splice(indexItem, 1);
+            this.currentData.document_licenses_file = arrayFiles;
+        },
+        delete_file_certifying_identity_ceo_file(indexItem) {
+            let arrayFiles = Array.from(this.currentData.document_certifying_identity_ceo_file);
+            arrayFiles.splice(indexItem, 1);
+            this.currentData.document_certifying_identity_ceo_file = arrayFiles;
+        },
+
+
         getType(type) {
             type = type.split("/")[1];
             return type;
@@ -157,6 +184,7 @@ export default {
         back() {
             this.$router.push({ name: `step_${this.number_step - 1}` });
         },
+
         async redirect() {
             const formData = new FormData();
 
