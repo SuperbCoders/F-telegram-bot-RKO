@@ -123,15 +123,15 @@
       </v-card>
     </v-dialog>
     <div>
-      <h4 class="mb-6 text-center">Подтвердите введенные данные</h4>
+      <h4 class="mb-6 text-center" style="text-align: left">Подтвердите введенные данные</h4>
     </div>
     <div class="all_data_table">
       <div class="d-flex">
         <div class="data_table_block">
-          <p class="form_block_title  w-50">Вопрос</p>
+          <p class="form_block_title  w-50" style="text-align: left">Вопрос</p>
         </div>
         <div class="data_table_block">
-          <p class="form_block_title  w-50">Ответ</p>
+          <p class="form_block_title  w-50" style="text-align: left">Ответ</p>
         </div>
       </div>
       <div v-for="(step, step_index) in getFormData" :key="step_index">

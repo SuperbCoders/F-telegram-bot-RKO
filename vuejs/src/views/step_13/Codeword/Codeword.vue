@@ -96,6 +96,7 @@ export default {
     border: 1px solid #d6d6d6;
     border-radius: 8px;
     padding: 16px 12px;
+    outline: none;
 }
 
 .v-input__slot {

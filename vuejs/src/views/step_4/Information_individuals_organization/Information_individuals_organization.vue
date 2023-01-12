@@ -110,7 +110,7 @@ export default {
             return `${account_own_lastname} ${account_own_name} ${account_own_surname}`;
         },
         renderRole(obj) {
-            const account_onw_role = obj?.account_onw_role ?? "";
+            const account_onw_role = obj?.account_onw_role ?? [];
             return account_onw_role.join(', ');
         }
 

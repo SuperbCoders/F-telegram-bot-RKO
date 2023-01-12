@@ -11,8 +11,8 @@
     <div class="auth_form mt-12">
       <v-form ref="form" v-model="valid" lazy-validation>
         <InnAndNameInput @input="getInnAndNameComnany" :value="currentData.company_name" />
-        <v-text-field label="Контактный номер телефона" outlined v-model="currentData.contact_number"
-          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
+        <v-text-field placeholder="Контактный номер телефона" outlined v-model="currentData.contact_number"
+          :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-5 auth_form">
         </v-text-field>
         <!-- <div class="auth_form_cheked_block d-flex w-100">
           <v-checkbox :rules="requiredRules" v-model="currentData.is_conditions">

@@ -17,7 +17,7 @@
 
             <div class="form_block" v-if="currentData.information_counterparties == 'Имеются'">
                 <p class="text-left form_block_title">Наименование организации</p>
-                <v-text-field label="Наименование организации" outlined v-model="currentData.name_organization"
+                <v-text-field outlined v-model="currentData.name_organization"
                     class="mt-1 auth_form">
                 </v-text-field>
             </div>
@@ -33,7 +33,7 @@
 
             <div class="form_block" v-if="currentData.information_counterparties_two == 'Имеются'">
                 <p class="text-left form_block_title">Наименование организации</p>
-                <v-text-field label="Наименование организации" outlined v-model="currentData.name_organization_two"
+                <v-text-field outlined v-model="currentData.name_organization_two"
                     class="mt-1 auth_form">
                 </v-text-field>
             </div>

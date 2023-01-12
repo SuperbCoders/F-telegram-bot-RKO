@@ -6,11 +6,11 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block checkboxs">
         <div class="form_block mb-5">
-          <v-checkbox @click="isTypeAdress(itemForm)"
-            v-model="itemForm.typeAdress" label="Юридический" value="Юридический" hide-details>
+          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Юридический"
+            value="Юридический" hide-details>
           </v-checkbox>
-          <v-checkbox @click="isTypeAdress(itemForm)"
-            v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый" hide-details></v-checkbox>
+          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый"
+            hide-details></v-checkbox>
         </div>
         <p class="error_message" v-if="!valid && currentData.typeAdress > 0">
           Выберите пункт
@@ -58,10 +58,6 @@ export default {
           ogrn: null,
         },
       ],
-      defaultGroupItem: {
-        physic_address: null,
-        mail_address: null,
-      },
 
       currentData: {
         addresses: [

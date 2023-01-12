@@ -24,13 +24,13 @@
 
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Гражданство</p>
-        <v-combobox label="Гражданство" outlined required class="mt-1 auth_form combobox" @keyup="inputCountry"
+        <v-combobox outlined required class="mt-1 auth_form combobox" @keyup="inputCountry"
           v-model="currentData.account_own_citizenship" :items="itemsCountry">
         </v-combobox>
       </div>
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Страна проживания</p>
-        <v-combobox label="Страна проживания" outlined required class="mt-1 auth_form combobox" @keyup="inputCountry2"
+        <v-combobox outlined required class="mt-1 auth_form combobox" @keyup="inputCountry2"
           v-model="currentData.account_country_residence" :items="itemsCountry2">
         </v-combobox>
       </div>
@@ -47,22 +47,22 @@
       <div class="form_block">
         <p class="text-left form_block_title"><span class="star">*</span>Эл. почта</p>
 
-        <v-text-field id="oldName" type="email" placeholder="Эл. почта" class="align-center border-none" outlined :rules="emailRules"
-          v-model="currentData.account_own_email" :required="true">
+        <v-text-field id="oldName" type="email" placeholder="Эл. почта" class="align-center border-none" outlined
+          :rules="emailRules" v-model="currentData.account_own_email" :required="true">
 
         </v-text-field>
       </div>
 
       <div class="form_block" v-if="is_auctioner">
         <p class="text-left form_block_title"><span class="star">*</span>Доля владения Акционер/учредитель</p>
-        <v-text-field id="oldName" placeholder="Доля владения Акционер/учредитель" class="align-center border-none" outlined :rules="requiredRules"
-          v-model="currentData.account_own_piece_auctioner" :required="true">
+        <v-text-field id="oldName" placeholder="Доля владения Акционер/учредитель" class="align-center border-none"
+          outlined :rules="requiredRules" v-model="currentData.account_own_piece_auctioner" :required="true">
         </v-text-field>
       </div>
       <div class="form_block" v-if="is_beneficiary">
         <p class="text-left form_block_title"><span class="star">*</span>Доля владения Бенифициар</p>
-        <v-text-field id="oldName" placeholder="Доля владения Бенифициар" class="align-center border-none" outlined :rules="requiredRules"
-          v-model="currentData.account_own_piece_beneficiary" :required="true">
+        <v-text-field id="oldName" placeholder="Доля владения Бенифициар" class="align-center border-none" outlined
+          :rules="requiredRules" v-model="currentData.account_own_piece_beneficiary" :required="true">
         </v-text-field>
       </div>
       <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
@@ -158,5 +158,10 @@ export default {
 </script>
 
 <style>
-
+.combobox .v-input__icon {
+  display: none !important;
+}
+.theme--light.v-list-item.v-list-item--highlighted::before {
+  opacity: 0 !important;
+}
 </style>

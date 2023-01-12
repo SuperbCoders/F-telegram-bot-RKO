@@ -13,20 +13,20 @@
 
             <div class="form_block">
                 <p class="text-left form_block_title"><span class="star">*</span>Телефон</p>
-                <v-text-field label="Телефон" outlined v-model="currentData.contact_phone_number" :rules="requiredRules"
+                <v-text-field placeholder="+7 (000) 000 00 00" outlined v-model="currentData.contact_phone_number" :rules="requiredRules"
                     :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-1 auth_form">
                 </v-text-field>
             </div>
 
             <div class="form_block">
                 <p class="text-left form_block_title">Сайт компании</p>
-                <v-text-field label="Доменное имя" outlined v-model="currentData.donainname" class="mt-1 auth_form">
+                <v-text-field placeholder="domain.ru" outlined v-model="currentData.donainname" class="mt-1 auth_form">
                 </v-text-field>
             </div>
 
             <div class="form_block">
                 <p class="text-left form_block_title">Факс</p>
-                <v-text-field type="number" label="Факс" outlined v-model="currentData.fax" class="mt-1 auth_form">
+                <v-text-field type="number" placeholder="7-000-000-0000" v-mask="'#-###-###-####'" masked="true" outlined v-model="currentData.fax" class="mt-1 auth_form">
                 </v-text-field>
             </div>
         </v-form>
@@ -35,7 +35,7 @@
         </v-btn>
     </div>
 </template>
-  
+
 <script>
 import LineStep from "@/components/line_step/line_step.vue";
 import { mask } from "vue-the-mask";
