@@ -48,6 +48,10 @@ export default {
   font-family: face;
   src: url('./assets/font/Roboto/Roboto-Regular.ttf')
 }
+@font-face {
+  font-family: mont;
+  src: url('./assets/font_Mont/Mont-RegularItalic.ttf');
+}
 html,
 body,
 #base {
@@ -66,7 +70,7 @@ fieldset{
   background: none;
 }
 .v-input__slot {
-  font-family: face;
+  font-family: mont;
   border-radius: 8px !important;
   font-weight: 400 !important;
   background: none !important;

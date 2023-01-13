@@ -83,14 +83,14 @@ export default {
 
 <style>
 .form_block_input {
-  font-family: face;
+  font-family: mont;
   color: #8E909B;
   font-size: 13px;
 }
 
 .form_block_title {
   font-size: 13px;
-  font-family: face;
+  font-family: mont;
   color: #8E909B;
 }
 </style>

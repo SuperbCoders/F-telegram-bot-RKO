@@ -127,7 +127,7 @@ export default {
 
 .auth_form {
     border-radius: 8px;
-    font-family: face;
+    font-family: mont;
 }
 
 .auth_form_bth {
