@@ -5,7 +5,7 @@
     </div>
     <div class="auth_title_block">
       <h2 class="auth_title font-weight-bold">
-        Заявка на открытие рассчетного счета
+        Заявка на открытие расчетного счета
       </h2>
     </div>
     <div class="auth_form mt-12">

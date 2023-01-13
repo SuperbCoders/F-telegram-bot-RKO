@@ -26,7 +26,7 @@
 
             <div class="form_block">
                 <p class="text-left form_block_title">Факс</p>
-                <v-text-field type="number" placeholder="7-000-000-0000" v-mask="'#-###-###-####'" masked="true" outlined v-model="currentData.fax" class="mt-1 auth_form">
+                <v-text-field type="text" placeholder="7-000-000-0000" v-mask="'#-###-###-####'" masked="true" outlined v-model="currentData.fax" class="mt-1 auth_form">
                 </v-text-field>
             </div>
         </v-form>

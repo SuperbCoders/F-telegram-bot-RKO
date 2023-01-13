@@ -152,7 +152,7 @@
               <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
                 {{ isTitle(question) }}
               </div>
-              <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
+              <div class="form_block_title w-50 pb-2 pt-2" style="flex-direction: column; gap: 15px;" v-if="objectAnswer.body.length > 0">
                 <div v-for="(subAnswer, subKey) in objectAnswer.body" :key="subKey">
                   - {{ translateValue(subAnswer.body) }}
                 </div>
@@ -326,6 +326,9 @@ export default {
 
             'document_confirming_real_activity',
             'document_licenses',
+
+            'document_certifying_identity_ceo_file',
+            'document_certifying_identity_ceo',
           ];
           if (list_skip.indexOf(keyStep) >= 0) {
             continue
