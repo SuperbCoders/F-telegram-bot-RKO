@@ -26,7 +26,5 @@ def setup_periodic_tasks(sender, **kwargs):
 
 @app.task
 def get_status_loan():
-    # print(os.getenv("DJANGO_APP_DOMAIN_DJANGO") + "/api/status/")
-    # requests.get(os.getenv("DJANGO_APP_DOMAIN_DJANGO") + "/api/status/", verify=False)
     print(os.getenv("DJANGO_APP_API_ROOT_URL") + "api/status/")
     requests.get(os.getenv("DJANGO_APP_API_ROOT_URL") + "api/status/", verify=False)

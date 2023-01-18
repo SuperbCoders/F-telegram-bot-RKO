@@ -74,11 +74,24 @@ The Telegram bot is build with Python by using the `python-telegram-bot` wrapper
 - `ALLOWED_CLIENT_DOMAIN_NAME` - the client domain name added to the CORS whitelist by Django [https://github.com/adamchainz/django-cors-headers](https://github.com/adamchainz/django-cors-headers)
 - `DJANGO_SETTINGS_MODULE` - the Django settings module used by Celery
 - `VUE_APP_API_ROOT_URL` - the API root URL used by the VueJS client
+- `ALLOWED_DOMAIN_NAME` - array domain's for api
+- `DJANGO_APP_API_BANK` - url api bank
+- `DJANGO_APP_API_BANK_ENABLE` - 'enable' or 'disable' api bank
+- `DJANGO_APP_DOMAIN_STORAGE` - url storage documents, default django url
+
+- `SMS_URL` - url sms manager
+- `SMS_MESSAGE` - sms message
+
+- `VUE_APP_HOST_API` - public host django
+
+- `DJANGO_APP_API_ROOT_URL` - url django\
+- `DOMAIN_APP_URL` - The URL of the site that the bot opens
 
 ### ./Docker/prod/.env.secret
 
 - `SECRET_KEY` - the Django secret key [https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key](https://docs.djangoproject.com/en/4.0/ref/settings/#secret-key)
 - `TELEGRAM_BOT_API_TOKEN` - Telegram's API token [https://core.telegram.org/bots#6-botfather](https://core.telegram.org/bots#6-botfather)
+- `VUE_APP_TOKEN_DADATA` - DADATA API token [https://dadata.ru/profile/#info](https://dadata.ru/profile/#info)
 
 ## Setting up a new server
 
@@ -266,7 +279,7 @@ inn: CharField # Инн
 company_name: CharField # Название компании
 contact_number: CharField # Номер телефона
 
-addresses: JSONField # Объект 
+addresses: JSONField # Объект
 
 supreme_management_body: CharField # Высший орган управления
 supreme_management_person: CharField # Руководитель
@@ -527,17 +540,19 @@ then update data, and if is_finished = True then create data
 ### upload file
 POST method send file in FormDate
 ```
-/api/passport-load/
+/api/document-load/
 ```
 > body
 ```
-passport: typeFile
+[{
+  document: typeFile
+}]
 ```
 > return
 ```
-{
+[{
   path: "<URLFile>"
-}
+}]
 ```
 
 ### Get phone number by telegram chat id
@@ -575,25 +590,9 @@ api/user/<str:telegram_chat_id>/
 ```
 ```
 If success then status 200
-If error then status 400
+If error then status 404
 ```
 
-### License 
-GET method
-```
-api/get_license/
-```
-> return 
-```
-{
-  view,
-  number,
-  Issued_by,
-  License_issue_date,
-  Validity,
-  List_types_licensed_activities,
-}
-```
 
 
 ### Status list
@@ -621,9 +620,10 @@ code
 ```
 
 > return
-
-STATUS 200 OR STATUS 404
-
+```
+If success then status 200
+If error then status 404
+```
 
 POST method
 ```
@@ -631,5 +631,6 @@ api/sms_code/<str:phone_number>/
 ```
 
 > return
-
-STATUS 200
+```
+If success then status 200
+```
