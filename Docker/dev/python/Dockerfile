@@ -8,7 +8,7 @@ RUN seq 1 8 | xargs -I{} mkdir -p /usr/share/man/man{}
 
 RUN apt-get update && apt-get install -y \
   # general dependencies
-  net-tools netcat g++ make git wget ca-certificates \
+  g++ make git wget ca-certificates \
   build-essential cmake pkg-config python3-dev \
   # psycopg2 dependencies
   python3-psycopg2 \
