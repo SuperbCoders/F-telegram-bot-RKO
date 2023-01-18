@@ -14,7 +14,7 @@ from djangorestframework_camel_case.parser import (
 )
 import requests
 
-from .utils import format_phone
+from .utils import format_phone, generate_code
 
 from .adapter import Adapter_LoanRequest
 
@@ -38,7 +38,7 @@ class LoanRequestCurrentAPIView(APIView):
     parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
                       CamelCaseJSONParser]
     renderer_classes = [CamelCaseJSONRenderer]
-    
+
     def get(self, request, format=None, *args, **kwargs):
         phone_number: str | None = kwargs.get("phone_number")
         if phone_number:
@@ -54,22 +54,22 @@ class LoanRequestCurrentAPIView(APIView):
             return JsonResponse(loan_request_serializer.data)
         else:
             return Response({}, status=status.HTTP_200_OK)
-    
+
     def post(self, request, format=None, *args, **kwargs):
         phone_number = kwargs.get("phone_number")
         phone_number = format_phone(phone_number)
         data = request.data
-        
+
         print(data)
-        
+
         if 'contact_number' in data:
             data['contact_number'] = format_phone(data['contact_number'])
-        
+
         loan_request = LoanRequest.objects.filter(
             contact_number=phone_number,
             is_finished=False,
         ).first()
-        
+
         if loan_request:
             for field_name, field_value in data.items():
                 setattr(loan_request, field_name, field_value)
@@ -82,17 +82,20 @@ class LoanRequestCurrentAPIView(APIView):
                 adapter = Adapter_LoanRequest(loan_request)
                 result = adapter.getResult()
                 print("DJANGO_APP_API_BANK result", result)
-                answer = requests.post(os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
-                print("DJANGO_APP_API_BANK answer", answer.status_code, answer.text)
-                
+                answer = requests.post(
+                    os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
+                print("DJANGO_APP_API_BANK answer",
+                      answer.status_code, answer.text)
+
                 orderId = answer['orderId']
                 loan_request.order_id = orderId
-                response_status = requests.get(os.getenv("DJANGO_APP_API_BANK") + f'/order/{orderId}')
+                response_status = requests.get(
+                    os.getenv("DJANGO_APP_API_BANK") + f'/order/{orderId}')
                 data_status = response_status.json()
                 loan_request.status = data_status['statusCode']
                 loan_request.last_status = data_status['statusCode']
                 loan_request.status_description = data_status['statusDescription']
-                
+
                 loan_request.save()
         return Response({}, status=status.HTTP_200_OK)
 
@@ -109,7 +112,8 @@ class LoanApplicationListAPIView(ListAPIView):
         telegram_chat_id = self.request.GET.get('telegram_chat_id')
         phone_number = self.request.GET.get('phone_number')
         if telegram_chat_id:
-            user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
+            user = User.objects.filter(
+                telegram_chat_id=telegram_chat_id).first()
             phone_number = user.phone_number
 
         return (
@@ -118,6 +122,7 @@ class LoanApplicationListAPIView(ListAPIView):
                 is_finished=True,
             ).order_by("created_at")
         )
+
 
 class UserAPIView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -152,8 +157,11 @@ class UserAPIView(APIView):
     #         return Response({}, status=status.HTTP_200_OK)
     #     except User.DoesNotExist:
     #         return Response({}, status=status.HTTP_400_BAD_REQUEST)
+
+
 class PhoneApiView(APIView):
     permission_classes = [permissions.AllowAny]
+
     def get(self, request, format=None, *args, **kwargs):
         telegram_chat_id = kwargs.get("telegram_chat_id")
         list_user = User.objects.filter(telegram_chat_id=telegram_chat_id)
@@ -184,7 +192,7 @@ class DocumentLoad(APIView):
 
 class StatusCheck(APIView):
     permission_classes = [permissions.AllowAny]
-    
+
     def get(self, request, format=None, *args, **kwargs):
         loan_request = LoanRequest.objects.filter(is_finished=True)
         for lr in loan_request:
@@ -196,9 +204,47 @@ class StatusCheck(APIView):
                         "statusDescription": 'На рассмотрении',
                     }
                 else:
-                    response = requests.get( os.getenv("DJANGO_APP_API_BANK") + f"/order/{order_id}" )
+                    response = requests.get(
+                        os.getenv("DJANGO_APP_API_BANK") + f"/order/{order_id}")
                     responseData = response.json()
                 lr.status = responseData['statusCode']
                 lr.status_description = responseData['statusDescription']
                 lr.save()
+        return Response({}, status=status.HTTP_200_OK)
+
+
+class SmsValidation(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, format=None, *args, **kwargs):
+        phone_number = kwargs['phone_number']
+        user = User.objects.filter(
+            phone_number=format_phone(phone_number)
+        ).first()
+
+        code_is_frontend = request.data['code']
+        code_is_user = user.last_sms_code
+
+        if code_is_frontend == code_is_user:
+            return Response({}, status=status.HTTP_200_OK)
+        return Response({}, status=status.HTTP_404_NOT_FOUND)
+
+    def post(self, request, format=None, *args, **kwargs):
+        phone_number = kwargs['phone_number']
+        user = User.objects.filter(
+            phone_number=format_phone(phone_number)
+        ).first()
+        code = generate_code()
+        user.last_sms_code = code
+        user.save()
+        sms_url = os.getenv("SMS_URL")
+        message = os.getenv("SMS_MESSAGE").format(code=f"{code}")
+        if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'enable':
+            requests.get(sms_url, json={
+                "processId": f"+{phone_number}",
+                "taskId": "0",
+                "phone": f"+{phone_number}",
+                "priority": "LOW",
+                "message": message
+            })
         return Response({}, status=status.HTTP_200_OK)

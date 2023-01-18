@@ -430,6 +430,11 @@ class User(AbstractUser):
         null=True,
         unique=True,
     )
+    last_sms_code = models.CharField(
+        max_length=10,
+        blank=True,
+        null=True,
+    )
 
 
 class DocumentFile(models.Model):

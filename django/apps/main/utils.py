@@ -1,3 +1,5 @@
+import random
+
 def format_phone(phone: str):
     pn = phone.strip()
     pn: str = pn.replace('(', '')
@@ -17,3 +19,9 @@ def format_date(date: str):
 def format_string(data: str):
     new_string = data.replace(" ", '')
     return new_string
+
+def generate_code():
+    number = random.random()
+    number = number * 1000000
+    number = round(number)
+    return number

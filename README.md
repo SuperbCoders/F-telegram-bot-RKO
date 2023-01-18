@@ -610,3 +610,26 @@ phone_number
 
 Array "Structure Data"
 
+### SMS code
+GET method
+```
+api/sms_code/<str:phone_number>/
+```
+GET Parametr
+```
+code
+```
+
+> return
+
+STATUS 200 OR STATUS 404
+
+
+POST method
+```
+api/sms_code/<str:phone_number>/
+```
+
+> return
+
+STATUS 200

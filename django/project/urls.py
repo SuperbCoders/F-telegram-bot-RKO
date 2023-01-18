@@ -27,6 +27,7 @@ from apps.main.views import (
     LoanApplicationListAPIView,
     DocumentLoad,
     StatusCheck,
+    SmsValidation,
 )
 
 
@@ -50,6 +51,7 @@ urlpatterns = [
     path('api/document-load/', DocumentLoad.as_view()),
     path('api/get_phone/<str:telegram_chat_id>/', PhoneApiView.as_view()),
     path('api/status/', StatusCheck.as_view()),
+    path('api/sms_code/<str:phone_number>/', SmsValidation.as_view()),
 ]
 
 if settings.DEBUG:
