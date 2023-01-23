@@ -216,7 +216,7 @@ class StatusCheck(APIView):
 class SmsValidation(APIView):
     permission_classes = [permissions.AllowAny]
 
-    def get(self, request, format=None, *args, **kwargs):
+    def post(self, request, format=None, *args, **kwargs):
         phone_number = kwargs['phone_number']
         user = User.objects.filter(
             phone_number=format_phone(phone_number)
@@ -229,7 +229,7 @@ class SmsValidation(APIView):
             return Response({}, status=status.HTTP_200_OK)
         return Response({}, status=status.HTTP_404_NOT_FOUND)
 
-    def post(self, request, format=None, *args, **kwargs):
+    def get(self, request, format=None, *args, **kwargs):
         phone_number = kwargs['phone_number']
         user = User.objects.filter(
             phone_number=format_phone(phone_number)
