@@ -610,11 +610,11 @@ phone_number
 Array "Structure Data"
 
 ### SMS code
-GET method
+POST method
 ```
 api/sms_code/<str:phone_number>/
 ```
-GET Parametr
+Body
 ```
 code
 ```
@@ -625,7 +625,7 @@ If success then status 200
 If error then status 404
 ```
 
-POST method
+GET method
 ```
 api/sms_code/<str:phone_number>/
 ```
