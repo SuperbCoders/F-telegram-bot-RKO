@@ -22,6 +22,6 @@ def format_string(data: str):
 
 def generate_code():
     number = random.random()
-    number = number * 1000000
+    number = number * 10000
     number = round(number)
     return number
