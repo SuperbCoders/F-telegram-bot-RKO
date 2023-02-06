@@ -7,226 +7,263 @@ import os
 session = requests.Session()
 
 # УЧРЕДИТЕЛИ-ЮЛ
-class CompanyFoundersUl(TypedDict): 
-    inn: str # ИНН
-    ogrn: str # ОГРН
-    share: int # Доля в уставном капитале
+
+
+class CompanyFoundersUl(TypedDict):
+    inn: str  # ИНН
+    ogrn: str  # ОГРН
+    share: int  # Доля в уставном капитале
 
 
 class Adapter_LoanRequest:
-    
+
     json_api = {}
-    
+
     loan_request = None
-    
+
     def __init__(self, loan_request) -> None:
         self.loan_request = loan_request
         self.json_api = {
-        "initiator": { # Инициатор заявки
-            "phoneNumber": "" # Номер телефона
-        },
-        "isEioPDL": True,
-        "company": { # Клиент
-            "inn": "", # ИНН
-            "ogrn": "", # ОГРН
-            "shortNameEn": "", # Наименование на иностранном языке (если имеется)
-            "legalAddress": "", # Юридический адрес компании
-            "postalAddress": "", # Почтовый адрес компании
-            "companyContacts": { # Контактные данные организации
-                "email": "", # E-mail
-                "phone": "", # Телефон
-                "webSite": "", # Доменное имя, указатель страницы сайта в сети "Интернет", с использованием которых юридическим лицом оказываются услуги
-                "fax": "" # Факс
+            "initiator": {  # Инициатор заявки
+                "phoneNumber": ""  # Номер телефона
             },
-            "companyFoundersUl": [ # УЧРЕДИТЕЛИ-ЮЛ
-                {
-                    "inn": "", # ИНН
-                    "ogrn": "", # ОГРН
-                    "share": 0 # Доля в уставном капитале
-                }
-            ],
-            "companyPersons": [ # СВЕДЕНИЯ О ФИЗИЧЕСКИХ ЛИЦАХ ОРГАНИЗАЦИИ
-                {
-                    "inn": "", # ИНН
-                    "lastName": "", # Фамилия
-                    "firstName": "", # Имя
-                    "middleName": "", # Отчество
-                    "gender": "", # Пол
-                    "birthDate": "", # Дата рождения
-                    "birthPlace": "", # Место рождения
-                    "identityDocument": { # Документ, удостверяющий личность
-                        "type": "", # Тип документа (выбор из справочника)
-                        "series": "", # Серия
-                        "number": "", # Номер
-                        "issuedDate": "", # Дата выдачи
-                        "issuingAuthority": "", # Кем выдан
-                        "issuingAuthorityCode": "" # Код подразделения
-                    },
-                    "citizenship": "", # Гражданство (выбор из справочника)
-                    "countryOfResidence": "", # Страна проживания (выбор из справочника)
-                    "registrationAddress": "", # Адрес регистрации
-                    "actualAddress": "", # Адрес местонахождения
-                    "contacts": { # Контактные данные
-                        "phone": "", # Телефон
-                        "email": "" # Электронная почта
-                    },
-                    "roles": { # Роли физического лица в организации
-                        "companyHead": { # ЕИО
-                            "enabled": True,
-                            "position": "" # Должность
-                        },
-                        "founder": { # Акционер/Учредитель
-                            "enabled": True,
-                            "share": 0 # Доля
-                        },
-                        "beneficiary": { # Бенифициар
-                            "enabled": True,
-                            "share": 0 # Доля
-                        },
-                    },
-                    "pdl": { # Отношение к публичным должностным лицам
-                        "ipdl": True, # Является ИПДЛ
-                        "mpdl": True, # Является МПДЛ
-                        "rpdl": True # Является РПДЛ
+            "isEioPDL": True,
+            "company": {  # Клиент
+                "inn": "",  # ИНН
+                "ogrn": "",  # ОГРН
+                # Наименование на иностранном языке (если имеется)
+                "shortNameEn": "",
+                "legalAddress": "",  # Юридический адрес компании
+                "postalAddress": "",  # Почтовый адрес компании
+                "companyContacts": {  # Контактные данные организации
+                    "email": "",  # E-mail
+                    "phone": "",  # Телефон
+                    "webSite": "",  # Доменное имя, указатель страницы сайта в сети "Интернет", с использованием которых юридическим лицом оказываются услуги
+                    "fax": ""  # Факс
+                },
+                "companyFoundersUl": [  # УЧРЕДИТЕЛИ-ЮЛ
+                    {
+                        "inn": "",  # ИНН
+                        "ogrn": "",  # ОГРН
+                        "share": 0  # Доля в уставном капитале
                     }
+                ],
+                "companyPersons": [  # СВЕДЕНИЯ О ФИЗИЧЕСКИХ ЛИЦАХ ОРГАНИЗАЦИИ
+                    {
+                        "inn": "",  # ИНН
+                        "lastName": "",  # Фамилия
+                        "firstName": "",  # Имя
+                        "middleName": "",  # Отчество
+                        "gender": "",  # Пол
+                        "birthDate": "",  # Дата рождения
+                        "birthPlace": "",  # Место рождения
+                        "identityDocument": {  # Документ, удостверяющий личность
+                            "type": "",  # Тип документа (выбор из справочника)
+                            "series": "",  # Серия
+                            "number": "",  # Номер
+                            "issuedDate": "",  # Дата выдачи
+                            "issuingAuthority": "",  # Кем выдан
+                            "issuingAuthorityCode": ""  # Код подразделения
+                        },
+                        # Гражданство (выбор из справочника)
+                        "citizenship": "",
+                        # Страна проживания (выбор из справочника)
+                        "countryOfResidence": "",
+                        "registrationAddress": "",  # Адрес регистрации
+                        "actualAddress": "",  # Адрес местонахождения
+                        "contacts": {  # Контактные данные
+                            "phone": "",  # Телефон
+                            "email": ""  # Электронная почта
+                        },
+                        "roles": {  # Роли физического лица в организации
+                            "companyHead": {  # ЕИО
+                                "enabled": True,
+                                "position": ""  # Должность
+                            },
+                            "founder": {  # Акционер/Учредитель
+                                "enabled": True,
+                                "share": 0  # Доля
+                            },
+                            "beneficiary": {  # Бенифициар
+                                "enabled": True,
+                                "share": 0  # Доля
+                            },
+                        },
+                        "pdl": {  # Отношение к публичным должностным лицам
+                            "ipdl": True,  # Является ИПДЛ
+                            "mpdl": True,  # Является МПДЛ
+                            "rpdl": True  # Является РПДЛ
+                        }
+                    }
+                ],
+                "companyManagement": {  # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
+                    # Высший орган управления (выбор из справочника)
+                    "supremeGoverningBody": ""
                 }
-            ],
-            "companyManagement": { # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
-                "supremeGoverningBody": "" # Высший орган управления (выбор из справочника)
-            }
-        },
-        "companyBusinessInfo": { # ИНФОРМАЦИЯ О БИЗНЕСЕ
-            "hasBeneficiariesInfo": True, # Сведения о выгодоприобретателях
-            "beneficiariesInfo": "", # Укажите третьи лица, к выгоде которых действует компания
-            "companyCarriesOutActivitiesSubjectToLicensing": "", # Компания осуществляет деятельность, подлежащую лицензированию (выбор из справочника)
-            "historyReputationMarketSectorCompetition": "", # История, репутация, сектор рынка и конкуренция (выбор из справочника)
-            "totalNumberOfTransactionsPerMonth": "", # Общее количество операций в месяц (выбор из справочника)
-            "totalNumberOfTransactionsPerWeek": "", # Общее количество операций в неделю
-            "totalNumberOfTransactionsPerQuarter": "", # Общее количество операций в квартал
-            "totalNumberOfTransactionsPerYear": "", # Общее количество операций в год
-            "totalSumTransactionsPerMonth": "", # Общая сумма операций в месяц (выбор из справочника)
-            "totalSumTransactionsPerWeek": "", # Общая сумма операций в неделю
-            "totalSumTransactionsPerQuarter": "", # Общая сумма операций в квартал
-            "totalSumTransactionsPerYear": "", # Общая сумма операций в год
-            "numberOfCashWithdrawalsPerMonth": "", # Количество операций по снятию наличности в месяц (выбор из справочника)
-            "numberOfCashWithdrawalsPerWeek": "", # Количество операций по снятию наличности в неделю
-            "numberOfCashWithdrawalsPerQuarter": "", # Количество операций по снятию наличности в квартал
-            "numberOfCashWithdrawalsPerYear": "", # Количество операций по снятию наличности в год
-            "amountOfCashWithdrawalsPerMonth": "", # Сумма операций по снятию наличности в месяц (руб.) (выбор из справочника)
-            "amountOfCashWithdrawalsPerWeek": "", # Сумма операций по снятию денежных средств в наличной форме в неделю
-            "amountOfCashWithdrawalsPerQuarter": "", # Сумма операций по снятию денежных средств в наличной форме в квартал
-            "amountOfCashWithdrawalsPerYear": "", # Сумма операций по снятию денежных средств в наличной форме в год
-            "numberTransactionsOnForeignTradeContractsPerMonth": "", # Количество операций по внешнеторговым контрактам в месяц (выбор из справочника)
-            "numberTransactionsOnForeignTradeContractsPerWeek": "", # Количество операций по внешнеторговым контрактам в неделю
-            "numberTransactionsOnForeignTradeContractsPerQuarter": "", # Количество операций по внешнеторговым контрактам в квартал
-            "numberTransactionsOnForeignTradeContractsPerYear": "", # Количество операций по внешнеторговым контрактам в год
-            "amountOfTransactionsUnderForeignTradeContractsPerMonth": "", # Сумма операций по внешнеторговым контрактам в месяц (руб.) (выбор из справочника)
-            "amountOfTransactionsUnderForeignTradeContractsPerWeek": "", # Сумма операций по внешнеторговым контрактам в неделю
-            "amountOfTransactionsUnderForeignTradeContractsPerQuarter": "", # Сумма операций по внешнеторговым контрактам в квартал
-            "amountOfTransactionsUnderForeignTradeContractsPerYear": "", # Сумма операций по внешнеторговым контрактам в год
-            "moneySources": "", # Источники происхождения денежных средств (выбор из справочника)
-            "numberOfEmployees": "", # Штатная численность сотрудников (выбор из справочника)
-            "fatcaAndStrategicStatus": ""
-        },
-        "typesOfContracts": { # ВИДЫ ДОГОВОРОВ (КОНТРАКТОВ), РАСЧЕТЫ ПО КОТОРЫМ ЮРИДИЧЕСКОЕ ЛИЦО СОБИРАЕТСЯ ОСУЩЕСТВЛЯТЬ ЧЕРЕЗ БАНК
-            "contractProvisionServices": True, # Договор возмездного оказания услуг
-            "supplyContract": True, # Договор поставки
-            "workAgreement": True, # Договор подряда
-            "commissionAgreement": True, # Договор комиссии
-            "contractOfSale": True, # Договор купли-продажи
-            "leaseAgreementForMovableProperty": True, # Договор аренды движимого имущества
-            "realEstateLeaseAgreement": True, # Договор аренды недвижимого имущества
-            "leasingAgreement": True, # Договор лизинга
-            "factoringAgreement": True, # Договор факторинга
-            "other": True, # Иное
-            "contractsInfo": "" # Иные виды договоров
-        },
-        "additionalProducts": { # ДОПОЛНИТЕЛЬНЫЕ ПРОДУКТЫ К ПОДКЛЮЧЕНИЮ
-            "sms": True, # СМС-оповещение
-            "overdraft": True, # Овердрафт
-            "internetAcquiring": True, # Интернет-эквайринг
-            "merchantAcquiring": True, # Торговый эквайринг
-            "fastPaymentSystem": True, # Расчеты по Системе быстрых платежей
-            "loyaltyProgram": True, # Подключить к Программе лояльности
-            "loyaltyProgramInfo": "", # Программа лояльности (выбор из справочника)
-            "community": True, # Комьюнити
-            "accounting": True, # Бухгалтерия
-            "legalSupport": True, # Юридическая поддержка
-            "promotion": True # Продвижение
-        },
-        "consents": { # Согласия
-            "consentPd": True, # Согласие на обработку персональных данных
-            "consentBki": True, # Согласие для бюро кредитных историй
-            "consentToReceiveInfoLetters": True, # Согласие на получение информационной рассылки
-            "consentSubscriberInformation": True, # Согласие на обработку сведений об абоненте
-            "confirmationAccessionToTermsOfPEPFL": True, # Подтверждение присоединения к Соглашению ПЭП ФЛ
-            "confirmationAccessionToTermsOfGuarantor": True # Подтверждение присоединения к Условиям поручительства
-        },
-        "infoOnPurposesOfFinancialAndEconomicActivities": {
-            "hasConstantPayers": True,
-            "hasConstantPayersDetails": "hasConstantPayersDetails",
-            "hasConstantRecipient": True,
-            "hasConstantRecipientDetails": "hasConstantRecipientDetails"
-    },
-        "selectedTariff": "", # Выбранный ТАРИФ НА РАСЧЕТНО-КАССОВОЕ ОБСЛУЖИВАНИЕ 
-        "codeword": "", # Кодовое слово
-        "documents": [],
-    }
+            },
+            "companyBusinessInfo": {  # ИНФОРМАЦИЯ О БИЗНЕСЕ
+                "hasBeneficiariesInfo": True,  # Сведения о выгодоприобретателях
+                "beneficiariesInfo": "",  # Укажите третьи лица, к выгоде которых действует компания
+                # Компания осуществляет деятельность, подлежащую лицензированию (выбор из справочника)
+                "companyCarriesOutActivitiesSubjectToLicensing": "",
+                # История, репутация, сектор рынка и конкуренция (выбор из справочника)
+                "historyReputationMarketSectorCompetition": "",
+                # Общее количество операций в месяц (выбор из справочника)
+                "totalNumberOfTransactionsPerMonth": "",
+                "totalNumberOfTransactionsPerWeek": "",  # Общее количество операций в неделю
+                # Общее количество операций в квартал
+                "totalNumberOfTransactionsPerQuarter": "",
+                "totalNumberOfTransactionsPerYear": "",  # Общее количество операций в год
+                # Общая сумма операций в месяц (выбор из справочника)
+                "totalSumTransactionsPerMonth": "",
+                "totalSumTransactionsPerWeek": "",  # Общая сумма операций в неделю
+                "totalSumTransactionsPerQuarter": "",  # Общая сумма операций в квартал
+                "totalSumTransactionsPerYear": "",  # Общая сумма операций в год
+                # Количество операций по снятию наличности в месяц (выбор из справочника)
+                "numberOfCashWithdrawalsPerMonth": "",
+                # Количество операций по снятию наличности в неделю
+                "numberOfCashWithdrawalsPerWeek": "",
+                # Количество операций по снятию наличности в квартал
+                "numberOfCashWithdrawalsPerQuarter": "",
+                # Количество операций по снятию наличности в год
+                "numberOfCashWithdrawalsPerYear": "",
+                # Сумма операций по снятию наличности в месяц (руб.) (выбор из справочника)
+                "amountOfCashWithdrawalsPerMonth": "",
+                # Сумма операций по снятию денежных средств в наличной форме в неделю
+                "amountOfCashWithdrawalsPerWeek": "",
+                # Сумма операций по снятию денежных средств в наличной форме в квартал
+                "amountOfCashWithdrawalsPerQuarter": "",
+                # Сумма операций по снятию денежных средств в наличной форме в год
+                "amountOfCashWithdrawalsPerYear": "",
+                # Количество операций по внешнеторговым контрактам в месяц (выбор из справочника)
+                "numberTransactionsOnForeignTradeContractsPerMonth": "",
+                # Количество операций по внешнеторговым контрактам в неделю
+                "numberTransactionsOnForeignTradeContractsPerWeek": "",
+                # Количество операций по внешнеторговым контрактам в квартал
+                "numberTransactionsOnForeignTradeContractsPerQuarter": "",
+                # Количество операций по внешнеторговым контрактам в год
+                "numberTransactionsOnForeignTradeContractsPerYear": "",
+                # Сумма операций по внешнеторговым контрактам в месяц (руб.) (выбор из справочника)
+                "amountOfTransactionsUnderForeignTradeContractsPerMonth": "",
+                # Сумма операций по внешнеторговым контрактам в неделю
+                "amountOfTransactionsUnderForeignTradeContractsPerWeek": "",
+                # Сумма операций по внешнеторговым контрактам в квартал
+                "amountOfTransactionsUnderForeignTradeContractsPerQuarter": "",
+                # Сумма операций по внешнеторговым контрактам в год
+                "amountOfTransactionsUnderForeignTradeContractsPerYear": "",
+                # Источники происхождения денежных средств (выбор из справочника)
+                "moneySources": "",
+                # Штатная численность сотрудников (выбор из справочника)
+                "numberOfEmployees": "",
+                "fatcaAndStrategicStatus": ""
+            },
+            "typesOfContracts": {  # ВИДЫ ДОГОВОРОВ (КОНТРАКТОВ), РАСЧЕТЫ ПО КОТОРЫМ ЮРИДИЧЕСКОЕ ЛИЦО СОБИРАЕТСЯ ОСУЩЕСТВЛЯТЬ ЧЕРЕЗ БАНК
+                "contractProvisionServices": True,  # Договор возмездного оказания услуг
+                "supplyContract": True,  # Договор поставки
+                "workAgreement": True,  # Договор подряда
+                "commissionAgreement": True,  # Договор комиссии
+                "contractOfSale": True,  # Договор купли-продажи
+                "leaseAgreementForMovableProperty": True,  # Договор аренды движимого имущества
+                "realEstateLeaseAgreement": True,  # Договор аренды недвижимого имущества
+                "leasingAgreement": True,  # Договор лизинга
+                "factoringAgreement": True,  # Договор факторинга
+                "other": True,  # Иное
+                "contractsInfo": ""  # Иные виды договоров
+            },
+            "additionalProducts": {  # ДОПОЛНИТЕЛЬНЫЕ ПРОДУКТЫ К ПОДКЛЮЧЕНИЮ
+                "sms": True,  # СМС-оповещение
+                "overdraft": True,  # Овердрафт
+                "internetAcquiring": True,  # Интернет-эквайринг
+                "merchantAcquiring": True,  # Торговый эквайринг
+                "fastPaymentSystem": True,  # Расчеты по Системе быстрых платежей
+                "loyaltyProgram": True,  # Подключить к Программе лояльности
+                # Программа лояльности (выбор из справочника)
+                "loyaltyProgramInfo": "",
+                "community": True,  # Комьюнити
+                "accounting": True,  # Бухгалтерия
+                "legalSupport": True,  # Юридическая поддержка
+                "promotion": True  # Продвижение
+            },
+            "consents": {  # Согласия
+                "consentPd": True,  # Согласие на обработку персональных данных
+                "consentBki": True,  # Согласие для бюро кредитных историй
+                # Согласие на получение информационной рассылки
+                "consentToReceiveInfoLetters": True,
+                # Согласие на обработку сведений об абоненте
+                "consentSubscriberInformation": True,
+                # Подтверждение присоединения к Соглашению ПЭП ФЛ
+                "confirmationAccessionToTermsOfPEPFL": True,
+                # Подтверждение присоединения к Условиям поручительства
+                "confirmationAccessionToTermsOfGuarantor": True
+            },
+            "infoOnPurposesOfFinancialAndEconomicActivities": {
+                "hasConstantPayers": True,
+                "hasConstantPayersDetails": "hasConstantPayersDetails",
+                "hasConstantRecipient": True,
+                "hasConstantRecipientDetails": "hasConstantRecipientDetails"
+            },
+            "selectedTariff": "",  # Выбранный ТАРИФ НА РАСЧЕТНО-КАССОВОЕ ОБСЛУЖИВАНИЕ
+            "codeword": "",  # Кодовое слово
+            "documents": [],
+        }
 
     # ВИДЫ ДОГОВОРОВ (КОНТРАКТОВ), РАСЧЕТЫ ПО КОТОРЫМ ЮРИДИЧЕСКОЕ ЛИЦО СОБИРАЕТСЯ ОСУЩЕСТВЛЯТЬ ЧЕРЕЗ БАНК
     def setTypesOfContracts(
-            self,
-            contractProvisionServices,
-            supplyContract,
-            workAgreement,
-            commissionAgreement,
-            contractOfSale,
-            leaseAgreementForMovableProperty,
-            realEstateLeaseAgreement,
-            leasingAgreement,
-            factoringAgreement,
-            other,
-            contractsInfo,
-        ):
+        self,
+        contractProvisionServices,
+        supplyContract,
+        workAgreement,
+        commissionAgreement,
+        contractOfSale,
+        leaseAgreementForMovableProperty,
+        realEstateLeaseAgreement,
+        leasingAgreement,
+        factoringAgreement,
+        other,
+        contractsInfo,
+    ):
         self.json_api["typesOfContracts"] = {
-            "contractProvisionServices": contractProvisionServices, # Договор возмездного оказания услуг
-            "supplyContract": supplyContract, # Договор поставки
-            "workAgreement": workAgreement, # Договор подряда
-            "commissionAgreement": commissionAgreement, # Договор комиссии
-            "contractOfSale": contractOfSale, # Договор купли-продажи
-            "leaseAgreementForMovableProperty": leaseAgreementForMovableProperty, # Договор аренды движимого имущества
-            "realEstateLeaseAgreement": realEstateLeaseAgreement, # Договор аренды недвижимого имущества
-            "leasingAgreement": leasingAgreement, # Договор лизинга
-            "factoringAgreement": factoringAgreement, # Договор факторинга
-            "other": other, # Иное
-            "contractsInfo": contractsInfo # Иные виды договоров
+            # Договор возмездного оказания услуг
+            "contractProvisionServices": contractProvisionServices,
+            "supplyContract": supplyContract,  # Договор поставки
+            "workAgreement": workAgreement,  # Договор подряда
+            "commissionAgreement": commissionAgreement,  # Договор комиссии
+            "contractOfSale": contractOfSale,  # Договор купли-продажи
+            # Договор аренды движимого имущества
+            "leaseAgreementForMovableProperty": leaseAgreementForMovableProperty,
+            # Договор аренды недвижимого имущества
+            "realEstateLeaseAgreement": realEstateLeaseAgreement,
+            "leasingAgreement": leasingAgreement,  # Договор лизинга
+            "factoringAgreement": factoringAgreement,  # Договор факторинга
+            "other": other,  # Иное
+            "contractsInfo": contractsInfo  # Иные виды договоров
         }
 
     def getInitiatorData(self, phoneNumber) -> dict:
         return {
-            "phoneNumber": phoneNumber, # Номер телефона
+            "phoneNumber": phoneNumber,  # Номер телефона
         }
 
     def setInitiator(self, initiator) -> None:
         self.json_api['initiator'] = initiator
 
-
     def getCompanyBase(self, inn, ogrn, shortNameEn, legalAddress, postalAddress) -> dict:
         return {
-            "inn": format_string(inn), # ИНН
-            "ogrn": format_string(ogrn), # ОГРН
-            "shortNameEn": shortNameEn, # Наименование на иностранном языке (если имеется)
-            "legalAddress": legalAddress, # Юридический адрес компании
-            "postalAddress": postalAddress, # Почтовый адрес компании
+            "inn": format_string(inn),  # ИНН
+            "ogrn": format_string(ogrn),  # ОГРН
+            # Наименование на иностранном языке (если имеется)
+            "shortNameEn": shortNameEn,
+            "legalAddress": legalAddress,  # Юридический адрес компании
+            "postalAddress": postalAddress,  # Почтовый адрес компании
         }
 
     def getCompanyContacts(self, email, phone, webSite, fax) -> dict:
         return {
-            "companyContacts": { # Контактные данные организации
-                "email": email, # E-mail
-                "phone": phone, # Телефон
-                "webSite": webSite, # Доменное имя, указатель страницы сайта в сети "Интернет", с использованием которых юридическим лицом оказываются услуги
-                "fax": fax, # Факс
+            "companyContacts": {  # Контактные данные организации
+                "email": email,  # E-mail
+                "phone": phone,  # Телефон
+                "webSite": webSite,  # Доменное имя, указатель страницы сайта в сети "Интернет", с использованием которых юридическим лицом оказываются услуги
+                "fax": fax,  # Факс
             },
         }
 
@@ -235,39 +272,39 @@ class Adapter_LoanRequest:
             "companyFoundersUl": companyFoundersUl,
         }
 
-
     def getCompanyPersonsBase(self, inn, lastName, firstName, middleName, gender, birthDate, birthPlace, citizenship, countryOfResidence, registrationAddress, actualAddress):
         return {
-            "inn": format_string(inn), # ИНН
-            "lastName": lastName, # Фамилия
-            "firstName": firstName, # Имя
-            "middleName": middleName, # Отчество
-            "gender": gender, # Пол
-            "birthDate": format_date(birthDate), # Дата рождения
-            "birthPlace": birthPlace, # Место рождения
-            "citizenship": citizenship, # Гражданство (выбор из справочника)
-            "countryOfResidence": countryOfResidence, # Страна проживания (выбор из справочника)
-            "registrationAddress": registrationAddress, # Адрес регистрации
-            "actualAddress": actualAddress, # Адрес местонахождения
+            "inn": format_string(inn),  # ИНН
+            "lastName": lastName,  # Фамилия
+            "firstName": firstName,  # Имя
+            "middleName": middleName,  # Отчество
+            "gender": gender,  # Пол
+            "birthDate": format_date(birthDate),  # Дата рождения
+            "birthPlace": birthPlace,  # Место рождения
+            "citizenship": citizenship,  # Гражданство (выбор из справочника)
+            # Страна проживания (выбор из справочника)
+            "countryOfResidence": countryOfResidence,
+            "registrationAddress": registrationAddress,  # Адрес регистрации
+            "actualAddress": actualAddress,  # Адрес местонахождения
         }
 
     def getContacts(self, phone, email):
         return {
-            "contacts": { # Контактные данные
-                "phone": format_string(phone), # Телефон
-                "email": email # Электронная почта
+            "contacts": {  # Контактные данные
+                "phone": format_string(phone),  # Телефон
+                "email": email  # Электронная почта
             },
         }
 
     def getIdentityDocument(self, type, series, number, issuedDate, issuingAuthority, issuingAuthorityCode):
         return {
-            "identityDocument": { # Документ, удостверяющий личность
-                "type": type, # Тип документа (выбор из справочника)
-                "series": format_string(series), # Серия
-                "number": format_string(number), # Номер
-                "issuedDate": format_date(issuedDate), # Дата выдачи
-                "issuingAuthority": issuingAuthority, # Кем выдан
-                "issuingAuthorityCode": issuingAuthorityCode, # Код подразделения
+            "identityDocument": {  # Документ, удостверяющий личность
+                "type": type,  # Тип документа (выбор из справочника)
+                "series": format_string(series),  # Серия
+                "number": format_string(number),  # Номер
+                "issuedDate": format_date(issuedDate),  # Дата выдачи
+                "issuingAuthority": issuingAuthority,  # Кем выдан
+                "issuingAuthorityCode": issuingAuthorityCode,  # Код подразделения
             },
         }
 
@@ -285,30 +322,29 @@ class Adapter_LoanRequest:
         if 'Бенифициар' in roles:
             beneficiaryEnabled = True
 
-
         return {
-            "roles": { # Роли физического лица в организации
-                "companyHead": { # ЕИО
+            "roles": {  # Роли физического лица в организации
+                "companyHead": {  # ЕИО
                     "enabled": companyHeadEnabled,
-                    "position": companyHeadPosition # Должность
+                    "position": companyHeadPosition  # Должность
                 },
-                "founder": { # Акционер/Учредитель
+                "founder": {  # Акционер/Учредитель
                     "enabled": founderEnabled,
-                    "share": founderShare # Доля
+                    "share": founderShare  # Доля
                 },
-                "beneficiary": { # Бенифициар
+                "beneficiary": {  # Бенифициар
                     "enabled": beneficiaryEnabled,
-                    "share": beneficiaryShare # Доля
+                    "share": beneficiaryShare  # Доля
                 },
             },
         }
 
     def getPdl(self, ipdl, mpdl, rpdl):
         return {
-            "pdl": { # Отношение к публичным должностным лицам
-                "ipdl": ipdl, # Является ИПДЛ
-                "mpdl": mpdl, # Является МПДЛ
-                "rpdl": rpdl # Является РПДЛ
+            "pdl": {  # Отношение к публичным должностным лицам
+                "ipdl": ipdl,  # Является ИПДЛ
+                "mpdl": mpdl,  # Является МПДЛ
+                "rpdl": rpdl  # Является РПДЛ
             }
         }
 
@@ -320,11 +356,12 @@ class Adapter_LoanRequest:
             **roles,
             **pdl,
         }
-    
+
     def getCompanyManagement(self, supremeGoverningBody):
         return {
-            "companyManagement": { # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
-                "supremeGoverningBody": supremeGoverningBody # Высший орган управления (выбор из справочника)
+            "companyManagement": {  # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
+                # Высший орган управления (выбор из справочника)
+                "supremeGoverningBody": supremeGoverningBody
             }
         }
 
@@ -347,7 +384,6 @@ class Adapter_LoanRequest:
                 return address['address']
         return ""
 
-
     def parserCompanyPersons(self):
         companyPersons = []
         for persons in self.loan_request.list_persone:
@@ -360,122 +396,153 @@ class Adapter_LoanRequest:
 
     def setCompany(self, company):
         self.json_api['company'] = company
-    
+
     def setDocument(self, listObj):
         self.json_api['documents'] = listObj
-    
+
     def getDocument(self, url, docType):
         response = session.get(os.getenv("DJANGO_APP_DOMAIN_STORAGE") + url)
         uri = (base64.b64encode(response.content).decode("utf-8"))
         nameFile = url.split('/')[-1]
 
         return {
-                "docType": docType, # Тип документа (справочник)
-                "files": [
-                    {
-                        "fileName": nameFile,
-                        "content": uri
-                    }
-                ]
-            }
+            "docType": docType,  # Тип документа (справочник)
+            "files": [
+                {
+                    "fileName": nameFile,
+                    "content": uri
+                }
+            ]
+        }
 
-    def getCompanyBusinessInfo(self, 
-        hasBeneficiariesInfo, 
-        beneficiariesInfo, 
-        companyCarriesOutActivitiesSubjectToLicensing,
-        historyReputationMarketSectorCompetition,
-        totalNumberOfTransactionsPerMonth,
-        totalNumberOfTransactionsPerWeek,
-        totalNumberOfTransactionsPerQuarter,
-        totalNumberOfTransactionsPerYear,
-        totalSumTransactionsPerMonth,
-        totalSumTransactionsPerWeek,
-        totalSumTransactionsPerQuarter,
-        totalSumTransactionsPerYear,
-        numberOfCashWithdrawalsPerMonth,
-        numberOfCashWithdrawalsPerWeek,
-        numberOfCashWithdrawalsPerQuarter,
-        numberOfCashWithdrawalsPerYear,
-        amountOfCashWithdrawalsPerMonth,
-        amountOfCashWithdrawalsPerWeek,
-        amountOfCashWithdrawalsPerQuarter,
-        amountOfCashWithdrawalsPerYear,
-        numberTransactionsOnForeignTradeContractsPerMonth,
-        numberTransactionsOnForeignTradeContractsPerWeek,
-        numberTransactionsOnForeignTradeContractsPerQuarter,
-        numberTransactionsOnForeignTradeContractsPerYear,
-        amountOfTransactionsUnderForeignTradeContractsPerMonth,
-        amountOfTransactionsUnderForeignTradeContractsPerWeek,
-        amountOfTransactionsUnderForeignTradeContractsPerQuarter,
-        amountOfTransactionsUnderForeignTradeContractsPerYear,
-        moneySources,
-        numberOfEmployees,
-        fatcaAndStrategicStatus,
-    ):
+    def getCompanyBusinessInfo(self,
+                               hasBeneficiariesInfo,
+                               beneficiariesInfo,
+                               companyCarriesOutActivitiesSubjectToLicensing,
+                               historyReputationMarketSectorCompetition,
+                               totalNumberOfTransactionsPerMonth,
+                               totalNumberOfTransactionsPerWeek,
+                               totalNumberOfTransactionsPerQuarter,
+                               totalNumberOfTransactionsPerYear,
+                               totalSumTransactionsPerMonth,
+                               totalSumTransactionsPerWeek,
+                               totalSumTransactionsPerQuarter,
+                               totalSumTransactionsPerYear,
+                               numberOfCashWithdrawalsPerMonth,
+                               numberOfCashWithdrawalsPerWeek,
+                               numberOfCashWithdrawalsPerQuarter,
+                               numberOfCashWithdrawalsPerYear,
+                               amountOfCashWithdrawalsPerMonth,
+                               amountOfCashWithdrawalsPerWeek,
+                               amountOfCashWithdrawalsPerQuarter,
+                               amountOfCashWithdrawalsPerYear,
+                               numberTransactionsOnForeignTradeContractsPerMonth,
+                               numberTransactionsOnForeignTradeContractsPerWeek,
+                               numberTransactionsOnForeignTradeContractsPerQuarter,
+                               numberTransactionsOnForeignTradeContractsPerYear,
+                               amountOfTransactionsUnderForeignTradeContractsPerMonth,
+                               amountOfTransactionsUnderForeignTradeContractsPerWeek,
+                               amountOfTransactionsUnderForeignTradeContractsPerQuarter,
+                               amountOfTransactionsUnderForeignTradeContractsPerYear,
+                               moneySources,
+                               numberOfEmployees,
+                               fatcaAndStrategicStatus,
+                               ):
         return {
-            "hasBeneficiariesInfo": hasBeneficiariesInfo, # Сведения о выгодоприобретателях
-            "beneficiariesInfo": beneficiariesInfo, # Укажите третьи лица, к выгоде которых действует компания
-            "companyCarriesOutActivitiesSubjectToLicensing": companyCarriesOutActivitiesSubjectToLicensing, # Компания осуществляет деятельность, подлежащую лицензированию (выбор из справочника)
-            "historyReputationMarketSectorCompetition": historyReputationMarketSectorCompetition, # История, репутация, сектор рынка и конкуренция (выбор из справочника)
-            "totalNumberOfTransactionsPerMonth": totalNumberOfTransactionsPerMonth, # Общее количество операций в месяц (выбор из справочника)
-            "totalNumberOfTransactionsPerWeek": totalNumberOfTransactionsPerWeek, # Общее количество операций в неделю
-            "totalNumberOfTransactionsPerQuarter": totalNumberOfTransactionsPerQuarter, # Общее количество операций в квартал
-            "totalNumberOfTransactionsPerYear": totalNumberOfTransactionsPerYear, # Общее количество операций в год
-            "totalSumTransactionsPerMonth": totalSumTransactionsPerMonth, # Общая сумма операций в месяц (выбор из справочника)
-            "totalSumTransactionsPerWeek": totalSumTransactionsPerWeek, # Общая сумма операций в неделю
-            "totalSumTransactionsPerQuarter": totalSumTransactionsPerQuarter, # Общая сумма операций в квартал
-            "totalSumTransactionsPerYear": totalSumTransactionsPerYear, # Общая сумма операций в год
-            "numberOfCashWithdrawalsPerMonth": numberOfCashWithdrawalsPerMonth, # Количество операций по снятию наличности в месяц (выбор из справочника)
-            "numberOfCashWithdrawalsPerWeek": numberOfCashWithdrawalsPerWeek, # Количество операций по снятию наличности в неделю
-            "numberOfCashWithdrawalsPerQuarter": numberOfCashWithdrawalsPerQuarter, # Количество операций по снятию наличности в квартал
-            "numberOfCashWithdrawalsPerYear": numberOfCashWithdrawalsPerYear, # Количество операций по снятию наличности в год
-            "amountOfCashWithdrawalsPerMonth": amountOfCashWithdrawalsPerMonth, # Сумма операций по снятию наличности в месяц (руб.) (выбор из справочника)
-            "amountOfCashWithdrawalsPerWeek": amountOfCashWithdrawalsPerWeek, # Сумма операций по снятию денежных средств в наличной форме в неделю
-            "amountOfCashWithdrawalsPerQuarter": amountOfCashWithdrawalsPerQuarter, # Сумма операций по снятию денежных средств в наличной форме в квартал
-            "amountOfCashWithdrawalsPerYear": amountOfCashWithdrawalsPerYear, # Сумма операций по снятию денежных средств в наличной форме в год
-            "numberTransactionsOnForeignTradeContractsPerMonth": numberTransactionsOnForeignTradeContractsPerMonth, # Количество операций по внешнеторговым контрактам в месяц (выбор из справочника)
-            "numberTransactionsOnForeignTradeContractsPerWeek": numberTransactionsOnForeignTradeContractsPerWeek, # Количество операций по внешнеторговым контрактам в неделю
-            "numberTransactionsOnForeignTradeContractsPerQuarter": numberTransactionsOnForeignTradeContractsPerQuarter, # Количество операций по внешнеторговым контрактам в квартал
-            "numberTransactionsOnForeignTradeContractsPerYear": numberTransactionsOnForeignTradeContractsPerYear, # Количество операций по внешнеторговым контрактам в год
-            "amountOfTransactionsUnderForeignTradeContractsPerMonth": amountOfTransactionsUnderForeignTradeContractsPerMonth, # Сумма операций по внешнеторговым контрактам в месяц (руб.) (выбор из справочника)
-            "amountOfTransactionsUnderForeignTradeContractsPerWeek": amountOfTransactionsUnderForeignTradeContractsPerWeek, # Сумма операций по внешнеторговым контрактам в неделю
-            "amountOfTransactionsUnderForeignTradeContractsPerQuarter": amountOfTransactionsUnderForeignTradeContractsPerQuarter, # Сумма операций по внешнеторговым контрактам в квартал
-            "amountOfTransactionsUnderForeignTradeContractsPerYear": amountOfTransactionsUnderForeignTradeContractsPerYear, # Сумма операций по внешнеторговым контрактам в год
-            "moneySources": moneySources, # Источники происхождения денежных средств (выбор из справочника)
-            "numberOfEmployees": numberOfEmployees, # Штатная численность сотрудников (выбор из справочника)
-            "fatcaAndStrategicStatus": fatcaAndStrategicStatus # Отметьте все верные утверждения (множественный выбор из справочника)
-            
+            "hasBeneficiariesInfo": hasBeneficiariesInfo,  # Сведения о выгодоприобретателях
+            # Укажите третьи лица, к выгоде которых действует компания
+            "beneficiariesInfo": beneficiariesInfo,
+            # Компания осуществляет деятельность, подлежащую лицензированию (выбор из справочника)
+            "companyCarriesOutActivitiesSubjectToLicensing": companyCarriesOutActivitiesSubjectToLicensing,
+            # История, репутация, сектор рынка и конкуренция (выбор из справочника)
+            "historyReputationMarketSectorCompetition": historyReputationMarketSectorCompetition,
+            # Общее количество операций в месяц (выбор из справочника)
+            "totalNumberOfTransactionsPerMonth": totalNumberOfTransactionsPerMonth,
+            # Общее количество операций в неделю
+            "totalNumberOfTransactionsPerWeek": totalNumberOfTransactionsPerWeek,
+            # Общее количество операций в квартал
+            "totalNumberOfTransactionsPerQuarter": totalNumberOfTransactionsPerQuarter,
+            # Общее количество операций в год
+            "totalNumberOfTransactionsPerYear": totalNumberOfTransactionsPerYear,
+            # Общая сумма операций в месяц (выбор из справочника)
+            "totalSumTransactionsPerMonth": totalSumTransactionsPerMonth,
+            # Общая сумма операций в неделю
+            "totalSumTransactionsPerWeek": totalSumTransactionsPerWeek,
+            # Общая сумма операций в квартал
+            "totalSumTransactionsPerQuarter": totalSumTransactionsPerQuarter,
+            # Общая сумма операций в год
+            "totalSumTransactionsPerYear": totalSumTransactionsPerYear,
+            # Количество операций по снятию наличности в месяц (выбор из справочника)
+            "numberOfCashWithdrawalsPerMonth": numberOfCashWithdrawalsPerMonth,
+            # Количество операций по снятию наличности в неделю
+            "numberOfCashWithdrawalsPerWeek": numberOfCashWithdrawalsPerWeek,
+            # Количество операций по снятию наличности в квартал
+            "numberOfCashWithdrawalsPerQuarter": numberOfCashWithdrawalsPerQuarter,
+            # Количество операций по снятию наличности в год
+            "numberOfCashWithdrawalsPerYear": numberOfCashWithdrawalsPerYear,
+            # Сумма операций по снятию наличности в месяц (руб.) (выбор из справочника)
+            "amountOfCashWithdrawalsPerMonth": amountOfCashWithdrawalsPerMonth,
+            # Сумма операций по снятию денежных средств в наличной форме в неделю
+            "amountOfCashWithdrawalsPerWeek": amountOfCashWithdrawalsPerWeek,
+            # Сумма операций по снятию денежных средств в наличной форме в квартал
+            "amountOfCashWithdrawalsPerQuarter": amountOfCashWithdrawalsPerQuarter,
+            # Сумма операций по снятию денежных средств в наличной форме в год
+            "amountOfCashWithdrawalsPerYear": amountOfCashWithdrawalsPerYear,
+            # Количество операций по внешнеторговым контрактам в месяц (выбор из справочника)
+            "numberTransactionsOnForeignTradeContractsPerMonth": numberTransactionsOnForeignTradeContractsPerMonth,
+            # Количество операций по внешнеторговым контрактам в неделю
+            "numberTransactionsOnForeignTradeContractsPerWeek": numberTransactionsOnForeignTradeContractsPerWeek,
+            # Количество операций по внешнеторговым контрактам в квартал
+            "numberTransactionsOnForeignTradeContractsPerQuarter": numberTransactionsOnForeignTradeContractsPerQuarter,
+            # Количество операций по внешнеторговым контрактам в год
+            "numberTransactionsOnForeignTradeContractsPerYear": numberTransactionsOnForeignTradeContractsPerYear,
+            # Сумма операций по внешнеторговым контрактам в месяц (руб.) (выбор из справочника)
+            "amountOfTransactionsUnderForeignTradeContractsPerMonth": amountOfTransactionsUnderForeignTradeContractsPerMonth,
+            # Сумма операций по внешнеторговым контрактам в неделю
+            "amountOfTransactionsUnderForeignTradeContractsPerWeek": amountOfTransactionsUnderForeignTradeContractsPerWeek,
+            # Сумма операций по внешнеторговым контрактам в квартал
+            "amountOfTransactionsUnderForeignTradeContractsPerQuarter": amountOfTransactionsUnderForeignTradeContractsPerQuarter,
+            # Сумма операций по внешнеторговым контрактам в год
+            "amountOfTransactionsUnderForeignTradeContractsPerYear": amountOfTransactionsUnderForeignTradeContractsPerYear,
+            # Источники происхождения денежных средств (выбор из справочника)
+            "moneySources": moneySources,
+            # Штатная численность сотрудников (выбор из справочника)
+            "numberOfEmployees": numberOfEmployees,
+            # Отметьте все верные утверждения (множественный выбор из справочника)
+            "fatcaAndStrategicStatus": fatcaAndStrategicStatus
+
         }
 
     def setCompanyBusinessInfo(self, obj):
         self.json_api['companyBusinessInfo'] = obj
 
     def setAdditionalProducts(
-        self, 
-        sms, 
-        overdraft, 
-        internetAcquiring, 
-        merchantAcquiring, 
-        fastPaymentSystem, 
-        loyaltyProgram, 
-        loyaltyProgramInfo, 
-        community, 
+        self,
+        sms,
+        overdraft,
+        internetAcquiring,
+        merchantAcquiring,
+        fastPaymentSystem,
+        loyaltyProgram,
+        loyaltyProgramInfo,
+        community,
         accounting,
         legalSupport,
         promotion,
     ):
         self.json_api['additionalProducts'] = {
-            "sms": sms, # СМС-оповещение
-            "overdraft": overdraft, # Овердрафт
-            "internetAcquiring": internetAcquiring, # Интернет-эквайринг
-            "merchantAcquiring": merchantAcquiring, # Торговый эквайринг
-            "fastPaymentSystem": fastPaymentSystem, # Расчеты по Системе быстрых платежей
-            "loyaltyProgram": loyaltyProgram, # Подключить к Программе лояльности
-            "loyaltyProgramInfo": loyaltyProgramInfo, # Программа лояльности (выбор из справочника)
-            "community": community, # Комьюнити
-            "accounting": accounting, # Бухгалтерия
-            "legalSupport": legalSupport, # Юридическая поддержка
-            "promotion": promotion # Продвижение
+            "sms": sms,  # СМС-оповещение
+            "overdraft": overdraft,  # Овердрафт
+            "internetAcquiring": internetAcquiring,  # Интернет-эквайринг
+            "merchantAcquiring": merchantAcquiring,  # Торговый эквайринг
+            "fastPaymentSystem": fastPaymentSystem,  # Расчеты по Системе быстрых платежей
+            "loyaltyProgram": loyaltyProgram,  # Подключить к Программе лояльности
+            # Программа лояльности (выбор из справочника)
+            "loyaltyProgramInfo": loyaltyProgramInfo,
+            "community": community,  # Комьюнити
+            "accounting": accounting,  # Бухгалтерия
+            "legalSupport": legalSupport,  # Юридическая поддержка
+            "promotion": promotion  # Продвижение
         }
 
     def setCodeword(self, codeword=""):
@@ -485,7 +552,7 @@ class Adapter_LoanRequest:
         lr = self.loan_request
         initiatorData = self.getInitiatorData(phoneNumber=lr.contact_number)
         self.setInitiator(initiator=initiatorData)
-        
+
         legalAddress = self.getLoadRequest_legalAddress()
         postalAddress = self.getLoadRequest_postalAddress()
 
@@ -513,10 +580,10 @@ class Adapter_LoanRequest:
                 ))
 
         companyFoundersUl = self.getCompanyFoundersUl(arrayCompanyFoundersUl)
-        
+
         lr_list_companyPersons = self.parserCompanyPersons()
         companyPersonsList = []
-        
+
         for lr_persons in lr_list_companyPersons:
             print(lr_persons)
             companyPersonsBase = self.getCompanyPersonsBase(
@@ -524,7 +591,9 @@ class Adapter_LoanRequest:
                 lastName=lr_persons['account_own_name'],
                 firstName=lr_persons['account_own_lastname'],
                 middleName=lr_persons['account_own_surname'],
-                gender=lr_persons['account_own_gender'],
+                gender=(
+                    1 if lr_persons['account_own_gender'] == 'Мужской' else 0
+                ),
                 birthDate=lr_persons['account_datebirth'],
                 birthPlace=lr_persons['account_birth_place'],
                 citizenship=lr_persons['account_own_citizenship'],
@@ -538,8 +607,6 @@ class Adapter_LoanRequest:
                 email=lr_persons['account_own_email'],
             )
 
-            
-
             identityDocument = self.getIdentityDocument(
                 type=lr_persons['doc_type'],
                 series=lr_persons['doc_serial'],
@@ -552,8 +619,8 @@ class Adapter_LoanRequest:
             roles = self.getRoles(
                 roles=lr_persons['account_onw_role'],
                 companyHeadPosition=lr_persons['account_own_job_title'],
-                founderShare=lr_persons['account_own_piece'] if lr_persons['account_own_piece'] else 0,
-                beneficiaryShare=lr_persons['account_own_piece'] if lr_persons['account_own_piece'] else 0,
+                founderShare=lr_persons['account_own_piece_auctioner'] if lr_persons['account_own_piece_auctioner'] else 0,
+                beneficiaryShare=lr_persons['account_own_piece_beneficiary'] if lr_persons['account_own_piece_beneficiary'] else 0,
             )
 
             pdl = self.getPdl(
@@ -569,10 +636,9 @@ class Adapter_LoanRequest:
                 roles=roles,
                 pdl=pdl,
             )
-            
 
             companyPersonsList.append(companyPersons)
-        
+
         companyManagement = self.getCompanyManagement(
             supremeGoverningBody=lr.structure_value
         )
@@ -661,23 +727,23 @@ class Adapter_LoanRequest:
         )
 
         documentList = []
-        
+
         for image in lr.document_certifying_identity_executive:
-            im = self.getDocument(url=image['path'],docType="executiveBody")
+            im = self.getDocument(url=image['path'], docType="executiveBody")
             documentList.append(im)
 
         for image in lr.document_confirming_real_activity:
-            im = self.getDocument(url=image['path'], docType="additionalClientDocs")
+            im = self.getDocument(
+                url=image['path'], docType="additionalClientDocs")
             documentList.append(im)
 
         for image in lr.document_licenses:
-            im = self.getDocument(url=image['path'],docType="license")
-            documentList.append(im)
-            
-        for image in lr.document_certifying_identity_ceo:
-            im = self.getDocument(url=image['path'],docType="dulHead")
+            im = self.getDocument(url=image['path'], docType="license")
             documentList.append(im)
 
+        for image in lr.document_certifying_identity_ceo:
+            im = self.getDocument(url=image['path'], docType="dulHead")
+            documentList.append(im)
 
         self.setDocument(documentList)
 

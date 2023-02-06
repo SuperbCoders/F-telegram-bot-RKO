@@ -168,10 +168,9 @@
       </h4>
       <div @click="valid = true" class="form_block">
         <v-radio-group v-model="currentData.sum_mouth_cash_withdrawal" column>
-          <v-radio label="До 1 000 000" value="to-1-mln"></v-radio>
-          <v-radio label="До 10 000 000" value="to-10-mln"></v-radio>
-          <v-radio label="До 100 000 000" value="to-100-mln"></v-radio>
-          <v-radio label="Свыше 100 000 000" value="more-100-mln"></v-radio>
+          <v-radio label="До 100 000" value="from-0-to-99"></v-radio>
+          <v-radio label="До 500 000" value="from-10-to-100"></v-radio>
+          <v-radio label="Свыше 500 000" value="more-100"></v-radio>
         </v-radio-group>
       </div>
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
@@ -214,9 +213,9 @@
       </h4>
       <div @click="valid = true" class="form_block">
         <v-radio-group v-model="currentData.foreign_trade_contracts_month" column>
-          <v-radio label="От 10" value="from-10"></v-radio>
-          <v-radio label="От 100" value="from-100"></v-radio>
-          <v-radio label="От 1000" value="from-1000"></v-radio>
+          <v-radio label="От 10" value="from-0-to-29"></v-radio>
+          <v-radio label="От 100" value="from-30-to-100"></v-radio>
+          <v-radio label="От 1000" value="more-100"></v-radio>
         </v-radio-group>
       </div>
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
