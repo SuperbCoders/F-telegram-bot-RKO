@@ -619,8 +619,8 @@ class Adapter_LoanRequest:
             roles = self.getRoles(
                 roles=lr_persons['account_onw_role'],
                 companyHeadPosition=lr_persons['account_own_job_title'],
-                founderShare=lr_persons['account_own_piece_auctioner'] if lr_persons['account_own_piece_auctioner'] else 0,
-                beneficiaryShare=lr_persons['account_own_piece_beneficiary'] if lr_persons['account_own_piece_beneficiary'] else 0,
+                founderShare=lr_persons['account_own_piece_auctioner'] if "account_own_piece_auctioner" in lr_persons else 0,
+                beneficiaryShare=lr_persons['account_own_piece_beneficiary'] if "account_own_piece_beneficiary" in lr_persons else 0,
             )
 
             pdl = self.getPdl(
