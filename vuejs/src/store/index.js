@@ -24,6 +24,7 @@ export default new Vuex.Store({
                 contact_number: "",
                 ogrn: "",
                 opf: {},
+                short: "",
                 is_conditions: false,
             },
 

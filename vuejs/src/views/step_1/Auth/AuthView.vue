@@ -14,29 +14,6 @@
         <v-text-field placeholder="Контактный номер телефона" outlined v-model="currentData.contact_number"
           :rules="requiredRules" :required="true" v-mask="'+# (###) ### ## ##'" masked="true" class="mt-5 auth_form">
         </v-text-field>
-        <!-- <div class="auth_form_cheked_block d-flex w-100">
-          <v-checkbox :rules="requiredRules" v-model="currentData.is_conditions">
-            <template v-slot:label>
-              <div class="text-left auth_form_link_container">
-                <span class="black--text">Я ознакомился и согласен с условиями </span>
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <a target="_blank" class="text-decoration-none" href="https://vuetifyjs.com" v-on="on" @click.stop>
-                      обработки и хранения персональных данных
-                    </a>
-                    <span class="black--text"> а также с условиями </span>
-
-                    <a target="_blank" class="text-decoration-none text-left" href="https://vuetifyjs.com" v-on="on"
-                      @click.stop>
-                      <span>резервирования счета,</span>
-
-                    </a>
-                  </template>
-                </v-tooltip>
-              </div>
-            </template>
-          </v-checkbox>
-        </div> -->
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
         </v-btn>
       </v-form>
@@ -134,13 +111,16 @@ export default {
       const data = await getCompanyName(this.currentData.company_name.split(',')[0]);
       if (data.suggestions.length === 1) {
         this.currentData.inn = data.suggestions[0].data.inn
+        this.currentData.short = data.suggestions[0].data?.name?.short
       }
     },
-    async getInnAndNameComnany({ name, inn, ogrn, opf }) {
+    async getInnAndNameComnany({ name, inn, ogrn, opf, short }) {
       this.currentData.company_name = name;
       this.currentData.inn = inn;
       this.currentData.ogrn = ogrn;
       this.currentData.opf = opf;
+      this.currentData.short = short;
+      console.log(short);
     }
   },
   computed: {},

@@ -302,6 +302,10 @@ export const translateMixin = {
                     return "Второй";
                 case "third":
                     return "Третий";
+                case "generalMeeting":
+                    return "Общее собрание участников";
+                case "soleExecutiveBody":
+                    return "Единоличный исполнительный орган";
 
 
                 default: return name;

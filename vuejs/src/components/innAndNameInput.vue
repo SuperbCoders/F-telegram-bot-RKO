@@ -30,13 +30,14 @@ export default {
     },
     methods: {
         async selectCompany(company) {
-            const {value, data: {inn, ogrn, opf} } = company;
+            const {value, data: {inn, ogrn, opf, name: {short}} } = company;
             this.list = [];
             this.$emit('input', {
                 name: value,
                 inn,
                 ogrn,
                 opf,
+                short,
             })
         },
 

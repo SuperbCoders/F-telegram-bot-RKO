@@ -16,12 +16,14 @@ MAX_PHONE_LENGTH = 12
 MAX_ADDRESS_LENGTH = 120
 MAX_JSON_STRING_LENGTH = 300
 
+
 def generate_dhl_track_id():
     characters = string.ascii_uppercase + string.digits
     random_dhl_track_id = ''.join(
         random.choice(characters) for _ in range(15)
     )
     return random_dhl_track_id
+
 
 def generate_application_id():
     characters = ''.join(
@@ -35,6 +37,7 @@ def generate_application_id():
 
 class TypeToChoose(models.Model):
     type_name = models.CharField(max_length=MAX_CITY_NAME_STRING)
+
 
 class TariffPlan(models.Model):
     name = models.CharField(max_length=MAX_CITY_NAME_STRING)
@@ -56,13 +59,13 @@ class LoanRequest(models.Model):
                               default="under_review",
                               blank=True)
     last_status = models.CharField(max_length=140,
-                              choices=STATUS_CHOICES,
-                              default="under_review",
-                              blank=True)
+                                   choices=STATUS_CHOICES,
+                                   default="under_review",
+                                   blank=True)
 
     # Desctop field
-    
-    short_name = models.CharField(max_length=255, null=True, blank=True)
+
+    short = models.CharField(max_length=255, null=True, blank=True)
     full_name = models.CharField(max_length=255, null=True, blank=True)
     registration_date = models.CharField(max_length=255, null=True, blank=True)
     kpp = models.CharField(max_length=255, null=True, blank=True)
@@ -70,17 +73,20 @@ class LoanRequest(models.Model):
     registrator_name = models.CharField(max_length=255, null=True, blank=True)
     okved = models.CharField(max_length=255, null=True, blank=True)
     oktmo = models.CharField(max_length=255, null=True, blank=True)
-    
+
     # Bot field
 
     email = models.CharField(max_length=255, null=True, blank=True)
     donainname = models.CharField(max_length=255, null=True, blank=True)
     fax = models.CharField(max_length=255, null=True, blank=True)
     founders = models.JSONField(blank=True, null=True)
-    information_counterparties = models.CharField(max_length=255, null=True, blank=True)
+    information_counterparties = models.CharField(
+        max_length=255, null=True, blank=True)
     name_organization = models.CharField(max_length=255, null=True, blank=True)
-    information_counterparties_two = models.CharField(max_length=255, null=True, blank=True)
-    name_organization_two = models.CharField(max_length=255, null=True, blank=True)
+    information_counterparties_two = models.CharField(
+        max_length=255, null=True, blank=True)
+    name_organization_two = models.CharField(
+        max_length=255, null=True, blank=True)
     codeword = models.CharField(max_length=255, null=True, blank=True)
     sms_sending = models.BooleanField(null=True, blank=True)
     is_conditions = models.BooleanField(null=True, blank=True)
@@ -88,43 +94,68 @@ class LoanRequest(models.Model):
     opf = models.JSONField(blank=True, null=True)
 
     subject_licensing = models.CharField(max_length=255, null=True, blank=True)
-    history_reputation = models.CharField(max_length=255, null=True, blank=True)
-    num_transactions_month = models.CharField(max_length=255, null=True, blank=True)
-    num_transactions_week = models.CharField(max_length=255, null=True, blank=True)
-    num_transactions_quarter = models.CharField(max_length=255, null=True, blank=True)
-    num_transactions_age = models.CharField(max_length=255, null=True, blank=True)
-    sum_transactions_month = models.CharField(max_length=255, null=True, blank=True)
-    sum_transactions_week = models.CharField(max_length=255, null=True, blank=True)
-    sum_transactions_quarter = models.CharField(max_length=255, null=True, blank=True)
-    sum_transactions_age = models.CharField(max_length=255, null=True, blank=True)
-    
-    monthly_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    week_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    
-    quarter_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    age_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    
-    sum_mouth_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    sum_week_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    sum_quarter_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
-    sum_age_cash_withdrawal = models.CharField(max_length=255, null=True, blank=True)
+    history_reputation = models.CharField(
+        max_length=255, null=True, blank=True)
+    num_transactions_month = models.CharField(
+        max_length=255, null=True, blank=True)
+    num_transactions_week = models.CharField(
+        max_length=255, null=True, blank=True)
+    num_transactions_quarter = models.CharField(
+        max_length=255, null=True, blank=True)
+    num_transactions_age = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_transactions_month = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_transactions_week = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_transactions_quarter = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_transactions_age = models.CharField(
+        max_length=255, null=True, blank=True)
 
-    foreign_trade_contracts_month = models.CharField(max_length=255, null=True, blank=True)
-    foreign_trade_contracts_week = models.CharField(max_length=255, null=True, blank=True)
-    foreign_trade_contracts_quarter = models.CharField(max_length=255, null=True, blank=True)
-    foreign_trade_contracts_age = models.CharField(max_length=255, null=True, blank=True)
-    foreign_sum_contracts_month = models.CharField(max_length=255, null=True, blank=True)
-    foreign_sum_contracts_week = models.CharField(max_length=255, null=True, blank=True)
-    foreign_sum_contracts_quarter = models.CharField(max_length=255, null=True, blank=True)
-    foreign_sum_contracts_age = models.CharField(max_length=255, null=True, blank=True)
+    monthly_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+    week_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+
+    quarter_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+    age_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+
+    sum_mouth_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_week_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_quarter_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+    sum_age_cash_withdrawal = models.CharField(
+        max_length=255, null=True, blank=True)
+
+    foreign_trade_contracts_month = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_trade_contracts_week = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_trade_contracts_quarter = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_trade_contracts_age = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_sum_contracts_month = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_sum_contracts_week = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_sum_contracts_quarter = models.CharField(
+        max_length=255, null=True, blank=True)
+    foreign_sum_contracts_age = models.CharField(
+        max_length=255, null=True, blank=True)
     sources_cash_receipts = models.JSONField(blank=True, null=True)
     headcount = models.CharField(max_length=255, null=True, blank=True)
 
-    document_certifying_identity_executive = models.JSONField(null=True, blank=True)
+    document_certifying_identity_executive = models.JSONField(
+        null=True, blank=True)
     document_confirming_real_activity = models.JSONField(null=True, blank=True)
     document_licenses = models.JSONField(null=True, blank=True)
     document_certifying_identity_ceo = models.JSONField(null=True, blank=True)
-
 
     structure_value = models.CharField(max_length=255, null=True)
 
@@ -132,55 +163,76 @@ class LoanRequest(models.Model):
     order_id = models.CharField(max_length=255, null=True, blank=True)
     inn = models.CharField(max_length=20, blank=True, null=True)
     ogrn = models.CharField(max_length=30, blank=True, null=True)
-    company_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    company_name = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
     contact_number = models.CharField(max_length=20)
-    contact_phone_number = models.CharField(max_length=20, blank=True, null=True)
-    
+    contact_phone_number = models.CharField(
+        max_length=20, blank=True, null=True)
+
     addresses = models.JSONField(blank=True, null=True)
-    
-    supreme_management_body = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    supreme_management_person = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    supreme_management_inn = models.CharField(max_length=INN_MAX_LENGTH, blank=True, null=True)
-    
+
+    supreme_management_body = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supreme_management_person = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    supreme_management_inn = models.CharField(
+        max_length=INN_MAX_LENGTH, blank=True, null=True)
+
     list_persone = models.JSONField(blank=True, null=True)
 
-    licence_type = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    licence_number = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    licence_issued_by = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licence_type = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licence_number = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licence_issued_by = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
     licence_date_issue = models.DateField(blank=True, null=True)
     licence_validity = models.DateField(blank=True, null=True)
-    licenced_activity = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    licenced_activity = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
 
-    employers_volume = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    employers_volume = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
     salary_debt = models.BigIntegerField(blank=True, null=True)
 
-    company_group_name = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
+    company_group_name = models.CharField(
+        max_length=MAX_STRING_LENGTH, blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
     end_date = models.DateField(blank=True, null=True)
-    group_members = models.JSONField(max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
-    
-    beneficiaries = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    third_parties = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    
+    group_members = models.JSONField(
+        max_length=MAX_JSON_STRING_LENGTH, blank=True, null=True)
+
+    beneficiaries = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    third_parties = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
+
     planned_operations = models.JSONField(null=True, blank=True)
-    planned_other = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    
-    account_operations = models.JSONField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    operation_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    sum_per_month = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    planned_other = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
+
+    account_operations = models.JSONField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    operation_volume = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    sum_per_month = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
     cash_source = models.JSONField(null=True, blank=True)
-    outside_contracts_volume = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
-    state_employers = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    outside_contracts_volume = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    state_employers = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
     information_goals = models.JSONField(null=True, blank=True)
 
     # rate = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
-    tariff = models.CharField(max_length=MAX_STRING_LENGTH, null=True, blank=True)
+    tariff = models.CharField(
+        max_length=MAX_STRING_LENGTH, null=True, blank=True)
     is_finished = models.BooleanField(default=False)
     last_step = models.CharField(max_length=50, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
 
     def _send_success_message_to_telegram(self):
-        
+
         text = (
             "Ваша заявка отправлена в банк на рассмотрение.\n" +
             "Информация с результатами рассмотрения будет отправлена " +
@@ -188,7 +240,7 @@ class LoanRequest(models.Model):
         )
         normal_pn = format_phone(self.contact_number)
         user = User.objects.filter(phone_number=normal_pn).first()
-        
+
         send_telegram_bot_message.delay(user.telegram_chat_id, text)
 
     def _send_upload_message_to_telegram(self):
@@ -199,10 +251,10 @@ class LoanRequest(models.Model):
         )
         button_text = "Загрузить документы"
         button_url = "https://www.zenit.ru/"
-        
+
         normal_pn = format_phone(self.contact_number)
         user = User.objects.filter(phone_number=normal_pn).first()
-        
+
         send_telegram_bot_message.delay(
             user.telegram_chat_id,
             text,
@@ -214,7 +266,7 @@ class LoanRequest(models.Model):
     def _send_change_status_message_to_telegram(self):
         normal_pn = format_phone(self.contact_number)
         user = User.objects.filter(phone_number=normal_pn).first()
-        if self.status == "update": 
+        if self.status == "update":
             print(self.status)
             text = (
                 f"{self.account_own_name} {self.account_own_lastname}, нам необходима дополнительная"
@@ -251,15 +303,15 @@ class LoanRequest(models.Model):
             text = ''
             if self.company_name.find('ИП ') != -1:
                 text = (
-                    f"{self.account_own_name} {self.account_own_lastname}," 
+                    f"{self.account_own_name} {self.account_own_lastname},"
                     + "вам одобрено открытие расчётного счёта. В ближайшее время мы позвоним,"
                     + "чтобы назначить встречу с представителем банка. Конакты КЦ"
                 )
-            elif self.company_name.find('ООО ') !=-1:
+            elif self.company_name.find('ООО ') != -1:
                 text = (
-                    f"{self.account_own_name} {self.account_own_lastname}," 
-                    + f"для {self.company_name} одобрено открытие расчётного счёта." 
-                    +"В ближайшее время мы позвоним, чтобы назначить встречу с представителем банка.  Конакты КЦ" 
+                    f"{self.account_own_name} {self.account_own_lastname},"
+                    + f"для {self.company_name} одобрено открытие расчётного счёта."
+                    + "В ближайшее время мы позвоним, чтобы назначить встречу с представителем банка.  Конакты КЦ"
                 )
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
@@ -272,11 +324,11 @@ class LoanRequest(models.Model):
             )
             self.last_status = self.status
         elif self.status == "under_review":
-            
+
             text = (
-                f"{self.account_own_name} {self.account_own_lastname}," 
-                +"Ваша заявка на открытие счёта находится на рассмотрении." 
-                +"Подробнее — в мобильном и интернет-банке: ДИПЛИНК"
+                f"{self.account_own_name} {self.account_own_lastname},"
+                + "Ваша заявка на открытие счёта находится на рассмотрении."
+                + "Подробнее — в мобильном и интернет-банке: ДИПЛИНК"
             )
             button_text = "Контактный центр"
             button_url = "https://www.yandex.ru/"
@@ -288,6 +340,7 @@ class LoanRequest(models.Model):
                 delay=1,
             )
             self.last_status = self.status
+
     class Meta:
         verbose_name = 'заявление'
         verbose_name_plural = "заявления"
@@ -297,7 +350,6 @@ class LoanRequest(models.Model):
             if self.status != self.last_status:
                 self._send_change_status_message_to_telegram()
         super().save(*args, **kwargs)
-
 
     # def update
 

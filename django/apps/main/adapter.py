@@ -31,6 +31,7 @@ class Adapter_LoanRequest:
             "company": {  # Клиент
                 "inn": "",  # ИНН
                 "ogrn": "",  # ОГРН
+                "shortName": "",
                 # Наименование на иностранном языке (если имеется)
                 "shortNameEn": "",
                 "legalAddress": "",  # Юридический адрес компании
@@ -98,7 +99,8 @@ class Adapter_LoanRequest:
                 ],
                 "companyManagement": {  # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
                     # Высший орган управления (выбор из справочника)
-                    "supremeGoverningBody": ""
+                    "supremeGoverningBody": "",
+                    "selectedManagementKey" : None,
                 }
             },
             "companyBusinessInfo": {  # ИНФОРМАЦИЯ О БИЗНЕСЕ
@@ -247,11 +249,12 @@ class Adapter_LoanRequest:
     def setInitiator(self, initiator) -> None:
         self.json_api['initiator'] = initiator
 
-    def getCompanyBase(self, inn, ogrn, shortNameEn, legalAddress, postalAddress) -> dict:
+    def getCompanyBase(self, inn, ogrn, shortName, shortNameEn, legalAddress, postalAddress) -> dict:
         return {
             "inn": format_string(inn),  # ИНН
             "ogrn": format_string(ogrn),  # ОГРН
             # Наименование на иностранном языке (если имеется)
+            "shortName": shortName,
             "shortNameEn": shortNameEn,
             "legalAddress": legalAddress,  # Юридический адрес компании
             "postalAddress": postalAddress,  # Почтовый адрес компании
@@ -357,11 +360,12 @@ class Adapter_LoanRequest:
             **pdl,
         }
 
-    def getCompanyManagement(self, supremeGoverningBody):
+    def getCompanyManagement(self, supremeGoverningBody, selectedManagementKey):
         return {
             "companyManagement": {  # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
                 # Высший орган управления (выбор из справочника)
-                "supremeGoverningBody": supremeGoverningBody
+                "supremeGoverningBody": supremeGoverningBody,
+                "selectedManagementKey" : selectedManagementKey,
             }
         }
 
@@ -559,6 +563,7 @@ class Adapter_LoanRequest:
         companyBase = self.getCompanyBase(
             inn=lr.inn,
             ogrn=lr.ogrn,
+            shortName=lr.short,
             shortNameEn="",
             legalAddress=legalAddress,
             postalAddress=postalAddress,
@@ -640,7 +645,8 @@ class Adapter_LoanRequest:
             companyPersonsList.append(companyPersons)
 
         companyManagement = self.getCompanyManagement(
-            supremeGoverningBody=lr.structure_value
+            supremeGoverningBody=lr.structure_value,
+            selectedManagementKey=lr.structure_value,
         )
         self.setCompany(
             {
