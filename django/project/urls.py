@@ -27,6 +27,7 @@ from apps.main.views import (
     LoanApplicationListAPIView,
     DocumentLoad,
     StatusCheck,
+    LoanApplicationStatusListAPIView,
     SmsValidation,
 )
 
@@ -42,6 +43,10 @@ urlpatterns = [
     path(
         "api/loan-application",
         LoanApplicationListAPIView.as_view()
+    ),
+    path(
+        "api/loan-application/status",
+        LoanApplicationStatusListAPIView.as_view()
     ),
     path(
         "api/user/<str:telegram_chat_id>/",

@@ -6,13 +6,13 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <div v-for="(itemForm, index) in currentData.addresses" :key="index" class="form_input_block checkboxs">
         <div class="form_block mb-5">
-          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Юридический"
+          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.type_address" label="Юридический"
             value="Юридический" hide-details>
           </v-checkbox>
-          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.typeAdress" label="Почтовый" value="Почтовый"
+          <v-checkbox @click="isTypeAdress(itemForm)" v-model="itemForm.type_address" label="Почтовый" value="Почтовый"
             hide-details></v-checkbox>
         </div>
-        <p class="error_message" v-if="!valid && currentData.typeAdress > 0">
+        <p class="error_message" v-if="!valid && currentData.type_address > 0">
           Выберите пункт
         </p>
         <div class="form_block">
@@ -32,7 +32,9 @@
         </v-btn>
       </div>
       <line-step :step="number_step" />
-      <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+
+      <v-btn block large :disabled="(!isValidAllAddress)" class="mt-10 auth_form_bth" color="primary" @click="validate">
+        Продолжить
       </v-btn>
     </v-form>
   </div>
@@ -62,7 +64,7 @@ export default {
       currentData: {
         addresses: [
           {
-            typeAdress: [],
+            type_address: [],
             legal_address: "",
             mail_address: "",
             address: "",
@@ -74,7 +76,7 @@ export default {
       },
       addresses: [],
       checkboxList: [],
-      valid: true,
+      valid: false,
       innRules: [
         (v) => !!v || "Это поле обязательно",
         (v) =>
@@ -115,19 +117,19 @@ export default {
       this.$router.push({ name: `step_${this.number_step - 1}` });
     },
     isTypeAdress(object) {
-      if (object.typeAdress.includes("Фактический")) {
+      if (object.type_address.includes("Фактический")) {
         object.physic_address = object.address;
       }
-      if (object.typeAdress.includes("Почтовый")) {
+      if (object.type_address.includes("Почтовый")) {
         object.mail_address = object.address;
       }
-      if (object.typeAdress.includes("Юридический")) {
+      if (object.type_address.includes("Юридический")) {
         object.legal_address = object.address;
       }
     },
     addGroupList() {
       const defaultGroupItem = {
-        typeAdress: [],
+        type_address: [],
         legal_address: null,
         physic_address: null,
         mail_address: null,
@@ -140,7 +142,21 @@ export default {
       }
     },
   },
-  computed: {},
+  computed: {
+    isValidAllAddress() {
+      let is_main_address = false;
+      let is_legal_address = false;
+
+      for (const address of this.currentData.addresses) {
+        console.log(address);
+        const type_address = address?.type_address;
+        is_legal_address = type_address.indexOf("Юридический") >= 0;
+        is_main_address = type_address.indexOf("Почтовый") >= 0;
+      }
+      console.log(is_legal_address && is_main_address);
+      return is_legal_address && is_main_address;
+    }
+  },
   components: { LineStep, AddressInput },
 };
 </script>

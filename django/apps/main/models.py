@@ -54,14 +54,20 @@ class LoanRequest(models.Model):
         ("approved", "Одобрена"),
         ("update", "Доработка заявки")
     ]
-    status = models.CharField(max_length=140,
-                              choices=STATUS_CHOICES,
-                              default="under_review",
-                              blank=True)
-    last_status = models.CharField(max_length=140,
-                                   choices=STATUS_CHOICES,
-                                   default="under_review",
-                                   blank=True)
+
+    status = models.CharField(
+        max_length=140,
+        choices=STATUS_CHOICES,
+        default="under_review",
+        blank=True,
+    )
+
+    last_status = models.CharField(
+        max_length=140,
+        choices=STATUS_CHOICES,
+        default="under_review",
+        blank=True,
+    )
 
     # Desctop field
 

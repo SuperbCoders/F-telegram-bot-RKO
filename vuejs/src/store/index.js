@@ -37,7 +37,7 @@ export default new Vuex.Store({
             step_3: {
                 addresses: [
                     {
-                        typeAdress: [],
+                        type_address: [],
                         legal_address: "",
                         mail_address: "",
                         address: "",

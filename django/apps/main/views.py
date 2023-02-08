@@ -124,6 +124,40 @@ class LoanApplicationListAPIView(ListAPIView):
         )
 
 
+class LoanApplicationStatusListAPIView(ListAPIView):
+    permission_classes = [permissions.AllowAny]
+    parser_classes = [CamelCaseFormParser, CamelCaseMultiPartParser,
+                      CamelCaseJSONParser]
+    renderer_classes = [CamelCaseJSONRenderer]
+    model = LoanRequest
+    serializer_class = LoanRequestSerializer
+
+    def get_queryset(self):
+        telegram_chat_id = self.request.GET.get('telegram_chat_id')
+        phone_number = self.request.GET.get('phone_number')
+        if telegram_chat_id:
+            user = User.objects.filter(
+                telegram_chat_id=telegram_chat_id).first()
+            phone_number = user.phone_number
+
+        loan_request = LoanRequest.objects.filter(
+            contact_number=format_phone(phone_number),
+            is_finished=True,
+        ).order_by("created_at")
+
+        list_status = []
+
+        if os.getenv("DJANGO_APP_API_BANK_ENABLE") in ['enable', 'test']:
+            for load in loan_request:
+
+                response = requests.get(
+                    os.getenv("DJANGO_APP_API_BANK") + f"/order/{load.order_id}")
+                responseData = response.json()
+                list_status.append(responseData)
+
+        return list_status
+
+
 class UserAPIView(APIView):
     permission_classes = [permissions.AllowAny]
 
@@ -207,9 +241,11 @@ class StatusCheck(APIView):
                     response = requests.get(
                         os.getenv("DJANGO_APP_API_BANK") + f"/order/{order_id}")
                     responseData = response.json()
-                lr.status = responseData['statusCode']
-                lr.status_description = responseData['statusDescription']
+
+                lr.status = responseData["orderStatus"]['statusCode']
+                lr.status_description = responseData["orderStatus"]['statusDescription']
                 lr.save()
+
         return Response({}, status=status.HTTP_200_OK)
 
 

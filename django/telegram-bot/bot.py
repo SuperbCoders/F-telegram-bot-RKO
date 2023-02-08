@@ -219,39 +219,55 @@ def get_user_applications(chat_id):
 
 async def status(update, context):
     chat_id = update.effective_chat.id
-    user_applications = get_user_applications(chat_id)
+    api_url = (
+        os.getenv("DJANGO_APP_API_ROOT_URL") +
+        "api/loan-application/status?telegram_chat_id={}".format(chat_id)
+    )
     status_list = []
-    print(user_applications)
-    if user_applications:
+
+    message_list = []
+
+    try:
+        response = requests.get(api_url, timeout=10)
+        if response.json():
+            status_list = response.json()
+            debug_print("status_list", status_list)
+    except:
+        pass
+
+    print(status_list)
+    if len(status_list) >= 0:
         status_list = []
-        for i, status in enumerate(user_applications, start=1):
+        for i, status in enumerate(status_list, start=1):
+            orderCreatedDate = datetime.datetime.strptime(
+                status['orderCreatedDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
+            )
+            accountReservationDate = datetime.datetime.strptime(
+                status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
+            )
             mess = ""
             mess += f"Номер заявки: {random.randint(100000, 999999)}\n"
-            mess += f"Дата заявки {status['createdAt'].split('T')[0]}\n"
+            mess += f"Дата заявки {accountReservationDate.strftime('%Y-%m-%d')}\n"
             mess += f"Тип - открытие счета\n"
             mess += f"Компания:\n"
             mess += f"    - Имя: {status['companyName']}\n"
             mess += f"    - ИНН: {status['inn']}\n"
-            mess += f"    - ОГРН: {random.randint(100000, 999999)}\n"
-            if status['status'] == 'under_review':
+            mess += f"    - ОГРН: {status['ogrn']}\n"
+            if status['orderType'] == 'under_review':
                 mess += f"Cтатус заявки - На рассмотрении\n"
-            elif status['status'] == 'declined':
+            elif status['orderType'] == 'declined':
                 mess += f"Cтатус заявки - Отклонена\n"
-            elif status['status'] == 'approved':
+            elif status['orderType'] == 'approved':
                 mess += f"Cтатус заявки - Одобрена\n"
-            elif status['status'] == 'update':
+            elif status['orderType'] == 'update':
                 mess += f"Cтатус заявки - Доработка заявки\n"
-            mess += (f"Номер счета: {random.randint(100000, 999999)} \n" if 'На рассмотрении' ==
-                     status["status"] or "Доработка заявки" else '\n')
-            mess += (f"Валюта счета: RUB\n " if 'На рассмотрении' ==
-                     status["status"] or "Доработка заявки" else '\n')
-            mess += (f"Дата открытия {date.today().strftime('%Y-%m-%d')}\n" if 'На рассмотрении' ==
-                     status["status"] or "Доработка заявки" else '\n')
-            mess += (f"Статус: Зарезервирован\n" if 'На рассмотрении' ==
-                     status["status"] or "Доработка заявки" else '\n')
-            status_list.append(mess)
+            mess += (f"Номер счета: {status['accountNumber']} \n")
+            mess += (f"Валюта счета: {status['accountCurrency']}\n ")
+            mess += (f"Дата открытия {orderCreatedDate.strftime('%Y-%m-%d %H:%M')}\n")
+            mess += (f"Статус: {status['orderType']}\n")
+            message_list.append(mess)
 
-        text = "\n\n".join(status_list)
+        text = "\n\n".join(message_list)
     else:
         text = "Заявок не найдено."
     await context.bot.send_message(

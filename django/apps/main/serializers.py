@@ -11,7 +11,7 @@ class LoanRequestSerializer(serializers.ModelSerializer):
         model = LoanRequest
         fields = [
 
-            'short_name',
+            'short',
             'full_name',
             'registration_date',
             'kpp',

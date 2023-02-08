@@ -66,22 +66,22 @@ export const auto_route = {
 
 
                 case 'substep_0':
-                    next_push = 'substep_1';
+                    next_push = 'step_4';
                     break
                 case 'substep_1':
-                    next_push = 'substep_2';
+                    next_push = 'step_4';
                     break
                 case 'substep_2':
-                    next_push = 'substep_3';
+                    next_push = 'step_4';
                     break
                 case 'substep_3':
-                    next_push = 'substep_4';
+                    next_push = 'step_4';
                     break
                 case 'substep_4':
-                    next_push = 'substep_5';
+                    next_push = 'step_4';
                     break
                 case 'substep_5':
-                    next_push = 'substep_6';
+                    next_push = 'step_4';
                     break
             }
 
