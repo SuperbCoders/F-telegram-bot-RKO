@@ -153,7 +153,16 @@ class LoanApplicationStatusListAPIView(ListAPIView):
                 response = requests.get(
                     os.getenv("DJANGO_APP_API_BANK") + f"/order/{load.order_id}")
                 responseData = response.json()
-                list_status.append(responseData)
+                list_status.append({
+                    "accountCurrency": responseData["accountCurrency"],
+                    "accountNumber": responseData["accountNumber"],
+                    "accountReservationDate": responseData["accountReservationDate"],
+                    "accountStatus": responseData["accountStatus"],
+                    "orderCreatedDate": responseData["orderCreatedDate"],
+                    "orderNumber": responseData["orderNumber"],
+                    "orderStatus": responseData["orderStatus"],
+                    "orderType": responseData["orderType"],
+                })
 
         return list_status
 
