@@ -246,7 +246,7 @@ async def status(update, context):
                 status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
             )
             mess = ""
-            mess += f"Номер заявки: {random.randint(100000, 999999)}\n"
+            mess += f"Номер заявки: {status['orderNumber']}\n"
             mess += f"Дата заявки {accountReservationDate.strftime('%Y-%m-%d')}\n"
             mess += f"Тип - открытие счета\n"
             mess += f"Компания:\n"

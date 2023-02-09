@@ -162,6 +162,10 @@ class LoanApplicationStatusListAPIView(ListAPIView):
                     "orderNumber": responseData["orderNumber"],
                     "orderStatus": responseData["orderStatus"],
                     "orderType": responseData["orderType"],
+                    "companyName": responseData["orderType"],
+                    "inn": responseData["orderType"],
+                    "ogrn": responseData["orderType"],
+
                 })
 
         return list_status
