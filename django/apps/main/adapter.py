@@ -100,7 +100,7 @@ class Adapter_LoanRequest:
                 "companyManagement": {  # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
                     # Высший орган управления (выбор из справочника)
                     "supremeGoverningBody": "",
-                    "selectedManagementKey" : None,
+                    "selectedManagementKey": None,
                 }
             },
             "companyBusinessInfo": {  # ИНФОРМАЦИЯ О БИЗНЕСЕ
@@ -365,7 +365,7 @@ class Adapter_LoanRequest:
             "companyManagement": {  # СТРУКТУРА ОРГАНОВ УПРАВЛЕНИЯ
                 # Высший орган управления (выбор из справочника)
                 "supremeGoverningBody": supremeGoverningBody,
-                "selectedManagementKey" : selectedManagementKey,
+                "selectedManagementKey": selectedManagementKey,
             }
         }
 
@@ -516,6 +516,22 @@ class Adapter_LoanRequest:
             "fatcaAndStrategicStatus": fatcaAndStrategicStatus
 
         }
+
+    def setInfoOnPurposesOfFinancialAndEconomicActivities(
+        self,
+        hasConstantPayers,
+        hasConstantPayersDetails,
+        hasConstantRecipient,
+        hasConstantRecipientDetails
+    ):
+        if hasConstantPayers:
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantPayers'] = hasConstantPayers
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantPayersDetails'] = hasConstantPayersDetails
+
+        if hasConstantRecipient:
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipient'] = hasConstantRecipient
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipientDetails'] = hasConstantRecipientDetails
+
 
     def setCompanyBusinessInfo(self, obj):
         self.json_api['companyBusinessInfo'] = obj
@@ -716,6 +732,13 @@ class Adapter_LoanRequest:
 
         self.setTariff(
             lr.tariff
+        )
+
+        self.setInfoOnPurposesOfFinancialAndEconomicActivities(
+            hasConstantPayers=lr.hasConstantPayers == 'Да',
+            hasConstantPayersDetails=lr.hasConstantPayersDetails,
+            hasConstantRecipient=lr.hasConstantRecipient == 'Да',
+            hasConstantRecipientDetails=lr.hasConstantRecipientDetails,
         )
 
         self.setTypesOfContracts(

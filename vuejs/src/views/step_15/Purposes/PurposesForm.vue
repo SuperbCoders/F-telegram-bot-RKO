@@ -329,6 +329,55 @@
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
+    <div class="">
+      <h4 class="form_block_label text-left">
+        Имеются постоянные или предполагаемые плательщики по операциям с денежными средствами на счете
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.hasConstantPayers" column>
+          <v-radio label="Да" value="Да"></v-radio>
+          <v-radio label="Нет" value="Нет"></v-radio>
+        </v-radio-group>
+
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div class="mt-4" v-if="currentData.hasConstantPayers == 'Да'">
+      <h4 class="form_block_label text-left">
+        Наименование и ИНН организации
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-text-field type="text" outlined v-model="currentData.hasConstantPayersDetails" class="mt-1 auth_form">
+        </v-text-field>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div class="mt-4">
+      <h4 class="form_block_label text-left">
+        Имеются постоянные или предполагаемые получатели по операциям с денежными средствами на счете
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-radio-group v-model="currentData.hasConstantRecipient" column>
+          <v-radio label="Да" value="Да"></v-radio>
+          <v-radio label="Нет" value="Нет"></v-radio>
+        </v-radio-group>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
+    <div class="mt-4" v-if="currentData.hasConstantRecipient == 'Да'">
+      <h4 class="form_block_label text-left">
+        Наименование и ИНН организации
+      </h4>
+      <div @click="valid = true" class="form_block">
+        <v-text-field type="text" outlined v-model="currentData.hasConstantRecipientDetails" class="mt-1 auth_form">
+        </v-text-field>
+      </div>
+      <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
+    </div>
+
     <line-step :step='number_step' class="mt-5" />
     <v-btn block large :disabled="!valid" @click="validate" class="mt-10 auth_form_bth" color="primary">Продолжить
     </v-btn>
@@ -377,6 +426,10 @@ export default {
         foreign_sum_contracts_age: "",
         sources_cash_receipts: [],
         headcount: "",
+        hasConstantPayers: "",
+        hasConstantPayersDetails: "",
+        hasConstantRecipient: "",
+        hasConstantRecipientDetails: "",
       }
 
     }

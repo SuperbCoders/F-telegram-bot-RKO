@@ -150,10 +150,11 @@ export default {
       for (const address of this.currentData.addresses) {
         console.log(address);
         const type_address = address?.type_address;
-        is_legal_address = type_address.indexOf("Юридический") >= 0;
-        is_main_address = type_address.indexOf("Почтовый") >= 0;
+        is_legal_address = type_address.indexOf("Юридический") >= 0 || is_legal_address;
+        is_main_address = type_address.indexOf("Почтовый") >= 0 || is_main_address;
+        console.log(`is_legal_address=${is_legal_address} is_main_address=${is_main_address}`);
       }
-      console.log(is_legal_address && is_main_address);
+      console.log("is_legal_address && is_main_address", is_legal_address, is_main_address);
       return is_legal_address && is_main_address;
     }
   },

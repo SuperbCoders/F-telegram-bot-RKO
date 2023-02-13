@@ -125,6 +125,8 @@ export default new Vuex.Store({
                 foreign_sum_contracts_age: "",
                 sources_cash_receipts: [],
                 headcount: "",
+                hasConstantPayers: "",
+                hasConstantPayersDetails: "",
             },
             step_16: {
                 tariff: null,
