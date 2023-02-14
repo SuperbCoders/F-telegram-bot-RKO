@@ -376,7 +376,7 @@ class Adapter_LoanRequest:
         lr = self.loan_request
         addresses = lr.addresses
         for address in addresses:
-            if "Юридический" in address['type_adress']:
+            if "Юридический" in address['type_address']:
                 return address['address']
         return ""
 
@@ -384,7 +384,7 @@ class Adapter_LoanRequest:
         lr = self.loan_request
         addresses = lr.addresses
         for address in addresses:
-            if "Почтовый" in address['type_adress']:
+            if "Почтовый" in address['type_address']:
                 return address['address']
         return ""
 
