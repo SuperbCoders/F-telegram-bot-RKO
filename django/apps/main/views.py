@@ -73,10 +73,8 @@ class LoanRequestCurrentAPIView(APIView):
         if loan_request:
             for field_name, field_value in data.items():
                 setattr(loan_request, field_name, field_value)
-                loan_request.save()
         else:
             loan_request = LoanRequest(**data)
-            loan_request.save()
         if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'enable':
             if loan_request.is_finished:
                 adapter = Adapter_LoanRequest(loan_request)
@@ -99,7 +97,7 @@ class LoanRequestCurrentAPIView(APIView):
                 loan_request.last_status = data_status['orderStatus']['statusCode']
                 loan_request.status_description = data_status['orderStatus']['statusDescription']
 
-                loan_request.save()
+        loan_request.save()
         return Response({}, status=status.HTTP_200_OK)
 
 
