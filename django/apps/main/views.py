@@ -93,6 +93,8 @@ class LoanRequestCurrentAPIView(APIView):
                 response_status = requests.get(
                     os.getenv("DJANGO_APP_API_BANK") + f'/order/{orderId}')
                 data_status = response_status.json()
+                print(answer_data)
+                print(data_status)
                 loan_request.status = data_status['orderStatus']['statusCode']
                 loan_request.last_status = data_status['orderStatus']['statusCode']
                 loan_request.status_description = data_status['orderStatus']['statusDescription']
