@@ -144,14 +144,15 @@ class LoanApplicationStatusListAPIView(ListAPIView):
         loan_request = LoanRequest.objects.filter(
             contact_number=format_phone(phone_number),
             is_finished=True,
-            order_id__isnull=False,
         ).order_by("created_at")
 
         list_status = []
 
         if os.getenv("DJANGO_APP_API_BANK_ENABLE") in ['enable', 'test']:
             for load in loan_request:
-
+                if not load.order_id:
+                    print(load)
+                    continue
                 response = requests.get(
                     os.getenv("DJANGO_APP_API_BANK") + f"/order/{load.order_id}")
                 print(response.text)
