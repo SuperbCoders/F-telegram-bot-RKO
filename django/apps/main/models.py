@@ -57,14 +57,12 @@ class LoanRequest(models.Model):
 
     status = models.CharField(
         max_length=140,
-        choices=STATUS_CHOICES,
         default="under_review",
         blank=True,
     )
 
     last_status = models.CharField(
         max_length=140,
-        choices=STATUS_CHOICES,
         default="under_review",
         blank=True,
     )
