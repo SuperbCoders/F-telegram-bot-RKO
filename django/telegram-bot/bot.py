@@ -236,7 +236,7 @@ async def status(update, context):
         pass
 
     print(status_list)
-    if len(status_list) >= 0:
+    if len(status_list) > 0:
         status_list = []
         for i, status in enumerate(status_list, start=1):
             orderCreatedDate = datetime.datetime.strptime(
