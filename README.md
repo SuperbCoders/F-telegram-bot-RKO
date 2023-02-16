@@ -75,16 +75,16 @@ The Telegram bot is build with Python by using the `python-telegram-bot` wrapper
 - `DJANGO_SETTINGS_MODULE` - the Django settings module used by Celery
 - `VUE_APP_API_ROOT_URL` - the API root URL used by the VueJS client
 - `ALLOWED_DOMAIN_NAME` - array domain's for api
-- `DJANGO_APP_API_BANK` - url api bank
+- `DJANGO_APP_API_BANK` - bank api url
 - `DJANGO_APP_API_BANK_ENABLE` - 'enable' or 'disable' api bank
-- `DJANGO_APP_DOMAIN_STORAGE` - url storage documents, default django url
+- `DJANGO_APP_DOMAIN_STORAGE` - url storage documents or default django url
 
 - `SMS_URL` - url sms manager
 - `SMS_MESSAGE` - sms message
 
 - `VUE_APP_HOST_API` - public host django
 
-- `DJANGO_APP_API_ROOT_URL` - url django\
+- `DJANGO_APP_API_ROOT_URL` - url django
 - `DOMAIN_APP_URL` - The URL of the site that the bot opens
 
 ### ./Docker/prod/.env.secret
