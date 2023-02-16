@@ -1,5 +1,10 @@
 # loan-application-bot
+## Инструкция установки
 
+Заходим в папку Docker/dev копируем файлы .env.example и .env.secret.example и переименовываем копии на  .env и .env.secret 
+Заполняем все поля, информация что вставить в поле находится в “Config”
+
+Затем выполняем команду ```(cd ./Docker/dev && sudo docker-compose up --build)```
 ## To run the development build
 
 ```
