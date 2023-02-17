@@ -137,7 +137,7 @@
       <div v-for="(step, step_index) in getFormData" :key="step_index">
 
         <div v-for="(objectAnswer, question) in step" :key="question" class="mt-2">
-          <div v-if="objectAnswer.type === 'Object'">
+          <div v-if="objectAnswer?.type === 'Object'">
             <div v-if="objectAnswer.body">
               <div class="form_block_title w-50 pb-2 pt-2">
                 {{ isTitle(question) }}
@@ -147,8 +147,8 @@
               </div>
             </div>
           </div>
-          <div v-else-if="objectAnswer.type === 'Array'">
-            <div class="d-flex" v-if="objectAnswer.typeArray === 'Variable'">
+          <div v-else-if="objectAnswer?.type === 'Array'">
+            <div class="d-flex" v-if="objectAnswer?.typeArray === 'Variable'">
               <div class="form_block_title w-50 pb-2 pt-2" v-if="objectAnswer.body.length > 0">
                 {{ isTitle(question) }}
               </div>
@@ -159,7 +159,7 @@
               </div>
             </div>
 
-            <div class="" v-if="objectAnswer.typeArray === 'Object'">
+            <div class="" v-if="objectAnswer?.typeArray === 'Object'">
               <div class="form_block_title pb-2 pt-2" v-if="objectAnswer.body.length > 0">
                 {{ isTitle(question) }}
               </div>
@@ -189,7 +189,7 @@
             </div>
 
           </div>
-          <div v-else-if="objectAnswer.type === 'Boolean'">
+          <div v-else-if="objectAnswer?.type === 'Boolean'">
             <div class="d-flex">
               <div class="form_block_title w-50 pb-2 pt-2">
                 {{ isTitle(question) }}
@@ -203,7 +203,7 @@
               </div>
             </div>
           </div>
-          <div v-else-if="objectAnswer.type === 'Variable'">
+          <div v-else-if="objectAnswer?.type === 'Variable'">
             <div class="d-flex">
               <div class="form_block_title w-50 pb-2 pt-2">
                 {{ isTitle(question) }}
@@ -243,7 +243,7 @@ export default {
   methods: {
     async sendData() {
       this.$store.dispatch('addObjectFormData', {
-        object: 'step_11',
+        object: 'step_17',
         value: {
           is_finished: true,
         }
