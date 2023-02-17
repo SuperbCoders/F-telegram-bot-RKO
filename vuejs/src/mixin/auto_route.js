@@ -13,7 +13,7 @@ export const auto_route = {
 
             if (!last_step) return
 
-            let next_push = "/";
+            let next_push = "step_1";
             switch (last_step) {
                 case 'step_1':
                     next_push = 'step_2';
