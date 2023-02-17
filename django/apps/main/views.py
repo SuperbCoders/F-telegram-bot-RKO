@@ -125,30 +125,29 @@ class LoanApplicationStatusListAPIView(ListAPIView):
     model = LoanRequest
     serializer_class = LoanRequestSerializer
 
-    def get_queryset(self):
+    def get(self, request, format=None, *args, **kwargs):
         telegram_chat_id = self.request.GET.get('telegram_chat_id')
         phone_number = self.request.GET.get('phone_number')
         if telegram_chat_id:
-            user = User.objects.filter(
-                telegram_chat_id=telegram_chat_id).first()
+            user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
             phone_number = user.phone_number
 
         loan_request = LoanRequest.objects.filter(
             contact_number=format_phone(phone_number),
             is_finished=True,
+            order_id__isnull=False,
         ).order_by("created_at")
 
         list_status = []
-
         if os.getenv("DJANGO_APP_API_BANK_ENABLE") in ['enable', 'test']:
+            print(loan_request)
             for load in loan_request:
-                if not load.order_id:
-                    print(load)
-                    continue
+                print(load)
                 response = requests.get(
                     os.getenv("DJANGO_APP_API_BANK") + f"/order/{load.order_id}")
                 print(response.text)
                 responseData = response.json()
+
                 list_status.append({
                     "accountCurrency": responseData["accountCurrency"],
                     "accountNumber": responseData["accountNumber"],
@@ -158,13 +157,11 @@ class LoanApplicationStatusListAPIView(ListAPIView):
                     "orderNumber": responseData["orderNumber"],
                     "orderStatus": responseData["orderStatus"],
                     "orderType": responseData["orderType"],
-                    "companyName": responseData["orderType"],
-                    "inn": responseData["orderType"],
-                    "ogrn": responseData["orderType"],
-
+                    "companyName": load.company_name,
+                    "inn": load.inn,
+                    "ogrn": load.ogrn,
                 })
-
-        return list_status
+        return Response(list_status, status=status.HTTP_200_OK)
 
 
 class UserAPIView(APIView):

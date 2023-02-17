@@ -227,22 +227,18 @@ async def status(update, context):
 
     message_list = []
 
-    try:
-        response = requests.get(api_url, timeout=10)
-        if response.json():
-            status_list = response.json()
-            debug_print("status_list", status_list)
-    except:
-        pass
+    response = requests.get(api_url, timeout=10)
+    print(response.text)
+    if response.json():
+        status_list = response.json()
+        debug_print("status_list", status_list)
 
-    print(status_list)
     if len(status_list) > 0:
-        status_list = []
-        for i, status in enumerate(status_list, start=1):
-            orderCreatedDate = datetime.datetime.strptime(
+        for status in status_list:
+            orderCreatedDate = datetime.strptime(
                 status['orderCreatedDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
             )
-            accountReservationDate = datetime.datetime.strptime(
+            accountReservationDate = datetime.strptime(
                 status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
             )
             mess = ""

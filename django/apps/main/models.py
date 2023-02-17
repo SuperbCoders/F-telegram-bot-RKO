@@ -59,12 +59,14 @@ class LoanRequest(models.Model):
         max_length=140,
         default="under_review",
         blank=True,
+        null=True,
     )
 
     last_status = models.CharField(
         max_length=140,
         default="under_review",
         blank=True,
+        null=True,
     )
 
     # Desctop field
@@ -229,9 +231,12 @@ class LoanRequest(models.Model):
     information_goals = models.JSONField(null=True, blank=True)
 
     hasConstantPayers = models.CharField(max_length=255, null=True, blank=True)
-    hasConstantPayersDetails = models.CharField(max_length=255, null=True, blank=True)
-    hasConstantRecipient = models.CharField(max_length=255, null=True, blank=True)
-    hasConstantRecipientDetails = models.CharField(max_length=255, null=True, blank=True)
+    hasConstantPayersDetails = models.CharField(
+        max_length=255, null=True, blank=True)
+    hasConstantRecipient = models.CharField(
+        max_length=255, null=True, blank=True)
+    hasConstantRecipientDetails = models.CharField(
+        max_length=255, null=True, blank=True)
 
     # rate = models.CharField(max_length=MAX_STRING_LENGTH, blank=True, null=True)
     tariff = models.CharField(
