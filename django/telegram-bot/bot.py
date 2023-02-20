@@ -236,10 +236,10 @@ async def status(update, context):
     if len(status_list) > 0:
         for status in status_list:
             orderCreatedDate = datetime.strptime(
-                status['orderCreatedDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
+                status['orderCreatedDate'], "%Y-%m-%dT%H:%M:%S.%f"
             )
             accountReservationDate = datetime.strptime(
-                status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%fZ"
+                status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%f"
             )
             mess = ""
             mess += f"Номер заявки: {status['orderNumber']}\n"
