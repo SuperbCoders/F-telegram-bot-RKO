@@ -235,15 +235,19 @@ async def status(update, context):
 
     if len(status_list) > 0:
         for status in status_list:
-            orderCreatedDate = datetime.strptime(
-                status['orderCreatedDate'], "%Y-%m-%dT%H:%M:%S.%f"
-            )
-            accountReservationDate = datetime.strptime(
-                status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%f"
-            )
+            if status['orderCreatedDate']:
+                orderCreatedDate = datetime.strptime(
+                    status['orderCreatedDate'], "%Y-%m-%dT%H:%M:%S.%f"
+                )
+            if status['accountReservationDate']:
+                accountReservationDate = datetime.strptime(
+                    status['accountReservationDate'], "%Y-%m-%dT%H:%M:%S.%f"
+                )
             mess = ""
-            mess += f"Номер заявки: {status['orderNumber']}\n"
-            mess += f"Дата заявки {accountReservationDate.strftime('%Y-%m-%d')}\n"
+            if status['orderNumber']:
+                mess += f"Номер заявки: {status['orderNumber']}\n"
+            if status['accountReservationDate']:
+                mess += f"Дата заявки {accountReservationDate.strftime('%Y-%m-%d')}\n"
             mess += f"Тип - открытие счета\n"
             mess += f"Компания:\n"
             mess += f"    - Имя: {status['companyName']}\n"
@@ -257,10 +261,14 @@ async def status(update, context):
                 mess += f"Cтатус заявки - Одобрена\n"
             elif status['orderType'] == 'update':
                 mess += f"Cтатус заявки - Доработка заявки\n"
-            mess += (f"Номер счета: {status['accountNumber']} \n")
-            mess += (f"Валюта счета: {status['accountCurrency']}\n ")
-            mess += (f"Дата открытия {orderCreatedDate.strftime('%Y-%m-%d %H:%M')}\n")
-            mess += (f"Статус: {status['orderType']}\n")
+            if status['accountNumber']:
+                mess += (f"Номер счета: {status['accountNumber']} \n")
+            if status['accountCurrency']:
+                mess += (f"Валюта счета: {status['accountCurrency']}\n ")
+            if status['orderCreatedDate']:
+                mess += (f"Дата открытия {orderCreatedDate.strftime('%Y-%m-%d %H:%M')}\n")
+            if status['orderType']:
+                mess += (f"Статус: {status['orderType']}\n")
             message_list.append(mess)
 
         text = "\n\n".join(message_list)
