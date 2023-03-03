@@ -9,15 +9,14 @@ import Documents from '../views//step_5/Documents/Documents.vue'
 import Structure from '@/views/step_6/Structure/StructureForm.vue'
 import Founders from '@/views/step_7/Founders/Founders.vue'
 import Beneficiaries from '@/views/step_8/Beneficiaries/BeneficiariesForm.vue'
-import intelligenceForm from '@/views/step_9/intelligence/intelligenceForm.vue'
-import AdditionalInformation from '@/views/step_10/AdditionalInformation/AdditionalInformation.vue'
-import PlanningOperation from '@/views/step_11/PlanningOperation/PlanningOperationForm.vue'
-import Approvals from '@/views/step_12/Approvals/ApprovalsForm.vue'
-import Codeword from '@/views/step_13/Codeword/Codeword.vue'
-import Information_counterparties from '@/views/step_14/Information_counterparties/Information_counterparties.vue'
-import Purposes from '@/views/step_15/Purposes/PurposesForm.vue'
-import Rate from '@/views/step_16/Rate/RateForm.vue'
-import AllData from '@/views/step_17/AllData/AllData.vue'
+import AdditionalInformation from '@/views/step_9/AdditionalInformation/AdditionalInformation.vue'
+import PlanningOperation from '@/views/step_10/PlanningOperation/PlanningOperationForm.vue'
+import Approvals from '@/views/step_11/Approvals/ApprovalsForm.vue'
+import Codeword from '@/views/step_12/Codeword/Codeword.vue'
+import Information_counterparties from '@/views/step_13/Information_counterparties/Information_counterparties.vue'
+import Purposes from '@/views/step_14/Purposes/PurposesForm.vue'
+import Rate from '@/views/step_15/Rate/RateForm.vue'
+import AllData from '@/views/step_16/AllData/AllData.vue'
 
 
 
@@ -104,75 +103,67 @@ const routes = [
     }
   },
   {
-    path: "/intelligence",
+    path: "/additional_information",
     name: "step_9",
-    component: intelligenceForm,
+    component: AdditionalInformation,
     props: {
       number_step: 9,
     }
   },
   {
-    path: "/additional_information",
+    path: "/planning",
     name: "step_10",
-    component: AdditionalInformation,
+    component: PlanningOperation,
     props: {
       number_step: 10,
     }
   },
   {
-    path: "/planning",
+    path: "/approvals",
     name: "step_11",
-    component: PlanningOperation,
+    component: Approvals,
     props: {
       number_step: 11,
     }
   },
   {
-    path: "/approvals",
+    path: "/codeword",
     name: "step_12",
-    component: Approvals,
+    component: Codeword,
     props: {
       number_step: 12,
     }
   },
   {
-    path: "/codeword",
+    path: "/information_counterparties",
     name: "step_13",
-    component: Codeword,
+    component: Information_counterparties,
     props: {
       number_step: 13,
     }
   },
   {
-    path: "/information_counterparties",
+    path: "/purposes",
     name: "step_14",
-    component: Information_counterparties,
+    component: Purposes,
     props: {
       number_step: 14,
     }
   },
   {
-    path: "/purposes",
+    path: "/rate",
     name: "step_15",
-    component: Purposes,
+    component: Rate,
     props: {
       number_step: 15,
     }
   },
   {
-    path: "/rate",
-    name: "step_16",
-    component: Rate,
-    props: {
-      number_step: 16,
-    }
-  },
-  {
     path: "/all-data",
-    name: "step_17",
+    name: "step_16",
     component: AllData,
     props: {
-      number_step: 17,
+      number_step: 16,
     }
 
   },
