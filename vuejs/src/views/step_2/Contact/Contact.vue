@@ -23,12 +23,6 @@
                 <v-text-field placeholder="domain.ru" outlined v-model="currentData.donainname" class="mt-1 auth_form">
                 </v-text-field>
             </div>
-
-            <div class="form_block">
-                <p class="text-left form_block_title">Факс</p>
-                <v-text-field type="text" placeholder="7-000-000-0000" v-mask="'#-###-###-####'" masked="true" outlined v-model="currentData.fax" class="mt-1 auth_form">
-                </v-text-field>
-            </div>
         </v-form>
         <line-step :step="number_step" />
         <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
@@ -53,7 +47,6 @@ export default {
             email: null,
             contact_phone_number: null,
             donainname: null,
-            fax: null
         },
 
         valid: true,

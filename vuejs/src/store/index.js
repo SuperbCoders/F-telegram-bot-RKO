@@ -32,7 +32,6 @@ export default new Vuex.Store({
                 email: "",
                 contact_phone_number: "",
                 donainname: "",
-                fax: "",
             },
             step_3: {
                 addresses: [
