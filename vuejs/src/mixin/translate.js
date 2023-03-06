@@ -249,6 +249,23 @@ export const translateMixin = {
                     return "Имеются постоянные или предполагаемые плательщики по операциям с денежными средствами на счете";
                 case "information_counterparties_two":
                     return "Имеются постоянные или предполагаемые получатели по операциям с денежными средствами на счете";
+                case "third_parties":
+                    return "Укажите третьи лица, к выгоде которых действует компания";
+                case "additional_inforamtion":
+                    return "Дополнительная информация о ЕИО";
+                case "name_organization":
+                    return "Наименование организации";
+                case "name_organization_two":
+                    return "Наименование организации";
+
+                case "hasConstantPayers":
+                    return "Имеются постоянные или предполагаемые плательщики по операциям с денежными средствами на счете";
+                case "hasConstantPayersDetails":
+                    return "Наименование и ИНН организации";
+                case "hasConstantRecipient":
+                    return "Имеются постоянные или предполагаемые получатели по операциям с денежными средствами на счете";
+                case "hasConstantRecipientDetails":
+                    return "Наименование и ИНН организации";
 
                 default: return name
             }
@@ -274,6 +291,8 @@ export const translateMixin = {
                     return "От 10";
                 case "from-100":
                     return "От 100";
+                case "from-30-to-100":
+                    return "От 100";
                 case "from-1000":
                     return "От 1000";
                 case "to-1-mln":
@@ -284,6 +303,12 @@ export const translateMixin = {
                     return "До 100 000 000";
                 case "more-100-mln":
                     return "Свыше 100 000 000";
+                case "more-100":
+                    return "От 1000";
+                case "from-0-to-29":
+                    return "От 10";
+                case "from-0-to-99":
+                    return "До 100 000";
                 case "founderFunding":
                     return "Финансирование учредителей/участников";
                 case "incomeFromMainActivity":

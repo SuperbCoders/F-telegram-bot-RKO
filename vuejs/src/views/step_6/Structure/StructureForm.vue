@@ -3,7 +3,7 @@
     <v-btn class="mb-5 auth_form_bth" color="primary" @click="back">Назад
     </v-btn>
     <h2 class="text-left mb-5 font-bold form_block_label">
-      Структура органов управления
+      Структура органов управления (выбор одного значения из справочников)
     </h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-radio-group v-model="currentData.structure_value" class="checkboxs">

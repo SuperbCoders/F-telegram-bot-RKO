@@ -302,19 +302,14 @@
       <h4 class="form_block_label text-left">
         Источники поступления денежных средств
       </h4>
-      <div @click="valid = true" class="form_block">
-        <v-checkbox label="Финансирование учредителей/участников" value="founderFunding"
-          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-        <v-checkbox label="Доходы от основного вида деятельности" value="incomeFromMainActivity"
-          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-        <v-checkbox label="Доходы от дополнительных видов деятельности" value="incomeFromAdditionalActivity"
-          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-        <v-checkbox label="Заемные (кредитные)/привлеченные денежные средства" value="borrowed"
-          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-        <v-checkbox label="Государственное финансирование" value="governmentFunding"
-          v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-        <v-checkbox label="Иное" value="other" v-model="currentData.sources_cash_receipts" hide-details></v-checkbox>
-      </div>
+      <v-radio-group v-model="currentData.sources_cash_receipts" column>
+          <v-radio label="Финансирование учредителей/участников" value="founderFunding"></v-radio>
+          <v-radio label="Доходы от основного вида деятельности" value="incomeFromMainActivity"></v-radio>
+          <v-radio label="Доходы от дополнительных видов деятельности" value="incomeFromAdditionalActivity"></v-radio>
+          <v-radio label="Заемные (кредитные)/привлеченные денежные средства" value="borrowed"></v-radio>
+          <v-radio label="Государственное финансирование" value="governmentFunding"></v-radio>
+          <v-radio label="Иное" value="other"></v-radio>
+        </v-radio-group>
       <p v-if="!valid && !isValidateInformationGoals" class="error_message">Выберите поле</p>
     </div>
 
