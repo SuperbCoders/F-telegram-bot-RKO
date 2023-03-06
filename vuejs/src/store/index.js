@@ -222,7 +222,7 @@ export default new Vuex.Store({
             state.formData.step_4.list_persone.pop();
         },
         delPersoneIndex(state, { index }) {
-            state.formData.step_4.list_persone = state.formData.step_4.list_persone.slice(index, 1);
+            state.formData.step_4.list_persone.splice(index, 1);
         },
         async setPersone(state, { key, value, index }) {
             const last_element = state.formData.step_4.list_persone[index];

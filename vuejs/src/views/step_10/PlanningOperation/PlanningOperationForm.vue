@@ -27,15 +27,15 @@
         hide-details></v-checkbox>
 
       <v-text-field id="other" v-if="currentData.planned_operations.indexOf('Иное (укажите)') >= 0"
-        v-model="currentData.planned_other" placeholder="Иное" class="align-center border-none mt-5" outlined>
+        v-model="currentData.planned_other" placeholder="*Иное" :required="true" class="align-center border-none mt-5" outlined>
       </v-text-field>
 
     </div>
     <p class="error_message" v-if="!valid && operationlist.length < 1">
-      Выберите пункт
+      Заполните пункты
     </p>
     <line-step :step='number_step' class="mt-5" />
-    <v-btn block large :disabled="!valid" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
+    <v-btn block large :disabled="(currentData.planned_operations.indexOf('Иное (укажите)') >= 0 && currentData.planned_other.length == 0)" class="mt-10 auth_form_bth" color="primary" @click="validate">Продолжить
     </v-btn>
   </div>
 </template>

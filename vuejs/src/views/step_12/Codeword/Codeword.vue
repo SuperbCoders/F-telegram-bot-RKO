@@ -8,7 +8,7 @@
                 placeholder="Кодовое слово" :required="true">
         </div>
         <LineStep :step="number_step" class="mt-5" />
-        <v-btn block large @click="redirect()" class="mt-10 auth_form_bth" color="primary">
+        <v-btn block large :disabled="currentData.codeword.length == 0" @click="redirect()" class="mt-10 auth_form_bth" color="primary">
             Продолжить
         </v-btn>
     </div>

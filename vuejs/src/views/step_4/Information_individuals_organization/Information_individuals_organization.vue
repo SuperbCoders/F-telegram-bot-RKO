@@ -17,10 +17,10 @@
             <div class="form_block mt-2">
                 <div class="contain_btn_add">
                     <v-btn large style="width: 50%; background: #F3F4F4 !important; color: #5B656D !important" class="text-center
-                  d-flex
-                  align-center
-                  justify-center
-                  add_form" @click="createPersone">
+                      d-flex
+                      align-center
+                      justify-center
+                      add_form" @click="createPersone">
                         <span class="pr-3">Добавить</span>
                         <v-icon>mdi-plus-circle-outline</v-icon>
                     </v-btn>

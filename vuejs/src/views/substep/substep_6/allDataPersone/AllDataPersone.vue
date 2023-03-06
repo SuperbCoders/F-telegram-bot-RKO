@@ -22,6 +22,11 @@
                                 <div v-if="name === 'first_passport_page'" class="form_block_title d-block">
                                     {{ val[0].name }}
                                 </div>
+                                <div v-else-if="name === 'doc_type'" class="form_block_title d-block">
+                                    <p class="form_block_title">
+                                        {{ translateDocType(val) }}
+                                    </p>
+                                </div>
                                 <div v-else-if="isArray(val)" class="form_block_title d-block">
                                     <div v-for="(val2, name2) in val" :key="name2">
                                         <div v-if="isObject(val2)">
@@ -66,9 +71,10 @@
 <script>
 import { translateMixin } from '@/mixin/translate'
 import { formOrderPersone } from '@/mixin/formOrder'
+import { translateDocTypeMixin } from '@/mixin/translateDocType'
 
 export default {
-    mixins: [translateMixin, formOrderPersone],
+    mixins: [translateMixin, formOrderPersone, translateDocTypeMixin],
     data() {
         return {};
     },
@@ -89,7 +95,7 @@ export default {
             }
         },
         back() {
-            this.$router.push({ name: "substep_5",params: {id: this.$route.params.id} });
+            this.$router.push({ name: "substep_5", params: { id: this.$route.params.id } });
         },
         del() {
             this.$store.dispatch('addObjectFormData', {
@@ -103,7 +109,7 @@ export default {
         add() {
             this.$store.commit('addPersone')
 
-            this.$router.push({ name: "substep_1", params: {id: this.$route.params.id+1} })
+            this.$router.push({ name: "substep_1", params: { id: this.$route.params.id + 1 } })
         },
         next() {
             this.$store.dispatch('addObjectFormData', {
