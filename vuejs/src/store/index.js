@@ -122,7 +122,7 @@ export default new Vuex.Store({
                 foreign_sum_contracts_week: "",
                 foreign_sum_contracts_quarter: "",
                 foreign_sum_contracts_age: "",
-                sources_cash_receipts: [],
+                sources_cash_receipts: "",
                 headcount: "",
                 hasConstantPayers: "",
                 hasConstantPayersDetails: "",

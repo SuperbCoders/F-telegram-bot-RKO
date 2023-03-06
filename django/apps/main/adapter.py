@@ -708,7 +708,7 @@ class Adapter_LoanRequest:
                 amountOfTransactionsUnderForeignTradeContractsPerQuarter=lr.foreign_sum_contracts_quarter,
                 amountOfTransactionsUnderForeignTradeContractsPerYear=lr.foreign_sum_contracts_age,
 
-                moneySources=",".join(lr.sources_cash_receipts),
+                moneySources=lr.sources_cash_receipts,
                 numberOfEmployees=lr.headcount,
                 fatcaAndStrategicStatus=",".join(lr.information_goals),
             )
