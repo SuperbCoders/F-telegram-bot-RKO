@@ -133,7 +133,7 @@ export const translateMixin = {
                     return "Дата окончания срока действия права пребывания(проживания)";
                 case "licenced_activity":
                     return "Перечень видов лицензируемой деятельности";
-                case "typeAdress":
+                case "type_address":
                     return "Тип Адреса";
                 case "basis":
                     return "Основание";
@@ -266,6 +266,8 @@ export const translateMixin = {
                     return "Имеются постоянные или предполагаемые получатели по операциям с денежными средствами на счете";
                 case "hasConstantRecipientDetails":
                     return "Наименование и ИНН организации";
+                case "short":
+                    return "короткое имя компании";
 
                 default: return name
             }
@@ -309,6 +311,8 @@ export const translateMixin = {
                     return "От 10";
                 case "from-0-to-99":
                     return "До 100 000";
+                case "from-10-to-100":
+                    return "До 500 000";
                 case "founderFunding":
                     return "Финансирование учредителей/участников";
                 case "incomeFromMainActivity":
@@ -332,6 +336,7 @@ export const translateMixin = {
                 case "soleExecutiveBody":
                     return "Единоличный исполнительный орган";
 
+                    
 
                 default: return name;
             }

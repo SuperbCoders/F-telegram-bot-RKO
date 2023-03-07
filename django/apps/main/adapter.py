@@ -527,10 +527,16 @@ class Adapter_LoanRequest:
         if hasConstantPayers:
             self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantPayers'] = hasConstantPayers
             self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantPayersDetails'] = hasConstantPayersDetails
+        else:
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantPayers'] = hasConstantPayers
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantPayersDetails'] = ""
 
         if hasConstantRecipient:
             self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipient'] = hasConstantRecipient
             self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipientDetails'] = hasConstantRecipientDetails
+        else:
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipient'] = hasConstantRecipient
+            self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipientDetails'] = ""
 
 
     def setCompanyBusinessInfo(self, obj):

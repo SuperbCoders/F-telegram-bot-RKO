@@ -20,6 +20,7 @@ from .adapter import Adapter_LoanRequest
 
 import uuid
 from datetime import date
+import json
 
 from .models import (
     LoanRequest,
@@ -75,11 +76,12 @@ class LoanRequestCurrentAPIView(APIView):
                 setattr(loan_request, field_name, field_value)
         else:
             loan_request = LoanRequest(**data)
-        if os.getenv("DJANGO_APP_API_BANK_ENABLE") == 'enable':
+        if os.getenv("DJANGO_APP_API_BANK_ENABLE") in ['enable', 'test']:
             if loan_request.is_finished:
                 adapter = Adapter_LoanRequest(loan_request)
                 result = adapter.getResult()
                 print("DJANGO_APP_API_BANK result", result)
+
                 answer = requests.post(
                     os.getenv("DJANGO_APP_API_BANK") + '/order/rko', json=result)
                 print("DJANGO_APP_API_BANK answer",
@@ -129,7 +131,8 @@ class LoanApplicationStatusListAPIView(ListAPIView):
         telegram_chat_id = self.request.GET.get('telegram_chat_id')
         phone_number = self.request.GET.get('phone_number')
         if telegram_chat_id:
-            user = User.objects.filter(telegram_chat_id=telegram_chat_id).first()
+            user = User.objects.filter(
+                telegram_chat_id=telegram_chat_id).first()
             phone_number = user.phone_number
 
         loan_request = LoanRequest.objects.filter(

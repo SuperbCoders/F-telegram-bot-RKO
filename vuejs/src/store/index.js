@@ -73,29 +73,25 @@ export default new Vuex.Store({
                 third_parties: "",
             },
             step_9: {
-                employers_volume: "",
-                salary_debt: 0,
-            },
-            step_10: {
                 additional_inforamtion: "",
             },
-            step_11: {
+            step_10: {
                 planned_operations: [],
                 planned_other: "",
             },
-            step_12: {
+            step_11: {
                 information_goals: [],
             },
-            step_13: {
+            step_12: {
                 codeword: "",
             },
-            step_14: {
+            step_13: {
                 information_counterparties: null,
                 information_counterparties_two: null,
                 name_organization: null,
                 name_organization_two: null,
             },
-            step_15: {
+            step_14: {
                 subject_licensing: "",
                 history_reputation: "",
                 num_transactions_month: "",
@@ -127,7 +123,7 @@ export default new Vuex.Store({
                 hasConstantPayers: "",
                 hasConstantPayersDetails: "",
             },
-            step_16: {
+            step_15: {
                 tariff: null,
                 additional_products: [],
             },
