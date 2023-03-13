@@ -401,6 +401,9 @@ class Adapter_LoanRequest:
     def setCompany(self, company):
         self.json_api['company'] = company
 
+    def setIsEioPDL(self, isEioPDL):
+        self.json_api['isEioPDL'] = isEioPDL
+
     def setDocument(self, listObj):
         self.json_api['documents'] = listObj
 
@@ -537,7 +540,6 @@ class Adapter_LoanRequest:
         else:
             self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipient'] = hasConstantRecipient
             self.json_api['infoOnPurposesOfFinancialAndEconomicActivities']['hasConstantRecipientDetails'] = ""
-
 
     def setCompanyBusinessInfo(self, obj):
         self.json_api['companyBusinessInfo'] = obj
@@ -720,6 +722,8 @@ class Adapter_LoanRequest:
             )
         )
 
+        self.setIsEioPDL(lr.additional_inforamtion)
+
         self.setAdditionalProducts(
             sms='СМС-оповещение' in lr.additional_products,
             overdraft=False,
@@ -728,10 +732,10 @@ class Adapter_LoanRequest:
             fastPaymentSystem=False,
             loyaltyProgram=False,
             loyaltyProgramInfo="first",
-            community='Комьюнити' in lr.additional_products,
-            accounting='Бухгалтерия' in lr.additional_products,
+            community='Сообщество предпринимателей' in lr.additional_products,
+            accounting='Онлайн-бухгалтерия' in lr.additional_products,
             legalSupport='Юридическая поддержка' in lr.additional_products,
-            promotion='Продвижение' in lr.additional_products,
+            promotion='Привлечение клиентов' in lr.additional_products,
         )
 
         self.setCodeword(lr.codeword)

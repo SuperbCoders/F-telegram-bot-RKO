@@ -99,6 +99,8 @@ class LoanRequest(models.Model):
     additional_products = models.JSONField(blank=True, null=True)
     opf = models.JSONField(blank=True, null=True)
 
+    additional_inforamtion = models.CharField(max_length=255, null=True, blank=True)
+
     subject_licensing = models.CharField(max_length=255, null=True, blank=True)
     history_reputation = models.CharField(
         max_length=255, null=True, blank=True)

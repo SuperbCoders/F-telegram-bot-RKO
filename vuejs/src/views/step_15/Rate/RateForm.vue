@@ -140,16 +140,16 @@
       <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Торговый-эквайринг"
         value="Торговый-эквайринг" hide-details>
       </v-checkbox>
-      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Комьюнити" value="Комьюнити"
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Сообщество предпринимателей" value="Сообщество предпринимателей"
         hide-details>
       </v-checkbox>
-      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Бухгалтерия" value="Бухгалтерия"
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Онлайн-бухгалтерия" value="Онлайн-бухгалтерия"
         hide-details>
       </v-checkbox>
       <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Юридическая поддержка"
         value="Юридическая поддержка" hide-details>
       </v-checkbox>
-      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Продвижение" value="Продвижение"
+      <v-checkbox v-model="currentData.additional_products" class="checkboxs" label="Привлечение клиентов" value="Привлечение клиентов"
         hide-details>
       </v-checkbox>
     </div>
